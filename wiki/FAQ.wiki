@@ -1,16 +1,21 @@
-#summary One-sentence summary of this page.
+#summary Cadpage FAQ
 
 = Breaking News =
 
-V1.1.7 is out. Suffolk users can now try CadPage. Please report crashes or issues. We currently only have 2 city codes BRENTW and NBAYSH so all other areas will fail to map. let us know of other city codes.
+! Suffolk Users will need to change Location in the settings for this to work.
+
+V1.1.7 is out. Suffolk users can now try Cadpage. Please report crashes or issues. We currently only have 2 city codes BRENTW and NBAYSH so all other areas will fail to map. let us know of other city codes.
+
 
 = Introduction =
-This is the FAQ for CadPage. 
+This is the FAQ for Cadpage. 
 
-CadPage was created by Fire/EMS Personnel that wanted a better 
+Cadpage was created by Fire/EMS Personnel that wanted a better 
 way to get their calls and map them.
 
 = Details =
+
+This reads incoming text messages. If it sees specific keys in the text message it will treat it as a call and present a popup and options. If the popup's are not happening then check that Cadpage is enabled, and that your location is correct.
 
 For this to work you must meet the following two requirements.
 1. You must be located in Loudoun County, VA or Suffolk County, NY
@@ -22,5 +27,3 @@ Do you live somewhere else ? Drop us a note and we can adapt this to work for yo
 
 == Version History ==
 See the main Page Home
-
-
