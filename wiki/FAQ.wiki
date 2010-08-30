@@ -1,0 +1,26 @@
+#summary One-sentence summary of this page.
+
+= Breaking News =
+
+V1.1.7 is out. Suffolk users can now try CadPage. Please report crashes or issues. We currently only have 2 city codes BRENTW and NBAYSH so all other areas will fail to map. let us know of other city codes.
+
+= Introduction =
+This is the FAQ for CadPage. 
+
+CadPage was created by Fire/EMS Personnel that wanted a better 
+way to get their calls and map them.
+
+= Details =
+
+For this to work you must meet the following two requirements.
+1. You must be located in Loudoun County, VA or Suffolk County, NY
+2. You must get your calls to your phone via text message.
+   - For Loudoun users you do this by forwarding messages from google mail to your cell phone.
+
+Do you live somewhere else ? Drop us a note and we can adapt this to work for you. 
+
+
+== Version History ==
+See the main Page Home
+
+
