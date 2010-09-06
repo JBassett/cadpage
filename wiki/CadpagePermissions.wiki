@@ -29,7 +29,7 @@ We need the above 3 to know if your on the phone or not
   * android.permission.ACCESS_NETWORK_STATE
 The above 4 are used for Google Maps
 
-  * android.permission.WRITE_SMS
+  * android.permission.WRITE_SMS (removed in V 1.1.8)
 This will be removed soon. Still have some dependent code from smspopup
 
   * android.permission.READ_CONTACTS
