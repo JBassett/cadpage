@@ -32,7 +32,7 @@ For this to work you must meet the following two requirements.
 2. You must get your calls to your phone via text message.
    - For Loudoun users you do this by forwarding messages from google mail to your cell phone.
 
-Do you live somewhere else ? Drop us a note and we can adapt this to work for you. 
+Do you live somewhere else ? Drop us a note and we can adapt this to work for you. Please include 5 or more sample calls and the city zip code that you receive calls in. This helps with writing the parser.
 
 
 == Version History ==
