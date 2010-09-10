@@ -2,10 +2,12 @@
 
 = Breaking News =
 
+Thanks and welcome to our new developer KenC 
+
 ! Any Non-Loudoun Users will need to change Location in the settings for this to work.
 
 V 1.1.9  released on 9/9/10 (seems fitting enough)
-4 Locations now Supported.
+4 Locations now Supported. 
 Loudoun,VA - Suffolk, NY - Harris, TX- and Benton County, OR.
 
 V 1.1.9 is in the works. A new developer has joined up and now that the base work is stable we are starting to put the ground work in for cleanup and new functionality.
