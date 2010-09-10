@@ -4,12 +4,14 @@
 
 ! Any Non-Loudoun Users will need to change Location in the settings for this to work.
 
-V 1.1.9 should release on 9/9/10 (seems fitting enough)
+V 1.1.9  released on 9/9/10 (seems fitting enough)
+4 Locations now Supported.
+Loudoun,VA - Suffolk, NY - Harris, TX- and Benton County, OR.
 
 V 1.1.9 is in the works. A new developer has joined up and now that the base work is stable we are starting to put the ground work in for cleanup and new functionality.
   * Added a feature that should keep the default sms app from receiving messages that cadpage intercepts and acts on.
   * Adding a filter so that we ignore all text messages except those from the address you specify (we will try to have defaults per location as people report them)
-  * Removed some bloat in extra language packs and cleared out code we are not using. Removed to previous permissions SMS_Write and Read_Contacts
+  * Removed some bloat in extra language packs and cleared out code we are not using. Removed to previous permissions SMS_Write
 
 
 V 1.1.8 was released to fix some bugs and crashes. 
