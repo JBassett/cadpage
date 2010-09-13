@@ -6,6 +6,13 @@ Thanks and welcome to our new developer KenC
 
 ! Any Non-Loudoun Users will need to change Location in the settings for this to work.
 
+V 1.1.10 released on 9/13/10
+  * Harris TX support is working and should be tested by users.
+  * New Google Maps app is default mapping now. Select address balloon to use driving directions.
+  * More features that were not in use have been removed. 
+  * More code cleanup in preparation for call history functionality.
+  * Additional fix to resolve SMS notification clashes.  
+
 V 1.1.9  released on 9/9/10 (seems fitting enough)
 4 Locations now Supported. 
 Loudoun,VA - Suffolk, NY - Harris, TX- and Benton County, OR.
