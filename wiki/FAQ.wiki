@@ -4,7 +4,7 @@
 
 Thanks and welcome to our new developer KenC 
 
-! Any Non-Loudoun Users will need to change Location in the settings for this to work.
+V 1.1.11 released on 9/19/10
 
 V 1.1.10 released on 9/13/10
   * Harris TX support is working and should be tested by users.
@@ -39,9 +39,8 @@ way to get their calls and map them.
 This reads incoming text messages. If it sees specific keys in the text message it will treat it as a call and present a popup and options. If the popup's are not happening then check that Cadpage is enabled, and that your location is correct.
 
 For this to work you must meet the following two requirements.
-1. You must be located in Loudoun County, VA or Suffolk County, NY
-2. You must get your calls to your phone via text message.
-   - For Loudoun users you do this by forwarding messages from google mail to your cell phone.
+ You must get your calls to your phone via text message.
+
 
 Do you live somewhere else ? Drop us a note and we can adapt this to work for you. Please include 5 or more sample calls and the city zip code that you receive calls in. This helps with writing the parser.
 
