@@ -2,11 +2,12 @@
 
 = Breaking News =
 
- Will this work for Your local department, county, area ?
+= Will this work for Your local department, county, area ? =
 
     I have started receiving requests asking if this can be used in their area. In most cases yes. All we need are a few sample messages from your dispatch that can be used to write a decoder/parser and to test with. Once that is in hand we can add your locality in and you can give it a try. 
 
 Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least one that is based on an intersection as well as some street addresses. From that we can start the work. 
+
 
 Thanks and welcome to our new developer KenC 
 
