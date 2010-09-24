@@ -4,6 +4,12 @@
 
 Thanks and welcome to our new developer KenC 
 
+V 1.1.12 released on 9/24/10
+  * A few bug fixes including crash on more than 10 calls
+  * Ken has been working more on the call history and other clean up
+  * No new counties added this time (sorry)
+  * Next release should be on Wed and should include 3 new counties.
+
 V 1.1.11 released on 9/19/10
   * First run on Call History
   * 2 new counties added, Herkimer, NY and Oconee, GA
