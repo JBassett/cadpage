@@ -11,6 +11,11 @@ Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least o
 
 Thanks and welcome to our new developer KenC 
 
+V 1.1.13 coming soon
+  * Ability to clear historic calls
+  * Several fixes for crashes regarding history and rerun call.
+  * Added Livingston, MI
+
 V 1.1.12 released on 9/24/10
   * A few bug fixes including crash on more than 10 calls
   * Ken has been working more on the call history and other clean up
