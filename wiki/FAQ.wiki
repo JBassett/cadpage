@@ -13,12 +13,16 @@ Some users report crashes when starting the app after an upgrade. If this happen
 
 Thanks and welcome to our new developer KenC 
 
-V 1.1.15 planned
+V 1.1.16 planned
   * Adding Centreville, MD
   * Adding Arnold, MD
   * Try to get delete calls fixed.
 
-V 1.1.14 release on 10/2/10
+V 1.1.15 released on 10/3/10
+  * Sorry about the rapid releases. We had some bugs that were causing the app to not be use-able. These have been resolved and tested. 
+  * New notification Icon and other minor changes. 
+
+V 1.1.14 released on 10/2/10
   * This was an emergency release to resolve an issue with LCFR address parsing.
   * This release also fixed an issue with crashes when changing notification settings like LED color or vibrate pattern.
   * No new locations added due to time constraint.
