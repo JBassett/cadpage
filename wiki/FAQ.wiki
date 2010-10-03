@@ -11,10 +11,15 @@ Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least o
 
 Thanks and welcome to our new developer KenC 
 
-V 1.1.14 planned
+V 1.1.15 planned
   * Adding Centreville, MD
   * Adding Arnold, MD
   * Try to get delete calls fixed.
+
+V 1.1.14 release on 10/2/10
+  * This was an emergency release to resolve an issue with LCFR address parsing.
+  * This release also fixed an issue with crashes when changing notification settings like LED color or vibrate pattern.
+  * No new locations added due to time constraint.
 
 V 1.1.13 released on 10/1/10
   * Ability to clear all historic calls
