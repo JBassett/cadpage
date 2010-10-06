@@ -6,7 +6,7 @@
 
     I have started receiving requests asking if this can be used in their area. In most cases yes. All we need are a few sample messages from your dispatch that can be used to write a decoder/parser and to test with. Once that is in hand we can add your locality in and you can give it a try. 
 
-Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least one that is based on an intersection as well as some street addresses. From that we can start the work. 
+Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least one that is based on an intersection as well as some street addresses. From that we can start the work. Please also include the email address that the messages come from.
 
 Some users report crashes when starting the app after an upgrade. If this happens please uninstall and re-install. If you can send a crash report I would really appreciate it.
 
