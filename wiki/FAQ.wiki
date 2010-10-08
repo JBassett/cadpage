@@ -13,10 +13,15 @@ Some users report crashes when starting the app after an upgrade. If this happen
 
 Thanks and welcome to our new developer KenC 
 
-V 1.1.16 planned
+V 1.1.17 planned
   * Adding Centreville, MD
   * Adding Arnold, MD
   * Try to get delete calls fixed.
+
+V 1.1.16 released on 10/8/10
+  * Bug fixes for LCFR dispatches.
+  * Bug fixes for crash on startup issues.
+  * No new locations (sorry for the delay for those waiting. They should be in this weekend)
 
 V 1.1.15 released on 10/3/10
   * Sorry about the rapid releases. We had some bugs that were causing the app to not be use-able. These have been resolved and tested. 
