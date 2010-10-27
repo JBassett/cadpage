@@ -1,22 +1,54 @@
 #summary Cadpage FAQ
 
+= Introduction =
+This is the FAQ for the android application CadPage. 
+
+CadPage was created by Fire/EMS Personnel that wanted a better 
+way to get their calls and map them.
+
 = Breaking News =
 
-= Will this work for Your local department, county, area ? =
+New release should be coming on Thursday Oct 28.
 
-    I have started receiving requests asking if this can be used in their area. In most cases yes. All we need are a few sample messages from your dispatch that can be used to write a decoder/parser and to test with. Once that is in hand we can add your locality in and you can give it a try. 
+== How does CadPage work ? ==
 
-Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least one that is based on an intersection as well as some street addresses. From that we can start the work. Please also include the email address that the messages come from.
+Cadpage requires that you already receive or can receive your fire/ems pages to your phone as an sms message. Currently this app will NOT work if we do not already support your location/district. 
 
-Some users report crashes when starting the app after an upgrade. If this happens please uninstall and re-install. If you can send a crash report I would really appreciate it.
+== Currently Supported Locations ==
+
+ * Adams County, CO
+ * Oconee County, GA
+ * Smyrna, GA
+ * Madison County, IN
+ * Tipton County, IN
+ * Allegany County, MI
+ * Babylon, NY
+ * Dix Hills, NY
+ * Herkimer County, NY
+ * Suffolk, NY
+ * Benton County, OR
+ * Prineville, OR
+ * Lancaster, PA
+ * Harris County, TX
+ * Henry County, VA
+ * and of course Loudoun County, VA
 
 
-Thanks and welcome to our new developer KenC 
+== Want this app to work for your County ? ==
 
-V 1.1.17 planned
+Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least one that is based on an intersection as well as some street addresses. If you know the name of your CAD Vendor please include that. From that we can start the work. Please also include the email address that the messages come from.
+
+== Version History ==
+
+V 1.1.19 planned
   * Adding Centreville, MD
   * Adding Arnold, MD
   * Try to get delete calls fixed.
+
+V 1.1.17 released
+  * Bug Fixes for LCFR Dispatches.
+  * Bug fix for crash on startup.
+  * Auto-send of crash reports.
 
 V 1.1.16 released on 10/8/10
   * Bug fixes for LCFR dispatches.
@@ -74,22 +106,9 @@ V 1.1.8 was released to fix some bugs and crashes.
 V1.1.7 is out. Suffolk users can now try Cadpage. Please report crashes or issues. We currently only have 2 city codes BRENTW and NBAYSH so all other areas will fail to map. let us know of other city codes.
 
 
-= Introduction =
-This is the FAQ for Cadpage. 
-
-Cadpage was created by Fire/EMS Personnel that wanted a better 
-way to get their calls and map them.
-
 = Details =
 
 This reads incoming text messages. If it sees specific keys in the text message it will treat it as a call and present a popup and options. If the popup's are not happening then check that Cadpage is enabled, and that your location is correct.
 
 For this to work you must meet the following two requirements.
  You must get your calls to your phone via text message.
-
-
-Do you live somewhere else ? Drop us a note and we can adapt this to work for you. Please include 5 or more sample calls and the city zip code that you receive calls in. This helps with writing the parser.
-
-
-== Version History ==
-See the main Page Home
