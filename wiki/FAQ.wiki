@@ -1,16 +1,16 @@
 #summary Cadpage FAQ
 
 = Introduction =
-This is the FAQ for the android application CadPage. 
+This is the FAQ for the android application Cadpage. 
 
-CadPage was created by Fire/EMS Personnel that wanted a better 
+Cadpage was created by Fire/EMS Personnel that wanted a better 
 way to get their calls and map them.
 
 = Breaking News =
 
 New release should be coming on Thursday Oct 28.
 
-== How does CadPage work ? ==
+== How does Cadpage work ? ==
 
 Cadpage requires that you already receive or can receive your fire/ems pages to your phone as an sms message. Currently this app will NOT work if we do not already support your location/district. 
 
@@ -32,6 +32,12 @@ Cadpage requires that you already receive or can receive your fire/ems pages to 
  * Harris County, TX
  * Henry County, VA
  * and of course Loudoun County, VA
+
+Locations in Queue:
+ * Amityville Fider, NY
+ * Longview, TX
+ * Northglenn and Commerce City, CO
+ * Anoka County, MN
 
 
 == Want this app to work for your County ? ==
