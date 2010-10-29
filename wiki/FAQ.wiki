@@ -8,7 +8,8 @@ way to get their calls and map them.
 
 = Breaking News =
 
-New release should be coming on Thursday Oct 28.
+V 1.1.19 has been released on Oct 28, 2010
+For support email support@cadpage.org
 
 == How does Cadpage work ? ==
 
@@ -46,10 +47,17 @@ Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least o
 
 == Version History ==
 
-V 1.1.19 planned
+V 1.2.0 
   * Adding Centreville, MD
   * Adding Arnold, MD
   * Try to get delete calls fixed.
+
+V 1.1.19 Oct 28, 2010
+  * New Locations (a lot)
+  * Bug Fixes 
+  * New Graphics
+  * New email and website. http://www.cadpage.org
+  * For support email support@cadpage.org
 
 V 1.1.17 released
   * Bug Fixes for LCFR Dispatches.
