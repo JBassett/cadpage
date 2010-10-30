@@ -11,6 +11,8 @@ way to get their calls and map them.
 V 1.1.19 has been released on Oct 28, 2010
 For support email support@cadpage.org
 
+SupportCadpage with a Donation !
+
 == How does Cadpage work ? ==
 
 Cadpage requires that you already receive or can receive your fire/ems pages to your phone as an sms message. Currently this app will NOT work if we do not already support your location/district. 
