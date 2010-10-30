@@ -4,7 +4,7 @@
 This is the FAQ for the android application Cadpage. 
 
 Cadpage was created by Fire/EMS Personnel that wanted a better 
-way to get their calls and map them.
+way to get their calls and map them. [http://code.google.com/p/cadpage/wiki/Disclaimer Disclaimer]
 
 = Breaking News =
 
