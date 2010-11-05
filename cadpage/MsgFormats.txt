@@ -1,3 +1,7 @@
+                                                                     
+                                                                     
+                                                                     
+                                             
 *******************************************************************************
 Supported district message formats
 This isn't intended to be the final or full documentation for different 
@@ -109,6 +113,7 @@ FRM:LogiSYSCAD\nSUBJ:CAD Page for CFS 100110-96\nMSG:UNCONCIOUS/UNRESPONSIVE 91 
 FRM:LogiSYSCAD\nSUBJ:CAD Page for CFS 100710-102\nMSG:AUTOMATIC HOUSE ALARM 106 SUNSET DR\nUnits: CO2 ENG9 A52 TR16
 FRM:LogiSYSCAD\nSUBJ:CAD Page for CFS 101310-67\nMSG:HOUSE FIRE           147 ORMAND ST\nUnits: ENG16 TR16 ENG17
 ***************************************************************************
+**********************************************************
 Accomack County, VA 
 Contact: niblett25@gmail.com
 Sender: cad@esva911.org
@@ -119,6 +124,7 @@ CAD:STROKE;6225 HOLLAND RD;NEWC;A25;A6;DEBRA LN;R J DR
 CAD:ACCIDENT WITH INJURY;12432 LANKFORD HWY;HALL;A59;B6;FOX DR;JOHN TAYLOR RD
 CAD:ABDOMINAL PAIN;15361 LANKFORD HWY;MAPP;A68;D4;GILLESPIE LN;SHERWOOD DR;MILE MARKER 125
 ********************************************************************************************
+**********************************************************
 Chester Country, PA 
 Contact: "buckhunter1113@aol.com" <buckhunter1113@aol.com>
 Sender: station24@comcast.net
@@ -283,85 +289,8 @@ BREATHING PROBLEMS; 126 E BANK ST VAL; 76 yom B/P SWEATS DIZZY  6D4  PRI 1;
 HEART PROBLEMS/AICD; 15140 RIDGE RD TGN; 50 YOM RAPID HEART 180 BPS ; PRI 1 19c4;
 TRAFFIC/TRANSPORTATION INCIDENTS; 14681 RIDGE RD TGN; REPORTED 2 CAR MINOR INJ MVA   29-B-1;
 SICK PERSON; 1579 E KENT RD TCR; 75 yom cathater removed pain PRI 3;
-**********************************************************
-Rockingham County, VA (class II)
-Contact: Spencer Gibson <stgibs@gmail.com>
-Sender: messaging@iamresponding.com or mailbox@hrecc.org
 
-R40 EMS-CARDIAC CONDITION 1751 MAIN AVE HAR CFS# 2010-082726 CROSS: GARBERS
-CHURCH RD/S HIGH ST
 
-R40 EMS-MENTAL PROBLEM 445 N MAIN ST 44 HAR CFS# 2010-082451 CROSS: WOLFE
-ST/ROCK ST
-
-R40 EMS-ABDOMINAL PAIN 1737 MORELAND DR HAR CFS# 2010-083119 CROSS: PHEASANT
-RUN CIR/ASHFORD CT
-
-Note that the following is an example of an address with an apartment/suite:
-
-R40 EMS-CHEST PAIN 235 LAYMAN ST 101 HAR CFS# 2010-083046 CROSS: N MAIN
-ST/LONGVIEW DR
-
-Block example:
-R40 TRAFFIC CRASH 300 BOYERS RD BLK HAR CFS# 2010-082984 CROSS: MYSTIC WOODS
-LN/CULLISON CT
-
-Intersection example:
-R40 TRAFFIC CRASH RESERVOIR ST & CANTRELL AV HAR CFS# 2010-082327
-
-Notice that there is a space before R40. I think this is a function of the
-fact that we have our pages sent via I am responding.
-
-Some departments have a leading blank and some do not.  Other departments start
-with a different code, but it will always be Rnn or Cnn.
-
-The city codes we use are:
-
-BRO BROADWAY
-BRI BRIDGEWATER
-HAR HARRISONBURG
-SIN SINGERS GLEN
-CLO CLOVER HILL
-HIN HINTON
-MOU MOUNT CRAWFORD
-TIM TIMBERVILLE
-DAY DAYTON
-GRO GROTTOES
-MCG MCGAHEYSVILLE
-PEN PENN LAIRD
-ELK ELKTON
-WEY WEYERS CAVE
-NEW NEW MARKET
-STA STANLEY
-LUR LURAY
-SHE SHENANDOAH
-
-Finally, those addresses most likely won't map (made some of them up), so
-here's a few that will, in the format in which they would arrive:
-
-238 E WATER ST 118 (118 is an apt number)
-1700 RESERVOIR ST
-251 N INTERSTATE 81
-242 S INTERSTATE 81
-1183 DEVON LN A
-4561 S VALLEY PK (we use somewhat strange 2-char street type suffixes.)
-**********************************************************
-Suffolk County, NY  (class II)
-(Apparently a different dispatch format from our Suffolk County??  Hold for more info)
-Contact: Jonathan broder <redorbj@gmail.com>
-Sender: paging@alpinesoftware.com <From%3Apaging@alpinesoftware.com>
-Falls, Not dangerous body area at 6 CROWN RD, ROCKY POINT  c/s: FISH RD . . 08:00:02
-Automatic Alarm, Residential at 38 CHERYL DR, SHOREHAM  c/s: COBBLESTONE DR . . 08:23:03
-**********************************************************
-Greeley, CO (Class I)
-Contact: 9703818003@vzwpix.com
-Sender: Basepage@mauser.greeleypd.com 
-20442,ALARMF,23691 CR 60H.E1 E4 L1,TEXT:AUDIBLE FROM GENERAL AND SMOKE DETECTOR \COMP:1ST CLASS SECURITY \PH:800 482 9800,
-20431,SMKODR,1ST ST/8TH AV.E4 L1,TEXT:SMELL OF NATURAL GAS ALL OVER THE AREA \COMP:W012,
-20373,SMKODR,10TH AV/22ND ST.E4 R1,TEXT:STRONG SMELL OF NATURAL GAS IN AIR IN THIS AREA \COMP:MIKE RUANE \PH:608 630 2959,
-20032,SMKODR,2114 BLUEBELL AV.E4 R1,TEXT:FROM THE SOUTH, STRONG SMELL OF NATURAL GAS UNK WHERE ITS COMING FROM,
-19897,ALARMF,2013 1ST AV.E4 E1 L1,TEXT:AUDIBLE COMING FROM PULL STATION  NW DOOR, NO ATC, PREM PH 970 674 1957 \COMP:OP 311 SHERLOCK PLUS \PH:800 443
-19547,AIRAF ,600 AIRPORT RD.E4,TEXT:PLANE COMING IN WITHOUT LANDING GEAR.  RP WANTS FIRE AND MEDICAL TO RESPOND AND STANDBY. \COMP:MANDY \PH:336-3000,
 **********************************************************
 * Misc formats received with problem reports
 **********************************************************

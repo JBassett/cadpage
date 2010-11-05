@@ -13,7 +13,7 @@ public class ManagePreferences {
   // Preference version.  This needs to be incremented every time a new
   // configuration setting is added to force it to initialize properly
   // when the new release is first run.
-  private static final int PREFERENCE_VERSION = 2;
+  private static final int PREFERENCE_VERSION = 1;
   
   private static ManagePreferences prefs;
 
@@ -207,10 +207,6 @@ public class ManagePreferences {
     return saveParser;
   }
 
-  public static String getCallback() {
-    return prefs.getString(R.string.pref_callback_key);
-  }
-
 
   /**
    * Append configuration information to constructed message
@@ -264,7 +260,6 @@ public class ManagePreferences {
         R.string.pref_button1_key,
         R.string.pref_button2_key,
         R.string.pref_button3_key,
-        R.string.pref_callback_key
     };
 
     Map<String, ?> map = prefs.mPrefs.getAll();
@@ -366,6 +361,10 @@ public class ManagePreferences {
 
   public String getString(int resPrefId, String defaultVal) {
     return mPrefs.getString(context.getString(resPrefId), defaultVal);
+  }
+
+  public static String getCallback() {
+    return prefs.getString(R.string.pref_callback_key);
   }
   public void close() {}
 }
