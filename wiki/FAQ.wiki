@@ -11,6 +11,7 @@ way to get their calls and map them. [http://code.google.com/p/cadpage/wiki/Disc
 V 1.1.20 released Nov 3, 2010
 
 For support email support@cadpage.org
+For news follow us on [http://twitter.com/#!/cadpage Twitter] @cadpage
 
 SupportCadpage with a Donation !
 
