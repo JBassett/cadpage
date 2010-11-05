@@ -8,9 +8,8 @@ way to get their calls and map them. [http://code.google.com/p/cadpage/wiki/Disc
 
 = Breaking News =
 
-V 1.1.20 scheduled for Nov 3, 2010
+V 1.1.20 released Nov 3, 2010
 
-V 1.1.19 has been released on Oct 28, 2010
 For support email support@cadpage.org
 
 SupportCadpage with a Donation !
@@ -36,6 +35,8 @@ Cadpage requires that you already receive or can receive your fire/ems pages to 
  * Lancaster, PA
  * Harris County, TX
  * Henry County, VA
+ * Prince William, VA (Beta)
+ * Accomack, VA (Beta)
  * and of course Loudoun County, VA
 
 Locations in Queue:
@@ -51,13 +52,16 @@ Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least o
 
 == Version History ==
 
-V 1.2.0 
-  * Adding Centreville, MD
-  * Adding Arnold, MD
+V 1.1.21 Planned for Nov 7, 2010
+  * Hope to add all remaining locations that are in the queue and can be done.
+
+
+V 1.1.20 Nov 3, 2010 
   * Try to get delete calls fixed.
   * Fix to graphics 
   * Additional launch crash resolved.
   * New Locations
+  * Added requested Callback feature. Under Additional Options you can now add a callback number which will then enable a new button on the Popup to then call that number.
   * Additional data displayed on Popup for some locations.
 
 V 1.1.19 Oct 28, 2010
