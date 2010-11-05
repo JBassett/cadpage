@@ -6,7 +6,7 @@ Why do we need the permissions we do ?
 
 
 = Details =
-
+  * andoird.permission.CALL_PHONE. As of ver. 1.1.20 new feature to call a pre-configured number.
   * android.permission.READ_SMS
   * android.permission.RECEIVE_SMS
   * android.permission.RECEIVE_MMS
