@@ -3,6 +3,10 @@
 = User Manual =
 Cadpage has more options than most programs. These options allow you the user tailor the app to how it will best suit your needs.
 
+= Initial Configuration Screen =
+
+|| Image || Details ||
+|| http://code.google.com/p/cadpage/source/browse/wiki/images/ss_config.png ||
 
 
 = Details =
