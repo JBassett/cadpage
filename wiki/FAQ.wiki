@@ -22,20 +22,27 @@ Cadpage requires that you already receive or can receive your fire/ems pages to 
 
 == Currently Supported Locations ==
 
- * Adams County, CO
+ * Northglenn EMS, CO
  * Oconee County, GA
  * Smyrna, GA
  * Madison County, IN
  * Tipton County, IN
- * Allegany County, MI
+ * Allegany County, MD
+ * Arnold, MD (Added Nov 11)
+ * Centreville, MD (Added Nov 11)
+ * Livingston County, MI
  * Babylon, NY
  * Dix Hills, NY
  * Herkimer County, NY
+ * Setauket, NY (Added Nov 11)
  * Suffolk, NY
+ * Macon County, NC (Added Nov 11)
  * Benton County, OR
  * Prineville, OR
+ * Chester County, PA (Added Nov 11)
  * Lancaster, PA
  * Harris County, TX
+ * Longview, TX (Added Nov 11 Very Beta)
  * Henry County, VA
  * Prince William, VA (Beta)
  * Accomack, VA (Beta)
@@ -43,8 +50,6 @@ Cadpage requires that you already receive or can receive your fire/ems pages to 
 
 Locations in Queue:
  * Amityville Fider, NY
- * Longview, TX
- * Northglenn and Commerce City, CO
  * Anoka County, MN
 
 
