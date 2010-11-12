@@ -30,6 +30,7 @@ Cadpage requires that you already receive or can receive your fire/ems pages to 
  * Allegany County, MD
  * Arnold, MD (Added Nov 11)
  * Centreville, MD (Added Nov 11)
+ * Harford, MD (Added Nov 11)
  * Livingston County, MI
  * Babylon, NY
  * Dix Hills, NY
