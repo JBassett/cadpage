@@ -1,5 +1,7 @@
 #summary Cadpage FAQ
 
+=*The FAQ has moved to http://www.cadpage.org/faq=
+
 = Introduction =
 This is the FAQ for the android application Cadpage. 
 
