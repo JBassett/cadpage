@@ -58,7 +58,7 @@ Locations in Queue:
 
 == Want this app to work for your County ? ==
 
-Email at least 5-6 example texts to cadpage@arcolavfd.org please have at least one that is based on an intersection as well as some street addresses. If you know the name of your CAD Vendor please include that. From that we can start the work. Please also include the email address that the messages come from.
+Email at least 5-6 example texts to support@cadpage.org please have at least one that is based on an intersection as well as some street addresses. If you know the name of your CAD Vendor please include that. From that we can start the work. Please also include the email address that the messages come from.
 
 == Version History ==
 
