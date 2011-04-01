@@ -1,9 +1,0 @@
-#summary One-sentence summary of this page.
-
-= Support this Project  =
-
-Cadpage is a free application. Currently all work is done by two developers on separate sides of the US. Both of us are active Fire/EMS professionals who saw a need and developed a solution.
-
-If you find this application useful and would like to help support it then please consider donating. All donations are split directly between the 2 current developers. Donations of any amount are appreciated and will help in supporting continued work on this project.
-
-[https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RFHNWM8S5HDCN Donate to Cadpage]
