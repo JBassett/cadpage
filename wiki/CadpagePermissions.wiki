@@ -23,17 +23,8 @@ We need the above 3 so we can show the message in all cases.
   * android.permission.READ_PHONE_STATE
 We need the above 3 to know if your on the phone or not
 
-  * android.permission.INTERNET
-  * android.permission.ACCESS_COARSE_LOCATION
-  * android.permission.ACCESS_FINE_LOCATION
-  * android.permission.ACCESS_NETWORK_STATE
-The above 4 are used for Google Maps
-
-  * android.permission.WRITE_SMS (removed in V 1.1.8)
-This will be removed soon. Still have some dependent code from smspopup
-
-  * android.permission.READ_CONTACTS (removed in V 1.1.8)
-This will be removed soon. Still have some dependent code from smspopup
+  * android.permission.READ_CONTACTS
+We use this to try to figure out who you are, and if we should not bother you about donating more money.
 
   * android.permission.WRITE_EXTERNAL_STORAGE
 This is so we can add the new ringtone.
