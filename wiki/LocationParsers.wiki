@@ -5,9 +5,12 @@
     # If you find a pattern match that isn't already based on a Dispatch parser, you should consider creating a new one that can be hold the common code needed to process both locations and subclassing both location parsers from it. 
     # Otherwise, if the text pages consists of data fields separated by an obvious field delimiter, use subclass FieldProgramParser
     # Otherwise, if text pages contains fields that are separated by keywords with trailing colons, subclass FieldProgramParser
-    # Otherwise, if the text pages contain an address whose beginning and end cannot be identified without having to understand what an address looks like, subclass SmartAddressParser.
-    # Otherwise, subclass SmsMsgParser
+    # Otherwise, if the text pages contain an address whose beginning and end cannot be identified without having to understand what an address looks like, subclass [SmartAddressParser].
+    # Otherwise, subclass [SmsMsgParser]
   # Create the new Parser class
     # It is usually best to copy an existing parser with the same base class.  Preferably from within the same state package, but use another state parser if that is all that is available
     # Remove the initial comments associated with the old parser and replace them with the information about this location in MsgFormats.txt.
     # Clean up the text pages.  Each page must consist of a single line with \n separating lines.  If you have a lot of text pages, you can select them all and use some fancy pattern replaces.
+      * Replace \n with empty string followed by \\n\\n with \n
+      * Replace \2s with 2 blanks
+      * Replace \n with \\n followed by replace \\n\\n with \n
