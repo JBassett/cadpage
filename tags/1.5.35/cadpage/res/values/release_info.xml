@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">05042012</string>
+  <string name="release_version">v1.5.35</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="min_expire_date">10012012</string>
+  <string name="release_text">
+New Locations:\n
+Manatee County, FL\n
+Clarion County, PA\n
+\n
+Location Parsing Fixes:\n
+Ventura County, CA\n
+Weld County, CO\n
+Touland County, CT\n
+Price Georges County, MD\n
+Marion County, MS\n
+Medina County, OH\n
+Bucks County, PA\n
+Lebanon County, PA\n
+Rockingham County, VA\n
+\n
+General Fixes:\n
+Another attempt to fix sporadic widget issues.  This time I really think we got it.\n
+Rearranged field order in call detail screen.\n
+Fixed problem with Reconnect Direct Paging feature.\n
+\n
+Still trying to catch up on the new location backlog :(
+  </string>  
+</resources>
+  
