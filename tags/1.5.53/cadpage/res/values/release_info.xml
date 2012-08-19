@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">08182012</string>
+  <string name="release_version">v1.5.53</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="min_expire_date">10012012</string>
+  <string name="release_text">
+New Locations:\n
+Calaveras County, CA\n
+Golden, CO\n
+Oldham County, KY\n
+Pottawatomie County, OK\n
+Montgomery County, PA (alt)\n
+Pierce County, WA\n
+\n
+Location Parsing Fixes:\n
+Sonoma County, CA\n
+Adams County, CO\n
+Sussex County, DE\n
+Howard County, MD\n
+Seminole County, OK\n
+Jefferson County, TN\n
+Bexar County, TX\n
+Montgomery County, TX\n
+\n
+General Fixes:\n
+Fixed 3 problems causing Cadpage crashes\n
+  </string>  
+</resources>
+  
