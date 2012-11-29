@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">11282012</string>
+  <string name="release_version">v1.5.70</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+New Locations:\n
+Madison County, IN (alt)\n
+Vanderburgh County, IN\n
+Garrett County, MD\n
+Osage County, MO\n
+New York City, NY\n
+Lake County, OH\n
+Campbell County, TN\n
+Knox County, TN\n
+King County, WA\n
+Lewis County, WA\n
+\n      
+Location Parsing Fixes:\n
+El Paso County, CO\n
+Garfield County, CO\n
+Larimer County, CO\n
+Hamilton County, IN\n
+Madison County, IN\n
+Cecil County, MD\n
+Hunterdon County, NJ\n
+Keene Mutual Aid, NY\n
+Westchester County, NY\n
+Portage County, OH\n
+Snyder County, PA\n
+Nassau Bay, TX\n
+Rockingham County, VA\n
+  </string>  
+</resources>
+  
