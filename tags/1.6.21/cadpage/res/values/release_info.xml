@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">04282013</string>
+  <string name="release_version">v1.6.21</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+New Locations:\n
+Warren County, MO\n
+Nassau County, NY\n
+Bryan County, OK\n
+Clarion County, PA\n
+\n
+Location Parsing Fixes:\n
+Louisville, KY\n
+Midland County, MI\n
+Cayuga County, NY\n
+Davie County, NC\n
+Nash County, NC\n
+York County, PA\n
+Oconee County, SC\n
+Minnehaha County, SD\n
+Loudon County, VA\n
+\n
+  </string>  
+</resources>
+  
