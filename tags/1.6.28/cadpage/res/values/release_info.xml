@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">06062013</string>
+  <string name="release_version">v1.6.28</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+New Locations:\n
+Knox County, ME\n
+Kershaw County, SC\n
+\n      
+Location Parsing Fixes:\n
+San Bernardino County, CA\n
+Nortwest Public Safety, CT\n
+Campbell County, KY\n
+Cayuga County, NY\n
+Herkimer County, NY\n
+Portage County, OH\n
+Prince William County, VA\n
+\n
+General Fixes:\n
+Force close problems\n
+  </string>  
+</resources>
+  
