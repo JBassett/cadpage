@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">07212013</string>
+  <string name="release_version">v1.6.34</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+New Locations:\n
+Smyth County, VA\n
+Warren County, VA\n
+Hardy County, WV\n
+\n
+Location Parsing Fixes:\n
+Colbert County, AL\n
+Shelby County, AL\n
+Carroll County, MD\n
+Flathead County, MT\n
+Broome County, NY\n
+Suffolk County, NY\n
+Davidson County, NC\n
+Mecklenburg County, NC\n
+Orange County, NC\n
+Union County, NC\n
+Jackson County, OR\n
+Josephine County, OR\n
+Lake County, OR\n
+Lancaster County, PA\n
+  </string>  
+</resources>
+  
