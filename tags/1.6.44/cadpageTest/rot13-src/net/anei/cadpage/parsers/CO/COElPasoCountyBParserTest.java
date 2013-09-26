@@ -1,0 +1,84 @@
+cnpxntr arg.narv.pnqcntr.cnefref.PB;
+
+vzcbeg arg.narv.pnqcntr.cnefref.OnfrCnefreGrfg;
+
+vzcbeg bet.whavg.Grfg;
+
+/*
+Ry Cnfb Pbhagl, PB
+Pbagnpg: Npgvir911
+Ntrapl anzr: Qbanyq Jrfpbgg Sver Cebgrpgvba Qvfgevpg
+Ybpngvba: Pbybenqb Fcevatf, PB, Havgrq Fgngrf
+Fraqre: pnq@fcevatftbi.pbz
+
+77777711*BQBE R19,QJR11079 ZVYNAB CG #1724Znc X8 11:16:46BQBEErcbeg P1340488
+77777711*ZRQ R19,QJR112105 NZONFFNQBE QE #360 YVOREGL URVTUGF NG ABEGUTNGRZnc X17 13:42:53ZRQVPNYErcbeg P1340155
+77777711*ZRQ R19,QJR111028 IBLNTRE CLZnc X20 08:37:04ZRQVPNYErcbeg P1340100
+77777711*ZRQ R19,QJR11435 NYZNTER CRNX QEZnc X17 08:17:42ZRQVPNYErcbeg P1339937
+77777711*BSVE R19,QJR11460 CRERTEVAR IVFGN UG #304 GNYBA UVYYZnc X17 13:26:52BGURE SVERErcbeg P1339824
+77777711*33P4G R19,QJR112205 THAFGBPX QE #P12 YVOREGL URVTUGF NG ABEGUTNGRZnc X17 08:20:27GENAFSRE NPHGR URNEG CEBO BE ZVErcbeg P1339774
+77777711*21O1 R19,QJR112205 THAFGBPX QE #P13 YVOREGL URVTUGF NG ABEGUTNGRZnc X17 06:10:40OYRRQVAT CBFFVOYR QNATREBHF NERNErcbeg P1339460
+77777711*31Q3 R19,QJR112105 NZONFFNQBE QE YVOREGL URVTUGF NG ABEGUTNGRZnc X17 20:02:14HAPBA/SNVAG CG ABG NYREGErcbeg P1339391
+77777711*ZRQ R19,QJR112105 NZONFFNQBE QE #531 YVOREGL URVTUGF NG ABEGUTNGRZnc X17 07:59:04ZRQVPNYErcbeg P1339308
+77777711*BQBE R19,QJR112465 JBBQEHSS QEZnc X17 12:51:59BQBEErcbeg P1339176
+77777711*NGNY R19,QJR11943 DHRRAF PNALBA PGZnc X17 09:16:56NHGBZNGVP NYNEZErcbeg P1339143
+77777711*GNG R19,G19,QJR1UL-83/ABEGU-TNGR OYZnc X4 05:48:41GENSSVP NPPVQRAG/GENCCRQErcbeg P1339118
+77777711*CHO G19,QJR113754 SVERSNYY PGZnc X4 17:18:46CHOYVP NFFVFGErcbeg P1339052
+77777711*GNG R19,G19,QJR111195 UL-83 ENZCNEG ENATR PNZCHFZnc X20 15:55:35GENSSVP NPPVQRAG/GENCCRQErcbeg P1338888
+77777711*40F R19,QJR11810 ABEGU-TNGR OY QVFPBIREL PNALBA PNZCHFZnc X4 11:56:43NYCUN - CQ ERD PBQR 2, ZRQ FGNTRErcbeg P1338859
+77777711*ZRQ G19,QJR112105 NZONFFNQBE QE YVOREGL URVTUGF NG ABEGUTNGRZnc X17 22:15:20ZRQVPNYErcbeg P1338786
+77777711*NI R19,QJR11142 ORYYN FCEVATF IJZnc X8 18:54:59NFFNHYG IVPGVZErcbeg P1338752
+77777711*ZRQ R19,QJR1ABEGU-TNGR OY/BYQ ABEGU-TNGR EQ15:47:17ZRQVPNYErcbeg P1338710
+77777711*ZRQ R19,QJR11810 ABEGU-TNGR OY QVFPBIREL PNALBA PNZCHFZnc X4 12:15:19ZRQVPNYErcbeg P1338667
+77777711*ZRQ R19,QJR112710 IBLNTRE CL CEBTERFFVIR VAFHENAPRZnc X8 10:57:39ZRQVPNYErcbeg P1338656
+77777711*ZRQ G19,QJR112105 NZONFFNQBE QE #308 YVOREGL URVTUGF NG ABEGUTNGRZnc X17 16:57:09ZRQVPNYErcbeg P1338539
+77777711*ZRQ R19,QJR1436 SBK EHA PEZnc X6 08:00:22ZRQVPNYErcbeg P1338473
+77777711*NGNY R19,QJR31588 BNXZBAG QEZnc X8 19:53:22NHGBZNGVP NYNEZErcbeg P1338414
+77777711*ZRQ R19,QJR12823 PVAANONE EQZnc X4 09:38:58ZRQVPNYErcbeg P1338329
+77777711*ZRQ R19,QJR112738 EBPXOEVQTR PEZnc X8 05:54:47ZRQVPNYErcbeg P1338306
+
+** ABGRF **
+V ungr gurfr.  Ab oynaxf orgjrra svryqf, ohg whfg zvtug or rabhtu xrl cuenfrf gb yrg hf oernx rirelguvat bhg.
+Ohg guvf unf gb or n znfgre cnggrea cnefre, naq gubfr pna or n ovgpu gb trg jbexvat.
+
+Lbh unir gb perngr n ZNFGRE cnggrea naq zngpu gur ragver grkg obql ntnvafg vg.  Vs gung fhpprrqf nffvta gur
+pbeerpg svryqf sebz gur pbeerfcbaqvat zngpu tebhcf.  Vg ybbxf pbby naq fhcre fvzcyr jura vg vf qbar, ohg vg 
+arire jbexf gur svefg gvzr.  Lbh jvyy nyzbfg pregnvayl arrq gb hfr gur CnggreaGrfg pynff va gur grfg cebwrpg
+qrsnhyg tebhc gb qroht gur znfgre cnggrea.
+
+Zl thrff ng jung lbh arrq sbe n cnggrea jbhyq or
+(\\q+)\\*([N-M\\q]+) +([N-M\\q,]+),([N-M]{3}\\q{5,6}) (.*)[Znc ([N-M]\\q) (\\q\\q:\\q\\q:\\q\\q)(.*) P\\q+
+
+Jvgu tebhcf nffvtarq gb gur sbyybjvat svryqf...
+FEP
+PBQR
+HAVG .gevz()
+VQ
+Fgevat nqqe
+ZNC
+GVZR
+PNYY.gevz()
+
+Gura jr arrq gb oernx gur nqqe svryq vagb nqqerff, ncg, naq cynpr svryqf
+fbzrguvat yvxr
+cnefrNqqerff(FgnegGlcr.FGNEG_NQQE, nqqe, qngn)
+qngn.fgeCynpr = trgYrsg()
+fubhyq qb vg
+
+ */
+
+choyvp pynff PBRyCnfbPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
+  
+  choyvp PBRyCnfbPbhaglOCnefreGrfg() {
+    frgCnefre(arj QhzzlCnefre(), "RY CNFB PBHAGL", "PB");
+  }
+  
+  @Grfg
+  choyvp ibvq grfgCnefre() {
+
+  }
+  
+  choyvp fgngvp ibvq znva(Fgevat[] netf) {
+    arj PBRyCnfbPbhaglOCnefreGrfg().trarengrGrfgf("G1");
+  }
+}
