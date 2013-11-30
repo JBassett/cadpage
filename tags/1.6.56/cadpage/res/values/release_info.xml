@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">11302013</string>
+  <string name="release_version">v1.6.56</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+New Locations:\n
+Larimer County, CO\n
+Fairfield County, CT\n
+Clinton County, MO\n
+Pocahontas County, WV\n
+\n
+Location Parsing Fixes:\n
+Anne Arrundel County, MD\n
+Cape Girardeau County, MO\n
+Greene County, MO\n
+St Louis County, MO\n
+Ulster County, NY\n
+Lane County, OR\n
+Lancaster County, PA\n
+Collin County, TX\n
+Cy Creek Comm Center, TX\n
+  </string>  
+</resources>
+  
