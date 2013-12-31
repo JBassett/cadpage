@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">12312013</string>
+  <string name="release_version">v1.6.60</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+New Locations:\n
+Cape Giradeau County, MO (alt)\n
+\n
+Location Parsing Fixes:\n
+New Milford, CT\n
+Burlington County, NJ\n
+JCMC EMS Jersey Sity, NJ\n
+York COunty, PA\n
+Jefferson County, TN\n
+Montgomery County, TX\n
+  </string>  
+</resources>
+  
