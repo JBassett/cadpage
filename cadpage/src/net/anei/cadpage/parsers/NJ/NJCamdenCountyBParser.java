@@ -11,7 +11,6 @@ public class NJCamdenCountyBParser extends SmartAddressParser {
 
   public NJCamdenCountyBParser() {
     super("CAMDEN COUNTY", "NJ");
-    setFieldList("CALL ADDR APT INFO");
   }
   
   @Override

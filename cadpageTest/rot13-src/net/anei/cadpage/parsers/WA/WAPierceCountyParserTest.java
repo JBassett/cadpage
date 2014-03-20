@@ -17,10 +17,4 @@ choyvp pynff JNCvreprPbhaglCnefreGrfg {
       frgCnefre(arj JNCvreprPbhaglCnefre());
     }
   }
-  
-  choyvp fgngvp pynff GrfgQ rkgraqf JNCvreprPbhaglQCnefreGrfg {
-    choyvp GrfgQ() {
-      frgCnefre(arj JNCvreprPbhaglCnefre());
-    }
-  }
 }

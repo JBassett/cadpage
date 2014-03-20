@@ -13,7 +13,7 @@ public class NJAtlanticareEMSParser extends DispatchProQAParser {
   
   @Override
   public String getFilter() {
-    return "medcom@medcom.com,medcom@atlanticare.org";
+    return "medcom@medcom.com";
   }
   
   @Override
@@ -55,7 +55,6 @@ public class NJAtlanticareEMSParser extends DispatchProQAParser {
   // Atlantic County
     "ABSECON",    
     "ATLANTIC",
-    "ATLANTIC CITY",
     "BRIGANTINE",
     "BUENA VISTA TWP",
     "COLLINGS LAKES",

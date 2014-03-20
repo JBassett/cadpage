@@ -41,7 +41,7 @@ public class TrackingService extends Service implements LocationListener {
   private static final int TRACKING_NOTIFICATION = 298;
 
   // Wake lock and synchronize lock
-  static private PowerManager.WakeLock sWakeLock = null;
+  static private PowerManager.WakeLock mWakeLock = null;
   
   /**
    * Internal class defining a location report request
@@ -77,8 +77,8 @@ public class TrackingService extends Service implements LocationListener {
     
     void report(Context context, Location loc) {
       Uri.Builder bld = Uri.parse(URL).buildUpon().appendQueryParameter("type", "LOCATION");
-      bld.appendQueryParameter("lat", Double.toString(loc.getLatitude()));
-      bld.appendQueryParameter("long", Double.toString(loc.getLongitude()));
+      bld.appendQueryParameter("lat", Location.convert(loc.getLatitude(), Location.FORMAT_DEGREES));
+      bld.appendQueryParameter("long", Location.convert(loc.getLongitude(), Location.FORMAT_DEGREES));
       if (loc.hasAccuracy()) bld.appendQueryParameter("acc", Float.toString(loc.getAccuracy()));
       if (loc.hasAltitude()) bld.appendQueryParameter("alt", Double.toString(loc.getAltitude()));
       if (loc.hasBearing()) bld.appendQueryParameter("bearing", Float.toString(loc.getBearing()));
@@ -125,7 +125,7 @@ public class TrackingService extends Service implements LocationListener {
       return 0;
     }
     
-    if (flags != 0) holdPowerLock(this);
+    if (!mWakeLock.isHeld()) mWakeLock.acquire(); 
     String url = intent.getStringExtra(EXTRA_URL);
     long endTime = intent.getLongExtra(EXTRA_END_TIME, 0L);
     int minDist = intent.getIntExtra(EXTRA_MIN_DIST, 10);
@@ -215,7 +215,7 @@ public class TrackingService extends Service implements LocationListener {
     LocationManager locMgr = (LocationManager)this.getSystemService(LOCATION_SERVICE);
     locMgr.removeUpdates(this);
     bestProvider = null;
-    if (sWakeLock != null) sWakeLock.release();
+    if (mWakeLock != null) mWakeLock.release();
   }
 
   @Override
@@ -243,8 +243,15 @@ public class TrackingService extends Service implements LocationListener {
    */
   public static void addLocationRequest(Context context, String URL, int duration, int minDist, int minTime) {
     
-    // Create and hold partial power lock
-    holdPowerLock(context);
+    // If we haven't established a power wake lock, do that now.
+    synchronized (TrackingService.class) {
+      if (mWakeLock == null) {
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".LocationService");
+        mWakeLock.setReferenceCounted(false);
+      }
+      if(!mWakeLock.isHeld()) mWakeLock.acquire();
+    }
     
     Intent intent = new Intent(ACTION_REPORT, null, context, TrackingService.class);
     intent.putExtra(EXTRA_URL, URL);
@@ -252,16 +259,5 @@ public class TrackingService extends Service implements LocationListener {
     intent.putExtra(EXTRA_MIN_DIST, minDist);
     intent.putExtra(EXTRA_MIN_TIME, minTime);
     context.startService(intent);
-  }
-
-  private static void holdPowerLock(Context context) {
-    synchronized (TrackingService.class) {
-      if (sWakeLock == null) {
-        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".TrackingService");
-        sWakeLock.setReferenceCounted(false);
-      }
-      if(!sWakeLock.isHeld()) sWakeLock.acquire();
-    }
   }
 }

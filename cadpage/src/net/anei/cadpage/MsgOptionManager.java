@@ -2,7 +2,6 @@ package net.anei.cadpage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import net.anei.cadpage.donation.DonationManager;
 import android.app.Activity;
@@ -12,8 +11,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
@@ -108,7 +105,7 @@ public class MsgOptionManager {
           item.setVisible(visible);
         }
         
-      }, false);
+      });
     }
   }
 
@@ -124,8 +121,7 @@ public class MsgOptionManager {
     R.id.publish_item, 
     R.id.close_app_item,
     R.id.more_info_item,
-    R.id.start_radio_item,
-    R.id.active911_item
+    R.id.start_radio_item
   };
   
   // List of item title resources associated with each button index
@@ -140,8 +136,7 @@ public class MsgOptionManager {
     R.string.publish_item_text, 
     R.string.close_app_item_text,
     R.string.more_info_item_text,
-    R.string.start_radio_item_text,
-    R.string.active911_item_text
+    R.string.start_radio_item_text
   };
   
   public void setupButtons(ViewGroup respButtonGroup, ViewGroup mainButtonGroup) {
@@ -333,9 +328,8 @@ public class MsgOptionManager {
    * @param buttonList list of buttons to be prepared
    */
   public void prepareButtons(List<ButtonHandler> buttonList) {
-    boolean suppressMoreInfo = false;
     for (ButtonHandler btnHandler : buttonList) {
-      if (btnHandler.prepareButton(suppressMoreInfo)) suppressMoreInfo = true;
+      btnHandler.prepareButton();
     }
   }
   
@@ -398,8 +392,8 @@ public class MsgOptionManager {
       this.respCode = respCode;
     }
     
-    public boolean prepareButton(boolean suppressMoreInfo) {
-      return prepareItem(new ItemObject(){
+    public void prepareButton() {
+      prepareItem(new ItemObject(){
         
         @Override
         public int getId() {
@@ -420,7 +414,7 @@ public class MsgOptionManager {
         public void setVisible(boolean visible) {
           button.setVisibility(visible ? View.VISIBLE : View.GONE);
         }
-      }, suppressMoreInfo);
+      });
     }
 
     public void onClick(View v) {
@@ -440,7 +434,7 @@ public class MsgOptionManager {
     public void setVisible(boolean visible);
   }
   
-  private boolean prepareItem(ItemObject item, boolean suppressMoreInfo) {
+  private void prepareItem(ItemObject item) {
     
     switch (item.getId()) {
     
@@ -471,10 +465,8 @@ public class MsgOptionManager {
       break;
       
       // More info disappears if there is no info to display
-      // Or if the Active911 info button has been previously enabled, since
-      // both buttons accomplish pretty much the same thing
     case R.id.more_info_item:
-      item.setVisible(message.getInfoURL() != null && !suppressMoreInfo);
+      item.setVisible(message.getInfoURL() != null);
       item.setTitle(message.getInfoTitle());
       break;
 
@@ -482,14 +474,7 @@ public class MsgOptionManager {
     case R.id.start_radio_item:
       item.setVisible(ManagePreferences.scannerChannel() != null);
       break;
-      
-    case R.id.active911_item:
-      String vendor = message.getVendorCode();
-      boolean enabled = vendor != null && vendor.equals("Active911") && launchActive911(activity, false, message);
-      item.setEnabled(enabled);
-      return enabled;
     }
-    return false;
   }
 
   /**
@@ -504,11 +489,8 @@ public class MsgOptionManager {
   
   public boolean menuItemSelected(int itemId, boolean display, String respCode) {
     
-    // If parent activity is no longer valid, disregard
-    if (activity.isFinishing()) return false;
-    
     // Any button clears the notice
-    ClearAllReceiver.clearAll(activity);
+    ManageNotification.clear(activity);
     
     // Any button will trigger an auto response, except for an HTTP response button
     // which is going to send a response code of it's own, rendering the auto response
@@ -569,10 +551,6 @@ public class MsgOptionManager {
       }
       return true;
       
-    case R.id.active911_item:
-      launchActive911(activity, true, message);
-      return true;
-      
     case R.id.ack_item:
       message.setResponseMenuVisible(false);
       return true;
@@ -616,26 +594,9 @@ public class MsgOptionManager {
     if (searchStr == null) return;
     
     if (!SmsPopupUtils.haveNet(context)) return;
-    
-    // We do things differently for GPS coordinates
-    if (GPS_LOC_PTN.matcher(searchStr).matches()) {
-      searchStr = "geo:0,0?q=" + searchStr;
-      
-      // Add real address as title
-      String addr = message.getInfo().getAddress();
-      if (addr.length() > 0) {
-        searchStr = searchStr + '(' + addr + ')';
-      }
-    } 
-    
-    // Regular address parsing
-    else {
-      searchStr = searchStr.replaceAll(" *& *", " AT ");
-      searchStr = "geo:0,0?q=" + Uri.encode(searchStr);
-    }
-    
-    // Build and launch map request
-    Uri uri = Uri.parse(searchStr);
+
+    searchStr = searchStr.replaceAll(" *& *", " AT ");
+    Uri uri = Uri.parse("geo:0,0?q=" + Uri.encode(searchStr));
     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
     Log.w("Map Request:");
     ContentQuery.dumpIntent(intent);
@@ -646,7 +607,6 @@ public class MsgOptionManager {
         Log.e("Could not find com.google.android.maps.Maps activity");
     }
   }
-  private static final Pattern GPS_LOC_PTN = Pattern.compile("[+-]?\\d+\\..*");
 
   /**
    * Send SMS response message
@@ -725,37 +685,4 @@ public class MsgOptionManager {
   }
   private static final String SMS_SENT = "net.anei.cadpage.MsgOptionManager.SMS_SENT";
   private static final String SMS_DELIVERED = "net.anei.cadpage.MsgOptionManager.SMS_DELIVERED";
-  
-  /**
-   * Launch Active911 app if it is installed
-   * @param context current context
-   * @param launch true to really launch the app. false to just test to see if it is installed 
-   * @return true if Active911 app is installed, false otherwise
-   */
-  private static boolean launchActive911(Context context, boolean launch, SmsMmsMessage msg) {
-    Intent intent = new Intent(Intent.ACTION_MAIN);
-    intent.addCategory(Intent.CATEGORY_LAUNCHER);
-    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                    Intent.FLAG_ACTIVITY_SINGLE_TOP |
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    intent.setClassName("com.active911.app", "com.active911.app.MainActivity");
-    
-    // See if we can extract the message ID from the ack URL
-    String code = msg.getActive911MsgCode();
-    if (code != null) intent.putExtra("q", code);
-    
-    PackageManager pm = context.getPackageManager();
-    List<ResolveInfo> list = pm.queryIntentActivities(intent, 0);
-    if (list == null || list.size() == 0) return false;
-    
-    if (!launch) return true;
-    Log.w("Launching Active911");
-    ContentQuery.dumpIntent(intent);
-    try {
-      context.startActivity(intent);
-    } catch (ActivityNotFoundException ex) {
-      Log.e(ex);
-    }
-    return true;
-  }
 }

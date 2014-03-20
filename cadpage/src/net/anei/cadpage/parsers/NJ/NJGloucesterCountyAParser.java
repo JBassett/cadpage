@@ -24,7 +24,7 @@ public class NJGloucesterCountyAParser extends DispatchProphoenixParser {
  
   @Override
   public String getFilter() {
-    return "gccad@co.gloucester.nj.us,777,@private.gloucesteralert.com,12101";
+    return "gccad@co.gloucester.nj.us,777,@private.gloucesteralert.com";
   }
   
   @Override
@@ -38,7 +38,6 @@ public class NJGloucesterCountyAParser extends DispatchProphoenixParser {
     
     // THere are some weird text options presumably introduced by forwarding services
     if (body.startsWith("Fwd:")) body = body.substring(4).trim();
-    if (body.endsWith("=")) body = body.substring(0,body.length()-1).trim();
     
     Matcher match = FROM_ADDR_PTN.matcher(fromAddress);
     if (match.matches()) {
@@ -79,7 +78,6 @@ public class NJGloucesterCountyAParser extends DispatchProphoenixParser {
       "T", "WEST DEPTFORD TWP",
       "U", "WESTVILLE BORO",
       "V", "WOODBURY CITY",
-      "W", "WOODBURY HEIGHTS",
       "Y", "ROWAN",
       "04", "BUENA VISTA TWP",
       "05", "BUENA VISTA TWP",

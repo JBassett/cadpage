@@ -15,7 +15,6 @@ public class MDQueenAnnesCountyParser extends SmartAddressParser {
   
   public MDQueenAnnesCountyParser() {
     super("QUEEN ANNES COUNTY", "MD");
-    setFieldList("CALL CITY ADDR PLACE INFO BOX");
   }
   
   @Override

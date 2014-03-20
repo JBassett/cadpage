@@ -30,13 +30,6 @@ Ybpngvba: Ornhzbag, GK, Havgrq Fgngrf
 (IvfvPnq FZGC Cntvat) Erfc#10422288 Yvsr Guerngravat Rzretrapl Urzbeeuntr/Ynprengvbaf Ybp: Nqq:1131 J Cebpgre Fg NCG: Pebff Fg:Qhaone Nir/Uneqvat Nir Pvgl:Cbeg Neguhe Pagl: WRSSREFBA Znc Ct: Qrfg: Cg'f Anzr:
 (IvfvPnq FZGC Cntvat) Erfc#10422373 Aba Yvsr Guerngravat RzretraplFvpx Crefba (Fcrpvsvp Qvnt.) Ybp: Nqq:155 Tnel Fg NCG: Pebff Fg:Sebagntr Eq/Qrnq Raq Pvgl:Oevqtr Pvgl Pagl: Benatr Znc Ct: Qrfg: Cg'f Anzr:
 
-** Abg cnefvat - Ab nqqerff **
-Pbagnpg: nfubhygf1 <nfubhygf1@lnubb.pbz>
-Fraqre: pbzzpragrenhfgva@npnqvna.pbz
-(NHF PNQ FZGC Cntvat) Erfc#:20131117-0230       Hafpurqhyrq Gk                Hafpurqhyrq Genafcbeg         Ybp:Abegu Prageny Oncgvfg Ubfcg UANqq:520 Z
-(NHF PNQ FZGC Cntvat) Erfc#:20131117-0168       Yvsr Guerngravat Rzretrapl    Urzbeeuntr/Ynprengvbaf        Ybp:                              Nqq:700 T
-(NHF PNQ FZGC Cntvat) Erfc#:20140223-0074       Rzr Ubfcvgny Gk NYF           Urzbeeuntr/Ynprengvbaf        Ybp:Abegu Prageny Oncgvfg Ubfcg RQNqq:520 Z
-
 */
 
 choyvp pynff GKNpnqvnaNzohynaprCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -77,7 +70,7 @@ choyvp pynff GKNpnqvnaNzohynaprCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:9881442",
         "PNYY:Yvsr Guerngravat Rzretrapl Urneg Ceboyrzf",
         "NQQE:24212 Sz 2100 Eq",
-        "ZNQQE:24212 SNEZ-GB-ZNEXRG 2100",
+        "ZNQQE:24212 SZ 2100",
         "K:Haanzrq Fgerrg/3eq Fg",
         "PVGL:Uhsszna, Uneevf");
 
@@ -140,7 +133,6 @@ choyvp pynff GKNpnqvnaNzohynaprCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:9909614",
         "PNYY:Yvsr Guerngravat Rzretrapl Genssvp Nppvqragf",
         "NQQE:Sz 2100 & Uhsszna Eq",
-        "ZNQQE:Snez-gb-znexrg 2100 & Uhsszna Eq",
         "K:SZ 2100/Uhsszna Pyrirynaq EQ",
         "PVGL:Uhsszna");
   }

@@ -22,9 +22,6 @@ FVPX2 @ 13:06:02\e\aJBZNA VYY\e\a26408 112GU FG R, 22\e\aZnc=452,EQ=22- 162\e\ag
 PURFG1 @ 13:25:10\e\aZNA VYY\e\a13349 CENVEVR EVQTR QE R, 22\e\aZnc=503,EQ=22- 121\e\agb: S22
 FVPX2 @ 13:06:02\e\aHaxabja Zrqvpny\e\a26408 112GU FG R, 22\e\aZnc=452,EQ=22- 162\e\agb: S22
 67Q3 @ 12:35:32\e\aYET BHGFVQR SVER\e\a2017 217GU NIPG R, 22\e\aZnc=226,EQ=22- 151\e\agb: S22
-PIN ¡ 12:30:27\aCBFF PIN\a5625 159GU NIPG R, 22\aZnc=291,EQ=22- 133\agb: S22
-FME1 ¡         \aFrvmher\a\aZnc=,EQ=22- 181\agb: S22
-ERF ¡ 20:13:24\aXVGPURA SVER\a22041 127GU FG R, 22\aZnc=503,EQ=22- 121\agb: S22
 
 Pbagnpg: ezolyva@lnubb.pbz <ezolyva@lnubb.pbz>
 Fraqre: 41411
@@ -142,32 +139,6 @@ choyvp pynff JNCvreprPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZNC:Znc=226,EQ=22- 151",
         "HAVG:S22");
 
-    qbGrfg("G6",
-        "PIN ¡ 12:30:27\aCBFF PIN\a5625 159GU NIPG R, 22\aZnc=291,EQ=22- 133\agb: S22",
-        "PBQR:PIN",
-        "GVZR:12:30:27",
-        "PNYY:CBFF PIN",
-        "NQQE:5625 159GU NIPG R",
-        "ZNQQE:5625 159GU NIR PG R",
-        "ZNC:Znc=291,EQ=22- 133",
-        "HAVG:S22");
-
-    qbGrfg("G7",
-        "FME1 ¡         \aFrvmher\a\aZnc=,EQ=22- 181\agb: S22",
-        "PBQR:FME1",
-        "PNYY:Frvmher",
-        "ZNC:Znc=,EQ=22- 181",
-        "HAVG:S22");
-
-    qbGrfg("G8",
-        "ERF ¡ 20:13:24\aXVGPURA SVER\a22041 127GU FG R, 22\aZnc=503,EQ=22- 121\agb: S22",
-        "PBQR:ERF",
-        "GVZR:20:13:24",
-        "PNYY:XVGPURA SVER",
-        "NQQE:22041 127GU FG R",
-        "ZNC:Znc=503,EQ=22- 121",
-        "HAVG:S22");
- 
   }
   
   @Grfg
@@ -179,7 +150,6 @@ choyvp pynff JNCvreprPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:13:50:38",
         "PNYY:PIN",
         "NQQE:15519 62AQ FGPG R",
-        "ZNQQE:15519 62AQ FG PG R",
         "NCG:215",
         "ZNC:Znc=290,EQ=22- 133",
         "HAVG:S22");

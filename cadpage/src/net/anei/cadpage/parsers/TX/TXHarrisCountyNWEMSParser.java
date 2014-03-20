@@ -18,11 +18,6 @@ public class TXHarrisCountyNWEMSParser extends DispatchVisionAirParser {
   }
   
   @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
- 
-  @Override
   public boolean parseMsg(String body, Data data) {
     if (!super.parseMsg(body, data)) return false;
     if (data.strCity.equals("HARRIS CO")) data.strCity = "";

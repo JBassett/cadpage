@@ -6,13 +6,13 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.anei.cadpage.parsers.FieldProgramParser;
+import net.anei.cadpage.parsers.SmartAddressParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
 /**
  * Lincoln County, SD
  */
-public class SDLincolnCountyParser extends FieldProgramParser {
+public class SDLincolnCountyParser extends SmartAddressParser {
   
   private static final Pattern LEAD_NUMBER = Pattern.compile("^\\d+ +(?!Y/O |YO ).*");
   private static final Pattern CALL_ID_PTN = Pattern.compile("^\\{?(\\d\\d-\\d+)\\b\\}?");
@@ -21,18 +21,15 @@ public class SDLincolnCountyParser extends FieldProgramParser {
   private static final Pattern APT_PTN = Pattern.compile("^# *([^,]+?) *,");
   private static final Pattern CITY_ST_PTN = Pattern.compile("^([A-Z ]+)\\b *, *([A-Z]{2})(?: +\\d{5})?", Pattern.CASE_INSENSITIVE);
   private static final Pattern INFO_JUNK_PTN = Pattern.compile(" *Please respond immediately\\.? *", Pattern.CASE_INSENSITIVE);
-  private static final Pattern SUB_SRC_PTN = Pattern.compile("[A-Z ]+ AMB(?:ULANCE)?", Pattern.CASE_INSENSITIVE);
-  
-  private String version;
  
   public SDLincolnCountyParser() {
-    super(CITY_LIST, "LINCOLN COUNTY", "SD",
-          "( SELECT/2 ADDR INFO CALL! | SRC ADDR! ) DATETIME? INFO+ ");
+    super(CITY_LIST, "LINCOLN COUNTY", "SD");
+    setFieldList("ID CALL ADDR APT CITY ST INFO");
   }
   
   @Override
   public String getFilter() {
-    return "no-reply@ledsportal.com,leds@lincolncountysd.org";
+    return "no-reply@ledsportal.com";
   }
   
   @Override
@@ -40,57 +37,19 @@ public class SDLincolnCountyParser extends FieldProgramParser {
     
     if (subject.length() == 0) return false;
     
-    // Too many different formats. :(
-    
-    String tmp = body;
-    int pt = tmp.indexOf('\n');
-    if (pt >= 0) tmp = tmp.substring(0,pt).trim();
-    if (tmp.startsWith("-")) tmp = ' ' + tmp;
-    if (tmp.endsWith("-")) tmp = tmp + ' ';
-    String[] flds = tmp.split(" - ", -1);
-    if (subject.equals(flds[0])) {
-      version = "2";
-      return super.parseFields(flds, data);
-    }
-
-    if (subject.startsWith("Ambulance Call") || subject.equals("Injury Accident")) {
-      version = "1";
-      data.strCall = subject;
-      return parseFields(flds, data);
-    }
-    
-    version = "0";
-    
     // See if subject contains the address
     // with possible city and state qualifier
     Parser p = new Parser(subject);
     String addr = p.get(',');
     Result res = parseAddress(StartType.START_ADDR, FLAG_CHECK_STATUS | FLAG_ANCHOR_END, addr);
-    if (res.getStatus() >= STATUS_INTERSECTION || LEAD_NUMBER.matcher(addr).matches()) {
-      setFieldList("ADDR CITY STATE CALL");
+    if (res.getStatus() > 1 || LEAD_NUMBER.matcher(addr).matches()) {
       res.getData(data);
       if (data.strCity.length() == 0) data.strCity = p.get(',');
       data.strState = p.get(',');
       data.strCall = body;
-      cleanup(data);
       return true;
     }
     
-    if (SUB_SRC_PTN.matcher(subject).matches()) {
-      if (body.startsWith(subject+',')) {
-        res = parseAddress(StartType.START_CALL, FLAG_START_FLD_REQ | FLAG_NO_IMPLIED_APT, body.substring(subject.length()+1).trim());
-        if (res.getStatus() > 0) {
-          setFieldList("SRC CALL ADDR APT CITY ST INFO");
-          data.strSource = subject;
-          res.getData(data);
-          data.strSupp = res.getLeft();
-          cleanup(data);
-          return true;
-        }
-      }
-    }
-    
-    setFieldList("ID CALL ADDR APT CITY ST INFO");
     boolean good = false;
     Matcher match = CALL_ID_PTN.matcher(subject);
     if (match.find()) {
@@ -129,8 +88,8 @@ public class SDLincolnCountyParser extends FieldProgramParser {
     
     else {
       
-      // See if there is an comma or = terminating the address
-      pt = body.indexOf(',');
+      // See if there is an comma terminating the address
+      int pt = body.indexOf(',');
       if (pt < 0) {
         
         // Use the smart address parser to try and find and address
@@ -182,72 +141,9 @@ public class SDLincolnCountyParser extends FieldProgramParser {
     if (info.endsWith("/")) info = info.substring(0,info.length()-1).trim();
     data.strSupp = info;
     
-    cleanup(data);
-    return true;
-  }
-
-  private void cleanup(Data data) {
     if (data.strCity.equalsIgnoreCase("CA")) data.strCity = "CANTON";
     if (data.strCity.equalsIgnoreCase("INWOOD")) data.strState = "IA";
-  }
-  
-  // New format(s) uses a FieldProgramParser program
-  
-  @Override
-  protected String getSelectValue() {
-    return version;
-  }
-  
-  @Override
-  public String getProgram() {
-    if (version.equals("1")) return "CALL " + super.getProgram();
-    return super.getProgram();
-  }
-
-  @Override
-  public Field getField(String name) {
-    if (name.equals("SRC")) return new MySourceField();
-    if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("DATETIME")) return new DateTimeField("\\d\\d/\\d\\d/\\d\\d +\\d\\d:\\d\\d:\\d\\d", true);
-    if (name.equals("INFO")) return new MyInfoField();
-    
-    return super.getField(name);
-  }
-  
-  private class MySourceField extends SourceField {
-    @Override
-    public void parse(String field, Data data) {
-      if (field.equals("None")) return;
-      super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CALL SRC";
-    }
-  }
-  
-  private class MyAddressField extends AddressField {
-    @Override
-    public void parse(String field, Data data) {
-      Parser p = new Parser(field);
-      String city = p.getLastOptional(',');
-      if (city.startsWith("SD")) city = p.getLastOptional(',');
-      parseAddress(p.get(), data);
-      data.strCity = city;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return super.getFieldNames() + " CITY";
-    }
-  }
-  
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      data.strSupp = append(data.strSupp, " - ", field);
-    }
+    return true;
   }
   
   private static final String[] CITY_LIST = new String[] {
@@ -264,8 +160,7 @@ public class SDLincolnCountyParser extends FieldProgramParser {
     "SIOUX FALLS",
     "TEA",
     "WORTHING",
-
-    // Iowa
+    
     "INWOOD"
   };
   

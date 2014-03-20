@@ -1,6 +1,7 @@
 package net.anei.cadpage.parsers.VA;
 
-import net.anei.cadpage.parsers.CodeSet;
+import java.util.regex.Pattern;
+
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchDAPROParser;
 
@@ -8,9 +9,10 @@ import net.anei.cadpage.parsers.dispatch.DispatchDAPROParser;
 
 public class VACarrollCountyParser extends DispatchDAPROParser {
   
+  private static final Pattern LEAD_ZERO_PTN = Pattern.compile("^0+ *");
+  
   public VACarrollCountyParser() {
     super("CARROLL COUNTY", "VA");
-    setupCallList(CALL_SET);
   }
   
   @Override
@@ -22,17 +24,8 @@ public class VACarrollCountyParser extends DispatchDAPROParser {
   public boolean parseMsg(String body, Data data) {
     if (!body.startsWith("MAILBOX:")) return false;
     body = body.substring(8).trim();
-    body = body.replace('\n', ' ');
-    return super.parseMsg(body, data);
+    if (!super.parseMsg(body, data)) return false;
+    data.strAddress = LEAD_ZERO_PTN.matcher(data.strAddress).replaceFirst("");
+    return true;
   }
-  
-  private static final CodeSet CALL_SET = new CodeSet(
-      "EMS - BACK PAIN / INJURY",
-      "EMS - BREATHING DIFFICULTY",
-      "EMS - DIABETIC",
-      "EMS - NAUSEA / VOMITING",
-      "EMS - PAIN",
-      "FIRE - ELECTRICAL",
-      "FIRE - VEHICLE"
-  );
 }

@@ -9,8 +9,6 @@ import net.anei.cadpage.parsers.general.GeneralParser;;
 
 public class OHColumbianaCountyParser extends GeneralParser {
   
-  private static final Pattern CITY_PTN = Pattern.compile(" +([A-Z]+?) +OHIO\\b(?: +[A-Z]+ +COUNTY\\b)?", Pattern.CASE_INSENSITIVE);
-  private static final Pattern TWP_PTN = Pattern.compile(" +[A-Z]+ +COUNTY +([ A-Z]+? TWP\\b)", Pattern.CASE_INSENSITIVE);
   private static final Pattern SOURCE_PTN = Pattern.compile("^This email was sent by: (.*)\n+");
   private static final Pattern ADDRESS_QUAL_PTN = 
       Pattern.compile(" +(NEXT TO|(?:IN )?FRONT OF|(?:JUST )?BEFORE) ", Pattern.CASE_INSENSITIVE);
@@ -18,7 +16,7 @@ public class OHColumbianaCountyParser extends GeneralParser {
   public OHColumbianaCountyParser() {
     super("COLUMBIANA COUNTY", "OH");
     setupMultiWordStreets("CALCUTTA SMITH FERRY", "CALCUTTA SMITHFERRY");
-    setFieldList("SRC CALL ADDR APT DATE TIME X INFO CITY");
+    setFieldList("SRC CALL ADDR APT DATE TIME X INFO");
   }
   
   @Override
@@ -35,23 +33,7 @@ public class OHColumbianaCountyParser extends GeneralParser {
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
-    
-    // See if we can find a city
-    Matcher match = CITY_PTN.matcher(body);
-    if (match.find()) {
-      data.strCity = match.group(1);
-      body = body.substring(0,match.start()) + body.substring(match.end());
-    }
-    
-    else {
-      match = TWP_PTN.matcher(body);
-      if (match.find()) {
-        data.strCity = match.group(1);
-        body = body.substring(0,match.start()) + body.substring(match.end());
-      }
-    }
-    
-    match = SOURCE_PTN.matcher(body);
+    Matcher match = SOURCE_PTN.matcher(body);
     if (match.find()) {
       data.strSource = match.group(1).trim();
       body = body.substring(match.end()).trim();
@@ -60,10 +42,6 @@ public class OHColumbianaCountyParser extends GeneralParser {
       // But if there is only one line, drop out and use the general location logic
       String[] flds = body.split("\n+");
       if (flds.length >= 2) {
-        for (int ndx = 0; ndx < flds.length; ndx++) {
-          flds[ndx] = flds[ndx].trim().replaceAll("  +", " ");
-        }
-        
         data.strCall = flds[0].trim();
         
         // Determining if line 1 is a place or address is tricky.
@@ -72,14 +50,14 @@ public class OHColumbianaCountyParser extends GeneralParser {
             
           ndx = 2;
           if (parseAddressLine(flds[ndx], data, false)) {
-            data.strPlace = flds[1];
+            data.strPlace = flds[1].trim();
           } else {
             ndx = 1;
             parseAddressLine(flds[ndx], data, true);
           }
         }
         
-        // Everything following the address is an info
+        // Everythign following the address is an info
         for ( ndx++ ; ndx < flds.length; ndx++) {
           String fld = flds[ndx];
           if (checkAddress(fld) > 0) {

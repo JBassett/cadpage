@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchA19Parser;
 /**
- * Hood County, TX
+ * Bell County, TX
  */
 public class TXHoodCountyParser extends DispatchA19Parser {
   
@@ -13,11 +13,6 @@ public class TXHoodCountyParser extends DispatchA19Parser {
     super("HOOD COUNTY", "TX");
   }
   
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
- 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
     if (!super.parseMsg(subject, body, data)) return false;

@@ -50,14 +50,6 @@ Pbagnpg: Npgvir911.pbz
 [VPBZ/400 abgvsvpngvba] PNEQVNP/ERFC NEERFG/ 2801 FJ HZNGVYYN FG Nyonal/ 30231212/\a
 [VPBZ/400 abgvsvpngvba] N501 Erpnyy Nynez/ GENS PBYYVFVBA/25010 F V5 Yvaa Pbhagl ZC212 F V5//iruvpyr jnf geniryvat fbhgu, chg uvf oyvaxre ba gb gur\a
 
-Pbagnpg: igmnpu88 . <igmnpu88@tznvy.pbz>
-Fraqre: 777800490099
-YVAA 911 (!) HAPBAP/SNVAGVAT/28290 XVATFOHEL EQ/08-18-13/10:25:07/80 lrne byq, Znyr, Hapbafpvbhf, Oernguvat.  Hapbafpvbhf //FUSS FURZG/ GKG FGBC gb bcg-bhg
-
-Pbagnpg: pfgrarx@ubgznvy.pbz <pfgrarx@ubgznvy.pbz>
-Fraqre: 777800490099
-YVAA 911 (VPBZ/400 abgvsvpngvba) HAPBAP/SNVAGVAT/38135 PBHEGARL PERRX QE/09-04-13/04:47:12/anhfrbhf. ynenmncna,nzovra/E61/ GKG FGBC gb bcg-bhg
-
 */
 choyvp pynff BEYvaaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   
@@ -277,8 +269,7 @@ choyvp pynff BEYvaaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "NQQE:32717 BYQ ZVYY EQ",
         "QNGR:06/08/12",
         "GVZR:21:20:12",
-        "VASB:63 lrne byq, Znyr, Pbafpvbhf, Oernguvat.  Qvnorgvp",
-        "HAVG:R32");
+        "VASB:63 lrne byq, Znyr, Pbafpvbhf, Oernguvat.  Qvnorgvp");
   }
   
   @Grfg
@@ -352,34 +343,6 @@ choyvp pynff BEYvaaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZNQQE:25010 F V 5",
         "CYNPR:ZC212 F V5",
         "VASB:iruvpyr jnf geniryvat fbhgu, chg uvf oyvaxre ba gb gur");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgigmnpu88() {
-
-    qbGrfg("G1",
-        "YVAA 911 (!) HAPBAP/SNVAGVAT/28290 XVATFOHEL EQ/08-18-13/10:25:07/80 lrne byq, Znyr, Hapbafpvbhf, Oernguvat.  Hapbafpvbhf //FUSS FURZG/ GKG FGBC gb bcg-bhg",
-        "PNYY:HAPBAP/SNVAGVAT",
-        "NQQE:28290 XVATFOHEL EQ",
-        "QNGR:08/18/13",
-        "GVZR:10:25:07",
-        "VASB:80 lrne byq, Znyr, Hapbafpvbhf, Oernguvat.  Hapbafpvbhf",
-        "HAVG:FUSS FURZG");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgPrfgrarx() {
-
-    qbGrfg("G1",
-        "YVAA 911 (VPBZ/400 abgvsvpngvba) HAPBAP/SNVAGVAT/38135 PBHEGARL PERRX QE/09-04-13/04:47:12/anhfrbhf. ynenmncna,nzovra/E61/ GKG FGBC gb bcg-bhg",
-        "PNYY:YVAA 911 (VPBZ/400 abgvsvpngvba) HAPBAP/SNVAGVAT",
-        "NQQE:38135 PBHEGARL PERRX QE",
-        "QNGR:09/04/13",
-        "GVZR:04:47:12",
-        "VASB:anhfrbhf. ynenmncna,nzovra",
-        "HAVG:E61");
 
   }
   

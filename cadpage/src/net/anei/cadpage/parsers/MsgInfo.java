@@ -27,7 +27,7 @@ public class MsgInfo {
   public static final int MAP_FLG_SUPPR_DIRO = 8;
   
   // Suppress inclusion of place name in front of naked street names
-  public static final int MAP_FLG_SUPPR_AND_ADJ = 0x10;
+  public static final int MAP_FLG_SUPPR_ADD_PLACE = 0x10;
   
   // Recommend use of GPS coordinates for mapping
   public static final int MAP_FLG_PREFER_GPS = 0x20;
@@ -37,19 +37,6 @@ public class MsgInfo {
   
   // convert CR -> CRES instead of CIR
   public static final int MAP_FLG_CR_CRES = 0x80;
-  
-  // Suppress conversion of various forms of CR XX to COUNTY ROAD XX
-  public static final int MAP_FLG_SUPPR_CR = 0x100;
-  
-  // convert CR -> CRES instead of CIR
-  public static final int MAP_FLG_CR_CREEK = 0x200;
-  
-  // Suppress TE -> TER translation
-  public static final int MAP_FLG_SUPPR_TE = 0x400;
-  
-  // Preserver STATE HIGHWAY construct
-  public static final int MAP_FLG_KEEP_STATE_HIGHWAY = 0x800;
-  
 
   private String strCall;
   private String strPlace;
@@ -82,19 +69,10 @@ public class MsgInfo {
   // and another part should be expected
   private boolean expectMore;
   
-  // Cached map address & map city
+  // Cached map address
   private String strBaseMapAddress = null;
-  private String strMapCity = null;
   
-  // Parser code of parser used to create this information block
-  private String parserCode;
-  
-  // Parser to be used for any followup processing
-  // This is usually the same as the parser used to create this information block
-  // The exception is the Cadpage family of parsers that are relaying information
-  // created by another primary parser running on a vendor server.  In that
-  // situation, parserCode refers to the Cadpage class parser that parsed the 
-  // information and parser points to the original information parser
+  // Parser used to create this information block
   private MsgParser parser;
   
 
@@ -132,20 +110,19 @@ public class MsgInfo {
     public boolean preferGPSLoc;
     
     public boolean expectMore;
-
-    public String parserCode;
+    
     public MsgParser parser;
     public String strBaseMapAddress;
-    public String strMapCity;
     
     public Data(MsgParser parser) {
-      initialize(parser);
+      this.parser = parser;
+      initialize();
     }
     
     /**
      * Initialize existing Data structure to original state
      */
-    public void initialize(MsgParser parser) {
+    public void initialize() {
       expectMore = false;
       
       strCall = "";
@@ -175,9 +152,7 @@ public class MsgInfo {
       countryCode = MsgParser.CountryCode.US;
       preferGPSLoc = false;
       
-      this.parser = parser;
       if (parser != null) {
-        this.parserCode = parser.getParserCode();
         this.defCity = parser.getDefaultCity();
         this.defState = parser.getDefaultState();
         this.countryCode = parser.getCountryCode();
@@ -185,7 +160,6 @@ public class MsgInfo {
       }
       
       strBaseMapAddress = null;
-      strMapCity = null;
     }
     
     /**
@@ -194,8 +168,8 @@ public class MsgInfo {
      * @param message message to be set as the general alert text
      * @returns always returns true
      */
-    public boolean parseGeneralAlert(MsgParser parser, String message) {
-      initialize(parser);
+    public boolean parseGeneralAlert(String message) {
+      initialize();
       strCall = "GENERAL ALERT";
       strPlace = message;
       return true;
@@ -207,9 +181,9 @@ public class MsgInfo {
      * @param message message to be set as the general alert text
      * @returns always returns true
      */
-    public boolean parseRunReport(MsgParser parser, String message) {
+    public boolean parseRunReport(String message) {
       String saveCallId = strCallId;
-      initialize(parser);
+      initialize();
       strCall = "RUN REPORT";
       strCallId = saveCallId;
       strPlace = message;
@@ -223,11 +197,8 @@ public class MsgInfo {
      */
     public int score() {
       int result = 0;
-      if (strCall.equals("GENERAL ALERT")) result += 0;
-      else if (strCall.equals("RUN REPORT")) result += 20000;
-      else if (strCall.length() == 0 || strCall.equals("ALERT")) result += 40000;
-      else result += 42000;
       if (strAddress.length() > 0) result += 10000;
+      if (strCall.length() > 0 && !strCall.equals("ALERT") && !strCall.equals("GENERAL ALERT")) result += 1000;
       if (strCity.length() > 0) result += 100;
       if (strCross.length() > 0) result += 100;
       if (strApt.length() > 0) result += 100;
@@ -286,10 +257,8 @@ public class MsgInfo {
     expectMore = info.expectMore;
     preferGPSLoc = info.preferGPSLoc;
     
-    parserCode = info.parserCode;
     parser = info.parser;
     strBaseMapAddress = info.strBaseMapAddress;
-    strMapCity = info.strMapCity;
   }
   
   /**
@@ -369,7 +338,7 @@ public class MsgInfo {
     StringBuilder sb = new StringBuilder(mapAddr);
     
     // Add city if specified, default city otherwise
-    String city = getMapCity();
+    String city = strCity;
     if (city.equals("OUT OF COUNTY")) city = "";
     else if (city.length() == 0) {
       city = (overrideCity != null ? overrideCity : defCity);
@@ -408,7 +377,6 @@ public class MsgInfo {
    */
   private static final Pattern UK_POST_CODE_PTN = Pattern.compile("^[A-Z]{1,2}\\d{1,2}[A-Z]? \\d[A-Z]{2} +");
   private static final Pattern DIR_OF_PTN = Pattern.compile(" [NSEW]O |(?: JUST)? (?:[NSEW]|NORTH|SOUTH|EAST|WEST) OF ", Pattern.CASE_INSENSITIVE);
-  private static final Pattern NO_DIGIT_PTN = Pattern.compile("\\bNO *(\\d+)");
   private static final Pattern CROSS_DELIM = Pattern.compile("(?<=..)[&/,@]| - | AND ", Pattern.CASE_INSENSITIVE);
   private static final Pattern DEAD_END_PTN = Pattern.compile("END OF .*|DEAD END", Pattern.CASE_INSENSITIVE);
   public String getBaseMapAddress(int useGPSOption) {
@@ -422,8 +390,6 @@ public class MsgInfo {
     }
     
     if (strBaseMapAddress != null) return strBaseMapAddress;
-
-    if (strAddress.length() == 0) return strAddress;
     
     // See if we can find any GPS coordinates, if we do, return those
     String mapAddr = null;
@@ -432,15 +398,8 @@ public class MsgInfo {
       strBaseMapAddress = mapAddr;
       return mapAddr;
     }
-    
-    // If we have a parser, see if we have a GPS location match
-    if (parser != null) {
-      String addr = parser.lookupGpsCoordinates(strAddress, strApt);
-      if (addr != null) {
-        strBaseMapAddress = addr;
-        return addr;
-      }
-    }
+
+    if (strAddress.length() == 0) return strAddress;
 
     // Perform any parser specific customizations
     String sAddr = strAddress;
@@ -461,8 +420,6 @@ public class MsgInfo {
     
     if ((parser.getMapFlags() & MAP_FLG_SUPPR_DIRO) == 0) {
       sAddr = DIR_OF_PTN.matcher(sAddr).replaceAll(" & ");
-    } else {
-      sAddr = NO_DIGIT_PTN.matcher(sAddr).replaceAll("$1");
     }
     sAddr = cleanParens(sAddr);
     sAddr = cleanStreetSuffix(sAddr);
@@ -505,6 +462,11 @@ public class MsgInfo {
           sCross = sCross.trim();
           if (sCross.length() > 0) sAddr = prefix + sAddr + " & " + sCross;
         }
+      }
+    
+      // If that didn't work, lets hope a place name will be enough
+      else if (strPlace.length() > 0 && (parser.getMapFlags() & MAP_FLG_SUPPR_ADD_PLACE) == 0) {
+        sAddr  = strPlace + "," + prefix + sAddr;
       }
       
       // else just append prefix
@@ -550,9 +512,10 @@ public class MsgInfo {
 
   // Clean up any street suffix abbreviations that Google isn't happy with
   private static final Pattern CR_PTN = Pattern.compile("\\bCR\\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern CRNN_PTN = Pattern.compile("\\b(?:CR|COUNTY|(?:CO|CTY|CNTY|COUNTY)(?: *(?:RD|RT|RTE|ROAD|HWY|ROUTE))?)[- ]*(\\d+[A-Z]?|(?<= )[A-Z]|(?<= )([A-Z])\\2)(?: HWY)?\\b", Pattern.CASE_INSENSITIVE);
+  private static final Pattern CRNN_PTN = Pattern.compile("\\b(?:CR|COUNTY|(?:CO|CTY|CNTY|COUNTY)(?: *(?:RD|RT|RTE|ROAD|HWY|ROUTE))?)[- ]*(\\d+[A-Z]?)(?: HWY)?\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern AV_PTN = Pattern.compile("\\bAV\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern HW_PTN = Pattern.compile("\\bH[WY]\\b", Pattern.CASE_INSENSITIVE);
+  private static final Pattern STH_PTN = Pattern.compile("\\bST?HY?\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern PK_PTN = Pattern.compile("\\b(?:PI|PI?K|PKE)\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern PW_PTN = Pattern.compile("\\bPK?[WY]\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern CI_PTN = Pattern.compile("\\bC[IR]\\b", Pattern.CASE_INSENSITIVE);
@@ -562,19 +525,17 @@ public class MsgInfo {
   private static final Pattern GR_PTN = Pattern.compile("\\bGR\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern CRSN_PTN = Pattern.compile("\\bCRSN\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern CG_PTN = Pattern.compile("\\bCG\\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern BYP_PTN = Pattern.compile("\\bBY?P\\b", Pattern.CASE_INSENSITIVE);
+  private static final Pattern BP_PTN = Pattern.compile("\\bBP\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern LA_PTN = Pattern.compile("\\bLA\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern EXT_PTN = Pattern.compile(" EXT?\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern SR_PTN = Pattern.compile("\\bSR\\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern TP_PTN = Pattern.compile("\\b(?:TP|TRPK)\\b", Pattern.CASE_INSENSITIVE);
+  private static final Pattern TP_PTN = Pattern.compile("\\bTP\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern PA_PTN = Pattern.compile("\\bPA\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern PLAZ_PTN = Pattern.compile("\\bPLAZ\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern NEAR_PTN = Pattern.compile("\\b(?:NEAR|OFF)\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern TE_PTN = Pattern.compile("\\bTE\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern WK_PTN = Pattern.compile("\\bWK\\b", Pattern.CASE_INSENSITIVE);
   private static final Pattern RCH_PTN = Pattern.compile("\\bRCH\\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern HT_PTN = Pattern.compile("\\bHT\\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern FM_PTN = Pattern.compile("\\bFM\\b", Pattern.CASE_INSENSITIVE);
   private String cleanStreetSuffix(String sAddr) {
     
     // CR is a very versatile abbreviation.  In New Zealand, it is an abbreviation for Crescent
@@ -582,21 +543,14 @@ public class MsgInfo {
       sAddr = CR_PTN.matcher(sAddr).replaceAll("CRES"); 
     }
     
-    // Or sometimes creek
-    if ((parser.getMapFlags() & MAP_FLG_CR_CREEK) != 0) {
-      sAddr = CR_PTN.matcher(sAddr).replaceAll("CREEK"); 
-    }
-    
-    
     // convert CR nn to COUNTY ROAD nn
     // we need to do this before we do the abbreviations converstions that will
     // change CR to CIR.
-    if ((parser.getMapFlags() & MAP_FLG_SUPPR_CR) == 0) {
-      sAddr = CRNN_PTN.matcher(sAddr).replaceAll("COUNTY ROAD $1");
-    }
+    sAddr = CRNN_PTN.matcher(sAddr).replaceAll("COUNTY ROAD $1");
     
     sAddr = replace(sAddr, AV_PTN, "AVE");
     sAddr = replace(sAddr, HW_PTN, "HWY");
+    sAddr = replace(sAddr, STH_PTN, "ST");
     sAddr = replace(sAddr, PK_PTN, "PIKE");
     sAddr = replace(sAddr, PW_PTN, "PKWY");
     sAddr = replace(sAddr, CI_PTN, "CIR");
@@ -606,7 +560,7 @@ public class MsgInfo {
     sAddr = replace(sAddr, GR_PTN, "GRADE");
     sAddr = replace(sAddr, CRSN_PTN, "CRESCENT");
     sAddr = replace(sAddr, CG_PTN, "CROSSING");
-    sAddr = replace(sAddr, BYP_PTN, "BYPASS");
+    sAddr = replace(sAddr, BP_PTN, "BYPASS");
     if ((parser.getMapFlags() & MAP_FLG_SUPPR_SR) == 0) {
       sAddr = replace(sAddr, SR_PTN, "ST");
     }
@@ -615,15 +569,13 @@ public class MsgInfo {
     sAddr = replace(sAddr, PLAZ_PTN, "PLAZA");
     sAddr = replace(sAddr, WK_PTN, "WALK");
     sAddr = replace(sAddr, RCH_PTN, "REACH");
-    sAddr = replace(sAddr, HT_PTN, "HTS");
-    sAddr = replace(sAddr, FM_PTN, "FARM-TO-MARKET");
+    if (countryCode != CountryCode.NZ) sAddr = replace(sAddr, TE_PTN, "TER");
     
     // Some alterations are suppressed by different parsers to meet local
     // requirements
     int mapFlags = parser.getMapFlags();
     if ((mapFlags & MAP_FLG_SUPPR_LA) == 0) sAddr = replace(sAddr, LA_PTN, "LN");
     if ((mapFlags & MAP_FLG_SUPPR_EXT) == 0) sAddr = EXT_PTN.matcher(sAddr).replaceAll("");
-    if ((mapFlags & MAP_FLG_SUPPR_TE) == 0 && countryCode != CountryCode.NZ) sAddr = replace(sAddr, TE_PTN, "TER");
     
     if (!sAddr.contains("CUT OFF")) {
       sAddr = NEAR_PTN.matcher(sAddr).replaceAll("&");
@@ -672,8 +624,8 @@ public class MsgInfo {
   }
 
   // Clean up any BLK indicators
-  // Remove occurrence of BLK bracketed by non-alpha characters
-  private static final Pattern BLK_PAT = Pattern.compile("(?:-|(?<![A-Z]))BLK(?![A-Z])| BLOCK(?! DR)(?: OF)?(?= )", Pattern.CASE_INSENSITIVE);
+  // Remove occurance of BLK bracketed by non-alpha characters
+  private static final Pattern BLK_PAT = Pattern.compile("(?:-|(?<![A-Z]))BLK(?![A-Z])| BLOCK OF(?= )", Pattern.CASE_INSENSITIVE);
   private String cleanBlock(String sAddr) {
     sAddr = sAddr.replaceAll("[\\{\\}]", "");
     Matcher match = BLK_PAT.matcher(sAddr);
@@ -682,11 +634,15 @@ public class MsgInfo {
   }
   
   // Clean up some Interstate conventions
-  private static final Pattern INA_PATTERN = Pattern.compile("\\bIH?[- ]?(\\d+)[NSEW]?\\b");
+  private static final Pattern INA_PATTERN = Pattern.compile("\\bIH?-?(\\d+)[NSEW]?\\b");
   private static final Pattern FRONTAGE_PTN = Pattern.compile("\\b(?:[NSEW]B)?FR\\b");
   private static final Pattern IH_PTN = Pattern.compile("\\bIH\\b");
   private String cleanInterstate(String sAddr) {
     sAddr = INA_PATTERN.matcher(sAddr).replaceAll("I $1");
+    Matcher match = INA_PATTERN.matcher(sAddr);
+    if (match.find()) {
+      sAddr = sAddr.substring(0,match.start(1)) + sAddr.substring(match.end());
+    }
     sAddr = FRONTAGE_PTN.matcher(sAddr).replaceAll("FRONTAGE RD");
     sAddr = IH_PTN.matcher(sAddr).replaceAll("");
     return sAddr;
@@ -694,18 +650,18 @@ public class MsgInfo {
   
   // Clean up and NB, SB, EB, or WB words
 
-  private static final Pattern DIRBOUND_PAT = Pattern.compile("\\s*(?<![A-Z])(?:NB|SB|EB|WB)\\b", Pattern.CASE_INSENSITIVE);
+  private static final Pattern DIRBOUND_PAT = Pattern.compile("\\s*\\b(?:NB|SB|EB|WB)\\b", Pattern.CASE_INSENSITIVE);
   private String cleanBounds(String sAddr) {
     Matcher match = DIRBOUND_PAT.matcher(sAddr);
     return match.replaceAll("").trim();
   }
-
+  
   // Google doesn't always handle single word route names like US30 or HWY10.
   // This method breaks those up into two separate tokens, also dropping any
   // direction qualifiers
   private static final Pattern ROUTE_PTN =
-    Pattern.compile("\\b(?:(RT|RTE|HW|HWY|HIGH|US|STH?Y?|SHY?|FM|I|CO|CR|CORD|SRT?|I)|([A-Z]{2}))-?(\\d{1,3})(?:[NSEW]B?)?\\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern SRT_PTN = Pattern.compile("\\bS(?:RT?| ?H|TH)\\b", Pattern.CASE_INSENSITIVE);
+    Pattern.compile("\\b(?:(RT|RTE|HW|HWY|US|ST|SH|FM|I|CO|CR|CORD|SRT?|I)|([A-Z]{2}))-?(\\d{1,3})(?:[NSEW]B?)?\\b", Pattern.CASE_INSENSITIVE);
+  private static final Pattern SRT_PTN = Pattern.compile("\\bS(?:RT?| ?H)\\b", Pattern.CASE_INSENSITIVE);
   
   private String cleanRoutes(String sAddress) {
     
@@ -721,7 +677,7 @@ public class MsgInfo {
           g1 = match.group(2);
           if (!g1.equals(state)) continue;
         }
-        if (g1.startsWith("ST") || g1.startsWith("SH") || g1.equals(state)) g1 = repState;
+        if (g1.equals("ST") || g1.equals(state)) g1 = repState;
         String replace = g1 + ' ' + match.group(3);
         match.appendReplacement(sb, replace);
       } while (match.find());
@@ -754,18 +710,17 @@ public class MsgInfo {
   // If we find a construct like that, remove the middle section
   // When we are done with that, check for addresses ending with 666 HWY and reverse the terms
   private static final Pattern[] DBL_ROUTE_PTNS = new Pattern[]{ 
-    Pattern.compile("\\b([A-Z]{2}|STATE|COUNTY) *(ROAD|RD|RT|RTE|ROUTE|HW|HWY|HY|HIGH|HIGHWAY) +(\\d+[ABNSEW]?|[A-Z]{1,2})\\b", Pattern.CASE_INSENSITIVE),
-    Pattern.compile("\\b([A-Z]{2}|STATE|COUNTY|ROUTE|FARM-TO-MARKET) +(\\d+|[A-Z]{1,2})\\b *(?:ROAD|RD|RT|RTE|ROUTE|HW|HWY|HY|HIGH)\\b", Pattern.CASE_INSENSITIVE)
+    Pattern.compile("\\b([A-Z]{2}|STATE|COUNTY) *(ROAD|RD|RT|RTE|ROUTE|HW|HWY|HY|HIGHWAY) +(\\d+[NSEW]?|[A-Z]{1,2})\\b", Pattern.CASE_INSENSITIVE),
+    Pattern.compile("\\b([A-Z]{2}|STATE|COUNTY) +(\\d+|[A-Z]{1,2})\\b *(?:ROAD|RD|RT|RTE|ROUTE|HW|HWY|HY)\\b", Pattern.CASE_INSENSITIVE)
   };
+  private static final Pattern REV_HWY_PTN = Pattern.compile("(?<!-)\\b(\\d+) *(HWY|RT|RTE|ROUTE)(?=$| *&)", Pattern.CASE_INSENSITIVE);
   private static final Pattern I_FWY_PTN = Pattern.compile("\\b(I[- ]\\d+) +[FH]WY\\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern AND_PTN = Pattern.compile(" and ", Pattern.CASE_INSENSITIVE);
-  private static final Pattern REV_HWY_PTN = Pattern.compile("(?<!-)\\b(\\d+|([A-Z&&[^NSEW]])\\2?\\b) *(HWY|RT|RTE|ROUTE)(?=$| *&)", Pattern.CASE_INSENSITIVE);
   private String cleanDoubleRoutes(String sAddress) {
     
     String state = getStateCode();
     if (state.length() == 0) state = defState;
     String repState = getRepState(state);
-    boolean keepStateHighway = (parser.getMapFlags() & MAP_FLG_KEEP_STATE_HIGHWAY) != 0;
+    
     for (Pattern ptn : DBL_ROUTE_PTNS) {
       Matcher match = ptn.matcher(sAddress);
       if (!match.find()) continue;
@@ -781,7 +736,6 @@ public class MsgInfo {
           middle = "";
           hwy = match.group(2).toUpperCase();
         }
-        if (keepStateHighway && prefix.equalsIgnoreCase("STATE") && middle.equalsIgnoreCase("HIGHWAY")) continue;
         if (!hwy.equals("TO") && !hwy.equals("OF") && !hwy.equals("OR")) {
           if (prefix.length() != 2 ||
               (prefix.equals(state) ||
@@ -803,23 +757,21 @@ public class MsgInfo {
     // Google also doesn't like I-20 fwy contructs
     sAddress = I_FWY_PTN.matcher(sAddress).replaceAll("$1");
     
-    if (parser == null || (parser.getMapFlags() & MAP_FLG_SUPPR_AND_ADJ) == 0) {
-      sAddress = AND_PTN.matcher(sAddress).replaceAll(" & ");
-    }
-    sAddress = REV_HWY_PTN.matcher(sAddress).replaceAll("$3 $1");
+    sAddress = REV_HWY_PTN.matcher(sAddress).replaceAll("$2 $1");
     return sAddress;
   }
 
   // Google map isn't found of house numbers mixed with intersections
   // If we find an intersection marker, remove any house numbers
   private static final Pattern HOUSE_RANGE = Pattern.compile("^(\\d+) *- *[A-Z0-9/\\.]+\\b");
-  private static final Pattern HOUSE_NUMBER = Pattern.compile("^ *\\d+ +(?![NSEW]{0,2} *[&/]|(?:AV|AVE|RD|ST|MILE)\\b)", Pattern.CASE_INSENSITIVE);
+  private static final Pattern HOUSE_NUMBER = Pattern.compile("^ *\\d+ +(?![NSEW]{0,2} *[&/]|(?:AV|AVE|ST|MILE)\\b)", Pattern.CASE_INSENSITIVE);
   private String cleanHouseNumbers(String sAddress) {
     
     // Start by eliminating any house ranges
     sAddress = HOUSE_RANGE.matcher(sAddress).replaceAll("$1");
 
     // If this has an house number and an intersecting street.  Drop the intersecting street
+    sAddress = sAddress.replace(" and ", " & ");
     int ipt = sAddress.indexOf('&');
     if (ipt >= 0) {
       Matcher match = HOUSE_NUMBER.matcher(sAddress);
@@ -877,7 +829,7 @@ public class MsgInfo {
    * @return state code replacement value
    */
   private String getRepState(String state) {
-    return state.equals("NC") || state.equals("MI") ? "STATE" : state;
+    return state.equals("NC") ? "STATE" : state;
   }
   
   /**
@@ -896,16 +848,6 @@ public class MsgInfo {
    */
   public String getCity() {
     return strCity;
-  }
-  
-  /**
-   * @return map adjusted city
-   */
-  public String getMapCity() {
-    if (strMapCity == null) {
-      strMapCity = (parser != null ? parser.adjustMapCity(strCity) : strCity);
-    }
-    return strMapCity;
   }
 
   /**
@@ -1053,10 +995,6 @@ public class MsgInfo {
    */
   public boolean isExpectMore() {
     return expectMore;
-  }
-  
-  public String getParserCode() {
-    return parserCode;
   }
   
   public MsgParser getParser() {

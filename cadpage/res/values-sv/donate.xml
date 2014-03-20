@@ -28,7 +28,7 @@
   <string name="donate_sponsor_noexp_text">
     Du använder en tjänst sponsrad av\n%1$s Stöd till utveckling och underhåll av CadPage har getts av denne. Inga ytterligare betalningar förväntas av dig så länge du utför tjänster tillhandahållna av denne sponsor.
   </string>
-  <string name="donate_paid_warn_title">Ditt abonnemang går ut om %d dagar</string>
+  <string name="donate_paid_warn_title">Ditt abonnemang går ut om %d days</string>
   <string name="donate_paid_warn_text">
     Ditt abonnemang kommer att upphöra om %s. Du kan fortsätta att använda CadPage efter detta datum så länge du inte gör en ominstallation med en release daterad efter detta datum.
   </string>
@@ -78,7 +78,6 @@
   <string name="donate_android_title">Köpt genom Android market</string>
   <string name="donate_paypal_title">Köpt genom PayPal</string>
   <string name="donate_whats_up_title">Vad handlar det här om?</string>
-  <string name="donate_active911_parse_info_title">Berätta mer</string>
   <string name="donate_email_title">Skicka email</string>
   <string name="donate_android_unsupported_text">
  Android Market appen rapporterar att app-i-app köp inte understödjs. Du kan behöva uppgradera Market-appen till den senaste versionen eller också måste du logga in med ett giltigt Google-konto (Välj meny &gt; Konton i Marketappen) 
@@ -95,7 +94,7 @@
   <string name="donate_android_problem_title">Jag kan inte göra betalningar på android market</string>
   <string name="donate_android_problem_text">Jäklar,vi ska se vad vi kan göra åt det</string>
   <string name="donate_reset_market_title">Räkna om betalningsstatus</string>
-  <string name="donate_sob_story_title">"Jag har inte råd med 10$ i år"</string>
+  <string name="donate_sob_story_title">"Jag har inte råd med $10 i år"</string>
   <string name="donate_sob_story_text">
     "Berätta varför du inte har råd att betala $10.  Vi är lätta  att övertala.\n\n"
     Vet du något sätt som gör Cadpage lättare att använda?  Har du något förslag på bättre sätt att finansiera de avsevärda kostnaderna att underhålla Cadpage?
@@ -122,18 +121,12 @@
   <string name="donate_new_user_title">Ny användare</string>
   <string name="donate_new_user_text">
     Cadpage kommer inte att göra någonting med dessa inställningar. Du måste gå in på Ortinställningar och antingen välja en ort som motsvarar din plats eller välja Från: (filter) och skriva in den e-postadress eller  det telefonnummer som dina larm-meddelanden kommer ifrån.
-  </string>
-  
-  <string name="donate_active911_parse_warn_title">Active911 lokalanpassningsalarm</string>
-  <string name="donate_active911_parse_warn_text">
-    Informationen i det här larmet kommer inte från Cadpage. Det här larmet kommer från Active911 och dess lokalanpassningssystem eftersom de jobbar på att resätta Cadpages system. Vi jobbar tillsammans med dem för att få det att fungera.  
-  </string>
-  
+    </string>
   <string name="vendor_title">Registrera med %s</string>
   <string name="vendor_text">
     Du verkar få textmeddelanden från %s. Du kan regista dig på deras meddelandetjänst så får du dina larm från dem. På så sätt slipper du en del problem förknippade med textmeddelanden.  
   </string>
-  <string name="vendor_help_title">Vad menas med meddelandeservice?</string>
+  <string name="vendor_help_title">Vad menas med direct paging?</string>
   <string name="vendor_help_text">
     Med Meddelandeservice menas att du låter speciella meddelandeservicetjänster skicka dina larm via mobila nätverk utan att vara beroende av SMS. Det medför att  kostnaden för SMS försvinner samt att längden på textmeddelandet ökar. De flesta agenturer betalar Cadpage med pengar från larmcentraler och förvaltningar så vi förväntar oss inte att kunder som använder meddelandeservice ska köpa separat licens för Cadpage.
   </string>

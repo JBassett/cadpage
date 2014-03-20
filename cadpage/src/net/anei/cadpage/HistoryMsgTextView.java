@@ -1,7 +1,7 @@
 package net.anei.cadpage;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.Typeface;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
 import android.view.View;
@@ -31,9 +31,7 @@ public class HistoryMsgTextView extends TextView {
 
       @Override
       public void onClick(View v) {
-        
-        // Clear any active notification and wake locks
-        ClearAllReceiver.clearAll(getContext());
+        ManageNotification.clear(getContext());
         
         if (msg == null) return;
         
@@ -54,7 +52,10 @@ public class HistoryMsgTextView extends TextView {
     float ftextSize = Integer.parseInt(ManagePreferences.textSize());
     this.setTextSize(ftextSize);
     setText(text);
-    setTextColor(msg.isRead() ? Color.WHITE : Color.YELLOW);
+    if (! msg.isRead()){
+      setTypeface(Typeface.DEFAULT_BOLD);
+    }
+    else setTypeface(Typeface.DEFAULT);
   }
 
   public SmsMmsMessage getMessage() {

@@ -29,10 +29,8 @@ Fraqre: 7771
 
 Pbagnpg: Wnlzrf Aryfba <wnlzrfearyfba@tznvy.pbz>
 Fraqre: Sebz:qvfcngpu@pprep911.bet
-Fraqre: 777799995001
 (&) 130100078/01-10-13/08:28:25/Fgehpgher Sver/2400 WBUAFGBJA EQ/UHAGVATGBA/PBIRANAG FPUBBY/FGEBAT RYRPGEVPNY FZRYY/ [Nggnpuzrag(f) erzbirq]
 (&) 130080282/01-08-13/18:07:33/Fgehpgher Sver/810 J 13GU FG/UHAGVATGBA/ZNQVFBA NIR/ZBAEBR NIR/PYBFR GB ERF/ZRGRE NAQ CBJRE YVARF BA SVER/
-" " (PPREP911) 132170228/08-05-13/16:07:00/Fgehpgher Sver/1415 4GU NIR/UHAGVATGBA/GUR SYNGF/14GU FG/15GU FG/PBAS SNP 15 5GU FG OEVQTR CUNFR GJB/USQ43/ GKG FGBC gb bcg-bhg
 
 Ntrapl anzr: Pnoryy Pbhagl 911
 Ybpngvba: Uhagvatgba, JI, Havgrq Fgngrf
@@ -322,19 +320,7 @@ choyvp pynff JIPnoryyPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PVGL:UHAGVATGBA",
         "K:ZNQVFBA NIR & ZBAEBR NIR",
         "VASB:PYBFR GB ERF / ZRGRE NAQ CBJRE YVARF BA SVER");
-
-    qbGrfg("G3",
-        "\" \" (PPREP911) 132170228/08-05-13/16:07:00/Fgehpgher Sver/1415 4GU NIR/UHAGVATGBA/GUR SYNGF/14GU FG/15GU FG/PBAS SNP 15 5GU FG OEVQTR CUNFR GJB/USQ43/ GKG FGBC gb bcg-bhg",
-        "VQ:132170228",
-        "QNGR:08/05/13",
-        "GVZR:16:07:00",
-        "PNYY:Fgehpgher Sver",
-        "NQQE:1415 4GU NIR",
-        "PVGL:UHAGVATGBA",
-        "CYNPR:GUR SYNGF",
-        "K:14GU FG & 15GU FG",
-        "VASB:PBAS SNP 15 5GU FG OEVQTR CUNFR GJB / USQ43");
-
+ 
   }
   
   @Grfg
@@ -600,7 +586,7 @@ choyvp pynff JIPnoryyPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:14:04:25",
         "PNYY:ZIN Vaw.",
         "NQQE:15 V64 .5RO",
-        "ZNQQE:15 V 64 .5",
+        "ZNQQE:15 V 64 .5RO",
         "PVGL:ONEOBHEFIVYYR",
         "CYNPR:V64 15ZZ RO",
         "K:29GU FG",
@@ -638,8 +624,8 @@ choyvp pynff JIPnoryyPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:ZIN Vaw.",
         "NQQE:4745 FCEVAT EQ",
         "PVGL:UHAGVATGBA",
-        "K:QNEARYY EQ & SBERFG UGF",
-        "VASB:1 IRU VAGB GERR");
+        "K:QNEARYY EQ",
+        "VASB:SBERFG UGF / 1 IRU VAGB GERR");
 
     qbGrfg("G17",
         "130250121/01-25-13/11:22:02/ZIN Vaw./800 29GU FG VAGREFRPGA/UHAGVATGBA/8GU NIR/",
@@ -794,7 +780,7 @@ choyvp pynff JIPnoryyPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:03:37:55",
         "PNYY:ZIN Yrnxntr",
         "NQQE:16 V64 .5RO",
-        "ZNQQE:16 V 64 .5",
+        "ZNQQE:16 V 64 .5RO",
         "PVGL:ONEOBHEFIVYYR",
         "CYNPR:V64 16ZZ RO",
         "K:OCQ BF JVGU ZIN YRNXNTR NQI BVY FCVYY");
@@ -876,7 +862,7 @@ choyvp pynff JIPnoryyPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:09:18:11",
         "PNYY:Iruvpyr Sver",
         "NQQE:16 V64 .5RO",
-        "ZNQQE:16 V 64 .5",
+        "ZNQQE:16 V 64 .5RO",
         "PVGL:ONEOBHEFIVYYR",
         "CYNPR:V64 16ZZ RO",
         "K:GENPGBE GENVYRE FZBXVAT");

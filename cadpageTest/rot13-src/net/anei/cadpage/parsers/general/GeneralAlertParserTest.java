@@ -25,8 +25,4 @@ choyvp pynff TrarenyNyregCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CYNPR:(GRFG FHOWRPG) YBAT ZRFFNTR");
 
   }
-  
-  choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj TrarenyNyregCnefreGrfg().trarengrGrfgf("G1");
-  }
 }

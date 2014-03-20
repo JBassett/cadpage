@@ -1,19 +1,24 @@
 package net.anei.cadpage.parsers.PA;
 
 
-import net.anei.cadpage.parsers.dispatch.DispatchB2Parser;
+import net.anei.cadpage.parsers.dispatch.DispatchBParser;
 
 
 
-public class PAJuniataCountyParser extends DispatchB2Parser {
+public class PAJuniataCountyParser extends DispatchBParser {
  
   public PAJuniataCountyParser() {
-    super("JUNIATA911:", CITY_LIST, "JUNIATA COUNTY", "PA");
+    super(CITY_LIST, "JUNIATA COUNTY", "PA");
   }
   
   @Override
   public String getFilter() {
     return "UNIATA911@Juniata.PA";
+  }
+  
+  @Override
+  protected boolean isPageMsg(String body) {
+    return body.startsWith("JUNIATA911:");
   }
   
   public static final String[] CITY_LIST = new String[]{

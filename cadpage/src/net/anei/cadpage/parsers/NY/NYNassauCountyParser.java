@@ -11,13 +11,11 @@ public class NYNassauCountyParser extends GroupBestParser {
 
   public NYNassauCountyParser() {
     super(new NYNassauCountyAParser(), new NYNassauCountyBParser(), 
-          new NYNassauCountyCParser(), new NYNassauCountyDParser(), 
-          new NYNassauCountyFParser(), new NYNassauCountyGParser(),
-          new NYNassauCountyHParser(), new NYNassauCountyIParser(),
-          new NYNassauCountyJParser(), new NYNassauCountyKParser(),
-          new NYNassauCountyRedAlertParser(), new NYNassauCountyFiretrackerParser(),
-          new NYNassauCountyElmontParser(), new NYNassauCountyMassepequaParser(), 
-          new NYNassauCountyBethpageParser());
+           new NYNassauCountyCParser(), new NYNassauCountyDParser(), 
+           new NYNassauCountyFParser(), new NYNassauCountyGParser(),
+           new NYNassauCountyHParser(),
+           new NYNassauCountyRedAlertParser(), new NYNassauCountyFiretrackerParser(),
+           new NYNassauCountyElmontParser(), new NYNassauCountyMassepequaParser());
   }
 }
 

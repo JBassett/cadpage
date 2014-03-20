@@ -2,9 +2,6 @@ package net.anei.cadpage.parsers.dispatch;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,33 +15,17 @@ public class DispatchA3Parser extends FieldProgramParser {
   
   private static final Pattern DELIM = Pattern.compile("(?<!\\*)\\*[\n ]+");
   
-  private String prefix = null;
-  private Pattern prefixPtn = null;
-  
-  public DispatchA3Parser(int version, Pattern prefixPtn, String defCity, String defState) {
-    this(version, defCity, defState);
-    this.prefixPtn = prefixPtn;
-  }
+  private String prefix;
   
   public DispatchA3Parser(int version, String prefix, String defCity, String defState) {
-    this(version, defCity, defState);
-    this.prefix = prefix;
-  }
-  
-  public DispatchA3Parser(int version, String defCity, String defState) {
-    super(defCity, defState,
+    this(prefix, defCity, defState,
           version == 0 ?
             "ID? ADDR/SXP APT CH CITY! X X MAP INFO1 CALL CALL ( UNIT! | NAME UNIT! | NAME PHONE UNIT ) INFO+"
           : version == 1 ?
               "ID? ADDR/SXP APT CH CITY! EMPTY+? CALL CALL ( UNIT! | NAME UNIT! | NAME PHONE UNIT ) INFO+"
           : version == 2 ?
-              "ID? ADDR APT CH CITY X X MAP INFO1 SKIP CALL! PLACENAME PHONE UNIT INFO+"
+              "ID ADDR APT CH CITY X X MAP INFO1 SKIP CALL! PLACENAME PHONE UNIT INFO+"
           : null);
-  }
-  
-  public DispatchA3Parser(Pattern prefixPtn, String defCity, String defState, String program) {
-    super(defCity, defState, program);
-    this.prefixPtn = prefixPtn;
   }
   
   public DispatchA3Parser(String prefix, String defCity, String defState, String program) {
@@ -52,39 +33,12 @@ public class DispatchA3Parser extends FieldProgramParser {
     this.prefix = prefix;
   }
   
-  public DispatchA3Parser(String prefix, String[] cityList, String defCity, String defState, String program) {
-    super(cityList, defCity, defState, program);
-    this.prefix = prefix;
-  }
-  
   @Override
   protected boolean parseMsg(String body, Data data) {
-    return parseMsg(body, data, true);
-  }
-  
-  /**
-   * New variant of standard parseMsg() call
-   * @param body text body
-   * @param data parsed data object to be filled with information
-   * @param splitField true if textline should be broken up by the standard A3 delimiter seqeuence.
-   * false if these delimiters are  not going to be found in the text body
-   * @return true if parse was successful
-   */
-  protected boolean parseMsg(String body, Data data, boolean splitField) {
-    if (prefix != null) {
-      if (!body.startsWith(prefix)) return false;
-      body = body.substring(prefix.length()).trim();
-    } else if (prefixPtn != null) {
-      Matcher match = prefixPtn.matcher(body);
-      if (!match.find()) return false;
-      body  = body.substring(match.end()).trim();
-    }
-    if (splitField) {
-      if (body.endsWith("*")) body = body + " ";
-      return parseFields(DELIM.split(body), data);
-    } else {
-      return super.parseMsg(body, data);
-    }
+    if (!body.startsWith(prefix)) return false;
+    body = body.substring(prefix.length()).trim();
+    if (body.endsWith("*")) body = body + " ";
+    return parseFields(DELIM.split(body), data);
   }
   
   private class BaseAddressField extends AddressField {
@@ -123,15 +77,12 @@ public class DispatchA3Parser extends FieldProgramParser {
     public void parse(String field, Data data) {
       
       // Override previous call field
-      // Unless this is a generic call description
-      if (field.length() == 0) return;
-      if (data.strCall.length() > 0 && GENERIC_CALL_SET.contains(field)) return;
-      data.strCall = field;
+      if (field.length() > 0) data.strCall = field;
     }
   }
   
-  private static final Pattern COMMENT_LABEL = Pattern.compile("^(?:Landmark|Geo|Place) Comment:");
-  private static final Pattern COMMENT_LABEL2 = Pattern.compile("(?:Landmark|Geo|Place) Comment:");
+  private static final Pattern COMMENT_LABEL = Pattern.compile("^(?:Landmark|Geo) Comment:");
+  private static final Pattern COMMENT_LABEL2 = Pattern.compile("(?:Landmark|Geo) Comment:");
   private class BaseInfo1Field extends InfoField {
     @Override
     public boolean canFail() {
@@ -163,22 +114,8 @@ public class DispatchA3Parser extends FieldProgramParser {
       if (match.find()) {
         field = field.substring(match.end()).trim();
         if (field.startsWith("UPDATE")) return;
-        match = COMMENT_LABEL2.matcher(field);
-        if (match.find()) {
-          pt = match.start();
-          if (pt == 0) {
-            field = field.substring(match.end()).trim();
-          } else {
-            field = field.substring(0,pt).trim();
-          }
-        }
       }
       super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "INFO PLACE";
     }
   }
   
@@ -314,11 +251,4 @@ public class DispatchA3Parser extends FieldProgramParser {
     if (name.equals("UNIT")) return new UnitField("(?:[A-Z0-9]{1,4}[0-9]|RRS|CSRS)(?:[,/](?:[A-Z]{0,3}[0-9]+[A-Z]{0,3}|[A-Z]{1,4}))*");
     return super.getField(name);
   }
-  
-  private static final Set<String> GENERIC_CALL_SET = new HashSet<String>(Arrays.asList(
-      "FIRE",
-      "HAZ-MAT INCIDENT",
-      "MEDICAL EMERGENCY",
-      "TRAUMA EMERGENCY"
-  ));
 }

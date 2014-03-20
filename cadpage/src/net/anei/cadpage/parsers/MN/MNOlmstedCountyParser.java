@@ -31,6 +31,7 @@ public class MNOlmstedCountyParser extends SmartAddressParser {
     if (match.matches()) {
       data.strSource = match.group(1).trim();
   
+      body = body.replace(",", " ");
       parseAddress(StartType.START_CALL, body, data);
       if (data.strCall.length() == 0) {
         data.strCall = getLeft();

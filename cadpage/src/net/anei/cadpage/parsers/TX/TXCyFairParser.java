@@ -12,6 +12,8 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  */
 public class TXCyFairParser extends FieldProgramParser {
   
+  private static final String SIGNATURE = "Paging Message from VisiCAD";
+  
   private static final Pattern RUN_REPORT_MARKER = Pattern.compile(" [A-Z]{4,5}\\d{10} ");
   
   public TXCyFairParser() {
@@ -28,14 +30,20 @@ public class TXCyFairParser extends FieldProgramParser {
   public String getLocName() {
     return "Cypress-Harris, TX";
   }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
 
   @Override
-  protected boolean parseMsg(String body, Data data) {
+  protected boolean parseMsg(String subject, String body, Data data) {
+    
+    do {
+      if (subject.equals(SIGNATURE)) break;
+      
+      if (body.startsWith(SIGNATURE)) {
+        body = body.substring(SIGNATURE.length()).trim();
+        break;
+      }
+      
+      return false;
+    } while (false);
     
     if (RUN_REPORT_MARKER.matcher(body).find()) {
       data.strCall = "RUN REPORT";
@@ -71,21 +79,25 @@ public class TXCyFairParser extends FieldProgramParser {
   }
   
   private static final String NO_X_FOUND = "No X Street Found";
+  private static final Pattern BACKUP_CROSS_PTN = Pattern.compile(" +([A-Z0-9 ]+)$");
   private class MyAddressField extends AddressField {
     @Override
     public void parse(String field, Data data) {
       
-      field = field.replace("SANDHILLGLEN", "SAND HILL GLEN DR");
       if (field.endsWith(NO_X_FOUND)) {
         parseAddress(field.substring(0,field.length()-NO_X_FOUND.length()).trim(), data);
         return;
       }
       parseAddress(StartType.START_ADDR, FLAG_CROSS_FOLLOWS, field, data);
-      String cross = getLeft();
-      if (cross.startsWith("&")) cross = cross.substring(1).trim();
-      data.strCross = cross;
+      data.strCross = getLeft();
       if (data.strCross.length() > 0) return;
       
+      Matcher match = BACKUP_CROSS_PTN.matcher(field);
+      if (match.find()) {
+        data.strCross = match.group(1);
+        data.strAddress = "";
+        parseAddress(field.substring(0,match.start()), data);
+      }
     }
     
     @Override
@@ -99,7 +111,6 @@ public class TXCyFairParser extends FieldProgramParser {
     public void parse(String field, Data data) {
       if (field.equals(NO_X_FOUND)) return;
       String saveCross = data.strCross;
-      data.strCross = "";
       parseAddress(StartType.START_ADDR, FLAG_ONLY_CROSS, field, data);
       data.strCross = append(saveCross, " & ", data.strCross);
       data.strApt = getLeft();
@@ -120,7 +131,6 @@ public class TXCyFairParser extends FieldProgramParser {
   }
   
   private static final Properties CITY_PLACE_TABLE = buildCodeTable(new String[]{
-      "FAIRFIELD",         "",
-      "MUELLER CEMETERY",  ""
+      "FAIRFIELD",    ""
   });
 }

@@ -14,7 +14,6 @@ import net.anei.cadpage.parsers.dispatch.DispatchOSSIParser;
 public class TXLaPorteParser extends DispatchOSSIParser {
   
   private static final Pattern PREFIX = Pattern.compile("^\\d*:");
-  private static final Pattern LINE_BRK_PTN = Pattern.compile(" *\n *");
   
   public TXLaPorteParser() {
     this("LA PORTE", "TX");
@@ -22,7 +21,7 @@ public class TXLaPorteParser extends DispatchOSSIParser {
   
   protected TXLaPorteParser(String defCity, String defState) {
     super(CITY_CODES, defCity, defState,
-          "( FYI ( DATETIME ADDR CITY CALL SRC+? | SRC? CALL! ADDR! UNIT? CITY? CODE? INFO+? DATETIME ) | CANCEL ADDR! CITY? ) INFO+");
+          "( FYI SRC? CALL! ADDR! UNIT? CITY? CODE? DATETIME! | CANCEL ADDR! CITY? ) INFO+");
   }
   
   @Override
@@ -45,8 +44,9 @@ public class TXLaPorteParser extends DispatchOSSIParser {
     
     // Strip off option number prefix
     Matcher match = PREFIX.matcher(body);
-    if (match.find()) body = body.substring(match.end()).trim();
-    body = LINE_BRK_PTN.matcher(body).replaceAll(" ");
+    if (match.find()) {
+      body = body.substring(match.end()).trim();
+    }
     return super.parseMsg(body, data);
   }
   
@@ -63,22 +63,11 @@ public class TXLaPorteParser extends DispatchOSSIParser {
   @Override
   public Field getField(String name) {
     if (name.equals("CANCEL")) return new CallField("CANCEL", true);
-    if (name.equals("SRC")) return new MySourceField();
+    if (name.equals("SRC")) return new SourceField("[A-Z]{4}", true);
     if (name.equals("UNIT")) return new UnitField("(?:[A-Z]+\\d+|[A-Z]{2}FD|\\d{2,4})(?:,.*)?|SENS", true);
     if (name.equals("CODE")) return new CodeField("[A-Z]{1,2}[A-Z0-9]{1,2}", true);
     if (name.equals("INFO")) return new MyInfoField();
     return super.getField(name);
-  }
-  
-  private class MySourceField extends SourceField {
-    public MySourceField() {
-      super("[A-Z]{4}", true);
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      data.strSource = append(data.strSource, " ", field);
-    }
   }
   
   @Override

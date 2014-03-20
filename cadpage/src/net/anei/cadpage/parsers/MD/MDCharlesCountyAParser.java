@@ -13,7 +13,7 @@ public class MDCharlesCountyAParser extends SmartAddressParser {
   
   private static final Pattern UNIT_PATTERN = Pattern.compile("(?:,? +(?:EMS|ALS|BLS|APPARATUS|TRUCK|AMBULANCE|MOTORCYCLE|ATV|BICYCLE|BIKE|MISC|\\d{1,2}[A-D]))+\\b");
   private static final Pattern MAP_PATTERN = Pattern.compile("\\b\\d{1,2} [A-Z]\\d{1,2}(?:-[A-Z]\\d{1,2})?\\b");
-  private static final Pattern ID_PATTERN = Pattern.compile("(\\b[EF]\\d{9}(?: +\\d+))\\b");
+  private static final Pattern ID_PATTERN = Pattern.compile("\\bF\\d{9}\\b");
   
   @Override
   public String getFilter() {
@@ -23,7 +23,7 @@ public class MDCharlesCountyAParser extends SmartAddressParser {
 
   public MDCharlesCountyAParser() {
     super( "CHARLES COUNTY", "MD");
-    setFieldList("CALL UNIT CITY ADDR APT PLACE CODE MAP INFO ID TIME");
+    setFieldList("CALL UNIT ADDR APT PLACE CODE MAP INFO ID");
   }
   
   @Override
@@ -37,13 +37,10 @@ public class MDCharlesCountyAParser extends SmartAddressParser {
     boolean good = false;
     if (subject.equals("*CAD*|CAD")) good = true;
     
-    body = body.replace('\n', ' ');
-    
     Matcher match = ID_PATTERN.matcher(body);
     if (match.find()) {
       good = true;
-      data.strCallId = match.group(1).replace(' ', '-');
-      data.strTime = body.substring(match.end()).trim();
+      data.strCallId = body.substring(match.start(),match.end());
       body = body.substring(0,match.start()).trim();
     }
     
@@ -96,12 +93,7 @@ public class MDCharlesCountyAParser extends SmartAddressParser {
     do {
       if (mapSt >= 0 && unitSt >= 0) {
         Parser p = new Parser(body);
-        String addr = p.get(',');
-        if (addr.equals("PG COUNTY")) {
-          data.strCity = "PRINCE GEORGES COUNTY";
-          addr = p.get(',');
-        }
-        parseAddress(addr, data);
+        parseAddress(p.get(','), data);
         data.strPlace = p.get();
         good = true;
         break;
@@ -135,7 +127,7 @@ public class MDCharlesCountyAParser extends SmartAddressParser {
       // Otherwise we have to use the smart parser to separate out what we didn't get
       int flags = (mapSt >= 0 ? FLAG_ANCHOR_END : 0);
       parseAddress(start, flags, body, data);
-      good = (getStatus() > STATUS_STREET_NAME);
+      good = (getStatus() > 1);
 
       if (data.strCall.endsWith(",")) data.strCall = data.strCall.substring(0, data.strCall.length()-1).trim();
       

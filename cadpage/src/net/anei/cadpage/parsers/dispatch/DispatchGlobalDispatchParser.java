@@ -21,26 +21,14 @@ public class DispatchGlobalDispatchParser extends FieldProgramParser {
   public static final int PLACE_FOLLOWS_ADDR = 8;
   
   private static final Pattern CALL_NUMBER_PTN = Pattern.compile("^Call Number: *(\\d+) +");
-  private static final Pattern KEYWORD_PTN = Pattern.compile("(?:MapRegions|Description|CrossStreets|Description|Dispatch|Primary_Incident|):");
-  private static final Pattern DELIM_PTN = Pattern.compile("\n| (?=CrossStreets:|Dispatch:)");
   
   private Pattern stationPtn;
   private Pattern unitPtn;
   private boolean leadStuff;
   private boolean trailStuff;
   
-  private String select;
-  
-  public DispatchGlobalDispatchParser(String defCity, String defState) {
-    this(null, defCity, defState, 0, null, null);
-  }
-  
   public DispatchGlobalDispatchParser(String[] cityList, String defCity, String defState) {
     this(cityList, defCity, defState, 0, null, null);
-  }
-  
-  public DispatchGlobalDispatchParser(String defCity, String defState, int flags) {
-    this(null, defCity, defState, flags, null, null);
   }
   
   public DispatchGlobalDispatchParser(String[] cityList, String defCity, String defState, int flags) {
@@ -50,26 +38,19 @@ public class DispatchGlobalDispatchParser extends FieldProgramParser {
   public DispatchGlobalDispatchParser(String[] cityList, String defCity, String defState,
                                        int flags, Pattern stationPtn, Pattern unitPtn) {
     super(cityList, defCity, defState,
-          calcAddressTerm(flags, cityList != null) +
-          " Call_Received_Time:DATE_TIME_CITY MapRegions:MAP Description:INFO INFO+ CrossStreets:X PLACE Description:INFO INFO+ Dispatch:DATETIME Primary_Incident:ID Call_Number:ID Description:INFO INFO+ ReferenceText:INFO Dispatch:SKIP");
+          calcAddressTerm(flags) +
+          " MapRegions:MAP Description:INFO CrossStreets:X Description:INFO Dispatch:DATETIME Dispatch:SKIP");
     this.stationPtn = stationPtn;
     this.unitPtn = unitPtn;
     leadStuff = (flags & LEAD_SRC_UNIT_ADDR) != 0;
     trailStuff = (flags & TRAIL_SRC_UNIT_ADDR) != 0;
   }
   
-  private static final String calcAddressTerm(int flags, boolean inclCity) {
-    StringBuilder sb = new StringBuilder("( SELECT/NEW ");
-    if ((flags & LEAD_SRC_UNIT_ADDR) != 0) sb.append("UNIT ");
-    if ((flags & CALL_FOLLOWS_ADDR) == 0) sb.append("CALL! ");
-    sb.append("ADDR! ");
-    if (inclCity) sb.append("CITY? ");
-    if ((flags & CALL_FOLLOWS_ADDR) != 0) sb.append("( CALL! Primary_Incident:ID! | PLACE CALL! ) ");
-    if ((flags & TRAIL_SRC_UNIT_ADDR) != 0) sb.append("UNIT ");
-    sb.append(" | ADDR2/S");
+  private static final String calcAddressTerm(int flags) {
+    StringBuilder sb = new StringBuilder("ADDR/S");
     sb.append((flags & CALL_FOLLOWS_ADDR) != 0 ? "XC" : "CX");
     if ((flags & PLACE_FOLLOWS_ADDR) != 0) sb.append('P');
-    sb.append("! )");
+    sb.append('!');
     return sb.toString();
   }
   
@@ -80,35 +61,6 @@ public class DispatchGlobalDispatchParser extends FieldProgramParser {
       data.strCallId = match.group(1);
       body = body.substring(match.end());
     }
-    
-    // See if this is the new fangled line break separated format
-    // Beware of false positives, occasionally an old format will
-    // have enough newlines to trigger the old logic
-    match = KEYWORD_PTN.matcher(body);
-    int pt = (match.find() ? match.start() : body.length());
-    if (body.substring(0,pt).contains("\n")) {
-      select = "NEW";
-      if (!parseFields(DELIM_PTN.split(body), data)) return false;
-      if (data.strMap.length() > 0 || data.strSupp.length() > 0 || 
-          data.strCross.length() > 0 || data.strTime.length() > 0) return true;
-      
-      // Still questionable.  If there is a unit field and pattern, see if
-      // they match
-      if (data.strUnit.length() > 0 && unitPtn != null) {
-        boolean good = true;
-        for (String unit : data.strUnit.split(" +")) {
-          if (!unitPtn.matcher(unit).matches()) {
-            good = false;
-            break;
-          }
-        }
-        if (good) return true;
-      }
-      return false;
-    }
-    
-    // Otherwise use the standard line break format
-    select = "OLD";
     if (! super.parseMsg(body, data)) return false;
     if (data.strCall.length() == 0) return false;
     if (data.strCity.length() == 0 && data.strUnit.length() == 0 && data.strCross.length() == 0 && !body.contains(" Description:")) return false;
@@ -120,23 +72,7 @@ public class DispatchGlobalDispatchParser extends FieldProgramParser {
     return "ID " + super.getProgram();
   }
   
-  
-  @Override
-  protected String getSelectValue() {
-    return select;
-  }
-
   protected class BaseAddressField extends AddressField {
-    
-    @Override
-    public void parse(String field, Data data) {
-      field = field.replaceAll(",", "");
-      super.parse(field, data);
-    }
-  }
-
-
-  protected class BaseAddress2Field extends AddressField {
     
     @Override
     public void parse(String field, Data data) {
@@ -195,23 +131,8 @@ public class DispatchGlobalDispatchParser extends FieldProgramParser {
     }
   }
   
-  private class BaseDateTimeCityField extends Field {
-    @Override
-    public void parse(String field, Data data) {
-      Parser p = new Parser(field);
-      data.strDate = p.get(' ');
-      data.strTime = p.get(' ');
-      data.strCity = p.get();
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "DATE TIME CITY";
-    }
-  }
-  
   private static final Pattern DATE_TIME_PTN = Pattern.compile("\\[(\\d\\d/\\d\\d/\\d{4}) (\\d\\d:\\d\\d:\\d\\d) \\d+\\]");
-  protected class BaseInfoField extends InfoField {
+  private class BaseInfoField extends InfoField {
     @Override
     public void parse(String field, Data data) {
       Matcher match = DATE_TIME_PTN.matcher(field);
@@ -222,24 +143,15 @@ public class DispatchGlobalDispatchParser extends FieldProgramParser {
         if (field.startsWith("/ ")) field = field.substring(2).trim(); 
       }
       field = field.replaceAll("\\s{2,}", " ");
-      data.strSupp = append(data.strSupp, ". ", field);
-    }
-  }
-
-  private class BaseIdField extends IdField {
-    @Override
-    public void parse(String field, Data data) {
-      data.strCallId = append(data.strCallId, "/", field);
+      super.parse(field, data);
     }
   }
   
+  
   @Override
   public Field getField(String name) {
-    if (name.equals("ADDR")) return new BaseAddressField();
-    if (name.equals("ADDR2")) return new BaseAddress2Field();
-    if (name.equals("DATE_TIME_CITY")) return new BaseDateTimeCityField();
     if (name.equals("INFO")) return new BaseInfoField();
-    if (name.equals("ID")) return new BaseIdField();
+    if (name.equals("ADDR")) return new BaseAddressField();
     return super.getField(name);
   }
 }

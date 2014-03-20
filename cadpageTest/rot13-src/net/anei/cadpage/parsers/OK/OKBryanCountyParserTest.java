@@ -627,7 +627,7 @@ choyvp pynff BXOelnaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G18",
         "0:ZIPV >IRUVPYR PBYYVFVBA /J VAWHEVRF 1425 F 9GU NIR QHENAG E; & Q NHGB FNYINTR 5809249323 Znc: Tevqf:0,0 Pnq: 2013-0000013193",
         "PBQR:ZIPV",
-        "PNYY:IRUVPYR PBYYVFVBA /J VAWHEVRF",
+        "PNYY:IRUVPYR PBYYVFVBA/J VAWHEVRF",
         "NQQE:1425 F 9GU NIR",
         "PVGL:QHENAG",
         "ANZR:E; & Q NHGB FNYINTR",
@@ -656,8 +656,9 @@ choyvp pynff BXOelnaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G22",
         "0:ARG >ABA RZRET GENAFCBEG QCQ///GRFG Pnq: 2013-0000013128",
-        "PNYY:TRARENY NYREG",
-        "CYNPR:ARG >ABA RZRET GENAFCBEG QCQ///GRFG Pnq: 2013-0000013128");
+        "PBQR:ARG",
+        "PNYY:ABA RZRET GENAFCBEG QCQ/GRFG",
+        "VQ:2013-0000013128");
 
     qbGrfg("G23",
         "0:RIRAG: ARG YBP:PNYREN ZAE Pnq: 2013-0000013125 1097 >09:12:50 RAE >09:20:48 ZPFB 1098 >10:05:12",
@@ -885,8 +886,7 @@ choyvp pynff BXOelnaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "0:ZRQ >ZRQVPNY PNYY PNFVAB 1FG SYBBE CNEXVAT TNENT QHENAG HF PRYYHYNE 4693352770 Pnq: 2013-0000012900",
         "PBQR:ZRQ",
         "PNYY:ZRQVPNY PNYY",
-        "NQQE:PNFVAB 1FG",
-        "NCG:SYBBE CNEXVAT TNENT",
+        "NQQE:PNFVAB 1FG SYBBE CNEXVAT TNENT",
         "PVGL:QHENAG",
         "CUBAR:4693352770",
         "VQ:2013-0000012900");
@@ -1114,7 +1114,6 @@ choyvp pynff BXOelnaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PBQR:FHVP",
         "PNYY:FHVPVQR BE NGGRZCGRQ FHVPVQR",
         "NQQE:UJL 91 NAQ F 4GU",
-        "ZNQQE:UJL 91 & F 4GU",
         "PVGL:PNEGJEVTUG",
         "ANZR:TRAGEL JRFG",
         "CUBAR:5809800076",
@@ -1144,7 +1143,7 @@ choyvp pynff BXOelnaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G88",
         "0:ZIPV >IRUVPYR PBYYVFVBA /J VAWHEVRF 6160 JVYFBA EQ OELNA HF PRYYHYNE 5807758522 Znc: Tevqf:0,0 Pnq: 2013-0000012778",
         "PBQR:ZIPV",
-        "PNYY:IRUVPYR PBYYVFVBA /J VAWHEVRF",
+        "PNYY:IRUVPYR PBYYVFVBA/J VAWHEVRF",
         "NQQE:6160 JVYFBA EQ",
         "ANZR:OELNA",
         "CUBAR:5807758522",

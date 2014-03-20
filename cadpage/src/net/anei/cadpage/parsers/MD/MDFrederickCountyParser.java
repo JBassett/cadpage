@@ -231,7 +231,6 @@ public class MDFrederickCountyParser extends FieldProgramParser {
         "MTAY", "Mt Airy",
         "NEWM", "New Market",
         "THUR","Thurmont",
-        "WALK", "Walkersville",
         "WASH", "Washington County,MD", 
         "WASHCO", "Washington County,MD", 
         "WASH CO", "Washington County,MD", 

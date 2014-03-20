@@ -13,17 +13,16 @@ public class ALDothanParser extends FieldProgramParser {
   
   public ALDothanParser() {
     super("DOTHAN", "AL",
-          "TIME CALL ADDR/SXa CITY! PLACE+? ID INFO+");
+           "TIME CALL ADDR/SXa CITY! PLACE+? ID INFO+");
   }
   
   @Override
   public String getFilter() {
-    return "Robot.ALERT@dothan.org,777802230001";
+    return "Robot.ALERT@dothan.org";
   }
   
   @Override
   protected boolean parseMsg(String body, Data data) {
-    if (body.startsWith("CITY OF DOTHAN ")) body = body.substring(15).trim(); 
     return parseFields(body.split("/"), 4, data);
   }
   

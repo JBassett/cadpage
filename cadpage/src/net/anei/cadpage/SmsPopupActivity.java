@@ -12,6 +12,8 @@ import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.text.util.Linkify;
 import android.view.ContextMenu;
 import android.view.Display;
@@ -23,6 +25,7 @@ import android.view.ViewStub;
 import android.view.Window;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,6 +40,8 @@ public class SmsPopupActivity extends Safe40Activity {
   private MsgOptionManager optManager;
 
   private boolean exitingKeyguardSecurely = false;
+  private InputMethodManager inputManager = null;
+  private View inputView = null;
   private ImageView fromImage;
   private TextView fromTV;
   private TextView messageReceivedTV;
@@ -48,8 +53,6 @@ public class SmsPopupActivity extends Safe40Activity {
   private ViewStub privacyViewStub;
   private View privacyView = null;
   private LinearLayout mainLL = null;
-  
-  private Button donateStatusBtn = null;
 
   private boolean wasVisible = false;
 
@@ -103,9 +106,9 @@ public class SmsPopupActivity extends Safe40Activity {
     mainLL = (LinearLayout)findViewById(R.id.MainLinearLayout);
     registerForContextMenu(mainLL);
     
-    // We can't hook the current donations status here because it may change
-    // from msg to message.
-    donateStatusBtn = (Button)findViewById(R.id.donate_status_button);
+    // Hook donate status button to current donation status
+    Button btn = (Button)findViewById(R.id.donate_status_button);
+    MainDonateEvent.instance().setButton(this, btn);
     
     // Populate display fields
     populateViews(getIntent());
@@ -143,7 +146,7 @@ public class SmsPopupActivity extends Safe40Activity {
     exitingKeyguardSecurely = false;
     
     // Supposed to workaround Android 4 problem
-    // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
   }
 
   @Override
@@ -168,19 +171,26 @@ public class SmsPopupActivity extends Safe40Activity {
       mProgressDialog.dismiss();
     }
 
-    if (wasVisible) ManageKeyguard.reenableKeyguard();
+    if (wasVisible) {
+      // Cancel the receiver that will clear our locks
+      ClearAllReceiver.removeCancel(getApplicationContext());
+      ClearAllReceiver.clearAll(!exitingKeyguardSecurely);
+    }
   }
 
   @Override
   protected void onStop() {
     super.onStop();
     if (Log.DEBUG) Log.v("SMSPopupActivity: onStop()");
-    if (wasVisible) ManageKeyguard.reenableKeyguard();
+
+    // Cancel the receiver that will clear our locks
+    ClearAllReceiver.removeCancel(getApplicationContext());
+    ClearAllReceiver.clearAll(!exitingKeyguardSecurely);
   }
 
   @Override
   protected void onDestroy() {
-    MainDonateEvent.instance().setButton(null, null, null);
+    MainDonateEvent.instance().setButton(null, null);
     super.onDestroy();
   }
 
@@ -269,9 +279,6 @@ public class SmsPopupActivity extends Safe40Activity {
     optManager.prepareButtons();
     
     info = message.getInfo();
-
-    // Hook the donate status button with the current donation status
-    MainDonateEvent.instance().setButton(this, donateStatusBtn, newMessage);
     
     // Update Icon to indicate direct paging source
     int resIcon = VendorManager.instance().getVendorIconId(message.getVendorCode());
@@ -500,8 +507,8 @@ public class SmsPopupActivity extends Safe40Activity {
   public void onBackPressed() {
     super.onBackPressed();
     
-    // Clear any active notification and wake locks
-    ClearAllReceiver.clearAll(this);
+    // Clear any active notification
+    ManageNotification.clear(this);
     
     // Flag message acknowledgement
     message.acknowledge(this);
@@ -625,6 +632,14 @@ public class SmsPopupActivity extends Safe40Activity {
     });
   }
 
+
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    if (Log.DEBUG) Log.v("SMSPopupActivity: onConfigurationChanged()");
+    resizeLayout();
+  }
+
   private void resizeLayout() {
     // This sets the minimum width of the activity to a minimum of 80% of the screen
     // size only needed because the theme of this activity is "dialog" so it looks
@@ -658,7 +673,7 @@ public class SmsPopupActivity extends Safe40Activity {
    */
   public static void launchActivity(Context context, int msgId) {
     Intent popup = new Intent(context, SmsPopupActivity.class);
-    popup.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    popup.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
     popup.putExtra(EXTRAS_MSG_ID, msgId);
     context.startActivity(popup);
   }

@@ -27,13 +27,14 @@ public class CTNorthwestPublicSafetyParser extends SmartAddressParser {
 
   @Override
   public String getFilter() {
-    return "globalpaging@nowestps.org,no-reply@nowestps.org,NWCTPS@nowestps.org";
+    return "globalpaging@nowestps.org,no-reply@nowestps.org";
   }
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
     if (!subject.equals("From Northwest")) return false;
-    body = body.replace('\n', ' ');
+    int pt = body.indexOf('\n');
+    if (pt >= 0) body = body.substring(0,pt).trim();
     Parser p = new Parser(body);
     String sAddr = p.get("Primary Incident:");
     data.strCallId = p.get(' ');
@@ -41,10 +42,10 @@ public class CTNorthwestPublicSafetyParser extends SmartAddressParser {
     String sAddr2 = p.get();
     
     
-    parseAddress(StartType.START_ADDR, FLAG_PAD_FIELD, sAddr, data);
+    parseAddress(StartType.START_ADDR, FLAG_PAD_FIELD, sAddr.replace(',', ' '), data);
     data.strPlace = getPadField();
     if (data.strApt.startsWith("(")) {
-      int pt = data.strPlace.indexOf(')');
+      pt = data.strPlace.indexOf(')');
       if (pt >= 0) {
         data.strApt = data.strApt + ' ' + data.strPlace.substring(0,pt+1);
         data.strPlace = data.strPlace.substring(pt+1).trim();
@@ -79,7 +80,7 @@ public class CTNorthwestPublicSafetyParser extends SmartAddressParser {
     if (!sAddr.startsWith(sAddr2)) {
       data.strAddress = "";
       data.strApt = "";
-      parseAddress(StartType.START_ADDR, sAddr2, data);
+      parseAddress(StartType.START_ADDR, sAddr2.replace(',', ' '), data);
     }
     return true;
   }

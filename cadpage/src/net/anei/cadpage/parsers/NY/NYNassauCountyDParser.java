@@ -9,18 +9,13 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class NYNassauCountyDParser extends FieldProgramParser {
   
-  private static final Pattern MARKER = Pattern.compile("^([^\\*]*?)\\*\\*\\*([^\\*]+?)\\*[\\* ]\\* ?");
-  private static final Pattern MISSING_DELIM = Pattern.compile("(?<=[^\\*])(?=TOA:|CS:)|(?<= \\d\\d-\\d\\d-\\d\\d)(?! ?\\*)");
-  private static final Pattern DELIM = Pattern.compile("(?<![\\*\n])\\*");
+  private static final Pattern MARKER = Pattern.compile("^([^\\*]*?)\\*\\*\\*([^\\*]+?)\\* \\* ?");
+  private static final Pattern MISSING_DELIM = Pattern.compile("(?<=[^\\*])(?=TOA:)");
+  private static final Pattern DELIM = Pattern.compile(" \\*");
   
   public NYNassauCountyDParser() {
     super("NASSAU COUNTY", "NY",
-           "PLACE? ADDR/ZSXa! CS:X? TOA:TIMEDATE? UNITID? INFO+");
-  }
-  
-  @Override
-  public String getFilter() {
-    return "eastmeadowfd@eastmeadowfd.net,paging1@firerescuesystems.xohost.com,wantaghpaging@gmail.com";
+           "PLACE? ADDR/Z! CS:X? TOA:TIMEDATE? UNITID? INFO+");
   }
   
   @Override
@@ -29,9 +24,7 @@ public class NYNassauCountyDParser extends FieldProgramParser {
     if (!match.find()) return false;
     data.strCall = append(match.group(2).trim(), " - ", match.group(1).trim());
     body = body.substring(match.end());
-    body = MISSING_DELIM.matcher(body).replaceAll(" *");
-    
-    if (body.contains(" c/s:") || body.contains(" ADTNL:") || body.contains(" ADTML:")) return false;
+    body = MISSING_DELIM.matcher(body).replaceFirst(" *");
     return parseFields(DELIM.split(body), 2, data);
   }
   
@@ -54,14 +47,6 @@ public class NYNassauCountyDParser extends FieldProgramParser {
       if (nextFld.contains(":")) return false;
       super.parse(field, data);
       return true;
-    }
-  }
-  
-  private class MyDateTimeField extends DateTimeField {
-    @Override
-    public void parse(String field, Data data) {
-      field = field.replace('-', '/');
-      super.parse(field, data);
     }
   }
   
@@ -95,16 +80,15 @@ public class NYNassauCountyDParser extends FieldProgramParser {
     
   }
   
-  private static final Pattern INFO_UNIT_PTN = Pattern.compile(" +UNITS +([0-9, /]+)$");
   private class MyInfoField extends InfoField {
     @Override
     public void parse(String field, Data data) {
-      Matcher match = INFO_UNIT_PTN.matcher(field);
-      if (match.find()) {
-        String unit = match.group(1).trim();
+      int pt = field.indexOf(" UNITS ");
+      if (pt >= 0) {
+        String unit = field.substring(pt+7).trim();
         if (unit.endsWith(",")) unit = unit.substring(0,unit.length()-1).trim();
         data.strUnit = append(data.strUnit, ", ", unit);
-        field = field.substring(0,match.start());
+        field = field.substring(0,pt).trim();
       }
       super.parse(field, data);
     }
@@ -119,18 +103,19 @@ public class NYNassauCountyDParser extends FieldProgramParser {
   public Field getField(String name) {
     if (name.equals("PLACE")) return new MyPlaceField();
     if (name.equals("INFO")) return new MyInfoField();
-    if (name.equals("DATETIME")) return new MyDateTimeField();
     if (name.equals("UNITID")) return new MyUnitIdField();
     return super.getField(name);
   }
   
   @Override
   public String adjustMapAddress(String addr) {
-    if (addr.startsWith("Pre-Plan ")) addr = addr.substring(9).trim();
     addr = BLVE_PTN.matcher(addr).replaceAll(" BLVD");
+    addr = SWIM_PTN.matcher(addr).replaceAll(" ");
     return addr;
   }
   private static final Pattern BLVE_PTN = Pattern.compile(" +BLVE\\b");
+  private static final Pattern SWIM_PTN = Pattern.compile(" +SWIM\\b");
+  
 }
 
 

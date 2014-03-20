@@ -20,7 +20,7 @@ public class ALMadisonCountyParser extends FieldProgramParser {
   
   @Override
   public String getFilter() {
-    return "cad.page@madco911.com,rescue1-bounces@rescuesquad.net,cad.page@madco9-1-1.org";
+    return "cad.page@madco911.com,rescue1-bounces@rescuesquad.net";
   }
 
   @Override
@@ -34,10 +34,6 @@ public class ALMadisonCountyParser extends FieldProgramParser {
         body = body.substring(CAD_MARKER.length()+3);
         break;
       }
-      
-      if (body.startsWith("Loc:")) break;
-      
-      return false;
     } while (false);
    
     return super.parseMsg(body, data);

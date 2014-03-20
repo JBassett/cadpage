@@ -53,14 +53,13 @@ public class DispatchSouthernPlusParser extends DispatchSouthernParser {
     }
     
     if (!super.parseMsg(body, data)) return false;
-    
     if (badTime) data.strTime = "";
     
     if (data.strCallId.length() == 0) data.strCallId = callId;
     return true;
   }
   
-  private final static Pattern SUB_MARKER = Pattern.compile("^([A-Za-z0-9]+:)?\\d\\d:\\d\\d(?:[ ,;]|$)");
+  private final static Pattern SUB_MARKER = Pattern.compile("^([A-Za-z0-9]+:)?\\d\\d:\\d\\d[ ,;]");
   private final static Pattern SUB_TRAILER = Pattern.compile(" \\d\\d$");
   private final static Pattern CALL_ID_PTN = Pattern.compile(" +OCA: *(\\d\\d-\\d\\d-\\d{4})$");
 }

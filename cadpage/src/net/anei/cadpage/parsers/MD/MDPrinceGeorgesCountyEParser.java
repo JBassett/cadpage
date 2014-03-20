@@ -3,25 +3,26 @@ package net.anei.cadpage.parsers.MD;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-
 
 /**
  * Prince Georges County, MD (variant E)
  */
-public class MDPrinceGeorgesCountyEParser extends MDPrinceGeorgesCountyBaseParser {
+public class MDPrinceGeorgesCountyEParser extends FieldProgramParser {
   
   private static final Pattern ID_PTN = Pattern.compile("^(?:TR +)?(F\\d{6,}):");
   private static final Pattern TRAILER = Pattern.compile(" - From [A-Z0-9]+ (\\d\\d/\\d\\d/\\d{4}) (\\d\\d:\\d\\d:\\d\\d)$");
   private static final Pattern AT_PTN = Pattern.compile("\\bAT\\b", Pattern.CASE_INSENSITIVE);
   
   public MDPrinceGeorgesCountyEParser() {
-    super("CODE? CALL ADDR PP? AT? X? PP2? ( CITY ST CH | CITY CH | CH! ) BOX MAP INFO+ Units:UNIT% UNIT+");
+    super("PRINCE GEORGES COUNTY", "MD",
+           "CODE? CALL ADDR PP? AT? X? PP2? ( CITY ST CH | CITY CH | CH! ) BOX MAP INFO+ Units:UNIT% UNIT+");
   }
   
   @Override
   public String getFilter() {
-    return "@alert.co.pg.md.us,rc.505@c-msg.net,14100,12101";
+    return "@alert.co.pg.md.us,rc.505@c-msg.net,14100";
   }
   
   @Override
@@ -49,13 +50,6 @@ public class MDPrinceGeorgesCountyEParser extends MDPrinceGeorgesCountyBaseParse
     if (data.strAddress.length() < 5 || data.strAddress.contains("<")) return false;
     
     if (data.strState.equals("MD")) data.strState = "";
-    
-    // If they did not specify a city, see if we can deduce it from a mutual aid code
-    if (data.strCity.length() == 0 && data.strCode.startsWith("MA")) {
-      if (data.strCode.equals("MAAA")) data.strCity = "ANNE ARUNDEL COUNTY";
-      else if (data.strCode.equals("MACH")) data.strCity = "CHARLES COUNTY";
-      else if (data.strCode.equals("MACC")) data.strCity = "CALVERT COUNTY";
-    }
     
     return true;
   }
@@ -133,4 +127,13 @@ public class MDPrinceGeorgesCountyEParser extends MDPrinceGeorgesCountyBaseParse
     if (name.equals("UNIT")) return new MyUnitField();
     return super.getField(name);
   }
+
+  
+  @Override
+  public String adjustMapAddress(String sAddress) {
+    // Undo various abbreviations of CAPITAL BELTWAY
+    return CAP_BELT_PTN.matcher(sAddress).replaceAll("CAPITAL BELTWAY");
+  }
+  private static final Pattern CAP_BELT_PTN = 
+      Pattern.compile("\\bCAP BELT(?:WAY)?(?: OL [A-Z]{1,2})(?: HWY)?\\b", Pattern.CASE_INSENSITIVE);
 }

@@ -1,13 +1,14 @@
 package net.anei.cadpage.parsers.OR;
 
-import net.anei.cadpage.parsers.GroupBestParser;
 
-/**
- * Washington County, OR
- * Also Clackamas County
- */
-public class ORClackamasCountyParser extends GroupBestParser {
+/*
+Clackamas County, OR
+Dummy front end to Washington COunty, OR which does the real dispatching
+*/
+
+public class ORClackamasCountyParser extends ORWashingtonCountyParser {
+  
   public ORClackamasCountyParser() {
-    super(new ORClackamasCountyAParser(), new ORClackamasCountyBParser());
+    super("CLACKAMAS COUNTY", "OR");
   }
 }

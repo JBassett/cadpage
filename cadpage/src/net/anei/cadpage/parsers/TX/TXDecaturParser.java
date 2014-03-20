@@ -13,16 +13,10 @@ public class TXDecaturParser extends MsgParser {
   
   public TXDecaturParser() {
     super("DECATUR", "TX");
-    setFieldList("SRC CALL ADDR APT X UNIT INFO");
   }
   
   public String getFilter() {
     return "messaging@iamresponding.com";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
   }
   
   @Override

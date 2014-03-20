@@ -9,61 +9,42 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class DispatchGeoconxParser extends FieldProgramParser {
   
-  /**
-   *  Flag indicating an empty subject is acceptable
-   */
-  public static final int GCX_FLG_EMPTY_SUBJECT_OK = 1;
-  
-  /**
-   * Flag indicating a name or place and phone number may
-   * precede the address field
-   */
-  public static final int GCX_FLG_NAME_PHONE = 2;
-  
   private Set<String> citySet;
   private boolean noSubject; 
-  private boolean nameField;
   
   public DispatchGeoconxParser(String defCity, String defState) {
-    this(null, defCity, defState, 0);
+    this(null, defCity, defState, false);
   }
   
-  public DispatchGeoconxParser(Set<String> citySet, String defCity, String defState) {
-    this(citySet, defCity, defState, 0);
-  }
-  
-  public DispatchGeoconxParser(String defCity, String defState, int flags) {
-    this(null, defCity, defState, flags);
-  }
-  
-  public DispatchGeoconxParser(Set<String> citySet, String defCity, String defState, int flags) {
+  public DispatchGeoconxParser(Set<String> citySet, String defCity, String defState,
+                           boolean noSubject) {
     super(defCity, defState,
-          (flags & GCX_FLG_NAME_PHONE) == 0
-              ? "CALL ADDR INFO+"
-              : "CALL ( EMPTY ADDR | NAMEPH/Z ADDR | NAMEPH? ADDR ) INFO+");
-    this.citySet = citySet;
-    this.noSubject = (flags & GCX_FLG_EMPTY_SUBJECT_OK) != 0;
-    this.nameField = (flags & GCX_FLG_NAME_PHONE) != 0;
+           "CALL ( ADDR/Z END | NAMEPH? ADDR INFO+ )");
+  }
+  
+  @Override
+  public String getProgram() {
+    return "CALL PHONE NAME PLACE ADDR CITY INFO";
   }
   
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
     String flds[] = body.split("\n");
     if (!subject.equals("E911")) {
-      if (!noSubject || flds.length < 3) return false;
+      if (noSubject || flds.length < 3) return false;
     }
-    return parseFields(flds, data);
+    if (!parseFields(flds, data)) return false;
+    
+    // SOmetimes, what we interpreted as a name should be a place
+    if (checkPlace(data.strName)) {
+      data.strPlace = data.strName;
+      data.strName = "";
+    }
+    return true;
   }
 
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("NAMEPH")) return new NamePhoneField();
-    if (name.equals("ADDR")) return new MyAddressField();
-    return super.getField(name);
-  }
-  
   private static final Pattern PHONE_PTN = Pattern.compile("\\b\\d{10}$");
+  private static final Pattern DIGIT_PTN = Pattern.compile("\\b\\d{1,7}\\b");
   private class NamePhoneField extends Field {
     
     @Override
@@ -73,18 +54,28 @@ public class DispatchGeoconxParser extends FieldProgramParser {
     
     @Override
     public boolean checkParse(String field, Data data) {
-      Matcher match = PHONE_PTN.matcher(field);
-      if (!match.find()) return false;
-      data.strPhone = match.group();
-      field = field.substring(0,match.start()).trim();
-
-      if (checkPlace(field)) {
-        data.strPlace = field;
-      } else {
-        data.strName = field;
+      
+      // A comma followed by a legitimate name indicates this is really an
+      // address field, which we should not recognize
+      int pt = field.lastIndexOf(',');
+      if (pt >= 0) {
+        String sCity = field.substring(pt+1).trim().toUpperCase();
+        if (citySet != null && citySet.contains(sCity)) return false;
       }
+      
+      // Ditto if it contains an @
+      if (field.indexOf('@') >= 0) return false;
+      
+      // Or a number with fewer than 8 digits
+      // And does not end with a 10 digit phone number
+      if (DIGIT_PTN.matcher(field).find()) {
+        if (!PHONE_PTN.matcher(field).find()) return false;
+      }
+      
+      parse(field, data);
       return true;
     }
+    
     
     @Override
     public void parse(String field, Data data) {
@@ -93,38 +84,21 @@ public class DispatchGeoconxParser extends FieldProgramParser {
         data.strPhone = match.group();
         field = field.substring(0,match.start()).trim();
       }
-      if (checkPlace(field)) {
-        data.strPlace = field;
-      } else {
-        data.strName = field;
-      }
+      data.strName = field;
     }
     
     @Override
     public String getFieldNames() {
-      return "NAME PLACE PHONE";
+      return "NAME PHONE";
     }
   }
   
   private static final Pattern CITY_PTN = Pattern.compile(", *([A-Z]+ ?[A-Z]*)$", Pattern.CASE_INSENSITIVE);
-  private static final Pattern APT_PTN = Pattern.compile(", *(?:APT +)?((?:\\w+ *)?[-\\w]+)$");
-  private static final Pattern AT_PTN = Pattern.compile("(?:@| AT )(?! *M[MP]\\b)", Pattern.CASE_INSENSITIVE);
+  private static final Pattern APT_PTN = Pattern.compile(", *((?:\\w+ *)?[-\\w]+)$");
   private class MyAddressField extends AddressField {
     
     @Override
-    public boolean checkParse(String field, Data data) {
-      if (!isAddress(field)) return false;
-      parse(field, data, true);
-      return true;
-    }
-    
-    
-    @Override
     public void parse(String field, Data data) {
-      parse(field, data, false);
-    }
-    
-    private void parse(String field, Data data, boolean noNameHere) {
       field = field.replace("&&", "&");
       
       Matcher match = CITY_PTN.matcher(field);
@@ -139,60 +113,36 @@ public class DispatchGeoconxParser extends FieldProgramParser {
         field = field.substring(0,match.start()).trim();
       }
       
-      field = AT_PTN.matcher(field).replaceAll("&");
+      String tail = "";
+      int pt = field.indexOf('@');
+      if (pt >= 0) {
+        tail = field.substring(pt);
+        field = field.substring(0,pt).trim();
+      }
       
-      
-      StartType st = (!nameField || noNameHere || data.strName.length() > 0 || data.strPlace.length() > 0 
-                        ? StartType.START_ADDR : StartType.START_PLACE);
-      parseAddress(st, FLAG_IGNORE_AT | FLAG_ANCHOR_END, field, data);
+      StartType st = (data.strName.length() > 0 ? StartType.START_ADDR : StartType.START_PLACE);
+      parseAddress(st, FLAG_ANCHOR_END, field, data);
       if (st == StartType.START_PLACE){ 
         if (data.strAddress.length() == 0) {
           data.strAddress = data.strPlace;
-          data.strPlace = "";
-        } else if (!checkPlace(data.strPlace)){
+        } else {
           data.strName = data.strPlace;
-          data.strPlace = "";
         }
+        data.strPlace = "";
       }
+      data.strAddress = append(data.strAddress, " ", tail);
     }
     
     @Override
     public String getFieldNames() {
-      return "NAME ADDR APT CITY";
+      return "ADDR CITY";
     }
   }
   
-  /**
-   * method invoked by address parser to determine if field is an address
-   * or not.  Moved here so it can be overridden by subclasses that need
-   * to add additional conditions
-   * @param field
-   * @return
-   */
-  protected boolean isAddress(String field) {
-
-    // If we find a comma, assume an address.  Unless we have a city list
-    // in which case confirm valid city.  If not, reject immediately
-    int pt = field.lastIndexOf(',');
-    if (pt >= 0) {
-      String sCity = field.substring(pt+1).trim().toUpperCase();
-      if (citySet == null) return true;
-      if (citySet.contains(sCity)) return true;;
-      return false;
-    }
-    
-    // Anything containing an @ is OK.
-    if (field.indexOf('@') >= 0) return true;
-    
-    // Does it look like it starts with a street number
-    // that is not followed by YO
-    if (STREET_NO.matcher(field).matches()) return true;
-    
-    // OK, check for a legitimate street name
-    if (checkAddress(field) > 0) return true;
-    
-    // well, we certainly tried...
-    return false;
+  @Override
+  public Field getField(String name) {
+    if (name.equals("NAMEPH")) return new NamePhoneField();
+    if (name.equals("ADDR")) return new MyAddressField();
+    return super.getField(name);
   }
-  private static final Pattern STREET_NO = Pattern.compile("\\d+ +(?!YO|CAR).*", Pattern.CASE_INSENSITIVE);
 }

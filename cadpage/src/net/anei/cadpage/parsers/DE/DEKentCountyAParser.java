@@ -14,11 +14,11 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class DEKentCountyAParser extends FieldProgramParser {
   
-  private static final Pattern DELIM = Pattern.compile("[A-Z]+:| :", Pattern.CASE_INSENSITIVE);
+  private static final Pattern DELIM = Pattern.compile("[^ ]*:");
   
   public DEKentCountyAParser() {
     super(CITY_LIST, "KENT COUNTY", "DE",
-           "( CALL ADDR/ZS PLACECITY | ADDR/SCXP ) Xsts:X CALLER:NAME");
+           "( CALL ADDR/Z PLACECITY | ADDR/SCXP ) Xsts:X CALLER:NAME");
   }
   
   @Override
@@ -35,8 +35,6 @@ public class DEKentCountyAParser extends FieldProgramParser {
     boolean good = subject.equals("!|K") || subject.equals("K") || subject.equals("CAD");
     body = body.replace("Xst's:", "Xsts:");
     if (!parseFields(splitMsg(body), data)) return false;
-    if (good) return true;
-    if (getStatus() <= STATUS_STREET_NAME) return false;
     return good || data.strAddress.length() > 0 || data.strCross.length() > 0 || data.strName.length() > 0;
   }
   
@@ -49,7 +47,7 @@ public class DEKentCountyAParser extends FieldProgramParser {
       list.add((key + body.substring(pt,match.start())).trim());
       pt = match.end();
       key = match.group();
-      if (key.equals(" :")) key = "";
+      if (key.length() == 1) key = "";
     }
     String tail = body.substring(pt);
     if (tail.length() > 0) list.add(tail);

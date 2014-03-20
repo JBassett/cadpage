@@ -9,9 +9,4 @@ public class TXWebsterParser extends TXLaPorteParser {
   public TXWebsterParser() {
     super("WEBSTER", "TX");
   }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
 }

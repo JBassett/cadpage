@@ -106,11 +106,6 @@ Nzohynapr Pnyy, Purfg Cnvaf: N/S ng 25 Cbadhbthr Nirahr, Unzcgba Onlf  p/f: Rnfg
 Pbagnpg: Cnhy Fzvgu <fzvgglc330@tznvy.pbz>
 Fraqre: zrqsbeq@erqazkpnq.pbz
 Nhgbzngvp Nynez, Trareny Sver ng 2 EHFFRYY PG, ZRQSBEQ  p/f: ZNCYR NIR   B: FZNYQBAR, FHMNAA . . 11:47:20
-Nzohynapr Pnyy: r/s nzf ng 5 Ybrgfpure Ynar, Unzcgba Onlf  p/f: Jnxrzna Ebnq   B: Wbua Ybrgfpure . . 12:32:42
-
-Pbagnpg: evpu zvpuryf <fveoyxavtug@tznvy.pbz>
-Fraqre: ynxrynaqsq@erqazkpnq.pbz
-Nzohynapr Pnyy, Oyrrqvat ng 11 YNXRFUBER . . 19:28:35
 
 */
 
@@ -587,16 +582,6 @@ choyvp pynff ALFhssbyxPbhaglPCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CYNPR:Fravbe - Pbzzhavgl Pragre",
         "GVZR:11:14:08");
 
-    qbGrfg("G5",
-        "Nzohynapr Pnyy: r/s nzf ng 5 Ybrgfpure Ynar, Unzcgba Onlf  p/f: Jnxrzna Ebnq   B: Wbua Ybrgfpure . . 12:32:42",
-        "PNYY:Nzohynapr Pnyy",
-        "VASB:r/s nzf",
-        "NQQE:5 Ybrgfpure Ynar",
-        "PVGL:Unzcgba Onlf",
-        "K:Jnxrzna Ebnq",
-        "CYNPR:Wbua Ybrgfpure",
-        "GVZR:12:32:42");
-
   }
   
   @Grfg
@@ -610,17 +595,6 @@ choyvp pynff ALFhssbyxPbhaglPCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:ZNCYR NIR",
         "CYNPR:FZNYQBAR, FHMNAA",
         "GVZR:11:47:20");
-   
-  }
-  
-  @Grfg
-  choyvp ibvq grfgEvpuZvpunryf() {
-
-    qbGrfg("G1",
-        "Nzohynapr Pnyy, Oyrrqvat ng 11 YNXRFUBER . . 19:28:35",
-        "PNYY:Nzohynapr Pnyy, Oyrrqvat",
-        "NQQE:11 YNXRFUBER",
-        "GVZR:19:28:35");
    
   }
   

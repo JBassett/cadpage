@@ -11,6 +11,6 @@ public class NCWayneCountyParser extends DispatchA15Parser {
   
   @Override
   public String getFilter() {
-    return "Notification@usamobility.net";
+    return "CC_Message_Notification@usamobility.net";
   }
 }

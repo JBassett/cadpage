@@ -33,22 +33,6 @@ Pbagnpg: Punq Xryyl <sversvtugrexryyl@tznvy.pbz>
 Fraqre: rpp4@wbpbtbi.bet
 Nqq: 7344 Pnagreohel Fg         Ncg:            Ybp:                 Angher: ZRQVPNY              Tevq: 68/1. Vapvqrag# 13-0690093 Pebff:JVAQFBE FG/J 74G
 
-Pbagnpg: Xra Curycf <xra.curycf@wbpbsq1.bet>
-Fraqre: rpp4@wbpbtbi.bet
-1 bs 2\aSEZ:rpp4@wbpbtbi.bet\aZFT:Nqq: 400 F Zbbayvtug Eq         Ncg: 15U        Ybp: Zbbayvtug Evqtr             Angher: Orunivbeny P2\a(Pba'g) 2 bs 2\aTevq: 363/1 Vapvqrag# 13-1860028 Pebff:R CHZCXVA EVQTR FG/R PBGGNTR P(Raq)
-
-Pbagnpg: "Juryna, Znex, RZP" <ZJuryna@wbpbtbi.bet>
-
-Fraqre: rpp4@wbpbtbi.bet
-Nqq: 13750 F Oynpx Obo Eq       Ncg:            Ybp: Ybjr'f   13750  Angher: Nhgb Nynez - Jngre Sybj        Tevq: 251/1 Vapvqrag# 13-3190065 Pebff:F NYQRA FG/J 138
-
-Fraqre: 2183500185
-WBPB RZP Nqq: 13750 F Oynpx Obo Eq       Ncg:            Ybp: Ybjr'f   13750  Angher: Nhgb Nynez - Jngre Sybj        Tevq: 251/1 Vapvqrag# 13-3190065 Pebff:F NYQRA FG/J 138GU FG
-
-Pbagnpg: "Sbyfbz, Wbfrcu, RZF" <wsbyfbz@wbpbrzf.bet>
-Fraqre: 2183500185
-WBPB RZP Nqq: 401 A Uneevfba Fg          Ncg:            Ybp:                 Angher: Haxabja RZF P2                 Tevq: 464/1 Vapvqrag# 13-3230106 Pebff:J FZVGU FG/J XVAT FG
-
 */
 
 choyvp pynff XFWbuafbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -143,59 +127,6 @@ choyvp pynff XFWbuafbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:13-0690093",
         "K:JVAQFBE FG/J 74G");
 
-    qbGrfg("G1",
-        "1 bs 2\a" +
-        "SEZ:rpp4@wbpbtbi.bet\a" +
-        "ZFT:Nqq: 400 F Zbbayvtug Eq         Ncg: 15U        Ybp: Zbbayvtug Evqtr             Angher: Orunivbeny P2\a" +
-        "(Pba'g) 2 bs 2\a" +
-        "Tevq: 363/1 Vapvqrag# 13-1860028 Pebff:R CHZCXVA EVQTR FG/R PBGGNTR P(Raq)",
-
-        "NQQE:400 F Zbbayvtug Eq",
-        "NCG:15U",
-        "CYNPR:Zbbayvtug Evqtr",
-        "PNYY:Orunivbeny P2",
-        "ZNC:363/1",
-        "VQ:13-1860028",
-        "K:R CHZCXVA EVQTR FG/R PBGGNTR P");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgZnexJuryna() {
-
-    qbGrfg("G1",
-        "Nqq: 13750 F Oynpx Obo Eq       Ncg:            Ybp: Ybjr'f   13750  Angher: Nhgb Nynez - Jngre Sybj        Tevq: 251/1 Vapvqrag# 13-3190065 Pebff:F NYQRA FG/J 138",
-        "NQQE:13750 F Oynpx Obo Eq",
-        "CYNPR:Ybjr'f   13750",
-        "PNYY:Nhgb Nynez - Jngre Sybj",
-        "ZNC:251/1",
-        "VQ:13-3190065",
-        "K:F NYQRA FG/J 138");
-
-    qbGrfg("G1",
-        "WBPB RZP Nqq: 13750 F Oynpx Obo Eq       Ncg:            Ybp: Ybjr'f   13750  Angher: Nhgb Nynez - Jngre Sybj        Tevq: 251/1 Vapvqrag# 13-3190065 Pebff:F NYQRA FG/J 138GU FG",
-        "FEP:WBPB RZP",
-        "NQQE:13750 F Oynpx Obo Eq",
-        "CYNPR:Ybjr'f   13750",
-        "PNYY:Nhgb Nynez - Jngre Sybj",
-        "ZNC:251/1",
-        "VQ:13-3190065",
-        "K:F NYQRA FG/J 138GU FG");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgWbfrcuSbyfbz() {
-
-    qbGrfg("G1",
-        "WBPB RZP Nqq: 401 A Uneevfba Fg          Ncg:            Ybp:                 Angher: Haxabja RZF P2                 Tevq: 464/1 Vapvqrag# 13-3230106 Pebff:J FZVGU FG/J XVAT FG",
-        "FEP:WBPB RZP",
-        "NQQE:401 A Uneevfba Fg",
-        "PNYY:Haxabja RZF P2",
-        "ZNC:464/1",
-        "VQ:13-3230106",
-        "K:J FZVGU FG/J XVAT FG");
- 
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

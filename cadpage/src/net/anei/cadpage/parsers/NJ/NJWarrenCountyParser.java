@@ -20,12 +20,11 @@ public class NJWarrenCountyParser extends SmartAddressParser {
   
   public NJWarrenCountyParser() {
     super(CITY_LIST, "WARREN COUNTY", "NJ");
-    setFieldList("UNIT CALL PLACE ADDR APT CITY DATE TIME INFO X");
   }
   
   @Override
   public String getFilter() {
-    return "WC911@co.warren.nj.us,root@co.warren.nj.us";
+    return "WC911@co.warren.nj.us";
   }
   
   @Override

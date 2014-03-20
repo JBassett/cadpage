@@ -666,8 +666,7 @@ choyvp pynff APVerqryyPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZEF 10-50 Genssvp Nppvqrag, OVT VAQVNA NAQ OYHRSVRYQ",
         "HAVG:ZEF",
         "PNYY:10-50 Genssvp Nppvqrag",
-        "NQQE:OVT VAQVNA NAQ OYHRSVRYQ",
-        "ZNQQE:OVT VAQVNA & OYHRSVRYQ");
+        "NQQE:OVT VAQVNA NAQ OYHRSVRYQ");
 
     qbGrfg("G27",
         "ZEF P-80 PCE VA CEBTERFF, 1113 F  ZNTABYVN FG",

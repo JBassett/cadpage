@@ -8,7 +8,6 @@ public class TNHumphreysCountyParser extends GeneralParser {
   
   public TNHumphreysCountyParser() {
     super("HUMPHREYS COUNTY", "TN");
-    setFieldList("CALL ADDR PLACE INFO");
   }
   
   @Override
@@ -22,9 +21,9 @@ public class TNHumphreysCountyParser extends GeneralParser {
   }
 
   @Override
-  public boolean parseMsg(String subject, String body, Data data) {
+  protected boolean parseMsg(String subject, String body, Data data) {
     if (! subject.equals("E911")) return false;
     return super.parseMsg("", body, data) ||
-            data.parseGeneralAlert(this, body);
+            data.parseGeneralAlert(body);
   }
 }

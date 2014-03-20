@@ -14,7 +14,6 @@ public class ZUKWestMidlandsParser extends SmartAddressParser {
 
   public ZUKWestMidlandsParser() {
     super(CITY_LIST, "", "West Midlands", CountryCode.UK);
-    setFieldList("ID TIME CALL PLACE ADDR CITY MAP");
   }
   
   @Override

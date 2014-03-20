@@ -42,10 +42,4 @@ choyvp pynff CNZbagtbzrelPbhaglCnefreGrfg {
       frgCnefre(arj CNZbagtbzrelPbhaglCnefre());
     }
   }
-  
-  choyvp fgngvp pynff GrfgT rkgraqf CNZbagtbzrelPbhaglTCnefreGrfg {
-    choyvp GrfgT() {
-      frgCnefre(arj CNZbagtbzrelPbhaglCnefre());
-    }
-  }
 }

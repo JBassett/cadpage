@@ -1,6 +1,5 @@
 package net.anei.cadpage.parsers.MO;
 
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,8 +10,8 @@ import net.anei.cadpage.parsers.dispatch.DispatchGlobalDispatchParser;
 
 public class MOPolkCountyParser extends DispatchGlobalDispatchParser {
   
-  private static final Pattern UNIT_PTN = Pattern.compile("[MRC]\\d+|MSHP\\d|\\d{2,3}(?:-\\d)?|SJDC|SJLL|[A-Z]{1,2}FD");
-  private static final Pattern CALL_CODE_PTN = Pattern.compile("/ *(\\d{1,2}-[A-Z]-\\d{1,2})$");
+  private static final Pattern UNIT_PTN = Pattern.compile("M\\d+|MSHP\\d|\\d{3}");
+  private static final Pattern MAP_PTN = Pattern.compile("/ *(\\d{1,2}-[A-Z]-\\d{1,2})$");
   private static final Pattern CITY_PTN = Pattern.compile("[A-Z ]+", Pattern.CASE_INSENSITIVE);
   
   public MOPolkCountyParser() {
@@ -26,18 +25,16 @@ public class MOPolkCountyParser extends DispatchGlobalDispatchParser {
   
   @Override
   public boolean parseMsg(String body, Data data) {
-    body = body.replace("Disp:", "Dispatch:");
+    body = body.replace(" Disp:", " Dispatch:");
     if (!super.parseMsg(body, data)) return false;
     if (data.strCity.equals("POLK COUNTY")) data.strCity = "";
-    Matcher match = CALL_CODE_PTN.matcher(data.strCall);
+    Matcher match = MAP_PTN.matcher(data.strCall);
     if (match.find()) {
       data.strCode = match.group(1);
       data.strCall = data.strCall.substring(0,match.start()).trim();
     }
     if (CITY_PTN.matcher(data.strMap).matches()) {
-      if (data.strCity.length() == 0) {
-        data.strCity = convertCodes(data.strMap, CITY_ABBRV_TABLE);
-      }
+      data.strCity = data.strMap;
       data.strMap = "";
     }
     return true;
@@ -45,30 +42,7 @@ public class MOPolkCountyParser extends DispatchGlobalDispatchParser {
   
   @Override
   public String getProgram() {
-    return super.getProgram().replace(" CALL ", " CALL CODE ").replace(" MAP ", " MAP CITY ");
-  }
-  
-  private class MyCityField extends CityField {
-    @Override
-    public boolean checkParse(String field, Data data) {
-      return super.checkParse(cleanCity(field), data);
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      super.checkParse(cleanCity(field), data);
-    }
-    
-    private String cleanCity(String city) {
-      if (city.endsWith(" MO")) city = city.substring(0,city.length()-3).trim();
-      return city;
-    }
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("CITY")) return new MyCityField();
-    return super.getField(name);
+    return super.getProgram().replace(" CALL ", " CALL CODE ");
   }
   
   private static final String[] CITY_TABLE = new String[]{
@@ -90,10 +64,4 @@ public class MOPolkCountyParser extends DispatchGlobalDispatchParser {
     
     "POLK COUNTY"
   };
-  
-  private static final Properties CITY_ABBRV_TABLE = buildCodeTable(new String[]{
-      "Pleasant H", "Pleasant Hope",
-      "Humansvill", "Humansville",
-      "Morrisvill", "Morrisville"
-  });
 }

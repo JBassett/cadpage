@@ -43,24 +43,6 @@ choyvp pynff ALFhssbyxPbhaglNyyCnefreGrfg {
     }
   }
   
-  choyvp fgngvp pynff GrfgT rkgraqf ALFhssbyxPbhaglTCnefreGrfg {
-    choyvp GrfgT() {
-      frgCnefre(arj ALFhssbyxPbhaglNyyCnefre());
-    }
-  }
-  
-  choyvp fgngvp pynff GrfgU rkgraqf ALFhssbyxPbhaglUCnefreGrfg {
-    choyvp GrfgU() {
-      frgCnefre(arj ALFhssbyxPbhaglNyyCnefre());
-    }
-  }
-  
-  choyvp fgngvp pynff GrfgV rkgraqf ALFhssbyxPbhaglVCnefreGrfg {
-    choyvp GrfgV() {
-      frgCnefre(arj ALFhssbyxPbhaglNyyCnefre());
-    }
-  }
-  
   choyvp fgngvp pynff GrfgSvergenpxre rkgraqf ALFhssbyxPbhaglSvergenpxreCnefreGrfg {
     choyvp GrfgSvergenpxre() {
       frgCnefre(arj ALFhssbyxPbhaglNyyCnefre());

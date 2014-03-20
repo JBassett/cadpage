@@ -9,8 +9,7 @@ import net.anei.cadpage.parsers.dispatch.DispatchEmergitechParser;
 public class OHWayneCountyCParser extends DispatchEmergitechParser {
   
   public OHWayneCountyCParser() {
-    super("Dispatch:", new int[]{62, 65, 66, 69}, CITY_LIST, "WAYNE COUNTY", "OH");
-    addSpecialWords("COLUMBUS", "HARRISON");
+    super("[A-Z0-9]{3,5}:", -23, -21, CITY_LIST, "WAYNE COUNTY", "OH");
   }
 
   @Override
@@ -28,8 +27,11 @@ public class OHWayneCountyCParser extends DispatchEmergitechParser {
       data.strCall = desc;
     }
     
-    int pt = data.strCity.indexOf('-');
-    if (pt >= 0) data.strCity = data.strCity.substring(0,pt).trim();
+    // Fix problem with apple creek broken up at CR CREEK
+    if (data.strName.equals ("APPLE CR EEK")) {
+      data.strCity = "APPLE CREEK";
+      data.strName = "";
+    }
     return true;
   }
   
@@ -82,9 +84,6 @@ public class OHWayneCountyCParser extends DispatchEmergitechParser {
     "FUNK",
     "KIDRON",
     "STERLING",
-    
-    "WAYNE COUNTY",
-    "RIPLEY TWP - HC"
   };
   
   private static final Properties CALL_CODES = buildCodeTable(new String[]{

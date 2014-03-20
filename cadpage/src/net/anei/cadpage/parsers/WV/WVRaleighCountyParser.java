@@ -37,6 +37,11 @@ public class WVRaleighCountyParser extends DispatchBParser {
     return true;
   }
   
+  @Override
+  public int getMapFlags() {
+    return MAP_FLG_SUPPR_ADD_PLACE;
+  }
+  
   private static final String[] CITY_LIST = new String[]{
 
     // Cities & Towns

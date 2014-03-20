@@ -1,16 +1,11 @@
 package net.anei.cadpage.parsers.CT;
 
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
 
 public class CTColchesterEmergCommParser extends FieldProgramParser {
-  
-  private static final Pattern RUN_REPORT_PTN = Pattern.compile("Unit: ([A-Z0-9]+) (Times: )# (\\d\\d-\\d+) (.*)");
   
   public CTColchesterEmergCommParser() {
     super("", "CT",
@@ -28,23 +23,8 @@ public class CTColchesterEmergCommParser extends FieldProgramParser {
   }
   
   @Override
-  public boolean parseMsg(String subject, String body, Data data) {
-    data.strSource = subject;
-    Matcher match = RUN_REPORT_PTN.matcher(body);
-    if (match.matches()) {
-      data.strCall = "RUN REPORT";
-      data.strUnit = match.group(1);
-      data.strCallId = match.group(3);
-      data.strPlace = match.group(2) + match.group(4).trim();
-      return true;
-    }
-    
+  public boolean parseMsg(String body, Data data) {
     return parseFields(body.split("\\\\"), 7, data);
-  }
-  
-  @Override
-  public String getProgram() {
-    return "SRC " + super.getProgram();
   }
   
   private class MyCrossField extends CrossField {
@@ -63,15 +43,19 @@ public class CTColchesterEmergCommParser extends FieldProgramParser {
     }
   }
   
-  private static final Pattern EXTRA_PTN = Pattern.compile("(\\d\\d:\\d\\d)\\b.*?(?:\\((.*)\\))?$");
   private class ExtraField extends Field {
 
     @Override
     public void parse(String field, Data data) {
-      Matcher match = EXTRA_PTN.matcher(field);
-      if (!match.matches()) abort();
-      data.strTime = match.group(1);
-      data.strSupp = getOptGroup(match.group(2));
+      int pt = field.indexOf(' ');
+      if (pt < 0) abort();
+      data.strTime = field.substring(0,pt).trim();
+      pt = field.indexOf(" CT (");
+      if (pt >= 0) {
+        field = field.substring(pt+5).trim();
+        if (field.endsWith(")")) field = field.substring(0,field.length()-1).trim();
+        data.strSupp = field;
+      }
     }
     
     @Override

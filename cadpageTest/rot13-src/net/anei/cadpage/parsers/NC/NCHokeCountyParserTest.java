@@ -166,10 +166,6 @@ Ubxr Pb 911:9615 SNLRGGRIVYYR EQ* * * * SBERFG JBBQF EQ* **JNLFVQR EQ* 65U* * NP
 Ubxr Pb 911:399 SNVESVRYQ PVE* * * * 100 GUBEAPYVSS QE* *** 65E* * NP/CV* * * * * * Yvar16=* Yvar17=* Yvar18=01/29/2013 13:12:22 : cbf3 : GTRFFYRE0782 Pebff fgerrgf: 100 GUBEAPYVSS QE// Trb Pbzzrag: PVEPYRF ONPX BAGB VGFRYS NG GUBEAPYVSS QE\a
 Ubxr Pb 911:520 QHAEBOVA QE* * * * 534 ZPQBHTNYQ QE* **ZPQBHTNYQ QE* 58H* * SVERNYNEZ* * * * * * Yvar16=* Yvar17=* Yvar18=01/25/2013 17:27:18 : cbf2 : EPEHZCYRE3351 Pebff fgerrgf: 534 ZPQBHTNYQ QE//ZPQBHTNYQ QE AOU: ZPQBHTNYQ QBJAF F/Q UNYY\a
 
-Pbagnpg: Wbua Wbfrcu <Wbua.z.Wbfrcu@appbhegf.bet>
-Fraqre: Ubxr@ubxrpbhagl.bet
-Ubxr Pb 911:328 FBZREFRG QE* * * * OYHR JNGRE QE* **SNYYVATYRNS QE* 64P* * SVERNYNEZ* * * * * * Yvar16=* Yvar17=* Yvar18=*
-
 */
 
 choyvp pynff APUbxrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -953,7 +949,7 @@ choyvp pynff APUbxrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "Ubxr Pb 911:194 UVPXBEL QE* * * * * **NFFNHYG* * * * * * * * 01/16/2013 01:28:34 : cbf1 : YTENQL7274 13 ARRQ RZF EBHGVAR URNQ VAWHEL 01/16/2013 01:18:36 : cbf1 : YTENQL7274 Pebff fgerrgf: 4770 CVGGZNA TEBIR PUHEPU//700 QBTJBBQ YA 01/16/2013",
         "NQQE:194 UVPXBEL QE",
         "K:NFFNHYG",
-        "VASB:13 ARRQ RZF EBHGVAR URNQ VAWHEL\a01/16/2013",
+        "VASB:13 ARRQ RZF EBHGVAR URNQ VAWHEL\a01 / 16 / 2013",
         "QNGR:01/16/2013",
         "GVZR:01:28:34",
         "PU:cbf1");
@@ -1395,17 +1391,6 @@ choyvp pynff APUbxrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     
   }
 
-  @Grfg
-  choyvp ibvq grfgWbuaWbfrcu() {
-
-    qbGrfg("G1",
-        "Ubxr Pb 911:328 FBZREFRG QE* * * * OYHR JNGRE QE* **SNYYVATYRNS QE* 64P* * SVERNYNEZ* * * * * * Yvar16=* Yvar17=* Yvar18=*",
-        "NQQE:328 FBZREFRG QE",
-        "K:OYHR JNGRE QE & SNYYVATYRNS QE",
-        "ZNC:64P",
-        "PNYY:SVERNYNEZ");
-
-  }
 
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
     arj APUbxrPbhaglCnefreGrfg().trarengrGrfgf("G1");

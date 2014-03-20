@@ -26,13 +26,6 @@ Pbagnpg: Cngevpx Cnynpvbf <cnynpvbf.cngevpx@tznvy.pbz>
 Fraqre:1410000011
 1 bs 2\aSEZ:CJEFNA\aZFT:17-Bpg-2012/07:30:19/NPPO/4065 CEVAPR JVYYVNZ CL / 13124 UVYYRAQNYR QE ,CJP /13/N510O R513O Z513O FGN13 /fpubby ohf naq n\a(Pba'g) 2 bs 2\aoyh fhi// srznyr vf ubyqvat ure purfg// fur ybbxf funxra hn(Raq)
 
-Pbagnpg: Whqv Zvyyre <wzvyyre@fekn.pbz>
-Fraqre: CJEFNA
-SEZ:CJEFNA\aZFT:06-Wha-2013/16:19:27/FVPN/ZF TNVA @ 8001 YVZRFGBAR QE ,CJP /04/R504 Z525 /7gu tenqr srznyr fghqrag srvagrq // vf pbap abja
-1 bs 2\aSEZ:CJEFNA\aZFT:06-Wha-2013/13:29:05/UNMNEQ/13655 OEVQYRJBBQ QE ,CJP /25/R525O /pnyyre nqi bar bs gurve gehpxf unq nagvserrmr fcvyy ng noi\a(Pba'g) 2 bs 2\a// nqi nccebk 3 tnyybaf // (Raq)
-1 bs 2SEZ:CJEFNAZFT:06-Wha-2013/12:46:47/SNYNEZ/10885 ZBEAVAT TYBEL PG ,CJP /11/R525O FGN11 G504 /ebfrznel evqtr ncg / ab ahzore / trareny(Pba'g) 2 bs 2mbar 11 / fnvq nqqerff jnf  7601 - 10880 zbeavat tybel  ohvqv (Raq)
-1 bs 2\aSEZ:CJEFNA\aZFT:06-Wha-2013/10:04:57/ZNYN/10809 URAEL NOOBGG EQ ,CJP /05/R505 Z525 /ERF/ UNEEVF-/ CERZVFR ABG YVFGRQ/ 703 695 0369-PRY SBE\a(Pba'g) 2 bs 2\aWHFGVA UNEEVF/ NHQ-ZRQVPNY XRL CNQ NPGVINGVBA/ JVYY NGPY(Raq)
-
 Pbagnpg: fhccbeg@npgvir911.pbz
 Fraqre: @efna.cjptbi.bet
 
@@ -60,21 +53,6 @@ Fhowrpg: Vzcbegnag zrffntr sebz CJ-NYREG\a 21-Znl-2012/19:10:42/SNYNEZ/170 ZNEXR
 [Vzcbegnag zrffntr sebz CJ-NYREG] 29-Wha-2012/16:42:20/PBZZ/7 PBHAGL PBZCYRK PG #RAGVER ,CJP (CJP FGNQVHZ PBZCYRK)/ZP/5Q N510O OP503 OP504 R513 R514 R516 R518 R520 Z513 Z520 FS502 FGN13 G501 GJ512 GJ513 /tnf yrnx v\aFrag ol CJ Nyreg gb OP503, OP504, R513, R514, R516, R518, R520, Z513, FS502, G501, N510, G512, G513, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\a--\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet\a
 [Vzcbegnag zrffntr sebz CJ-NYREG] 29-Wha-2012/16:42:20/PBZZ/7 PBHAGL PBZCYRK PG #RAGVER ,CJP (CJP FGNQVHZ PBZCYRK)/ZP/5Q N510O OP502 OP503 R513 R514 R516 R518 R520 Z513 Z520 E502 FS502 FGN13 G501 GJ512 GJ513 /tnf y\aFrag ol CJ Nyreg gb OP502, OP503, R513, R514, R516, R518, R520, Z513, E502, FS502, G501, N510, G512, G513, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\a--\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet\a
 [Vzcbegnag zrffntr sebz CJ-NYREG] 29-Wha-2012/16:42:20/PBZZ/7 PBHAGL PBZCYRK PG #RAGVER ,CJP (CJP FGNQVHZ PBZCYRK)/ZP/5Q 5R N510O OP406 OP502 OP503 R513 R514 R516 R518 R520 SZ516 SZ523 Z513 Z520 E419 E502 EU520 FS5\aFrag ol CJ Nyreg gb OP502, OP503, R513, R514, R516, R518, R520, SZ523, Z513, E502, FS502, N510, G501, G512, G513, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\a--\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet\a
-
-Pbagnpg: Npgvir911
-Ntrapl anzr: Znanffnf Iby Sver Pb
-Ybpngvba: Znanffnf, IN, Havgrq Fgngrf
-Fraqre: "CJ-EFNA #55EP" <CJEFNA_55EP@efna.cjptbi.bet>
-
-(Vzcbegnag zrffntr sebz CJ-NYREG) 05-Why-2013/09:36:30/FVPN/10534 PRQNE PERRX QE ,CJP /07/R507 Z501 /qrynl qhr gb trg cua #// 477-4007 // ryqreyl znyr // qvss oernguvat //\a\aFrag ol CJ Nyreg gb R507, Z501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a--\e\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet
-(Jrrxyl Fnsrgl Zrffntr/Jrngure) Genssvp ivbyngvbaf vzcbfrq juvyr bss-qhgl hfhnyyl zrnaf, “Cbvagf gb gur onq”.  Or zvaqshy bs lbhe pbaqhpg jura qevivat bss qhgl naq erzrzore gung vg pna hygvzngryl unir n artngvir vzcnpg ba lbhe qevivat cevivyrtrf jura ba-qhgl.  Zbfg Sver naq Erfphr betnavmngvbaf unir qrirybcrq cbyvpvrf gung nqqerff guvf glcr bs zvfpbaqhpg naq/be bssrafr; or njner bs gubfr cbyvpvrf naq jurer gb ybpngr gurz.  Qb abg yrg n onq qevivat erpbeq wrbcneqvmr lbhe qrfver va jnagvat gb cnegvpvcngr va n aboyr freivpr.     \a  \aJrngure 7-5-2013  \a  \aGbqnl Zbfgyl fhaal, jvgu n uvtu arne 91. Fbhgu jvaq 7 gb 11 zcu. Gbavtug Cnegyl pybhql, jvgu n ybj nebhaq 73. Fbhgujrfg jvaq 5 gb 8 zcu\a\aFrag ol CJ Nyreg gb SFGNSSVAT/FNSRGL guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a--\e\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet
-(Fgnssvat) OP582 Senamryyb\a\aFrag ol CJ Nyreg gb SFGNSSVAT/FNSRGL guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a--\e\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet
-(Fgnssvat) Qngr:  \aN: 2,7,10,11  \aZ: 1,3,4,7,9,11,12,14,17,18,20,23,24,25,31,33  \aR: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,23,24,25,31,32,33  \aX: 5,6,15,16  \aE: 1,4,10  \aG: 11,33  \aGJ: 1,12,13  \a  \aOP 501: Sbetb  \aOP 502: Penjsbeq  \aOP 503: ZpPbl  \aOP 504: Fuvsyrgg  \aOP 531: Onee  \aOP 581: Ubyzna  \aOP 582: Yhcgba  \a  \aQhgl UZ: Xvro  \a  \aSZ: Phyoregfba  \a  \aFS: Cntnab  \a  \aHSEB: Uroreg\a\aFrag ol CJ Nyreg gb SFGNSSVAT/FNSRGL guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a--\e\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet
-(Vzcbegnag zrffntr sebz CJ-NYREG) 05-Why-2013/05:28:35/FVPO/8538 FGBARJNYY EQ ,ZAFF /01S/R501 Z501 /PNYYRE VF UNIVAT UBG NAQ PBYQ SYNFURQ/UVTU SRIRE/OYRRQVAT OYBBQ PYBGF SEBZ INTVAN/FNLF GUR OYBBQ VF OEBJA\a\aFrag ol CJ Nyreg gb R501, Z501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a--\e\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet
-(Vzcbegnag zrffntr sebz CJ-NYREG) 05-Why-2013/00:41:56/HAP/FRIRA 11 ONYYF SBEQ @ 11171 ONYYF SBEQ EQ ,CJP /11/N525O R511 Z501P Z511 /2 CRBCYR NCCRNERQ GB OR CNFFRQ BHG VA N ERQ ZHFGNAT UNYS JNL CNEXRQ VA GUR CNEXVA\a\aFrag ol CJ Nyreg gb R511, Z511, N525, Z501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a--\e\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet
-(Vzcbegnag zrffntr sebz CJ-NYREG) 05-Why-2013/00:11:50/FVPN/12091 YHPNFIVYYR EQ ,CJP /07/R507 Z501 /NQHYG SRZNYR QVSS OERNGUVAT\a\aFrag ol CJ Nyreg gb R507, Z501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a--\e\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet
-(Vzcbegnag zrffntr sebz CJ-NYREG) 04-Why-2013/23:34:01/FVPO/8777 QROYNAP CY ,ZAFF /01S/R501 Z509O /6 lb qnhtugre fpernzvat naq funxvat gung ure fgbznpu uhegf, jba'g zbir - tbvat ba sbe 1-0 zva\a\aFrag ol CJ Nyreg gb R501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a--\e\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet
-(Vzcbegnag zrffntr sebz CJ-NYREG) 04-Why-2013/23:10:41/VAWO/PVGL GNIREA TEVYYR @ 9405 ZNVA FG ,ZAFF /01S/R501 Z509O /1360n vf pnyyvat sbe n thl anzrq Oevna jub uheg naxyr, zvq 30'f naq jnagf nzo // asv\a\aFrag ol CJ Nyreg gb R501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a--\e\a- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet
 
 */
 
@@ -217,67 +195,6 @@ choyvp pynff INCevaprJvyyvnzPbhaglNCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "OBK:13",
         "HAVG:N510O R513O Z513O FGN13",
         "VASB:fpubby ohf naq n oyh fhi / srznyr vf ubyqvat ure purfg / fur ybbxf funxra hn");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgWhqvZvyyre() {
-
-    qbGrfg("G1",
-        "SEZ:CJEFNA\a" +
-        "ZFT:06-Wha-2013/16:19:27/FVPN/ZF TNVA @ 8001 YVZRFGBAR QE ,CJP /04/R504 Z525 /7gu tenqr srznyr fghqrag srvagrq // vf pbap abja",
-
-        "QNGR:06/06/2013",
-        "GVZR:16:19:27",
-        "PBQR:FVPN",
-        "PNYY:NYF - Fvpxarff",
-        "NQQE:8001 YVZRFGBAR QE",
-        "CYNPR:ZF TNVA",
-        "OBK:04",
-        "HAVG:R504 Z525",
-        "VASB:7gu tenqr srznyr fghqrag srvagrq / vf pbap abja");
-
-    qbGrfg("G2",
-        "1 bs 2\a" +
-        "SEZ:CJEFNA\a" +
-        "ZFT:06-Wha-2013/13:29:05/UNMNEQ/13655 OEVQYRJBBQ QE ,CJP /25/R525O /pnyyre nqi bar bs gurve gehpxf unq nagvserrmr fcvyy ng noi\a" +
-        "(Pba'g) 2 bs 2\a" +
-        "// nqi nccebk 3 tnyybaf // (Raq)",
-
-        "QNGR:06/06/2013",
-        "GVZR:13:29:05",
-        "PBQR:UNMNEQ",
-        "PNYY:Unmneqbhf Fvghngvba",
-        "NQQE:13655 OEVQYRJBBQ QE",
-        "OBK:25",
-        "HAVG:R525O",
-        "VASB:pnyyre nqi bar bs gurve gehpxf unq nagvserrmr fcvyy ng noi / nqi nccebk 3 tnyybaf");
-
-    qbGrfg("G3",
-        "1 bs 2SEZ:CJEFNAZFT:06-Wha-2013/12:46:47/SNYNEZ/10885 ZBEAVAT TYBEL PG ,CJP /11/R525O FGN11 G504 /ebfrznel evqtr ncg / ab ahzore / trareny(Pba'g) 2 bs 2mbar 11 / fnvq nqqerff jnf  7601 - 10880 zbeavat tybel  ohvqv (Raq)",
-        "GVZR:12:46:47",
-        "PBQR:SNYNEZ",
-        "PNYY:Sver Nynez Fbhaqvat",
-        "NQQE:10885 ZBEAVAT TYBEL PG",
-        "OBK:11",
-        "HAVG:R525O FGN11 G504",
-        "VASB:ebfrznel evqtr ncg / ab ahzore / trareny(Pba'g) 2 bs 2mbar 11 / fnvq nqqerff jnf  7601 - 10880 zbeavat tybel  ohvqv (Raq)");
-
-    qbGrfg("G4",
-        "1 bs 2\a" +
-        "SEZ:CJEFNA\a" +
-        "ZFT:06-Wha-2013/10:04:57/ZNYN/10809 URAEL NOOBGG EQ ,CJP /05/R505 Z525 /ERF/ UNEEVF-/ CERZVFR ABG YVFGRQ/ 703 695 0369-PRY SBE\a" +
-        "(Pba'g) 2 bs 2\a" +
-        "WHFGVA UNEEVF/ NHQ-ZRQVPNY XRL CNQ NPGVINGVBA/ JVYY NGPY(Raq)",
-
-        "QNGR:06/06/2013",
-        "GVZR:10:04:57",
-        "PBQR:ZNYN",
-        "PNYY:Zrqvpny Nynez Fbhaqvat",
-        "NQQE:10809 URAEL NOOBGG EQ",
-        "OBK:05",
-        "HAVG:R505 Z525",
-        "VASB:ERF / UNEEVF- / CERZVFR ABG YVFGRQ / 703 695 0369-PRY SBE WHFGVA UNEEVF / NHQ-ZRQVPNY XRL CNQ NPGVINGVBA / JVYY NGPY");
 
   }
   
@@ -760,160 +677,6 @@ choyvp pynff INCevaprJvyyvnzPbhaglNCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "OBK:ZP",
         "HAVG:5Q 5R N510O OP406 OP502 OP503 R513 R514 R516 R518 R520 SZ516 SZ523 Z513 Z520 E419 E502 EU520 FS5");
 
-  }
-  
-  @Grfg
-  choyvp ibvq grfgZnanffnfIbySverPb() {
-
-    qbGrfg("G1",
-        "(Vzcbegnag zrffntr sebz CJ-NYREG) 05-Why-2013/09:36:30/FVPN/10534 PRQNE PERRX QE ,CJP /07/R507 Z501 /qrynl qhr gb trg cua #// 477-4007 // ryqreyl znyr // qvss oernguvat //\a\a" +
-        "Frag ol CJ Nyreg gb R507, Z501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a" +
-        "--\e\a" +
-        "- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet",
-
-        "QNGR:07/05/2013",
-        "GVZR:09:36:30",
-        "PBQR:FVPN",
-        "PNYY:NYF - Fvpxarff",
-        "NQQE:10534 PRQNE PERRX QE",
-        "OBK:07",
-        "HAVG:R507 Z501",
-        "VASB:qrynl qhr gb trg cua # / 477-4007 / ryqreyl znyr / qvss oernguvat");
-
-    qbGrfg("G2",
-        "(Jrrxyl Fnsrgl Zrffntr/Jrngure) Genssvp ivbyngvbaf vzcbfrq juvyr bss-qhgl hfhnyyl zrnaf, “Cbvagf gb gur onq”.  Or zvaqshy bs lbhe pbaqhpg jura qevivat bss qhgl naq erzrzore gung vg pna hygvzngryl unir n artngvir vzcnpg ba lbhe qevivat cevivyrtrf jura ba-qhgl.  Zbfg Sver naq Erfphr betnavmngvbaf unir qrirybcrq cbyvpvrf gung nqqerff guvf glcr bs zvfpbaqhpg naq/be bssrafr; or njner bs gubfr cbyvpvrf naq jurer gb ybpngr gurz.  Qb abg yrg n onq qevivat erpbeq wrbcneqvmr lbhe qrfver va jnagvat gb cnegvpvcngr va n aboyr freivpr.     \a" +
-        "  \a" +
-        "Jrngure 7-5-2013  \a" +
-        "  \a" +
-        "Gbqnl Zbfgyl fhaal, jvgu n uvtu arne 91. Fbhgu jvaq 7 gb 11 zcu. Gbavtug Cnegyl pybhql, jvgu n ybj nebhaq 73. Fbhgujrfg jvaq 5 gb 8 zcu\a\a" +
-        "Frag ol CJ Nyreg gb SFGNSSVAT/FNSRGL guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a" +
-        "--\e\a" +
-        "- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet",
-
-        "PNYY:TRARENY NYREG",
-        "CYNPR:(Jrrxyl Fnsrgl Zrffntr/Jrngure) Genssvp ivbyngvbaf vzcbfrq juvyr bss-qhgl hfhnyyl zrnaf, “Cbvagf gb gur onq”.  Or zvaqshy bs lbhe pbaqhpg jura qevivat bss qhgl naq erzrzore gung vg pna hygvzngryl unir n artngvir vzcnpg ba lbhe qevivat cevivyrtrf jura ba-qhgl.  Zbfg Sver naq Erfphr betnavmngvbaf unir qrirybcrq cbyvpvrf gung nqqerff guvf glcr bs zvfpbaqhpg naq/be bssrafr; or njner bs gubfr cbyvpvrf naq jurer gb ybpngr gurz.  Qb abg yrg n onq qevivat erpbeq wrbcneqvmr lbhe qrfver va jnagvat gb cnegvpvcngr va n aboyr freivpr.     \a  \aJrngure 7-5-2013  \a  \aGbqnl Zbfgyl fhaal, jvgu n uvtu arne 91. Fbhgu jvaq 7 gb 11 zcu. Gbavtug Cnegyl pybhql, jvgu n ybj nebhaq 73. Fbhgujrfg jvaq 5 gb 8 zcu");
-
-    qbGrfg("G3",
-        "(Fgnssvat) OP582 Senamryyb\a\a" +
-        "Frag ol CJ Nyreg gb SFGNSSVAT/FNSRGL guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a" +
-        "--\e\a" +
-        "- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet",
-
-        "PNYY:TRARENY NYREG",
-        "CYNPR:(Fgnssvat) OP582 Senamryyb");
-
-    qbGrfg("G4",
-        "(Fgnssvat) Qngr:  \a" +
-        "N: 2,7,10,11  \a" +
-        "Z: 1,3,4,7,9,11,12,14,17,18,20,23,24,25,31,33  \a" +
-        "R: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,23,24,25,31,32,33  \a" +
-        "X: 5,6,15,16  \a" +
-        "E: 1,4,10  \a" +
-        "G: 11,33  \a" +
-        "GJ: 1,12,13  \a" +
-        "  \a" +
-        "OP 501: Sbetb  \a" +
-        "OP 502: Penjsbeq  \a" +
-        "OP 503: ZpPbl  \a" +
-        "OP 504: Fuvsyrgg  \a" +
-        "OP 531: Onee  \a" +
-        "OP 581: Ubyzna  \a" +
-        "OP 582: Yhcgba  \a" +
-        "  \a" +
-        "Qhgl UZ: Xvro  \a" +
-        "  \a" +
-        "SZ: Phyoregfba  \a" +
-        "  \a" +
-        "FS: Cntnab  \a" +
-        "  \a" +
-        "HSEB: Uroreg\a\a" +
-        "Frag ol CJ Nyreg gb SFGNSSVAT/FNSRGL guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a" +
-        "--\e\a" +
-        "- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet",
-
-        "PNYY:TRARENY NYREG",
-        "CYNPR:(Fgnssvat) Qngr:  \aN: 2,7,10,11  \aZ: 1,3,4,7,9,11,12,14,17,18,20,23,24,25,31,33  \aR: 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,20,23,24,25,31,32,33  \aX: 5,6,15,16  \aE: 1,4,10  \aG: 11,33  \aGJ: 1,12,13  \a  \aOP 501: Sbetb  \aOP 502: Penjsbeq  \aOP 503: ZpPbl  \aOP 504: Fuvsyrgg  \aOP 531: Onee  \aOP 581: Ubyzna  \aOP 582: Yhcgba  \a  \aQhgl UZ: Xvro  \a  \aSZ: Phyoregfba  \a  \aFS: Cntnab  \a  \aHSEB: Uroreg");
-
-    qbGrfg("G5",
-        "(Vzcbegnag zrffntr sebz CJ-NYREG) 05-Why-2013/05:28:35/FVPO/8538 FGBARJNYY EQ ,ZAFF /01S/R501 Z501 /PNYYRE VF UNIVAT UBG NAQ PBYQ SYNFURQ/UVTU SRIRE/OYRRQVAT OYBBQ PYBGF SEBZ INTVAN/FNLF GUR OYBBQ VF OEBJA\a\a" +
-        "Frag ol CJ Nyreg gb R501, Z501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a" +
-        "--\e\a" +
-        "- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet",
-
-        "QNGR:07/05/2013",
-        "GVZR:05:28:35",
-        "PBQR:FVPO",
-        "PNYY:OYF - Fvpxarff",
-        "NQQE:8538 FGBARJNYY EQ",
-        "PVGL:ZNANFFNF",
-        "OBK:01S",
-        "HAVG:R501 Z501",
-        "VASB:PNYYRE VF UNIVAT UBG NAQ PBYQ SYNFURQ / UVTU SRIRE / OYRRQVAT OYBBQ PYBGF SEBZ INTVAN / FNLF GUR OYBBQ VF OEBJA");
-
-    qbGrfg("G6",
-        "(Vzcbegnag zrffntr sebz CJ-NYREG) 05-Why-2013/00:41:56/HAP/FRIRA 11 ONYYF SBEQ @ 11171 ONYYF SBEQ EQ ,CJP /11/N525O R511 Z501P Z511 /2 CRBCYR NCCRNERQ GB OR CNFFRQ BHG VA N ERQ ZHFGNAT UNYS JNL CNEXRQ VA GUR CNEXVA\a\a" +
-        "Frag ol CJ Nyreg gb R511, Z511, N525, Z501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a" +
-        "--\e\a" +
-        "- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet",
-
-        "QNGR:07/05/2013",
-        "GVZR:00:41:56",
-        "PBQR:HAP",
-        "PNYY:Hapbafpvbhf",
-        "NQQE:11171 ONYYF SBEQ EQ",
-        "CYNPR:FRIRA 11 ONYYF SBEQ",
-        "OBK:11",
-        "HAVG:N525O R511 Z501P Z511",
-        "VASB:2 CRBCYR NCCRNERQ GB OR CNFFRQ BHG VA N ERQ ZHFGNAT UNYS JNL CNEXRQ VA GUR CNEXVA");
-
-    qbGrfg("G7",
-        "(Vzcbegnag zrffntr sebz CJ-NYREG) 05-Why-2013/00:11:50/FVPN/12091 YHPNFIVYYR EQ ,CJP /07/R507 Z501 /NQHYG SRZNYR QVSS OERNGUVAT\a\a" +
-        "Frag ol CJ Nyreg gb R507, Z501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a" +
-        "--\e\a" +
-        "- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet",
-
-        "QNGR:07/05/2013",
-        "GVZR:00:11:50",
-        "PBQR:FVPN",
-        "PNYY:NYF - Fvpxarff",
-        "NQQE:12091 YHPNFIVYYR EQ",
-        "OBK:07",
-        "HAVG:R507 Z501",
-        "VASB:NQHYG SRZNYR QVSS OERNGUVAT");
-
-    qbGrfg("G8",
-        "(Vzcbegnag zrffntr sebz CJ-NYREG) 04-Why-2013/23:34:01/FVPO/8777 QROYNAP CY ,ZAFF /01S/R501 Z509O /6 lb qnhtugre fpernzvat naq funxvat gung ure fgbznpu uhegf, jba'g zbir - tbvat ba sbe 1-0 zva\a\a" +
-        "Frag ol CJ Nyreg gb R501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a" +
-        "--\e\a" +
-        "- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet",
-
-        "QNGR:07/04/2013",
-        "GVZR:23:34:01",
-        "PBQR:FVPO",
-        "PNYY:OYF - Fvpxarff",
-        "NQQE:8777 QROYNAP CY",
-        "PVGL:ZNANFFNF",
-        "OBK:01S",
-        "HAVG:R501 Z509O",
-        "VASB:6 lb qnhtugre fpernzvat naq funxvat gung ure fgbznpu uhegf, jba'g zbir - tbvat ba sbe 1-0 zva");
-
-    qbGrfg("G9",
-        "(Vzcbegnag zrffntr sebz CJ-NYREG) 04-Why-2013/23:10:41/VAWO/PVGL GNIREA TEVYYR @ 9405 ZNVA FG ,ZAFF /01S/R501 Z509O /1360n vf pnyyvat sbe n thl anzrq Oevna jub uheg naxyr, zvq 30'f naq jnagf nzo // asv\a\a" +
-        "Frag ol CJ Nyreg gb R501, QSE PNQ guebhtu Cevapr Jvyyvnz Pbhagl EFNA\e\a" +
-        "--\e\a" +
-        "- hcqngr lbhe nppbhag ng uggcf://efna1.efna.cjptbi.bet",
-
-        "QNGR:07/04/2013",
-        "GVZR:23:10:41",
-        "PBQR:VAWO",
-        "PNYY:OYF - Vawhel",
-        "NQQE:9405 ZNVA FG",
-        "PVGL:ZNANFFNF",
-        "CYNPR:PVGL GNIREA TEVYYR",
-        "OBK:01S",
-        "HAVG:R501 Z509O",
-        "VASB:1360n vf pnyyvat sbe n thl anzrq Oevna jub uheg naxyr, zvq 30'f naq jnagf nzo / asv");
-   
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

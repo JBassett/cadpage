@@ -177,8 +177,7 @@ choyvp pynff INSenaxyvaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZNVYOBK:F03 NFFNHYG 80 ZHYYVAF PBHEG YA 16 SRE PSF# 2011-031404 PEBFF: JNVQFOBEB EQ/QRNQ RAQ",
         "FEP:F03",
         "PNYY:NFFNHYG",
-        "NQQE:80 ZHYYVAF PBHEG YA",
-        "NCG:16",
+        "NQQE:80 ZHYYVAF PBHEG YA 16",
         "PVGL:Sreehz",
         "VQ:2011-031404",
         "K:JNVQFOBEB EQ/QRNQ RAQ");
@@ -267,7 +266,7 @@ choyvp pynff INSenaxyvaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZNVYOBK:F02 RZF-FRVMHER 000735 RNFG PBHEG FG EZG PSF# 2011-031028 PEBFF: QBANYQ NIR/CBJRE QNZ EQ",
         "FEP:F02",
         "PNYY:RZF-FRVMHER",
-        "NQQE:735 RNFG PBHEG FG",
+        "NQQE:000735 RNFG PBHEG FG",
         "PVGL:Ebpxl Zbhag",
         "VQ:2011-031028",
         "K:QBANYQ NIR/CBJRE QNZ EQ");
@@ -415,7 +414,7 @@ choyvp pynff INSenaxyvaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZNVYOBK:F15 RZF-CNGVRAG VA CNVA 001635 ZBERJBBQ EQ UNE PSF# 2011-031025 PEBFF: VAQVNA CBVAGR QE/PURFGAHG CBVAGR QE",
         "FEP:F15",
         "PNYY:RZF-CNGVRAG VA CNVA",
-        "NQQE:1635 ZBERJBBQ EQ",
+        "NQQE:001635 ZBERJBBQ EQ",
         "PVGL:Uneql",
         "VQ:2011-031025",
         "K:VAQVNA CBVAGR QE/PURFGAHG CBVAGR QE");
@@ -490,8 +489,7 @@ choyvp pynff INSenaxyvaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZNVYOBK:F07 RZF-BGURE/QRSVAR 18360 IVETVY U TBBQR UJL 124 EZG PSF# 2010-030542 PEBFF: FUNQL YA/OYNPXJNGRE EVIRE",
         "FEP:F07",
         "PNYY:RZF-BGURE/QRSVAR",
-        "NQQE:18360 IVETVY U TBBQR UJL",
-        "NCG:124",
+        "NQQE:18360 IVETVY U TBBQR UJL 124",
         "PVGL:Ebpxl Zbhag",
         "VQ:2010-030542",
         "K:FUNQL YA/OYNPXJNGRE EVIRE");
@@ -580,7 +578,7 @@ choyvp pynff INSenaxyvaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZNVYOBK:F09 911 UNAT HC 000283 XVA INYR EQ EZG PSF# 2011-033694 PEBFF: NATYR CYNAGNGVBA EQ/NYRNA EQ",
         "FEP:F09",
         "PNYY:911 UNAT HC",
-        "NQQE:283 XVA INYR EQ",
+        "NQQE:000283 XVA INYR EQ",
         "PVGL:Ebpxl Zbhag",
         "VQ:2011-033694",
         "K:NATYR CYNAGNGVBA EQ/NYRNA EQ");

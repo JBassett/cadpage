@@ -13,7 +13,6 @@ import net.anei.cadpage.vendors.VendorManager;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -27,19 +26,15 @@ public class C2DMService extends IntentService {
   private static final int INIT_REREGISTER_DELAY = 3000;  // 3 seconds
   private static final int MAX_REREGISTER_DELAY = 3600000;  // 1 Hour
   
-  // Refresh ID timeout.  We will automatically request a new registration ID if
-  // nothing is received for this amount of time
-  private static final int REFRESH_ID_TIMEOUT = 24*60*60*1000; // 1 day
-  
   private static final String ACTION_C2DM_REGISTER = "com.google.android.c2dm.intent.REGISTER";
   private static final String ACTION_C2DM_UNREGISTER = "com.google.android.c2dm.intent.UNREGISTER";
   private static final String ACTION_C2DM_REGISTERED = "com.google.android.c2dm.intent.REGISTRATION";
   private static final String ACTION_C2DM_RECEIVE = "com.google.android.c2dm.intent.RECEIVE";
   private static final String ACTION_RETRY_REGISTER = "net.anei.cadpage.RETRY_REGISTER";
-  private static final String ACTION_REFRESH_ID = "net.anei.cadpage.REFRESH_ID";
   private static final String GCM_PROJECT_ID = "1027194726673";
 
   // wakelock
+  private static final String WAKELOCK_KEY = "C2DMService";
   private static PowerManager.WakeLock sWakeLock;
 
   private static final Random RANDOM = new Random();
@@ -49,27 +44,35 @@ public class C2DMService extends IntentService {
   }
 
   @Override
-  public int onStartCommand(Intent intent, int flags, int startId) {
-    if (flags != 0) holdPowerLock(this);
-    super.onStartCommand(intent, flags, startId);
-    return Service.START_REDELIVER_INTENT;
-  }
-
-  @Override
   protected void onHandleIntent(Intent intent) {
     
-    Log.v("C2DMReceiver: onReceive()");
-    
-    if (ACTION_C2DM_REGISTERED.equals(intent.getAction())) {
-      handleRegistration(intent);
+    try {
+      Log.v("C2DMReceiver: onReceive()");
+      
+      if (ACTION_C2DM_REGISTERED.equals(intent.getAction())) {
+        handleRegistration(intent);
+      }
+      
+      else if (ACTION_C2DM_RECEIVE.equals(intent.getAction())) {
+        handleMessage(intent);
+      }
+      
+      else if (ACTION_RETRY_REGISTER.equals(intent.getAction())) {
+        retryRegisterRequest(intent);
+      }
     }
     
-    else if (ACTION_C2DM_RECEIVE.equals(intent.getAction())) {
-      handleMessage(intent);
-    }
-    
-    else if (ACTION_RETRY_REGISTER.equals(intent.getAction())) {
-      retryRegisterRequest(intent);
+    finally {
+      
+      // Release the power lock, so phone can get back to sleep.
+      // The lock should be reference-counted by default, so multiple
+      // messages are ok.  But one user is having under lock issues
+      // so we will double check to make sure the lock is held before
+      // we release it.
+      Log.v("C2DMServce Releasing wakelock");
+      synchronized (C2DMService.class){ 
+        if (sWakeLock.isHeld()) sWakeLock.release();
+      }
     }
  }
 
@@ -87,10 +90,8 @@ public class C2DMService extends IntentService {
         String error = intent.getStringExtra("error");
         if (error != null) {
           Log.w("C2DM registration failed: " + error);
-          error = retryRegistration(error);
-          if (error != null) {
+          if (!retryRegistration(error)) {
             ManagePreferences.setRegistrationId(null);
-            ManagePreferences.setRegisterReqActive(false);
             VendorManager.instance().failureC2DMId(C2DMService.this, error);
           }
           EmailDeveloperActivity.logSnapshot(C2DMService.this, "GCM Registration failure report");
@@ -110,9 +111,9 @@ public class C2DMService extends IntentService {
         regId = intent.getStringExtra("registration_id");
         if (regId != null) {
           Log.w("C2DM registration succeeded: " + regId);
-          boolean change = ManagePreferences.setRegistrationId(regId);
+          ManagePreferences.setRegistrationId(regId);
           ManagePreferences.setRegisterReqActive(false);
-          VendorManager.instance().registerC2DMId(C2DMService.this, change, regId);
+          VendorManager.instance().registerC2DMId(C2DMService.this, regId);
           return;
         }
       }
@@ -122,36 +123,29 @@ public class C2DMService extends IntentService {
   /**
    * Called after a registration error has been reported
    * @param error
-   * @return error status to be reported to user or null if request
-   * has been rescheduled and no error status should be reported
+   * @return true if a server is busy and a subsequent request has been scheduled, false otherwise
    */
-  private String retryRegistration(String error) {
+  private boolean retryRegistration(String error) {
     
     // We can only recover from the SERVICE_NOT_AVAILABLE error
     // Lately PHONE_REGISTRATION_ERROR appears to be a recoverable error
     // But we can at least check to make sure there is an identifiable user account
-    // Google is having problems with some systems returning AUTHENTICATION_FAILED status for unknown
-    // reasons, so we will try to generate a bug report to help them out
     if (!error.equals("SERVICE_NOT_AVAILABLE")) {
-      if (!error.equals("PHONE_REGISTRATION_ERROR")) {
-        if (error.equals("AUTHENTICATION_FAILED")) BugReportGenerator.generate();
-        return error;
-      }
-      if (UserAcctManager.instance().getUser() == null) return "AUTHENTICATION_FAILED";
+      if (!error.equals("PHONE_REGISTRATION_ERROR")) return false;
+      if (UserAcctManager.instance().getUser() == null) return false;
     }
     
     // See if request should be rescheduled
     int req = ManagePreferences.registerReq();
     int delayMS = ManagePreferences.reregisterDelay();
-    if (req == 0 || delayMS == 0) return error;
+    if (req == 0 || delayMS == 0) return false;
 
     // Since PHONE_REGISTRATION_ERROR isn't really recoverable, 
     // we will give up on it when we hit the maximum delay time
     if (delayMS == MAX_REREGISTER_DELAY && error.equals("PHONE_REGISTRATION_ERROR")) {
-      Log.v("C2DMService terminating registration retries");
       ManagePreferences.setRegisterReq(0);
       ManagePreferences.setReregisterDelay(0);
-      return error + "_HARD";
+      return false;
     }
     
     // If it should compute how long to delay before reissuing the request.  Since we are
@@ -166,7 +160,7 @@ public class C2DMService extends IntentService {
     am.set(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + realDelayMS, retryPendingIntent);
     Log.v("Rescheduling request in " + realDelayMS + " / " + delayMS + " msecs");
     ContentQuery.dumpIntent(retryIntent);
-    return null;
+    return true;
   }
 
   /**
@@ -195,6 +189,9 @@ public class C2DMService extends IntentService {
     
     try {
       
+      // If registration has been canceled, all C2DM messages should be ignored
+      if (ManagePreferences.registrationId() == null) return;
+      
       // Likewise if Cadpage is disabled
       if (!ManagePreferences.enabled()) return;
       
@@ -213,8 +210,6 @@ public class C2DMService extends IntentService {
       // Ping just needs to be acknowledged
       if (type.equals("PING")) {
         sendAutoAck(intent, vendorCode);
-        VendorManager.instance().checkVendorStatus(this, vendorCode);
-        resetRefreshIDTimer(this, "PING");
         return;
       }
       
@@ -232,13 +227,9 @@ public class C2DMService extends IntentService {
           }
         });
         sendAutoAck(intent, vendorCode);
-        resetRefreshIDTimer(this, "VENDOR_" + type);
         return;
       }
-
-      // Check vendor enabled status
-      VendorManager.instance().checkVendorStatus(this, vendorCode);
-
+      
       // Save timestamp
       final long timestamp = System.currentTimeMillis();
       
@@ -281,27 +272,17 @@ public class C2DMService extends IntentService {
     
   private void processContent(Intent intent, String content, long timestamp) {
     
-    resetRefreshIDTimer(this, "PAGE");
-    
     // Reconstruct message from data from intent fields
     String from = intent.getStringExtra("sender");
     if (from == null) from = "GCM";
     String subject = intent.getStringExtra("subject");
     if (subject == null) subject = "";
     String location = intent.getStringExtra("format");
-    
-    // Get vendor code
+    if (location != null) {
+      if (location.equals("Active911")) location = "Cadpage";
+    }
     String vendorCode = intent.getStringExtra("vendor");
     if (vendorCode == null) vendorCode = intent.getStringExtra("sponsor");
-    
-    // Send receive notice to vendor app running on this device
-    if (vendorCode != null) {
-      String action = "net.anei.cadpage.RECEIVE." + vendorCode;
-      Intent sendIntent = new Intent(action);
-      Log.w("Broadcasting direct page alert");
-      ContentQuery.dumpIntent(sendIntent);
-      this.sendBroadcast(sendIntent);
-    }
     
     // Get the acknowledge URL and request code
     String ackURL = intent.getStringExtra("ack_url");
@@ -316,10 +297,6 @@ public class C2DMService extends IntentService {
     String serverTime = intent.getStringExtra("unix_time");
     String infoUrl = intent.getStringExtra("info_url"); 
     
-    // See if we need to switch the vendors location codes to something
-    // we better understand
-    location = VendorManager.instance().convertLocationCode(vendorCode, location);
-    
     // See if we need to correct for character set problems
     String charset = intent.getStringExtra("charset");
     if (charset != null && charset.length() > 0 && !charset.equals("UTF-8")) {
@@ -329,10 +306,6 @@ public class C2DMService extends IntentService {
         Log.e("charset " + charset + " not supported");
       }
     }
-    
-    // If page includes a server receive time, and page has arrived within
-    // a reasonable window of that time, reset the refresh ID timer.
-    // If there is no server receive time, always reset the refresh ID timer
     
     final SmsMmsMessage message = 
       new SmsMmsMessage(from, subject, content, timestamp,
@@ -356,12 +329,6 @@ public class C2DMService extends IntentService {
       }
     });
   }
-  
-  @Override
-  public void onDestroy() {
-    Log.v("Shutting down C2DMService");
-    if (sWakeLock != null) sWakeLock.release();
-  }
 
   /**
    * Called from the broadcast receiver.
@@ -371,38 +338,19 @@ public class C2DMService extends IntentService {
    * alive.
    */
   static void runIntentInService(Context context, Intent intent) {
-
-    // The refresh action request is handled by a static method, 
-    // so there really is no need to go through the overhead of
-    // starting a service to handle it
-    if (ACTION_REFRESH_ID.equals(intent.getAction())) {
-      
-      // Do NOT perform refresh if no direct paging vendors are enabled
-      if (!VendorManager.instance().isRegistered()) return;
-      
-      Log.w("Processing C2DM registration refresh request");
-      register(context, true);
-      return;
-    }
-
-    // Otherwise, hold a power lock for the duration and
-    // start the service to handle the intent
-    holdPowerLock(context);
-    intent.setClass(context, C2DMService.class);
-    context.startService(intent);
-  }
-
-  private static void holdPowerLock(Context context) {
-    synchronized (C2DMService.class) {
-      if (sWakeLock == null) {
-        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".C2DMService");
-        sWakeLock.setReferenceCounted(false);
+      synchronized (C2DMService.class) {
+          if (sWakeLock == null) {
+              PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);
+              sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, WAKELOCK_KEY);
+              sWakeLock.setReferenceCounted(true);
+          }
       }
-      if(!sWakeLock.isHeld()) sWakeLock.acquire();
-    }
+      Log.v("C2DMService Acquiring wakelock");
+      sWakeLock.acquire();
+      intent.setClass(context, C2DMService.class);
+      context.startService(intent);
   }
-
+  
   /**
    * send response messages
    * @param context current context
@@ -442,7 +390,7 @@ public class C2DMService extends IntentService {
       if (phone != null) bld.appendQueryParameter("phone", phone);
     }
     
-    // If a vendor code was specified, return status and version code associated with vendor
+    // If a vendor code was specified, return status and version code assoicated with vendor
     if (vendorCode != null) {
       
       VendorManager vm = VendorManager.instance();
@@ -508,8 +456,6 @@ public class C2DMService extends IntentService {
    */
   private static boolean startRegisterRequest(Context context, int reqCode, boolean auto) {
     
-    if (reqCode == 1) resetRefreshIDTimer(context, "REGISTER");
-    
     // Don't do anything if we already have an active ongoing request for this type
     if (ManagePreferences.registerReqActive() && ManagePreferences.registerReq() == reqCode) return true;
     
@@ -542,37 +488,10 @@ public class C2DMService extends IntentService {
     }
     
     if (intent == null) return false;
-    Log.v("C2DMService sending registration request");
+    Log.trace("C2DMService sending registration request");
     ContentQuery.dumpIntent(intent);
     intent.putExtra("app", PendingIntent.getBroadcast(context, 0, new Intent(), 0));
     return context.startService(intent) != null;
-  }
-  
-  /**
-   * Reset the refresh registration ID timer, rescheduling the next refresh event
-   * until REFRESH_ID_TIMEOUT msecs in the future
-   * @param context current context
-   * @param eventType Event type responsible for reset request
-   */
-  private static void resetRefreshIDTimer(Context context, String eventType) {
-    
-    long curTime = System.currentTimeMillis();
-    ManagePreferences.setLastGcmEventType(eventType);
-    ManagePreferences.setLastGcmEventTime(curTime);
-    
-    Log.v("Scheduling refresh event in " + REFRESH_ID_TIMEOUT + " msecs");
-    
-    AlarmManager myAM = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-    Intent refreshIntent = new Intent(context, C2DMRetryReceiver.class);
-    refreshIntent.setAction(ACTION_REFRESH_ID);
-
-    PendingIntent refreshPendingIntent =
-      PendingIntent.getBroadcast(context, 0, refreshIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-    long triggerTime = curTime + REFRESH_ID_TIMEOUT;
-    myAM.set(AlarmManager.RTC_WAKEUP, triggerTime, refreshPendingIntent);
-   
   }
 
   /**

@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 public abstract class DonateScreenBaseEvent extends DonateEvent {
   
-  private int titleId;
   private int textId;
   private int layout;
 
@@ -20,7 +19,6 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
                                    int layout) {
     super(alertStatus, titleId);
     registerScreenEvent(this);
-    this.titleId = titleId;
     this.textId = textId;
     this.layout = layout;
   }
@@ -30,26 +28,12 @@ public abstract class DonateScreenBaseEvent extends DonateEvent {
    * @param activity new activity being created
    */
   public void create(final Activity activity) {
-    
-    // Double check that event is still enabled.
-    // It isn't that we really worry about showing an inappropriate display
-    // as we are making sure that isEnabled has been called for this activity
-    // as it sometimes has some required side effects.
-    if (!isEnabled()) {
-      closeEvents(activity);
-      return;
-    }
 
     activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
     activity.setContentView(layout);
     
     // Set heading color if appropriate
-    // There is one and only one status event that is not really a payment status.
-    // Very sloppy, but we will check for that and overwrite the normal title text
     TextView view = (TextView)activity.findViewById(R.id.DonateStatusView);
-    if (titleId == R.string.donate_active911_parse_warn_title) {
-      view.setText(activity.getString(titleId));
-    }
     setTextColor(view);
     
     // Set up main box text and color

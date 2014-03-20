@@ -18,12 +18,11 @@ public class NYMontgomeryCountyParser extends SmartAddressParser {
   
   public NYMontgomeryCountyParser() {
     super(CITY_LIST, "MONTGOMERY COUNTY", "NY");
-    setFieldList("SRC CALL PLACE ADDR CITY X DATE TIME INFO GPS");
   }
   
   @Override
   public String getFilter() {
-    return "paging@impact-sys.com,messaging@iamresponding.com,impact@impact.co.Montgomery.NY.us,2183500166";
+    return "paging@impact-sys.com,messaging@iamresponding.com,impact@impact.co.Montgomery.NY.us";
   }
   
   @Override

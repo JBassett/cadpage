@@ -11,22 +11,15 @@ choyvp pynff ZftVasbGrfg {
   
   @Grfg
   choyvp ibvq grfgCeboyrz() {
+    qbZncGrfg("EG3", "JR75 & KK 10,XRAOHET,KK", "JR75&KK10");
   }
 
   @Grfg
   choyvp ibvq grfgTrgZncNqqerff() {
     
-    qbZncGrfg("VYZpUraelPbhagl", "12300 F EBHGR 47,XRAOHET,KK", "12300 F EBHGR 47 UL");
-    
-    qbZncGrfg("PBXvgPnefbaPbhagl", "PBHAGL EBNQ 46 & PBHAGL EBNQ H,XRAOHET,KK", "PE 46 NAQ PE H");
-    
-    qbZncGrfg("PBXvgPnefbaPbhagl", "48275 PBHAGL EBNQ UU,XRAOHET,KK", "48275 PE UU");
-    
-    qbZncGrfg("ZBWbuafbaPbhagl", "AR UJL SS & AR UJL 50,XRAOHET,KK", "AR SS UJL & AR 50 UJL");
-    
     qbZncGrfg("ALFgYnjeraprPbhagl", "5771 PBHAGL EBNQ 10,XRAOHET,KK", "5771 PB EG 10");
     
-    qbZncGrfg("MPNBAZvffvffnhtn", "401 & UHEBAGNEVB FG GB UJL 410,XRAOHET,KK", "401RO R BS UHEBAGNEVB FG GB UJL410");
+    qbZncGrfg("MPNBAZvffvffnhtn", "401RO & UHEBAGNEVB FG GB UJL 410,XRAOHET,KK", "401RO R BS UHEBAGNEVB FG GB UJL410");
     
     qbZncGrfg("Haxabja", "767 R EG 70,XRAOHET,KK", "767 R EG70");
     
@@ -61,7 +54,7 @@ choyvp pynff ZftVasbGrfg {
     
     qbZncGrfg("GKAnffnhOnl", "KK 3 & ZNTABYVN NIR,XRAOHET,KK", "FU 3 UJL & ZNTABYVN NIR");
     
-    qbZncGrfg("GKAnffnhOnl", "20233 V 45 SJL,XRAOHET,KK", "20233 VU 45 SJL");
+    qbZncGrfg("GKAnffnhOnl", "20233  45 SJL,XRAOHET,KK", "20233 VU 45 SJL");
     
     qbZncGrfg("ZBWrssrefbaPbhagl", "BYQ ZBEFR ZVYY EQ & FGNGR RR,XRAOHET,KK", 
                                    "BYQ ZBEFR ZVYY EQ & FGNGR EQ RR");
@@ -90,6 +83,9 @@ choyvp pynff ZftVasbGrfg {
     
     qbZncGrfg("OAQ1", "HF 85 & R 77GU NIR,XRAOHET,KK", "HF UVTUJNL 85 AO & R 77GU NIR");
     qbZncGrfg("OAQ2", "HF 100,XRAOHET,KK", "HF UVTUJNL 100 FO");
+    
+    qbZncCynprGrfg("CYP1", "CNEX CYNPR,HF 100,XRAOHET,KK", "HF UVTUJNL 100", "CNEX CYNPR");
+    qbZncCynprGrfg("CYP2", "850 HF 100,XRAOHET,KK", "850 HF UVTUJNL 100", "CNEX CYNPR");
     
     qbZncGrfg("EG1", "KK 150 & UJL 12,XRAOHET,KK", "FG150 & UJL12");
     qbZncGrfg("EG2", "FNZR KK 30 & KK 15 YNFG,XRAOHET,KK", "FNZR KK30 & KK15 YNFG");
@@ -148,4 +144,19 @@ choyvp pynff ZftVasbGrfg {
     ZftVasb vasb = arj ZftVasb(qngn);
     nffregRdhnyf(gvgyr, erfhyg, vasb.trgZncNqqerff(2, ahyy, ahyy));
   }
+  
+  cevingr ibvq qbZncCynprGrfg(Fgevat gvgyr, Fgevat erfhyg, Fgevat nqqerff, Fgevat cynpr) { 
+    ZftVasb.Qngn qngn = arj ZftVasb.Qngn(ahyy);
+    qngn.fgeNqqerff = nqqerff;
+    qngn.fgeCynpr = cynpr;
+    
+    qngn.qrsPvgl = "XRAOHET";
+    qngn.qrsFgngr = "KK";
+    
+    qngn.cnefre = arj TrarenyCnefre();
+    
+    ZftVasb vasb = arj ZftVasb(qngn);
+    nffregRdhnyf(gvgyr, erfhyg, vasb.trgZncNqqerff(2, ahyy,ahyy));
+  }
+
 }

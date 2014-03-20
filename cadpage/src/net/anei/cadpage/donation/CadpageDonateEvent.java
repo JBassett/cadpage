@@ -1,7 +1,6 @@
 package net.anei.cadpage.donation;
 
 import net.anei.cadpage.R;
-import net.anei.cadpage.donation.DonationManager.DonationStatus;
 
 /**
   
@@ -26,8 +25,7 @@ public class CadpageDonateEvent extends DonateScreenEvent {
   
   @Override
   public boolean isEnabled() {
-    return (DonationManager.instance().status() == DonationStatus.SPONSOR && 
-            "Cadpage".equals(DonationManager.instance().sponsor()));
+    return ("Cadpage".equals(DonationManager.instance().sponsor()));
   }
 
   private static final CadpageDonateEvent instance = new CadpageDonateEvent();

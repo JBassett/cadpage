@@ -176,7 +176,6 @@ choyvp pynff APEbjnaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   @Grfg
   choyvp ibvq grfgOnq() {
     qbOnqGrfg("PNQ:Qnivqfba Pbhagl Erfphr Fdhnq vf ubyq n oneorphr puvpxra qvaare ng Fg6 hagvy sbbq vf tbar. Qvaare vapyhqrf puvpxra, ornaf, cbgngb fnynq, ebyy , naq qrff");
-    qbOnqGrfg("PNQ:R4-NFFNHYG/ENCR/5558 JNTBARE EQ/TYU/HF 52 UJL A/[CEBDN] ERFCBAFR: Oenib Dhrfgvbaf: 89-lrne-byq, Znyr, Pbafpvbhf, Oernguvat. Nffnhyg / Frkhny Nffnhyg Pbqr: 4-O-3-N:");
   }
   
   @Grfg
@@ -1320,12 +1319,6 @@ choyvp pynff APEbjnaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "HAVG:Z821");
     
   }
-  
-  @Grfg
-  choyvp ibvq grfgQnavryVfraubhe() {
-    
-  }
-  
   
 
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

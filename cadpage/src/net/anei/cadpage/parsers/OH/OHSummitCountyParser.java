@@ -12,8 +12,6 @@ public class OHSummitCountyParser extends GroupBestParser {
     super(new OHSummitCountyAParser(),
            new OHSummitCountyBParser(),
            new OHSummitCountyCParser(),
-           new OHSummitCountyDParser(),
-           new OHSummitCountyEParser(),
-           new OHSummitCountyFParser());
+           new OHSummitCountyDParser());
   }
 }

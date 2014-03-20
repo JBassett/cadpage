@@ -567,7 +567,6 @@ choyvp pynff CNPurfgrePbhaglQ5CnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:22:58",
         "PNYY:VAWHERQ CREFBA - OYF",
         "NQQE:TBFURA EQ & ZNEYOBEBHTU EQ",
-        "PVGL:JVYYVFGBJA GJC",
         "OBK:0041");
 
     qbGrfg("G36",
@@ -623,7 +622,6 @@ choyvp pynff CNPurfgrePbhaglQ5CnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:12:09",
         "PNYY:CBYRF,JVERF,GENAFSBEZRE SVER",
         "NQQE:ZBBERF EQ & EG 401",
-        "PVGL:RNFG JUVGRYNAQ GJC",
         "OBK:0509",
         "VASB:JVERF UNATVAT QBJA YBJ BA EBNQ, FCNEXVAT");
 

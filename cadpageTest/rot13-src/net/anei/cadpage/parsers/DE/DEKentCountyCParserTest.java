@@ -333,8 +333,8 @@ choyvp pynff QRXragPbhaglPCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "(Vapvqrag Nyreg)Havg:N41 Fgnghf:Qvfcngpurq 23B1N Bireqbfr/Cbvfbavat JVYYBJ TEBIR EQ  Irahr: Pnzqra Jlbzvat Qri/Fho: Kfg'f: Pnyyre: FGNPRL PELFGNY",
         "HAVG:N41",
         "PBQR:23B1N",
-        "PNYY:Bireqbfr/Cbvfbavat",
-        "NQQE:JVYYBJ TEBIR EQ",
+        "PNYY:Bireqbfr/Cbvfbavat JVYYBJ",
+        "NQQE:TEBIR EQ",
         "PVGL:Pnzqra Jlbzvat",
         "ANZR:FGNPRL PELFGNY");
 
@@ -871,6 +871,7 @@ choyvp pynff QRXragPbhaglPCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PBQR:29N1",
         "PNYY:ZIP 1fg Cnegl Vawhel",
         "NQQE:FCEVAT ZRNQBJ QE",
+        "ZNQQE:GJVA JVYYBJF,FCEVAT ZRNQBJ QE",
         "CYNPR:GJVA JVYYBJF",
         "PVGL:Fzlean",
         "ANZR:QFC");
@@ -1065,7 +1066,6 @@ choyvp pynff QRXragPbhaglPCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "HAVG:C45S",
         "PNYY:Bhgfvqr Sver-Fznyy",
         "NQQE:FYBJ NAQ RNFL QE",
-        "ZNQQE:FYBJ & RNFL QE",
         "PVGL:Pynlgba",
         "ANZR:URFGRE FUNJA");
 
@@ -1135,6 +1135,7 @@ choyvp pynff QRXragPbhaglPCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PBQR:29O1",
         "PNYY:ZIP Vawhevrf",
         "NQQE:ZBBEGBA EQ",
+        "ZNQQE:YNXRFUBER IVYYNTR,ZBBEGBA EQ",
         "CYNPR:YNXRFUBER IVYYNTR",
         "PVGL:Qbire",
         "ANZR:ZNHYR EVPUNEQ");

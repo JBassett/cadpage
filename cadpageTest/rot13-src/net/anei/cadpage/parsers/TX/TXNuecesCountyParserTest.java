@@ -64,7 +64,6 @@ choyvp pynff GKAhrprfPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CEV:1",
         "HAVG:6",
         "NQQE:4909 SZ 2826",
-        "ZNQQE:4909 SNEZ-GB-ZNEXRG 2826",
         "CYNPR:YNOEBPX PBEERPGVBAF FREIVPRF",
         "VQ:1110031803");
 
@@ -74,7 +73,6 @@ choyvp pynff GKAhrprfPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CEV:1",
         "HAVG:104",
         "NQQE:1332 SZ 665",
-        "ZNQQE:1332 SNEZ-GB-ZNEXRG 665",
         "CYNPR:ZRZBEL TNEQRAF PRZRGREL - SZ 665",
         "VQ:111003414");
 
@@ -93,7 +91,6 @@ choyvp pynff GKAhrprfPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CEV:1",
         "HAVG:2",
         "NQQE:SZ 665 & SZ 70",
-        "ZNQQE:SNEZ-GB-ZNEXRG 665 & SNEZ-GB-ZNEXRG 70",
         "VQ:1110034392");
   }
   

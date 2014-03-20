@@ -15,7 +15,7 @@ public class ORJacksonCountyParser extends FieldProgramParser {
   
   public ORJacksonCountyParser() {
     super(CITY_CODES, "JACKSON COUNTY", "OR",
-          "CODE CALL ( PLACE SKIP AT | ADDR ) CITY! PRI:PRI! Unit:UNIT! UNIT+");
+          "CODE CALL ADDR CITY! PRI:PRI! Unit:UNIT! UNIT+");
   }
   
   @Override
@@ -25,28 +25,16 @@ public class ORJacksonCountyParser extends FieldProgramParser {
 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
-    if (! subject.equals("CAD Page") && !subject.equals("Cell Phone Paging system")) return false;
+    if (! subject.equals("CAD Page")) return false;
     if (!body.startsWith("DISPATCH:")) return false;
     body = body.substring(9).trim();
     
     Matcher match = SRC_DATE_TIME_PTN.matcher(body);
-    if (match.find()) {
-      data.strSource = match.group(1);
-      data.strDate = match.group(2);
-      data.strTime = match.group(3);
-      body = body.substring(0,match.start()).trim();
-    }
-    
-    // Look for truncated source date time
-    else {
-      int pt = body.indexOf(" - From");
-      if (pt >= 0) {
-        String src = body.substring(pt+7).trim();
-        pt = src.indexOf(' ');
-        if (pt >= 0) src = src.substring(0,pt);
-        data.strSource = src;
-      }
-    }
+    if (!match.find()) return false;
+    data.strSource = match.group(1);
+    data.strDate = match.group(2);
+    data.strTime = match.group(3);
+    body = body.substring(0,match.start()).trim();
     
     body = body.replace("Units:", "Unit:");
     return parseFields(body.split(","), 6, data);
@@ -66,29 +54,6 @@ public class ORJacksonCountyParser extends FieldProgramParser {
     }
   }
   
-  private class AtField extends AddressField {
-    @Override
-    public boolean checkParse(String field, Data data) {
-      if (!field.startsWith("at ")) return false;
-      super.parse(field.substring(3).trim(), data);
-      return true;
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      if (!checkParse(field, data)) abort();
-    }
-  }
-  
-  private class MyCityField extends CityField {
-    @Override
-    public void parse(String field, Data data) {
-      int pt = field.indexOf('<');
-      if (pt >= 0) field = field.substring(0,pt).trim();
-      super.parse(field, data);
-    }
-  }
-  
   private class MyUnitField extends UnitField {
     @Override
     public void parse(String field, Data data) {
@@ -99,8 +64,6 @@ public class ORJacksonCountyParser extends FieldProgramParser {
   @Override
   public Field getField(String name) {
     if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("AT")) return new AtField();
-    if (name.equals("CITY")) return new MyCityField();
     if (name.equals("UNIT")) return new MyUnitField();
     return super.getField(name);
   }

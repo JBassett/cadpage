@@ -34,12 +34,7 @@ public class TXBexarCountyParser extends FieldProgramParser {
   }
   
   public String getFilter() {
-    return "visinet.command@sanantonio.gov,commcenteraustin@Acadian.com";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
+    return "visinet.command@sanantonio.gov";
   }
   
   @Override
@@ -113,8 +108,7 @@ public class TXBexarCountyParser extends FieldProgramParser {
   }
   
   private static final Pattern CALL_DESC_PTN = Pattern.compile("[A-Za-z ]*");
-  private static final Pattern SPEC_CALL_DESC_PTN = 
-      Pattern.compile("^(?:Witness?|Inspection Fol[a-z]*|Investigation Foll|Special Assignment|SELF INITIATED ACT|Assist Other Agenc|Inspection Fire Wa)(?=[A-Z0-9 ])");
+  private static final Pattern SPEC_CALL_DESC_PTN = Pattern.compile("^Witness?\\b");
   private static final Pattern IH_PTN = Pattern.compile("\\bIh\\b", Pattern.CASE_INSENSITIVE);
   private class MyAddressField extends AddressField {
     @Override
@@ -137,7 +131,7 @@ public class TXBexarCountyParser extends FieldProgramParser {
         // Otherwise, if contains only alpha letters and blanks, it is a call description
         // otherwise it is an address
         // Not sure what EOC is, but treat it like an address
-        if (!field.equalsIgnoreCase("EOC") && !field.endsWith(" COUNTY") && CALL_DESC_PTN.matcher(field).matches()) return false;
+        if (!field.equalsIgnoreCase("EOC") && CALL_DESC_PTN.matcher(field).matches()) return false;
       }
       
       // There (so far) one case where there was no delimiter beween the last part of

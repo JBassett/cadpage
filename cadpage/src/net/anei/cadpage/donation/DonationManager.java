@@ -112,13 +112,8 @@ public class DonationManager {
         expireDate = cal.getTime();
       }
     }
-
-    // Life gets complicated because we may be dealing with two sponsors, one that came from direct
-    // paging or parser sponsoring vendors, and the other that was reported by the authorization server
-    // and we won't know which one should be in the final result until we check on the subscription
-    // expiration status.  So save the first sponsor as the sponsoring vendor so it can be recovered.
-    String sponsoringVendor = (expireDate == null ? sponsor : null);
-    daysSinceInstall = ManagePreferences.calcAuthRunDays(sponsoringVendor == null ? curDate : null);
+    boolean vendorSponsored = sponsor != null && expireDate == null;
+    daysSinceInstall = ManagePreferences.calcAuthRunDays(!vendorSponsored ? curDate : null);
     int daysTillDemoEnds = DEMO_LIMIT_DAYS - daysSinceInstall;
     
     // Calculate subscription expiration date
@@ -145,7 +140,7 @@ public class DonationManager {
       // If we have both a subscription and sponsor expiration date, choose the
       // latest one
       if (expireDate == null || tDate.after(expireDate)) {
-        sponsor = ManagePreferences.sponsor();
+        if (!vendorSponsored) sponsor = ManagePreferences.sponsor();
         expireDate = tDate;
       }
     }
@@ -172,9 +167,9 @@ public class DonationManager {
       status = DonationStatus.AUTH_DEPT;
     } else if (expireDate != null) {
       if (daysTillExpire > EXPIRE_WARN_DAYS) {
-        status = (sponsoringVendor == null && sponsor != null ? DonationStatus.SPONSOR : DonationStatus.PAID);
+        status = (!vendorSponsored && sponsor != null ? DonationStatus.SPONSOR : DonationStatus.PAID);
       }
-      else if (sponsoringVendor != null) status = DonationStatus.SPONSOR;
+      else if (vendorSponsored) status = DonationStatus.SPONSOR;
       else if (daysTillExpire >= 0) {
         if (daysTillExpire == daysTillSubExpire) {
           status = (sponsor != null ? DonationStatus.SPONSOR_WARN : DonationStatus.PAID_WARN);
@@ -194,14 +189,6 @@ public class DonationManager {
     else {
       if (daysTillExpire >= 0) status = DonationStatus.DEMO;
       else status = DonationStatus.DEMO_EXPIRE;
-    }
-    
-    // If we did have a  master unexpiring vendor, and the final status indicates
-    // a Vendor paid status, clean things up by reporting the correct vendor and
-    // null expiration date
-    if (sponsoringVendor != null && status == DonationStatus.SPONSOR) {
-      sponsor = sponsoringVendor;
-      expireDate = null;
     }
     
     // If they don't have a clear green status, check for a special release exemption

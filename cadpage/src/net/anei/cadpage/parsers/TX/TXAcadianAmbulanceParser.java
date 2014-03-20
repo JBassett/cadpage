@@ -17,10 +17,4 @@ public class TXAcadianAmbulanceParser extends XXAcadianAmbulanceParser {
   public String getLocName() {
     return "Acadian Ambulance, TX";
   }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
-
 }

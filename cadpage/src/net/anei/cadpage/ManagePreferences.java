@@ -30,7 +30,7 @@ public class ManagePreferences {
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 33;
+  private static final int PREFERENCE_VERSION = 27;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -275,20 +275,12 @@ public class ManagePreferences {
     return prefs.getBoolean(R.string.pref_split_chk_sender_key);
   }
   
-  public static boolean splitKeepLeadBreak() {
-    return prefs.getBoolean(R.string.pref_split_keep_lead_break_key);
-  }
-  
   public static boolean revMsgOrder() {
     return prefs.getBoolean(R.string.pref_rev_msg_order_key);
   }
   
   public static boolean suppressDupMsg() {
     return prefs.getBoolean(R.string.pref_suppress_dup_msg_key);
-  }
-  
-  public static boolean overrideVendorLoc() {
-    return prefs.getBoolean(R.string.pref_override_vendor_loc_key);
   }
   
   public static boolean activeScanner() {
@@ -363,10 +355,6 @@ public class ManagePreferences {
     return prefs.getString(R.string.pref_notif_sound_key);
   }
   
-  public static int notifyTimeout() {
-    return prefs.getIntValue(R.string.pref_notif_timeout_key);
-  }
-  
   public static boolean vibrate() {
     return prefs.getBoolean(R.string.pref_vibrate_key);
   }
@@ -424,12 +412,20 @@ public class ManagePreferences {
     return prefs.getIntValue(R.string.pref_notif_repeat_interval_key);
   }
   
+  public static int repeatTimes() {
+    return prefs.getIntValue(R.string.pref_notif_repeat_times_key);
+  }
+  
   public static boolean popupEnabled() {
     return prefs.getBoolean(R.string.pref_popup_enabled_key);
   }
   
   public static void setPopupEnabled(boolean newVal) {
     prefs.putBoolean(R.string.pref_popup_enabled_key, newVal);
+  }
+  
+  public static boolean onlyShowOnKeyguard() {
+    return prefs.getBoolean(R.string.pref_onlyShowOnKeyguard_key);
   }
   
   public static boolean noShowInCall() {
@@ -587,7 +583,6 @@ public class ManagePreferences {
       if (year > curYear) {
         prefs.putInt(R.string.pref_prev_year_key, curYear);
         prefs.putInt(R.string.pref_paid_year_key, year);
-        prefs.putString(R.string.pref_prev_purchase_date_key, purchaseDateString());
         DonationManager.instance().reset();
         MainDonateEvent.instance().refreshStatus();
       }
@@ -596,8 +591,6 @@ public class ManagePreferences {
         int prevYear = prefs.getInt(R.string.pref_prev_year_key, 0);
         prefs.putInt(R.string.pref_paid_year_key, prevYear);
         prefs.putInt(R.string.pref_prev_year_key, 0);
-        setPurchaseDateString(prefs.getString(R.string.pref_prev_purchase_date_key, ""));
-        prefs.putString(R.string.pref_prev_purchase_date_key, "");
         DonationManager.instance().reset();
         MainDonateEvent.instance().refreshStatus();
       }
@@ -801,12 +794,10 @@ public class ManagePreferences {
     return prefs.getString(R.string.pref_registration_id_key, null);
   }
   
-  public static boolean setRegistrationId(String regId) {
+  public static void setRegistrationId(String regId) {
     String oldRegId = registrationId();
-    prefs.putString(R.string.pref_prev_registration_id_key, oldRegId);
+    if (oldRegId != null) prefs.putString(R.string.pref_prev_registration_id_key, oldRegId);
     prefs.putString(R.string.pref_registration_id_key, regId);
-    if (regId == null) return (oldRegId == null);
-    else return !regId.equals(oldRegId);
   }
   
   public static boolean newVersion(int versionCode) {
@@ -860,14 +851,6 @@ public class ManagePreferences {
     prefs.putString(R.string.pref_register_date_key, dateStr);
   }
   
-  public static boolean reconnect() {
-    return prefs.getBoolean(R.string.pref_reconnect_key);
-  }
-  
-  public static void setReconnect(boolean newVal) {
-    prefs.putBoolean(R.string.pref_reconnect_key, newVal);
-  }
-  
   public static String ledColor() {
     return prefs.getString(R.string.pref_flashled_color_key, R.string.pref_flashled_color_default);
   }
@@ -908,30 +891,6 @@ public class ManagePreferences {
     prefs.putFloat(R.string.pref_last_loc_acc_key, newVal);
   }
   
-  public static boolean directPageActive() {
-    return prefs.getBoolean(R.string.pref_direct_page_active_key);
-  }
-  
-  public static void setDirectPageActive(boolean newVal) {
-    prefs.putBoolean(R.string.pref_direct_page_active_key, newVal);
-  }
-  
-  public static long lastGcmEventTime() {
-    return prefs.getLong(R.string.pref_last_gcm_event_time_key, 0L);
-  }
-  
-  public static void setLastGcmEventTime(long newVal) {
-    prefs.putLong(R.string.pref_last_gcm_event_time_key, newVal);
-  }
-  
-  public static String lastGcmEventType() {
-    return prefs.getString(R.string.pref_last_gcm_event_type_key, null);
-  }
-  
-  public static void setLastGcmEventType(String newVal) {
-    prefs.putString(R.string.pref_last_gcm_event_type_key, newVal);
-  }
-  
   public static void clearAll() {
     SharedPreferences.Editor settings = prefs.mPrefs.edit();
     settings.clear();
@@ -964,7 +923,6 @@ public class ManagePreferences {
         R.string.pref_defcity_key,
         R.string.pref_defstate_key,
         R.string.pref_enable_msg_type_key,
-        R.string.pref_timeout_key,
         R.string.pref_mms_timeout_key,
         R.string.pref_loglimit_key,
         R.string.pref_msgtimeout_key,
@@ -972,9 +930,7 @@ public class ManagePreferences {
         R.string.pref_rev_msg_order_key,
         R.string.pref_split_blank_ins_key,
         R.string.pref_split_chk_sender_key,
-        R.string.pref_split_keep_lead_break_key,
         R.string.pref_suppress_dup_msg_key,
-        R.string.pref_override_vendor_loc_key,
         R.string.pref_activate_scanner_key,
         R.string.pref_scanner_channel_key,
         R.string.pref_scanner_channel_app_node_key,
@@ -995,20 +951,21 @@ public class ManagePreferences {
         R.string.pref_flashled_pattern_custom_key,
 
         R.string.pref_notif_repeat_key,
+        R.string.pref_notif_repeat_times_key,
         R.string.pref_notif_repeat_interval_key,
-        R.string.pref_notif_timeout_key,
 
         R.string.pref_history_limit_key,
         R.string.pref_delete_unopen_key,
         R.string.pref_map_network_chk_key,
         R.string.pref_gps_map_option_key,
-        R.string.pref_report_position_key,
         
         R.string.pref_popup_enabled_key,
+        R.string.pref_onlyShowOnKeyguard_key,
         R.string.pref_noShowInCall_key,
         R.string.pref_passthrusms_key,
         
         R.string.pref_screen_on_key,
+        R.string.pref_timeout_key,
         R.string.pref_textsize_key,
         R.string.pref_dimscreen_key,
         R.string.pref_privacy_key,
@@ -1053,8 +1010,6 @@ public class ManagePreferences {
         R.string.pref_auth_last_date_key,
         R.string.pref_auth_run_days_key,
         R.string.pref_auth_last_check_time_key,
-        R.string.pref_prev_year_key,
-        R.string.pref_prev_purchase_date_key,
         
         R.string.pref_registration_id_key,
         R.string.pref_prev_registration_id_key,
@@ -1063,14 +1018,9 @@ public class ManagePreferences {
         R.string.pref_register_req_key,
         R.string.pref_reregister_delay_key,
         R.string.pref_register_date_key,
-        R.string.pref_reconnect_key,
         
         R.string.pref_last_loc_time_key,
-        R.string.pref_last_loc_acc_key,
-        
-        R.string.pref_direct_page_active_key,
-        R.string.pref_last_gcm_event_type_key,
-        R.string.pref_last_gcm_event_time_key
+        R.string.pref_last_loc_acc_key
     };
 
     Map<String, ?> map = prefs.mPrefs.getAll();
@@ -1082,16 +1032,6 @@ public class ManagePreferences {
       if (key == R.string.pref_registration_id_key) regId = value;
       if (key == R.string.pref_prev_registration_id_key) {
         if (value != null && value.equals(regId)) value = "< Same >";
-      }
-      if (key == R.string.pref_last_gcm_event_time_key){
-        try {
-          long time = (Long)value;
-          if (time > 0) {
-            value = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS").format(time);
-          }
-        } catch (Exception ex) {
-          value = null;
-        }
       }
       sb.append(String.format("%s: %s\n", keyName, value));
     }

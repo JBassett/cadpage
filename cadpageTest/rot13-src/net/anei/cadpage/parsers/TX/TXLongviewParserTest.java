@@ -100,7 +100,6 @@ choyvp pynff GKYbativrjCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:31669",
         "PNYY:*Aba Yvsr Rzretrapl C/1/Snyyf",
         "NQQE:3000 SZ 250",
-        "ZNQQE:3000 SNEZ-GB-ZNEXRG 250",
         "PVGL:UHTURF FCEVATF");
 
     qbGrfg("G5",
@@ -147,6 +146,6 @@ choyvp pynff GKYbativrjCnefreGrfg rkgraqf OnfrCnefreGrfg {
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj GKYbativrjCnefreGrfg().trarengrGrfgf("G1");
+    arj GKYbativrjCnefreGrfg().trarengrGrfgf("G1", "VQ PNYY NQQE PVGL VASB");
   }
 }

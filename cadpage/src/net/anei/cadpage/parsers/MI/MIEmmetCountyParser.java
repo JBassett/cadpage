@@ -41,7 +41,6 @@ public class MIEmmetCountyParser extends DispatchOSSIParser {
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
       
       // Charlevoix County
-      "CX",   "CHARLEVOIX",
       "HDS",  "HUDSON",
       
       // Emmet County

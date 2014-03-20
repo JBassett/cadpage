@@ -9,7 +9,7 @@ import net.anei.cadpage.parsers.SmartAddressParser;
 
 public class WVKanawhaCountyParser extends SmartAddressParser {
   
-  private static final Pattern MASTER = Pattern.compile("(?:Metro911:)?(.+?) reported at (.+?)(?:@(.*))? in (.+?)(?:\\((.*?)\\))? on (\\d\\d/\\d\\d/\\d\\d) (\\d\\d:\\d\\d)(?: +Call (?:#|Number:) *(.*))?");
+  private static final Pattern MASTER = Pattern.compile("(?:Metro911:)?(.+?) reported at (.+?) in (.+?)(?:\\((.*?)\\))? on (\\d\\d/\\d\\d/\\d\\d) (\\d\\d:\\d\\d)(?: +Call Number: *(.*))?");
   
   public WVKanawhaCountyParser() {
     super("KANAWHA COUNTY", "WV");
@@ -22,27 +22,20 @@ public class WVKanawhaCountyParser extends SmartAddressParser {
   }
   
   @Override
-  protected boolean parseMsg(String body, Data data) {
+  protected boolean parseMsg(String subject, String body, Data data) {
     Matcher match = MASTER.matcher(body);
     if (!match.matches()) return false;
     data.strCall = match.group(1).trim();
     parseAddress(StartType.START_ADDR, FLAG_ANCHOR_END | FLAG_IMPLIED_INTERSECT, match.group(2).trim().replaceAll("//", "/"), data);
-    data.strPlace = getOptGroup(match.group(3));
-    data.strCity = match.group(4).trim();
+    data.strCity = match.group(3).trim();
     if (data.strCity.equals("SISSONVILLE")) {
-      if (data.strPlace.length() == 0) data.strPlace = data.strCity;
+      data.strPlace = data.strCity;
       data.strCity = "CHARLESTON";
     }
-    data.strPlace = append(data.strPlace, " - ", getOptGroup(match.group(5)));
-    data.strDate = match.group(6);
-    data.strTime = match.group(7);
-    data.strCallId = getOptGroup(match.group(8));
+    data.strPlace = append(data.strPlace, " - ", getOptGroup(match.group(4)));
+    data.strDate = match.group(5);
+    data.strTime = match.group(6);
+    data.strCallId = getOptGroup(match.group(7));
     return true;
-  }
-  
-  @Override
-  public String adjustMapCity(String city) {
-    if (city.equalsIgnoreCase("LITTLE TYLER")) return "3";
-    return city;
   }
 }

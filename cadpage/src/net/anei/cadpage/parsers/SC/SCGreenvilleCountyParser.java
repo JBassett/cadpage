@@ -60,7 +60,6 @@ public class SCGreenvilleCountyParser extends DispatchOSSIParser {
       "LAND", "LANDRUM",
       "MARI", "MARIETTA",
       "PELZ", "PELZER",
-      "SIMP", "SIMPSONVILLE",
       "TRAV", "TRAVELERS REST",
       "TAYL", "TAYLORS"
   });

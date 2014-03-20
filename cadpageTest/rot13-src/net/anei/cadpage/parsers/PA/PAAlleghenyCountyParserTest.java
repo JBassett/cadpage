@@ -89,18 +89,6 @@ Fraqre: PNQ.Nyreg@NyyrturalPbhagl.hf
 (PNQ Cntr) :17Q3, R0, SNYY - ABG NYREG, ZNABE PNER EBF #127O, EBF, ng 1105 CREEL UJL #127O, EBF, ogja GEVBA EQ naq FRJVPXYRL BNXZBAG EQ, AZQ1, R21002, R130077894, Zrqvpny CebDN erpbzzraqf qvfcngpu ng guvf gvzr, Havg:2142 - Sebz 404 05/15/2013 23:22:55\a\a\a\a----------------------------------------- YRTNY QVFPYNVZRE\aPbasvqragvnyvgl Abgvpr: Guvf r-znvy zrffntr, vapyhqvat nal\anggnpuzragf, vf sbe gur fbyr hfr bs gur vagraqrq erpvcvrag(f) naq\aznl pbagnva pbasvqragvny naq cevivyrtrq vasbezngvba. Nal\ahanhgubevmrq erivrj, hfr, qvfpybfher, sbejneqvat, be qvfgevohgvba\avf cebuvovgrq. Vs lbh ner abg gur vagraqrq erpvcvrag, cyrnfr\apbagnpg gur fraqre ol ercyl r-znvy naq qrfgebl nyy pbcvrf bs gur\abevtvany zrffntr. Nal dhrfgvbaf fubhyq or qverpgrq gb Nyyrtural\aPbhagl Freivpr Qrfx ng 412-350-URYC (412-350-4357) be r-znvy\aFreivprQrfx@NyyrturalPbhagl.HF\a-----------------------------------------   
 (PNQ Cntr) :SEERF1, R1, QJRYYVAT SVER, 113 IVBYRG FG, EBF, ogja CEVAPRGBA NIR naq RAQ, AZQ1, R21004, R130077873, TEVYY BA SVER, Havg:2141 - Sebz 404 05/15/2013 22:24:38\a\a\a\a----------------------------------------- YRTNY QVFPYNVZRE\aPbasvqragvnyvgl Abgvpr: Guvf r-znvy zrffntr, vapyhqvat nal\anggnpuzragf, vf sbe gur fbyr hfr bs gur vagraqrq erpvcvrag(f) naq\aznl pbagnva pbasvqragvny naq cevivyrtrq vasbezngvba. Nal\ahanhgubevmrq erivrj, hfr, qvfpybfher, sbejneqvat, be qvfgevohgvba\avf cebuvovgrq. Vs lbh ner abg gur vagraqrq erpvcvrag, cyrnfr\apbagnpg gur fraqre ol ercyl r-znvy naq qrfgebl nyy pbcvrf bs gur\abevtvany zrffntr. Nal dhrfgvbaf fubhyq or qverpgrq gb Nyyrtural\aPbhagl Freivpr Qrfx ng 412-350-URYC (412-350-4357) be r-znvy\aFreivprQrfx@NyyrturalPbhagl.HF\a-----------------------------------------   
 
-Pbagnpg: Zngg T. Intavre <zintavre@tznvy.pbz>
-Fraqre: 777800245001
-NYYRTURAL PBHAGL 911 :NYSEPBZ, S2, SVER NYNEZ PBZ OYQT, CVGGFOHETU RNFG SHYY TBFCRY PUHEPU, CYH, ng 2015 BOYBPX EQ, CYH, ogja BYQ SNEZ QE naq FNYGFOHET EQ, RSQ3, 236002, S130072821, PNYYRE ECGT N SVER NYNEZ VA GUR OYQT, Havg:236GX1 - Sebz 505 10/08/2013 20:55:27
-
-Pbagnpg: Wbua Faryfba <rocq16@tznvy.pbz>
-Fraqre: 777800245001
-NYYRTURAL PBHAGL 911 :GPSC, S3, GENSSVP PBAGEBY / SVER CBYVPR ERDHRFG, QBYYNE TRARENY RYO, RYO, ng 352 A 2AQ NIR, RYO, ogja FRPBAQ GB UNLQRA EZCC naq CNEX NYL, RSQ2, 139002, S140019446, AB PBZ- TENL CVPX HC GEHPX OYBPXVT RKVG SEBZ UNLQRA.. GVER SRYY BSS, Havg:139NFG - Sebz 505 03/15/2014 13:54:05
-
-Pbagnpg: Qraavf Znea <qraavf.znea@tznvy.pbz>
-(PNQ Cntr) :NYSEPBZ, S2, SVER NYNEZ PBZ OYQT, UBYL SNZVYL VAFGVGHGR TLZANFVHZ, RZF, ng 8235 BUVB EVIRE OYIQ, RZF, ogja BEPUNEQ NIR naq CRAAFLYINAVN NIR, ASQ4, 148003, S140019940, UBYL SNZVYL/ SVER NYNEZ SBE GUR TLZ .  CERZVFR # 412-766-4030, Havgf:103RA1, 103GX1, 109RA1, 148RA2 - Sebz 406 03/17/2014 16:00:40
-(PNQ Cntr) :SEPBAG, S2, PBAGNVAZRAG/PYRNA HC QRGNVY, BUVB EVIRE OYIQ/ZNCYR NIR, RZF,  <8199/ 198>, ASQ4, 148001, S140019933, CNFFREOL ERCBEGVAT N LRYYBJ OBK GEHPX CNEXRQ BA GUR FVQR BS GUR EBNQJNL YRNXVAT N YNETR NZBHAG BS SYHVQ, Havgf:109RA1, 148RA2, 148ED3 - Sebz 406 03/17/2014 15:06:32
-
 */
 
 choyvp pynff CNNyyrturalPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -1050,88 +1038,6 @@ choyvp pynff CNNyyrturalPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "QNGR:05/15/2013",
         "GVZR:22:24:38");
 
-  }
-  
-  
-  @Grfg
-  choyvp ibvq grfgZnggTIntavre() {
-
-    qbGrfg("G1",
-        "NYYRTURAL PBHAGL 911 :NYSEPBZ, S2, SVER NYNEZ PBZ OYQT, CVGGFOHETU RNFG SHYY TBFCRY PUHEPU, CYH, ng 2015 BOYBPX EQ, CYH, ogja BYQ SNEZ QE naq FNYGFOHET EQ, RSQ3, 236002, S130072821, PNYYRE ECGT N SVER NYNEZ VA GUR OYQT, Havg:236GX1 - Sebz 505 10/08/2013 20:55:27",
-        "PBQR:NYSEPBZ",
-        "CEV:S2",
-        "PNYY:SVER NYNEZ PBZ OYQT",
-        "CYNPR:CVGGFOHETU RNFG SHYY TBFCRY PUHEPU",
-        "NQQE:2015 BOYBPX EQ",
-        "PVGL:CYHZ",
-        "K:BYQ SNEZ QE naq FNYGFOHET EQ",
-        "VASB:PNYYRE ECGT N SVER NYNEZ VA GUR OYQT",
-        "FEP:RSQ3",
-        "OBK:236002",
-        "VQ:S130072821",
-        "HAVG:236GX1",
-        "QNGR:10/08/2013",
-        "GVZR:20:55:27");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgWbuaFaryfba() {
-
-    qbGrfg("G1",
-        "NYYRTURAL PBHAGL 911 :GPSC, S3, GENSSVP PBAGEBY / SVER CBYVPR ERDHRFG, QBYYNE TRARENY RYO, RYO, ng 352 A 2AQ NIR, RYO, ogja FRPBAQ GB UNLQRA EZCC naq CNEX NYL, RSQ2, 139002, S140019446, AB PBZ- TENL CVPX HC GEHPX OYBPXVT RKVG SEBZ UNLQRA.. GVER SRYY BSS, Havg:139NFG - Sebz 505 03/15/2014 13:54:05",
-        "PBQR:GPSC",
-        "CEV:S3",
-        "PNYY:GENSSVP PBAGEBY / SVER CBYVPR ERDHRFG",
-        "CYNPR:QBYYNE TRARENY RYO",
-        "NQQE:352 A 2AQ NIR",
-        "PVGL:RYVMNORGU",
-        "K:FRPBAQ GB UNLQRA EZCC naq CNEX NYL",
-        "VASB:AB PBZ- TENL CVPX HC GEHPX OYBPXVT RKVG SEBZ UNLQRA.. GVER SRYY BSS",
-        "FEP:RSQ2",
-        "OBK:139002",
-        "VQ:S140019446",
-        "HAVG:139NFG",
-        "QNGR:03/15/2014",
-        "GVZR:13:54:05");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgQnivqZnea() {
-
-    qbGrfg("G1",
-        "(PNQ Cntr) :NYSEPBZ, S2, SVER NYNEZ PBZ OYQT, UBYL SNZVYL VAFGVGHGR TLZANFVHZ, RZF, ng 8235 BUVB EVIRE OYIQ, RZF, ogja BEPUNEQ NIR naq CRAAFLYINAVN NIR, ASQ4, 148003, S140019940, UBYL SNZVYL/ SVER NYNEZ SBE GUR TLZ .  CERZVFR # 412-766-4030, Havgf:103RA1, 103GX1, 109RA1, 148RA2 - Sebz 406 03/17/2014 16:00:40",
-        "PBQR:NYSEPBZ",
-        "CEV:S2",
-        "PNYY:SVER NYNEZ PBZ OYQT",
-        "CYNPR:UBYL SNZVYL VAFGVGHGR TLZANFVHZ",
-        "NQQE:8235 BUVB EVIRE OYIQ",
-        "PVGL:RZFJBEGU",
-        "K:BEPUNEQ NIR naq CRAAFLYINAVN NIR",
-        "VASB:UBYL SNZVYL/ SVER NYNEZ SBE GUR TLZ .  CERZVFR # 412-766-4030",
-        "FEP:ASQ4",
-        "OBK:148003",
-        "VQ:S140019940",
-        "HAVG:103RA1 103GX1 109RA1 148RA2",
-        "QNGR:03/17/2014",
-        "GVZR:16:00:40");
-
-    qbGrfg("G2",
-        "(PNQ Cntr) :SEPBAG, S2, PBAGNVAZRAG/PYRNA HC QRGNVY, BUVB EVIRE OYIQ/ZNCYR NIR, RZF,  <8199/ 198>, ASQ4, 148001, S140019933, CNFFREOL ERCBEGVAT N LRYYBJ OBK GEHPX CNEXRQ BA GUR FVQR BS GUR EBNQJNL YRNXVAT N YNETR NZBHAG BS SYHVQ, Havgf:109RA1, 148RA2, 148ED3 - Sebz 406 03/17/2014 15:06:32",
-        "PBQR:SEPBAG",
-        "CEV:S2",
-        "PNYY:PBAGNVAZRAG/PYRNA HC QRGNVY",
-        "NQQE:BUVB EVIRE OYIQ & ZNCYR NIR",
-        "PVGL:RZFJBEGU",
-        "VASB:CNFFREOL ERCBEGVAT N LRYYBJ OBK GEHPX CNEXRQ BA GUR FVQR BS GUR EBNQJNL YRNXVAT N YNETR NZBHAG BS SYHVQ",
-        "FEP:ASQ4",
-        "OBK:148001",
-        "VQ:S140019933",
-        "HAVG:109RA1 148RA2 148ED3",
-        "QNGR:03/17/2014",
-        "GVZR:15:06:32");
-   
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

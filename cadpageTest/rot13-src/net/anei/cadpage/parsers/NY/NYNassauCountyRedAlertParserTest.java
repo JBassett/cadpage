@@ -81,14 +81,6 @@ Pbagnpg: Terttbel Xraal <xraalt1025@tznvy.pbz>
 Fraqre: yrivggbja@erqazkpnq.pbz
 Vairfgvtngvba: FVYRAG PNYY 626 BAYL ng 3750 URZCFGRNQ GCXR, YRIVGGBJA  p/f: JNAGNTU NI FBHGU   B: FGBC & FUBC . . 20:57:26
 
-Pbagnpg: Xra <ysq219@irevmba.arg>
-Fraqre: igrkg.pbz@zku3.rznvy-bq.pbz
-1042.10.5166443494=igrkg.pbz@zku3.rznvy-bq.pbz Ubhfr Sverf (Cubar Va) ng 58 ONEALNEQ YA, YRIVGGBJA  p/f: OEBBX YA   B: PBAGV . . 15:53:36
-
-Pbagnpg: Enl Avpubyfba <enlzbaqpc30311@tznvy.pbz>
-Fraqre: 6245
-yrivggbja@erqazkpnq.pbz Fvtany 9 ng 3758 JVAQFBE QE, ORGUCNTR  p/f: QVNAAR FG   B: ZNEFVRYYB . . 19:47:27\a
-
 */
 
 choyvp pynff ALAnffnhPbhaglErqNyregCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -448,37 +440,8 @@ choyvp pynff ALAnffnhPbhaglErqNyregCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
   }
   
-  
-  @Grfg
-  choyvp ibvq grfgXra() {
-
-    qbGrfg("G1",
-        "1042.10.5166443494=igrkg.pbz@zku3.rznvy-bq.pbz Ubhfr Sverf (Cubar Va) ng 58 ONEALNEQ YA, YRIVGGBJA  p/f: OEBBX YA   B: PBAGV . . 15:53:36",
-        "PNYY:Ubhfr Sverf (Cubar Va)",
-        "NQQE:58 ONEALNEQ YA",
-        "PVGL:YRIVGGBJA",
-        "K:OEBBX YA",
-        "CYNPR:PBAGV",
-        "GVZR:15:53:36");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgEnlAvpubyfba() {
-
-    qbGrfg("G1",
-        "yrivggbja@erqazkpnq.pbz Fvtany 9 ng 3758 JVAQFBE QE, ORGUCNTR  p/f: QVNAAR FG   B: ZNEFVRYYB . . 19:47:27\a",
-        "PNYY:Fvtany 9",
-        "NQQE:3758 JVAQFBE QE",
-        "PVGL:ORGUCNTR",
-        "K:QVNAAR FG",
-        "CYNPR:ZNEFVRYYB",
-        "GVZR:19:47:27");
-
-  }
-  
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj ALAnffnhPbhaglErqNyregCnefreGrfg().trarengrGrfgf("G1");
+    arj ALAnffnhPbhaglErqNyregCnefreGrfg().trarengrGrfgf("G1", "PNYY ZNC HAVG VASB NQQE NCG PVGL K CYNPR GVZR");
   }
 
 }

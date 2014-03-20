@@ -12,7 +12,7 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 public class COAdamsCountyParser extends FieldProgramParser {
   
   private static final Pattern CAD_MARKER = 
-        Pattern.compile("^(?:Subject:)?IPS I/Page Notifica(?:tion|\\.\\.\\.) (?:/ )?");
+        Pattern.compile("^(?:Subject:)?IPS I/Page Notification (?:/ )?");
   
   public COAdamsCountyParser() {
     super(CITY_TABLE, "ADAMS COUNTY", "CO",
@@ -35,7 +35,7 @@ public class COAdamsCountyParser extends FieldProgramParser {
     if (super.parseMsg(body, data)) return true;
     
     // Fallback parsing address followed by call description
-    data.initialize(this);
+    data.initialize();
     parseAddress(StartType.START_CALL, FLAG_AT_SIGN_ONLY, body, data);
     if (getStatus() == 0) return false;
     if (data.strCall.length() == 0) data.strCall = getLeft();
@@ -124,13 +124,10 @@ public class COAdamsCountyParser extends FieldProgramParser {
   
   private static final Properties CITY_TABLE = buildCodeTable(new String[]{
       "ADAM ADAM", "",
-      "ADAM ARV",  "ARVADA",
       "ADAM AUR",  "AURORA",
       "ADAM BPD",  "BRIGHTON",
       "ADAM CCPD", "COMMERCE CITY",
-      "ADAM FHPD", "FEDERAL HEIGHTS",
       "ADAM TPD",  "THORNTON",
-      "ADAM WES",  "WESTMINSTER",
       "ARAP ARAP", "ARAPAHOE COUNTY"
   });
 }

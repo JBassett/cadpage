@@ -58,7 +58,8 @@ choyvp pynff GAYbhqbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G3",
         "F: Z:WOYNXRFYRR:1 JUVGR JVAT EQ//OVEQ EQ YRABVE PVGL 2011030010 22:52:18 FZBXR VAIRFGVTNGVBA PBZCY FZRYYF FZBXR VA GUR NER",
-        "NQQE:JUVGR JVAT EQ & OVEQ EQ",
+        "NQQE:1 JUVGR JVAT EQ & OVEQ EQ",
+        "ZNQQE:1 JUVGR JVAT EQ",
         "PVGL:YRABVE PVGL",
         "VQ:2011030010",
         "GVZR:22:52:18",

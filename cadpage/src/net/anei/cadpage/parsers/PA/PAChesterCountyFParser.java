@@ -35,7 +35,7 @@ public class PAChesterCountyFParser extends PAChesterCountyBaseParser {
   }
   
   private static final Pattern TRAILER = Pattern.compile(" *\\(N?V\\)$");
-  private class MyAddressCityField extends BaseAddressCityField {
+  private class MyAddressCityField extends AddressCityField {
     @Override
     public void parse(String field, Data data) {
       Matcher match = TRAILER.matcher(field);

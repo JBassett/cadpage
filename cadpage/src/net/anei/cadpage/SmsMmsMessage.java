@@ -2,8 +2,6 @@ package net.anei.cadpage;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +21,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.telephony.SmsMessage;
 import android.telephony.SmsMessage.MessageClass;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 
 import static net.anei.cadpage.BroadcastBindings.*;
@@ -152,35 +151,6 @@ public class SmsMmsMessage implements Serializable {
     reportDataChange();
   }
   
-
-  /**
-   * @return true if message was parsed with Active911 parser
-   */
-  public boolean isActive911ParsedMsg() {
-    
-    // All we do is check the parsed message parser code is Active911.
-    // Active911 always sends us this parser code, but if the original message
-    // was parsed with a Cadpage parser, the message will contain its own
-    // parser code override, which will override the "Active911" value.
-    MsgInfo info = getInfo();
-    if (info == null) return false;
-    MsgParser parser = info.getParser();
-    if (parser == null) return false;
-    String parserCode = parser.getParserCode();
-    return parserCode != null && parserCode.equals("Active911");
-  }
-  
-  /**
-   * @return Active911 message ID if appropriate, null otherwise
-   */
-  public String getActive911MsgCode() {
-    if (ackURL == null) return null;
-    Matcher match = ACTIVE911_CODE_PTN.matcher(ackURL);
-    if (!match.find()) return null;
-    return match.group(1);
-  }
-  private static final Pattern ACTIVE911_CODE_PTN = Pattern.compile("[&\\?]q=([A-Za-z0-9]+)\\b");
-  
   private void reportDataChange() {
     if (msgId > 0) SmsMessageQueue.getInstance().notifyDataChange();
   }
@@ -200,9 +170,7 @@ public class SmsMmsMessage implements Serializable {
      */
     fromAddress = sms.getDisplayOriginatingAddress();
     if (fromAddress == null) fromAddress = "";
-    try {
-      messageClass = sms.getMessageClass();
-    } catch (NullPointerException ex) {}
+    messageClass = sms.getMessageClass();
     sentTime = sms.getTimestampMillis();
 
     String body;
@@ -328,7 +296,7 @@ public class SmsMmsMessage implements Serializable {
     this.timestamp = timestamp;
     this.messageType = messageType;
     this.location = "GeneralAlert";
-    this.parseInfo = bldParseInfo(false, subject, messageBody, false);
+    this.parseInfo = bldParseInfo(false, subject, messageBody);
   }
 
   /**
@@ -414,27 +382,25 @@ public class SmsMmsMessage implements Serializable {
   }
 
   private void buildParseInfo() {
-    boolean keepLeadBreak = ManagePreferences.splitKeepLeadBreak();
     parseInfo = bldParseInfo();
     if (extraMsgBody != null) {
       String msgSubject = parseInfo.getSubject();
       String parseMsgBody = parseInfo.getMessageBody();
       String delim = (ManagePreferences.splitBlankIns() ? " " : "");
       for (String msgBody : extraMsgBody) {
-        Message pInfo = bldParseInfo(true, subject, msgBody, keepLeadBreak);
+        Message pInfo = bldParseInfo(true, subject, msgBody);
         parseMsgBody = parseMsgBody + delim + pInfo.getMessageBody();
       }
-      parseInfo = bldParseInfo(false, msgSubject, parseMsgBody, false);
+      parseInfo = bldParseInfo(false, msgSubject, parseMsgBody);
     }
   }
   
   private Message bldParseInfo() {
-    return bldParseInfo(true, subject, messageBody, false);
+    return bldParseInfo(true, subject, messageBody);
   }
   
-  private Message bldParseInfo(boolean preParse, String msgSubject, String body, boolean keepLeadBreak) {
-    boolean insBlank = ManagePreferences.splitBlankIns();
-    return new Message(preParse, fromAddress, msgSubject, body, insBlank, keepLeadBreak){
+  private Message bldParseInfo(boolean preParse, String msgSubject, String body) {
+    return new Message(preParse, fromAddress, msgSubject, body){
 
       @Override
       protected void setLocationCode(String location) {
@@ -494,10 +460,9 @@ public class SmsMmsMessage implements Serializable {
     // If specific location was requested with a C2DM message, use it to get
     // a parser.  This is one of the only times we will ignore a bad location
     // code
-    if (reqLocation != null && !ManagePreferences.overrideVendorLoc()) {
+    if (reqLocation != null) {
       try {
         parser = ManageParsers.getInstance().getParser(reqLocation);
-        location = reqLocation;
       } catch (RuntimeException ex) {
         Log.e(ex);
       }
@@ -525,12 +490,6 @@ public class SmsMmsMessage implements Serializable {
     // If we didn't build a parse message info object when this was constructed
     // we never will have and pared message information
     if (parseInfo == null) return null;
-    
-    // Early versions of the Cadpage parser were setting location to the secondary 
-    // parser name which is cause subsequent attempt to parse the information with the
-    // wrong parser to fail.  We don't do that anymore, but we do want to fix calls
-    // that were parsed with that version.
-    if (reqLocation != null && reqLocation.startsWith("Cadpage")) location = reqLocation;
     
     // Some special logic if the previous location was General
     // And the current location code preference is not general
@@ -786,7 +745,7 @@ public class SmsMmsMessage implements Serializable {
     
     // A response code of anything other than 'N' will be taken as an 
     // active response which can start the location tracking logic
-    if (!respCode.startsWith("N")) triggerTracking(context);
+    if (!respCode.equals("N") && !respCode.equals("NO")) triggerTracking(context);
   }
   
   /**
@@ -921,7 +880,9 @@ public class SmsMmsMessage implements Serializable {
     sb.append("\n\nMessage Contents\n");
     
     sb.append("Time:");
-    sb.append(DATE_TIME_FMT.format(timestamp));
+    sb.append(DateFormat.getLongDateFormat(context).format(timestamp));
+    sb.append(" ");
+    sb.append(DateFormat.getTimeFormat(context).format(timestamp));
 
     sb.append("\nFrom:");
     sb.append(fromAddress);
@@ -997,7 +958,6 @@ public class SmsMmsMessage implements Serializable {
     
     sb.append('\n');
   }
-  private static final DateFormat DATE_TIME_FMT = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS");
  
   public boolean duplicate(SmsMmsMessage msg) {
     if (messageType != msg.messageType) return false;

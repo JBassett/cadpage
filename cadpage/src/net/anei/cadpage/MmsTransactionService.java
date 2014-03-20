@@ -227,7 +227,6 @@ public class MmsTransactionService extends Service {
         pdu = new PduParser(pushData).parse();
       } catch (Exception ex) {
         Log.e(ex);
-        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
       }
       if (null == pdu) {
         Log.e("Invalid PUSH data");
@@ -280,7 +279,6 @@ public class MmsTransactionService extends Service {
           cur = qr.query(MMS_URI, MMS_COL_LIST, "tr_id=?", new String[]{message.getMmsMsgId()}, null);
         } catch (IllegalStateException ex) {
           Log.e(ex);
-          EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
           continue;
         }
         if (cur == null) continue;
@@ -313,7 +311,6 @@ public class MmsTransactionService extends Service {
                 }
               } catch (Exception ex) {
                 Log.e(ex);
-                EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
               }
               
             }});

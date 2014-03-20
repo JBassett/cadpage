@@ -14,11 +14,12 @@ public class VAPrinceWilliamCountyBParser extends VAPrinceWilliamCountyBaseParse
 
   @Override
   public String getFilter() {
-    return "@rsan.pwcgov.org,PWRSAN";
+    return "@rsan.pwcgov.org";
   }
 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
+    if (subject.length() == 0) return false;
     int pt = body.indexOf("Sent by PW Alert to ");
     if (pt >= 0) body = body.substring(0,pt).trim();
     if (!body.startsWith("Event Type:")) body = "Event Type: " + body;

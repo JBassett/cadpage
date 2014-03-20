@@ -15,7 +15,6 @@ public class NYPutnamCountyParser extends MsgParser {
 
   public NYPutnamCountyParser() {
     super("PUTNAM COUNTY", "NY");
-    setFieldList("CALL PLACE ADDR CITY SRC X INFO");
   }
   
 

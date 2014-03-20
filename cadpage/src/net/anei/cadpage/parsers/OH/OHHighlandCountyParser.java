@@ -1,9 +1,5 @@
 package net.anei.cadpage.parsers.OH;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchEmergitechParser;
 
 
@@ -11,33 +7,14 @@ import net.anei.cadpage.parsers.dispatch.DispatchEmergitechParser;
 public class OHHighlandCountyParser extends DispatchEmergitechParser {
   
   public OHHighlandCountyParser() {
-    super(new String[]{"Networkadmin:", "Emergitech:", "Dispatch:"}, 
-          73, CITY_LIST, "HIGHLAND COUNTY", "OH");
-    addSpecialWords("ORCHARD", "SAUNER");
+    super("Dispatch:", 69, CITY_LIST, "HIGHLAND COUNTY", "OH");
   }
   
   @Override
   public String getFilter() {
-    return "networkadmin@highlandcoso.com,Emergitech@highlandcoso.com,Dispatch@highlandcoso.com";
+    return "Dispatch@highlandcoso.com";
   }
   
-  @Override
-  protected boolean parseMsg(String body, Data data) {
-    if (!super.parseMsg(body, data)) return false;
-    Matcher match = INFO_GPS_PTN.matcher(data.strSupp);
-    if (match.find()) {
-      setGPSLoc(match.group(1), data);
-      data.strSupp = data.strSupp.substring(match.end());
-    }
-    return true;
-  }
-  private static final Pattern INFO_GPS_PTN = Pattern.compile("^(\\+\\d{3}\\.\\d{6} -\\d{3}\\.\\d{6})\\b *(?:CF?= *[ \\d]+% *)?");
-  
-  @Override
-  public String getProgram() {
-    return super.getProgram().replace("INFO", "GPS INFO");
-  }
-
   private static final String[] CITY_LIST = new String[]{
     
     // Mutual aid counties

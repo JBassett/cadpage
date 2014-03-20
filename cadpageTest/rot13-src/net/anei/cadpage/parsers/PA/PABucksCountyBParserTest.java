@@ -34,8 +34,7 @@ Fhowrpg: 911 Qngn \a\a <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a339/134/R59\a \
 [911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129/134\a                                                    \a Vap Uvfgbel sbe: #RQ1216062    Kers:                           #CQ121250085 \a Erprvirq     05/04/12  02:15:38  OL CQ04   794      \a Ragrerq      05/04/12  02:16:25  OL CQ04   794      \a Qvfcngpurq   05/04/12  02:16:54  OL SF01   807      \a Vavgvny Glcr: NSNVAG  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR)) Cev: 3 Qfcb:      Cerz: [  ]\a RZF Oyx:  129106 Sver Oyx:  78035  Cbyvpr Oyx:  75401  Znc Cntr: 3034O7 \a Tebhc: RA  Orng: 129 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 3465 CVPXREGBJA EQ ,75  ogja XVATF PG & ERQ PBNG SNEZ QE\a Ybp Vasb: \a Anzr: OBJYVAT,YBEV            Nqqe:                         Cubar: 2159975078\a/0216  (794     )  RAGEL:         45 LBS,,SNVAGRQ,,SRRYF ANHFRN\a/0216  (807     )  QVFC    N134    #125093   CNAXBR,ELNA \a-- \aQVFPYNVZRE: Guvf ryrpgebavp zrffntr genafzvffvba unf orra frag ol Punysbag Rzretrapl Zrqvpny Freivprf, Vap., juvpu znl pbagnva pbasvqragvny be cevivyrtrq vasbezngvba. Guvf vasbezngvba vf vagraqrq sbe gur vaqvivqhny be ragvgl anzrq nobir. Vs lbh ner abg gur vagraqrq erpvcvrag, or njner gung nal qvfpybfher, pbclvat, qvfgevohgvba be hfr bs gur pbagragf bs guvf vasbezngvba vf cebuvovgrq. Vs lbh unir erprvirq guvf ryrpgebavp genafzvffvba va reebe, cyrnfr abgvsl hf vzzrqvngryl ol gryrcubar ng 215-822-1308 k116, be ol ryrpgebavp znvy (ercyl).\a
 (911 Qngn) <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  :\a129/134\a\a  Vap Uvfgbel sbe: #RQ1216062    Kers:                           #CQ121250085\a  Erprvirq     05/04/12  02:15:38  OL CQ04   794\a  Ragrerq      05/04/12  02:16:25  OL CQ04   794\a  Qvfcngpurq   05/04/12  02:16:54  OL SF01   807\a  Vavgvny Glcr: NSNVAG  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a  Svany Glcr: NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR)) Cev: 3 Qfcb:      Cerz: [  ]\a  RZF Oyx:  129106 Sver Oyx:  78035  Cbyvpr Oyx:  75401  Znc Cntr: 3034O7\a  Tebhc: RA  Orng: 129 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag\a  Ybp: 3465 CVPXREGBJA EQ ,75  ogja XVATF PG & ERQ PBNG SNEZ QE\a  Ybp Vasb:\a  Anzr: OBJYVAT,YBEV            Nqqe:                         Cubar: 2159975078\a  /0216  (794     )  RAGEL:         45 LBS,,SNVAGRQ,,SRRYF ANHFRN\a  /0216  (807     )  QVFC    N134    #125093   CNAXBR,ELNA\a  --\a  QVFPYNVZRE: Guvf ryrpgebavp zrffntr genafzvffvba unf orra frag ol  \aPunysbag Rzretrapl Zrqvpny Freivprf, Vap., juvpu znl pbagnva  \apbasvqragvny be cevivyrtrq vasbezngvba. Guvf vasbezngvba vf vagraqrq  \asbe gur vaqvivqhny be ragvgl anzrq nobir. Vs lbh ner abg gur vagraqrq  \aerpvcvrag, or njner gung nal qvfpybfher, pbclvat, qvfgevohgvba be hfr  \abs gur pbagragf bs guvf vasbezngvba vf cebuvovgrq. Vs lbh unir  \aerprvirq guvf ryrpgebavp genafzvffvba va reebe, cyrnfr abgvsl hf  \avzzrqvngryl ol gryrcubar ng 215-822-1308 k116, be ol ryrpgebavp znvy  \a(ercyl).
 [911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a019\a                                                        \aEha: R19    \a Vap Uvfgbel sbe: #SQ1206776    Kers:                           #CQ121371055 \a Ragrerq      05/16/12  15:51:28  OL RZF2   748      \a Qvfcngpurq   05/16/12  15:51:53  OL SF01   271      \a Vavgvny Glcr: SNYEZ   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SNYEZ (SVER NYNEZ (YBP)) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  125056 Sver Oyx:  19056  Cbyvpr Oyx:  28107  Znc Cntr: 2922X10 \a Tebhc: AB  Orng: 019 Fep:  A NGG:  VAI - Vairfgvtngr  \a Ybp: OEVNEYRNS AU ,28 ng 252 ORYZBAG NI ,28 ogja FCEHPR FG & PBGGNTR FG\a Ybp Vasb: #215-348-2983\a Anzr: ZRGEB FRPHEVGL          Nqqe: #3510                   Cubar: 8006332677\a/1551  (748     )  RAGEL:         MBAR 7 (HAX JURER),,J/A\a/1551  (271     )  QVFC    R19     #ZQ0802   R19 \a
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129/134\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1409445    Kers:              #SQ1404328   #CQ140690601 \a\a Ragrerq      03/10/14  12:10:52  OL SQ01   619      \a Qvfcngpurq   03/10/14  12:11:31  OL SF01   656      \a Raebhgr      03/10/14  12:12:56                     \a Bafprar      03/10/14  12:17:02                     \a\a Vavgvny Glcr: SVEPNY  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SVEPNY(SVER PNYY RZF) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  129035 Sver Oyx:  29030  Cbyvpr Oyx:  75301  Znc Cntr: 3146T2 \a Tebhc: RA  Orng: 129 Fep:  A NGG:    \a Ybp: 2354 TERRAFJNEQ EQ F ,75  ogja BNXSVRYQ EQ & PUVC CG\a\a Ybp Vasb: AJ FRPGBE\a Anzr: IREVMBA JVERYRFF        Nqqe:                         Cubar: 2674214587\a\a/1210  (619     )  PBCL           ,AB ZBER VASBEZNGVBA\a/1210             $PEBFF          #SQ1404328   \a/1211  (656     )  QVFC    N122    #189839   FPBGG, GNZZVR \a                                   #074972   WNZRF, ZVPURYYR (RZG) \a/1212  (189839  ) *RAEBHG  N122   \a/1213  (748     )  NQQRE   P129   [2354 TERRAFJNEQ EQ F ,75] \a                                   #886440   FPUBYY,ZNEX \a                                  ,URNQRE\a/1214              FHCC           GKG: 2.5 FGEL FVATYR SNZVYL SVER FUBJVAT CRE P\a                                  129 \a/1213? (578     )  FHCC           ANZ: EUBNQF JVYYNEQ, \a                                  NQE: 2358, \a                                  CUB: 2153432072, \a                                  GKG: OYNPX FZBZR SEBZ SEBAG BS UBHFR \a/1215  (646     )  FHCC           GKG: CRE CQ BF SHYYL VAIBYI,, \a/1215  (271     )  FHCC           GKG: CRPB NQI...FIP QVFPBAARPG NYFB NQI BS FZR\a                                  YY BS TNF CERIVBHF GB JBEXVA SVER.......JVGUVA\a                                   GUR UE \a/1217  (748     )  EDHRFG  N122   Nqqrq Havg(f) Erdhrfgrq\a                                  ,ERDN N122 1N O\a/1217  (271     )  ARJYBP  P129   [RZF PZQ] \a/1217  (748     )  ARJYBP  P129   [JNEEV RZF] \a/1217  (656     )  NQQ     N1221   #147886   GNTTNEG, NAQERJ (RZG) \a                                   #141260   ZNGGURJF, PBERL \a/1217  (147886  ) *RAEBHG  N1221  \a/1219  (646     )  FHCC           GKG: CRE CQ BF GUR ERFQ VF RINP,, \a/1220  (271     )  ZVFP    N122   ,N116 GB PIE FD 122\a/1220              EDHRFG  N122   Nqqrq Havg(f) Erdhrfgrq\a                                  ,ERDN N122 N116                              \a/1221  (189839  ) *BAFPAR  N122   \a/1223  (748     )  BAFPAR  N1221  \a/1229? (731     )  FHCC           YBP: TERRAFJNEQ EQ F/BNXSVRYQ EQ ,75, \a                                  ANZ: WBUA ONEPYNL RYRZRAGNEL, \a                                  NQE: GBQQ BUNEN, \a                                  CUB: 2678934100, \a                                  GKG: FRRF FZBXR VA NERN BS JBEXVAT SVER, NQI P\a                                  BZC BS #SQ328 \a/1231  (748     )  EDHRFG  P129   Nqqrq Havg(f) Erdhrfgrq\a                                  ,ERDN P129 ZPV134                            \a/1231              ZVFP    P129   ,ZPV FGERRG GB JRQTRJNL GB TERRAFJNEQ F  \a/1232  (656     )  NQQ     ZPV134
- 
+
 Pbagnpg: fhccbeg@npgvir911.pbz
 Ntrapl anzr: Jneevatgba Pbzzhavgl Nzohynapr Pbecf Ybpngvba: Jneevatgba, CN 
 Fraqre: <zff@pb.ohpxf.cn.hf>
@@ -101,6 +100,7 @@ Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a            
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129/352\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1220804    Kers:                           #CQ121601495 \a\a Erprvirq     06/08/12  21:04:08  OL PG10   773      \a Ragrerq      06/08/12  21:05:21  OL PG10   773      \a Qvfcngpurq   06/08/12  21:07:56  OL SF01   806      \a\a Vavgvny Glcr: NGENA   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET) Cev: 3 Qfcb:      Cerz: [  ]\a RZF Oyx:  129017 Sver Oyx:  29044  Cbyvpr Oyx:  75101  Znc Cntr: 3147N3 \a Tebhc: RA  Orng: 129 Fep:  9 NGG:    \a Ybp: 1843 ZNER EQ ,75  ogja FHEERL YN & EBNA QE\a\a Ybp Vasb: \a Anzr: ZVQQYRGBA WBNA          Nqqe:                         Cubar: 2153433790\a\a/2105  (773     )  RAGEL:         77 LBS,,URNEGORNG VF YBJ ,,VF QHR GB FGERFF\a/2105              FHCC           GKG: ERDHRFGVAT AB FVERAF \a/2107  (806     )  QVFC    N352   
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129/134\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1220807    Kers:                           #CQ121601535 \a\a Erprvirq     06/08/12  21:34:07  OL PG04   741      \a Ragrerq      06/08/12  21:35:18  OL PG04   741      \a Qvfcngpurq   06/08/12  21:35:47  OL SF01   806      \a\a Vavgvny Glcr: OCGNFG  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: OCGNFG(NFFVFG CNGVRAG) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  129132 Sver Oyx:  29037  Cbyvpr Oyx:  75301  Znc Cntr: 3034R7 \a Tebhc: RA  Orng: 129 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 1273 SBYYL EQ ,75  ogja CVPXREGBJA EQ & OEVFGBY EQ\a\a Ybp Vasb: \a Anzr: UNEEL OREQREVNA         Nqqe: 1273 SBYYL EQ           Cubar: 2159183222\a\a/2135  (741     )  RAGEL:         PURZB CG SRYY,,GBB JRNX GB FGNAQ HC,,WHFG ERD \a                                  URYC TRGGVAT UVZ CVPXRQ HC\a/2135  (806     )  QVFC    N134    #125093   CNAXBR,ELNA 
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1220813    Kers:                           #CQ121601609 \a\a Ragrerq      06/08/12  22:32:58  OL CQ05   774      \a Qvfcngpurq   06/08/12  22:33:40  OL SF01   806      \a\a Vavgvny Glcr: OBQ     Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: OBQ   (BIREQBFR/CBVFVBAVAT (ABA PEVG)) Cev: 4 Qfcb:      Cerz: [CJ]\a RZF Oyx:  129126 Sver Oyx:  78054  Cbyvpr Oyx:  29301  Znc Cntr: 3034S7 \a Tebhc: RA  Orng: 129 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 3079 OEVFGBY EQ #1 ,29 -- NCGF ogja BYQ ARJ EQ & SBYYL EQ\a\a Ybp Vasb: QBJAFGNVEF NCG\a Anzr: XNGUL ZLREF             Nqqe: P/C                     Cubar: 2158709925\a\a/2232  (774     )  RAGEL:         SRZ GNXVAT CVYYF NAQ PBZVAT NSGRE PZCY\a/2233  (806     )  QVFC    N129    #147878   URYYLRE, ZVXR \a                                   #100054   RATYR, PUEVFGBCURE (RZG) 
+Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129/125\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1220813    Kers:                           #CQ121601609 \a\a Ragrerq      06/08/12  22:32:58  OL CQ05   774      \a Qvfcngpurq   06/08/12  22:33:40  OL SF01   806      \a Raebhgr      06/08/12  22:37:39                     \a Bafprar      06/08/12  22:39:45                     \a\a Vavgvny Glcr: OBQ     Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: OBQ   (BIREQBFR/CBVFVBAVAT (ABA PEVG)) Cev: 4 Qfcb:      Cerz: [CJ]\a RZF Oyx:  129126 Sver Oyx:  78054  Cbyvpr Oyx:  29301  Znc Cntr: 3034S7 \a Tebhc: RA  Orng: 129 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 3079 OEVFGBY EQ #1 ,29 -- NCGF ogja BYQ ARJ EQ & SBYYL EQ\a\a Ybp Vasb: QBJAFGNVEF NCG\a Anzr: XNGUL ZLREF             Nqqe: P/C                     Cubar: 2158709925\a\a/2232  (774     )  RAGEL:         SRZ GNXVAT CVYYF NAQ PBZVAT NSGRE PZCY\a/2233  (806     )  QVFC    N129    #147878   URYYLRE, ZVXR \a                                   #100054   RATYR, PUEVFGBCURE (RZG) \a/2233  (774     )  FHCC           GKG: GBBX HAX NZBHAG XYBABCVA, VA UNYYJNL \a/2237  (807     )  RAEBHG  N129   \a/2238  (774     )  FHCC           GKG: PZCY GUVAXF SRZ "YVM" VF TBVAT GB NGGNPX \a                                  URE FB FUR VF UVQVAT ORUVAQ URE PNE \a/2238              FHCC           GKG: SEBAG NCG \a/2239  (807     )  ZVFP    N129   , JVYY FGNTR GVYY CBYVPR FRPHER FPRAR\a/2239              FHCC           GKG: FDHNQ FGNTVAT GVYY FPRAR FRPHER \a/2239              BAFPAR  N129   [FGNTVAT] \a/2242              EDHRFG  N129   Nqqrq Havg(f) Erdhrfgrq\a                                  ,ERDN N129 1O N\a/2243  (806     )  NQQ     N125    #203578   ZVYYRE,PBAENQ \a                                   #191620   EBHFVF, WNFBA (RZG) 
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1220821    Kers:                           #CQ121601678 \a\a Ragrerq      06/09/12  00:20:44  OL CQ09   779      \a Qvfcngpurq   06/09/12  00:23:10  OL SF01   806      \a\a Vavgvny Glcr: NSNYY   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NSNYY (SNYY IVPGVZ (PEVGVPNY)) Cev: 3 Qfcb:      Cerz: [  ]\a RZF Oyx:  129013 Sver Oyx:  29048  Cbyvpr Oyx:  75201  Znc Cntr: 3146W1 \a Tebhc: RA  Orng: 129 Fep:   NGG:    \a Ybp: 1111 RNFGBA EQ ,75 -- JNEEV CNIVYVBA ogja BKSBEQ QE & CNEX EQ\a\a Ybp Vasb: WBUAL NAQ SENAXVRF\a Anzr: WBR TVBINAVR            Nqqe: 1111 RNFGBA EQ          Cubar: 2153431584\a\a/0020  (779     )  PBCL           ,72 LBZ J/URNQ VAW..CBFF SRYY...\a/0020             $PEBFF          #CQ121601678 \a                                  ,72 LBZ J/URNQ VAW..CBFF SRYY...\a/0021  (806     )  UBYQ           \a/0023              QVFC    N129    #147878   URYYLRE, ZVXR \a                                   #100054   RATYR, PUEVFGBCURE (RZG) 
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1220882    Kers:                           #CQ121610549 \a\a Ragrerq      06/09/12  11:41:39  OL PG12   367      \a Qvfcngpurq   06/09/12  11:42:25  OL SF01   748      \a\a Vavgvny Glcr: OGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: OGNV  (GENSSVP NPPVQRAG(ABA-PEVGVPNY)) Cev: 3 Qfcb:      Cerz: [  ]\a RZF Oyx:  129002 Sver Oyx:  29003  Cbyvpr Oyx:  75301  Znc Cntr: 3146U5 \a Tebhc: RA  Orng: 129 Fep:  9 NGG:  VAI - Vairfgvtngr  \a Ybp: 404 RNFGBA EQ ,75  ogja GVGHF NI & TNEQRA NI\a\a Ybp Vasb: VSB\a Anzr: SENAPRF                 Nqqe: OYVAQ FUNQR SNPGBEL     Cubar: 2154914400\a\a/1141  (367     )  RAGEL:         ER:2 IRUF VAIBYIRQ,,,HAX VAWF\a/1142              FHCC           YBPV: VSB, \a                                  GKG: 1 CREFBA NFXVAT SBE RZF,,,,HAX ERNFBA \a/1142  (748     )  QVFC    N129    #147878   URYYLRE, ZVXR \a                                   #100054   RATYR, PUEVFGBCURE (RZG) 
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129/122\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1220893    Kers:                           #CQ121610608 \a\a Erprvirq     06/09/12  12:31:27  OL CQ12   735      \a Ragrerq      06/09/12  12:32:17  OL CQ12   735      \a Qvfcngpurq   06/09/12  12:32:42  OL SF01   748      \a\a Vavgvny Glcr: NHAP    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NHAP  (HAPBAFPVBHF CREFBA) Cev: 1 Qfcb:      Cerz: [CJ]\a RZF Oyx:  129002 Sver Oyx:  29018  Cbyvpr Oyx:  75101  Znc Cntr: 3146W4 \a Tebhc: RA  Orng: 129 Fep:  9 NGG:  VAI - Vairfgvtngr  \a Ybp: YN SVGARFF ,75 ng 599 CNHY INYYRL EQ ,75 ogja RNFGBA EQ & FGERRG EQ\a\a Ybp Vasb: VA ZRAF YBPXRE EBBZ\a Anzr: NY CVEBYV               Nqqe: ZNANTRE                 Cubar: 2159180900\a\a/1232  (735     )  RAGEL:         HAPBA ZNYR 80LBZ\a/1232  (748     )  QVFC    N122    #177366   XNMNAWVNA, CNGEVPX \a                                   #141260   ZNGGURJF, PBERL(RZG) 
@@ -115,6 +115,7 @@ Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a            
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1221102    Kers:                           #CQ121621078 \a\a Erprvirq     06/10/12  20:07:26  OL PG07   814      \a Ragrerq      06/10/12  20:08:31  OL PG07   814      \a Qvfcngpurq   06/10/12  20:09:24  OL SF01   657      \a\a Vavgvny Glcr: NHAE    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NHAE  (HAERFCBAFVIR CREFBA) Cev: 1 Qfcb:      Cerz: [CJ]\a RZF Oyx:  129027 Sver Oyx:  29904  Cbyvpr Oyx:  86003  Znc Cntr: 3034X7 \a Tebhc: RA  Orng: 129 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 1660 RNFGBA EQ #246 ,86 -- ARFUN ZNABE AU ARJ ogja XRYYL EQ & NYZFUBHFR EQ\a\a Ybp Vasb: ORQ #2\a Anzr: EBA,YCA                 Nqqe: 1660 RNFGBA EQ          Cubar: 2152453256\a\a/2008  (814     )  RAGEL:         97LBZ,,FBO,,HAE GB NYY FGVZHYV\a/2008              FHCC           GKG: OERNGUVAT FYBJYL,ZBIRQ SEBZ GBVYRG GB ORQ\a/2009  (657     )  QVFC    N129    #190830   ZBLRE,WHFGVA \a                                   #141260   ZNGGURJF, PBERL(RZG) 
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a125/129\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1221126    Kers:                           #CQ121621291 \a\a Ragrerq      06/10/12  23:24:32  OL PG08   414      \a Qvfcngpurq   06/10/12  23:27:51  OL SF01   657      \a\a Vavgvny Glcr: OGENA   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: OGENA (RZRETRAPL GENAFCBEGNGVBA) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  125038 Sver Oyx:  19038  Cbyvpr Oyx:  28106  Znc Cntr: 3034W1 \a Tebhc: RA  Orng: 125 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: QBLYR GENVA FGN ,28 ng 110 F PYVAGBA FG ,28 ogja J NFUYNAQ FG & OEVQTR FG\a\a Ybp Vasb: \a Anzr: WBL YLAA                Nqqe:                         Cubar:           \a\a/2324  (414     )  RAGEL:         JVYY OR NG GF ARRQF GB TB GB QU ,PNZR NYY GUR \a                                  JNL SEZ CUVYN NAQ FBA JNF FHCCBFRQ GB CVPX URE\a                                   HC OHG UR VFAG GURER,NAQ PZCY UNQ GB HFR FBZR\a                                  BRAF PRYY CUBAR JUB JNF YRNIVAT SBE GENVA FB P\a                                  BHYQAG GNYX NALZBER\a/2326              FHCC           GKG: FNVQ ARPX NAQ ONPX CNVA \a/2327  (657     )  QVFC    N129    #190830   ZBLRE,WHFGVA \a                                   #141260   ZNGGURJF, PBERL(RZG) 
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1221183    Kers:              #SQ1208206   #CQ121630460 \a\a Ragrerq      06/11/12  11:20:35  OL PG08   675      \a Qvfcngpurq   06/11/12  11:21:53  OL SF01   745      \a\a Vavgvny Glcr: NGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NGNV  (GENSSVP NPPVQRAG (PEVGVPNY)) Cev: 1 Qfcb:      Cerz: [  ]\a RZF Oyx:  129018 Sver Oyx:  29024  Cbyvpr Oyx:  75101  Znc Cntr: 3146W4 \a Tebhc: RA  Orng: 129 Fep:  A NGG:    \a Ybp: JRTZNAF ZNEXRG ,75 ng 1405 ZNVA FG ,75 ogja INYYRL FDHNER OY & NYYVFBA QE\a\a Ybp Vasb: BA EG 611 VSB JRTZNAF\a Anzr:                         Nqqe:                         Cubar:           \a\a/1120  (675     )  RAGEL:         2 IRUF,,,1 ZNYR VAWHERQ,,,JNF FGVYY VA IRU,,,T\a                                  NFBYVAR FCVYYVAT\a/1121  (745     )  QVFC    N129    #190830   ZBLRE,WHFGVA \a                                   #107241   JBYS, MNPUNEL (RZG) 
+Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129/122\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1221183    Kers:              #SQ1208206   #CQ121630460 \a\a Ragrerq      06/11/12  11:20:35  OL PG08   675      \a Qvfcngpurq   06/11/12  11:21:53  OL SF01   745      \a Raebhgr      06/11/12  11:23:40                     \a Bafprar      06/11/12  11:25:46                     \a\a Vavgvny Glcr: NGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NGNV  (GENSSVP NPPVQRAG (PEVGVPNY)) Cev: 1 Qfcb:      Cerz: [  ]\a RZF Oyx:  129018 Sver Oyx:  29027  Cbyvpr Oyx:  75101  Znc Cntr: 3146U3 \a Tebhc: RA  Orng: 129 Fep:  A NGG:    \a Ybp: EG 611/INYYRL FDHNER OY ,75   \a\a Ybp Vasb: BA EG 611 VSB JRTZNAF\a Anzr: FUREEL OVFRYR           Nqqe:                         Cubar: 2017450118\a\a/1120  (675     )  RAGEL:         2 IRUF,,,1 ZNYR VAWHERQ,,,JNF FGVYY VA IRU,,,T\a                                  NFBYVAR FCVYYVAT\a/1121  (745     )  QVFC    N129    #190830   ZBLRE,WHFGVA \a                                   #107241   JBYS, MNPUNEL (RZG) \a/1122  (675     )  PUNATR         ANZ:  -->  FUREEL OVFRYR, \a                                  CUB:  -->  2017450118\a/1122              PUNATR         GKG: ZNYR UNF URNQ JBHAQ \a/1123  (190830  ) *RAEBHG  N129   ,43400.7\a/1124  (721     )  PUNATR         YBP: JRTZNAF ZNEXRG ,75 -->  EG 611/INYYRL FDH\a                                  NER OY ,75\a/1125  (190830  ) *BAFPAR  N129   ,43401.6\a/1128  (721     )  EDHRFG  N129   Nqqrq Havg(f) Erdhrfgrq\a                                  ,ERDN N129 1N\a/1129  (745     )  NQQ     N122    #143904   ZVGPURYY, PUNAAN \a                                   #163145   GHGGYR, WHFGVA (RZG) 
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1221194    Kers:                           #CQ121630609 \a\a Erprvirq     06/11/12  12:49:35  OL PG07   534      \a Ragrerq      06/11/12  12:51:35  OL PG07   534      \a Qvfcngpurq   06/11/12  12:52:41  OL SF01   745      \a\a Vavgvny Glcr: NNOQB   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NNOQB (NPHGR NOQBZRA) Cev: 3 Qfcb:      Cerz: [SJ]\a RZF Oyx:  129021 Sver Oyx:  29505  Cbyvpr Oyx:  75101  Znc Cntr: 3146X4 \a Tebhc: RA  Orng: 129 Fep:  9 NGG:    \a Ybp: JRFGZVAFGRE NCGF #O17 ,75 ng 600 INYYRL EQ #O17 ,75 ogja EG 132 & YN EHR YN\a\a Ybp Vasb: \a Anzr: TBEYRL,QRAVFR           Nqqe:                         Cubar: 2153437606\a\a/1251  (534     )  RAGEL:         61 LB SRZNYR,,PUEBARF QVFRNFR CG,,RKGERZR ANHF\a                                  RN,,SRRYF SNVAG,,CNVA VA FGBZNPU,,FVFGRE BF JV\a                                  GU URE\a/1252  (745     )  PUNATR         YBP: 600 INYYRL EQ #O17 ,75 -->  JRFGZVAFGRE N\a                                  CGF #O17 ,75, \a                                  YBPV: NCG O17 -->  \a/1252              QVFC    N129    #190830   ZBLRE,WHFGVA \a                                   #107241   JBYS, MNPUNEL (RZG) 
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1221209    Kers:                           #CQ121630773 \a\a Erprvirq     06/11/12  14:31:54  OL RZF1   639      \a Ragrerq      06/11/12  14:33:35  OL RZF1   639      \a Qvfcngpurq   06/11/12  14:35:40  OL SF01   745      \a\a Vavgvny Glcr: NPURFC  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF) Cev: 3 Qfcb:      Cerz: [SJ]\a RZF Oyx:  129021 Sver Oyx:  29505  Cbyvpr Oyx:  75101  Znc Cntr: 3146X4 \a Tebhc: RA  Orng: 129 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: JRFGZVAFGRE NCGF #N40 ,75 ng 600 INYYRL EQ #N40 ,75 ogja EG 132 & YN EHR YN\a\a Ybp Vasb: NCG N-40\a Anzr: RTRYXNZC,WBFRCU         Nqqe: 600 INYYRL EQ           Cubar: 2674838068\a\a/1433  (639     )  RAGEL:         QE JNAGF PBZCY JVSR GENAFCBEGRQ SBE RINY SBE E\a                                  NCVQ URNEG ENGR NAQ JRNXARFF\a/1433              FHCC           GKG: VA GUR YVIVAT EBBZ,,87LBS \a/1435              FHCC           GKG: CRE PBZCY JURRYRQ FGERGPURE JBA'G SVG VA,\a                                  ,JVYY ARRQ N FGNVE PUNVE \a/1435  (745     )  QVFC    N129    #190830   ZBLRE,WHFGVA \a                                   #107241   JBYS, MNPUNEL (RZG) 
 Fhowrpg: 911 Qngn\a  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a129\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1221223    Kers:                           #CQ121630907 \a\a Ragrerq      06/11/12  15:45:51  OL CQ10   734      \a Qvfcngpurq   06/11/12  15:47:05  OL SF01   745      \a\a Vavgvny Glcr: NOYRQ   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NOYRQ (URZBEEUNTR/OYRRQVAT) Cev: 3 Qfcb:      Cerz: [  ]\a RZF Oyx:  129039 Sver Oyx:  29020  Cbyvpr Oyx:  75101  Znc Cntr: 3146W4 \a Tebhc: RA  Orng: 129 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 271 FNFFNSENF PG ,75  ogja UNPXOREEL PG & PBFGARE QE\a\a Ybp Vasb: \a Anzr: XEVFGRA XYRGXR          Nqqe:                         Cubar: 2672183331\a\a/1545  (734     )  RAGEL:         78 LBS,,FRIRER ABFROYRRQ,,ERD QGU\a/1547  (745     )  QVFC    N129    #190830   ZBLRE,WHFGVA \a                                   #107241   JBYS, MNPUNEL (RZG) 
@@ -129,6 +130,7 @@ Pbagnpg: Npgvir911
 [911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \e\a129/122\e\a                                                    \e\a\e\a\e\a Vap Uvfgbel sbe: #RQ1233029    Kers:                           #CQ122540225 \e\a\e\a Erprvirq     09/10/12  07:30:21  OL PG05   731      \e\a Ragrerq      09/10/12  07:31:32  OL PG05   731      \e\a Qvfcngpurq   09/10/12  07:31:58  OL SF01   619      \e\a\e\a Vavgvny Glcr: NPURFC  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\e\a Svany Glcr: NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF) Cev: 3 Qfcb:      Cerz: [SJ]\e\a RZF Oyx:  129021 Sver Oyx:  29505  Cbyvpr Oyx:  75101  Znc Cntr: 3146X4 \e\a Tebhc: RA  Orng: 129 Fep:  9 NGG:    \e\a Ybp: 600 INYYRL EQ #P12 ,75 -- JRFGZVAFGRE NCGF ogja EG 132 & YN EHR YN\e\a\e\a Ybp Vasb: NCG P12\e\a Anzr: BFYRE QBEVF             Nqqe: JVSR BF                 Cubar: 2153431902\e\a\e\a/0731  (731     )  RAGEL:         87 LBZ CNVAF VA PURFG\e\a/0731              FHCC           GKG: UNF CNPRZNXRE \e\a/0731  (619     )  QVFC    N122    #129287   UBHTU, FGRCURA \e\a\e\a\e\a\e\a
 [911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \e\a122\e\a                                                        \e\a\e\a\e\a Vap Uvfgbel sbe: #RQ1233030    Kers:                           #CQ122540226 \e\a\e\a Ragrerq      09/10/12  07:31:35  OL PG09   733      \e\a Qvfcngpurq   09/10/12  07:32:35  OL SF01   619      \e\a\e\a Vavgvny Glcr: NSNYY   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\e\a Svany Glcr: NSNYY (SNYY IVPGVZ (PEVGVPNY)) Cev: 3 Qfcb:      Cerz: [  ]\e\a RZF Oyx:  122112 Sver Oyx:  91097  Cbyvpr Oyx:  74004  Znc Cntr: 3147U8 \e\a Tebhc: RA  Orng: 122 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \e\a Ybp: GNLYBE PEBFFVAT #219 ,74 ng 23000 NAAF PUBVPR #219 ,74 ogja WBUAFIVYYR OY & GNLYBE PEBFFVAT\e\a\e\a Ybp Vasb: \e\a Anzr: QNIVQ QRGRER            Nqqe: RZG                     Cubar: 2157911441\e\a\e\a/0731  (733     )  RAGEL:         93 LBS,,SRYY UVG URNQ,, EVTUG XARR NAQ EVTUG J\e\a                                  EVFG CNVA,,BA OYBBQ GUVAAREF\e\a/0731              FHCC           GKG: AB IVFVOYR OYRRQVAT \e\a/0732  (619     )  QVFC    N1221   #147886   GNTTNEG, NAQERJ (RZG) \e\a                                   #203754   JEVTUG, INYREVR \e\a\e\a\e\a\e\a
 [911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \e\a122\e\a                                                        \e\a\e\a\e\a Vap Uvfgbel sbe: #RQ1233048    Kers:                           #CQ122540426 \e\a\e\a Erprvirq     09/10/12  09:54:56  OL PG08   646      \e\a Ragrerq      09/10/12  09:55:45  OL PG08   646      \e\a Qvfcngpurq   09/10/12  09:56:19  OL SF01   619      \e\a\e\a Vavgvny Glcr: NGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\e\a Svany Glcr: NGNV  (GENSSVP NPPVQRAG (PEVGVPNY)) Cev: 1 Qfcb:      Cerz: [  ]\e\a RZF Oyx:  122006 Sver Oyx:  90043  Cbyvpr Oyx:  74002  Znc Cntr: 3147O8 \e\a Tebhc: RA  Orng: 122 Fep:  9 NGG:  VAI - Vairfgvtngr  \e\a Ybp: PYNVER EQ/ZNTABYVN EQ ,74   \e\a\e\a Ybp Vasb: \e\a Anzr: YBTNA, CNGEVPX          Nqqe: 775 PYNVER EQ           Cubar: 2156748558\e\a\e\a/0955  (646     )  RAGEL:         GUVAXF CRQ FGEHPX,,GUVAXF FGEVXVAT IRU FGVYY B\e\a                                  F,,\e\a/0956  (619     )  QVFC    N122    #129287   UBHTU, FGRCURA \e\a\e\a\e\a\e\a
+[911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \e\a122\e\a                                                        \e\a\e\a\e\a Vap Uvfgbel sbe: #RQ1233048    Kers:                           #CQ122540426 \e\a\e\a Erprvirq     09/10/12  09:54:56  OL PG08   646      \e\a Ragrerq      09/10/12  09:55:45  OL PG08   646      \e\a Qvfcngpurq   09/10/12  09:56:19  OL SF01   619      \e\a Raebhgr      09/10/12  09:57:41                     \e\a\e\a Vavgvny Glcr: NGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\e\a Svany Glcr: NGNV  (GENSSVP NPPVQRAG (PEVGVPNY)) Cev: 1 Qfcb:      Cerz: [  ]\e\a RZF Oyx:  122006 Sver Oyx:  90043  Cbyvpr Oyx:  74002  Znc Cntr: 3147O8 \e\a Tebhc: RA  Orng: 122 Fep:  9 NGG:  VAI - Vairfgvtngr  \e\a Ybp: PYNVER EQ/ZNTABYVN EQ ,74   \e\a\e\a Ybp Vasb: \e\a Anzr: YBTNA, CNGEVPX          Nqqe: 775 PYNVER EQ           Cubar: 2156748558\e\a\e\a/0955  (646     )  RAGEL:         GUVAXF CRQ FGEHPX,,GUVAXF FGEVXVAT IRU FGVYY B\e\a                                  F,,\e\a/0956  (619     )  QVFC    N122    #129287   UBHTU, FGRCURA \e\a/0956  (646     )  FHCC           GKG: PBZCY JVYY TB TRG SHEGURE VASB NAQ P/O SE\e\a                                  BZ P/C,, \e\a/0957  (826     )  FHCC           ANZ: PUEVFGVAR ARJGBA, \e\a                                  NQE: CZ, \e\a                                  CUB: 2152606624, \e\a                                  GKG: CRQ IF IRU,,68 LBS,,OYRRQVAT SEBZ URNQ \e\a/0957  (129287  ) *RAEBHG  N122   \e\a/0958  (815     )  FHCC           ANZ: SERQ PVNB, \e\a                                  NQE: VAIBYIRQ, \e\a                                  CUB: 2676290392, \e\a                                  GKG: FHOW TBG UVG OL IRU,,OYRRQVAT SEBZ GUR SN\e\a                                  PR...JVSR OYRRQVAT SEBZ GUR URNQ \e\a/0959              FHCC           ANZ: SERQ PVNB, \e\a                                  NQE: VAIBYIRQ, \e\a                                  CUB: 2676290392, \e\a                                  GKG: ZNYR CG VF 72,,JVSR VF 69,, \e\a/0959              FHCC           ANZ: SERQ PVNB, \e\a                                  NQE: VAIBYIRQ, \e\a                                  CUB: 2676290392, \e\a                                  GKG: GREZ YVAR CQ BF \e\a/1000  (271     )  EDHRFG  N122   Nqqrq Havg(f) Erdhrfgrq\e\a                                  ,ERDN N122 1N\e\a/1000  (619     )  NQQ     N1221   #147886   GNTTNEG, NAQERJ (RZG) \e\a                                   #203754   JEVTUG, INYREVR \e\a\e\a\e\a\e\a
 [911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \e\a122/113\e\a                                                    \e\a\e\a\e\a Vap Uvfgbel sbe: #RQ1233055    Kers:              #SQ1212953   #CQ122540509 \e\a\e\a Ragrerq      09/10/12  10:51:37  OL PG08   646      \e\a Qvfcngpurq   09/10/12  10:52:18  OL SF01   619      \e\a\e\a Vavgvny Glcr: NGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\e\a Svany Glcr: NGNV  (GENSSVP NPPVQRAG (PEVGVPNY)) Cev: 1 Qfcb:      Cerz: [  ]\e\a RZF Oyx:  122116 Sver Oyx:  91016  Cbyvpr Oyx:  74004  Znc Cntr: 3259W2 \e\a Tebhc: RA  Orng: 122 Fep:  A NGG:  VAI - Vairfgvtngr  \e\a Ybp: JNJN AB TNF ,74 ng 10 QNIVFIVYYR EQ ,74 ogja R PBHAGL YVAR EQ & YVYNP YN\e\a\e\a Ybp Vasb: VSB\e\a Anzr: XNGUYRRA ZHZSBEQ        Nqqe: C/Z                     Cubar: 2152908401\e\a\e\a/1051  (646     )  RAGEL:         1 IRU BIREGHEARQ,,ZNYR YNLVAT BA FGERR,,HAX VS\e\a                                   RWRPGRQ,,\e\a/1051  (826     )  FHCC           YBP: R PBHAGL YVAR EQ/QNIVFIVYYR EQ ,74, \e\a                                  YBPV: BA QNIVFIVYYR, \e\a                                  ANZ: PENVT UNEEVF, \e\a                                  NQE: CZ, \e\a                                  CUB: 6096058820, \e\a                                  GKG: 2 IRUF,,AEV,,CNEGVNY OYXVAT \e\a/1051  (619     ) $PEBFF          #SQ1212953   \e\a/1052              QVFC    N113    #192624   ZVGPURYY, EBOREG \e\a                                   #108365   XVEX, QVNAR (RZG) \e\a\e\a\e\a\e\a
 [911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \e\a122\e\a                                                        \e\a\e\a\e\a Vap Uvfgbel sbe: #RQ1233068    Kers:                           #CQ122540615 \e\a\e\a Ragrerq      09/10/12  12:01:58  OL PG05   731      \e\a Qvfcngpurq   09/10/12  12:02:34  OL SF01   619      \e\a\e\a Vavgvny Glcr: NSNVAG  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\e\a Svany Glcr: NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR)) Cev: 3 Qfcb:      Cerz: [  ]\e\a RZF Oyx:  122112 Sver Oyx:  91097  Cbyvpr Oyx:  74004  Znc Cntr: 3147U8 \e\a Tebhc: RA  Orng: 122 Fep:  A NGG:    \e\a Ybp: JRFGJBBQ CYNPR ,74 ng 13000 NAAF PUBVPR ,74 ogja WBUAFIVYYR OY & JRFGJBBQ CYNPR\e\a\e\a Ybp Vasb: NCG #101\e\a Anzr: CUVYVC                  Nqqe: FRP / RZG               Cubar: 2157790288\e\a\e\a/1201  (731     )  RAGEL:         83 LBZ QVMMVARFF /\e\a/1202  (619     )  QVFC    N122    #129287   UBHTU, FGRCURA \e\a\e\a\e\a\e\a
 
@@ -139,6 +141,7 @@ Fraqre: zff@pb.ohpxf.cn.hf
 
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a/134\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1246458                                                 \a\a Ragrerq      12/18/12  12:19:45  OL SF01   748      \a Qvfcngpurq   12/18/12  12:21:00  OL SF01   748      \a\a Vavgvny Glcr: NHAP    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NHAP  (HAPBAFPVBHF CREFBA) Cev: 1 Qfcb:      Cerz: [  ]\a RZF Oyx:   Sver Oyx:   Cbyvpr Oyx:   Znc Cntr:  \a Tebhc: RK  Orng:  Fep:  A NGG:    \a Ybp: 640 ORGUYRURZ CX,ZBAGPB GJC  \a\a Ybp Vasb: ZNABE PNER URNYG #102 KFGE UBEFUNZ EQ\a Anzr: ZBAGPB                  Nqqe:                         Cubar:           \a\a/1219  (748     )  RAGEL:         PBIRE ZRQVP 345\a/1221              QVFC    N134    #032218   FGROHYVF,ONEONEN 
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a/134\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1246635                                                 \a\a Ragrerq      12/19/12  18:17:04  OL SF01   747      \a Qvfcngpurq   12/19/12  18:17:51  OL SF01   747      \a\a Vavgvny Glcr: NBQ     Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NBQ   (BIREQBFR/CBVFVBAVAT (PEVGVPNY)) Cev: 2 Qfcb:      Cerz: [  ]\a RZF Oyx:   Sver Oyx:   Cbyvpr Oyx:   Znc Cntr:  \a Tebhc: RK  Orng:  Fep:  A NGG:  VAI - Vairfgvtngr  \a Ybp: 202 FGENGSBEQ QE,ZBAG GJC  \a\a Ybp Vasb: KFGERRG PYNERZBAG\a Anzr: ZBAGPB                  Nqqe: ENQVB                   Cubar:           \a\a/1817  (747     )  RAGEL:         PBIRE 345\a/1817              QVFC    N134    #078910   ZPQBANTU, CRARYBCR \a                                   #131319   ZRRUNA, WBFRCU (RZG)
+(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a134/151\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1246749    Kers:              #SQ1219921   #CQ123550683 \a\a Erprvirq     12/20/12  12:54:06  OL OPB1   734      \a Ragrerq      12/20/12  12:56:06  OL OPB1   734      \a Qvfcngpurq   12/20/12  12:57:25  OL SQ01   341      \a Raebhgr      12/20/12  12:58:04                     \a Bafprar      12/20/12  13:05:57                     \a\a Vavgvny Glcr: ENHGB   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: ENHGB (NHGB RKGEVPNGVBA (EOBK)) Cev: 1 Qfcb:      Cerz: [  ]\a RZF Oyx:  134309 Sver Oyx:  61013  Cbyvpr Oyx:  36107  Znc Cntr: 2921N6 \a Tebhc: RA  Orng: 134 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: EVPXREG EQ/EG 152 ,36   \a\a Ybp Vasb: \a Anzr: SERQ JRVFONPU           Nqqe: ABG VAIBYIRQ            Cubar: 2153173391\a\a/1256  (734     )  RAGEL:         3 IRUF,,GOBAR,,BAR RAGENCCRQ\a/1256              FHCC           ANZ: SERQ JRVFONPU, \a                                  NQE: ABG VAIBYIRQ\a/1257  (341     )  QVFC    N151    #177638   QVYYNEQ, TERTTBEL \a/1257              NQQ     DHG60  \a/1258  (742     )  RAEBHG  DHG60  \a/1259              RAEBHG  N151   \a/1305              BAFPAR  DHG60  \a/1308              BAFPAR  N151   \a/1309              EDHRFG  N151   Nqqrq Havg(f) Erdhrfgrq\a                                  ,ERDN N151 1N  \a/1310  (639     )  NQQ     N1511   #047966   RYVSS, OENQ 
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SQ01  : \a134/151\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1246749    Kers:              #SQ1219921   #CQ123550683 \a\a Erprvirq     12/20/12  12:54:06  OL OPB1   734      \a Ragrerq      12/20/12  12:56:06  OL OPB1   734      \a Qvfcngpurq   12/20/12  12:57:25  OL SQ01   341      \a\a Vavgvny Glcr: ENHGB   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: ENHGB (NHGB RKGEVPNGVBA (EOBK)) Cev: 1 Qfcb:      Cerz: [  ]\a RZF Oyx:  134309 Sver Oyx:  61013  Cbyvpr Oyx:  36107  Znc Cntr: 2921N6 \a Tebhc: RA  Orng: 134 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: EVPXREG EQ/EG 152 ,36   \a\a Ybp Vasb: \a Anzr: SERQ JRVFONPU           Nqqe: ABG VAIBYIRQ            Cubar: 2153173391\a\a/1256  (734     )  RAGEL:         3 IRUF,,GOBAR,,BAR RAGENCCRQ\a/1256              FHCC           ANZ: SERQ JRVFONPU, \a                                  NQE: ABG VAIBYIRQ\a/1257  (341     )  QVFC    N151    #177638   QVYYNEQ, TERTTBEL 
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a134/R60\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1246741    Kers:                           #CQ123550611 \a\a Ragrerq      12/20/12  12:17:20  OL PG07   730      \a Qvfcngpurq   12/20/12  12:18:27  OL SF01   639      \a\a Vavgvny Glcr: NFRVM   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NFRVM (FRVMHER/NPGVIR (ZRQVP)) Cev: 2 Qfcb:      Cerz: [  ]\a RZF Oyx:  134620 Sver Oyx:  60062  Cbyvpr Oyx:  36097  Znc Cntr: 3032U4 \a Tebhc: RA  Orng: 134 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: JNYZNEG FGBER ,36 ng 1515 ORGUYRURZ CX ,36 ogja UVYYGBJA CX & FJNEGYRL EQ\a\a Ybp Vasb: NG ERTVFGRE 1\a Anzr: RQ ZNFFNEB              Nqqe: PHFGBZRE                Cubar: 6092345444\a\a/1217  (730     )  RAGEL:         ZNYR,CBFFVOYL RZCYBLRR,,NPGVIRYL FRVMVAT\a/1217  (690     )  FHCC           YBPV: VSB FGEBER TEBPREL FGBER, \a                                  ANZ: WVZVFU, \a                                  CUB: 2673473873, \a                                  GKG: ZNYR VA 30-40 UNIVAT N FRVM \a/1217  (730     )  FHCC           GKG: PBZCY ABG JVGU CG OHG BGURE RZCYBLRRF NER\a/1218  (721     )  FHCC           ANZ: REVP FGRUZNA, \a                                  CUB: 6103291709, \a                                  GKG: 30-40LBZ UNIVAT N FRVMHER \a/1218  (639     )  QVFC    N134    #078910   ZPQBANTU, CRARYBCR \a/1218              NQQ     DHG60  
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SQ02  : \a134/R60\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1246602    Kers:                           #CQ123540753 \a\a Erprvirq     12/19/12  14:08:24  OL PG08   672      \a Ragrerq      12/19/12  14:10:14  OL PG08   672      \a Qvfcngpurq   12/19/12  14:10:54  OL SQ02   721      \a\a Vavgvny Glcr: NGENA   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET) Cev: 3 Qfcb:      Cerz: [CJ]\a RZF Oyx:  134620 Sver Oyx:  60063  Cbyvpr Oyx:  36106  Znc Cntr: 3032R3 \a Tebhc: RA  Orng: 134 Fep:  9 NGG:    \a Ybp: QBPX ZRNQBJF AU #14 ,36 ng 2343 ORGUYRURZ CX #14 ,36 ogja HAVBAIVYYR CX & PUHEPU EQ\a\a Ybp Vasb: \a Anzr: ZNELYBH LBEX            Nqqe: AHEFR                   Cubar: 2158220688\a\a/1410  (672     )  RAGEL:         ER: 99LB SRZ,, SRYY RNEYVRE GBQNL,, PBASHFVBA,\a                                  , QVMMVARFF\a/1408?             FHCC           GKG: PBZR VA GUR EG 309 RAGENAPR \a/1410  (721     )  QVFC    N134    #189793   FCNEXF,PNFRL \a/1410              NQQ     DHG60  
@@ -160,6 +163,7 @@ Fraqre: zff@pb.ohpxf.cn.hf
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a090\a                                                        \aEha: R90    \a\a Vap Uvfgbel sbe: #SQ1305283    Kers:                           #CQ131130610 \a\a Ragrerq      04/23/13  13:05:20  OL CQ11   646      \a Qvfcngpurq   04/23/13  13:05:44  OL SF01   748      \a\a Vavgvny Glcr: SNYEZ   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SNYEZ (SVER NYNEZ (YBP)) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  122022 Sver Oyx:  90022  Cbyvpr Oyx:  74003  Znc Cntr: 3147T8 \a Tebhc: JR  Orng: 090 Fep:  A NGG:  VAI - Vairfgvtngr  \a Ybp: PBK PBAFGEHPGVBA ,74 ng 655 YBHVF QE ,74 ogja J FGERRG EQ & PBAFGNAPR QE\a\a Ybp Vasb: 215 672 9880\a Anzr: ERYVNAPR NY             Nqqe: 22                      Cubar: 8003040834\a\a/1305  (646     )  RAGEL:         ZNVA BSSVPR FZBXR,,J/A,,\a/1305  (748     )  QVFC    R90    
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a090\a                                                        \aEha: R90    \a\a Vap Uvfgbel sbe: #SQ1305276    Kers:                           #CQ131130360 \a\a Ragrerq      04/23/13  09:48:47  OL CQ04   744      \a Qvfcngpurq   04/23/13  09:49:08  OL SF01   748      \a\a Vavgvny Glcr: JNGRE   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: JNGRE (JNGRESYBJ NYNEZ (YBP)) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  122041 Sver Oyx:  90041  Cbyvpr Oyx:  74002  Znc Cntr: 3147Q7 \a Tebhc: JR  Orng: 090 Fep:  A NGG:  VAI - Vairfgvtngr  \a Ybp: 720 J FGERRG EQ ,74  ogja EG 263 & WNPX YNSSREGL OY\a\a Ybp Vasb: 908 PRAGENY CBVAG FP,AB CERZVFR AHZORE\a Anzr: QVROBYQ                 Nqqe: TW02                    Cubar: 8004344000\a\a/0948  (744     )  RAGEL:         HAX NHQ/FVY,JNGRE SYBJ NYEZ SEBZ FCEVAXYRE EBB\a                                  Z,,FCEVAXYRE EBBZ #2,J/A ,ERS #0735604,,TNIR N\a                                  F SNYEZ OHG GRKG UNF NF JNGRE SYBJ\a/0949  (748     )  QVFC    R90    
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a092/090\a                                                    \aEha: Y90    R92    R90    \a\a Vap Uvfgbel sbe: #SQ1305250    Kers:                           #CQ131120964 \a\a Erprvirq     04/22/13  15:38:11  OL PG11   728      \a Ragrerq      04/22/13  15:39:19  OL PG11   728      \a Qvfcngpurq   04/22/13  15:39:44  OL SF01   748      \a\a Vavgvny Glcr: SHZRVA  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SHZRVA(SHZRF VAFVQR FGEHPGHER (GNP)) Cev: 2 Qfcb:      Cerz: [  ]\a RZF Oyx:  122205 Sver Oyx:  92042  Cbyvpr Oyx:  74002  Znc Cntr: 3147O8 \a Tebhc: JR  Orng: 092 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 259 URAEL NI ,74  ogja QBTJBBQ EQ & URZYBPX EQ\a\a Ybp Vasb: \a Anzr: FNENU UBORAFNX          Nqqe:                         Cubar: 2159323615\a\a/1539  (728     )  RAGEL:         TNF FGBIR JNF SVKRQ GUVF ZBEAVAT,,PBZCY WHFG T\a                                  BG UBZR NAQ JUBYR UBHFR FZRYYF YVXR TNF PBZCY \a                                  QBRFA'G XABJ UBJ GB GHEA VG BSS,,CEBONOYL TBVA\a                                  T FVAPR 13:30\a/1539  (748     )  QVFC    Y90    \a/1539              NQQ     R92    \a/1539              NQQ     R90    
+(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a019/029/079/020/090\a                                        \aEha: Y29    R79    R20    E90    \a\a Vap Uvfgbel sbe: #SQ1305243    Kers: #RQ1314816                #CQ131120789 \a\a Erprvirq     04/22/13  13:52:33  OL PG06   744      \a Ragrerq      04/22/13  13:53:24  OL PG06   744      \a Qvfcngpurq   04/22/13  13:53:54  OL SF01   748      \a Raebhgr      04/22/13  13:55:13                     \a Bafprar      04/22/13  13:59:07                     \a\a Vavgvny Glcr: SNCG    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SNCG  (NCNEGZRAG SVER (OBK)) Cev: 1 Qfcb:      Cerz: [SJ]\a RZF Oyx:  125012 Sver Oyx:  19042  Cbyvpr Oyx:  29202  Znc Cntr: 2922T10 \a Tebhc: AB  Orng: 019 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 612 A FUNQL ERGERNG EQ #15 ,29 -- QBLYR PBZZBAF ogja YVZRXVYA EQ & ZNUBTNAL PG\a\a Ybp Vasb: EZ:NCG ,NCG:15\a Anzr: RQ                      Nqqe: 2153455875              Cubar: 2153455875\a\a/1353  (744     )  RAGEL:         SVER VA XVGPURA,,NQI GB RINP\a/1353  (748     )  QVFC    Y79     #ZQ0810   Y79 \a/1353              NQQ     Y29     #ZQ0889   Y29 \a/1353              NQQ     R19     #ZQ0802   R19 \a/1353              NQQ     R19-1   #ZQ0812   R19-1 \a/1353              NQQ     R79     #ZQ0813   R79 \a/1353              NQQ     R20    \a/1355  (619     )  NQQRE   OP19   [612 A FUNQL ERGERNG EQ #15 ,29] \a                                   #ZQ0803   XERHGRE, ONGG. C. \a/1359              BAFPAR  OP19   \a/1359              ZVFP    R19    ,ZBZRAG\a/1359              RAEBHG  Y79    \a/1400  (792     )  PUNATR         ,CQ ERQHPVAT FCRRQ, ABGUVAT SHEGURE\a/1400  (619     )  RAEBHG  R19    \a/1401              ZVFP    OP19   ,UBYQ GB R19 Y79\a/1401              ZVFP    OP19   ,QELRE SVER J/RKGRAFVBA,,XABPXRQ OL UBZRBJARE \a/1401              ZVFP    OP19   ,SZ GB FPRAR \a/1402              NVD     R20    \a/1402              NVD     R79    \a/1402              NVD     Y29    \a/1402              ONYAPR         Glcr punatrq gb G/SNCG   \a/1402              ZVFP    OP19   ,SVER VA 2AQ SYBBE YNHAQEL EBBZ \a/1402             $PEBFF          #RQ1314816   \a/1403              BAFPAR  R19    \a/1403  (748     )  NQQ     Y29     #ZQ0889   Y29 \a/1403              NQQ     R79     #ZQ0813   R79 \a/1403              NQQ     R20    \a/1403              NQQ     E90    
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a090\a                                                        \aEha: R90    \a\a Vap Uvfgbel sbe: #SQ1305223    Kers:                           #CQ131120122 \a\a Ragrerq      04/22/13  06:07:48  OL CQ07   592      \a Qvfcngpurq   04/22/13  06:08:42  OL SF01   748      \a\a Vavgvny Glcr: SNYEZ   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SNYEZ (SVER NYNEZ (YBP)) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  122026 Sver Oyx:  90026  Cbyvpr Oyx:  74003  Znc Cntr: 3147S7 \a Tebhc: JR  Orng: 090 Fep:  A NGG:  VAI - Vairfgvtngr  \a Ybp: 415 PBAFGNAPR QE ,74 -- PNEYGBA CBBYF ogja AVAN JL & ZRNEAF EQ\a\a Ybp Vasb: \a Anzr: ERFVQRAGVNY NY PB       Nqqe: #4007                   Cubar: 8006332677\a\a/0607  (592     )  RAGEL:         NHQ...SVER MBAR 5\a/0608  (619     )  ZVFP           ,QP52 BA ENQVB\a/0608  (748     )  QVFC    R90    
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a090\a                                                        \aEha: R90    \a\a Vap Uvfgbel sbe: #SQ1305217    Kers:                           #CQ131120043 \a\a Ragrerq      04/22/13  01:08:28  OL CQ06   515      \a Qvfcngpurq   04/22/13  01:08:45  OL SF01   757      \a\a Vavgvny Glcr: SNYEZ   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SNYEZ (SVER NYNEZ (YBP)) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  122026 Sver Oyx:  90026  Cbyvpr Oyx:  74003  Znc Cntr: 3147S7 \a Tebhc: JR  Orng: 090 Fep:  A NGG:  VAI - Vairfgvtngr  \a Ybp: PNEYGBA CBBYF ,74 ng 415 PBAFGNAPR QE ,74 ogja AVAN JL & ZRNEAF EQ\a\a Ybp Vasb: \a Anzr: ERFVQRAGVNY NY PB       Nqqe: 3652                    Cubar: 8006332677\a\a/0108  (515     )  RAGEL:         NHQ,,MBAR 5,,JA\a/0108  (757     )  QVFC    R90    
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a093/090\a                                                    \aEha: R93    Y90    FD93   R90    \a\a Vap Uvfgbel sbe: #SQ1305203    Kers:                           #CQ131110819 \a\a Ragrerq      04/21/13  17:17:42  OL PG02   639      \a Qvfcngpurq   04/21/13  17:18:31  OL SF01   341      \a\a Vavgvny Glcr: SQJY    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SQJY  (QJRYYVAT SVER (GNP)) Cev: 1 Qfcb:      Cerz: [  ]\a RZF Oyx:  122327 Sver Oyx:  93027  Cbyvpr Oyx:  74003  Znc Cntr: 3147S4 \a Tebhc: JR  Orng: 093 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 736 PURELY QE ,74  ogja EBOREGF EQ & QNUYVN EQ\a\a Ybp Vasb: \a Anzr: EBOREG RINATNYVFGN      Nqqe:                         Cubar: 2674812068\a\a/1717  (639     )  RAGEL:         UBHFR VF BA SVER,,PNA FRR SYNZRF SEBZ GUR UBHF\a                                  R,,VG'F GUR PBZCY ERFQ\a/1718              FHCC           GKG: ABOBQL VAFVQR GUR ERFQ,,ONPX QRPX VF RATH\a                                  YSRQ,,ONPX BS GUR UBHFR VF ABJ BA SVER \a/1718  (341     )  QVFC    R93    \a/1718              NQQ     Y90    \a/1718              NQQ     FD93   \a/1718              NQQ     R90    
@@ -169,22 +173,6 @@ Fraqre: zff@pb.ohpxf.cn.hf
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a091/090\a                                                    \aEha: Y90    R91    R90    \a\a Vap Uvfgbel sbe: #SQ1305059    Kers: #RQ1314407                #CQ131090284 \a\a Ragrerq      04/19/13  09:16:13  OL PG06   796      \a Qvfcngpurq   04/19/13  09:18:19  OL SF01   745      \a\a Vavgvny Glcr: PBNYEZ  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SHZRVA(SHZRF VAFVQR FGEHPGHER (GNP)) Cev: 2 Qfcb:      Cerz: [  ]\a RZF Oyx:  122121 Sver Oyx:  91021  Cbyvpr Oyx:  74004  Znc Cntr: 3147W9 \a Tebhc: JR  Orng: 091 Fep:  A NGG:  VAI - Vairfgvtngr  \a Ybp: 738 YBATFGERGU EQ ,74  ogja FPUBBY UBHFR YN & ZP TYLAA EQ\a\a Ybp Vasb: \a Anzr: URYRA XBFLYN            Nqqe:                         Cubar: 2156726366\a\a/0916  (796     )  RAGEL:         NYEZ TBVAT BSS,,PZCY UNF N URNQNPUR,,UBZR NYBA\a                                  R,,NQI GB JNVG BHGFVQR\a/0917  (745     )  PUNATR         GLC: PBNYEZ\a                                  ---> SHZRVA.\a                                  CEV: 4 \a                                  ---> 2 .\a/0918              QVFC    Y90    \a/0918              NQQ     R91    \a/0918              NQQ     R90    
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a/091/090\a                                                \aEha: R91    Y90    \a\a Vap Uvfgbel sbe: #SQ1305029                                                 \a\a Ragrerq      04/18/13  13:47:12  OL SQ01   619      \a Qvfcngpurq   04/18/13  13:50:13  OL SF01   656      \a\a Vavgvny Glcr: SNFG    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SNFG  (SVER NFFVFG BHG BS PBHAGL) Cev: 1 Qfcb:      Cerz: [  ]\a RZF Oyx:   Sver Oyx:   Cbyvpr Oyx:   Znc Cntr:  \a Tebhc: SK  Orng:  Fep:  A NGG:    \a Ybp: 2705 PRAGRAAVNY EQ K CVBARRE,HCE ZBERYA  \a\a Ybp Vasb: R91 Y90 J/ZFGN 10 OBK 35-93\a Anzr: ZBAGPB                  Nqqe:                         Cubar:           \a\a/1347  (619     )  RAGEL:         OHVYQVAT\a/1350  (656     )  QVFC    R91    \a/1350              NQQ     Y90    
 (911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a090\a                                                        \aEha: R90    \a\a Vap Uvfgbel sbe: #SQ1304992    Kers:                           #CQ131071199 \a\a Ragrerq      04/17/13  18:34:42  OL RZF2   765      \a Qvfcngpurq   04/17/13  18:35:08  OL SF01   807      \a\a Vavgvny Glcr: SNYEZ   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: SNYEZ (SVER NYNEZ (YBP)) Cev: 4 Qfcb:      Cerz: [SJ]\a RZF Oyx:  122012 Sver Oyx:  90050  Cbyvpr Oyx:  74004  Znc Cntr: 3147U9 \a Tebhc: JR  Orng: 090 Fep:  A NGG:  VAI - Vairfgvtngr  \a Ybp: OHPXF YNAQVAT NCGF #W3 ,74 ng 120 R FGERRG EQ #W3 ,74 ogja WNPXFBAIVYYR EQ & WBUAFIVYYR OY\a\a Ybp Vasb: 2156943650\a Anzr: RZRET ERFCBA NFFBP      Nqqe: QNA                     Cubar: 8006332677\a\a/1834  (765     )  RAGEL:         NHQ, W3, J/A\a/1835  (807     )  QVFC    R90    
-
-Pbagnpg: Npgvir911
-Ntrapl anzr: Prageny Ohpxf Nzohynapr
-Ybpngvba: Qblyrfgbja, CN, Havgrq Fgngrf
-Fraqre: <zff@pb.ohpxf.cn.hf>
-
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a134/125\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1346606    Kers:                           #CQ133531148 \a\a Erprvirq     12/19/13  17:56:14  OL PG07   838      \a Ragrerq      12/19/13  17:57:29  OL PG07   838      \a Qvfcngpurq   12/19/13  17:58:10  OL SF01   613      \a\a Vavgvny Glcr: OSNYY   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY)) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  134004 Sver Oyx:  34004  Cbyvpr Oyx:  48201  Znc Cntr: 2921R10 \a Tebhc: RA  Orng: 134 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 220 HCCRE FGHZC EQ ,48  ogja A EG 152 & PNYYBJUVYY EQ\a\a Ybp Vasb: \a Anzr: RYZBE SBK               Nqqe: SEVRAQ BF               Cubar: 2158222245\a\a/1757  (838     )  RAGEL:         76LBS,,SRYY,,YBFG N YVGGYR OYBBQ SEBZ URE URNQ\a/1758  (613     )  QVFC    N125    #054805   UNLRF, WBFRCU \a                                   #160510   FBYR, PUEVFGBCURE
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a135/125\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1346577    Kers:                           #CQ133530833 \a\a Ragrerq      12/19/13  13:54:55  OL CQ03   797      \a Qvfcngpurq   12/19/13  13:56:03  OL PUSF01 341      \a\a Vavgvny Glcr: NGENA   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET) Cev: 3 Qfcb:      Cerz: [  ]\a RZF Oyx:  135204 Sver Oyx:  35011  Cbyvpr Oyx:  26021  Znc Cntr: 3036S5 \a Tebhc: RA  Orng: 135 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 3936 FZVGU EQ ,26  ogja FJNZC EQ & SBERFG TEBIR EQ\a\a Ybp Vasb: \a Anzr: GBZZL JRVAREG           Nqqe: UBZR NYBAR,,            Cubar: 2674249126\a\a/1354  (797     )  RAGEL:         PBZCY VF CG,, SBBG CNVA,,53 LBZ,, QEBCCRQ N EB\a                                  PX BA VG YNFG JRRX,, PBZCY SRRYVAT YVTUG URNQR\a                                  Q\a/1356  (341     )  QVFC    N1251   #147595   ZBENA, XRVGU \a                                   #191474   PYNEX,GUBZNF (RZG)
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a135/125\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1346577    Kers:                           #CQ133530833 \a\a Ragrerq      12/19/13  13:54:55  OL CQ03   797      \a Qvfcngpurq   12/19/13  13:56:03  OL PUSF01 341      \a\a Vavgvny Glcr: NGENA   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET) Cev: 3 Qfcb:      Cerz: [  ]\a RZF Oyx:  135204 Sver Oyx:  35011  Cbyvpr Oyx:  26021  Znc Cntr: 3036S5 \a Tebhc: RA  Orng: 135 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 3936 FZVGU EQ ,26  ogja FJNZC EQ & SBERFG TEBIR EQ\a\a Ybp Vasb: \a Anzr: GBZZL JRVAREG           Nqqe: UBZR NYBAR,,            Cubar: 2674249126\a\a/1354  (797     )  RAGEL:         PBZCY VF CG,, SBBG CNVA,,53 LBZ,, QEBCCRQ N EB\a                                  PX BA VG YNFG JRRX,, PBZCY SRRYVAT YVTUG URNQR\a                                  Q\a/1356  (341     )  QVFC    N1251   #147595   ZBENA, XRVGU \a                                   #191474   PYNEX,GUBZNF (RZG)
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a135\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1346575    Kers:                           #CQ133530830 \a\a Ragrerq      12/19/13  13:53:02  OL CQ04   749      \a Qvfcngpurq   12/19/13  13:53:53  OL PUSF01 341      \a\a Vavgvny Glcr: NERFC   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NERFC (ERFCVENGBEL QVFGERFF) Cev: 2 Qfcb:      Cerz: [  ]\a RZF Oyx:  135514 Sver Oyx:  05023  Cbyvpr Oyx:  26012  Znc Cntr: 2924N8 \a Tebhc: RA  Orng: 135 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: OXUNZ CRQVNGEVPF ,26 ng 4870 LBEX EQ ,26 ogja EG 202 OXUNZ & DHNEEL EQ\a\a Ybp Vasb: \a Anzr: XNERA                   Nqqe: EA                      Cubar: 2157943305\a\a/1353  (749     )  RAGEL:         2 ZBF SBE OEBAPUVBVGVF,,CG VF J/N QE\a/1353  (341     )  QVFC    N135    #072232   TBEQBA, XRIVA \a                                   #100054   RATYR, PUEVFGBCURE (RZG)
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a125\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1346574    Kers:                           #CQ133530813 \a\a Erprvirq     12/19/13  13:44:50  OL PG01   742      \a Ragrerq      12/19/13  13:46:36  OL PG01   742      \a Qvfcngpurq   12/19/13  13:46:58  OL PUSF01 341      \a\a Vavgvny Glcr: NPURFC  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF) Cev: 3 Qfcb:      Cerz: [  ]\a RZF Oyx:  125053 Sver Oyx:  19053  Cbyvpr Oyx:  28112  Znc Cntr: 2922W9 \a Tebhc: RA  Orng: 125 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: JRFYRL RAUNAPRQ YV #229 ,28 ng 200 IRGRENAF YN #229 ,28 ogja NGXVAFBA QE & OEBNQ FG\a\a Ybp Vasb: \a Anzr: NYVGN PNEVYYV           Nqqe: EA                      Cubar: 2153454300\a\a/1346  (742     )  RAGEL:         +040.320193 -075.133455 86/Z,NSVO..\a/1346  (341     )  QVFC    N125    #054805   UNLRF, WBFRCU \a                                   #160510   FBYR, PUEVFGBCURE
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a125\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1346558    Kers:                           #CQ133530668 \a\a Erprvirq     12/19/13  12:07:01  OL CQ07   730      \a Ragrerq      12/19/13  12:08:33  OL CQ07   730      \a Qvfcngpurq   12/19/13  12:08:58  OL PUSF01 341      \a\a Vavgvny Glcr: NGENA   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET) Cev: 3 Qfcb:      Cerz: [CJ]\a RZF Oyx:  125050 Sver Oyx:  19050  Cbyvpr Oyx:  29202  Znc Cntr: 2922P9 \a Tebhc: RA  Orng: 125 Fep:  9 NGG:    \a Ybp: 777 SREEL EQ #O19 ,29 -- CVAR EHA PBZZHAVGL ogja VEBA UVYY EQ & CVAR EHA EQ\a\a Ybp Vasb: NCG O-19\a Anzr: ANAPL ERVYYL            Nqqe: AHEFR BF                Cubar: 2153407199\a\a/1208  (730     )  RAGEL:         90LBS,,ABG RNGVAT/QEVAXVAT JRYY,,ULCBGRAFVIR/J\a                                  RNX\a/1208  (341     )  QVFC    N125    #054805   UNLRF, WBFRCU \a                                   #160510   FBYR, PUEVFGBCURE
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PURZF2: \a125\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1346550    Kers:                           #CQ133530499 \a\a Erprvirq     12/19/13  10:28:11  OL CQ11   690      \a Ragrerq      12/19/13  10:29:12  OL CQ11   690      \a Qvfcngpurq   12/19/13  10:29:45  OL PURZF2 639      \a\a Vavgvny Glcr: NSNVAG  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR)) Cev: 3 Qfcb:      Cerz: [CJ]\a RZF Oyx:  125025 Sver Oyx:  79025  Cbyvpr Oyx:  29301  Znc Cntr: 3034X4 \a Tebhc: RA  Orng: 125 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a Ybp: 1980 RNFGBA EQ ,29 -- OHPXF PB ZRQVPNY N ogja EG 611 OL & FNHREZNA EQ\a\a Ybp Vasb: FGR:230\a Anzr: XNLYN                   Nqqe:                         Cubar: 2153481310\a\a/1029  (690     )  RAGEL:         42LBS RYRINGRQ OC NAQ SRRYF SNVAG ..QE J/CG\a/1029  (639     )  QVFC    N125    #054805   UNLRF, WBFRCU \a                                   #160510   FBYR, PUEVFGBCURE
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a125\a                                                        \a\a\a Vap Uvfgbel sbe: #RQ1346541    Kers:                           #CQ133530415 \a\a Erprvirq     12/19/13  09:46:45  OL CF04   414      \a Ragrerq      12/19/13  09:48:36  OL CF04   414      \a Qvfcngpurq   12/19/13  09:49:36  OL PUSF01 341      \a\a Vavgvny Glcr: OSNYY   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY)) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  125053 Sver Oyx:  19053  Cbyvpr Oyx:  28112  Znc Cntr: 2922W9 \a Tebhc: RA  Orng: 125 Fep:  9 NGG:    \a Ybp: 200 IRGRENAF YN #224 ,28 -- JRFYRL RAUNAPRQ YV ogja NGXVAFBA QE & OEBNQ FG\a\a Ybp Vasb: CREFBANY PNER\a Anzr: NYVQN                   Nqqe: 200 IRGRENAF YN         Cubar: 2678951163\a\a/0948  (414     )  RAGEL:         RYQ SRZ 87 LE BYQ SRZ,,3EQ CNEGL,,,CNVA VA XAR\a                                  R SEBZ SNYY RNEYVRE,,SRZ VA ORQ\a/0949  (341     )  QVFC    1253    #191746   QVRUY, QNA(RZG) \a                                   #191620   EBHFVF, WNFBA (RZG)
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a125/129\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1346535    Kers:                           #CQ133530303 \a\a Erprvirq     12/19/13  08:42:44  OL CF04   414      \a Ragrerq      12/19/13  08:44:00  OL CF04   414      \a Qvfcngpurq   12/19/13  08:44:56  OL PUSF01 341      \a\a Vavgvny Glcr: OSNYY   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY)) Cev: 4 Qfcb:      Cerz: [  ]\a RZF Oyx:  125026 Sver Oyx:  19026  Cbyvpr Oyx:  29101  Znc Cntr: 3035O1 \a Tebhc: RA  Orng: 125 Fep:  9 NGG:    \a Ybp: 24 FCEVATF QE ,29  ogja RNFG EQ & QBTJBBQ YN\a\a Ybp Vasb: \a Anzr: VERAR OBZNAFXV          Nqqe: 55 R PBHEG FG           Cubar: 2676934957\a\a/0844  (414     )  RAGEL:         PZCY ZBGURE 86 LE BYQ,,FRIRER ONPX CNVA,,UNQ S\a                                  K 7 JRRXF NTB\a/0844              FHCC           AB SHEGURE VASBEZNGVBA \a/0844  (341     )  QVFC    N129    #069209   EVRF, CRGRE
-(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a124/125\a                                                    \a\a\a Vap Uvfgbel sbe: #RQ1346534    Kers:                           #CQ133530282 \a\a Ragrerq      12/19/13  08:41:09  OL CQ06   737      \a Qvfcngpurq   12/19/13  08:42:13  OL PUSF01 341      \a\a Vavgvny Glcr: NGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a Svany Glcr: NGNV  (GENSSVP NPPVQRAG (PEVGVPNY)) Cev: 1 Qfcb:      Cerz: [  ]\a RZF Oyx:  124026 Sver Oyx:  24037  Cbyvpr Oyx:  57011  Znc Cntr: 2810R10 \a Tebhc: RA  Orng: 124 Fep:   NGG:    \a Ybp: UNEVAT EQ/FGHZC EQ ,57   \a\a Ybp Vasb: FGHZC EQ\a Anzr: OEVNA ERVGRE            Nqqe: CZ                      Cubar: 2158968416\a\a/0841  (737     )  PBCL           ,QEVIRE P/B ARPX NAQ ONPX CNVA\a/0841             $PEBFF          #CQ133530282 \a                                  ,QEVIRE P/B ARPX NAQ ONPX CNVA\a/0842  (341     )  QVFC    N125E   #131431   URAYRL, FPBGG \a/0842              NQQ     1253    #191746   QVRUY, QNA(RZG) \a                                   #191620   EBHFVF, WNFBA (RZG)
 
  */
 
@@ -225,9 +213,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1213417",
         "QNGR:04/13/12",
         "GVZR:15:57:23",
-        "PBQR:NQVNO",
-        "PNYY:QVNORGVP RZRETRAPL",
-        "CEV:3",
+        "PNYY:NQVNO (QVNORGVP RZRETRAPL)",
         "OBK:S:60063 R:134620",
         "ZNC:3032T4",
         "CYNPR:EG 309 BSSVPR SHEA",
@@ -264,9 +250,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1213447",
         "QNGR:04/13/12",
         "GVZR:21:11:21",
-        "PBQR:OBQ",
-        "PNYY:BIREQBFR/CBVFVBAVAT (ABA PEVG)",
-        "CEV:4",
+        "PNYY:OBQ   (BIREQBFR/CBVFVBAVAT (ABA PEVG))",
         "OBK:S:74062 R:134062",
         "ZNC:3033R6",
         "NQQE:214 UNZCFUVER QE",
@@ -310,9 +294,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1213623",
         "QNGR:04/15/12",
         "GVZR:09:19:51",
-        "PBQR:NGENA",
-        "PNYY:ABA-FCRPVSVP (PEVGVPNY) RZRET",
-        "CEV:3",
+        "PNYY:NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET)",
         "OBK:S:19003 R:125003",
         "ZNC:2922Q10",
         "NQQE:39 CVARINYR EQ",
@@ -357,9 +339,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1213579",
         "QNGR:04/14/12",
         "GVZR:23:50:00",
-        "PBQR:OHAX",
-        "PNYY:HAXABJA RZRETRAPL (3EQ CNEGL)",
-        "CEV:3",
+        "PNYY:OHAX  (HAXABJA RZRETRAPL (3EQ CNEGL))",
         "OBK:S:34005 R:134004",
         "ZNC:2921S10",
         "NQQE:PNYYBJUVYY EQ & ARJ TNYRAN EQ",
@@ -404,9 +384,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1213550",
         "QNGR:04/14/12",
         "GVZR:19:10:06",
-        "PBQR:OGENA",
-        "PNYY:RZRETRAPL GENAFCBEGNGVBA",
-        "CEV:4",
+        "PNYY:OGENA (RZRETRAPL GENAFCBEGNGVBA)",
         "OBK:S:59004 R:152204",
         "ZNC:2920R5",
         "CYNPR:YVSRCNGU UBZR",
@@ -415,8 +393,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:ANEBGULA EQ & R FPUBBYUBHFR EQ",
         "ANZR:GNUNYAL,WNARG",
         "CUBAR:2152574233",
-        "VASB:PBZCY HAFHER BS GJC,,XRRCF TVIVAT FRYYREFIVYYR NAQ PNYYVAT GUR OHVFARFF YVSRCNGU.....56/S,,O C 112/78,,TRARENY JRNXARFF,,UK BS ZRAGNY ERGNE QNGVBA",
-        "HAVG:N134 1512 DHG59");
+        "VASB:PBZCY HAFHER BS GJC,,XRRCF TVIVAT FRYYREFIVYYR NAQ PNYYVAT GUR OHVFARFF YVSRCNGU.....56/S,,O C 112/78,,TRARENY JRNXARFF,,UK BS ZRAGNY ERGNE QNGVBA");
 
     qbGrfg("G6",
         " <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : 134\a" +
@@ -443,9 +420,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215024",
         "QNGR:04/26/12",
         "GVZR:02:17:38",
-        "PBQR:OGENA",
-        "PNYY:RZRETRAPL GENAFCBEGNGVBA",
-        "CEV:4",
+        "PNYY:OGENA (RZRETRAPL GENAFCBEGNGVBA)",
         "OBK:S:34001 R:134001",
         "ZNC:3033P2",
         "NQQE:17 JNYQRA JL",
@@ -482,9 +457,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215020",
         "QNGR:04/25/12",
         "GVZR:23:34:32",
-        "PBQR:OCFLPU",
-        "PNYY:CFLPUVNGEVP RZRETRAPL",
-        "CEV:4",
+        "PNYY:OCFLPU(CFLPUVNGEVP RZRETRAPL)",
         "OBK:S:34030 R:134030",
         "ZNC:3033U1",
         "NQQE:209 R SNVEJBBQ QE",
@@ -521,9 +494,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215005",
         "QNGR:04/25/12",
         "GVZR:21:02:43",
-        "PBQR:NQVNO",
-        "PNYY:QVNORGVP RZRETRAPL",
-        "CEV:3",
+        "PNYY:NQVNO (QVNORGVP RZRETRAPL)",
         "OBK:S:74062 R:134062",
         "ZNC:3033S6",
         "NQQE:121 QBYYL YN",
@@ -559,9 +530,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215003",
         "QNGR:04/25/12",
         "GVZR:20:55:24",
-        "PBQR:NFRVM",
-        "PNYY:FRVMHER/NPGVIR (ZRQVP)",
-        "CEV:2",
+        "PNYY:NFRVM (FRVMHER/NPGVIR (ZRQVP))",
         "OBK:S:19006 R:125006",
         "ZNC:3034P2",
         "NQQE:20 PRQNE QE",
@@ -598,9 +567,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1214986",
         "QNGR:04/25/12",
         "GVZR:18:34:40",
-        "PBQR:NGENA",
-        "PNYY:ABA-FCRPVSVP (PEVGVPNY) RZRET",
-        "CEV:3",
+        "PNYY:NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET)",
         "OBK:S:37501 R:339751",
         "ZNC:2919X8",
         "NQQE:264 JNFUVATGBA CY",
@@ -635,9 +602,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1214883",
         "QNGR:04/24/12",
         "GVZR:20:54:54",
-        "PBQR:OSNYY",
-        "PNYY:SNYY IVPGVZ (ABA-PEVGVPNY)",
-        "CEV:4",
+        "PNYY:OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY))",
         "OBK:S:34029 R:134029",
         "ZNC:3033T4",
         "CYNPR:CVAR PERRX PBAQBF #Q53",
@@ -678,9 +643,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1214856",
         "QNGR:04/24/12",
         "GVZR:16:19:48",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:60063 R:134620",
         "ZNC:3032R3",
         "CYNPR:QBPX ZRNQBJF AU - PUHEPU EBNQ RAGENAPR",
@@ -690,7 +653,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:HAVBAIVYYR CX & PUHEPU EQ",
         "ANZR:FHR (AHEFR-EA)",
         "CUBAR:2158220688",
-        "VASB:80 LBZ,,FBO,,UVTU GRZC,,\aYBP: 2343 ORGUYRURZ CX #107 ,36, YBPV: PUHEPU EBNQ RAGENAPR, 80 LBZ,,FBO,,UVTU GRZC,,",
+        "VASB:80 LBZ,,FBO,,UVTU GRZC,,\aYBP: 2343 ORGUYRURZ CX #107 ,36, YBPV: PUHEPU EBNQ RAGENAPR,\a80 LBZ,,FBO,,UVTU GRZC,,",
         "HAVG:N134 DHG60");
 
     qbGrfg("G13",
@@ -718,9 +681,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1214833",
         "QNGR:04/24/12",
         "GVZR:11:36:25",
-        "PBQR:NPIN",
-        "PNYY:PIN/FGEBXR",
-        "CEV:3",
+        "PNYY:NPIN  (PIN/FGEBXR)",
         "OBK:S:23018 R:123017",
         "ZNC:2921U5",
         "CYNPR:GNOBEN BEPUNEQF - VGN",
@@ -729,7 +690,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:HCCRE PUHEPU EQ & BYQ YVZRXVYA EQ",
         "ANZR:CNHY FGVYZNA",
         "CUBAR:2155343199",
-        "VASB:46 LE BYQ ZNYR\aYBPV: VGN VA N TENIRY CXYBG BA N FJVAT, 46 LE BYQ ZNYR UNIVAT N FGEBXR",
+        "VASB:46 LE BYQ ZNYR\aYBPV: VGN VA N TENIRY CXYBG BA N FJVAT,\a46 LE BYQ ZNYR UNIVAT N FGEBXR",
         "HAVG:N124");
 
     qbGrfg("G14",
@@ -757,9 +718,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1214511",
         "QNGR:04/21/12",
         "GVZR:15:50:45",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:34036 R:134036",
         "ZNC:3033X3",
         "CYNPR:OL OHKZBAG CNEGL ERAGNYF",
@@ -794,10 +753,8 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1214497",
         "QNGR:04/21/12",
         "GVZR:13:10:58",
-        "PBQR:NHAP",
-        "PNYY:HAPBAFPVBHF CREFBA",
-        "CEV:1",
-        "K:FGERNZIVRJ QE",
+        "PNYY:NHAP  (HAPBAFPVBHF CREFBA)",
+        "CYNPR:KFGF FGERNZIVRJ QE",
         "NQQE:721 PLCERFF PG",
         "PVGL:ZBAGTBZREL GJC",
         "ANZR:ZBAGPB",
@@ -830,9 +787,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215452",
         "QNGR:04/29/12",
         "GVZR:14:13:56",
-        "PBQR:OGNV",
-        "PNYY:GENSSVP NPPVQRAG(ABA-PEVGVPNY)",
-        "CEV:3",
+        "PNYY:OGNV  (GENSSVP NPPVQRAG(ABA-PEVGVPNY))",
         "OBK:S:74055 R:134055",
         "ZNC:3033Q7",
         "NQQE:560 J OHGYRE NI",
@@ -873,13 +828,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215743",
         "QNGR:05/01/12",
         "GVZR:16:22:41",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:37401 R:152741",
         "ZNC:2920O10",
-        "CYNPR:FXLIVRJ ZRQVPNY PR - 2AQ SYE",
-        "NCG:3",
+        "CYNPR:FXLIVRJ ZRQVPNY PR - 2AQ SYE,,EZ #3",
         "NQQE:3456 ORGUYRURZ CX",
         "ZNQQE:3456 ORGUYRURZ CVXR",
         "PVGL:UVYYGBJA GJC",
@@ -913,13 +865,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215718",
         "QNGR:05/01/12",
         "GVZR:12:48:29",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:74058 R:134058",
         "ZNC:3033S8",
-        "CYNPR:TENAQIVRJ ZRQVPNY",
-        "NCG:103",
+        "CYNPR:TENAQIVRJ ZRQVPNY - FHVGR #103",
         "NQQE:700 UBEVMBA PV",
         "ZNQQE:700 UBEVMBA PVE",
         "PVGL:ARJ OEVGNVA GJC",
@@ -952,9 +901,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215649",
         "QNGR:04/30/12",
         "GVZR:21:30:08",
-        "PBQR:NFRVM",
-        "PNYY:FRVMHER/NPGVIR (ZRQVP)",
-        "CEV:2",
+        "PNYY:NFRVM (FRVMHER/NPGVIR (ZRQVP))",
         "OBK:S:19007 R:125007",
         "ZNC:3034S2",
         "CYNPR:SBHAQNGVBAF NQZVA - ORUNIVBE URNYGU HAVG 19",
@@ -991,9 +938,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215649",
         "QNGR:04/30/12",
         "GVZR:21:30:08",
-        "PBQR:NFRVM",
-        "PNYY:FRVMHER/NPGVIR (ZRQVP)",
-        "CEV:2",
+        "PNYY:NFRVM (FRVMHER/NPGVIR (ZRQVP))",
         "OBK:S:19007 R:125007",
         "ZNC:3034S2",
         "CYNPR:SBHAQNGVBAF NQZVA - ORUNIVBE URNYGU HAVG 19",
@@ -1034,9 +979,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215444",
         "QNGR:04/29/12",
         "GVZR:13:21:07",
-        "PBQR:EZNE",
-        "PNYY:ZNEVAR ERFPHR (ZOBK)",
-        "CEV:1",
+        "PNYY:EZNE  (ZNEVAR ERFPHR (ZOBK))",
         "OBK:S:34098 R:134098",
         "ZNC:2921W10",
         "CYNPR:CRNPR INYY OBNGEN2 - NATYREF CVRE",
@@ -1044,8 +987,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:BYQ VEBA UVYY EQ & PURRFR SNPGBEL EQ",
         "ANZR:CNYR, ZNELNAAR",
         "CUBAR:2157049576",
-        "VASB:BIREGHEARQ FNVYOBNG,,GUERR FHOWRPGF VA GUR JNG RE PNYYVAT SBE URYC",
-        "HAVG:N134");
+        "VASB:BIREGHEARQ FNVYOBNG,,GUERR FHOWRPGF VA GUR JNG RE PNYYVAT SBE URYC");
 
     qbGrfg("G22",
         "[911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a" +
@@ -1072,9 +1014,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1215775",
         "QNGR:05/01/12",
         "GVZR:21:22:02",
-        "PBQR:ONYYE",
-        "PNYY:NYYRETVP ERNPGVBA",
-        "CEV:4",
+        "PNYY:ONYYE (NYYRETVP ERNPGVBA)",
         "OBK:S:34099 R:134099",
         "ZNC:3033S4",
         "CYNPR:OEVTUGRA CYNPR",
@@ -1110,9 +1050,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1216062",
         "QNGR:05/04/12",
         "GVZR:02:16:54",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:78035 R:129106",
         "ZNC:3034O7",
         "NQQE:3465 CVPXREGBJA EQ",
@@ -1145,99 +1083,19 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1206776",
         "QNGR:05/16/12",
         "GVZR:15:51:53",
-        "PBQR:SNYEZ",
-        "PNYY:SVER NYNEZ (YBP)",
-        "CEV:4",
+        "PNYY:SNYEZ (SVER NYNEZ (YBP))",
         "OBK:S:19056 R:125056",
         "ZNC:2922X10",
-        "CYNPR:OEVNEYRNS AU",
-        "CUBAR:215-348-2983",
+        "CYNPR:OEVNEYRNS AU - #215-348-2983",
         "NQQE:252 ORYZBAG NI",
         "ZNQQE:252 ORYZBAG NIR",
         "PVGL:QBLYRFGBJA",
         "K:FCEHPR FG & PBGGNTR FG",
         "ANZR:ZRGEB FRPHEVGL (#3510)",
-        "CUBAR:215-348-2983 / 8006332677",
+        "CUBAR:8006332677",
         "VASB:MBAR 7 (HAX JURER),,J/A",
         "HAVG:R19");
-
-    qbGrfg("G25",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a" +
-        "129/134\a" +
-        "                                                    \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1409445    Kers:              #SQ1404328   #CQ140690601 \a\a" +
-        " Ragrerq      03/10/14  12:10:52  OL SQ01   619      \a" +
-        " Qvfcngpurq   03/10/14  12:11:31  OL SF01   656      \a" +
-        " Raebhgr      03/10/14  12:12:56                     \a" +
-        " Bafprar      03/10/14  12:17:02                     \a\a" +
-        " Vavgvny Glcr: SVEPNY  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: SVEPNY(SVER PNYY RZF) Cev: 4 Qfcb:      Cerz: [  ]\a" +
-        " RZF Oyx:  129035 Sver Oyx:  29030  Cbyvpr Oyx:  75301  Znc Cntr: 3146T2 \a" +
-        " Tebhc: RA  Orng: 129 Fep:  A NGG:    \a" +
-        " Ybp: 2354 TERRAFJNEQ EQ F ,75  ogja BNXSVRYQ EQ & PUVC CG\a\a" +
-        " Ybp Vasb: AJ FRPGBE\a" +
-        " Anzr: IREVMBA JVERYRFF        Nqqe:                         Cubar: 2674214587\a\a" +
-        "/1210  (619     )  PBCL           ,AB ZBER VASBEZNGVBA\a" +
-        "/1210             $PEBFF          #SQ1404328   \a" +
-        "/1211  (656     )  QVFC    N122    #189839   FPBGG, GNZZVR \a" +
-        "                                   #074972   WNZRF, ZVPURYYR (RZG) \a" +
-        "/1212  (189839  ) *RAEBHG  N122   \a" +
-        "/1213  (748     )  NQQRE   P129   [2354 TERRAFJNEQ EQ F ,75] \a" +
-        "                                   #886440   FPUBYY,ZNEX \a" +
-        "                                  ,URNQRE\a" +
-        "/1214              FHCC           GKG: 2.5 FGEL FVATYR SNZVYL SVER FUBJVAT CRE P\a" +
-        "                                  129 \a" +
-        "/1213? (578     )  FHCC           ANZ: EUBNQF JVYYNEQ, \a" +
-        "                                  NQE: 2358, \a" +
-        "                                  CUB: 2153432072, \a" +
-        "                                  GKG: OYNPX FZBZR SEBZ SEBAG BS UBHFR \a" +
-        "/1215  (646     )  FHCC           GKG: CRE CQ BF SHYYL VAIBYI,, \a" +
-        "/1215  (271     )  FHCC           GKG: CRPB NQI...FIP QVFPBAARPG NYFB NQI BS FZR\a" +
-        "                                  YY BS TNF CERIVBHF GB JBEXVA SVER.......JVGUVA\a" +
-        "                                   GUR UE \a" +
-        "/1217  (748     )  EDHRFG  N122   Nqqrq Havg(f) Erdhrfgrq\a" +
-        "                                  ,ERDN N122 1N O\a" +
-        "/1217  (271     )  ARJYBP  P129   [RZF PZQ] \a" +
-        "/1217  (748     )  ARJYBP  P129   [JNEEV RZF] \a" +
-        "/1217  (656     )  NQQ     N1221   #147886   GNTTNEG, NAQERJ (RZG) \a" +
-        "                                   #141260   ZNGGURJF, PBERL \a" +
-        "/1217  (147886  ) *RAEBHG  N1221  \a" +
-        "/1219  (646     )  FHCC           GKG: CRE CQ BF GUR ERFQ VF RINP,, \a" +
-        "/1220  (271     )  ZVFP    N122   ,N116 GB PIE FD 122\a" +
-        "/1220              EDHRFG  N122   Nqqrq Havg(f) Erdhrfgrq\a" +
-        "                                  ,ERDN N122 N116                              \a" +
-        "/1221  (189839  ) *BAFPAR  N122   \a" +
-        "/1223  (748     )  BAFPAR  N1221  \a" +
-        "/1229? (731     )  FHCC           YBP: TERRAFJNEQ EQ F/BNXSVRYQ EQ ,75, \a" +
-        "                                  ANZ: WBUA ONEPYNL RYRZRAGNEL, \a" +
-        "                                  NQE: GBQQ BUNEN, \a" +
-        "                                  CUB: 2678934100, \a" +
-        "                                  GKG: FRRF FZBXR VA NERN BS JBEXVAT SVER, NQI P\a" +
-        "                                  BZC BS #SQ328 \a" +
-        "/1231  (748     )  EDHRFG  P129   Nqqrq Havg(f) Erdhrfgrq\a" +
-        "                                  ,ERDN P129 ZPV134                            \a" +
-        "/1231              ZVFP    P129   ,ZPV FGERRG GB JRQTRJNL GB TERRAFJNEQ F  \a" +
-        "/1232  (656     )  NQQ     ZPV134",
-
-        "FEP:129/134",
-        "VQ:RQ1409445",
-        "QNGR:03/10/14",
-        "GVZR:12:11:31",
-        "PBQR:SVEPNY",
-        "PNYY:SVER PNYY RZF",
-        "CEV:4",
-        "HAVG:N122 N1221 ZPV134",
-        "OBK:S:29030 R:129035",
-        "ZNC:3146T2",
-        "NQQE:2354 TERRAFJNEQ EQ F",
-        "PVGL:JNEEVATGBA GJC",
-        "K:BNXSVRYQ EQ & PUVC CG",
-        "CYNPR:AJ FRPGBE",
-        "ANZR:IREVMBA JVERYRFF",
-        "CUBAR:2674214587",
-        "VASB:,AB ZBER VASBEZNGVBA\a2.5 FGEL FVATYR SNZVYL SVER FUBJVAT CRE P 129\aANZ: EUBNQF JVYYNEQ, NQE: 2358, CUB: 2153432072, OYNPX FZBZR SEBZ SEBAG BS UBHFR\aCRE CQ BF SHYYL VAIBYI,,\aCRPB NQI...FIP QVFPBAARPG NYFB NQI BS FZR YY BS TNF CERIVBHF GB JBEXVA SVER.......JVGUVA GUR UE\aCRE CQ BF GUR ERFQ VF RINP,,\aYBP: TERRAFJNEQ EQ F/BNXSVRYQ EQ ,75, ANZ: WBUA ONEPYNL RYRZRAGNEL, NQE: GBQQ BUNEN, CUB: 2678934100, FRRF FZBXR VA NERN BS JBEXVAT SVER, NQI P BZC BS #SQ328");
-    
-  }
+ }
   
   @Grfg
   choyvp ibvq grfgNpgvir911() {
@@ -1266,9 +1124,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219478",
         "QNGR:05/30/12",
         "GVZR:05:04:39",
-        "PBQR:NQVNO",
-        "PNYY:QVNORGVP RZRETRAPL",
-        "CEV:3",
+        "PNYY:NQVNO (QVNORGVP RZRETRAPL)",
         "OBK:S:66035 R:121333",
         "ZNC:3035S7",
         "NQQE:2030 BNX NI",
@@ -1305,9 +1161,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219462",
         "QNGR:05/29/12",
         "GVZR:23:13:45",
-        "PBQR:NFRVM",
-        "PNYY:FRVMHER/NPGVIR (ZRQVP)",
-        "CEV:2",
+        "PNYY:NFRVM (FRVMHER/NPGVIR (ZRQVP))",
         "OBK:S:29030 R:129035",
         "ZNC:3146U3",
         "NQQE:2228 BNXSVRYQ EQ",
@@ -1343,9 +1197,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219447",
         "QNGR:05/29/12",
         "GVZR:19:19:48",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:29032 R:129037",
         "ZNC:3146R1",
         "NQQE:2757 FCEVAT ZRNQBJ QE",
@@ -1380,9 +1232,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219437",
         "QNGR:05/29/12",
         "GVZR:18:04:31",
-        "PBQR:OCGNFG",
-        "PNYY:NFFVFG CNGVRAG",
-        "CEV:4",
+        "PNYY:OCGNFG(NFFVFG CNGVRAG)",
         "OBK:S:79057 R:129257",
         "ZNC:3034W7",
         "CYNPR:TEHAQL UNYY #425",
@@ -1421,9 +1271,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219386",
         "QNGR:05/29/12",
         "GVZR:10:54:10",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:29810 R:129024",
         "ZNC:3034W10",
         "CYNPR:GNZNARAQ ZVQ FPU",
@@ -1458,9 +1306,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219440",
         "QNGR:05/29/12",
         "GVZR:18:09:33",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:29904 R:129027",
         "ZNC:3034X7",
         "CYNPR:ARFUN ZNABE AU ARJ #P235",
@@ -1498,13 +1344,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219509",
         "QNGR:05/30/12",
         "GVZR:11:54:51",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:29901 R:129023",
-        "CEV:2",
         "ZNC:3034U9",
-        "CYNPR:SBK FHONPHGR PRAGR",
-        "NCG:HAVG 4",
+        "CYNPR:SBK FHONPHGR PRAGR - HAVG 4",
         "NQQE:2644 OEVFGBY EQ",
         "PVGL:JNEEVATGBA GJC",
         "K:CVPXREGBJA EQ & XRYYL EQ",
@@ -1539,9 +1382,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219541",
         "QNGR:05/30/12",
         "GVZR:14:33:59",
-        "PBQR:EIOYQ",
-        "PNYY:IRUVPYR VAGB N OHVYQVAT (EOBK)",
-        "CEV:1",
+        "PNYY:EIOYQ (IRUVPYR VAGB N OHVYQVAT (EOBK))",
         "OBK:S:29029 R:129018",
         "ZNC:3146U4",
         "CYNPR:UHAGVATQBA INYYRL ONAX",
@@ -1578,9 +1419,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219554",
         "QNGR:05/30/12",
         "GVZR:17:49:39",
-        "PBQR:OBQ",
-        "PNYY:BIREQBFR/CBVFVBAVAT (ABA PEVG)",
-        "CEV:4",
+        "PNYY:OBQ   (BIREQBFR/CBVFVBAVAT (ABA PEVG))",
         "OBK:S:74063 R:134063",
         "ZNC:3033T7",
         "NQQE:22 JBBQFVQR NI",
@@ -1618,9 +1457,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219562",
         "QNGR:05/30/12",
         "GVZR:19:57:37",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:90029 R:122029",
         "ZNC:3147R8",
         "CYNPR:LHZ LHZ QBAHGF",
@@ -1656,9 +1493,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219613",
         "QNGR:05/31/12",
         "GVZR:08:32:21",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:29030 R:129035",
         "ZNC:3146S2",
         "NQQE:219 JNLFVQR QE",
@@ -1694,10 +1529,8 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219677",
         "QNGR:05/31/12",
         "GVZR:16:51:11",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:78803 R:129132",
-        "CEV:2",
         "ZNC:3034R7",
         "CYNPR:PO FBHGU UF - NG GUR CBBY",
         "NQQE:1100 SBYYL EQ",
@@ -1732,9 +1565,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219685",
         "QNGR:05/31/12",
         "GVZR:17:33:54",
-        "PBQR:NFRVM",
-        "PNYY:FRVMHER/NPGVIR (ZRQVP)",
-        "CEV:2",
+        "PNYY:NFRVM (FRVMHER/NPGVIR (ZRQVP))",
         "OBK:S:66001 R:129301",
         "ZNC:3146X1",
         "CYNPR:BA THVARN NG ONFRONYY SVRYQ",
@@ -1770,9 +1601,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219698",
         "QNGR:05/31/12",
         "GVZR:19:33:51",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:92001 R:122201",
         "ZNC:3146X5",
         "NQQE:1469 SBFGRE EQ",
@@ -1806,9 +1635,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219712",
         "QNGR:05/31/12",
         "GVZR:22:04:26",
-        "PBQR:ZNYEZ",
-        "PNYY:ZRQVPNY NYNEZ",
-        "CEV:4",
+        "PNYY:ZNYEZ (ZRQVPNY NYNEZ)",
         "OBK:S:29041 R:129034",
         "ZNC:3146T2",
         "CYNPR:CVFRPUXB ERF #2153433739",
@@ -1843,9 +1670,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219719",
         "QNGR:05/31/12",
         "GVZR:23:34:15",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:29048 R:129024",
         "ZNC:3034W10",
         "NQQE:2263 OEVFGBY EQ",
@@ -1879,13 +1704,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219730",
         "QNGR:06/01/12",
         "GVZR:02:04:34",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:79057 R:129257",
         "ZNC:3034W7",
-        "CYNPR:TEHAQL UNYY",
-        "NCG:527",
+        "CYNPR:TEHAQL UNYY - NCG 527",
         "NQQE:1290 NYZFUBHFR EQ",
         "K:GHEX EQ & RNFGBA EQ",
         "ANZR:ORAUNLBA, ORGGL",
@@ -1917,9 +1739,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219734",
         "QNGR:06/01/12",
         "GVZR:03:45:12",
-        "PBQR:OGENA",
-        "PNYY:RZRETRAPL GENAFCBEGNGVBA",
-        "CEV:4",
+        "PNYY:OGENA (RZRETRAPL GENAFCBEGNGVBA)",
         "OBK:S:79057 R:129257",
         "ZNC:3034W7",
         "CYNPR:TEHAQL UNYY - TBEQBA ERFQ-2154911808",
@@ -1955,9 +1775,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219738",
         "QNGR:06/01/12",
         "GVZR:05:16:15",
-        "PBQR:OSNYY",
-        "PNYY:SNYY IVPGVZ (ABA-PEVGVPNY)",
-        "CEV:4",
+        "PNYY:OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY))",
         "OBK:S:19042 R:125012",
         "ZNC:2922U10",
         "NQQE:335 QBEFRG PG",
@@ -1992,9 +1810,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219746",
         "QNGR:06/01/12",
         "GVZR:07:52:37",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:79057 R:129228",
         "ZNC:3034W6",
         "CYNPR:OPC - VA GUR QVFCRAPEL",
@@ -2030,9 +1846,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219893",
         "QNGR:06/02/12",
         "GVZR:11:32:57",
-        "PBQR:NHAE",
-        "PNYY:HAERFCBAFVIR CREFBA",
-        "CEV:1",
+        "PNYY:NHAE  (HAERFCBAFVIR CREFBA)",
         "OBK:S:29904 R:129027",
         "ZNC:3034X7",
         "CYNPR:ARFUN ZNABE AU ARJ #N44-1",
@@ -2069,9 +1883,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219948",
         "QNGR:06/02/12",
         "GVZR:17:48:02",
-        "PBQR:OHAX",
-        "PNYY:HAXABJA RZRETRAPL (3EQ CNEGL)",
-        "CEV:3",
+        "PNYY:OHAX  (HAXABJA RZRETRAPL (3EQ CNEGL))",
         "OBK:S:29048 R:129011",
         "ZNC:3146W1",
         "NQQE:RNFGBA EQ & BKSBEQ QE",
@@ -2105,9 +1917,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219969",
         "QNGR:06/02/12",
         "GVZR:20:05:13",
-        "PBQR:OSNYY",
-        "PNYY:SNYY IVPGVZ (ABA-PEVGVPNY)",
-        "CEV:4",
+        "PNYY:OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY))",
         "OBK:S:92004 R:122204",
         "ZNC:3146W7",
         "NQQE:73 PNYRQBAVN QE",
@@ -2142,9 +1952,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219970",
         "QNGR:06/02/12",
         "GVZR:20:05:53",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:66007 R:129309",
         "ZNC:3035O8",
         "NQQE:2108 NFUGBA QE",
@@ -2178,9 +1986,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1219984",
         "QNGR:06/02/12",
         "GVZR:21:48:42",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:29048 R:129013",
         "ZNC:3146W1",
         "NQQE:2162 YVFN QE",
@@ -2218,9 +2024,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220003",
         "QNGR:06/03/12",
         "GVZR:06:28:57",
-        "PBQR:OGENA",
-        "PNYY:RZRETRAPL GENAFCBEGNGVBA",
-        "CEV:4",
+        "PNYY:OGENA (RZRETRAPL GENAFCBEGNGVBA)",
         "OBK:S:29904 R:129027",
         "ZNC:3034X7",
         "CYNPR:ARFUN ZNABE AU ARJ #N200",
@@ -2261,9 +2065,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220052",
         "QNGR:06/03/12",
         "GVZR:14:35:36",
-        "PBQR:OYNP",
-        "PNYY:YNPRENGVBA/NAVZNY OVGR",
-        "CEV:4",
+        "PNYY:OYNP  (YNPRENGVBA/NAVZNY OVGR)",
         "OBK:S:29051 R:129040",
         "ZNC:3034W9",
         "CYNPR:YHXBVY FGNGVBA",
@@ -2299,9 +2101,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220066",
         "QNGR:06/03/12",
         "GVZR:16:53:00",
-        "PBQR:OCGNFG",
-        "PNYY:NFFVFG CNGVRAG",
-        "CEV:4",
+        "PNYY:OCGNFG(NFFVFG CNGVRAG)",
         "OBK:S:29044 R:129017",
         "ZNC:3147N3",
         "NQQE:1815 ZNER EQ",
@@ -2336,9 +2136,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220075",
         "QNGR:06/03/12",
         "GVZR:17:39:43",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:66003 R:129301",
         "ZNC:3035O10",
         "NQQE:1696 OEBBX YN",
@@ -2374,9 +2172,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220110",
         "QNGR:06/03/12",
         "GVZR:22:12:43",
-        "PBQR:NQVNO",
-        "PNYY:QVNORGVP RZRETRAPL",
-        "CEV:3",
+        "PNYY:NQVNO (QVNORGVP RZRETRAPL)",
         "OBK:S:29048 R:129013",
         "ZNC:3146W1",
         "NQQE:2150 YVFN QE",
@@ -2410,9 +2206,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220162",
         "QNGR:06/04/12",
         "GVZR:10:36:10",
-        "PBQR:NHAP",
-        "PNYY:HAPBAFPVBHF CREFBA",
-        "CEV:1",
+        "PNYY:NHAP  (HAPBAFPVBHF CREFBA)",
         "OBK:S:78033 R:129105",
         "ZNC:3034Q9",
         "NQQE:766 F FRGGYREF PV",
@@ -2448,9 +2242,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220185",
         "QNGR:06/04/12",
         "GVZR:13:01:15",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:78803 R:129132",
         "ZNC:3034R7",
         "CYNPR:POHPX FBHGU UF - 1FG SYBBE HFR ERNE RAGEL",
@@ -2492,9 +2284,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220195",
         "QNGR:06/04/12",
         "GVZR:14:49:43",
-        "PBQR:ZNYEZ",
-        "PNYY:ZRQVPNY NYNEZ",
-        "CEV:4",
+        "PNYY:ZNYEZ (ZRQVPNY NYNEZ)",
         "OBK:S:74065 R:134059",
         "ZNC:3033S7",
         "CYNPR:ZBFFN ERF 215-996-1059",
@@ -2533,9 +2323,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220225",
         "QNGR:06/04/12",
         "GVZR:19:54:46",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:29504 R:129022",
         "ZNC:3146X5",
         "CYNPR:JNEEV PEBFFVAT NCG",
@@ -2574,9 +2362,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220257",
         "QNGR:06/05/12",
         "GVZR:01:42:37",
-        "PBQR:ONOQB",
-        "PNYY:NOQBZVANY/ONPX CNVA/ANHFRN",
-        "CEV:4",
+        "PNYY:ONOQB (NOQBZVANY/ONPX CNVA/ANHFRN)",
         "OBK:S:79057 R:129257",
         "ZNC:3034W7",
         "CYNPR:TEHAQL UNYY",
@@ -2614,13 +2400,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220310",
         "QNGR:06/05/12",
         "GVZR:10:17:03",
-        "PBQR:NNOQB",
-        "PNYY:NPHGR NOQBZRA",
-        "CEV:3",
+        "PNYY:NNOQB (NPHGR NOQBZRA)",
         "OBK:S:19053 R:125053",
         "ZNC:2922W9",
-        "CYNPR:UREVGNTR GJE AU",
-        "NCG:303",
+        "CYNPR:UREVGNTR GJE AU - NCG 303",
         "NQQE:200 IRGRENAF YN",
         "ZNQQE:200 IRGRENAF YA",
         "PVGL:QBLYRFGBJA",
@@ -2655,9 +2438,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220368",
         "QNGR:06/05/12",
         "GVZR:16:23:31",
-        "PBQR:OSNYY",
-        "PNYY:SNYY IVPGVZ (ABA-PEVGVPNY)",
-        "CEV:4",
+        "PNYY:OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY))",
         "OBK:S:29031 R:129037",
         "ZNC:3146R1",
         "NQQE:2493 BEPUNEQ CY",
@@ -2691,9 +2472,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220405",
         "QNGR:06/05/12",
         "GVZR:21:08:49",
-        "PBQR:ZNYEZ",
-        "PNYY:ZRQVPNY NYNEZ",
-        "CEV:4",
+        "PNYY:ZNYEZ (ZRQVPNY NYNEZ)",
         "OBK:S:92002 R:122202",
         "ZNC:3146W6",
         "CYNPR:UBBX ERF",
@@ -2729,9 +2508,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220411",
         "QNGR:06/05/12",
         "GVZR:22:34:08",
-        "PBQR:OCGNFG",
-        "PNYY:NFFVFG CNGVRAG",
-        "CEV:4",
+        "PNYY:OCGNFG(NFFVFG CNGVRAG)",
         "OBK:S:79057 R:129257",
         "ZNC:3034W7",
         "CYNPR:TEHAQL UNYY #106 - YNEEL ZNKJRYY 2154915770",
@@ -2767,9 +2544,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220439",
         "QNGR:06/06/12",
         "GVZR:08:51:04",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:74062 R:134062",
         "ZNC:3033R6",
         "NQQE:213 UNZCFUVER QE",
@@ -2803,9 +2578,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220464",
         "QNGR:06/06/12",
         "GVZR:12:21:53",
-        "PBQR:NFRVM",
-        "PNYY:FRVMHER/NPGVIR (ZRQVP)",
-        "CEV:2",
+        "PNYY:NFRVM (FRVMHER/NPGVIR (ZRQVP))",
         "OBK:S:29904 R:129027",
         "ZNC:3034X7",
         "CYNPR:ARFUN ZNABE AU ARJ #NB49",
@@ -2842,10 +2615,8 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220474",
         "QNGR:06/06/12",
         "GVZR:13:36:39",
-        "PBQR:OGENA",
-        "PNYY:RZRETRAPL GENAFCBEGNGVBA",
+        "PNYY:OGENA (RZRETRAPL GENAFCBEGNGVBA)",
         "OBK:S:29002 R:129002",
-        "CEV:4",
         "ZNC:3146W8",
         "CYNPR:OHETRE XVAT",
         "NQQE:60 EG 611",
@@ -2880,9 +2651,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220494",
         "QNGR:06/06/12",
         "GVZR:16:26:26",
-        "PBQR:OGNV",
-        "PNYY:GENSSVP NPPVQRAG(ABA-PEVGVPNY)",
-        "CEV:3",
+        "PNYY:OGNV  (GENSSVP NPPVQRAG(ABA-PEVGVPNY))",
         "OBK:S:29046 R:129014",
         "ZNC:3146X1",
         "CYNPR:VSB",
@@ -2918,9 +2687,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220548",
         "QNGR:06/06/12",
         "GVZR:23:26:05",
-        "PBQR:OGENA",
-        "PNYY:RZRETRAPL GENAFCBEGNGVBA",
-        "CEV:4",
+        "PNYY:OGENA (RZRETRAPL GENAFCBEGNGVBA)",
         "OBK:S:78007 R:129105",
         "ZNC:3145X1",
         "NQQE:192 FGRGFBA QE",
@@ -2956,9 +2723,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220580",
         "QNGR:06/07/12",
         "GVZR:11:07:27",
-        "PBQR:NGNV",
-        "PNYY:GENSSVP NPPVQRAG (PEVGVPNY)",
-        "CEV:1",
+        "PNYY:NGNV  (GENSSVP NPPVQRAG (PEVGVPNY))",
         "OBK:S:29039 R:129023",
         "ZNC:3034U9",
         "NQQE:OEVFGBY EQ & CVPXREGBJA EQ",
@@ -2991,9 +2756,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220589",
         "QNGR:06/07/12",
         "GVZR:11:52:34",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:66032 R:121333",
         "ZNC:3035S8",
         "NQQE:1673 SNVEJNL QE",
@@ -3027,13 +2790,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220599",
         "QNGR:06/07/12",
         "GVZR:13:05:22",
-        "PBQR:NOYRQ",
-        "PNYY:URZBEEUNTR/OYRRQVAT",
-        "CEV:3",
+        "PNYY:NOYRQ (URZBEEUNTR/OYRRQVAT)",
         "OBK:S:29504 R:129022",
         "ZNC:3146X5",
-        "CYNPR:JNEEV PEBFFVAT",
-        "NCG:R3",
+        "CYNPR:JNEEV PEBFFVAT NCG #R3",
         "NQQE:1700 FGERRG EQ",
         "NCG:R3",
         "PVGL:JNEEVATGBA GJC",
@@ -3068,9 +2828,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220610",
         "QNGR:06/07/12",
         "GVZR:14:42:28",
-        "PBQR:OBQ",
-        "PNYY:BIREQBFR/CBVFVBAVAT (ABA PEVG)",
-        "CEV:4",
+        "PNYY:OBQ   (BIREQBFR/CBVFVBAVAT (ABA PEVG))",
         "OBK:S:29059 R:129024",
         "ZNC:3034X9",
         "NQQE:2253 UREOYRJ EQ",
@@ -3103,9 +2861,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220614",
         "QNGR:06/07/12",
         "GVZR:15:06:41",
-        "PBQR:NBQ",
-        "PNYY:BIREQBFR/CBVFVBAVAT (PEVGVPNY)",
-        "CEV:2",
+        "PNYY:NBQ   (BIREQBFR/CBVFVBAVAT (PEVGVPNY))",
         "OBK:S:29017 R:129003",
         "ZNC:3146T3",
         "NQQE:529 GNLYBE NI",
@@ -3140,9 +2896,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220657",
         "QNGR:06/07/12",
         "GVZR:21:24:49",
-        "PBQR:NPNEQN",
-        "PNYY:PNEQVB/CHYZBANEL NEERFG",
-        "CEV:1",
+        "PNYY:NPNEQN(PNEQVB/CHYZBANEL NEERFG)",
         "OBK:S:29045 R:129015",
         "ZNC:3147N3",
         "NQQE:1734 UNEARFF QE A",
@@ -3177,9 +2931,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220684",
         "QNGR:06/08/12",
         "GVZR:06:01:52",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:29904 R:129027",
         "ZNC:3034X7",
         "CYNPR:ARFUN ZNABE AU ARJ #N231-2",
@@ -3215,9 +2967,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220695",
         "QNGR:06/08/12",
         "GVZR:08:05:37",
-        "PBQR:OSNYY",
-        "PNYY:SNYY IVPGVZ (ABA-PEVGVPNY)",
-        "CEV:4",
+        "PNYY:OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY))",
         "OBK:S:29041 R:129034",
         "ZNC:3146U1",
         "CYNPR:ORR ORETINYY & PB - VSB",
@@ -3252,9 +3002,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220702",
         "QNGR:06/08/12",
         "GVZR:09:35:18",
-        "PBQR:OGNV",
-        "PNYY:GENSSVP NPPVQRAG(ABA-PEVGVPNY)",
-        "CEV:3",
+        "PNYY:OGNV  (GENSSVP NPPVQRAG(ABA-PEVGVPNY))",
         "OBK:S:29028 R:129018",
         "ZNC:3146U2",
         "CYNPR:CHYYVAT BSS BAGB UVYYGBC",
@@ -3289,13 +3037,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220703",
         "QNGR:06/08/12",
         "GVZR:10:17:49",
-        "PBQR:NNOQB",
-        "PNYY:NPHGR NOQBZRA",
-        "CEV:3",
+        "PNYY:NNOQB (NPHGR NOQBZRA)",
         "OBK:S:29503 R:129012",
         "ZNC:3146U1",
-        "CYNPR:ARJCBVAG NCGF",
-        "NCG:N-7",
+        "CYNPR:ARJCBVAG NCGF - NCG N-7",
         "NQQE:955 RNFGBA EQ",
         "PVGL:JNEEVATGBA GJC",
         "K:HCCRE ONEARFF EQ & X FG",
@@ -3328,13 +3073,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220706",
         "QNGR:06/08/12",
         "GVZR:10:45:20",
-        "PBQR:OGENA",
-        "PNYY:RZRETRAPL GENAFCBEGNGVBA",
-        "CEV:4",
+        "PNYY:OGENA (RZRETRAPL GENAFCBEGNGVBA)",
         "OBK:S:79057 R:129257",
         "ZNC:3034W7",
-        "CYNPR:TEHAQL UNYY",
-        "NCG:404",
+        "CYNPR:TEHAQL UNYY - NCG 404",
         "NQQE:1290 NYZFUBHFR EQ",
         "PVGL:QBLYRFGBJA GJC",
         "K:GHEX EQ & EG 611",
@@ -3372,9 +3114,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220720",
         "QNGR:06/08/12",
         "GVZR:11:29:16",
-        "PBQR:NGNV",
-        "PNYY:GENSSVP NPPVQRAG (PEVGVPNY)",
-        "CEV:1",
+        "PNYY:NGNV  (GENSSVP NPPVQRAG (PEVGVPNY))",
         "OBK:S:29002 R:129002",
         "ZNC:3146W8",
         "NQQE:PBHAGL YVAR EQ & EG 611",
@@ -3407,9 +3147,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220753",
         "QNGR:06/08/12",
         "GVZR:14:50:50",
-        "PBQR:NHAE",
-        "PNYY:HAERFCBAFVIR CREFBA",
-        "CEV:1",
+        "PNYY:NHAE  (HAERFCBAFVIR CREFBA)",
         "OBK:S:29808 R:129016",
         "ZNC:3146W2",
         "CYNPR:FG CNHYF CER FPU - VA GUR CXYBG VA N PNE",
@@ -3444,9 +3182,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220789",
         "QNGR:06/08/12",
         "GVZR:19:06:26",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:78803 R:129132",
         "ZNC:3034R7",
         "CYNPR:PO FBHGU UF - SBBGONYY FGNQVHZ VA OYRNPURE NERN",
@@ -3482,9 +3218,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220795",
         "QNGR:06/08/12",
         "GVZR:20:10:38",
-        "PBQR:NGENHZ",
-        "PNYY:ZHYGV FLFGRZF GENHZN PEVGVPNY",
-        "CEV:1",
+        "PNYY:NGENHZ(ZHYGV FLFGRZF GENHZN PEVGVPNY)",
         "OBK:S:29022 R:129020",
         "ZNC:3146X4",
         "NQQE:1729 GEVHZCUR JL",
@@ -3519,9 +3253,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220804",
         "QNGR:06/08/12",
         "GVZR:21:07:56",
-        "PBQR:NGENA",
-        "PNYY:ABA-FCRPVSVP (PEVGVPNY) RZRET",
-        "CEV:3",
+        "PNYY:NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET)",
         "OBK:S:29044 R:129017",
         "ZNC:3147N3",
         "NQQE:1843 ZNER EQ",
@@ -3556,9 +3288,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220807",
         "QNGR:06/08/12",
         "GVZR:21:35:47",
-        "PBQR:OCGNFG",
-        "PNYY:NFFVFG CNGVRAG",
-        "CEV:4",
+        "PNYY:OCGNFG(NFFVFG CNGVRAG)",
         "OBK:S:29037 R:129132",
         "ZNC:3034R7",
         "NQQE:1273 SBYYL EQ",
@@ -3592,9 +3322,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220813",
         "QNGR:06/08/12",
         "GVZR:22:33:40",
-        "PBQR:OBQ",
-        "PNYY:BIREQBFR/CBVFVBAVAT (ABA PEVG)",
-        "CEV:4",
+        "PNYY:OBQ   (BIREQBFR/CBVFVBAVAT (ABA PEVG))",
         "OBK:S:78054 R:129126",
         "ZNC:3034S7",
         "CYNPR:NCGF - QBJAFGNVEF NCG",
@@ -3606,6 +3334,56 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CUBAR:2158709925",
         "VASB:SRZ GNXVAT CVYYF NAQ PBZVAT NSGRE PZCY",
         "HAVG:N129");
+
+    qbGrfg("G63",
+        "Fhowrpg: 911 Qngn\a" +
+        "  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a" +
+        "129/125\a" +
+        "                                                    \a\a\a" +
+        " Vap Uvfgbel sbe: #RQ1220813    Kers:                           #CQ121601609 \a\a" +
+        " Ragrerq      06/08/12  22:32:58  OL CQ05   774      \a" +
+        " Qvfcngpurq   06/08/12  22:33:40  OL SF01   806      \a" +
+        " Raebhgr      06/08/12  22:37:39                     \a" +
+        " Bafprar      06/08/12  22:39:45                     \a\a" +
+        " Vavgvny Glcr: OBQ     Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
+        " Svany Glcr: OBQ   (BIREQBFR/CBVFVBAVAT (ABA PEVG)) Cev: 4 Qfcb:      Cerz: [CJ]\a" +
+        " RZF Oyx:  129126 Sver Oyx:  78054  Cbyvpr Oyx:  29301  Znc Cntr: 3034S7 \a" +
+        " Tebhc: RA  Orng: 129 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a" +
+        " Ybp: 3079 OEVFGBY EQ #1 ,29 -- NCGF ogja BYQ ARJ EQ & SBYYL EQ\a\a" +
+        " Ybp Vasb: QBJAFGNVEF NCG\a" +
+        " Anzr: XNGUL ZLREF             Nqqe: P/C                     Cubar: 2158709925\a\a" +
+        "/2232  (774     )  RAGEL:         SRZ GNXVAT CVYYF NAQ PBZVAT NSGRE PZCY\a" +
+        "/2233  (806     )  QVFC    N129    #147878   URYYLRE, ZVXR \a" +
+        "                                   #100054   RATYR, PUEVFGBCURE (RZG) \a" +
+        "/2233  (774     )  FHCC           GKG: GBBX HAX NZBHAG XYBABCVA, VA UNYYJNL \a" +
+        "/2237  (807     )  RAEBHG  N129   \a" +
+        "/2238  (774     )  FHCC           GKG: PZCY GUVAXF SRZ \"YVM\" VF TBVAT GB NGGNPX \a" +
+        "                                  URE FB FUR VF UVQVAT ORUVAQ URE PNE \a" +
+        "/2238              FHCC           GKG: SEBAG NCG \a" +
+        "/2239  (807     )  ZVFP    N129   , JVYY FGNTR GVYY CBYVPR FRPHER FPRAR\a" +
+        "/2239              FHCC           GKG: FDHNQ FGNTVAT GVYY FPRAR FRPHER \a" +
+        "/2239              BAFPAR  N129   [FGNTVAT] \a" +
+        "/2242              EDHRFG  N129   Nqqrq Havg(f) Erdhrfgrq\a" +
+        "                                  ,ERDN N129 1O N\a" +
+        "/2243  (806     )  NQQ     N125    #203578   ZVYYRE,PBAENQ \a" +
+        "                                   #191620   EBHFVF, WNFBA (RZG) ",
+
+        "FEP:129/125",
+        "VQ:RQ1220813",
+        "QNGR:06/08/12",
+        "GVZR:22:33:40",
+        "PNYY:OBQ   (BIREQBFR/CBVFVBAVAT (ABA PEVG))",
+        "OBK:S:78054 R:129126",
+        "ZNC:3034S7",
+        "CYNPR:NCGF - QBJAFGNVEF NCG",
+        "NQQE:3079 OEVFGBY EQ",
+        "NCG:1",
+        "PVGL:QBLYRFGBJA GJC",
+        "K:BYQ ARJ EQ & SBYYL EQ",
+        "ANZR:XNGUL ZLREF (P/C)",
+        "CUBAR:2158709925",
+        "VASB:SRZ GNXVAT CVYYF NAQ PBZVAT NSGRE PZCY\aGBBX HAX NZBHAG XYBABCVA, VA UNYYJNL\aPZCY GUVAXF SRZ \"YVM\" VF TBVAT GB NGGNPX URE FB FUR VF UVQVAT ORUVAQ URE PNE\aSEBAG NCG\aFDHNQ FGNTVAT GVYY FPRAR FRPHER",
+        "HAVG:N129 N125");
 
     qbGrfg("G64",
         "Fhowrpg: 911 Qngn\a" +
@@ -3633,9 +3411,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220821",
         "QNGR:06/09/12",
         "GVZR:00:23:10",
-        "PBQR:NSNYY",
-        "PNYY:SNYY IVPGVZ (PEVGVPNY)",
-        "CEV:3",
+        "PNYY:NSNYY (SNYY IVPGVZ (PEVGVPNY))",
         "OBK:S:29048 R:129013",
         "ZNC:3146W1",
         "CYNPR:JNEEV CNIVYVBA - WBUAL NAQ SENAXVRF",
@@ -3672,9 +3448,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220882",
         "QNGR:06/09/12",
         "GVZR:11:42:25",
-        "PBQR:OGNV",
-        "PNYY:GENSSVP NPPVQRAG(ABA-PEVGVPNY)",
-        "CEV:3",
+        "PNYY:OGNV  (GENSSVP NPPVQRAG(ABA-PEVGVPNY))",
         "OBK:S:29003 R:129002",
         "ZNC:3146U5",
         "CYNPR:VSB",
@@ -3683,7 +3457,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:GVGHF NI & TNEQRA NI",
         "ANZR:SENAPRF (OYVAQ FUNQR SNPGBEL)",
         "CUBAR:2154914400",
-        "VASB:ER:2 IRUF VAIBYIRQ,,,HAX VAWF\aYBPV: VSB, 1 CREFBA NFXVAT SBE RZF,,,,HAX ERNFBA",
+        "VASB:ER:2 IRUF VAIBYIRQ,,,HAX VAWF\aYBPV: VSB,\a1 CREFBA NFXVAT SBE RZF,,,,HAX ERNFBA",
         "HAVG:N129");
 
     qbGrfg("G66",
@@ -3710,9 +3484,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220893",
         "QNGR:06/09/12",
         "GVZR:12:32:42",
-        "PBQR:NHAP",
-        "PNYY:HAPBAFPVBHF CREFBA",
-        "CEV:1",
+        "PNYY:NHAP  (HAPBAFPVBHF CREFBA)",
         "OBK:S:29018 R:129002",
         "ZNC:3146W4",
         "CYNPR:YN SVGARFF - VA ZRAF YBPXRE EBBZ",
@@ -3749,9 +3521,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220959",
         "QNGR:06/09/12",
         "GVZR:22:15:07",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:29904 R:129027",
         "ZNC:3034X7",
         "CYNPR:ARFUN ZNABE AU ARJ #P1-153 - ORQ 2",
@@ -3786,9 +3556,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220973",
         "QNGR:06/10/12",
         "GVZR:01:56:24",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:78033 R:129105",
         "ZNC:3034Q9",
         "NQQE:810 SBYYL EQ",
@@ -3820,9 +3588,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220977",
         "QNGR:06/10/12",
         "GVZR:02:55:13",
-        "PBQR:ZNYEZ",
-        "PNYY:ZRQVPNY NYNEZ",
-        "CEV:4",
+        "PNYY:ZNYEZ (ZRQVPNY NYNEZ)",
         "OBK:S:79057 R:129257",
         "ZNC:3034W7",
         "CYNPR:TEHAQL UNYY - TBEQRA ERF 2154911808",
@@ -3859,9 +3625,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1220984",
         "QNGR:06/10/12",
         "GVZR:04:03:31",
-        "PBQR:OCGNFG",
-        "PNYY:NFFVFG CNGVRAG",
-        "CEV:4",
+        "PNYY:OCGNFG(NFFVFG CNGVRAG)",
         "OBK:S:29020 R:129039",
         "ZNC:3146W4",
         "NQQE:421 ERQOHQ PG",
@@ -3895,9 +3659,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221000",
         "QNGR:06/10/12",
         "GVZR:07:52:22",
-        "PBQR:OCGNFG",
-        "PNYY:NFFVFG CNGVRAG",
-        "CEV:4",
+        "PNYY:OCGNFG(NFFVFG CNGVRAG)",
         "OBK:S:29044 R:129017",
         "ZNC:3147N3",
         "NQQE:1815 ZNER EQ",
@@ -3934,9 +3696,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221036",
         "QNGR:06/10/12",
         "GVZR:12:29:12",
-        "PBQR:OCFLPU",
-        "PNYY:CFLPUVNGEVP RZRETRAPL",
-        "CEV:4",
+        "PNYY:OCFLPU(CFLPUVNGEVP RZRETRAPL)",
         "OBK:S:79057 R:129257",
         "ZNC:3034W7",
         "CYNPR:OYQT W",
@@ -3971,9 +3731,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221065",
         "QNGR:06/10/12",
         "GVZR:16:36:51",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:79034 R:125032",
         "ZNC:3035S5",
         "NQQE:2295 F JUVGGZBER FG",
@@ -4008,9 +3766,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221078",
         "QNGR:06/10/12",
         "GVZR:17:37:23",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:29017 R:129003",
         "ZNC:3146S4",
         "NQQE:109 ERQFGBAR QE",
@@ -4046,9 +3802,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221102",
         "QNGR:06/10/12",
         "GVZR:20:09:24",
-        "PBQR:NHAE",
-        "PNYY:HAERFCBAFVIR CREFBA",
-        "CEV:1",
+        "PNYY:NHAE  (HAERFCBAFVIR CREFBA)",
         "OBK:S:29904 R:129027",
         "ZNC:3034X7",
         "CYNPR:ARFUN ZNABE AU ARJ - ORQ #2",
@@ -4088,9 +3842,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221126",
         "QNGR:06/10/12",
         "GVZR:23:27:51",
-        "PBQR:OGENA",
-        "PNYY:RZRETRAPL GENAFCBEGNGVBA",
-        "CEV:4",
+        "PNYY:OGENA (RZRETRAPL GENAFCBEGNGVBA)",
         "OBK:S:19038 R:125038",
         "ZNC:3034W1",
         "CYNPR:QBLYR GENVA FGN",
@@ -4125,10 +3877,8 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221183",
         "QNGR:06/11/12",
         "GVZR:11:21:53",
-        "PBQR:NGNV",
-        "PNYY:GENSSVP NPPVQRAG (PEVGVPNY)",
+        "PNYY:NGNV  (GENSSVP NPPVQRAG (PEVGVPNY))",
         "OBK:S:29024 R:129018",
-        "CEV:1",
         "ZNC:3146W4",
         "CYNPR:JRTZNAF ZNEXRG - BA EG 611 VSB JRTZNAF",
         "NQQE:1405 ZNVA FG",
@@ -4136,6 +3886,54 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:INYYRL FDHNER OY & NYYVFBA QE",
         "VASB:2 IRUF,,,1 ZNYR VAWHERQ,,,JNF FGVYY VA IRU,,,T NFBYVAR FCVYYVAT",
         "HAVG:N129");
+
+    qbGrfg("G78",
+        "Fhowrpg: 911 Qngn\a" +
+        "  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a" +
+        "129/122\a" +
+        "                                                    \a\a\a" +
+        " Vap Uvfgbel sbe: #RQ1221183    Kers:              #SQ1208206   #CQ121630460 \a\a" +
+        " Ragrerq      06/11/12  11:20:35  OL PG08   675      \a" +
+        " Qvfcngpurq   06/11/12  11:21:53  OL SF01   745      \a" +
+        " Raebhgr      06/11/12  11:23:40                     \a" +
+        " Bafprar      06/11/12  11:25:46                     \a\a" +
+        " Vavgvny Glcr: NGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
+        " Svany Glcr: NGNV  (GENSSVP NPPVQRAG (PEVGVPNY)) Cev: 1 Qfcb:      Cerz: [  ]\a" +
+        " RZF Oyx:  129018 Sver Oyx:  29027  Cbyvpr Oyx:  75101  Znc Cntr: 3146U3 \a" +
+        " Tebhc: RA  Orng: 129 Fep:  A NGG:    \a" +
+        " Ybp: EG 611/INYYRL FDHNER OY ,75   \a\a" +
+        " Ybp Vasb: BA EG 611 VSB JRTZNAF\a" +
+        " Anzr: FUREEL OVFRYR           Nqqe:                         Cubar: 2017450118\a\a" +
+        "/1120  (675     )  RAGEL:         2 IRUF,,,1 ZNYR VAWHERQ,,,JNF FGVYY VA IRU,,,T\a" +
+        "                                  NFBYVAR FCVYYVAT\a" +
+        "/1121  (745     )  QVFC    N129    #190830   ZBLRE,WHFGVA \a" +
+        "                                   #107241   JBYS, MNPUNEL (RZG) \a" +
+        "/1122  (675     )  PUNATR         ANZ:  -->  FUREEL OVFRYR, \a" +
+        "                                  CUB:  -->  2017450118\a" +
+        "/1122              PUNATR         GKG: ZNYR UNF URNQ JBHAQ \a" +
+        "/1123  (190830  ) *RAEBHG  N129   ,43400.7\a" +
+        "/1124  (721     )  PUNATR         YBP: JRTZNAF ZNEXRG ,75 -->  EG 611/INYYRL FDH\a" +
+        "                                  NER OY ,75\a" +
+        "/1125  (190830  ) *BAFPAR  N129   ,43401.6\a" +
+        "/1128  (721     )  EDHRFG  N129   Nqqrq Havg(f) Erdhrfgrq\a" +
+        "                                  ,ERDN N129 1N\a" +
+        "/1129  (745     )  NQQ     N122    #143904   ZVGPURYY, PUNAAN \a" +
+        "                                   #163145   GHGGYR, WHFGVA (RZG) ",
+
+        "FEP:129/122",
+        "VQ:RQ1221183",
+        "QNGR:06/11/12",
+        "GVZR:11:21:53",
+        "PNYY:NGNV  (GENSSVP NPPVQRAG (PEVGVPNY))",
+        "OBK:S:29027 R:129018",
+        "ZNC:3146U3",
+        "CYNPR:BA EG 611 VSB JRTZNAF",
+        "NQQE:EG 611 & INYYRL FDHNER OY",
+        "PVGL:JNEEVATGBA GJC",
+        "ANZR:FUREEL OVFRYR",
+        "CUBAR:2017450118",
+        "VASB:2 IRUF,,,1 ZNYR VAWHERQ,,,JNF FGVYY VA IRU,,,T NFBYVAR FCVYYVAT",
+        "HAVG:N129 N122");
 
     qbGrfg("G79",
         "Fhowrpg: 911 Qngn\a" +
@@ -4166,9 +3964,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221194",
         "QNGR:06/11/12",
         "GVZR:12:52:41",
-        "PBQR:NNOQB",
-        "PNYY:NPHGR NOQBZRA",
-        "CEV:3",
+        "PNYY:NNOQB (NPHGR NOQBZRA)",
         "OBK:S:29505 R:129021",
         "ZNC:3146X4",
         "CYNPR:JRFGZVAFGRE NCGF #O17",
@@ -4209,14 +4005,12 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221209",
         "QNGR:06/11/12",
         "GVZR:14:35:40",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:29505 R:129021",
         "ZNC:3146X4",
-        "CYNPR:JRFGZVAFGRE NCGF #N40",
-        "NCG:N-40",
+        "CYNPR:JRFGZVAFGRE NCGF #N40 - NCG N-40",
         "NQQE:600 INYYRL EQ",
+        "NCG:N40",
         "PVGL:JNEEVATGBA GJC",
         "K:EG 132 & YN EHR YN",
         "ANZR:RTRYXNZC,WBFRCU",
@@ -4247,9 +4041,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221223",
         "QNGR:06/11/12",
         "GVZR:15:47:05",
-        "PBQR:NOYRQ",
-        "PNYY:URZBEEUNTR/OYRRQVAT",
-        "CEV:3",
+        "PNYY:NOYRQ (URZBEEUNTR/OYRRQVAT)",
         "OBK:S:29020 R:129039",
         "ZNC:3146W4",
         "NQQE:271 FNFFNSENF PG",
@@ -4284,9 +4076,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221255",
         "QNGR:06/11/12",
         "GVZR:20:45:58",
-        "PBQR:NQVNO",
-        "PNYY:QVNORGVP RZRETRAPL",
-        "CEV:3",
+        "PNYY:NQVNO (QVNORGVP RZRETRAPL)",
         "OBK:S:29006 R:129004",
         "ZNC:3146P2",
         "NQQE:532 ZBPXVATOVEQ JL",
@@ -4321,9 +4111,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221285",
         "QNGR:06/12/12",
         "GVZR:04:59:55",
-        "PBQR:NPNEQN",
-        "PNYY:PNEQVB/CHYZBANEL NEERFG",
-        "CEV:1",
+        "PNYY:NPNEQN(PNEQVB/CHYZBANEL NEERFG)",
         "OBK:S:29049 R:129024",
         "ZNC:3035N10",
         "NQQE:1250 CRNPU GERR YN",
@@ -4359,9 +4147,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221316",
         "QNGR:06/12/12",
         "GVZR:12:31:38",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:29026 R:129018",
         "ZNC:3146W4",
         "CYNPR:PUVCBGYR - BSSVPR NOBIR",
@@ -4396,9 +4182,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221334",
         "QNGR:06/12/12",
         "GVZR:15:04:46",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:66003 R:129301",
         "ZNC:3035O10",
         "NQQE:1696 OEBBX YN",
@@ -4435,9 +4219,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1221336",
         "QNGR:06/12/12",
         "GVZR:15:20:13",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:29045 R:129015",
         "ZNC:3147N2",
         "NQQE:2019 ONYYNAGVAR YN",
@@ -4486,9 +4268,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1233016",
         "QNGR:09/10/12",
         "GVZR:05:54:03",
-        "PBQR:NNOQB",
-        "PNYY:NPHGR NOQBZRA",
-        "CEV:3",
+        "PNYY:NNOQB (NPHGR NOQBZRA)",
         "OBK:S:91097 R:122112",
         "ZNC:3147U8",
         "CYNPR:QNJFBA GREENPR #510",
@@ -4533,13 +4313,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1233029",
         "QNGR:09/10/12",
         "GVZR:07:31:58",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:29505 R:129021",
         "ZNC:3146X4",
-        "CYNPR:JRFGZVAFGRE NCGF",
-        "NCG:P12",
+        "CYNPR:JRFGZVAFGRE NCGF - NCG P12",
         "NQQE:600 INYYRL EQ",
         "NCG:P12",
         "PVGL:JNEEVATGBA GJC",
@@ -4582,9 +4359,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1233030",
         "QNGR:09/10/12",
         "GVZR:07:32:35",
-        "PBQR:NSNYY",
-        "PNYY:SNYY IVPGVZ (PEVGVPNY)",
-        "CEV:3",
+        "PNYY:NSNYY (SNYY IVPGVZ (PEVGVPNY))",
         "OBK:S:91097 R:122112",
         "ZNC:3147U8",
         "CYNPR:GNLYBE PEBFFVAT #219",
@@ -4629,9 +4404,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1233048",
         "QNGR:09/10/12",
         "GVZR:09:56:19",
-        "PBQR:NGNV",
-        "PNYY:GENSSVP NPPVQRAG (PEVGVPNY)",
-        "CEV:1",
+        "PNYY:NGNV  (GENSSVP NPPVQRAG (PEVGVPNY))",
         "OBK:S:90043 R:122006",
         "ZNC:3147O8",
         "NQQE:PYNVER EQ & ZNTABYVN EQ",
@@ -4640,6 +4413,73 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CUBAR:2156748558",
         "VASB:GUVAXF CRQ FGEHPX,,GUVAXF FGEVXVAT IRU FGVYY B F,,",
         "HAVG:N122");
+
+    qbGrfg("G5",
+        "[911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \e\a" +
+        "122\e\a" +
+        "                                                        \e\a" +
+        "\e\a" +
+        "\e\a" +
+        " Vap Uvfgbel sbe: #RQ1233048    Kers:                           #CQ122540426 \e\a" +
+        "\e\a" +
+        " Erprvirq     09/10/12  09:54:56  OL PG08   646      \e\a" +
+        " Ragrerq      09/10/12  09:55:45  OL PG08   646      \e\a" +
+        " Qvfcngpurq   09/10/12  09:56:19  OL SF01   619      \e\a" +
+        " Raebhgr      09/10/12  09:57:41                     \e\a" +
+        "\e\a" +
+        " Vavgvny Glcr: NGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\e\a" +
+        " Svany Glcr: NGNV  (GENSSVP NPPVQRAG (PEVGVPNY)) Cev: 1 Qfcb:      Cerz: [  ]\e\a" +
+        " RZF Oyx:  122006 Sver Oyx:  90043  Cbyvpr Oyx:  74002  Znc Cntr: 3147O8 \e\a" +
+        " Tebhc: RA  Orng: 122 Fep:  9 NGG:  VAI - Vairfgvtngr  \e\a" +
+        " Ybp: PYNVER EQ/ZNTABYVN EQ ,74   \e\a" +
+        "\e\a" +
+        " Ybp Vasb: \e\a" +
+        " Anzr: YBTNA, CNGEVPX          Nqqe: 775 PYNVER EQ           Cubar: 2156748558\e\a" +
+        "\e\a" +
+        "/0955  (646     )  RAGEL:         GUVAXF CRQ FGEHPX,,GUVAXF FGEVXVAT IRU FGVYY B\e\a" +
+        "                                  F,,\e\a" +
+        "/0956  (619     )  QVFC    N122    #129287   UBHTU, FGRCURA \e\a" +
+        "/0956  (646     )  FHCC           GKG: PBZCY JVYY TB TRG SHEGURE VASB NAQ P/O SE\e\a" +
+        "                                  BZ P/C,, \e\a" +
+        "/0957  (826     )  FHCC           ANZ: PUEVFGVAR ARJGBA, \e\a" +
+        "                                  NQE: CZ, \e\a" +
+        "                                  CUB: 2152606624, \e\a" +
+        "                                  GKG: CRQ IF IRU,,68 LBS,,OYRRQVAT SEBZ URNQ \e\a" +
+        "/0957  (129287  ) *RAEBHG  N122   \e\a" +
+        "/0958  (815     )  FHCC           ANZ: SERQ PVNB, \e\a" +
+        "                                  NQE: VAIBYIRQ, \e\a" +
+        "                                  CUB: 2676290392, \e\a" +
+        "                                  GKG: FHOW TBG UVG OL IRU,,OYRRQVAT SEBZ GUR SN\e\a" +
+        "                                  PR...JVSR OYRRQVAT SEBZ GUR URNQ \e\a" +
+        "/0959              FHCC           ANZ: SERQ PVNB, \e\a" +
+        "                                  NQE: VAIBYIRQ, \e\a" +
+        "                                  CUB: 2676290392, \e\a" +
+        "                                  GKG: ZNYR CG VF 72,,JVSR VF 69,, \e\a" +
+        "/0959              FHCC           ANZ: SERQ PVNB, \e\a" +
+        "                                  NQE: VAIBYIRQ, \e\a" +
+        "                                  CUB: 2676290392, \e\a" +
+        "                                  GKG: GREZ YVAR CQ BF \e\a" +
+        "/1000  (271     )  EDHRFG  N122   Nqqrq Havg(f) Erdhrfgrq\e\a" +
+        "                                  ,ERDN N122 1N\e\a" +
+        "/1000  (619     )  NQQ     N1221   #147886   GNTTNEG, NAQERJ (RZG) \e\a" +
+        "                                   #203754   JEVTUG, INYREVR \e\a" +
+        "\e\a" +
+        "\e\a" +
+        "\e\a",
+
+        "FEP:122",
+        "VQ:RQ1233048",
+        "QNGR:09/10/12",
+        "GVZR:09:56:19",
+        "PNYY:NGNV  (GENSSVP NPPVQRAG (PEVGVPNY))",
+        "OBK:S:90043 R:122006",
+        "ZNC:3147O8",
+        "NQQE:PYNVER EQ & ZNTABYVN EQ",
+        "PVGL:JNEZVAFGRE GJC",
+        "ANZR:YBTNA, CNGEVPX (775 PYNVER EQ)",
+        "CUBAR:2156748558",
+        "VASB:GUVAXF CRQ FGEHPX,,GUVAXF FGEVXVAT IRU FGVYY B F,,\aPBZCY JVYY TB TRG SHEGURE VASB NAQ P/O SE BZ P/C,,\aANZ: PUEVFGVAR ARJGBA, NQE: CZ, CUB: 2152606624,\aCRQ IF IRU,,68 LBS,,OYRRQVAT SEBZ URNQ\aANZ: SERQ PVNB, NQE: VAIBYIRQ, CUB: 2676290392,\aFHOW TBG UVG OL IRU,,OYRRQVAT SEBZ GUR SN PR...JVSR OYRRQVAT SEBZ GUR URNQ\aANZ: SERQ PVNB, NQE: VAIBYIRQ, CUB: 2676290392,\aZNYR CG VF 72,,JVSR VF 69,,\aANZ: SERQ PVNB, NQE: VAIBYIRQ, CUB: 2676290392,\aGREZ YVAR CQ BF",
+        "HAVG:N122 N1221");
 
     qbGrfg("G6",
         "[911 Qngn]  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \e\a" +
@@ -4680,9 +4520,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1233055",
         "QNGR:09/10/12",
         "GVZR:10:52:18",
-        "PBQR:NGNV",
-        "PNYY:GENSSVP NPPVQRAG (PEVGVPNY)",
-        "CEV:1",
+        "PNYY:NGNV  (GENSSVP NPPVQRAG (PEVGVPNY))",
         "OBK:S:91016 R:122116",
         "ZNC:3259W2",
         "CYNPR:JNJN AB TNF - VSB",
@@ -4691,7 +4529,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:R PBHAGL YVAR EQ & YVYNP YN",
         "ANZR:XNGUYRRA ZHZSBEQ (C/Z)",
         "CUBAR:2152908401",
-        "VASB:1 IRU BIREGHEARQ,,ZNYR YNLVAT BA FGERR,,HAX VS RWRPGRQ,,\aYBP: R PBHAGL YVAR EQ/QNIVFIVYYR EQ ,74, YBPV: BA QNIVFIVYYR, ANZ: PENVT UNEEVF, NQE: CZ, CUB: 6096058820, 2 IRUF,,AEV,,CNEGVNY OYXVAT",
+        "VASB:1 IRU BIREGHEARQ,,ZNYR YNLVAT BA FGERR,,HAX VS RWRPGRQ,,\aYBP: R PBHAGL YVAR EQ/QNIVFIVYYR EQ ,74, YBPV: BA QNIVFIVYYR, ANZ: PENVT UNEEVF, NQE: CZ, CUB: 6096058820,\a2 IRUF,,AEV,,CNEGVNY OYXVAT",
         "HAVG:N113");
 
     qbGrfg("G7",
@@ -4724,13 +4562,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1233068",
         "QNGR:09/10/12",
         "GVZR:12:02:34",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:91097 R:122112",
         "ZNC:3147U8",
-        "CYNPR:JRFGJBBQ CYNPR",
-        "NCG:101",
+        "CYNPR:JRFGJBBQ CYNPR - NCG #101",
         "NQQE:13000 NAAF PUBVPR",
         "PVGL:JNEZVAFGRE GJC",
         "K:WBUAFIVYYR OY & JRFGJBBQ CYNPR",
@@ -4765,9 +4600,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246458",
         "QNGR:12/18/12",
         "GVZR:12:21:00",
-        "PBQR:NHAP",
-        "PNYY:HAPBAFPVBHF CREFBA",
-        "CEV:1",
+        "PNYY:NHAP  (HAPBAFPVBHF CREFBA)",
         "CYNPR:ZNABE PNER URNYG #102 KFGE UBEFUNZ EQ",
         "NQQE:640 ORGUYRURZ CX",
         "ZNQQE:640 ORGUYRURZ CVXR",
@@ -4798,15 +4631,57 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246635",
         "QNGR:12/19/12",
         "GVZR:18:17:51",
-        "PBQR:NBQ",
-        "PNYY:BIREQBFR/CBVFVBAVAT (PEVGVPNY)",
-        "CEV:2",
+        "PNYY:NBQ   (BIREQBFR/CBVFVBAVAT (PEVGVPNY))",
         "CYNPR:KFGERRG PYNERZBAG",
         "NQQE:202 FGENGSBEQ QE",   // Tbbtyr pnyyf guvf FGENGSBEQ PG
         "PVGL:ZBAGTBZREL GJC",
         "ANZR:ZBAGPB (ENQVB)",
         "VASB:PBIRE 345",
         "HAVG:N134");
+
+    qbGrfg("G3",
+        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a" +
+        "134/151\a" +
+        "                                                    \a\a\a" +
+        " Vap Uvfgbel sbe: #RQ1246749    Kers:              #SQ1219921   #CQ123550683 \a\a" +
+        " Erprvirq     12/20/12  12:54:06  OL OPB1   734      \a" +
+        " Ragrerq      12/20/12  12:56:06  OL OPB1   734      \a" +
+        " Qvfcngpurq   12/20/12  12:57:25  OL SQ01   341      \a" +
+        " Raebhgr      12/20/12  12:58:04                     \a" +
+        " Bafprar      12/20/12  13:05:57                     \a\a" +
+        " Vavgvny Glcr: ENHGB   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
+        " Svany Glcr: ENHGB (NHGB RKGEVPNGVBA (EOBK)) Cev: 1 Qfcb:      Cerz: [  ]\a" +
+        " RZF Oyx:  134309 Sver Oyx:  61013  Cbyvpr Oyx:  36107  Znc Cntr: 2921N6 \a" +
+        " Tebhc: RA  Orng: 134 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a" +
+        " Ybp: EVPXREG EQ/EG 152 ,36   \a\a" +
+        " Ybp Vasb: \a" +
+        " Anzr: SERQ JRVFONPU           Nqqe: ABG VAIBYIRQ            Cubar: 2153173391\a\a" +
+        "/1256  (734     )  RAGEL:         3 IRUF,,GOBAR,,BAR RAGENCCRQ\a" +
+        "/1256              FHCC           ANZ: SERQ JRVFONPU, \a" +
+        "                                  NQE: ABG VAIBYIRQ\a" +
+        "/1257  (341     )  QVFC    N151    #177638   QVYYNEQ, TERTTBEL \a" +
+        "/1257              NQQ     DHG60  \a" +
+        "/1258  (742     )  RAEBHG  DHG60  \a" +
+        "/1259              RAEBHG  N151   \a" +
+        "/1305              BAFPAR  DHG60  \a" +
+        "/1308              BAFPAR  N151   \a" +
+        "/1309              EDHRFG  N151   Nqqrq Havg(f) Erdhrfgrq\a" +
+        "                                  ,ERDN N151 1N  \a" +
+        "/1310  (639     )  NQQ     N1511   #047966   RYVSS, OENQ ",
+
+        "FEP:134/151",
+        "VQ:RQ1246749",
+        "QNGR:12/20/12",
+        "GVZR:12:57:25",
+        "PNYY:ENHGB (NHGB RKGEVPNGVBA (EOBK))",
+        "OBK:S:61013 R:134309",
+        "ZNC:2921N6",
+        "NQQE:EVPXREG EQ & EG 152",
+        "PVGL:UVYYGBJA GJC",
+        "ANZR:SERQ JRVFONPU (ABG VAIBYIRQ)",
+        "CUBAR:2153173391",
+        "VASB:3 IRUF,,GOBAR,,BAR RAGENCCRQ\aANZ: SERQ JRVFONPU, NQE: ABG VAIBYIRQ",
+        "HAVG:N151 DHG60 N1511");
 
     qbGrfg("G4",
         "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SQ01  : \a" +
@@ -4832,9 +4707,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246749",
         "QNGR:12/20/12",
         "GVZR:12:57:25",
-        "PBQR:ENHGB",
-        "PNYY:NHGB RKGEVPNGVBA (EOBK)",
-        "CEV:1",
+        "PNYY:ENHGB (NHGB RKGEVPNGVBA (EOBK))",
         "OBK:S:61013 R:134309",
         "ZNC:2921N6",
         "NQQE:EVPXREG EQ & EG 152",
@@ -4874,9 +4747,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246741",
         "QNGR:12/20/12",
         "GVZR:12:18:27",
-        "PBQR:NFRVM",
-        "PNYY:FRVMHER/NPGVIR (ZRQVP)",
-        "CEV:2",
+        "PNYY:NFRVM (FRVMHER/NPGVIR (ZRQVP))",
         "OBK:S:60062 R:134620",
         "ZNC:3032U4",
         "CYNPR:JNYZNEG FGBER - NG ERTVFGRE 1",
@@ -4886,7 +4757,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:UVYYGBJA CX & FJNEGYRL EQ",
         "ANZR:RQ ZNFFNEB (PHFGBZRE)",
         "CUBAR:6092345444",
-        "VASB:ZNYR,CBFFVOYL RZCYBLRR,,NPGVIRYL FRVMVAT\aYBPV: VSB FGEBER TEBPREL FGBER, ANZ: WVZVFU, CUB: 2673473873, ZNYR VA 30-40 UNIVAT N FRVM\aPBZCY ABG JVGU CG OHG BGURE RZCYBLRRF NER\aANZ: REVP FGRUZNA, CUB: 6103291709, 30-40LBZ UNIVAT N FRVMHER",
+        "VASB:ZNYR,CBFFVOYL RZCYBLRR,,NPGVIRYL FRVMVAT\aYBPV: VSB FGEBER TEBPREL FGBER, ANZ: WVZVFU, CUB: 2673473873,\aZNYR VA 30-40 UNIVAT N FRVM\aPBZCY ABG JVGU CG OHG BGURE RZCYBLRRF NER\aANZ: REVP FGRUZNA, CUB: 6103291709,\a30-40LBZ UNIVAT N FRVMHER",
         "HAVG:N134 DHG60");
 
     qbGrfg("G6",
@@ -4914,9 +4785,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246602",
         "QNGR:12/19/12",
         "GVZR:14:10:54",
-        "PBQR:NGENA",
-        "PNYY:ABA-FCRPVSVP (PEVGVPNY) RZRET",
-        "CEV:3",
+        "PNYY:NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET)",
         "OBK:S:60063 R:134620",
         "ZNC:3032R3",
         "CYNPR:QBPX ZRNQBJF AU #14",
@@ -4952,9 +4821,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246565",
         "QNGR:12/19/12",
         "GVZR:09:27:43",
-        "PBQR:NQVNO",
-        "PNYY:QVNORGVP RZRETRAPL",
-        "CEV:3",
+        "PNYY:NQVNO (QVNORGVP RZRETRAPL)",
         "OBK:S:78011 R:134129",
         "ZNC:3033W6",
         "NQQE:829 HCCRE FGNGR EQ",
@@ -4991,9 +4858,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246564",
         "QNGR:12/19/12",
         "GVZR:08:49:16",
-        "PBQR:NGENHZ",
-        "PNYY:ZHYGV FLFGRZF GENHZN PEVGVPNY",
-        "CEV:1",
+        "PNYY:NGENHZ(ZHYGV FLFGRZF GENHZN PEVGVPNY)",
         "OBK:S:74096 R:134054",
         "ZNC:3033P7",
         "CYNPR:IREGVF QVERPG ZXGT",
@@ -5029,13 +4894,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246545",
         "QNGR:12/19/12",
         "GVZR:05:04:42",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
+        "PNYY:NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF)",
         "OBK:S:60063 R:134620",
         "ZNC:3032R3",
-        "CYNPR:QBPX ZRNQBJF AU",
-        "NCG:2",
+        "CYNPR:QBPX ZRNQBJF AU - EZ 2",
         "NQQE:2343 ORGUYRURZ CX",
         "ZNQQE:2343 ORGUYRURZ CVXR",
         "NCG:2",
@@ -5071,9 +4933,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246544",
         "QNGR:12/19/12",
         "GVZR:04:26:17",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:34033 R:134033",
         "ZNC:3033W2",
         "NQQE:104 PUREBXRR EQ",
@@ -5106,9 +4966,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246526",
         "QNGR:12/18/12",
         "GVZR:22:22:54",
-        "PBQR:OSNYY",
-        "PNYY:SNYY IVPGVZ (ABA-PEVGVPNY)",
-        "CEV:4",
+        "PNYY:OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY))",
         "OBK:S:60062 R:134620",
         "ZNC:3032U4",
         "CYNPR:JNYZNEG FGBER - VAFVQR TNEQRA PRAGRE",
@@ -5144,9 +5002,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246519",
         "QNGR:12/18/12",
         "GVZR:21:39:37",
-        "PBQR:ZNYEZ",
-        "PNYY:ZRQVPNY NYNEZ",
-        "CEV:4",
+        "PNYY:ZNYEZ (ZRQVPNY NYNEZ)",
         "OBK:S:74059 R:134059",
         "ZNC:3033R7",
         "CYNPR:SVEVXB ERF 215-822-3024",
@@ -5182,9 +5038,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246501",
         "QNGR:12/18/12",
         "GVZR:18:24:32",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
+        "PNYY:NERFC (ERFCVENGBEL QVFGERFF)",
         "OBK:S:59001 R:126201",
         "ZNC:2920T3",
         "CYNPR:VA YVIVAT EBBZ",
@@ -5217,9 +5071,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246421",
         "QNGR:12/18/12",
         "GVZR:09:05:25",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:34039 R:134039",
         "ZNC:3033T6",
         "NQQE:136 F YVZRXVYA CX",
@@ -5253,9 +5105,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:RQ1246380",
         "QNGR:12/17/12",
         "GVZR:18:45:53",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
+        "PNYY:NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR))",
         "OBK:S:34034 R:134034",
         "ZNC:3033X2",
         "CYNPR:ZRGEB HFN",
@@ -5294,9 +5144,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305283",
         "QNGR:04/23/13",
         "GVZR:13:05:44",
-        "PBQR:SNYEZ",
-        "PNYY:SVER NYNEZ (YBP)",
-        "CEV:4",
+        "PNYY:SNYEZ (SVER NYNEZ (YBP))",
         "OBK:S:90022 R:122022",
         "ZNC:3147T8",
         "CYNPR:PBK PBAFGEHPGVBA - 215 672 9880",
@@ -5332,12 +5180,10 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305276",
         "QNGR:04/23/13",
         "GVZR:09:49:08",
-        "PBQR:JNGRE",
-        "PNYY:JNGRESYBJ NYNEZ (YBP)",
-        "CEV:4",
+        "PNYY:JNGRE (JNGRESYBJ NYNEZ (YBP))",
         "OBK:S:90041 R:122041",
         "ZNC:3147Q7",
-        "CYNPR:908 PRAGENY CBVAG FP AB CERZVFR AHZORE",
+        "CYNPR:908 PRAGENY CBVAG FP,AB CERZVFR AHZORE",
         "NQQE:720 J FGERRG EQ",
         "PVGL:JNEZVAFGRE GJC",
         "K:EG 263 & WNPX YNSSREGL OY",
@@ -5374,9 +5220,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305250",
         "QNGR:04/22/13",
         "GVZR:15:39:44",
-        "PBQR:SHZRVA",
-        "PNYY:SHZRF VAFVQR FGEHPGHER (GNP)",
-        "CEV:2",
+        "PNYY:SHZRVA(SHZRF VAFVQR FGEHPGHER (GNP))",
         "OBK:S:92042 R:122205",
         "ZNC:3147O8",
         "NQQE:259 URAEL NI",
@@ -5387,6 +5231,70 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CUBAR:2159323615",
         "VASB:TNF FGBIR JNF SVKRQ GUVF ZBEAVAT,,PBZCY WHFG T BG UBZR NAQ JUBYR UBHFR FZRYYF YVXR TNF PBZCY QBRFA'G XABJ UBJ GB GHEA VG BSS,,CEBONOYL TBVA T FVAPR 13:30",
         "HAVG:Y90 R92 R90");
+
+    qbGrfg("G4",
+        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a" +
+        "019/029/079/020/090\a" +
+        "                                        \a" +
+        "Eha: Y29    R79    R20    E90    \a\a" +
+        " Vap Uvfgbel sbe: #SQ1305243    Kers: #RQ1314816                #CQ131120789 \a\a" +
+        " Erprvirq     04/22/13  13:52:33  OL PG06   744      \a" +
+        " Ragrerq      04/22/13  13:53:24  OL PG06   744      \a" +
+        " Qvfcngpurq   04/22/13  13:53:54  OL SF01   748      \a" +
+        " Raebhgr      04/22/13  13:55:13                     \a" +
+        " Bafprar      04/22/13  13:59:07                     \a\a" +
+        " Vavgvny Glcr: SNCG    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
+        " Svany Glcr: SNCG  (NCNEGZRAG SVER (OBK)) Cev: 1 Qfcb:      Cerz: [SJ]\a" +
+        " RZF Oyx:  125012 Sver Oyx:  19042  Cbyvpr Oyx:  29202  Znc Cntr: 2922T10 \a" +
+        " Tebhc: AB  Orng: 019 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a" +
+        " Ybp: 612 A FUNQL ERGERNG EQ #15 ,29 -- QBLYR PBZZBAF ogja YVZRXVYA EQ & ZNUBTNAL PG\a\a" +
+        " Ybp Vasb: EZ:NCG ,NCG:15\a" +
+        " Anzr: RQ                      Nqqe: 2153455875              Cubar: 2153455875\a\a" +
+        "/1353  (744     )  RAGEL:         SVER VA XVGPURA,,NQI GB RINP\a" +
+        "/1353  (748     )  QVFC    Y79     #ZQ0810   Y79 \a" +
+        "/1353              NQQ     Y29     #ZQ0889   Y29 \a" +
+        "/1353              NQQ     R19     #ZQ0802   R19 \a" +
+        "/1353              NQQ     R19-1   #ZQ0812   R19-1 \a" +
+        "/1353              NQQ     R79     #ZQ0813   R79 \a" +
+        "/1353              NQQ     R20    \a" +
+        "/1355  (619     )  NQQRE   OP19   [612 A FUNQL ERGERNG EQ #15 ,29] \a" +
+        "                                   #ZQ0803   XERHGRE, ONGG. C. \a" +
+        "/1359              BAFPAR  OP19   \a" +
+        "/1359              ZVFP    R19    ,ZBZRAG\a" +
+        "/1359              RAEBHG  Y79    \a" +
+        "/1400  (792     )  PUNATR         ,CQ ERQHPVAT FCRRQ, ABGUVAT SHEGURE\a" +
+        "/1400  (619     )  RAEBHG  R19    \a" +
+        "/1401              ZVFP    OP19   ,UBYQ GB R19 Y79\a" +
+        "/1401              ZVFP    OP19   ,QELRE SVER J/RKGRAFVBA,,XABPXRQ OL UBZRBJARE \a" +
+        "/1401              ZVFP    OP19   ,SZ GB FPRAR \a" +
+        "/1402              NVD     R20    \a" +
+        "/1402              NVD     R79    \a" +
+        "/1402              NVD     Y29    \a" +
+        "/1402              ONYAPR         Glcr punatrq gb G/SNCG   \a" +
+        "/1402              ZVFP    OP19   ,SVER VA 2AQ SYBBE YNHAQEL EBBZ \a" +
+        "/1402             $PEBFF          #RQ1314816   \a" +
+        "/1403              BAFPAR  R19    \a" +
+        "/1403  (748     )  NQQ     Y29     #ZQ0889   Y29 \a" +
+        "/1403              NQQ     R79     #ZQ0813   R79 \a" +
+        "/1403              NQQ     R20    \a" +
+        "/1403              NQQ     E90    ",
+
+        "FEP:019/029/079/020/090",
+        "VQ:SQ1305243",
+        "QNGR:04/22/13",
+        "GVZR:13:53:54",
+        "PNYY:SNCG  (NCNEGZRAG SVER (OBK))",
+        "OBK:S:19042 R:125012",
+        "ZNC:2922T10",
+        "CYNPR:QBLYR PBZZBAF - EZ:NCG ,NCG:15",
+        "NQQE:612 A FUNQL ERGERNG EQ",
+        "NCG:15",
+        "PVGL:QBLYRFGBJA GJC",
+        "K:YVZRXVYA EQ & ZNUBTNAL PG",
+        "ANZR:RQ (2153455875)",
+        "CUBAR:2153455875",
+        "VASB:SVER VA XVGPURA,,NQI GB RINP",
+        "HAVG:Y79 Y29 R19 R19-1 R79 R20 Y29 R79 R20 E90");
 
     qbGrfg("G5",
         "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a" +
@@ -5411,9 +5319,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305223",
         "QNGR:04/22/13",
         "GVZR:06:08:42",
-        "PBQR:SNYEZ",
-        "PNYY:SVER NYNEZ (YBP)",
-        "CEV:4",
+        "PNYY:SNYEZ (SVER NYNEZ (YBP))",
         "OBK:S:90026 R:122026",
         "ZNC:3147S7",
         "CYNPR:PNEYGBA CBBYF",
@@ -5447,9 +5353,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305217",
         "QNGR:04/22/13",
         "GVZR:01:08:45",
-        "PBQR:SNYEZ",
-        "PNYY:SVER NYNEZ (YBP)",
-        "CEV:4",
+        "PNYY:SNYEZ (SVER NYNEZ (YBP))",
         "OBK:S:90026 R:122026",
         "ZNC:3147S7",
         "CYNPR:PNEYGBA CBBYF",
@@ -5489,9 +5393,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305203",
         "QNGR:04/21/13",
         "GVZR:17:18:31",
-        "PBQR:SQJY",
-        "PNYY:QJRYYVAT SVER (GNP)",
-        "CEV:1",
+        "PNYY:SQJY  (QJRYYVAT SVER (GNP))",
         "OBK:S:93027 R:122327",
         "ZNC:3147S4",
         "NQQE:736 PURELY QE",
@@ -5524,9 +5426,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305132",
         "QNGR:04/20/13",
         "GVZR:14:05:54",
-        "PBQR:SNYEZ",
-        "PNYY:SVER NYNEZ (YBP)",
-        "CEV:4",
+        "PNYY:SNYEZ (SVER NYNEZ (YBP))",
         "OBK:S:90044 R:122007",
         "ZNC:3147Q9",
         "CYNPR:TERPB SNZVYL PUVEB - 215 715 2252",
@@ -5560,17 +5460,15 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305111",
         "QNGR:04/20/13",
         "GVZR:01:09:46",
-        "PBQR:SNYEZ",
-        "PNYY:SVER NYNEZ (YBP)",
-        "CEV:4",
+        "PNYY:SNYEZ (SVER NYNEZ (YBP))",
         "OBK:S:92040 R:122240",
         "ZNC:3147P7",
-        "CYNPR:CRC OBLF",
+        "CYNPR:CRC OBLF - #215-328-9520",
         "NQQE:982 J FGERRG EQ",
         "PVGL:JNEZVAFGRE GJC",
         "K:ABEEVFGBJA EQ & ABEEVFGBJA EQ",
         "ANZR:CEBGRPGVBA 1 (CRI)",
-        "CUBAR:215-328-9520 / 8773571808",
+        "CUBAR:8773571808",
         "VASB:MBAR 80 #4 FZBXRF, J/A",
         "HAVG:R92");
 
@@ -5599,9 +5497,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305100",
         "QNGR:04/19/13",
         "GVZR:20:46:17",
-        "PBQR:SOEH",
-        "PNYY:OEHFU SVER (YBP)",
-        "CEV:4",
+        "PNYY:SOEH  (OEHFU SVER (YBP))",
         "OBK:S:90022 R:122022",
         "ZNC:3147S8",
         "CYNPR:NGEVHZ",
@@ -5642,9 +5538,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305059",
         "QNGR:04/19/13",
         "GVZR:09:18:19",
-        "PBQR:SHZRVA",
-        "PNYY:SHZRF VAFVQR FGEHPGHER (GNP)",
-        "CEV:2",
+        "PNYY:SHZRVA(SHZRF VAFVQR FGEHPGHER (GNP))",
         "OBK:S:91021 R:122121",
         "ZNC:3147W9",
         "NQQE:738 YBATFGERGU EQ",
@@ -5678,9 +5572,7 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1305029",
         "QNGR:04/18/13",
         "GVZR:13:50:13",
-        "PBQR:SNFG",
-        "PNYY:SVER NFFVFG BHG BS PBHAGL",
-        "CEV:1",
+        "PNYY:SNFG  (SVER NFFVFG BHG BS PBHAGL)",
         "CYNPR:R91 Y90 J/ZFGN 10 OBK 35-93",
         "NQQE:2705 PRAGRAAVNY EQ K CVBARRE",
         "PVGL:HCE ZBERYA",
@@ -5710,404 +5602,21 @@ choyvp pynff CNOhpxfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:SQ1304992",
         "QNGR:04/17/13",
         "GVZR:18:35:08",
-        "PBQR:SNYEZ",
-        "PNYY:SVER NYNEZ (YBP)",
-        "CEV:4",
+        "PNYY:SNYEZ (SVER NYNEZ (YBP))",
         "OBK:S:90050 R:122012",
         "ZNC:3147U9",
-        "CYNPR:OHPXF YNAQVAT NCGF #W3",
+        "CYNPR:OHPXF YNAQVAT NCGF #W3 - 2156943650",
         "NQQE:120 R FGERRG EQ",
         "NCG:W3",
         "PVGL:JNEZVAFGRE GJC",
         "K:WNPXFBAIVYYR EQ & WBUAFIVYYR OY",
         "ANZR:RZRET ERFCBA NFFBP (QNA)",
-        "CUBAR:2156943650 / 8006332677",
+        "CUBAR:8006332677",
         "VASB:NHQ, W3, J/A",
         "HAVG:R90");
 
   }
-
-  @Grfg
-  choyvp ibvq grfgPragenyOhpxfNzohynapr() {
-
-    qbGrfg("G1",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ SF01  : \a" +
-        "134/125\a" +
-        "                                                    \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346606    Kers:                           #CQ133531148 \a\a" +
-        " Erprvirq     12/19/13  17:56:14  OL PG07   838      \a" +
-        " Ragrerq      12/19/13  17:57:29  OL PG07   838      \a" +
-        " Qvfcngpurq   12/19/13  17:58:10  OL SF01   613      \a\a" +
-        " Vavgvny Glcr: OSNYY   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY)) Cev: 4 Qfcb:      Cerz: [  ]\a" +
-        " RZF Oyx:  134004 Sver Oyx:  34004  Cbyvpr Oyx:  48201  Znc Cntr: 2921R10 \a" +
-        " Tebhc: RA  Orng: 134 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a" +
-        " Ybp: 220 HCCRE FGHZC EQ ,48  ogja A EG 152 & PNYYBJUVYY EQ\a\a" +
-        " Ybp Vasb: \a" +
-        " Anzr: RYZBE SBK               Nqqe: SEVRAQ BF               Cubar: 2158222245\a\a" +
-        "/1757  (838     )  RAGEL:         76LBS,,SRYY,,YBFG N YVGGYR OYBBQ SEBZ URE URNQ\a" +
-        "/1758  (613     )  QVFC    N125    #054805   UNLRF, WBFRCU \a" +
-        "                                   #160510   FBYR, PUEVFGBCURE",
-
-        "FEP:134/125",
-        "VQ:RQ1346606",
-        "QNGR:12/19/13",
-        "GVZR:17:58:10",
-        "PBQR:OSNYY",
-        "PNYY:SNYY IVPGVZ (ABA-PEVGVPNY)",
-        "CEV:4",
-        "HAVG:N125",
-        "OBK:S:34004 R:134004",
-        "ZNC:2921R10",
-        "NQQE:220 HCCRE FGHZC EQ",
-        "PVGL:ARJ OEVGNVA GJC",
-        "K:A EG 152 & PNYYBJUVYY EQ",
-        "ANZR:RYZBE SBK (SEVRAQ BF)",
-        "CUBAR:2158222245",
-        "VASB:76LBS,,SRYY,,YBFG N YVGGYR OYBBQ SEBZ URE URNQ");
-
-    qbGrfg("G2",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a" +
-        "135/125\a" +
-        "                                                    \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346577    Kers:                           #CQ133530833 \a\a" +
-        " Ragrerq      12/19/13  13:54:55  OL CQ03   797      \a" +
-        " Qvfcngpurq   12/19/13  13:56:03  OL PUSF01 341      \a\a" +
-        " Vavgvny Glcr: NGENA   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET) Cev: 3 Qfcb:      Cerz: [  ]\a" +
-        " RZF Oyx:  135204 Sver Oyx:  35011  Cbyvpr Oyx:  26021  Znc Cntr: 3036S5 \a" +
-        " Tebhc: RA  Orng: 135 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a" +
-        " Ybp: 3936 FZVGU EQ ,26  ogja FJNZC EQ & SBERFG TEBIR EQ\a\a" +
-        " Ybp Vasb: \a" +
-        " Anzr: GBZZL JRVAREG           Nqqe: UBZR NYBAR,,            Cubar: 2674249126\a\a" +
-        "/1354  (797     )  RAGEL:         PBZCY VF CG,, SBBG CNVA,,53 LBZ,, QEBCCRQ N EB\a" +
-        "                                  PX BA VG YNFG JRRX,, PBZCY SRRYVAT YVTUG URNQR\a" +
-        "                                  Q\a" +
-        "/1356  (341     )  QVFC    N1251   #147595   ZBENA, XRVGU \a" +
-        "                                   #191474   PYNEX,GUBZNF (RZG)",
-
-        "FEP:135/125",
-        "VQ:RQ1346577",
-        "QNGR:12/19/13",
-        "GVZR:13:56:03",
-        "PBQR:NGENA",
-        "PNYY:ABA-FCRPVSVP (PEVGVPNY) RZRET",
-        "CEV:3",
-        "HAVG:N1251",
-        "OBK:S:35011 R:135204",
-        "ZNC:3036S5",
-        "NQQE:3936 FZVGU EQ",
-        "PVGL:OHPXVATUNZ GJC",
-        "K:FJNZC EQ & SBERFG TEBIR EQ",
-        "ANZR:GBZZL JRVAREG (UBZR NYBAR,,)",
-        "CUBAR:2674249126",
-        "VASB:PBZCY VF CG,, SBBG CNVA,,53 LBZ,, QEBCCRQ N EB PX BA VG YNFG JRRX,, PBZCY SRRYVAT YVTUG URNQR Q");
-
-    qbGrfg("G3",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a" +
-        "135/125\a" +
-        "                                                    \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346577    Kers:                           #CQ133530833 \a\a" +
-        " Ragrerq      12/19/13  13:54:55  OL CQ03   797      \a" +
-        " Qvfcngpurq   12/19/13  13:56:03  OL PUSF01 341      \a\a" +
-        " Vavgvny Glcr: NGENA   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET) Cev: 3 Qfcb:      Cerz: [  ]\a" +
-        " RZF Oyx:  135204 Sver Oyx:  35011  Cbyvpr Oyx:  26021  Znc Cntr: 3036S5 \a" +
-        " Tebhc: RA  Orng: 135 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a" +
-        " Ybp: 3936 FZVGU EQ ,26  ogja FJNZC EQ & SBERFG TEBIR EQ\a\a" +
-        " Ybp Vasb: \a" +
-        " Anzr: GBZZL JRVAREG           Nqqe: UBZR NYBAR,,            Cubar: 2674249126\a\a" +
-        "/1354  (797     )  RAGEL:         PBZCY VF CG,, SBBG CNVA,,53 LBZ,, QEBCCRQ N EB\a" +
-        "                                  PX BA VG YNFG JRRX,, PBZCY SRRYVAT YVTUG URNQR\a" +
-        "                                  Q\a" +
-        "/1356  (341     )  QVFC    N1251   #147595   ZBENA, XRVGU \a" +
-        "                                   #191474   PYNEX,GUBZNF (RZG)",
-
-        "FEP:135/125",
-        "VQ:RQ1346577",
-        "QNGR:12/19/13",
-        "GVZR:13:56:03",
-        "PBQR:NGENA",
-        "PNYY:ABA-FCRPVSVP (PEVGVPNY) RZRET",
-        "CEV:3",
-        "HAVG:N1251",
-        "OBK:S:35011 R:135204",
-        "ZNC:3036S5",
-        "NQQE:3936 FZVGU EQ",
-        "PVGL:OHPXVATUNZ GJC",
-        "K:FJNZC EQ & SBERFG TEBIR EQ",
-        "ANZR:GBZZL JRVAREG (UBZR NYBAR,,)",
-        "CUBAR:2674249126",
-        "VASB:PBZCY VF CG,, SBBG CNVA,,53 LBZ,, QEBCCRQ N EB PX BA VG YNFG JRRX,, PBZCY SRRYVAT YVTUG URNQR Q");
-
-    qbGrfg("G4",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a" +
-        "135\a" +
-        "                                                        \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346575    Kers:                           #CQ133530830 \a\a" +
-        " Ragrerq      12/19/13  13:53:02  OL CQ04   749      \a" +
-        " Qvfcngpurq   12/19/13  13:53:53  OL PUSF01 341      \a\a" +
-        " Vavgvny Glcr: NERFC   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: NERFC (ERFCVENGBEL QVFGERFF) Cev: 2 Qfcb:      Cerz: [  ]\a" +
-        " RZF Oyx:  135514 Sver Oyx:  05023  Cbyvpr Oyx:  26012  Znc Cntr: 2924N8 \a" +
-        " Tebhc: RA  Orng: 135 Fep:  A NGG:  ZGP - Zrrg gur Pbzcynvanag  \a" +
-        " Ybp: OXUNZ CRQVNGEVPF ,26 ng 4870 LBEX EQ ,26 ogja EG 202 OXUNZ & DHNEEL EQ\a\a" +
-        " Ybp Vasb: \a" +
-        " Anzr: XNERA                   Nqqe: EA                      Cubar: 2157943305\a\a" +
-        "/1353  (749     )  RAGEL:         2 ZBF SBE OEBAPUVBVGVF,,CG VF J/N QE\a" +
-        "/1353  (341     )  QVFC    N135    #072232   TBEQBA, XRIVA \a" +
-        "                                   #100054   RATYR, PUEVFGBCURE (RZG)",
-
-        "FEP:135",
-        "VQ:RQ1346575",
-        "QNGR:12/19/13",
-        "GVZR:13:53:53",
-        "PBQR:NERFC",
-        "PNYY:ERFCVENGBEL QVFGERFF",
-        "CEV:2",
-        "HAVG:N135",
-        "OBK:S:05023 R:135514",
-        "ZNC:2924N8",
-        "NQQE:4870 LBEX EQ",
-        "PVGL:OHPXVATUNZ GJC",
-        "K:EG 202 OXUNZ & DHNEEL EQ",
-        "CYNPR:OXUNZ CRQVNGEVPF",
-        "ANZR:XNERA (EA)",
-        "CUBAR:2157943305",
-        "VASB:2 ZBF SBE OEBAPUVBVGVF,,CG VF J/N QE");
-
-    qbGrfg("G5",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a" +
-        "125\a" +
-        "                                                        \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346574    Kers:                           #CQ133530813 \a\a" +
-        " Erprvirq     12/19/13  13:44:50  OL PG01   742      \a" +
-        " Ragrerq      12/19/13  13:46:36  OL PG01   742      \a" +
-        " Qvfcngpurq   12/19/13  13:46:58  OL PUSF01 341      \a\a" +
-        " Vavgvny Glcr: NPURFC  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: NPURFC(PURFG CNVA / PNEQVNP FLZCGBZF) Cev: 3 Qfcb:      Cerz: [  ]\a" +
-        " RZF Oyx:  125053 Sver Oyx:  19053  Cbyvpr Oyx:  28112  Znc Cntr: 2922W9 \a" +
-        " Tebhc: RA  Orng: 125 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a" +
-        " Ybp: JRFYRL RAUNAPRQ YV #229 ,28 ng 200 IRGRENAF YN #229 ,28 ogja NGXVAFBA QE & OEBNQ FG\a\a" +
-        " Ybp Vasb: \a" +
-        " Anzr: NYVGN PNEVYYV           Nqqe: EA                      Cubar: 2153454300\a\a" +
-        "/1346  (742     )  RAGEL:         +040.320193 -075.133455 86/Z,NSVO..\a" +
-        "/1346  (341     )  QVFC    N125    #054805   UNLRF, WBFRCU \a" +
-        "                                   #160510   FBYR, PUEVFGBCURE",
-
-        "FEP:125",
-        "VQ:RQ1346574",
-        "QNGR:12/19/13",
-        "GVZR:13:46:58",
-        "PBQR:NPURFC",
-        "PNYY:PURFG CNVA / PNEQVNP FLZCGBZF",
-        "CEV:3",
-        "HAVG:N125",
-        "OBK:S:19053 R:125053",
-        "ZNC:2922W9",
-        "NQQE:200 IRGRENAF YN",
-        "ZNQQE:200 IRGRENAF YA",
-        "NCG:229",
-        "PVGL:QBLYRFGBJA",
-        "K:NGXVAFBA QE & OEBNQ FG",
-        "CYNPR:JRFYRL RAUNAPRQ YV #229",
-        "ANZR:NYVGN PNEVYYV (EA)",
-        "CUBAR:2153454300",
-        "VASB:+040.320193 -075.133455 86/Z,NSVO..");
-
-    qbGrfg("G6",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a" +
-        "125\a" +
-        "                                                        \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346558    Kers:                           #CQ133530668 \a\a" +
-        " Erprvirq     12/19/13  12:07:01  OL CQ07   730      \a" +
-        " Ragrerq      12/19/13  12:08:33  OL CQ07   730      \a" +
-        " Qvfcngpurq   12/19/13  12:08:58  OL PUSF01 341      \a\a" +
-        " Vavgvny Glcr: NGENA   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: NGENA (ABA-FCRPVSVP (PEVGVPNY) RZRET) Cev: 3 Qfcb:      Cerz: [CJ]\a" +
-        " RZF Oyx:  125050 Sver Oyx:  19050  Cbyvpr Oyx:  29202  Znc Cntr: 2922P9 \a" +
-        " Tebhc: RA  Orng: 125 Fep:  9 NGG:    \a" +
-        " Ybp: 777 SREEL EQ #O19 ,29 -- CVAR EHA PBZZHAVGL ogja VEBA UVYY EQ & CVAR EHA EQ\a\a" +
-        " Ybp Vasb: NCG O-19\a" +
-        " Anzr: ANAPL ERVYYL            Nqqe: AHEFR BF                Cubar: 2153407199\a\a" +
-        "/1208  (730     )  RAGEL:         90LBS,,ABG RNGVAT/QEVAXVAT JRYY,,ULCBGRAFVIR/J\a" +
-        "                                  RNX\a" +
-        "/1208  (341     )  QVFC    N125    #054805   UNLRF, WBFRCU \a" +
-        "                                   #160510   FBYR, PUEVFGBCURE",
-
-        "FEP:125",
-        "VQ:RQ1346558",
-        "QNGR:12/19/13",
-        "GVZR:12:08:58",
-        "PBQR:NGENA",
-        "PNYY:ABA-FCRPVSVP (PEVGVPNY) RZRET",
-        "CEV:3",
-        "HAVG:N125",
-        "OBK:S:19050 R:125050",
-        "ZNC:2922P9",
-        "NQQE:777 SREEL EQ",
-        "NCG:O-19",
-        "PVGL:QBLYRFGBJA GJC",
-        "K:VEBA UVYY EQ & CVAR EHA EQ",
-        "CYNPR:CVAR EHA PBZZHAVGL",
-        "ANZR:ANAPL ERVYYL (AHEFR BF)",
-        "CUBAR:2153407199",
-        "VASB:90LBS,,ABG RNGVAT/QEVAXVAT JRYY,,ULCBGRAFVIR/J RNX");
-
-    qbGrfg("G7",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PURZF2: \a" +
-        "125\a" +
-        "                                                        \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346550    Kers:                           #CQ133530499 \a\a" +
-        " Erprvirq     12/19/13  10:28:11  OL CQ11   690      \a" +
-        " Ragrerq      12/19/13  10:29:12  OL CQ11   690      \a" +
-        " Qvfcngpurq   12/19/13  10:29:45  OL PURZF2 639      \a\a" +
-        " Vavgvny Glcr: NSNVAG  Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: NSNVAG(FLAPBCNY RCVFBQR (FLAPBCR)) Cev: 3 Qfcb:      Cerz: [CJ]\a" +
-        " RZF Oyx:  125025 Sver Oyx:  79025  Cbyvpr Oyx:  29301  Znc Cntr: 3034X4 \a" +
-        " Tebhc: RA  Orng: 125 Fep:  9 NGG:  ZGP - Zrrg gur Pbzcynvanag  \a" +
-        " Ybp: 1980 RNFGBA EQ ,29 -- OHPXF PB ZRQVPNY N ogja EG 611 OL & FNHREZNA EQ\a\a" +
-        " Ybp Vasb: FGR:230\a" +
-        " Anzr: XNLYN                   Nqqe:                         Cubar: 2153481310\a\a" +
-        "/1029  (690     )  RAGEL:         42LBS RYRINGRQ OC NAQ SRRYF SNVAG ..QE J/CG\a" +
-        "/1029  (639     )  QVFC    N125    #054805   UNLRF, WBFRCU \a" +
-        "                                   #160510   FBYR, PUEVFGBCURE",
-
-        "FEP:125",
-        "VQ:RQ1346550",
-        "QNGR:12/19/13",
-        "GVZR:10:29:45",
-        "PBQR:NSNVAG",
-        "PNYY:FLAPBCNY RCVFBQR (FLAPBCR)",
-        "CEV:3",
-        "HAVG:N125",
-        "OBK:S:79025 R:125025",
-        "ZNC:3034X4",
-        "NQQE:1980 RNFGBA EQ",
-        "PVGL:QBLYRFGBJA GJC",
-        "K:EG 611 OL & FNHREZNA EQ",
-        "CYNPR:OHPXF PB ZRQVPNY N - FGR:230",
-        "ANZR:XNLYN",
-        "CUBAR:2153481310",
-        "VASB:42LBS RYRINGRQ OC NAQ SRRYF SNVAG ..QE J/CG");
-
-    qbGrfg("G8",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a" +
-        "125\a" +
-        "                                                        \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346541    Kers:                           #CQ133530415 \a\a" +
-        " Erprvirq     12/19/13  09:46:45  OL CF04   414      \a" +
-        " Ragrerq      12/19/13  09:48:36  OL CF04   414      \a" +
-        " Qvfcngpurq   12/19/13  09:49:36  OL PUSF01 341      \a\a" +
-        " Vavgvny Glcr: OSNYY   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY)) Cev: 4 Qfcb:      Cerz: [  ]\a" +
-        " RZF Oyx:  125053 Sver Oyx:  19053  Cbyvpr Oyx:  28112  Znc Cntr: 2922W9 \a" +
-        " Tebhc: RA  Orng: 125 Fep:  9 NGG:    \a" +
-        " Ybp: 200 IRGRENAF YN #224 ,28 -- JRFYRL RAUNAPRQ YV ogja NGXVAFBA QE & OEBNQ FG\a\a" +
-        " Ybp Vasb: CREFBANY PNER\a" +
-        " Anzr: NYVQN                   Nqqe: 200 IRGRENAF YN         Cubar: 2678951163\a\a" +
-        "/0948  (414     )  RAGEL:         RYQ SRZ 87 LE BYQ SRZ,,3EQ CNEGL,,,CNVA VA XAR\a" +
-        "                                  R SEBZ SNYY RNEYVRE,,SRZ VA ORQ\a" +
-        "/0949  (341     )  QVFC    1253    #191746   QVRUY, QNA(RZG) \a" +
-        "                                   #191620   EBHFVF, WNFBA (RZG)",
-
-        "FEP:125",
-        "VQ:RQ1346541",
-        "QNGR:12/19/13",
-        "GVZR:09:49:36",
-        "PBQR:OSNYY",
-        "PNYY:SNYY IVPGVZ (ABA-PEVGVPNY)",
-        "CEV:4",
-        "HAVG:1253",
-        "OBK:S:19053 R:125053",
-        "ZNC:2922W9",
-        "NQQE:200 IRGRENAF YN",
-        "ZNQQE:200 IRGRENAF YA",
-        "NCG:224",
-        "PVGL:QBLYRFGBJA",
-        "K:NGXVAFBA QE & OEBNQ FG",
-        "CYNPR:JRFYRL RAUNAPRQ YV - CREFBANY PNER",
-        "ANZR:NYVQN",
-        "CUBAR:2678951163",
-        "VASB:RYQ SRZ 87 LE BYQ SRZ,,3EQ CNEGL,,,CNVA VA XAR R SEBZ SNYY RNEYVRE,,SRZ VA ORQ");
-
-    qbGrfg("G9",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a" +
-        "125/129\a" +
-        "                                                    \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346535    Kers:                           #CQ133530303 \a\a" +
-        " Erprvirq     12/19/13  08:42:44  OL CF04   414      \a" +
-        " Ragrerq      12/19/13  08:44:00  OL CF04   414      \a" +
-        " Qvfcngpurq   12/19/13  08:44:56  OL PUSF01 341      \a\a" +
-        " Vavgvny Glcr: OSNYY   Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: OSNYY (SNYY IVPGVZ (ABA-PEVGVPNY)) Cev: 4 Qfcb:      Cerz: [  ]\a" +
-        " RZF Oyx:  125026 Sver Oyx:  19026  Cbyvpr Oyx:  29101  Znc Cntr: 3035O1 \a" +
-        " Tebhc: RA  Orng: 125 Fep:  9 NGG:    \a" +
-        " Ybp: 24 FCEVATF QE ,29  ogja RNFG EQ & QBTJBBQ YN\a\a" +
-        " Ybp Vasb: \a" +
-        " Anzr: VERAR OBZNAFXV          Nqqe: 55 R PBHEG FG           Cubar: 2676934957\a\a" +
-        "/0844  (414     )  RAGEL:         PZCY ZBGURE 86 LE BYQ,,FRIRER ONPX CNVA,,UNQ S\a" +
-        "                                  K 7 JRRXF NTB\a" +
-        "/0844              FHCC           AB SHEGURE VASBEZNGVBA \a" +
-        "/0844  (341     )  QVFC    N129    #069209   EVRF, CRGRE",
-
-        "FEP:125/129",
-        "VQ:RQ1346535",
-        "QNGR:12/19/13",
-        "GVZR:08:44:56",
-        "PBQR:OSNYY",
-        "PNYY:SNYY IVPGVZ (ABA-PEVGVPNY)",
-        "CEV:4",
-        "HAVG:N129",
-        "OBK:S:19026 R:125026",
-        "ZNC:3035O1",
-        "NQQE:24 FCEVATF QE",
-        "PVGL:QBLYRFGBJA GJC",
-        "K:RNFG EQ & QBTJBBQ YN",
-        "ANZR:VERAR OBZNAFXV (55 R PBHEG FG)",
-        "CUBAR:2676934957",
-        "VASB:PZCY ZBGURE 86 LE BYQ,,FRIRER ONPX CNVA,,UNQ S K 7 JRRXF NTB\aAB SHEGURE VASBEZNGVBA");
-
-    qbGrfg("G10",
-        "(911 Qngn)  <FLFGRZ TRARENGRQ> GB VAG1 SEBZ PUSF01: \a" +
-        "124/125\a" +
-        "                                                    \a\a\a" +
-        " Vap Uvfgbel sbe: #RQ1346534    Kers:                           #CQ133530282 \a\a" +
-        " Ragrerq      12/19/13  08:41:09  OL CQ06   737      \a" +
-        " Qvfcngpurq   12/19/13  08:42:13  OL PUSF01 341      \a\a" +
-        " Vavgvny Glcr: NGNV    Vavgvny Nynez Yriry:  1  Svany Nynez Yriry:  1\a" +
-        " Svany Glcr: NGNV  (GENSSVP NPPVQRAG (PEVGVPNY)) Cev: 1 Qfcb:      Cerz: [  ]\a" +
-        " RZF Oyx:  124026 Sver Oyx:  24037  Cbyvpr Oyx:  57011  Znc Cntr: 2810R10 \a" +
-        " Tebhc: RA  Orng: 124 Fep:   NGG:    \a" +
-        " Ybp: UNEVAT EQ/FGHZC EQ ,57   \a\a" +
-        " Ybp Vasb: FGHZC EQ\a" +
-        " Anzr: OEVNA ERVGRE            Nqqe: CZ                      Cubar: 2158968416\a\a" +
-        "/0841  (737     )  PBCL           ,QEVIRE P/B ARPX NAQ ONPX CNVA\a" +
-        "/0841             $PEBFF          #CQ133530282 \a" +
-        "                                  ,QEVIRE P/B ARPX NAQ ONPX CNVA\a" +
-        "/0842  (341     )  QVFC    N125E   #131431   URAYRL, FPBGG \a" +
-        "/0842              NQQ     1253    #191746   QVRUY, QNA(RZG) \a" +
-        "                                   #191620   EBHFVF, WNFBA (RZG)",
-
-        "FEP:124/125",
-        "VQ:RQ1346534",
-        "QNGR:12/19/13",
-        "GVZR:08:42:13",
-        "PBQR:NGNV",
-        "PNYY:GENSSVP NPPVQRAG (PEVGVPNY)",
-        "CEV:1",
-        "HAVG:N125E 1253",
-        "OBK:S:24037 R:124026",
-        "ZNC:2810R10",
-        "NQQE:UNEVAT EQ & FGHZC EQ",
-        "PVGL:CYHZFGRNQ GJC",
-        "K:FGHZC EQ",
-        "ANZR:OEVNA ERVGRE (CZ)",
-        "CUBAR:2158968416",
-        "VASB:,QEVIRE P/B ARPX NAQ ONPX CNVA");
-
-  }
- 
+  
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
     arj CNOhpxfPbhaglOCnefreGrfg().trarengrGrfgf("G1");

@@ -6,7 +6,7 @@ import net.anei.cadpage.parsers.dispatch.DispatchCiscoParser;
 public class OHSugarCreekParser extends DispatchCiscoParser {
   
   public OHSugarCreekParser() {
-    super("SugarCreek", "OH");
+    super(null, "SugarCreek", "OH");
   }
   
   @Override

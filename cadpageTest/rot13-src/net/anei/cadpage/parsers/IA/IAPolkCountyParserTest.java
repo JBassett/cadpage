@@ -76,14 +76,6 @@ Pbagnpg: fhccbeg@npgvir911.pbz
 [PNQ] Glcr: ERFPHR CVN Pnyyre: IREVMBA Gvzr: 07:12:39\a
 [PNQ] Ybpngvba: 3178 J 148GU FG F ZVGP Glcr: ZRQVPNY  Pnyyre: WBUAFBA,CNZ Gvzr: 08:43:40\a
 
-Pbagnpg: Eba Fpuvccre <eyf3703@tznvy.pbz>
-Fraqre: zrffntvat@vnzerfcbaqvat.pbz
-(Tevzrf) Ybpngvba: 6405 AJ 98GU FG WBUA Glcr: ERFQSVER NFFVTA Pnyyre: ZREVGG,WHYVR Gvzr: 08:28:52
-
-Pbagnpg: jrf unecre <fpbhg2187@tznvy.pbz>
-Fraqre: zrffntvat@vnzerfcbaqvat.pbz
-SEZ:zrffntvat@vnzerfcbaqvat.pbz\aFHOW:QRSQ\aZFT:  4355 AR 26GU FG QRYN Glcr: ZRQVPNY   Pnyyre:  Gvzr: 22:04:49
-
  */
 
 choyvp pynff VNCbyxPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -183,8 +175,7 @@ choyvp pynff VNCbyxPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   choyvp ibvq grfgRinaXryyvf() {
 
     qbGrfg("G1",
-        "Fhowrpg:QRSQ\aGlcr: ERFPHR CVN Pnyyre: IREVMBA Gvzr: 05:41:17",
-        "FEP:QRSQ",
+        "Obql:Fhowrpg:QRSQ\aGlcr: ERFPHR CVN Pnyyre: IREVMBA Gvzr: 05:41:17",
         "PNYY:ERFPHR CVN",
         "CYNPR:IREVMBA",
         "GVZR:05:41:17");
@@ -606,33 +597,6 @@ choyvp pynff VNCbyxPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:ZRQVPNY",
         "CYNPR:WBUAFBA,CNZ",
         "GVZR:08:43:40");
-   
-  }
-  
-  @Grfg
-  choyvp ibvq grfgEbabFpuvccre() {
-
-    qbGrfg("G1",
-        "(Tevzrf) Ybpngvba: 6405 AJ 98GU FG WBUA Glcr: ERFQSVER NFFVTA Pnyyre: ZREVGG,WHYVR Gvzr: 08:28:52",
-        "FEP:Tevzrf",
-        "NQQE:6405 AJ 98GU FG",
-        "PVGL:WBUAFGBA",
-        "PNYY:ERFQSVER NFFVTA",
-        "CYNPR:ZREVGG,WHYVR",
-        "GVZR:08:28:52");
-  
-  }
-  
-  @Grfg
-  choyvp ibvq grfgJrfUnecre() {
-
-    qbGrfg("G1",
-        "SEZ:zrffntvat@vnzerfcbaqvat.pbz\aFHOW:QRSQ\aZFT:  4355 AR 26GU FG QRYN Glcr: ZRQVPNY   Pnyyre:  Gvzr: 22:04:49",
-        "FEP:QRSQ",
-        "NQQE:4355 AR 26GU FG",
-        "PVGL:QRYNJNER GJC",
-        "PNYY:ZRQVPNY",
-        "GVZR:22:04:49");
    
   }
   

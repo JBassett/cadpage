@@ -33,7 +33,6 @@ public class NJSomersetCountyAParser extends MsgParser {
   
   public NJSomersetCountyAParser() {
     super("SOMERSET COUNTY", "NJ");
-    setFieldList("SRC ID DATE TIME CALL CITY PLACE ADDR APT INFO");
   }
   
   @Override

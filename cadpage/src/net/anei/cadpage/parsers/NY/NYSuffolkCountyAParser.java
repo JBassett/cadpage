@@ -1,8 +1,6 @@
 package net.anei.cadpage.parsers.NY;
 
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.SmartAddressParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
@@ -13,11 +11,9 @@ public class NYSuffolkCountyAParser extends SmartAddressParser {
 
   private static final String[] KEYWORDS = new String[]{"TYPE", "LOC", "CROSS", "CODE", "TIME"};
   
-  private static final Pattern APT_PTN = Pattern.compile("(.*) APT +#?([^ ]+)");
-  
   public NYSuffolkCountyAParser() {
     super(CITY_TABLE, "SUFFOLK COUNTY", "NY");
-    setFieldList("CALL ADDR CITY PLACE APT X CODE INFO TIME");
+    setFieldList("CALL ADDR CITY PLACE X CODE INFO TIME");
   }
   
   @Override
@@ -41,7 +37,6 @@ public class NYSuffolkCountyAParser extends SmartAddressParser {
     if (data.strCall == null) return false;
 
     data.strCross = props.getProperty("CROSS", "");
-    if (data.strCross.endsWith("/")) data.strCross = data.strCross.substring(0,data.strCross.length()-1).trim();
     
     String sAddress = props.getProperty("LOC");
     if (sAddress == null) {
@@ -49,11 +44,6 @@ public class NYSuffolkCountyAParser extends SmartAddressParser {
       parseAddress(data.strCross, data);
       data.strCross = "";
     } else {
-      Matcher match = APT_PTN.matcher(sAddress);
-      if (match.matches()) {
-        sAddress = match.group(1).trim();
-        data.strApt = match.group(2);
-      }
       sAddress = sAddress.replaceAll(":", " ");
       int pt = sAddress.indexOf('@');
       if (pt >= 0) {
@@ -79,8 +69,6 @@ public class NYSuffolkCountyAParser extends SmartAddressParser {
     }
     
     data.strCode = props.getProperty("CODE", "");
-    if (data.strCode.equals("default")) data.strCode = "";
-    
     data.strCity = convertCodes(data.strCity, CITY_TABLE);
     String sTime = props.getProperty("TIME", "");
     if (sTime.length() > 5 && sTime.length() < 8) sTime = sTime.substring(0,5);

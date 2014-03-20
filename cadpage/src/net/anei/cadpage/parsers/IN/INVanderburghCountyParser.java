@@ -12,6 +12,7 @@ public class INVanderburghCountyParser extends DispatchOSSIParser {
   public INVanderburghCountyParser() {
     super("VANDERBURGH COUNTY", "IN",
            "BOX UNIT CALL PLACE? ADDR! CH? INFO+");
+    setupCallList();
   }
   
   @Override

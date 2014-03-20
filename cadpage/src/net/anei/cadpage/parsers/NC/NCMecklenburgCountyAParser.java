@@ -12,11 +12,11 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class NCMecklenburgCountyAParser extends MsgParser {
   
-  private static final Pattern RUN_REPORT_PTN = Pattern.compile("[-0-9]+ +Received: *\\d\\d:\\d\\d *Assigned: *\\d\\d:\\d\\d *Enroute: *(?:\\d\\d:\\d\\d *|.*Cancelled: *\\d\\d:\\d\\d).*");
+  private static final Pattern RUN_REPORT_PTN = Pattern.compile("[-0-9]+ +Received: +\\d\\d:\\d\\d +Assigned: +\\d\\d:\\d\\d +Enroute: +\\d\\d:\\d\\d +.*");
   
   public NCMecklenburgCountyAParser() {
     super("MECKLENBURG COUNTY", "NC");
-    setFieldList("ADDR APT PLACE INFO CODE CALL X CH MAP ID");
+    setFieldList("ADDR APT PLACE INFO CALL X CH MAP ID");
   }
   
   @Override
@@ -34,6 +34,8 @@ public class NCMecklenburgCountyAParser extends MsgParser {
     }
     if(body.length() < 74) return false;
     
+    boolean good = subject.equals("Text Page") || subject.equals("Incoming Message");
+    
     parseAddress(substring(body,0,30), data);
     data.strApt = substring(body,30,40);
     data.strPlace = substring(body,40,70);
@@ -44,12 +46,14 @@ public class NCMecklenburgCountyAParser extends MsgParser {
     data.strMap = substring(body,206,216);
     data.strCallId = substring(body,216);
 
-    String check = data.strSupp;
-    int pt = check.indexOf('-');
-    if (pt >= 0) check = check.substring(0,pt).trim();
-    if (!PRI_VALUES.contains(check)) return false;
+    if (!good) {
+      String check = data.strSupp;
+      int pt = check.indexOf('-');
+      if (pt >= 0) check = check.substring(0,pt).trim();
+      if (!PRI_VALUES.contains(check)) return false;
+    }
     
-    pt = data.strCall.indexOf('-');
+    int pt = data.strCall.indexOf('-');
     if (pt < 0) pt = data.strCall.length();
     if (pt >=2 && pt<=5) {
       data.strCode = data.strCall.substring(0,pt).trim();
@@ -65,18 +69,11 @@ public class NCMecklenburgCountyAParser extends MsgParser {
     return true;
   }
   
-  @Override
-  public String adjustMapAddress(String addr) {
-    return PK_PTN.matcher(addr).replaceAll("PKWY");
-  }
-  private static final Pattern PK_PTN = Pattern.compile("\\bPK\\b", Pattern.CASE_INSENSITIVE);
-  
   private static final Set<String> PRI_VALUES = new HashSet<String>(Arrays.asList(new String[]{
       "Alpha", 
       "Bravo", 
       "Charlie", 
       "Delta", 
-      "ECHO",
       "Fire", 
       "unkFire"
   }));

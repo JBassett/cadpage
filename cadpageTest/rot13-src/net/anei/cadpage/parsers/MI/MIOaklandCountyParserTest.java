@@ -254,7 +254,7 @@ choyvp pynff ZVBnxynaqPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G32",
         "(Fbhgu Ylba Zhghny Nvq) Erfcbaq gb n zhgny nvq erdhrfg sbe Terra Bnx SQ sbe fgngvba pbirentr ng Fgngvba 83.",
         "PNYY:zhgny nvq erdhrfg sbe Terra Bnx SQ sbe fgngvba pbirentr",
-        "NQQE:Fgngvba 83.");
+        "NQQE:Fgngvba 83");
 
     qbGrfg("G33",
         "(Fbhgu Ylba Zhghny Nvq) Erfcbaq gb n zhgny nvq erdhrfg sbe fgngvba pbirentr ng fgn 81 naq 83 ",
@@ -266,8 +266,7 @@ choyvp pynff ZVBnxynaqPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "(Fbhgu Ylba Zrqvpny) Erfcbaq gb n zrqvpny ng 62292 lbexgbja havg 6 zrqvpny nynez urnq cnva ",
         "PNYY:zrqvpny",
         "NQQE:62292 lbexgbja",
-        "NCG:6",
-        "VASB:zrqvpny nynez urnq cnva");
+        "VASB:havg 6 zrqvpny nynez urnq cnva");
 
     qbGrfg("G35",
         "(Fbhgu Ylba Sver Eha) Erfcbaq gb n nynez ng 1047 pbyg",
@@ -328,7 +327,7 @@ choyvp pynff ZVBnxynaqPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G4",
         "(jnfuqbja) j ynxr naq a untnqbea   jnfuqbja   ng fprar bs cqn",
-        "PNYY:jnfuqbja   ng fprar bs cqn",
+        "PNYY:jnfuqbja ng fprar bs cqn",
         "NQQE:j ynxr naq a untnqbea",
         "ZNQQE:j ynxr & a untnqbea");
 
@@ -340,6 +339,6 @@ choyvp pynff ZVBnxynaqPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj ZVBnxynaqPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj ZVBnxynaqPbhaglCnefreGrfg().trarengrGrfgf("G1", "PNYY CYNPR NQQE NCG VASB");
   }
 }

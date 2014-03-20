@@ -5,17 +5,17 @@ import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.CodeSet;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.dispatch.DispatchB3Parser;
+import net.anei.cadpage.parsers.dispatch.DispatchBParser;
 
 /**
  * Hampshire County, WV
  */
-public class WVHampshireCountyParser extends DispatchB3Parser {
+public class WVHampshireCountyParser extends DispatchBParser {
   
   private static final Pattern COUNTY_PTN = Pattern.compile("^(HARDY|FRED|FREDERICK|MINERAL|ALLEGANY|MORGAN) ", Pattern.CASE_INSENSITIVE);
 
   public WVHampshireCountyParser() {
-    super("HAMPSHIRE911:", CITY_LIST, "HAMPSHIRE COUNTY", "WV");
+    super(CITY_LIST, "HAMPSHIRE COUNTY", "WV");
     setupCallList((CodeSet)null);
   }
   
@@ -26,7 +26,10 @@ public class WVHampshireCountyParser extends DispatchB3Parser {
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
-    if (!super.parseMsg(subject, body, data)) return false;
+    if (subject.length() == 0) return false;
+    if (!body.startsWith("HAMPSHIRE911:")) return false;
+    body = subject + " @ " + body.substring(13).trim();
+    if (!super.parseMsg(body, data)) return false;
     
     // SO far, so good
     // Now for some special corrective measures to take if the
@@ -65,7 +68,7 @@ public class WVHampshireCountyParser extends DispatchB3Parser {
   
   @Override
   public String getProgram() {
-    return super.getProgram().replace("CITY ", "CITY ST ");
+    return super.getProgram().replace("CITY ", "CITY ST");
   }
   
   @Override
@@ -153,5 +156,7 @@ public class WVHampshireCountyParser extends DispatchB3Parser {
     
     // Mineral County
     "BURLINGTON",
+    
+    
   };
 }

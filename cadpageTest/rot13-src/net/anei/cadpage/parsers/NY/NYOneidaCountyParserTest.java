@@ -87,6 +87,7 @@ Pbagnpg: gubznfzobk162 <gubznfzobk162@tznvy.pbz>
 Fraqre: zrffntvat@vnzerfcbaqvat.pbz
 (PBPINP) PBPN:2013:0304 >Qvfcngpurq >21O01 - CBFFVOYL QNATREBHF URZBEEUNTR >5555 JNYGRE EQ, JUVGRFGBJA  (/UHZCUERL EQ)
 
+
 ** ABG VZCYRZRAGRQ **
 SEZ:qvfcngpu@bp911.bet\aZFT:???JRZS:2011:0346NpxabjyrqtrZIN-HAXABJAEBHGR 233, JRFGZBERYNAQ/J ZNVA FG (PBHAGL EBHGR 23), JRFGZBERYNAQ
 ???FGVS:2011:0140Qvfcngpurq30O01 - CBFFVOYL QNATREBHF OBQL NERN8533 PUNZVANQR EQ, ZNEPL (BYQ EVIRE EQ/BEVFXNAL EQ; Arne:IVAPRF H CHYY VG)
@@ -106,10 +107,6 @@ Fraqre: zrffntvat@vnzerfcbaqvat.pbz
 (PBPINP) :2012:3415 >Qvfcngpurq >26N09 - GENAFCBEGNGVBA BAYL >@BP WNVY  (6075 WHQQ EQ), JUVGRFGBJA
 (PBPINP) :2012:3413 >Qvfcngpurq >RZF PNYY >3 CNMQHE OYIQ R, JRFGZBERYNAQ (CNMQHE OYIQ F/PNZRYBG OYIQ, UVYYPERFG QE)
 (PBPINP) :2012:3412 >Qvfcngpurq >09R01-ABG OERNGUVAT NG NYY >99 OEBBXFVQR QE, XVEXYNAQ (/XRYYBTT FG; Arne:NYGREEN IVYYNF BS FUREZNA OEBBX)
-
-Pbagnpg: ubbfrcngevpx <ubbfrcngevpx@lnubb.pbz>
-Fraqre: zrffntvat@vnzerfcbaqvat.pbz
-SEZ:zrffntvat@vnzerfcbaqvat.pbz\aFHOW:Ireaba Sver/Erfphr\aZFT:  >19P04 - PNEQVNP UVFGBEL >4776 EBHGR 5, IREABA  (LBHATF EQ/UNJGUBEAR QE)
 
 */
 
@@ -559,23 +556,6 @@ choyvp pynff ALBarvqnPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:XRYYBTT FG",
         "VASB:Arne:NYGREEN IVYYNF BS FUREZNA OEBBX");
 
-  }
-  
-  @Grfg
-  choyvp ibvq grfg() {
-
-    qbGrfg("G1",
-        "SEZ:zrffntvat@vnzerfcbaqvat.pbz\a" +
-        "FHOW:Ireaba Sver/Erfphr\a" +
-        "ZFT:  >19P04 - PNEQVNP UVFGBEL >4776 EBHGR 5, IREABA  (LBHATF EQ/UNJGUBEAR QE)",
-
-        "FEP:Ireaba Sver/Erfphr",
-        "PBQR:19P04",
-        "PNYY:PNEQVNP UVFGBEL",
-        "NQQE:4776 EBHGR 5",
-        "PVGL:IREABA",
-        "K:LBHATF EQ/UNJGUBEAR QE");
- 
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

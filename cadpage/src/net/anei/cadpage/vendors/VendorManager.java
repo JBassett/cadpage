@@ -169,38 +169,25 @@ public class VendorManager {
    * @param context current context
    */
   void reconnect(Context context) {
-    ManagePreferences.setDirectPageActive(true);
-    ManagePreferences.setReconnect(true);
-    C2DMService.register(context, true);
+    
+    // If there are any enabled or broken vendors, request a new registration ID
+    for (Vendor vendor : vendorList) {
+      if (vendor.isEnabled()) {
+        C2DMService.register(context, true);
+        break;
+      }
+    }
   }
   
   /**
    * Called by CD2MReceiver when a new registration ID is defined
    * @param context current context
-   * @param change true if new registration ID differs from previous ID
    * @param registrationId new registration ID
    */
-  public void registerC2DMId(Context context, boolean change, String registrationId) {
-    
-    // Skip everything if the ID has not changed and a reconnect was not forced
-    boolean reconect = ManagePreferences.reconnect();
-    if (!change && !reconect) return;
-    
-    // Pass new reg ID to all vendors and see if any of the respond
-    boolean done = false;
+  public void registerC2DMId(Context context, String registrationId) {
     for (Vendor vendor : vendorList) {
-      if (vendor.registerC2DMId(context, registrationId, reconect)) done = true;
+      vendor.registerC2DMId(context, registrationId);
     }
-    
-    // If no vendors are currently enabled, send a reg_query to all of them
-    if (!done) {
-      for (Vendor vendor : vendorList) {
-        vendor.sendRegQuery(context, registrationId);
-      }
-    }
-    
-    // Reset the connect flag
-    if (reconect) ManagePreferences.setReconnect(false);
   }
   
   /**
@@ -210,13 +197,17 @@ public class VendorManager {
    */
   public void unregisterC2DMId(Context context, String registrationId) {
     
-    // New rules, we always have to have a valid registration ID
-    // so we always request a new one
-    C2DMService.register(context, true);
+    // Loop through the vendor list to see if any of them are still enabled
+    boolean reregister = false;
+    for (Vendor vendor : vendorList) {
+      if (vendor.isEnabled()) {
+        reregister = true;
+        break;
+      }
+    }
     
-    // But if there are no more registered vendors, we will disable
-    // registration error reporting
-    if (!isRegistered()) ManagePreferences.setDirectPageActive(false);
+    // If any are, we need to request a new registration ID
+    if (reregister) C2DMService.register(context);
   }
   
   /**
@@ -225,18 +216,10 @@ public class VendorManager {
    * @param error error message
    */
   public void failureC2DMId(Context context, String error) {
-    
-    // We don't report any of the internal issues with registration unless
-    // user has done something to enable direct paging
-    if (!ManagePreferences.directPageActive()) return;
-    
-    // Display appropriate error message
     int resId;
     if (error.equals("SERVICE_NOT_AVAILABLE")) resId = R.string.vendor_service_not_available_error;
     else if (error.equals("ACCOUNT_MISSING")) resId = R.string.vendor_account_missing_error;
     else if (error.equals("AUTHENTICATION_FAILED")) resId = R.string.vendor_authentication_failed_error;
-    else if (error.equals("PHONE_REGISTRATION_ERROR")) resId = R.string.vendor_phone_registration_error_error;
-    else if (error.equals("PHONE_REGISTRATION_ERROR_HARD")) resId = R.string.vendor_phone_registration_error_hard_error;
     else resId = R.string.vendor_registration_error;
     String errMsg = context.getString(resId, error);
     NoticeActivity.showNotice(context, errMsg);
@@ -252,7 +235,7 @@ public class VendorManager {
    * @param token vendor security token
    */
   public void vendorRequest(Context context, String type, String vendorCode,
-                            String account, String token) {
+                              String account, String token) {
 
     // Identify the correct vendor and pass request to them
     Vendor vendor = findVendor(vendorCode);
@@ -435,47 +418,13 @@ public class VendorManager {
   public void addStatusInfo(StringBuilder sb) {
     for (Vendor vendor : vendorList) vendor.addStatusInfo(sb);
   }
-
-  /**
-   * Confirm that the vendor who has just sent us a message is really enabled
-   * @param vendorCode vendor code
-   */
-  public void checkVendorStatus(Context context, String vendorCode) {
-    Vendor vendor = findVendor(vendorCode);
-    if (vendor == null) return;
-    vendor.checkVendorStatus(context);
-  }
-  
-  /**
-   * Process vendor account information request
-   * @param context current context
-   * @param vendorCode vendor code
-   */
-  public void requestAccountInfo(Context context, String vendorCode) {
-    Vendor vendor = findVendor(vendorCode);
-    if (vendor == null) return;
-    vendor.publishAccountInfo(context);
-  }
-
-  /**
-   * Perform and vendor specific location code conversions
-   * @param vendorCode vendor code
-   * @param location received location code
-   * @return converted location code
-   */
-  public String convertLocationCode(String vendorCode, String location) {
-    Vendor vendor = findVendor(vendorCode);
-    if (vendor != null) location = vendor.convertLocationCode(location);
-    return location;
-  }
   
   /**
    * Find vendor with matching vendor code
    * @param vendorCode vendor code
    * @return matching vendor object, or null if none found.
    */
-  Vendor findVendor(String vendorCode) {
-    if (vendorCode == null) return null;
+ Vendor findVendor(String vendorCode) {
     for (Vendor vendor : vendorList) {
       if (vendorCode.equals(vendor.getVendorCode())) return vendor;
     }
@@ -489,4 +438,5 @@ public class VendorManager {
   public static VendorManager instance() {
     return instance;
   }
+
 }

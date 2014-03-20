@@ -274,7 +274,7 @@ choyvp pynff GKXryyreCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "(ZNWBE NPPVQRAG) \aZNWBE NPPVQRAG\a--  A CRNEFBA YA, Fbhguynxr\aJ SZ 1709//WBEQNA QE\a Sver Obk = 42100607",
         "PNYY:ZNWBE NPPVQRAG",
         "NQQE:A CRNEFBA YA",
-        "ZNQQE:A CRNEFBA YA & J SNEZ-GB-ZNEXRG 1709",
+        "ZNQQE:A CRNEFBA YA & J SZ 1709",
         "PVGL:Fbhguynxr",
         "K:J SZ 1709/WBEQNA QE",
         "OBK:42100607");
@@ -368,7 +368,6 @@ choyvp pynff GKXryyreCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:FZBXR VAIRFGVTNGVBA",
         "CYNPR:RRPH",
         "NQQE:1460 J SZ 1709",
-        "ZNQQE:1460 J SNEZ-GB-ZNEXRG 1709",
         "PVGL:Fbhguynxr",
         "K:FBHGUEVQTR YNXRF CXJL/PBECBENGR PVE",
         "OBK:42100710");
@@ -377,7 +376,6 @@ choyvp pynff GKXryyreCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "(TENFF SVER) \aTENFF SVER\a-- 1460 J SZ 1709, Fbhguynxr\aFBHGUEVQTR YNXRF CXJL//PBECBENGR PVE\a Sver Obk = 42100710",
         "PNYY:TENFF SVER",
         "NQQE:1460 J SZ 1709",
-        "ZNQQE:1460 J SNEZ-GB-ZNEXRG 1709",
         "PVGL:Fbhguynxr",
         "K:FBHGUEVQTR YNXRF CXJL/PBECBENGR PVE",
         "OBK:42100710");
@@ -398,7 +396,7 @@ choyvp pynff GKXryyreCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PVGL:Fbhguynxr",
         "K:ZVENPYR CBVAGR QE/OEBBXFUVER QE",
         "OBK:41200516");
-
+  
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

@@ -14,18 +14,12 @@ public class TXHaysCountyParser extends MsgParser {
   
   public TXHaysCountyParser() {
     super("HAYS COUNTY", "TX");
-    setFieldList("SRC UNIT ADDR APT CITY CALL CODE");
   }
   
   public String getFilter() {
     return "dispatch@smhcems.com";
   }
   
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
-
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
     Matcher match = SUBJECT_PTN.matcher(subject);

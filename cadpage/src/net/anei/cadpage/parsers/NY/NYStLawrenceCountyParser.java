@@ -14,7 +14,6 @@ import net.anei.cadpage.parsers.dispatch.DispatchA13Parser;
 
 public class NYStLawrenceCountyParser extends DispatchA13Parser {
   
-  private static final Pattern SECTOR_PTN = Pattern.compile(" +- +([A-Z]{1,2} SECTOR) #NY,");
   private static final Pattern ROUTE_PTN = Pattern.compile("\\b[A-Z]+ +(\\d+)");
   
   public NYStLawrenceCountyParser() {
@@ -29,18 +28,6 @@ public class NYStLawrenceCountyParser extends DispatchA13Parser {
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
     if (!subject.endsWith("911 DISPATCH")) return false;
-    
-    // Pull out sector information
-    Matcher match = SECTOR_PTN.matcher(body);
-    if (match.find()) {
-      data.strMap = match.group(1);
-      body = body.substring(0,match.start()) + ',' + body.substring(match.end()); 
-    }
-    
-    // Dump all of the extraneous #NY terms
-    body = body.replace("#NY,", ",");
-    body = body.replace("#NY", "#");
-    
     if (! super.parseMsg(body, data)) return false;
     
     // If call contains a response code expand it to full description
@@ -55,7 +42,6 @@ public class NYStLawrenceCountyParser extends DispatchA13Parser {
       }
     }
     
-    
     // More strangeness.  Cities are often followed a dash and something that might be
     // a place name, but is usually a restatement of a previous ROUTE number, this time
     // adding some qualifiers as to what kind of highway it is.
@@ -65,7 +51,7 @@ public class NYStLawrenceCountyParser extends DispatchA13Parser {
       if (!extra.equals("WINTHROP")) {
         data.strCity = data.strCity.substring(0,pt).trim();
         
-        match = ROUTE_PTN.matcher(extra);
+        Matcher match = ROUTE_PTN.matcher(extra);
         if (match.matches()) {
           String searchRoute = "ROUTE " + match.group(1);
           pt = data.strAddress.indexOf(searchRoute);
@@ -78,15 +64,18 @@ public class NYStLawrenceCountyParser extends DispatchA13Parser {
       if (extra != null) data.strPlace = extra;
     }
     
+    // Dispatch sprinkles a lot of #NY terms after addresses for no apparent reason
+    if (data.strApt.startsWith("NY")) data.strApt = data.strApt.substring(2).trim();
+    
+    // Check for house number separated from street address by a comma
+    if (NUMERIC.matcher(data.strAddress).matches() && data.strCity.contains(" ")) {
+      data.strAddress = data.strAddress + " " + data.strCity;
+      data.strCity = "";
+    }
+    
     // Redundant processing, but extra information is sometimes appended to address
     
     String addr = data.strAddress;
-    pt = addr.indexOf(" - ");
-    if (pt >= 0) {
-      data.strMap = append(data.strPlace, " - ", addr.substring(pt+3).trim());
-      addr = addr.substring(0,pt).trim();
-    } 
-      
     String saveCity = data.strCity;
     data.strAddress = "";
     parseAddress(StartType.START_ADDR, addr, data);
@@ -135,7 +124,12 @@ public class NYStLawrenceCountyParser extends DispatchA13Parser {
   
   @Override
   public String getProgram() {
-    return super.getProgram().replace("CALL", "CODE CALL").replace("CITY", "MAP CITY") + " PLACE";
+    return super.getProgram().replace("CALL", "CODE CALL") + " PLACE";
+  }
+  
+  @Override
+  public int getMapFlags() {
+    return MAP_FLG_SUPPR_ADD_PLACE;
   }
   
   @Override

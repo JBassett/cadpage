@@ -15,7 +15,7 @@ public class DispatchRedAlertParser extends SmartAddressParser {
   
   public DispatchRedAlertParser(String defCity, String defState) {
     super(defCity, defState);
-    setFieldList("CALL CODE INFO ADDR APT CITY BOX X PLACE TIME");
+    setFieldList("CALL CODE INFO ADDR APT CITY X PLACE TIME");
   }
 
   @Override
@@ -56,7 +56,7 @@ public class DispatchRedAlertParser extends SmartAddressParser {
       body = body.substring(0, pt) + " LOC: " + body.substring(pt+4);
     }
     
-    body = "TYPE:" + body.replace("c/s:", "CROSS:").replace(" c/s ", " CROSS:").replace(" CS:", " CROSS:").replace(" Box ", " Box:").replace(" B:", " O:").replaceAll("\\s+", " ");
+    body = "TYPE:" + body.replace("c/s:", "CROSS:").replace(" c/s ", " CROSS:").replace(" CS:", " CROSS:").replace(" Box ", " Box:").replaceAll("\\s+", " ");
     Properties props = parseMessage(body, new String[]{"TYPE","LOC","CROSS","Box", "O", "- S"});
     
     String sAddress = props.getProperty("LOC");

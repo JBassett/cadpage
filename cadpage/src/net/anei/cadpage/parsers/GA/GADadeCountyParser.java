@@ -11,12 +11,11 @@ import net.anei.cadpage.parsers.SmartAddressParser;
  * Dade County, GA
  */
 public class GADadeCountyParser extends SmartAddressParser {
-  
-  private static final Pattern MULT_SPACE_PTN = Pattern.compile("  +");
+
+  private static final Pattern MASTER = Pattern.compile("(.*?) {3,}(.*?) +(\\d\\d/\\d\\d/\\d\\d) +(\\d\\d:\\d\\d)");
   
   public GADadeCountyParser() {
     super(CITY_LIST, "DADE COUNTY", "GA");
-    setFieldList("CALL ADDR APT PLACE CITY X NAME INFO");
   }
   
   @Override
@@ -28,42 +27,30 @@ public class GADadeCountyParser extends SmartAddressParser {
   protected boolean parseMsg(String subject, String body, Data data) {
     
     if (!subject.equals("!")) return false;
-    
-    parseAddress(StartType.START_CALL, FLAG_START_FLD_REQ | FLAG_CROSS_FOLLOWS | FLAG_IGNORE_AT, body, data);
-    if (data.strAddress.length() == 0) return false;
-    if (data.strCity.length() > 0) {
-      String city = PLACE_CITY_XREF.getProperty(data.strCity);
-      if (city != null) {
-        data.strPlace = data.strCity;
-        data.strCity = city;
-      }
-    }
-    body = getLeft();
-
-    String info = "";
-    if (isMBlankLeft()) {
-      info = body;
-      body = "";
-    } else {
-      Matcher match = MULT_SPACE_PTN.matcher(body);
-      if (match.find()) {
-        info = body.substring(match.end());
-        body = body.substring(0,match.start());
-      }
+    Matcher match = MASTER.matcher(body);
+    String sAddr;
+    if (match.matches()) {
+      sAddr = match.group(1);
+      data.strSupp = match.group(2);
+      data.strDate = match.group(3);
+      data.strTime = match.group(4);
     }
     
-    if (body.length() > 0) {
-      parseAddress(StartType.START_ADDR, FLAG_ONLY_CROSS, body, data);
-      data.strName = cleanWirelessCarrier(getLeft());
+    else {
+      int pt = body.indexOf("   ");
+      if (pt < 0) return false;
+      sAddr = body.substring(0,pt);
+      data.strSupp = body.substring(pt+3).trim();
     }
     
-    if (info.length() > 0) {
-      info = MULT_SPACE_PTN.matcher(info).replaceAll("\n");
-      int pt = info.indexOf("\nE911 Info");
-      if (pt >= 0) info = info.substring(0,pt);
-      data.strSupp = info;
+    parseAddress(StartType.START_CALL, FLAG_START_FLD_REQ | FLAG_ANCHOR_END | FLAG_PAD_FIELD, sAddr, data);
+    data.strCross = getPadField();
+    String city = PLACE_CITY_XREF.getProperty(data.strCity);
+    if (city != null) {
+      data.strPlace = data.strCity;
+      data.strCity = city;
     }
-
+    
     return true;
   }
   

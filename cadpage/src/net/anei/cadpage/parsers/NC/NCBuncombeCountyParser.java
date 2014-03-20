@@ -120,7 +120,7 @@ public class NCBuncombeCountyParser extends DispatchOSSIParser {
         fieldProc = idField;
       }
       
-      else if (!field.startsWith("FM") && checkAddress(field) == STATUS_STREET_NAME) {
+      else if (!field.startsWith("FM") && checkAddress(field) == 1) {
         fieldProc = crossField;
       }
       

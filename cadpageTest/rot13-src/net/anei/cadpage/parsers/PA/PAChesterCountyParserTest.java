@@ -75,30 +75,7 @@ choyvp pynff CNPurfgrePbhaglCnefreGrfg {
     }
   }
   
-  choyvp fgngvp pynff GrfgU rkgraqf CNPurfgrePbhaglUCnefreGrfg {
-    choyvp GrfgU() {
-      frgCnefre(arj CNPurfgrePbhaglCnefre());
-    }
-  }
   
-  choyvp fgngvp pynff GrfgV rkgraqf CNPurfgrePbhaglVCnefreGrfg {
-    choyvp GrfgV() {
-      frgCnefre(arj CNPurfgrePbhaglCnefre());
-    }
-  }
-  
-  choyvp fgngvp pynff GrfgW rkgraqf CNPurfgrePbhaglWCnefreGrfg {
-    choyvp GrfgW() {
-      frgCnefre(arj CNPurfgrePbhaglCnefre());
-    }
-  }
-  
-  choyvp fgngvp pynff GrfgX rkgraqf CNPurfgrePbhaglXCnefreGrfg {
-    choyvp GrfgX() {
-      frgCnefre(arj CNPurfgrePbhaglCnefre());
-    }
-  }
- 
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
     arj OnfrCnefreGrfg(){}.trarengrGrfgf(arj CNPurfgrePbhaglCnefre());
   }

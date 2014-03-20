@@ -8,7 +8,7 @@ import net.anei.cadpage.parsers.dispatch.DispatchA9Parser;
 
 
 /**
- * Ocean County, NJ
+ * Ocean City County, NJ
  */
 public class NJOceanCountyParser extends DispatchA9Parser {
   
@@ -20,16 +20,14 @@ public class NJOceanCountyParser extends DispatchA9Parser {
   
   @Override
   public String getFilter() {
-    return "Fire_Records,FireRecords";
+    return "Fire_Records";
   }
   
   @Override
   protected boolean parseMsg(String body, Data data) {
     
     // Correct double spacing by iamresponding
-    if (body.startsWith("Rip and Run Report\n\n\n\n~")) body = body.replace("\n\n", "\n");
-    
-    body = body.replace("JACOBSTOWN - NEW EGYPT", "JACOBSTOWN-NEW EGYPT");
+    if (body.startsWith("Rip and Run Report\n\n\n\n~")) body = body.replace("\n\n", "\n"); 
     
     if (!super.parseMsg(body, data)) return false;
     

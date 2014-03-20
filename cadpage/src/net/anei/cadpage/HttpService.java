@@ -240,7 +240,7 @@ public class HttpService extends Service {
   }
 
   // Wake lock and synchronize lock
-  private static PowerManager.WakeLock sWakeLock = null;
+  private static PowerManager.WakeLock mWakeLock = null;
   
   // Master request queue
   private static Queue<HttpRequest> reqQueue =new LinkedList<HttpRequest>();
@@ -255,19 +255,6 @@ public class HttpService extends Service {
   @Override
   public IBinder onBind(Intent intent) {
     return null;
-  }
-
-  @Override
-  public int onStartCommand(Intent intent, int flags, int startId) {
-    if (flags != 0) holdPowerLock(this);
-    super.onStartCommand(intent, flags, startId);
-    return Service.START_REDELIVER_INTENT;
-  }
-  
-  @Override
-  public void onDestroy() {
-    Log.v("Shutting down HttpService");
-    if (sWakeLock != null) sWakeLock.release();
   }
 
   private final class HttpServiceThread extends Thread {
@@ -291,6 +278,7 @@ public class HttpService extends Service {
           synchronized(reqQueue) {
             req = reqQueue.poll();
             if (req == null) {
+              if (mWakeLock != null) mWakeLock.release();
               stopSelf();
               return;
             }
@@ -319,7 +307,12 @@ public class HttpService extends Service {
     synchronized (reqQueue) {
       
       // If we haven't established a power wake lock, do that now.
-      holdPowerLock(context);
+      if (mWakeLock == null) {
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".HttpService");
+        mWakeLock.setReferenceCounted(false);
+      }
+      if(!mWakeLock.isHeld()) mWakeLock.acquire();
       
       // Add new request to request queue and launch the HttpService
       // We don't need to pass anything, just make sure it got started
@@ -327,16 +320,4 @@ public class HttpService extends Service {
       context.startService(new Intent(context, HttpService.class));
     }
   }
-
-  private static void holdPowerLock(Context context) {
-    synchronized (HttpService.class) {
-      if (sWakeLock == null) {
-        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".HttpService");
-        sWakeLock.setReferenceCounted(false);
-      }
-      if(!sWakeLock.isHeld()) sWakeLock.acquire();
-    }
-  }
-
 }

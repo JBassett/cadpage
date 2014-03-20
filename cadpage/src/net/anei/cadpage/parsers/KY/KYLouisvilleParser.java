@@ -1,12 +1,12 @@
 package net.anei.cadpage.parsers.KY;
 
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.CodeTable;
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.StandardCodeTable;
-import net.anei.cadpage.parsers.dispatch.DispatchProQAParser;
 
 /**
  * Louisville, KY
@@ -64,11 +64,6 @@ public class KYLouisvilleParser extends FieldProgramParser {
       field = p.get();
       if (field.startsWith("@")) field = field.substring(1).trim();
       super.parse(field, data);
-      pt = data.strCity.indexOf('/');
-      if (pt >= 0) {
-        data.strPlace = append(data.strPlace, " - ", data.strCity.substring(0,pt));
-        data.strCity = data.strCity.substring(pt+1);
-      }
     }
     
     @Override
@@ -77,15 +72,14 @@ public class KYLouisvilleParser extends FieldProgramParser {
     }
   }
   
+  private static final Pattern INFO_SKIP_PTN = Pattern.compile(" *ProQA dispatch code: [0-9A-Za-z]+ Responder script: *| *\\*\\* Case number .*");
   private class MyInfoField extends InfoField {
     @Override
     public void parse(String field, Data data) {
-      DispatchProQAParser.parseProQAData(false, field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CODE INFO";
+      field = INFO_SKIP_PTN.matcher(field).replaceAll(" / ").trim();
+      if (field.startsWith("/")) field = field.substring(1).trim();
+      if (field.endsWith("/")) field = field.substring(0,field.length()-1).trim();
+      super.parse(field, data);
     }
   }
   
@@ -102,93 +96,43 @@ public class KYLouisvilleParser extends FieldProgramParser {
 
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
       "ANC",  "ANCHORAGE",
-      "AUD",  "AUDUBON PARK",
-      "BAN",  "BANCROFT",
       "BAR",  "BARBOURMEADE",
       "BELM", "BELLEMEADE",
-      "BELW", "BELLEWOOD",
-      "BPOI", "BROECK POINTE",
-      "BRFA", "BROWNSBORO FARM",
       "BRM",  "BLUE RIDGE MANOR",
-      "BRVI", "BEECHWOOD VILLAGE",
       "BRWD", "BRIARWOOD",
-      "BVIL", "BEECHWOOD VILLAGE",
-      "CAMB", "CAMBRIDGE",
+      "BVIL", "BROWNSBORO VILLAGE",
       "COLD", "COLDSTREAM",
       "CROS", "CROSSGATE",
-      "CSID", "CREEKSIDE",
-      "DHIL", "DOUGLASS HILLS",
-      "DRHI", "DRUID HILLS",
+      "DRHI", "DOUGLAS HILLS",
       "FHIL", "FOREST HILLS",
       "FINC", "FINCASTLE",
-      "GCRE", "GOOSE CREEK",
       "GMOR", "GRAYMOOR-DEVONDALE",
-      "GSPR", "GREEN SPRING",
-      "GVEW", "GLENVIEW",
-      "GVHI", "GLENVIEW HILLS",
-      "GVMA", "GLENVIEW MANOR",
-      "HCRE", "HOLLOW CREEK",
-      "HDAL", "HILLS AND DALES",
-      "HHIL", "HICKORY HILL",
       "HOAC", "HOUSTON ACRES",
-      "HTCK", "HERITAGE CREEK",
       "HUAC", "HURSTBOURNE ACRES",
       "HURS", "HURSTBOURNE",
-      "HVIL", "HOLLYVILLA",
       "INH",  "INDIAN HILLS",
       "JTN",  "JEFFERSONTOWN",
-      "KING", "KINGSLEY",
-      "LINC", "LINCOLNSHIRE",
-      "LPLA", "LANGDON PLACE",
       "LVIL", "LOUISVILLE",
       "LYND", "LYNDON",
-      "LYNN", "LYNNVIEW",
       "MCRE", "MANOR CREEK",
       "MEDE", "MEADOWVIEW ESTATES",
       "MEDV", "MEADOWVALE",
-      "MEVL", "MEADOW VALE",
-      "MFAR", "MEADOWBROOK FARM",
-      "MHES", "MARYHILL ESTATES",
       "MHIL", "MURRAY HILL",
       "MOOR", "MOORLAND",
-      "MOVL", "MOCKINGBIRD VALLEY",
       "MTWN", "MIDDLETOWN",
-      "MVES", "MEADOWVIEW ESTATES",
-      "NEST", "NORBOURNE ESTATES",
       "NORT", "NORTHFIELD",
       "NOWD", "NORWOOD",
-      "OBPL", "OLD BROWNSBORO PLACE",
-      "PHIL", "POPLAR HILLS",
       "PLAN", "PLANTATION",
-      "PRO",  "PROSPECT",
-      "PWVI", "PARKWAY VILLAGE",
       "RFIE", "ROLLING FIELDS",
       "RHIL", "ROLLING HILLS",
-      "RICH", "RICHLAWN",
-      "RVWD", "RIVERWOOD",
-      "SGAR", "SENECA GARDENS",
-      "SHV",  "SHIVELY",
-      "SMAN", "STRATHMOOR MANOR",
-      "SMIL", "SPRING MILL",
-      "SPVW", "SOUTH PARK VIEW",
       "SRPK", "ST REGIS PARK",
       "STM",  "ST MATTHEWS",
-      "SVAL", "SPRING VALLEY",
-      "SVIL", "STRATHMOOR VILLAGE",
-      "SYCA", "SYCAMORE",
       "TBRO", "TEN BROECK",
-      "THIL", "THORNHILL",
-      "UNK",  "UNKNOWN",
-      "WB",   "WEST BUECHEL",
+      "PRO",  "PROSPECT",
       "WDHI", "WOODLAND HILLS",
       "WDPK", "WOODLAWN PARK",
-      "WDWD", "WILDWOOD",
-      "WELL", "WELLINGTON",
       "WHIL", "WINDY HILLS",
-      "WORH", "WORTHINGTON HILLS",
-      "WTPK", "WATTERSON PARK",
       "WTWD", "WESTWOOD"
-
 
   });
 }

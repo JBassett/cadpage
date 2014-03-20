@@ -21,7 +21,7 @@ public class INMarionCountyParser extends MsgParser {
   
   @Override
   public String getFilter() {
-    return "CAD@pager.mecagov.org,CAD@page.indy.gov,777,888";
+    return "CAD@pager.mecagov.org,777,888";
   }
   
   @Override
@@ -95,22 +95,19 @@ public class INMarionCountyParser extends MsgParser {
   );
   
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "BGR", "Beech Grove",
       "HOM", "Homecroft",
       "IND", "Indianapolis",
       "PLF", "Plainfield",
       
-      "DEC", "Decatur TWP",
-      "FRA", "Franklin Township",
       "LWR", "Lawrence TWP",
-      "PER", "Perry TWP",
       "PIK", "Pike TWP",
       "SPD", "Speedway",
+      "PER", "Perry TWP",
+      "DEC", "Decatur TWP",
       "WAR", "Warren TWP",
       "WAS", "Washington TWP",
       "WAY", "Wayne TWP",
       
       "HAM", "Hamilton County"
-      
   });
 }

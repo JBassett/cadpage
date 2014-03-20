@@ -55,37 +55,22 @@ public class ILStClairCountyParser extends FieldProgramParser {
       body = body.substring(0, crossMatch.start()) + "\nCross:" + crossMatch.group(1) + body.substring(crossMatch.end());
     }
     
-    String[] fields = body.split("[\n\t]");
-    if (!parseFields(fields, data)) return false;
-    
-    if (data.strAddress.startsWith("@") && data.strCross.length() > 0) {
-      data.strPlace = data.strAddress.substring(1).trim();
-      data.strAddress = "";
-      parseAddress(data.strCross, data);
-      data.strCross = "";
-    }
-    return true;
-  }
-  
-  @Override
-  public String getProgram() {
-    return super.getProgram().replace("ADDR", "PLACE ADDR");
+    String[] fields = body.split("\n");
+    return parseFields(fields, data);
   }
   
   
-  private static final Pattern PTN_FULL_ADDR = Pattern.compile("(.*, .*), *\\d{5}(?: +#(.*))?");
+  private static final Pattern PTN_FULL_ADDR = Pattern.compile("(.*, .*), *\\d{5}");
   private class MyAddressField extends AddressCityField {
     
     @Override 
     public void parse(String field, Data data) {
-      String apt = "";
       Matcher m = PTN_FULL_ADDR.matcher(field);   // This will match address, city, and zip
-      if (m.matches()) {
-        field = m.group(1).trim();                       // Remove the zipcode
-        apt = getOptGroup(m.group(2));
+      if(m.matches()) {                           // If we have a match
+        field = m.group(1);                       // Remove the zipcode
       }
+      
       super.parse(field, data);
-      data.strApt = append(data.strApt, "-", apt);
     }
    
   }

@@ -58,18 +58,12 @@
   <string name="pref_review_title">Skriv en recension om Cadpage</string>
   <string name="pref_review_summary">Tryck \"Recensera\"</string>
   <string name="pref_review_url">market://details?id=net.anei.cadpage</string>
-  
-  <string name="pref_cadpage_active911_title">Cadpage och Active911 appar</string>
-  <string name="pref_cadpage_active911_summary">Hur du kör Cadpage och Active911 på samma enhet</string>
-  
   <!-- Additional Preferences -->
   <string name="pref_popup_control">Alarm Popup kontroll</string>
   <string name="pref_additional_title">Ytterligare inställningar</string>
   <string name="pref_additional_summary">Ytterligare Cadpage-konfigurering</string>
-  <string name="pref_notif_timeout_title">Alarmeringstid</string>
-  <string name="pref_notif_timeout_summary">Larm kommer att tystna after denna tid.  Aktuellt värde: %s</string>
-  <string name="pref_timeout_title">Skärmaktiveringstid</string>
-  <string name="pref_timeout_summary">Skärmen kommer att vara aktiverad så här länge.  Aktuellt värde: %s</string>
+  <string name="pref_timeout_title">Tidsinställning för skärm</string>
+  <string name="pref_timeout_summary">Skärmen kommer att gå till viloläge efter denna tid. Inställd tid är: %s</string>
   <string name="pref_dimscreen_title">Dimma ner Popup-fönster</string>
   <string name="pref_dimscreen_summaryon">Popup-fönstret kommer att dimmas ner (sparar batteri)</string>
   <string name="pref_dimscreen_summaryoff">Popup-fönstret kommer att vara ljust</string>
@@ -82,6 +76,9 @@
   <string name="pref_popup_enabled_title">Visa Popup</string>
   <string name="pref_popup_enabled_summaryon">Larm visar popup-fönster</string>
   <string name="pref_popup_enabled_summaryoff">Larm visar inte popup-fönster</string>
+  <string name="pref_onlyShowOnKeyguard_title">Knapplås popup begränsningar</string>
+  <string name="pref_onlyShowOnKeyguard_summaryon">Popup-fönstret kommer endast visas när knapplås är aktivt.</string>
+  <string name="pref_onlyShowOnKeyguard_summaryoff">Popup-fönstret kommer alltid att visas.</string>
   <string name="pref_noShowInCall_title">Begränsa i Larm-popup</string>
   <string name="pref_noShowInCall_summaryon">Larm-popup kommer inte att visas under pågående samtal.</string>
   <string name="pref_noShowInCall_summaryoff">Larm-popup kommer att visas under pågående samtal</string>
@@ -135,6 +132,8 @@
   <string name="pref_notif_repeat_interval_title">Påminnelseintervall</string>
   <string name="pref_notif_repeat_interval_summary">Tidsperiod mellan påminnele. Aktuellt värde: %s </string>
   <string name="pref_notif_repeat_interval_dialogTitle">Intervall (minuter)</string>
+  <string name="pref_notif_repeat_times_title">Antal påminnelser</string>
+  <string name="pref_notif_repeat_times_summary">Antal påminnelser.  Aktuellt värde: %s</string>
   <!-- Contact Notification Customization Strings -->
   <string name="pref_notif_default_title">Standardnotifiering</string>
   <string name="pref_notif_override_title">Ignorera notifikation</string>
@@ -190,19 +189,13 @@
   <string name="pref_screen_on_summaryoff">Skärmen kommer inte att sättas på när popup visas</string>
   <string name="pref_screen_category">Skärm</string>
   <string name="pref_notif_repeat_times_entries_keep_repeting">Fortsätt repetera</string>
-
-  <string name="pref_timeout_entries_disabled">Avaktiverad</string>
   <string name="pref_timeout_entries_10s">10 sekunder</string>
   <string name="pref_timeout_entries_20s">20 sekunder</string>
   <string name="pref_timeout_entries_30s">30 sekunder</string>
   <string name="pref_timeout_entries_1m">1 minut</string>
-  <string name="pref_timeout_entries_2m">2 minut</string>
-  <string name="pref_timeout_entries_3m">3 minut</string>
-  <string name="pref_timeout_entries_4m">4 minut</string>
-  <string name="pref_timeout_entries_5m">5 minut</string>
-  <string name="pref_timeout_entries_7m">7 minut</string>
-  <string name="pref_timeout_entries_10m">10 minut</string>
-  
+  <string name="pref_timeout_entries_2m">2 minuter</string>
+  <string name="pref_timeout_entries_5m">5 minuter</string>
+  <string name="pref_timeout_entries_10m">10 minuter</string>
   <string name="pref_vibrate_pattern_entries_normal">Normal</string>
   <string name="pref_vibrate_pattern_entries_long">Lång vibration</string>
   <string name="pref_vibrate_pattern_entries_multiple_short">Multipla korta</string>
@@ -260,19 +253,11 @@
   <string name="pref_split_chk_sender_summaryon">Avsändaradress kommer att kontrolleras när delade meddelanden sätts ihop</string>
   <string name="pref_split_chk_sender_summaryoff">Avsändaradress kommer inte att kontrolleras när delade meddelanden sätts ihop</string>
   <string name="pref_rev_msg_order_title">Reversera ordning i delade meddelanden</string>
-  <string name="pref_split_keep_lead_break_title">Radbrytining i delade meddelanden</string>
-  <string name="pref_split_keep_lead_break_summaryon">Inledande radbrytning i delade meddelanden kommer att bibehållas</string>
-  <string name="pref_split_keep_lead_break_summaryoff">Inledande radbrytning i delade meddelanden kommer att tas bort</string>
   <string name="pref_rev_msg_order_summaryon">Delade Cadpag Delade Cadpage-meddelanden kommer att läsas i ordning sist till först</string>
   <string name="pref_rev_msg_order_summaryoff">Delade Cadpage-meddelanden kommer att läsas i ordning först till sist</string>
   <string name="pref_suppress_dup_msg_title">Ignorera dubbla larm</string>
   <string name="pref_suppress_dup_msg_summaryon">Dubbla larm kommer att ignoreras</string>
   <string name="pref_suppress_dup_msg_summaryoff">Dubbla larm kommer att processas</string>
-
-  <string name="pref_override_vendor_loc_title">Skriv över leverantörsplats</string>
-  <string name="pref_override_vendor_loc_summaryon">Platsinställning skriver över leverantörs plats</string>
-  <string name="pref_override_vendor_loc_summaryoff">Leverantörs plats skriver över din lokalanpassning</string>
-  
   <string name="pref_activate_scanner_title">Öppna automatiskt scannerkanal</string>
   <string name="pref_activate_scanner_summaryon">Scannerkanal kommer att öppnas automatiskt</string>
   <string name="pref_activate_scanner_summaryoff">Scannerkanal kommer inte att öppnas automatiskt</string>
@@ -302,7 +287,6 @@
   <string name="publish_item_text">Publicera larm</string>
   <string name="more_info_item_text">Mer info</string>
   <string name="start_radio_item_text">Starta Radio</string>
-  <string name="active911_item_text">Active911</string>
   <string name="response_check_text">Kvittenskontroll</string>
   <!--  Response message menu items  -->
   <string name="responding_text">Kvitterar</string>
@@ -332,7 +316,7 @@
   <!-- Direct Paging settings -->
   <string name="pref_direct_paging_title">Meddelandeservice</string>
   <string name="pref_direct_paging_summary">Ställ in meddelandeservice</string>
-  <string name="pref_reconnect_title">Återanslut direkt koppling (med. service)</string>
+  <string name="pref_reconnect_title">Återanslut direkt koppling (ej med.service)</string>
   <string name="pref_reconnect_summary">Återställ anslutning till aktiverad meddelandeservice</string>
   <!-- Scanner Radio Interface reports -->
   <string name="scanner_not_installed">Den här funktionen förutsätter att du har vissa scannerapplikationer installerade.  Vill du installera dessa nu?</string>
