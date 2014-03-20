@@ -1,33 +1,45 @@
 package net.anei.cadpage.parsers.CA;
 
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Monterey County, CA
+Contact: Tom Tengdin <t3@razzolink.com>
+Sender: donotreply@co.monterey.ca.us
+System: Tiburon
 
-/**
- * Monterey County, CA
+FRM:donotreply@co.monterey.ca.us\nSUBJ:CAD Page\nMSG:52161HA - MEO:NOT XFR - 13200 CIELO AZULUnits:E5211, 52A
+FRM:donotreply@co.monterey.ca.us\nSUBJ:CAD Page\nMSG:5261BT - MEO:MEDICAL EMERGNCY - 7881 SANDHOLDT RDUnit:CH5202
+FRM:donotreply@co.monterey.ca.us\nSUBJ:CAD Page\nMSG:5254A - MEO:NOT XFRD - 315 NEPONSET RDUnits:E5211, 52A
+FRM:donotreply@co.monterey.ca.us\nSUBJ:CAD Page\nMSG:524451A - MEO:XFRD - 97 RAILROAD AVUnits:E5213, 52A
+FRM:donotreply@co.monterey.ca.us\nSUBJ:CAD Page\nMSG:52251AB - UIA:UNK INJ ACC - HWY 101/SAN MIGUEL CANYON RDUnits:E5212, E5213, 52V
+FRM:donotreply@co.monterey.ca.us\nSUBJ:CAD Page\nMSG:FMA:FIRE MUTUAL AID - 918 FREEDOM BLVDUnit:E5213
+FRM:donotreply@co.monterey.ca.us\nSUBJ:CAD Page\nMSG:52351A - MEO:MEO ALM - 398 BERRY RDUnits:E5213, 52A
+FRM:donotreply@co.monterey.ca.us\nSUBJ:CAD Page\nMSG:5261AT - MEO:XFRD - 10561 MERRITT STUnits:E5211, 52A
+FRM:donotreply@co.monterey.ca.us\nSUBJ:CAD Page\nMSG:52251A - VIA:SB HWY 101 - HWY 101/CRAZY HORSE CANYON RDUnits:E5212, BEU, 52V\n
+
+Contact: joel mendoza <ffjoelmendoza@gmail.com>
+(CAD Page) 64172B - SF:STRUCTURE FIRE - BARNET SEGAL LN/IRIS CANYON RD - MTY\n      Message: TYPE:VGF   -->SF
+(CAD Page) 5513 - SF:STRUCTURE FIRE - 17739 RIVERBEND RD - MCO
+
  */
+
+
 public class CAMontereyCountyParser extends MsgParser {
   
-  private static final Pattern MASTER = Pattern.compile("(?:(.*?) - )?([A-Z]{2,5}):(.*?) - (.*?)(?: - ([A-Z]{3}))? *(?:Units?:(.*?))?");
+  private static final Pattern MASTER = Pattern.compile("(?:(.*?) - )?([A-Z]{2,3}:.*?) - (.*?)(?:(?:Units?:(.*?))| - ([A-Z]{3}))");
   
   public CAMontereyCountyParser() {
     super("MONTEREY COUNTY", "CA");
-    setFieldList("MAP CODE CALL ADDR PLACE CITY UNIT INFO");
   }
   
   @Override
   public String getFilter() {
     return "donotreply@co.monterey.ca.us";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
   }
 
   @Override
@@ -46,18 +58,11 @@ public class CAMontereyCountyParser extends MsgParser {
     if (!match.matches()) return false;
     
     data.strMap = getOptGroup(match.group(1));
-    data.strCode = match.group(2);
-    data.strCall = match.group(3).trim();
-    parseAddress(match.group(4).trim(), data);
-    String city = match.group(5);
-    if (city != null) data.strCity = convertCodes(city, CITY_CODES);
-    data.strUnit = getOptGroup(match.group(6));
-    
-    pt = data.strCity.indexOf('/');
-    if (pt >= 0) {
-      data.strPlace = data.strCity.substring(0,pt);
-      data.strCity = data.strCity.substring(pt+1);
-    }
+    data.strCall = match.group(2).trim();
+    parseAddress(match.group(3).trim(), data);
+    String sUnit = match.group(4);
+    if (sUnit == null) sUnit = match.group(5);
+    data.strUnit = sUnit.trim();
     
     if (extra != null) {
       if (extra.startsWith("Message:")) extra = extra.substring(8).trim();
@@ -66,78 +71,4 @@ public class CAMontereyCountyParser extends MsgParser {
     
     return true;
   }
-  
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "ARO",   "AROMAS",
-      "ARS",   "ARROYO SECO/GREENFIELD",
-      "BKN",   "BOLSA KNOLLS",
-      "BOR",   "BORONDA",
-      "BRD",   "BRADLEY",
-      "CAS",   "CASTROVILLE",
-      "CDT",   "CORRAL DE TIERRA",
-      "CHI",   "CARMEL HIGHLANDS",
-      "CHS",   "CARMEL HILLS",
-      "CHU",   "CHUALAR",
-      "CML",   "CARMEL",
-      "CMM",   "CARMEL MEADOWS/CARMEL",
-      "CMP",   "CARMEL POINT",
-      "CMV",   "CARMEL VALLEY",
-      "CMW",   "CARMEL WOODS",
-      "CST",   "COAST/CARMEL",
-      "CSU",   "CAL STATE UNIVERSITY/SEASIDE",
-      "CVR",   "CARMEL VALLEY RANCH/CARMEL",
-      "CVW",   "CARMEL VIEWS/CARMEL",
-      "DLI",   "DEFENSE LANGUAGE INSTITUTE/MONTEREY",
-      "DMF",   "DEL MONTE FOREST",
-      "DRO",   "DEL REY OAKS",
-      "FTO",   "FORT ORD/SEASIDE",
-      "GON",   "GONZALES",
-      "GRN",   "GREENFIELD",
-      "HHS",   "HIDDEN HILLS/SALINAS",
-      "HIM",   "HIGH MEADOWS",
-      "HTF",   "HATTON FIELDS",
-      "IND",   "INDIAN SPRINGS/SALINAS",
-      "JOL",   "JOLON",
-      "KCY",   "KING CITY",
-      "LAM",   "LAMESA VILLAGE/MONTEREY", 
-      "LLG",   "LOS LAURELES GRADE/SALINAS",
-      "LLS",   "LAS LOMAS",
-      "LOC",   "LOCKWOOD/MONTEREY",
-      "LPR",   "LAS PALMAS RANCH/SALINAS",
-      "LSE",   "LAGUNA SECA ESTATES/SALINAS",
-      "MAR",   "MARINA",
-      "MCO",   "",                            // MONTEREY COUNTY
-      "MDL",   "MONTE DEL LAGO/CASTROVILLE",
-      "MPA",   "MONTEREY AIRPORT/MONTEREY",
-      "MSF",   "MISSION FIELDS",
-      "MSL",   "MOSS LANDING",
-      "MTR",   "MONTERA RANCH/MONTEREY",
-      "MTY",   "MONTEREY",
-      "NAF",   "NAVY ANNEX FACILITY/MONTEREY",
-      "NPS",   "NAVY POSTGRADUATE SCHOOL/MONTEREY",
-      "OHS",   "OAK HILLS",
-      "ORD",   "FT ORD/SEASIDE",
-      "PAC",   "PACIFIC GROVE",
-      "PAJ",   "PAJARO",
-      "PGS",   "POSTGRADUATE SCHOOL/MONTEREY",
-      "PRU",   "PRUNEDALE",
-      "RDR",   "ROBLES DEL RIO",
-      "SAR",   "SAN ARDO",
-      "SBC",   "SAN BENITO COUNTY",
-      "SBN",   "SAN BENANCIO",
-      "SCO",   "",                          // SOUTH COUNTY
-      "SCY",   "SAND CITY",
-      "SEA",   "SEASIDE",
-      "SLP",   "SANTA LUCIA PRESERVE/CARMEL",
-      "SLU",   "SAN LUCAS",
-      "SNS",   "SALINAS",
-      "SOL",   "SOLEDAD",
-      "SPK",   "SPRECKELS",
-      "SRV",   "SERRA VILLAGE/SALINAS",
-      "TPE",   "TORO PARK ESTATES/SALINAS",
-      "VGR",   "VALLEY GREENS/CARMEL",
-      "WAT",   "WATSONVILLE",
-      "YKP",   "YANKEE POINT",
-
-  });
 }

@@ -1,61 +1,43 @@
 package net.anei.cadpage.parsers.TX;
 
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-/**
- * Bell County, TX
- */
+
+/* 
+Bell County, TX
+Contact: Jonathan Phelps <texasking254@yahoo.com>
+Sender:930010xx
+
+LOC: 640 SCARLET OAK DR BELL TYPE CODE: STRUCT SubType: CALLER NAME: CLRNUM: TIME: 14:35:00 Comments: AC UNIT ON FIRE
+LOC: CHAPPARAL RD/E TRIMMIER RD BELL TYPE CODE: TTA SubType: CALLER NAME: CLAY/CBF&R 513 CLRNUM: 830-426-0696 TIME: 15:38:34 Comments: TX 8304260696 -097.690451 +031.030079 CALLED IN BY A CENTAL BELL FIRE &RECUE NOT BLOCKING, BOTH VEH IN DIRT 5 INDIVIDUAL INVOLVED - 4 FEM, 1 MALE 2 VEH ACC Number of patients: 5 Age: Unknown Range Gender: Unknown Conscious: Unknown Breathing: Unknown ProQA chief complaint code: 29 Responder script: Age unknown, 2 VEH ACC. RED HYUNDAI SEDAN VS TAN SUBURBAN SUBURBAN RADIATOR IS LEAKING AIRBAG DEPLOYED ON SEDAN
+LOC: CHAPPARAL RD/SCARLET OAK DR BELL TYPE CODE: GRASS SubType: CITY CALLER NAME: SW 706 CLRNUM:  TIME: 17:50:51
+LOC: 512 CEDAR RIDGE CR BELL TYPE CODE: GRASS SubType: COUNTY CALLER NAME:  CLRNUM:  TIME: 19:22:52
+LOC: 3465 UPTON DR BELL TYPE CODE: AL SubType: FIRE CALLER NAME: SARAH/STROUD CLRNUM: 8566-885-4634 TIME: 03:13:58 Comments:  ** Event not created for uncovered group CCFD/CCFD GENERAL FIRE RESIDENCE PREMISE PETER & JULIE PETERSON 254-518-5845 PENDING CONTACT '
+
+*/
+
 public class TXBellCountyParser extends FieldProgramParser {
+  
+  private static final Properties CITY_CODES = buildCodeTable(new String[]{
+      "BELL", ""   // Bell County
+  });
   
   public TXBellCountyParser() {
     super(CITY_CODES, "BELL COUNTY", "TX",
-        "PRI LOC:ADDR/S TYPE_CODE:CALL! SubType:CALL CALLER_NAME:NAME! CLRNUM:PHONE! TIME:TIME! Comments:INFO");
-    setupGpsLookupTable(GPS_TABLE);
+        "LOC:ADDR/S! TYPE_CODE:CALL! SubType:CALL CALLER_NAME:NAME! CLRNUM:PHONE! TIME:SKIP! Comments:INFO");
   }
   
   public String getFilter() {
     return "930010";
   }
   
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("PRI")) return new PriorityField("P(\\d)");
-    if (name.equals("CALL")) return new MyCallField();
-    if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("INFO")) return new MyInfoField();
-    return super.getField(name);
-  }
-
-  private static final Pattern PLACE_MARKER = Pattern.compile(": ?[@:]");
   private class MyAddressField extends AddressField {
     @Override
     public void parse(String field, Data data) {
-      while (field.endsWith(": EST")) field = field.substring(0,field.length()-5).trim();
       field = field.replace("CHAPPARAL", "CHAPARRAL");
-      if (field.startsWith("@")) {
-        data.strAddress = field;
-      } else {
-        Matcher match = PLACE_MARKER.matcher(field);
-        if (match.find()) {
-          data.strPlace = field.substring(match.end()).trim();
-          field = field.substring(0,match.start()).trim();
-        }
-        super.parse(field, data);
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return super.getFieldNames() + " PLACE";
+      super.parse(field, data);
     }
   }
   
@@ -66,52 +48,10 @@ public class TXBellCountyParser extends FieldProgramParser {
     }
   }
   
-  private static final Pattern INFO_PHONE_GPS_PTN = Pattern.compile("(\\d{10}) ([-+]\\d{3}\\.\\d{6} [-+]\\d{3}\\.\\d{6})\\b *(.*)");
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = INFO_PHONE_GPS_PTN.matcher(field);
-      if (match.matches()) {
-        data.strPhone = match.group(1);
-        setGPSLoc(match.group(2), data);
-        field = match.group(3);
-      }
-      super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "PHONE GPS INFO";
-    }
-  }
-  
   @Override
-  protected String adjustGpsLookupAddress(String address) {
-    if (!address.startsWith("@")) return null;
-    int pt = address.indexOf(':');
-    if (pt >= 0) address = address.substring(0,pt);
-    return address;
+  public Field getField(String name) {
+    if (name.equals("CALL")) return new MyCallField();
+    if (name.equals("ADDR")) return new MyAddressField();
+    return super.getField(name);
   }
-
-  private static final Properties GPS_TABLE = buildCodeTable(new String[]{
-      "@305",   "31.153174,-97.324602",
-      "@306",   "31.166908,-97.319074",
-      "@307",   "31.180577,-97.313935",
-      "@308",   "31.192139,-97.309398",
-      "@309",   "31.208031,-97.302668",
-      "@310",   "31.221252,-97.295544",
-      "@311",   "31.233926,-97.288221",
-      "@312",   "31.243887,-97.282241",
-      "@313",   "31.256592,-97.275016",
-      "@314",   "31.272733,-97.265484",
-      "@315",   "31.284852,-97.256454"
-  });
-  
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "BELL", "",         // Bell County
-      "HKRH", "HARKER HEIGHTS",
-      "NOLN", "NOLANVILLE",
-      "TROY", "TROY"
-  });
-  
 }

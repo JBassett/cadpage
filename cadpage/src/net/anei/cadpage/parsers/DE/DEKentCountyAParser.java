@@ -8,17 +8,40 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-/**
- * Kent County, DE (Variant A)
+/*
+Kent County, DE (Variant A)
+Contact: John Wothers <eng416res@yahoo.com>
+Sender: rc.187@c-msg.net
+System: New World Systems
+
+[!]  [K] 12D1 Seizure - Not Breathing 263 MORGANS CHOICE RD Camden Wyoming : Xst's: WILLOW GROVE RD / MUMFIELD LN Caller: COLE JR EARL
+[!]  [K] Alarms-Residential (single) 121 BIRKDALE LN Camden Wyoming : TRAYBERN Xst's: BIRKDALE WAY / N HIGH HILL RD, TRAYBERN WAY Caller: ADT
+[!]  [K] Structure-Chimney 6871 WILLOW GROVE RD Camden Wyoming : Xst's: HENRY COWGILL RD / WILLOW TREE CIR Caller: PETE
+[!]  [K] 31D2 Unconscious/Fainting 10829 WESTVILLE RD Camden Wyoming : Xst's: UNKNOWN / GREENS VILLAGE DR Caller: JOHNSON WANDA
+[!]  [K] 29B1 MVC Injuries HENRY COWGILL RD Camden Wyoming : Xst's: Caller:
+[!]  [K] Alarms-Residential (single) 233 TOWER RD Camden Wyoming : Xst's: UNKNOWN / DARLING FARM RD Caller: GUARDIAN TINA
+[!]  [K] Stand-By,Cover-up 2 N MAIN ST STATION 55 Magnolia : MAGNOLIA Xst's: W WALNUT ST, S MAIN ST, E WALNUT ST / BOOTY DR Caller:
+[!]  [K] 17B3G Falls - Unknown 852 STEELES RIDGE RD Camden Wyoming : Xst's: ASHLAND AVE / HENRY COWGILL RD, MAIN ST Caller: GARY
+[!]  [K] Alarms-Commercial 1678 S GOVERNORS AVE Dover : Xst's: S DUPONT HWY / GUNNING BEDFORD DR Caller: DAVID
+[!]  [K] 29D2L MVC Motorcycle/Bicycle 375 GATEWAY SOUTH BLVD SONIC - SOUTH DOVER Dover : Xst's: DEAD END / DEAD END Caller:
+[!]  [K] Structure-Residential Single 241 E CAMDEN WYOMING AVE Camden Wyoming : CAMDEN Xst's: S MAIN ST, N MAIN ST / S WEST ST, N WEST ST Caller: HARRISON THERE'S
+
+Contact: Tom <tw4715@comcast.net>
+[CAD]33C1T Transfer/Interfacility 2809 ANDREWVILLE RD Harrington : Xst's: TODDS CHAPEL RD, PROSPECT CHURCH RD / GREENWOOD RD Caller: CAY HOLLY
+
+Contact: Sam Crawford <nremtde@gmail.com>
+[K] 17B1G Falls - Possibly Dangerous 2 LAKE CREST DR Milford : HAVEN LAKE ESTATES Xst's: HAVEN LN / WILLIAMSVILLE RD Caller: L MURPHY  
+
  */
+
 
 public class DEKentCountyAParser extends FieldProgramParser {
   
-  private static final Pattern DELIM = Pattern.compile("[A-Z]+:| :", Pattern.CASE_INSENSITIVE);
+  private static final Pattern DELIM = Pattern.compile("[^ ]*:");
   
   public DEKentCountyAParser() {
     super(CITY_LIST, "KENT COUNTY", "DE",
-           "( CALL ADDR/ZS PLACECITY | ADDR/SCXP ) Xsts:X CALLER:NAME");
+           "ADDR/SCXP Xsts:X CALLER:NAME");
   }
   
   @Override
@@ -28,16 +51,9 @@ public class DEKentCountyAParser extends FieldProgramParser {
 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
-    
-    // Rule out Variant B pages
-    if (body.startsWith("-")) return false;
-    
-    boolean good = subject.equals("!|K") || subject.equals("K") || subject.equals("CAD");
+    if (!subject.equals("!|K") && !subject.equals("K") && !subject.equals("CAD")) return false;
     body = body.replace("Xst's:", "Xsts:");
-    if (!parseFields(splitMsg(body), data)) return false;
-    if (good) return true;
-    if (getStatus() <= STATUS_STREET_NAME) return false;
-    return good || data.strAddress.length() > 0 || data.strCross.length() > 0 || data.strName.length() > 0;
+    return parseFields(splitMsg(body), data);
   }
   
   private String[] splitMsg(String body) {
@@ -49,42 +65,11 @@ public class DEKentCountyAParser extends FieldProgramParser {
       list.add((key + body.substring(pt,match.start())).trim());
       pt = match.end();
       key = match.group();
-      if (key.equals(" :")) key = "";
+      if (key.length() == 1) key = "";
     }
     String tail = body.substring(pt);
     if (tail.length() > 0) list.add(tail);
     return list.toArray(new String[list.size()]);
-  }
-  
-  private class MyPlaceCityField extends Field {
-    @Override
-    public boolean canFail() {
-      return true;
-    }
-    
-    @Override
-    public boolean checkParse(String field, Data data) {
-      Result res = parseAddress(StartType.START_PLACE, FLAG_ONLY_CITY | FLAG_ANCHOR_END, field);
-      if (res.getStatus() == 0) return false;
-      res.getData(data);
-      return true;
-    }
-
-    @Override
-    public void parse(String field, Data data) {
-      if (!checkParse(field, data)) abort();
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "PLACE CITY";
-    }
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("PLACECITY")) return new MyPlaceCityField();
-    return super.getField(name);
   }
   
   private static final String[] CITY_LIST = new String[]{

@@ -1,37 +1,49 @@
 package net.anei.cadpage.parsers.PA;
 
-import java.util.regex.Pattern;
-
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchBParser;
 
+/*
+Butler County, PA
+Contact: Jeff Gooch <goochff21@gmail.com>
+"."@butlerco.911 :ALAF >ALARM/FIRE 20436 ROUTE 19 CRANBERRY TWP GUARDIAN Map: Grids:00000,000 Cad: 2011-0000075272
+"."@butlerco.911 :CO3 >CO DETECTOR / FIRE RESPONSE 437 SETTLERS VILLAGE CIR CRANBERRY TWP ALEJANDRO, GABRIEL Map: Grids:00000,000 Cad: 2011-0000074937
+"."@butlerco.911 :SERV >SERVICE CALL 143 FOX RUN RD CRANBERRY TWP CHEETHAM WILLIAM Map: Grids:00000,000 Cad: 2011-0000075245
+"."@butlerco.911 :FIRST >FIRE - STRUCTURE 20036 ROUTE 19 CRANBERRY TWP CANDLEWOOD EXTENDED STAY Map: Grids:00000,000 Cad: 2011-0000074503
+"."@co.butler.pa.us :ALAF >ALARM/FIRE 20620 ROUTE 19 CRANBERRY TWP RAMPART Map: Grids:00000,000 Cad: 2012-0000006337
 
+*/
 
 public class PAButlerCountyParser extends DispatchBParser {
   
-  private static final Pattern MARKER = Pattern.compile(" Cad: \\d{4}-\\d{10}$");
+  private static final String[] MARKERS = new String[]{
+    "\".\"@butlerco.911 :",
+    "\".\"@co.butler.pa.us :"
+  };
 
   public PAButlerCountyParser() {
     super(CITY_LIST, "BUTLER COUNTY", "PA");
-    setFieldList("CALL ADDR CITY X PLACE NAME PHONE MAP ID");
-  }
-  
-  @Override
-  public String getFilter() {
-    return "@butlerco.911,@co.butler.pa.us";
   }
   
   @Override
   protected boolean isPageMsg(String body) {
-    return MARKER.matcher(body).find();
+    return true;
   }
-
+  
   @Override
   public boolean parseMsg(String body, Data data) {
+
+    boolean found = false;
+    for (String marker : MARKERS) {
+      if (body.startsWith(marker)) {
+        found = true;
+        body = body.substring(marker.length()).trim();
+        break;
+      }
+    }
+    if (!found) return false;
     
     if (! super.parseMsg(body, data)) return false;
-    if (data.strCity.endsWith(" BORO")) data.strCity = data.strCity.substring(0,data.strCity.length()-5).trim();
-    if (data.strCity.equals("CONNOQ TWP")) data.strCity = "CONNOQUENESSING TWP";
     if (data.strMap.equals("00000,000")) data.strMap = "";
     return true;
   }
@@ -39,29 +51,29 @@ public class PAButlerCountyParser extends DispatchBParser {
   private static final String[] CITY_LIST = new String[]{
     "BUTLER",
     
-    "BRUIN BORO",
-    "CALLERY BORO",
-    "CHERRY VALLEY BORO",
-    "CHICORA BORO",
-    "CONNOQUENESSING BORO",
-    "EAST BUTLER BORO",
-    "EAU CLAIRE BORO",
-    "EVANS CITY BORO",
-    "FAIRVIEW BORO",
-    "HARMONY BORO",
-    "HARRISVILLE BORO",
-    "KARNS CITY BORO",
-    "MARS BORO",
-    "PETROLIA BORO",
-    "PORTERSVILLE BORO",
-    "PROSPECT BORO",
-    "SAXONBURG BORO",
-    "SEVEN FIELDS BORO",
-    "SLIPPERY ROCK BORO",
-    "VALENCIA BORO",
-    "WEST LIBERTY BORO",
-    "WEST SUNBURY BORO",
-    "ZELIENOPLE BORO",
+    "BRUIN",
+    "CALLERY",
+    "CHERRY VALLEY",
+    "CHICORA",
+    "CONNOQUENESSING",
+    "EAST BUTLER",
+    "EAU CLAIRE",
+    "EVANS CITY",
+    "FAIRVIEW",
+    "HARMONY",
+    "HARRISVILLE",
+    "KARNS CITY",
+    "MARS",
+    "PETROLIA",
+    "PORTERSVILLE",
+    "PROSPECT",
+    "SAXONBURG",
+    "SEVEN FIELDS",
+    "SLIPPERY ROCK",
+    "VALENCIA",
+    "WEST LIBERTY",
+    "WEST SUNBURY",
+    "ZELIENOPLE",
     
     "ADAMS TWP",
     "ALLEGHENY TWP",
@@ -74,7 +86,6 @@ public class PAButlerCountyParser extends DispatchBParser {
     "CLEARFIELD TWP",
     "CLINTON TWP",
     "CONCORD TWP",
-    "CONNOQ TWP",
     "CONNOQUENESSING TWP",
     "CRANBERRY TWP",
     "DONEGAL TWP",

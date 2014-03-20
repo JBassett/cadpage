@@ -1,12 +1,32 @@
 package net.anei.cadpage.parsers.ZAU;
 
-import net.anei.cadpage.parsers.GroupBestParser;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import net.anei.cadpage.parsers.FieldProgramParser;
+import net.anei.cadpage.parsers.MsgInfo.Data;
 
-public class ZAUNewSouthWalesParser extends GroupBestParser {
+/*
+New South Wales, Austrailia
+Contact: "Brad Nathan (WLC SES)" <brad.nathan@member.ses.nsw.gov.au>
+
+SNRWLC, RFA 9071-54, Firstname Surname, 65 MCCLELLAND ST, WILLOUGHBY, 0433 381 999, LGE BRANCH, 15M UP THREAT TO FALL IN YARD.. CALL 0242516111
+SNRWLC, RFA 9071-17, Firstname Surname, 37 INNES ROAD GREENWICH, 9906 999, TREE FALLEN & WEDGED ON 2 FENCES/SPLIT IN 3. CALL 0242516111
+SNRWLC, RFA 9072-18, Firstname Surname, 75 PARK ROAD NAREMBURN, 9439 999, ROOF GARDEN SHED COME LOOSE AND THREAT FALL.. CALL 0242516111
+SNRWLC, RFA 8984-40, Firstname Surname, 64 HAMILTON ST RIVERVIEW, 0402 984 0999, LRG BRANCH DOWN POSS ROOF DAMAGE DOG PRESENT. CALL 0242516111
+SNRWLC, RFA 9072-12, Firstname Surname, 4 FULLERS ROAD CHATSWOOD, 0417 204 999, ROOF DAMAGE REQUESTED TARPING. CALL 0242516111
+SNRWLC, RFA 9045-41, Firstname Surname, 13B FRY ST, CHATSWOOD, 0477 415 999, LEAKING CEILING IN BATHROOM, COULD SES ATTEND ON 21/4. CALL 0242516111
+SNRWLC, RFA 8902-70, Firstname Surname, 5 EMERSTAN DRIVE, CASTLE COVE, 9417 999, SUBSIDENCE- RETAINING WALL. CALL 0242516111
+SNRWLC, RFA 8835-101, Firstname Surname, 137 RIVER RD, NORTHWOOD, 0419999 999, LARGE TREE DOWN. CALL 0242516111
+
+*/
+public class ZAUNewSouthWalesParser extends FieldProgramParser {
+  
+  private static final Pattern CALLBACK_PTN = Pattern.compile("\\.* *CALL \\d{10}$");
 
   public ZAUNewSouthWalesParser() {
-    super(new ZAUNewSouthWalesAParser(), new ZAUNewSouthWalesBParser());
+    super(CITY_LIST, "", "NSW", CountryCode.AU,
+           "UNIT ID NAME ( ADDR/Z CITY | ADDR/S ) PHONE CALL! CALL+");
   }
 
   @Override
@@ -14,7 +34,30 @@ public class ZAUNewSouthWalesParser extends GroupBestParser {
     return "New South Wales, AU";
   }
 
-  static final String[] CITY_LIST = new String[]{
+  @Override
+  protected boolean parseMsg(String body, Data data) {
+    Matcher match = CALLBACK_PTN.matcher(body);
+    if (!match.find()) return false;
+    body = body.substring(0,match.start()).trim();
+    return parseFields(body.split(","), 6, data);
+  }
+  
+  private class MyInfoField extends InfoField {
+    @Override
+    public void parse(String field, Data data) {
+      data.strSupp = append(data.strSupp, ", ", field);
+    }
+  }
+  
+  @Override
+  protected Field getField(String name) {
+    if (name.equals("INFO")) return new MyInfoField();
+    return super.getField(name);
+  }
+
+
+
+  private static final String[] CITY_LIST = new String[]{
     "AARONS PASS",
     "ABBOTSBURY",
     "ABBOTSFORD",
@@ -4540,7 +4583,6 @@ public class ZAUNewSouthWalesParser extends GroupBestParser {
     "WINGHAM",
     "WINIFRED",
     "WINMALEE",
-    "WINMALLEE",       // Mispelled :(
     "WINSTON HILLS",
     "WINTON",
     "WIRLINGA",

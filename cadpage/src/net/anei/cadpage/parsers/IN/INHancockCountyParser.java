@@ -1,114 +1,25 @@
 package net.anei.cadpage.parsers.IN;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-/**
- * Hancock County, IN
- */
+/*
+Hancock County, IN
+Contact: Brandon Wilch <bwilch@bctfd.org>
+
+Vehicle Accident - PI/4100 N 600W GREENFIELD & W AIRPORT BLV/52/ E71 M71 FG1 BCFP1/gate 2A
+Structure #ALARM#/7935 W 600N MCCORDSVILLE R12B12089 OAKLANDON/N 700W & N 800W/52/ E71 E72 L71 M71 FG1 BCFP1/General fire alarm
+Vehicle Accident - PI/3600 N 600W GREENFIELD/W 350N & W STONER DR/17/ E71 M71 FG3 BCFP1
+Sick / Ill Person/2500 N 700W GREENFIELD/W 200N & W 300N/53/ E71 M71 FG1 BCFP1/LE on traffic stop; requesting check out
+Aircraft Down/5881 W AIRPORT BLV GREENFIELD FUEL DEPOT/N AVIATION WAY & N 600W/18/ T71 BCFP1/Aircraft into a cart; Vietest building
+
+*/
+
 public class INHancockCountyParser extends FieldProgramParser {
   
-  public INHancockCountyParser() {
-    super(CITY_LIST, "HANCOCK COUNTY", "IN",
-           "CALL ( MUTADDR INFO | CALL+? ADDR/SXP CITY? X/Z+? MAP ) UNIT! INFO+");
-  }
-  
-  @Override
-  public String getFilter() {
-    return "mplus@hancockcoingov.org,777";
-  }
-  
-  @Override
-  public boolean parseMsg(String body, Data data) {
-    if (! parseFields(body.split("/"), data)) return false;
-    if (data.strCity.equals("FORTVIL")) data.strCity = "FORTVILLE";
-    return true;
-  }
-  
-  private static final Pattern MUTAID_PTN = Pattern.compile("(.*)-(.*) CO");
-  private class MutualAidAddressField extends AddressField {
-    @Override
-    public boolean checkParse(String field, Data data) {
-      Matcher match = MUTAID_PTN.matcher(field);
-      if (!match.matches()) return false;
-      super.parse(match.group(1).trim(), data);
-      data.strCity = match.group(2).trim() + " COUNTY";
-      return true;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return super.getFieldNames() + " CITY";
-    }
-  }
-  
-  // Address class, special case if field after address starts with &
-  // make it a cross road rather than an place name
-  private class MyAddressField extends AddressField {
-    
-    @Override
-    public boolean checkParse(String field, Data data) {
-      field = field.replace(".", " ").trim().replaceAll("  +", " ");
-      if (!super.checkParse(field, data)) {
-        
-        // OK, this wasn't recognized as an address.  Let's check the next field
-        // to see if it looks like something that should follow an address
-        String next = getRelativeField(+1);
-        do {
-          
-          // Check for empty field
-          if (next.length() == 0) break;
-          
-          // Or a map field
-          if (MAP_PTN.matcher(next).matches()) break;
-          
-          // No go, this is not an address
-          return false;
-          
-        } while (false);
-        
-        // If we found something there, parse this field as an address
-        super.parse(field, data);
-      }
-      if (data.strPlace.startsWith("&")) {
-        data.strCross = data.strPlace.substring(2).trim();
-        data.strPlace = "";
-      }
-      return true;
-    }
-    
-    @Override 
-    public String getFieldNames() {
-      return super.getFieldNames() + " X";
-    }
-  }
-  
-  private static final Pattern MAP_PTN = Pattern.compile("\\d\\d?(?:00\\d\\d)?|[A-Z]{2}\\d+[NESW]?|");
-  private class MyMapField extends MapField {
-    public MyMapField() {
-      setPattern(MAP_PTN, true);
-    }
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("MUTADDR")) return new MutualAidAddressField();
-    if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("MAP")) return new MyMapField();
-    return super.getField(name);
-  }
-  
-  @Override
-  public String postAdjustMapAddress(String addr) {
-    return DIR_US_40_PTN.matcher(addr).replaceAll("$1");
-  }
-  private static final Pattern DIR_US_40_PTN = Pattern.compile("\\b[NSEW] +(US +40)\\b", Pattern.CASE_INSENSITIVE);
-  
   private static final String[] CITY_LIST = new String[]{
-    "FORTVIL",
     "FORTVILLE",
     "GREENFIELD",
     "MAXWELL",
@@ -126,12 +37,50 @@ public class INHancockCountyParser extends FieldProgramParser {
     "GREEN TWP",
     "JACKSON TWP",
     "SUGAR CREEK TWP",
-    "VERNON TWP",
-    
-    // Madison County
-    "PENDLETON",
-    
-    // Marion County
-    "CUMBERLAND"
+    "VERNON TWP"
   };
+  
+  public INHancockCountyParser() {
+    super(CITY_LIST, "HANCOCK COUNTY", "IN",
+           "CALL+? ADDR/SXP X/Z? MAP UNIT! INFO+");
+  }
+  
+  @Override
+  public boolean parseMsg(String body, Data data) {
+    return parseFields(body.split("/"), data);
+  }
+  
+  // Address class, special case if field after address starts with &
+  // make it a cross road rather than an place name
+  private class MyAddressField extends AddressField {
+    
+    @Override
+    public boolean checkParse(String field, Data data) {
+      if (!super.checkParse(field, data)) return false;
+      if (data.strPlace.startsWith("&")) {
+        data.strCross = data.strPlace.substring(2).trim();
+        data.strPlace = "";
+      }
+      return true;
+    }
+    
+    @Override 
+    public String getFieldNames() {
+      return super.getFieldNames() + " X";
+    }
+  }
+  
+  // Map class must be hard 2 digits
+  private class MyMapField extends MapField {
+    public MyMapField() {
+      setPattern(Pattern.compile("\\d\\d"), true);
+    }
+  }
+  
+  @Override
+  public Field getField(String name) {
+    if (name.equals("ADDR")) return new MyAddressField();
+    if (name.equals("MAP")) return new MyMapField();
+    return super.getField(name);
+  }
 }

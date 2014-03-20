@@ -14,8 +14,6 @@ public class PADelawareCountyParser extends GroupBestParser {
           new PADelawareCountyBParser(),
           new PADelawareCountyCParser(),
           new PADelawareCountyDParser(),
-          new PADelawareCountyEParser(),
-          new PADelawareCountyFParser(),
-          new PADelawareCountyGParser());
+          new PADelawareCountyEParser());
   }
 }

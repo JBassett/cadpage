@@ -3,12 +3,10 @@ package net.anei.cadpage.donation;
 import net.anei.cadpage.R;
 
 /**
-  This is the free version of Cadpage'
-  
-    This is the free version of Cadpage.  It is functionally equivalent to the
-    standard version of Cadpage, except that customer support is minimal and
-    updates will run 4-6 months behind the standard version.
-     
+Thank you for your support
+
+You have earned free, lifetime access to Cadpage. 
+Thank your for you contributions.
  */
 public class FreeDonateEvent extends DonateScreenEvent {
   

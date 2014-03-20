@@ -6,12 +6,37 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchOSSIParser;
 
+/* 
+Durham County, NC
+Contact: "Greg Parrott" <gregp@pvfd.com>,9196674642@vzwpix.com
+System: OSSI
+CAD:TRANSPORTATION ACCIDENT;2399 S ALSTON AVE/RIDDLE RD;{M8} CODE 2 RESPONSE [06/30/11 15:48:22 GRIFFINT] {M8} SEND ADDTL MEDIC UNIT [06/30/11 15:46:11 GRIFFINT] [
+CAD:BACK PAIN;5499 SUTTERIDGE CT/LYON FARM DR;[Medical Priority Info] PROBLEM: back pain # PATS: 1 AGE: 50 Years SEX: Male CONSCIOUS: Yes BREATHING: Yes [07/05/11
+CAD:PREGNANCY;5438 NEW HOPE COMMONS DR;MT MORIAH RD;HOFFLER LN
+CAD:CHEST PAIN;8210 RENAISSANCE PKWY;CHEST PAIN .. [07/05/11 12:37:45 GARRETTG] EMPLOYEE INJ .. [07/05/11 12:37:15 GARRETTG] ;KNOLL CIR;LEONARDO DR
+CAD:CHEST PAIN;2238 W NC 54 HWY;CELESTE CIR
+CAD:TRANSPORTATION ACCIDENT;4117 EMPEROR BLVD;**************OPS1 [07/05/11 06:06:46 ARCH] ;S MIAMI BLVD;SWABIA CT
+CAD:TRANSPORTATION ACCIDENT;28163 I40 E/EXIT 283;BLK 4DR VOLVO, BLK VW JETTER, BLK 2 DR JETTA [07/04/11 20:06:12 GAY]
+CAD:SICK PERSON;101 GREEN CEDAR LN;[Medical Priority Info] RESPONSE: Charlie RESPONDER SCRIPT: Unknown status/Other codes not applicable (Unknown when the symptoms
+CAD:TRANSPORTATION ACCIDENT;6405 FAYETTEVILLE RD;THE CALLER WORKS INSIDE AND WAS NOT INVOLVED [07/04/11 14:35:13 BELLD] in the parking lot involving a gold toyota
+CAD:FALL;1101 EXCHANGE PL;[Medical Priority Info] PROBLEM: fell # PATS: 1 AGE: 80 Years SEX: Female CONSCIOUS: Yes BREATHING: Yes [07/02/11 13:35:49 HINESLEY] ;MER
+CAD:DIABETIC PROBLEM;5219 PAGE RD;CREEKSTONE DR;TERRACE PINE DR
+
+Contact: Jeff Howard <parkwood151@gmail.com>
+From: CAD@durhamnc.gov
+(CAD:) ASST PD SEIZURE;1125 W NC 54 HWY;[LAW] {A324} CON BREATHING AND ALERT [09/10/11 01:52:07 MITCHELLM] Event spawned from INTOXICATED DRIVER. [09/10/2011 01:51
+
+Contact: "tc9008@aol.com" <tc9008@aol.com>
+Sender: CAD@durhamnc.gov
+CAD:SICK PERSON;6234 DELLO ST;***caller req no sirens*** [03/06/12 02:05:55 HOWARDS] ;DONLEE DR;DOYLE RD
+
+*/
 
 public class NCDurhamCountyParser extends DispatchOSSIParser {
   
   public NCDurhamCountyParser() {
     super("DURHAM COUNTY", "NC",
-           "CALL ADDR! CH? INFO+");
+           "CALL ADDR CH? X? X? INFO+");
   }
   
   @Override
@@ -20,27 +45,11 @@ public class NCDurhamCountyParser extends DispatchOSSIParser {
   }
   
   private static final Pattern UNIT_PTN = Pattern.compile("^\\{(.*?)\\}");
-  private static final Pattern JOIN_PTN = Pattern.compile("\\d\\d/\\d\\d/\\d\\d \\d\\d$|PROBLEM$");
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
-    
-    boolean cadSubj = subject.startsWith("CAD:");
-    boolean cadBody = body.startsWith("CAD:");
-    boolean suspect = !cadSubj && !cadBody;
-    if (suspect) {
-      body = "CAD:" + body;
-    }
-    else {
-      if (cadSubj || subject.contains(";")) {
-        if (cadSubj) subject = subject.substring(4);
-        if (cadBody) body = body.substring(4);
-        String join = (subject.length() > 0 && JOIN_PTN.matcher(subject).find() ? ":" : "");
-        body = "CAD:" + subject + join + body;
-      }
-    }
+    if (subject.equals("CAD:")) body = subject + body;
     if (!super.parseMsg(body, data)) return false;
-    if (suspect && !isPositiveId() && data.strTime.length() == 0 && data.strCross.length() == 0) return false;
     Matcher match = UNIT_PTN.matcher(data.strSupp);
     if (match.find()) {
       data.strUnit = match.group(1);
@@ -49,27 +58,26 @@ public class NCDurhamCountyParser extends DispatchOSSIParser {
     return true;
   }
   
-  @Override
-  public Field getField(String name) {
-    if (name.equals("CH")) return new ChannelField("\\**(OP.*?)\\**", true);
-    if (name.equals("INFO")) return new MyInfoField();
-    return super.getField(name);
+  private static final Pattern CH_PTN = Pattern.compile("\\**(OP.*)");
+  private class MyChannelField extends ChannelField {
+
+    @Override
+    public boolean canFail() {
+      return true;
+    }
+
+    @Override
+    public boolean checkParse(String field, Data data) {
+      Matcher  match = CH_PTN.matcher(field);
+      if (!match.matches()) return false;
+      super.parse(match.group(1), data);
+      return true;
+    }
   }
   
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      if (field.length() == 0) return;
-      if (checkAddress(field) > 0) {
-        data.strCross = append(data.strCross, " & ", field);
-      } else {
-        super.parse(field, data);
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "INFO X";
-    }
+  @Override
+  public Field getField(String name) {
+    if (name.equals("CH")) return new MyChannelField();
+    return super.getField(name);
   }
 }

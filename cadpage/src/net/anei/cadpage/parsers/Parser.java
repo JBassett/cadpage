@@ -3,7 +3,6 @@ package net.anei.cadpage.parsers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 
 /**
  * Wrapper class allowing the Cadpage Parser to be invoked as a Java program
@@ -20,8 +19,6 @@ import java.io.PrintStream;
  *    format code is the parser format code.  Default or - to read from stdin
  * SUBJ=<message subject>
  *    message subject.  Default or - to read from stdin
- * LOG=<filename>
- *    Specify log file name.  Default no logging
  * 
  * Message text is always from from stdin.  Can be terminated with EOF or a
  * line containing
@@ -40,24 +37,10 @@ public class Parser {
   private String fmtCode = "-";
   private String subject = "-";
   
-  private PrintStream logStream = null;
-  
   private BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
   private Parser(String[] args) throws IOException {
-    if (args.length == 1 && args[0].equals("-version")) {
-      displayVersionInfo();
-      return;
-    }
     setup(args);
-    if (logStream != null) {
-      logStream.print("Startup Args:");
-      for (String arg : args) {
-        logStream.print(' ');
-        logStream.print(arg);
-      }
-      logStream.println();
-    }
     while (true) {
       String tFlags = getValue(flags);
       String tFmtCode = getValue(fmtCode);
@@ -65,13 +48,7 @@ public class Parser {
       String text = getText();
       if (text == null) break;
       
-      if (logStream != null) {
-        logStream.println(Message.escape(text));
-        logStream.println(EOD_MARKER);
-        logStream.flush();
-      }
-      
-      Message msg = new Message(tFlags.contains("P"), null, tSubject, text, true, false);
+      Message msg = new Message(tFlags.contains("P"), null, tSubject, text);
       MsgParser parser = null;
       try {
         parser = ManageParsers.getInstance().getParser(tFmtCode);
@@ -82,7 +59,7 @@ public class Parser {
         int flags = MsgParser.PARSE_FLG_POSITIVE_ID | MsgParser.PARSE_FLG_SKIP_FILTER;
         if (tFlags.contains("G")) flags |= MsgParser.PARSE_FLG_GEN_ALERT;
         if (parser.isPageMsg(msg, flags)) {
-          System.out.println(CadpageParser.formatInfo(msg.getInfo(), "\n", true));
+          System.out.println(CadpageParser.formatInfo(msg.getInfo(), "\n", false));
         }
       }
       System.out.println(EOD_MARKER);
@@ -101,13 +78,6 @@ public class Parser {
       if (key.equals("FLGS")) flags = val;
       else if (key.equals("FMT")) fmtCode = val;
       else if (key.equals("SUBJ")) subject = val;
-      else if (key.equals("LOG")) {
-        try {
-          logStream = new PrintStream(val);
-        } catch (IOException ex) {
-          throw new RuntimeException("Cannot open log file:" + val, ex);
-        }
-      }
       else {
         throw new RuntimeException("Invalid argument - " + arg);
       }
@@ -120,7 +90,6 @@ public class Parser {
       if (EOD_MARKER.equals(value)) {
         throw new IOException("inappropraite EOD marker"); 
       }
-      if (logStream != null) logStream.println(Message.escape(value));
     }
     return value;
   }
@@ -136,11 +105,6 @@ public class Parser {
       if (sb.length() > 0) sb.append('\n');
       sb.append(line);
     }
-  }
-
-  private void displayVersionInfo() {
-    Package pkg = Package.getPackage("net.anei.cadpage.parsers");
-    System.err.println("version: " + pkg.getImplementationVersion());
   }
 
   public static void main(String[] args) throws IOException {

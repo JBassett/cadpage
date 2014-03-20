@@ -5,8 +5,7 @@ import android.util.AttributeSet;
 
 public class EditTextPreference extends android.preference.EditTextPreference {
 
-  private CharSequence origSummary;
-  private OnDialogClosedListener dialogClosedListener = null;
+  CharSequence origSummary;
 
   public EditTextPreference(Context context) {
     super(context);
@@ -16,10 +15,6 @@ public class EditTextPreference extends android.preference.EditTextPreference {
   public EditTextPreference(Context context, AttributeSet attrs) {
     super(context, attrs);
     origSummary = getSummary();
-  }
-  
-  public void setDialogClosedListener(OnDialogClosedListener dialogClosedListener) {
-    this.dialogClosedListener = dialogClosedListener;
   }
 
   @Override
@@ -31,8 +26,9 @@ public class EditTextPreference extends android.preference.EditTextPreference {
   @Override
   protected void onDialogClosed(boolean positiveResult) {
     super.onDialogClosed(positiveResult);
-    if (dialogClosedListener != null) dialogClosedListener.onDialogClosed(positiveResult); 
-    if (positiveResult) refreshSummary();
+    if (positiveResult) {
+      refreshSummary();
+    }
   }
   
   public void refreshSummary() {

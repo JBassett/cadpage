@@ -1,38 +1,30 @@
 package net.anei.cadpage.parsers.OH;
 
-import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchEmergitechParser;
 
+/*
+Knox County, OH
+Contact: timothy belcher <engine424@gmail.com>
+Sender: Dispatch@smtp-server.Columbus.rr.com
+
+Dispatch:[SD35]- NATURE: FIRE TRASH/DUMPSTER FIRE LOCATION: 21 JOHNSV ILLE RD CENTERBURG BETWEEN COLUMBUS RD / UPDIKE RD COMMENTS : MATRESS ON FIRE IN PARK ACROSS FROM SUNOCO STATION 
+Dispatch:[SD24]- NATURE: FIRESINGLE FAMILY RES STRUCTURE LOCATION: 42 20 ST RT 3 COMMENTS: MUTUAL AID BST&G STRUCTURE FIRE//HOUSE FILLED W/SMOKE////X ROADS OLD 3C//MEREDITH STATE RD
+Dispatch:[SD35]- NATURE: CARDIAC OR RESPIRATORY ARREST/DEATH LOCATION : 212 FAIRVIEW AVE SUITE: BLDG CENTERBURG BETWEEN JONES AVE / LEONARD AVE COMMENTS: X Y 39 YOF TRACH AND VE NTILATOR PATIENT FULL CODE PROQA MEDICAL: NEW CASE NUMBER A SSIGNED CALL 11-1010849 BY SD35 (POS 02) AT 07:13:06 PROQA MEDICAL: ABORT CALL 11-1010849 BY SD35 (POS 02) AT 07:13:13 - DID NOT USE PROQA MEDICAL: STOPPED CALL 11-1010849 BY SD3 5 (POS 02) AT 07:13:13
+Dispatch:[SD8]- NATURE: FALLS/BACK INJURY (TRAUMATIC) LOCATION: 164 W HOUCK ST SUITE: 109 CENTERBURG BETWEEN N PRESTON ST / WILL IS ST COMMENTS: FEMALE HAS FALLEN
+Dispatch:[SD24]- NATURE: UNCONCIOUS/PASSING OUT (NONTRAUMATI LOCATION : 164 W HOUCK ST SUITE: 112 CENTERBURG BETWEEN N PRESTON ST / WILLIS ST COMMENTS: PROQA MEDICAL: NEW CASE NUMBER ASSIGN ED CALL 11-1010741 BY SD24 (POS 01) AT 08:13:03 88 YOM UNRE SPONSIVE//BREATHING AT THIS TIME
+
+ */
 
 
 public class OHKnoxCountyParser extends DispatchEmergitechParser {
   
   public OHKnoxCountyParser() {
-    super(null, new int[]{59,60}, CITY_LIST, "KNOX COUNTY", "OH");
-    addSpecialWords("HYATT");
-    
-  }
-
-  @Override
-  public String getFilter() {
-    return "Dispatch@smtp-server.Columbus.rr.com";
+    super("Dispatch:", 69, CITY_LIST, "KNOX COUNTY", "OH");
   }
   
   @Override
-  protected boolean parseMsg(String subject, String body, Data data) {
-    
-    // We have to do a lot of massaging to get the message back to standard form
-    // including recovering a square bracket unit that might have been interpreted
-    // as the message subject
-    if (body.startsWith("Dispatch:")) body = body.substring(9).trim();
-    else if (subject.length() > 0) body = '[' + subject + ']' + body;
-    
-    // Fix some word breaks the basic logic won't catch
-    body = body.replace(" SP ARTA ", " SPARTA ");
-    body = body.replace(" FREDERICKTOW N ", " FREDERICKTOWN ");
-
-    if (!super.parseMsg(body, data)) return false;
-    return true;
+  public String getFilter() {
+    return "Dispatch@smtp-server.Columbus.rr.com";
   }
   
   private static final String[] CITY_LIST = new String[]{

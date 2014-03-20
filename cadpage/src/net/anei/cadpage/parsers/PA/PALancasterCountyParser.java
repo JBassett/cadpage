@@ -1,24 +1,45 @@
 package net.anei.cadpage.parsers.PA;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.anei.cadpage.parsers.FieldProgramParser;
+import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-/**
- * Lancaster County, PA
- */
-public class PALancasterCountyParser extends FieldProgramParser {
+/*
+Lancaster County, PA
+Contact: Benjamin Herskowitz <bherskowitz@gmail.com>
+Sender: 911@lcwc911.us
+(VEH ACCIDENT-STANDBY) MANHEIM TWP~LITITZ PIKE / PETERSBURG RD~~ENG271,SQ27~20:19:57^
+(VEH ACCIDENT-MASS TRANSIT-1A) MANHEIM TWP~2475 OREGON PIKE~WHITEMARSH DR~VALLEY RD~ENG271~08:13:50^
+(SPILL CONTROL) EAST DONEGAL TWP~1158 RIVER RD~N BANK ST~ANDERSON FERRY RD~HAZ291~11:55:37^
+(AUTO ALARM-HIGH OCCUPANCY) MANHEIM TWP~115 BLUE STREAK BLVD~SCHOOL RD~VALLEY RD~ENG271,ENG272~15:12:34^
+(HAZ MAT INCIDENT-1A) LANC CITY~753 S PLUM ST~17 ALY~JUNIATA ST~HAZ291~08:19:13^
+
+Contact: Matthew Lenker <strappy39@gmail.com>
+VEH ACCIDENT-ENTRAPMENT-1A / ELIZABETHTOWN BORO~E COLLEGE AVE / S SPRUCE ST~~TRK74,ENG741~08:54:12^\n
+
+Contact: James Taylor <jtaylor574@gmail.com>
+VEH ACCIDENT-CLASS 2 / WEST COCALICO TWP~N KING ST / E QUEEN ST~~RES13~13:10:45^\n
+
+Contact: Justin Fisher <justin62911@gmail.com>
+Sender: messaging@iamresponding.com
+FRM:messaging@iamresponding.com\nSUBJ:WBFC\nMSG:STANDBY-TRANSFER TO STATION\nWEST LAMPETER TWP~2901 WILLOW STREET PIKE~W WYNWOOD DR~DONNELLY DR~ENG906~14:44:13\n
+FRM:messaging@iamresponding.com\nSUBJ:WBFC\nMSG:BUILDING-DWELLING-1A\nPROVIDENCE TWP~417 LANC PIKE~MOUNT AIRY RD~DENNIS DR~ENG906~14:52:09\n
+FRM:messaging@iamresponding.com\nSUBJ:WBFC\nMSG:SPILL CONTROL\nMANOR TWP~2601 RIVER RD~ANCHOR RD~LETORT RD~ENG903,TAN903,BR903,TAN907~16:04:15\n
+
+*/
+
+public class PALancasterCountyParser extends MsgParser {
+  
+  private static Pattern LANC_PTN = Pattern.compile("\\bLANC\\b", Pattern.CASE_INSENSITIVE);
   
   public PALancasterCountyParser() {
-    super(CITY_LIST, "LANCASTER COUNTY", "PA",
-           "CITY ADDR X/Z+? UNIT TIME!");
+    super("LANCASTER COUNTY", "PA");
   }
   
   @Override
   public String getFilter() {
-    return "911@lcwc911.us,messaging@iamresponding.com,@everbridge.net,@den.everbridge.net,@den2.everbridge.net,141000";
+    return "911@lcwc911.us,messaging@iamresponding.com";
   }
 
   @Override
@@ -26,218 +47,57 @@ public class PALancasterCountyParser extends FieldProgramParser {
     
     if (! body.contains("~")) return false;
     
-    if (subject.indexOf(' ') >= 0 || subject.indexOf('-') >= 0 || subject.indexOf('/') >= 0) { 
+    if (subject.indexOf(' ') >= 0 || subject.indexOf('-') >= 0) { 
       data.strCall = subject;
     } else {
       data.strSource = subject;
     }
     
-    if (body.endsWith("^")) body = body.substring(0,body.length()-1).trim();
-    body = body.replace(" BOROUGH", " BORO").replace(" TOWNSHIP", " TWP");
-    return parseFields(body.split("~"), data);
-  }
-  
-  @Override
-  public String getProgram() {
-    return "SRC CALL " + super.getProgram();
-  }
-  
-  private static final Pattern CITY_DELIM = Pattern.compile("\n| / ");
-  private class MyCityField extends CityField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = CITY_DELIM.matcher(field);
-      if (match.find()) {
-        data.strCall = append(data.strCall, " / ", field.substring(0,match.start()).trim());
-        data.strCity = field.substring(match.end()).trim();
-      } else {
-        String call = data.strCall;
-        data.strCall = "";
-        parseAddress(StartType.START_CALL, FLAG_START_FLD_REQ | FLAG_ONLY_CITY | FLAG_ANCHOR_END, field, data);
-        data.strCall = append(call, " / ", data.strCall);
-        if (data.strCall.length() == 0 || data.strCity.length() == 0) abort();
+    int ndx = 0;
+    for (String line : body.split("~")) {
+      ndx++;
+      line = line.trim();
+      switch (ndx) {
+      
+      case 1:
+        int pt = line.indexOf('/');
+        if (pt < 0) pt = line.indexOf('\n');
+        if (pt >= 0) {
+          data.strCall = append(data.strCall, " / ", line.substring(0,pt).trim());
+          line = line.substring(pt+1).trim();
+        } else {
+          if (data.strCall.length() == 0) return false;
+        }
+        data.strCity = line;
+        if (data.strCity.endsWith(" BORO")) data.strCity = data.strCity.substring(0, data.strCity.length()-5).trim();
+        if (data.strCity.startsWith("LANC")) data.strCity = "LANCASTER";
+        break;
+        
+      case 2:
+        line = LANC_PTN.matcher(line).replaceAll("LANCASTER");
+        parseAddress(line, data);
+        break;
+        
+      case 3:
+        data.strCross = line;
+        break;
+        
+      case 4:
+        // Could be second cross st, or if there wasn't a cross street, this
+        // would be the unit field
+        if (line.length() == 0) break;
+        if (data.strCross.length() > 0) {
+          data.strCross += " & " + line;
+          break;
+        }
+        ndx++;
+        // fall through to case 5
+    
+      case 5:
+        data.strUnit = line;
+        break;
       }
-      if (data.strCity.endsWith(" BORO")) data.strCity = data.strCity.substring(0, data.strCity.length()-5).trim();
-      if (data.strCity.startsWith("LANC")) data.strCity = "LANCASTER";
-      if (data.strCity.startsWith("DAUPHIN ")) data.strCity = data.strCity.substring(8).trim();
     }
+    return true;
   }
-  
-  private static Pattern LANC_PTN = Pattern.compile("\\bLANC\\b", Pattern.CASE_INSENSITIVE);
-  private class MyAddressField extends AddressField {
-    @Override
-    public void parse(String field, Data data) {
-      field = LANC_PTN.matcher(field).replaceAll("LANCASTER");
-      super.parse(field, data);
-    }
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("CITY")) return new MyCityField();
-    if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("TIME")) return new TimeField("\\d\\d:\\d\\d:\\d\\d", true);
-    return super.getField(name);
-  }
-  
-  @Override
-  public String adjustMapAddress(String address) {
-    return ROUTE_30_PTN.matcher(address).replaceAll("US 30");
-  }
-  private static final Pattern ROUTE_30_PTN = Pattern.compile("\\b(?:RT|ROUTE) *30\\b");
-  
-  private static final String[] CITY_LIST = new String[]{
-
-    // Cities
-    "LANC",
-    "LANC CITY",
-    "LANCASTER",
-    "LANCASTER CITY",
-    
-    // Boroughs
-    "ADAMSTOWN BORO",
-    "AKRON BORO",
-    "CHRISTIANA BORO",
-    "COLUMBIA BORO",
-    "DENVER BORO",
-    "EAST PETERSBURG BORO",
-    "ELIZABETHTOWN BORO",
-    "EPHRATA BORO",
-    "LITITZ BORO",
-    "MANHEIM BORO",
-    "MARIETTA BORO",
-    "MILLERSVILLE BORO",
-    "MOUNT JOY BORO",
-    "MOUNTVILLE BORO",
-    "NEW HOLLAND BORO",
-    "QUARRYVILLE BORO",
-    "STRASBURG BORO",
-    "TERRE HILL BORO",
-    
-    // Townships
-    "BART TWP",
-    "BRECKNOCK TWP",
-    "CAERNARVON TWP",
-    "CLAY TWP",
-    "COLERAIN TWP",
-    "CONESTOGA TWP",
-    "CONOY TWP",
-    "DRUMORE TWP",
-    "EARL TWP",
-    "EAST COCALICO TWP",
-    "EAST DONEGAL TWP",
-    "EAST DRUMORE TWP",
-    "EAST EARL TWP",
-    "EAST HEMPFIELD TWP",
-    "EAST LAMPETER TWP",
-    "EDEN TWP",
-    "ELIZABETH TWP",
-    "EPHRATA TWP",
-    "FULTON TWP",
-    "LANCASTER TWP",
-    "LEACOCK TWP",
-    "LITTLE BRITAIN TWP",
-    "MANHEIM TWP",
-    "MANOR TWP",
-    "MARTIC TWP",
-    "MOUNT JOY TWP",
-    "PARADISE TWP",
-    "PENN TWP",
-    "PEQUEA TWP",
-    "PROVIDENCE TWP",
-    "RAPHO TWP",
-    "SADSBURY TWP",
-    "SALISBURY TWP",
-    "STRASBURG TWP",
-    "UPPER LEACOCK TWP",
-    "WARWICK TWP",
-    "WEST COCALICO TWP",
-    "WEST DONEGAL TWP",
-    "WEST EARL TWP",
-    "WEST HEMPFIELD TWP",
-    "WEST LAMPETER TWP",
-    
-    // Census-designated places
-    "BAINBRIDGE",
-    "BIRD-IN-HAND",
-    "BLUE BALL",
-    "BOWMANSVILLE",
-    "BRICKERVILLE",
-    "BROWNSTOWN",
-    "CHURCHTOWN",
-    "CLAY",
-    "CONESTOGA",
-    "EAST EARL",
-    "FALMOUTH",
-    "FARMERSVILLE",
-    "FIVEPOINTVILLE",
-    "GAP",
-    "GEORGETOWN",
-    "GOODVILLE",
-    "GORDONVILLE",
-    "HOPELAND",
-    "INTERCOURSE",
-    "KIRKWOOD",
-    "LAMPETER",
-    "LANDISVILLE",
-    "LEOLA",
-    "LITTLE BRITAIN",
-    "MAYTOWN",
-    "MORGANTOWN",
-    "PARADISE",
-    "PENRYN",
-    "REAMSTOWN",
-    "REFTON",
-    "REINHOLDS",
-    "RHEEMS",
-    "RONKS",
-    "ROTHSVILLE",
-    "SALUNGA",
-    "SCHOENECK",
-    "SMOKETOWN",
-    "SOUDERSBURG",
-    "STEVENS",
-    "SWARTZVILLE",
-    "WAKEFIELD",
-    "WASHINGTON BORO",
-    "WILLOW STREET",
-    "WITMER",
- 
-    // Other communities
-    "BAUSMAN",
-    "BROWNSTOWN",
-    "BLAINSPORT",
-    "BUCK",
-    "COCALICO",
-    "CONEWAGO",
-    "CRESWELL",
-    "DILLERVILLE",
-    "ELM",
-    "FERTILITY",
-    "HEMPFIELD",
-    "HINKLETOWN",
-    "HOLTWOOD",
-    "KINZERS",
-    "KISSEL HILL",
-    "LEAMAN PLACE",
-    "LYNDON",
-    "MARTINDALE",
-    "MASTERSONVILLE",
-    "MECHANICS GROVE",
-    "NARVON",
-    "NEW DANVILLE",
-    "NEFFSVILLE",
-    "NICKEL MINES",
-    "PEQUEA",
-    "SAFE HARBOR",
-    "SILVER SPRING",
-    "TALMAGE",
-    "WHITE HORSE",
-    
-    // Other counties
-    "CHESTER COUNTY",
-    
-    "DAUPHIN LONDONDERRY TWP"
-
-  };
 }

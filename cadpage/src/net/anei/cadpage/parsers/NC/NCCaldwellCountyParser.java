@@ -1,16 +1,37 @@
 package net.anei.cadpage.parsers.NC;
 
 import java.util.Properties;
+import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/* 
+Caldwell County, NC
+Contact: "justinwinebarger" <justinwinebarger@bellsouth.net>,8283127647@vtext.com
+Contact: Mark Stallings <stalprint@gmail.com>
+Contact: 8288509369@sms.alltelwireless.com
+Sender: CAD@caldwellcountync.org
+System: Sunguard OSSI
+
+BREATHING PROBLEMS CHARLIE;25 WATER ST;GF;APT 12;CIRCLE ST;NORTH SUMMIT AV
+CARDIAC RESP ARREST DEATH ECHO;5105 WENDOVER LN;GF;GUNPOWDER RD
+FALL WITH PERSONAL INJURY;2998 CAMPGROUND RD;GF;SHELTON HOLLAR PL;C BELL MCRARY PL;1107150247
+FALL WITH PERSONAL INJURY;WALMART GRANITE FALLS;4780 HICKORY BLVD;GF;GLEN RIDGE DR;RIVERBEND DR;1107160106
+CARBON MONOXIDE DETECTOR ALARM;398 THOMPSON DR;HUD;SHADY OAK TER;HICKORY BLVD;1107200204
+UNKNOWN MEDICAL CODE;1450 SHAIRE CENTER DR;LEN;APT 1;ANDREWS CIR;LOVEJOY ST;1108080045
+UNCONSC FAINT NEAR DELTA;9 LIBERTY ST;GF;FALLS AV;1108100046
+
+Contact: Marty Bumgarner <mbumgarner@gcfdnc.com>
+ACCIDENT PROPERTY DAMAGE;GRACE CHAPEL RD/WOLFE RD;HICK;1202190163
+
+*/
 
 public class NCCaldwellCountyParser extends FieldProgramParser {
   
   public NCCaldwellCountyParser() {
     super(CITY_CODES, "CALDWELL COUNTY", "NC",
-           "CALL ( ADDR/Z ID | ADDR/Z CITY APT? X/Z+? ID | PLACE ADDR/Z ID | PLACE ADDR/Z CITY APT? X/Z+? ID )");
+           "CALL PLACE? ADDR/Z CITY APT? X/Z+? ID");
   }
   
   @Override
@@ -38,10 +59,16 @@ public class NCCaldwellCountyParser extends FieldProgramParser {
     }
   }
   
+  private class MyIdField extends IdField {
+    public MyIdField() {
+      setPattern(Pattern.compile("\\d{10}"));
+    }
+  }
+  
   @Override
   public Field getField(String name) {
     if (name.equals("APT")) return new MyAptField();
-    if (name.equals("ID")) return new IdField("\\d{10}", true);
+    if (name.equals("ID")) return new MyIdField();
     return super.getField(name);
   }
   

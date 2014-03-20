@@ -1,69 +1,50 @@
 package net.anei.cadpage.parsers.OH;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.dispatch.DispatchEmergitechParser;
+
+/*
+Franklin, OH (in Clearmont County but dispatched separately)
+Contact: Christopher Rauh <crauh@franklinohio.org>
+Contact: Scott Rauh <srauh2290@yahoo.com>
+Sender: rc.282@cmsg.net
+
+(CAD) [!] F-STRUCTURE FIRE LOCATION: 818 UNION RD FRANKLIN TWP BETWEEN ROBERTS DR/SHAKER RD COMMENTS: X-084.304747 Y+039.552894 CF95 U ZUNCFIRE IN ATTIC EVERYONE EVACUATED
+(CAD) [!] F-POLICE ASSIST LOCATION: 235 INDUSTRIAL DR FRANKLIN BETWEEN N SR RT 123/SHAKER RD COMMENTS: VEH STRUCK A POLE/ APPEARS THAT THE WIRES ARE ALL STILL CONNECTED REQ FFD
+(CAD) [!] F-CARBON MONOXIDE INCIDENT LOCATION: 201 E 2ND ST FRANKLIN BETWEEN LOCUST ST / ALLEN ST COMMENTS: POSSIBLE CO LEAK BY STEPS SO POSSIBLY BASEMENT
+(CAD) [!] F-UTILITY POLE-TRANSFORMER FIRE LOCATION: 850 N MAIN ST FRANKLIN BETWEEN KENNETH KOONS BLVD / PENNYROYAL RD COMMENTS; WIRE DOWN / LINE ARCHING
+(CAD) [!] AUTO CRASH/SINGLE ENGINE LOCATION: 36 NB I-75 FRANKLIN BETWEEN SHAKER RD / SR 123 ST COMMENTS: X-084.284963 Y+039.562293 CFO U Z ZUNCSEMI TRUCK CRASHED DUMPING FUEL IN ROADWAY
+(CAD) [!] F-HAZMAT LEAK SPILL NO FIRE LOCATION: 501 SHOTWELL DR FRANKLIN BETWEEN N SR RT 123 / DEAD END COMMENTS: X Y CF U Z ZUNCBOTTLE OF ACCETYLINE LEAKING HEAVILY INSIDE THE BACK OF BUILDING
+(CAD) [!] F-OUTDOOR FIRE INVESTIGATION LOCATION: 324 PENNYROYAL RD FRANKLIN TWP BETWEEN CLEARCREEK FRANKLIN RD / HOMESTEAD DR COMMENTS: NEIGHBOR HAVING A VERY LARGE FIRE IN THEIR YARD/ REQ FFD COME CHECK IT
+(CAD) [!] F-ANIMAL RESCUE LOCATION: 5709 S DIXIE HWY FRANKLIN COMMENTS: ANIMAL SANCTUARY PERSON IS AT PROPERTY REQ ANIMAL RESCUE FOR POT BELLY PIG 
+(CAD) [!] F-FIRE ALARM LOCATION: 2301 COMMERCE CENTER DR FRANKLIN BETWEEN E 2ND ST / HERITAGE DR COMMENTS: SHOWING ZONE 47 / EMPLOYEE MANUAL PULL
+(CAD) [!] F-GENERAL RECALL LOCATION: 45 E 4TH ST FRANKLIN BETWEEN RILEY ST / ANDERSON ST
+(CAD) [!] AUTO CRASH WITH ENTRAPMENT LOCATION: 38 NB I-75 FRANKLIN BETWEEN SR 123 / SR 73 COMMENTS: X-084.261703 Y+039.568226 CF0 U Z ZUNC
+
+ */
 
 
-
-public class OHFranklinParser extends DispatchEmergitechParser {
-  
-  private static final Pattern ID_DATE_TIME_PTN = Pattern.compile(" +-(\\d{7})\\((\\d\\d?/\\d\\d?/\\d{4}) +(\\d\\d?:\\d\\d?:\\d\\d? [AP]M)\\)$");
-  private static final Pattern GPS_PTN = Pattern.compile("^X([-+]\\d+\\.\\d{4,}) +Y([-+]\\d+\\.\\d{4,})\\b");
-  
-  private static DateFormat TIME_FMT = new SimpleDateFormat("hh:mm:ss aa");
+public class OHFranklinParser extends FieldProgramParser {
   
   public OHFranklinParser() {
-    super("", 60, CITY_LIST, "FRANKLIN", "OH");
-    addSpecialWords("ASHGROVE", "MISSION", "THOMAS");
+    super(CITY_LIST, "FRANKLIN", "OH",
+           "CALL! LOCATION:ADDR/S! BETWEEN:X? COMMENTS:INFO");
   }
   
   @Override
   public String getFilter() {
-    return "@cmsg.net,@alert.active911.com";
+    return "@cmsg.net";
   }
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
-    if (subject.length() == 7 && NUMERIC.matcher(subject).matches()) {
-      body = '[' + subject + ']' + body;
-    } else if (subject.startsWith("CAD")) {
-      body = "[0000000]- NATURE: " + body;
-    }
-    
-    Matcher match = ID_DATE_TIME_PTN.matcher(body);
-    if (match.find()) {
-      data.strCallId = match.group(1);
-      data.strDate = match.group(2);
-      setTime(TIME_FMT, match.group(3), data);
-      body = body.substring(0,match.start());
-    }
-    
-    if (!super.parseMsg(body, data)) return false;
-    
-    data.strUnit = "";
-    
-    match = GPS_PTN.matcher(data.strSupp);
-    if (match.find()) {
-      setGPSLoc(match.group(1) + ' ' + match.group(2), data);
-      data.strSupp = data.strSupp.substring(match.end()).trim();
-    }
-    return true;
-  }
-  
-  @Override
-  public String getProgram() {
-    return super.getProgram().replace("INFO", "GPS INFO") + " ID DATE TIME";
+    if (!subject.equals("CAD|!")) return false;
+    body = body.replace(" BETWEEN ", " BETWEEN: ");
+    return super.parseMsg(body, data);
   }
   
   private static final String[] CITY_LIST = new String[]{
     "FRANKLIN",
-    "FRANKLIN TWP",
-    "LEBANON",
-    "MIDDLETOWN"
+    "FRANKLIN TWP"
   };
 }

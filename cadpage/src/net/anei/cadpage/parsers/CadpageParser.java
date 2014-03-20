@@ -1,5 +1,7 @@
 package net.anei.cadpage.parsers;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,14 +11,22 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  * Parser class that convert the generic Cadpage message format to and from
  * a parsed message information object
  */
-public class CadpageParser  extends CadpageParserBase {
+public class CadpageParser  extends FieldProgramParser{
   
-//  private static final Pattern KEYWORD = Pattern.compile("\\b([\\w]+):");
-  private static final Pattern KEYWORD = Pattern.compile("(?:^|\n)([\\w]+):");
+  private Map<String,Field> fieldMap = new HashMap<String,Field>();
+  
+  private static final Pattern KEYWORD = Pattern.compile("\\b([\\w]+):");
+  
+  public CadpageParser() {
+    // Pass empty strings to subclass constructor, we never really try to run a 
+    // field program or use the default city/state values
+    super("", "", "");
+    initMap();
+  }
   
   @Override
   public String getLocName() {
-    return "Standard Cadpage Format A";
+    return "Cadpage";
   }
   
   @Override
@@ -33,7 +43,7 @@ public class CadpageParser  extends CadpageParserBase {
       // If we don't find it there, assume this was a extra colon in the data
       // field and go on to the next one
       String key = match.group(1);
-      Field field = getMapField(key);
+      Field field = fieldMap.get(key);
       if (field != null) {
         
         // Increment the field count,
@@ -67,6 +77,77 @@ public class CadpageParser  extends CadpageParserBase {
     // We have to have found at least two fields for this to be considered valid
     return fieldCnt >= 2;
   }
+  
+  private void initMap() {
+    setMap("PRI");
+    setMap("DATE");
+    setMap("TIME");
+    setMap("CALL",        "title");
+    setMap("PLACE", "PL");
+    setMap("ADDR",        "address");
+    setMap("CITY",        "city");
+    setMap("ST");
+    setMap("APT");
+    setMap("X");
+    setMap("BOX");
+    setMap("MAP",         "map_code");
+    setMap("CH");
+    setMap("UNIT");
+    setMap("INFO");
+    setMap("NAME");
+    setMap("PHONE", "PH");
+    setMap("CODE");
+    setMap("GPS");
+    setMap("ID",           "cad_code");
+    setMap("SRC");
+    setMap("DCITY");
+    setMap("DST");
+    setMap("MADDR");
+    setMap("URL",         "response_url");
+  }
+
+  /**
+   * Set up key -> Field process map
+   * @param keys list of key used to access this field.  The first key will
+   * be used to look up the field that all of them will refer to.
+   */
+  private void setMap(String ... keys) {
+    Field field = getField(keys[0]);
+    for (String key : keys) fieldMap.put(key, field);
+  }
+  
+  @Override
+  public Field getField(String name) {
+    if (name.equals("ADDR")) return new MyAddressField();
+    if (name.equals("DCITY")) return new DefCityField();
+    if (name.equals("DST")) return new DefStateField();
+    if (name.equals("MADDR")) return new SkipField();
+    return super.getField(name);
+  }
+  
+  // We need an address field that just saves the address.  The default
+  // field process handles all kinds of cool things
+  private class MyAddressField extends AddressField {
+    @Override
+    public void parse(String field, Data data) {
+      data.strAddress = field;
+    }
+  }
+
+  // And something to save the default city and state
+  private class DefCityField extends Field {
+    @Override 
+    public void parse(String field, Data data) {
+      data.defCity = field;
+    }
+  }
+  
+  private class DefStateField extends Field {
+    @Override 
+    public void parse(String field, Data data) {
+      data.defState = field;
+    }
+  }
 
   /**
    * Convert parsed information object into a text string that the Cadpage parser
@@ -99,27 +180,15 @@ public class CadpageParser  extends CadpageParserBase {
     append(sb, "NAME", info.getName(), delim);
     append(sb, "PH", info.getPhone(), delim);
     append(sb, "CODE", info.getCode(), delim);
+    append(sb, "GPS", info.getGPSLoc(), delim);
     append(sb, "ID", info.getCallId(), delim);
+    
     append(sb, "SRC", info.getSource(), delim);
-    append(sb, "URL", info.getInfoURL(), delim);
     if (info.getCity().length() == 0) append(sb, "DCITY", info.getDefCity(), delim);
     if (info.getState().length() == 0) append(sb, "DST", info.getDefState(), delim);
-    CountryCode country = info.getCountryCode();
-    if (country != CountryCode.US) {
-      append(sb, "CO", country.toString(), delim);
-    }
-    append(sb, "GPS", info.getGPSLoc(), delim);
-    if (info.isPreferGPSLoc()) append(sb, "REC_GPS", "Y", delim);
     if (inclMapAddr) {
-      append(sb, "MADDR", info.getBaseMapAddress(2), delim);
-      String mapCity = info.getMapCity();
-      if (!mapCity.equals(info.getCity())) {
-        append(sb, "MCITY", mapCity, delim);
-      }
+      append(sb, "MADDR", info.getBaseMapAddress(), delim);
     }
-    MsgParser parser = info.getParser();
-    if (parser != null) append(sb, "PARSER", parser.getParserCode(), delim);
-    
     return sb.toString();
   }
   
@@ -131,4 +200,7 @@ public class CadpageParser  extends CadpageParserBase {
       sb.append(value);
     }
   }
+  
+  
+
 }

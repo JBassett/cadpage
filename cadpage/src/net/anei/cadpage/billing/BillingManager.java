@@ -4,7 +4,6 @@ import java.util.Calendar;
 
 import android.app.Activity;
 import android.content.Context;
-import net.anei.cadpage.Log;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.billing.BillingService.RequestPurchase;
 import net.anei.cadpage.billing.BillingService.RestoreTransactions;
@@ -59,12 +58,8 @@ public class BillingManager {
   }
   
   public boolean isPurchased() {
-    Calendar cal = Calendar.getInstance(); 
-    int year = cal.get(Calendar.YEAR);
-    int paidYear = ManagePreferences.paidYear();
-    if (paidYear > year) return true;
-    if (paidYear == year && cal.get(Calendar.MONTH) < Calendar.DECEMBER) return true;
-    return false;
+    int year = Calendar.getInstance().get(Calendar.YEAR);
+    return year == ManagePreferences.paidYear();
   }
   
   /**
@@ -72,33 +67,9 @@ public class BillingManager {
    * @param activity
    */
   public void startPurchase(Activity activity) {
-    if (mService == null) return;
-    int curYear = ManagePreferences.paidYear();
-    String year = null;
-    String purchaseDate = null;
-    String curDate = ManagePreferences.currentDateString();
-    
-    // If subscription has already purchased, use the previous
-    // purchase date.  Unless user subscription has expired, in 
-    // which case we will give them a break and ignore the 
-    // previous expired subscription
-    if (curYear > 0) {
-      year = Integer.toString(curYear + 1);
-      purchaseDate = ManagePreferences.purchaseDateString();
-      String expDateYMD = year + purchaseDate.substring(0,4);
-      String curDateYMD = curDate.substring(4) + curDate.substring(0,4);
-      if (curDateYMD.compareTo(expDateYMD) > 0) purchaseDate = null;
-    } 
-    
-    // If there was no previous subscription, or we are ignoring it
-    // because it has expired, use current date to compute things
-    if (purchaseDate ==  null) {
-      purchaseDate = curDate;
-      year = purchaseDate.substring(4);
-    }
-    
+    int year = Calendar.getInstance().get(Calendar.YEAR);
     String item = "cadpage_" + year;
-    String payload = purchaseDate;
+    String payload = ManagePreferences.purchaseDateString();
     mService.requestPurchase(activity, item, payload); 
   }
   
@@ -108,21 +79,17 @@ public class BillingManager {
     @Override
     public void onBillingSupported(boolean supported) {
       BillingManager.this.supported = supported;
-      if (mService != null && reload && supported) mService.restoreTransactions();
+      if (reload && supported) mService.restoreTransactions();
     }
 
     @Override
     public void onPurchaseStateChange(PurchaseState purchaseState,
                                        String itemId, long purchaseTime, 
                                        String payload) {
-      Log.v("PurchaseState:" + purchaseState + "  Item:" + itemId + "Payload:" + payload);
       if (itemId.startsWith("cadpage_")) {
         int year = Integer.parseInt(itemId.substring(8));
-        boolean purchase = purchaseState == PurchaseState.PURCHASED;
-        ManagePreferences.setPaidYear(year, purchase);
-        if (purchase && payload != null) ManagePreferences.setPurchaseDateString(payload);
-        ManagePreferences.setFreeSub(false);
-        ManagePreferences.setSponsor(null);
+        ManagePreferences.setPaidYear(year, purchaseState == PurchaseState.PURCHASED);
+        if (payload != null) ManagePreferences.setPurchaseDateString(payload);
       }
     }
 

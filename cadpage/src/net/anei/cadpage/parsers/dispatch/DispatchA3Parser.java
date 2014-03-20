@@ -1,10 +1,5 @@
 package net.anei.cadpage.parsers.dispatch;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,78 +8,95 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 /*
 Handles parsing for a vendor identified as VisionCAD
+
+Camden County, GA
+astudstill@co.camden.ga.us:2011-101695* HIGHWAY 17 STEFFANS* * * KINGSLAND* * Traffic Stop* TRAFFIC STOP* * * 1128,1140,1150,1152,509,514,523,532,LS3,R3* * Med
+astudstill@co.camden.ga.us:2011-104696* 4059 MARTIN LUTHER KING BLVD* N4* * 514,541,546,ENG4,LS4,MED4 KINGSLAND* * INJURY* INJURY* 509,ENG5,LS3* * Medical: No
+astudstill@co.camden.ga.us:2011-101995* 405 & HIGHWAY 40 OLD WAFFLE HOUSE* * * KINGSLAND* * ACCIDENT* ACCIDENT* ELAINE* 386-208-4465* 514,541,546,ENG4,LS4,MED4
+astudstill@co.camden.ga.us:2011-104843* 429 EAGLE BLVD* * * KINGSLAND* * PERSON SICK* PERSON SICK* * 540,ENG4,LS4* * Medical: No* Haz
+214 REDWOOD ST* * * KINGSLAND* * PERSON SICK* PERSON SICK* MS FAGEN*912-269-6157* LS3,R3* * Medical: No* Hazards: No* 
+astudstill@co.camden.ga.us:2011-181161* ADVANCE COLLISION CENTER* * * KINGSLAND* * WIRE DOWN* WIRE DOWN* JOHN* 316-258-1559* ENG4,LS4* * Medical: No* Haz
+astudstill@co.camden.ga.us:2012-037466* BOONE AND SUMMERBROOK* * * KINGSLAND* * INVESTIGATE* INVESTIGATE SUSPICIOUS PERSON/VEHICLE* JUAN RODRIGUEZ* 912-8
+
+Northampton County, NC
+S: M:Northampton911:* URIAH MARTIN RD // NEAR CEMETERY* * * CONWAY* * FIRE - BRUSH* * * * EMS3,FS20* * Medical: No* Hazards: No* * 
+S: M:Northampton911:* BOAT LANDING* * * WELDON* * MISSING PERS* * * * EMS8,FS20* * Medical: No* Hazards: No* * 
+S: M:Northampton911:* 907 HORNE RD* * * PENDLETON* * FIRE - SMOKE* * * * EMS3,FS18,FS20* * Medical: No* Hazards: No* * 
+S: M:Northampton911:* 203 WHITE ST* * * CONWAY* * ODOR OF GAS* * * * FS20* * Medical: No* Hazards: No* * 
+
+Halifax County, NC
+HalifaxCoE911@HalifaxNC911.com S: M:HalifaxCoE911:* JACKSON ST // 7TH ST* * * ROANOKE RAPIDS* * * * * WRECK NOPI* * * * C181,C182,FI14* * * * *
+HalifaxCoE911@HalifaxNC911.com S: M:HalifaxCoE911:* HWY 158 // AVE* * * ROANOKE RAPIDS* * * * * WRECK NOPI* * * * EMS4,EMS6,FI14* * * * *
+HalifaxCoE911@HalifaxNC911.com S: M:HalifaxCoE911:* 1403 EAST 10TH ST* * * ROANOKE RAPIDS* * * * * FIRE-ELEC* * * * FI14* * * * *
+HalifaxCoE911@HalifaxNC911.com S: M:HalifaxCoE911:* PILAND ST* * * ROANOKE RAPIDS* * * * * SPECIAL ASSG* * * * F1402,FI14* * * * *
+HalifaxCoE911@HalifaxNC911.com S: M:HalifaxCoE911:* SUBWAY // JULLIAN R ALLSBROOK* * * ROANOKE RAPIDS* * * * * WRECK NOPI* * * * FI14* * * * *
+HalifaxCoE911@HalifaxNC911.com S: M:HalifaxCoE911:* 93 ROANOKE AVE* * * ROANOKE RAPIDS* * * * * FIRE-SMOKE* * * * FI14* * * * *
+
+Pender County, NC
+911-:=12-010417* OLD MAPLE HILL RD N // NC HWY 50* * * * * * * * * 29-TRAFFIC/TRANSPORTATION ACCIDENTS* * * FD13* * * * *
+911-:=12-012441* OLD MAPLE HILL RD N // NC HWY 50* * * * * * * * * BRUSH/FOREST FIRE (RP 1-4)* * * FD13* * * * *
+911-:=12-012596* HOLLINGSWORTH DR // NC HWY 50* * * * * * * * * 29-TRAFFIC/TRANSPORTATION ACCIDENTS* * * FD13* * * * *
+911-:=12-013390* 1520 OLD MAPLE HILL RD* * * * * * * * * 29-TRAFFIC/TRANSPORTATION ACCIDENTS* * * FD13* * * * *
+911-:=12-009752* 5471 NC HWY 50* * * * * * * * * 29-TRAFFIC/TRANSPORTATION ACCIDENTS* * * FD13* * * * *
+911-:=12-009855* 14976 NC HWY 53 EAST* * * * * * * * * ASSIST EMS* * * FD13,FD15* * * * *
+
+Sampson County, NC
+EMS:2012-013061* 2280 HOBBTON HWY* * * CLINTON* WEDGEWOOD LN* BUMPY LN* K12* * ABDOMINAL* ABDOMINAL PAIN* CSRS,EMS79* 1328A* Medical: No* Hazards:  
+EMS:2012-013062* 219 W CARTER ST* * * CLINTON* BARDEN ST* BUNTING ST* L11* * BREATH DIFF* BREATHING DIFFICULTIES* CSRS,EMS75* 1379* Medical: No* Hazards: No* 02/2
+EMS:2012-013047* I40 MM 343* * * NEWTON GROVE* MCLAMB RD UNDERPASS* EXIT 343 HOBBTON HWY* D11* * MVA I* MOTOR VEHICLE ACCIDENT WITH INJURIES* EMS79* 1263* Medical
+EMS:2012-013001* 91 N CHURCH AVE* * * GARLAND* W THIRD ST* W FOURTH ST* T10* * CHEST PAIN* CHEST PAIN* EMS77* 1376* Medical: No* Hazards: No* *
+EMS:2012-012994* 303 MARTIN LUTHER KING JR BLVD* * * CLINTON* WEEKS ST* SOUTHEAST BLVD* L12* * UNCONSCIOUS* UNCONSCIOUS/FAINTING* CSRS,EMS77* 1380* Medical: No* H
+EMS:2012-012960* 120 SOUTHWOOD DR* 305A* * CLINTON* SOUTH WEST BLVD* * M12* Landmark Comment: UPDATED 01/07* BREATH DIFF* BREATHING DIFFICULTIES* CSRS,EMS75* 1380
+EMS:2012-012906* 229 e MORISEY BLVD* * * CLINTON* LISBON ST* DEVANE ST* L12* * BURNS* BURNS* CSRS,EMS75* 1275* Medical: No* Hazards: No* *
+EMS:2012-012904* 134 W SECOND ST* * * GARLAND* S CHURCH AVE* BROOKS AVE* T10* * SICK CALLS* SICK CALLS* 7112* 1376* Medical: No* Hazards: No* *
+EMS:2012-012890* 2100 REEDSFORD RD* * * CLINTON* MELVABROOK DR* BILLY LN* M13,M14* * MVA I* MOTOR VEHICLE ACCIDENT WITH INJURIES* CSRS,EMS76,STA14* 1330* Medical: Comment: TRACT 10 OVERDOSE* OVERDOSE* CSRS,EMS71* 1284A* Medical: No* Hazards: No* *
+EMS:2012-012887* 249 KAYLA LN* * * CLINTON* KING RD* KING RD* I14* Geo Comment: TRACT *10* OVERDOSE* OVERDOSE* CSRS,EMS71* 1284A* Medical: No* Hazards: No* *
+EMS:2012-012877* 233 EFFIE PETERSON LN* * * ROSEBORO* PORTER RD* DEAD END* M9* * STRUCTURE FI* STRUCTURE FIRE* CSRS,EMS76* 1336* Medical: No* Hazards: No* *
+EMS:2012-012839* 4056 REEDSFORD RD* * * CLINTON* HUCKLEBERRY LN* STEVE HARRIS LN* N14,N15* * CHEST PAIN* CHEST PAIN* CSRS,EMS71* 1347A* Medical: No* Hazards: No*
+EMS:2012-012887* 249 KAYLA LN* * * CLINTON* KING RD* KING RD* I14* Geo Comment: TRACT 10 OVERDOSE* OVERDOSE* CSRS,EMS71* 1284A* Medical: No* Hazards: No* *
+EMS:2012-012838* 1498 HAWLEY RD* * OR* DUNN* FRED TEW RD* UNION GROVE CH RD* C4* * MVA I* MOTOR VEHICLE ACCIDENT WITH INJURIES* EMS72,PVRS,Z951RT* 1254C* Medical:
+EMS:2012-012833* 253 PINE OAK LN* * * DUNN* MIDWAY ELEM SCH RD* DEAD END* E6* * SICK CALLS* SICK CALLS* EMS78* 1255A* Medical: No* Hazards: No* *
+EMS:2012-012830* 203 N MAIN ST* * * SALEMBURG* CLINTON ST* CHURCH ST* K6* * BREATH DIFF* BREATHING DIFFICULTIES* EMS76* 1378* Medical: No* Hazards: No* 02/26/2012
+EMS:2012-012826* 939 SOUTHWEST BLVD* * TAC3* CLINTON* MARTIN LUTH KING BLV* * L12* * STRUCTURE FI* STRUCTURE FIRE* CSRS,EMS72,STA14,STA16,STA8* 1380* Medical: No*
+EMS:2012-012816* 301 MAIN ST* * * NEWTON GROVE* E CIRCLE ST* N CHURCH ST* C11* Landmark Comment: UPDATED 2-02* BREATH DIFF* BREATHING DIFFICULTIES* EMS71,EMS72,NG
+EMS:2012-017694* 79 ROMAY MCKOY LN* * * ROSE HILL* BILL TOWN RD* LOOPS BACK TO ITSELF* S14* Geo Comment: *24* ABDOMINAL* ABDOMINAL PAIN* EMS77* 1352A* Medical: No
+
+Butler County, OH
+BCSO:12-026842* 7897 JESSIES WY* * * * MORRIS RD* TYLERSVILLE RD* * NBH: JESSIE`S LANDING CONDOS* MEDICAL* LIFE SQUAD REQUEST* * * FFTLS* * Line16=Medical: No* Line17=Hazards: No* Line18=05/18/2012 21:06:12 : pos1 : RLONEILL Cross streets: MORRIS RD//TYLERSVILLE RD NBH: JESSIE`S LANDING CONDOS 80 YO MALE URINATING BLOOD*
+BCSO:12-026840* 4090 MILLIKIN RD* * * * FAIRCREST* LIBERTY FAIRFIELD RD* * * MEDICAL* LIFE SQUAD REQUEST* * * FFTLS* * Line16=Medical: No* Line17=Hazards: No* Line18=05/18/2012 20:47:29 : pos4 : dkrednour Cross streets: FAIRCREST//LIBERTY FAIRFIELD RD 41 YOM,. DIABETIC UNRESPONSIVE*
+BCSO:12-026808* 6926 CHESTNUT OAK CT* * * * * JOCELYN DR* * NBH: ASHWOOD SUBD* MEDICAL* LIFE SQUAD REQUEST* WOLFER, NORBERT* * * * Line16=Medical: No* Line17=Hazards: No* Line18=05/18/2012 17:39:09 : pos5 : PDFRYER REQUESTING SILENT APPROACH 05/18/2012 17:38:51 : pos5 : PDFRYER Cross streets: //JOCELYN DR NBH: ASHWOOD SUBD 90 YO FEMALE RUNNING FEVER, UNABLE TO WALK - DIABETIC*
+BCSO:12-026807* 2580 UTICA AV* * * * CANASTOTA DR* * * NBH: NORMANDY HEIGHTS* MEDICAL* LIFE SQUAD REQUEST* SINGLETON,RAY* * * * Line16=Medical: No* Line17=Hazards: No* Line18=05/18/2012 17:34:43 : pos5 : PDFRYER Cross streets: CANASTOTA DR// NBH: NORMANDY HEIGHTS 75 YO FEMALE - UNABLE TO MOVE ONE LEG, KNEE AND LEG ARE SWOLLEN - NEEDS TRANSPORTED*
+BCSO:12-027009* 7309 CLARION CT* * * * * SARATOGA DR* * Special Comment:: *LOADED WEAPONS INSIDE* MAY2012 NBH: HOWARD`S SUBDIVISION* MEDICAL* LIFE SQUAD REQUEST* * * FFTLS* * Line16=Medical: Yes* Line17=Hazards: Yes* Line18=05/19/2012 18:06:17 : pos3 : RLONEILL Special Comment:: *LOADED WEAPONS INSIDE* MAY2012 Cross streets: //SARATOGA DR NBH: HOWARD`S SUBDIVISION 56 YO FEMALE DIFF BREATHING*
+BCSO:12-026888* 7418 CHATEAUGUAY ST* * * * RIVERDOWNS CT* CITATION DR* * NBH: ASCOT DOWNS* SUICIDE* SUICIDE OR ATTEMPT SUICIDE* * * 21P45,FFTLS* * Line16=Medical: No* Line17=Hazards: No* Line18=05/19/2012 01:40:26 : pos3 : KKMETSKER Cross streets: RIVERDOWNS CT//CITATION DR NBH: ASCOT DOWNS 24 Y.O.F. - HANG IS PREG 4 MO*
+BCSO:12-026932* 2923 HAMILTON MASON RD* * * * * * * * MEDICAL* LIFE SQUAD REQUEST* * * FFTLS* * Line16=Medical: No* Line17=Hazards: No* Line18=05/19/2012 10:33:24 : pos3 : HRMILLER Landmark: WELLINGTON MANOR 60YOM LEFT HIP PAIN .. FRONT DOUBLE DOORS GO TO THE RIGHT*
+BCSO:12-026944* 3219 PRINCETON RD* * * * BYPASS 4* BYPASS 4* * * CRASH INJURY* INJURY ACCIDENT* * * FFTFD,FFTLS* * Line16=Medical: No* Line17=Hazards: No* Line18=05/19/2012 11:43:04 : pos3 : HRMILLER Cross streets: BYPASS 4//BYPASS 4 Landmark: MURPHY GAS STATION ALI X Coordinate: -84.5082092 ALI Y Coordinate: 39.39026713 ALI Uncertainty Factor: 000 ALI Confidence Factor: 28 **Nearest Address: 3213 PRINCETON RD, FAIRFIELD TWP GREEN CAMRY .. 2 CHILDREN IN THE CAR 11 AND 9 .. LIGHT BEIGE MINI VAN LEFT THE SCENE .. NOW PARKED IN THE LOT OF THE GAS STATION*
+BCSO:12-026968* 5753 GREEN CREST DR* * * * CREST MANOR DR* MILLCREST DR* * NBH: GREEN CREST MANOR* MEDICAL* LIFE SQUAD REQUEST* * * FFTLS* * Line16=Medical: No* Line17=Hazards: No* Line18=05/19/2012 13:24:53 : pos1 : TJMILLER Cross streets: CREST MANOR DR//MILLCREST DR NBH: GREEN CREST MANOR 75 YOF UNRESPONSIVE BUT BREATHING - ALZHEIMER PATIENT , HEART HX*
+
 */
 public class DispatchA3Parser extends FieldProgramParser {
   
-  private static final Pattern DELIM = Pattern.compile("(?<!\\*)\\*[\n ]+");
+  private static final Pattern DELIM = Pattern.compile("\\* +");
   
-  private String prefix = null;
-  private Pattern prefixPtn = null;
-  
-  public DispatchA3Parser(int version, Pattern prefixPtn, String defCity, String defState) {
-    this(version, defCity, defState);
-    this.prefixPtn = prefixPtn;
-  }
+  private String prefix;
   
   public DispatchA3Parser(int version, String prefix, String defCity, String defState) {
-    this(version, defCity, defState);
-    this.prefix = prefix;
-  }
-  
-  public DispatchA3Parser(int version, String defCity, String defState) {
     super(defCity, defState,
-          version == 0 ?
-            "ID? ADDR/SXP APT CH CITY! X X MAP INFO1 CALL CALL ( UNIT! | NAME UNIT! | NAME PHONE UNIT ) INFO+"
-          : version == 1 ?
-              "ID? ADDR/SXP APT CH CITY! EMPTY+? CALL CALL ( UNIT! | NAME UNIT! | NAME PHONE UNIT ) INFO+"
-          : version == 2 ?
-              "ID? ADDR APT CH CITY X X MAP INFO1 SKIP CALL! PLACENAME PHONE UNIT INFO+"
-          : null);
-  }
-  
-  public DispatchA3Parser(Pattern prefixPtn, String defCity, String defState, String program) {
-    super(defCity, defState, program);
-    this.prefixPtn = prefixPtn;
-  }
-  
-  public DispatchA3Parser(String prefix, String defCity, String defState, String program) {
-    super(defCity, defState, program);
-    this.prefix = prefix;
-  }
-  
-  public DispatchA3Parser(String prefix, String[] cityList, String defCity, String defState, String program) {
-    super(cityList, defCity, defState, program);
+           version == 0 ?
+             "ID? ADDR/SXP APT CH CITY! X X MAP INFO1 CALL INFO ( UNIT! | NAME UNIT! | NAME PHONE UNIT ) INFO+"
+           : version == 1 ?
+               "ID? ADDR/SXP APT CH CITY! INFO CALL INFO ( UNIT! | NAME UNIT! | NAME PHONE UNIT ) INFO+"
+           : version == 2 ?
+               "ID? ADDR/SXP APT CH CITY! INFO CALL INFO NAME PHONE UNIT INFO+"
+           : null);
     this.prefix = prefix;
   }
   
   @Override
   protected boolean parseMsg(String body, Data data) {
-    return parseMsg(body, data, true);
-  }
-  
-  /**
-   * New variant of standard parseMsg() call
-   * @param body text body
-   * @param data parsed data object to be filled with information
-   * @param splitField true if textline should be broken up by the standard A3 delimiter seqeuence.
-   * false if these delimiters are  not going to be found in the text body
-   * @return true if parse was successful
-   */
-  protected boolean parseMsg(String body, Data data, boolean splitField) {
-    if (prefix != null) {
-      if (!body.startsWith(prefix)) return false;
-      body = body.substring(prefix.length()).trim();
-    } else if (prefixPtn != null) {
-      Matcher match = prefixPtn.matcher(body);
-      if (!match.find()) return false;
-      body  = body.substring(match.end()).trim();
-    }
-    if (splitField) {
-      if (body.endsWith("*")) body = body + " ";
-      return parseFields(DELIM.split(body), data);
-    } else {
-      return super.parseMsg(body, data);
-    }
+    if (!body.startsWith(prefix)) return false;
+    body = body.substring(prefix.length()).trim();
+    if (body.endsWith("*")) body = body + " ";
+    return parseFields(DELIM.split(body), data);
   }
   
   private class BaseAddressField extends AddressField {
@@ -110,83 +122,20 @@ public class DispatchA3Parser extends FieldProgramParser {
     }
   }
   
-  private class BaseCrossField extends CrossField {
-    @Override
-    public void parse(String field, Data data) {
-      if (field.startsWith("_")) field = field.substring(1).trim();
-      super.parse(field, data);
-    }
-  }
-  
-  private class BaseCallField extends CallField {
-    @Override
-    public void parse(String field, Data data) {
-      
-      // Override previous call field
-      // Unless this is a generic call description
-      if (field.length() == 0) return;
-      if (data.strCall.length() > 0 && GENERIC_CALL_SET.contains(field)) return;
-      data.strCall = field;
-    }
-  }
-  
-  private static final Pattern COMMENT_LABEL = Pattern.compile("^(?:Landmark|Geo|Place) Comment:");
-  private static final Pattern COMMENT_LABEL2 = Pattern.compile("(?:Landmark|Geo|Place) Comment:");
   private class BaseInfo1Field extends InfoField {
-    @Override
-    public boolean canFail() {
-      return true;
-    }
-    
-    @Override
-    public boolean checkParse(String field, Data data) {
-      if (!field.startsWith("NBH:") && !COMMENT_LABEL.matcher(field).find()) return false;
-      parse(field, data);
-      return true;
-    }
-    
     @Override
     public void parse(String field, Data data) {
       int pt = field.indexOf("NBH:");
       if (pt >= 0) {
-        String place = field.substring(pt+4).trim();
+        data.strPlace = append(data.strPlace, " - ", field.substring(pt+4).trim());
         field = field.substring(0,pt).trim();
-        Matcher match = COMMENT_LABEL2.matcher(place);
-        if (match.find()) {
-          pt = match.start();
-          field = place.substring(pt);
-          place = place.substring(0,pt).trim();
-        }
-        data.strPlace = append(data.strPlace, " - ", place);
       } 
-      Matcher match = COMMENT_LABEL.matcher(field);
-      if (match.find()) {
-        field = field.substring(match.end()).trim();
-        if (field.startsWith("UPDATE")) return;
-        match = COMMENT_LABEL2.matcher(field);
-        if (match.find()) {
-          pt = match.start();
-          if (pt == 0) {
-            field = field.substring(match.end()).trim();
-          } else {
-            field = field.substring(0,pt).trim();
-          }
-        }
-      }
       super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "INFO PLACE";
     }
   }
   
   private static final Pattern LINE_PTN = Pattern.compile("Line\\d+=");
-  private static final Pattern DATE_TIME_PTN = Pattern.compile("\\b(\\d?\\d/\\d?\\d/\\d{4}) (\\d?\\d:\\d?\\d:\\d?\\d(?: [AP]M)?) : \\w+ : \\w+\\b");
-  private static final DateFormat TIME_FMT = new SimpleDateFormat("hh:mm:ss aa");
-  private static final Pattern EXTRA_DELIM = Pattern.compile("\\*\\* EMD (?:Case Entry Finished|Case Complete|Recommended Dispatch) \\*\\*|\\bResponse Text:|\\bKey Questions:|\\bGeo Comment:|\\bLandmark Comment:|Narrative ?:|\\b(?=Cross Streets:|Landmark:|NBH:|[XY] Coordinate:|Uncertainty Factor:|Confidence Factor:|\\**Nearest Address:)|Place Comment:|  +|\n| \\.\\. |\bALI\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern SKIP_PTN = Pattern.compile("^UPDATED? +\\d\\d?(?:[-/]\\d\\d?){1,2}\\b.*");
+  private static final Pattern DATE_TIME_PTN = Pattern.compile("(\\d\\d/\\d\\d/\\d{4}) (\\d\\d:\\d\\d:\\d\\d) : \\w+ : \\w+\\b");
   private class BaseInfoField extends InfoField {
     @Override
     public void parse(String field, Data data) {
@@ -194,97 +143,48 @@ public class DispatchA3Parser extends FieldProgramParser {
         data.strCall = field;
         return;
       }
-      
       Matcher match = LINE_PTN.matcher(field);
-      if (match.find()) field = field.substring(match.end()).trim();
-      
-      match = DATE_TIME_PTN.matcher(field);
-      if (!match.find()) {
-        super.parse(field, data);
-        return;
-      }
-      
-      data.strDate = match.group(1);
-      String time = match.group(2);
-      if (time.endsWith("M")) {
-        setTime(TIME_FMT, time, data);
-      } else {
-        data.strTime = time;
-      }
-     
-      for (String fld1 : DATE_TIME_PTN.split(field)) {
-        String connect = "\n";
-        for (String fld2 : EXTRA_DELIM.split(fld1)) {
-          fld2 = fld2.trim();
-          if (fld2.length() == 0) continue;
-          
-          if (SKIP_PTN.matcher(fld2).matches()) continue;
-          
-          String upshift = fld2.toUpperCase();
-          if (upshift.startsWith("LANDMARK:")) {
-            if (data.strPlace.length() == 0) {
-              data.strPlace = fld2.substring(9).trim();
-            }
-            else if (data.strPlace.startsWith("OFF ")) {
-              data.strPlace = fld2.substring(9).trim() + ' ' + data.strPlace;
-            }
-            continue;
-          }
+      if (match.find()) {
+        field = field.substring(match.end()).trim();
+        match = DATE_TIME_PTN.matcher(field);
+        if (match.find()) {
+          data.strDate = match.group(1);
+          data.strTime = match.group(2);
+          field = match.replaceAll("");
           
           // Strip redundant place
-          if (upshift.startsWith("NBH:")) {
-            String place = data.strPlace;
-            int pt2 = place.indexOf(" OFF ");
-            if (pt2 >= 0) place = place.substring(pt2+1);
-            pt2 = fld2.indexOf(place);
+          int pt = field.indexOf(" NBH:");
+          if (pt >= 0) {
+            int pt2 = field.indexOf(data.strPlace, pt);
             if (pt2 >= 0) {
-              pt2 += place.length();
-              fld2 = fld2.substring(pt2).trim();
-              upshift = fld2.toUpperCase();
+              pt2 += data.strPlace.length();
+              field = field.substring(0,pt) + field.substring(pt2);
             }
           }
           
-          if (upshift.startsWith("CROSS STREETS:")) {
-            fld2 = fld2.substring(14).trim();
-            String saveCross = data.strCross;
-            int pt = fld2.indexOf("//");
-            if (pt < 0) {
-              data.strCross = fld2;
-              fld2 = "";
-            } else {
-              String prefix = fld2.substring(0,pt).trim();
-              fld2 = fld2.substring(pt+2);
-              if (fld2.startsWith(" ")) {
-                fld2 = fld2.trim();
-              } else {
-                Result res = parseAddress(StartType.START_ADDR, FLAG_ONLY_CROSS, fld2);
-                if (res.getStatus() > 0) {
-                  res.getData(data);
-                  fld2 = res.getLeft();
-                } else {
-                  data.strCross = fld2;
-                  fld2 = "";
-                }
-              }
-              data.strCross = append(prefix, " / ", data.strCross);
+          // Strip redundant cross street info
+          pt = field.indexOf(" Cross streets:");
+          if (pt >= 0) {
+            String cross = data.strCross;
+            int pt2 = cross.lastIndexOf('&');
+            if (pt2 >= 0) cross = cross.substring(pt2+1).trim();
+            pt2 = field.lastIndexOf(cross);
+            if (pt2 >= pt) {
+              pt2 += cross.length();
+              while (pt2 < field.length() && field.charAt(pt2)=='/') pt2++;
+              field = field.substring(0,pt) + field.substring(pt2);
             }
-            if (saveCross.length() > 0) data.strCross = saveCross;
-            upshift = fld2.toUpperCase();
           }
-          
-          if (upshift.startsWith("NARR:")) fld2 = fld2.substring(5).trim();
-         
-          if (fld2.length() > 0 && !fld2.equals(":") && !data.strSupp.contains(fld2)) {
-            data.strSupp = append(data.strSupp, connect, fld2);
-            connect = " / ";
-          }
+          field = field.trim();
         }
       }
+      
+      super.parse(field, data);
     }
     
     @Override
     public String getFieldNames() {
-      return "DATE TIME X PLACE INFO";
+      return "INFO DATE TIME";
     }
   }
   
@@ -300,25 +200,27 @@ public class DispatchA3Parser extends FieldProgramParser {
     }
   }
   
+  private static final Pattern UNIT_PTN = Pattern.compile("^[^ ]*,[^ ]* ");
+  private class BaseCityField extends CityField {
+    @Override
+    public void parse(String field, Data data) {
+      Matcher match = UNIT_PTN.matcher(field);
+      if (match.find()) field = field.substring(match.end()).trim();
+      super.parse(field, data);
+    }
+  }
+  
   
   @Override
   public Field getField(String name) {
-    if (name.equals("ID")) return new IdField("\\d{2,6}-\\d{4,}|", true);
+    if (name.equals("ID")) return new IdField("\\d{2,4}-\\d{6}", true);
     if (name.equals("ADDR")) return new BaseAddressField();
     if (name.equals("CH")) return new BaseChannelField();
-    if (name.equals("X")) return new BaseCrossField();
-    if (name.equals("CALL")) return new BaseCallField();
+    if (name.equals("CITY")) return new BaseCityField();
     if (name.equals("INFO1")) return new BaseInfo1Field();
     if (name.equals("INFO")) return new BaseInfoField();
     if (name.equals("NAME")) return new BaseNameField();
-    if (name.equals("UNIT")) return new UnitField("(?:[A-Z0-9]{1,4}[0-9]|RRS|CSRS)(?:[,/](?:[A-Z]{0,3}[0-9]+[A-Z]{0,3}|[A-Z]{1,4}))*");
+    if (name.equals("UNIT")) return new UnitField("(?:[A-Z0-9]{1,4}[0-9]|CSRS)(?:,(?:[A-Z]{0,3}[0-9]+[A-Z]{0,3}|[A-Z]{1,4}))*");
     return super.getField(name);
   }
-  
-  private static final Set<String> GENERIC_CALL_SET = new HashSet<String>(Arrays.asList(
-      "FIRE",
-      "HAZ-MAT INCIDENT",
-      "MEDICAL EMERGENCY",
-      "TRAUMA EMERGENCY"
-  ));
 }

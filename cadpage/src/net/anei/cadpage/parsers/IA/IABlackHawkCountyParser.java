@@ -1,69 +1,55 @@
 package net.anei.cadpage.parsers.IA;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import net.anei.cadpage.parsers.SmartAddressParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.dispatch.DispatchA28Parser;
+
+/*
+Waterloo, IA (or Black Hawk County)
+Contact: Ryan Mahood <331medic@gmail.com>
+Sender: Swmail@bhcso.org,Xmail@connectingyou.com
+
+10-127299 MVA ROLLOVER/20 HWY SERGEANT RD WATERLOO
+10-124880 MVA ROLLOVER 1941 W 6TH ST EUREKA/ MITCHELL/WATERLOO
+ */
 
 
-public class IABlackHawkCountyParser extends DispatchA28Parser {
+public class IABlackHawkCountyParser extends SmartAddressParser {
+  
+  private static final Pattern CALL_ID_PATTERN =
+      Pattern.compile("^\\d\\d-\\d{6} ");
   
   public IABlackHawkCountyParser() {
-    super(CITY_LIST, "BLACK HAWK COUNTY", "IA");
+    super("BLACK HAWK COUNTY", "IA");
   }
   
   @Override
   public String getFilter() {
     return "Swmail@bhcso.org,Xmail@connectingyou.com";
   }
-  
+
   @Override
   protected boolean parseMsg(String body, Data data) {
-    if (!super.parseMsg(body, data)) return false;
-    if (data.strCity.equals("RAYMO")) data.strCity = "RAYMOND";
+    
+    Matcher match = CALL_ID_PATTERN.matcher(body);
+    if (! match.find()) return false;
+    
+    data.strCallId = body.substring(0, match.end()-1);
+    body = body.substring(match.end()).trim();
+    
+    // city is awkward because they sometimes use / and sometimes blank to
+    // delineate it
+    int pt = Math.max(body.lastIndexOf(' '), body.lastIndexOf('/'));
+    if (pt < 0) return false;
+    data.strCity = body.substring(pt+1).trim();
+    body = body.substring(0, pt).trim();
+    
+    // Parse description and address, anything left is a cross street
+    parseAddress(StartType.START_CALL, body, data);
+    data.strCross = getLeft();
+    
     return true;
   }
-
-
-  private static final String[] CITY_LIST =new String[]{
-      // Incorporated cities
-      "CEDAR FALLS",
-      "DUNKERTON",
-      "ELK RUN HEIGHTS",
-      "EVANSDALE",
-      "GILBERTVILLE",
-      "HUDSON",
-      "JANESVILLE",
-      "JESUP",
-      "LA PORTE CITY",
-      "RAYMOND",
-      "RAYMO",
-      "WATERLOO",
-      
-      // Unincorporated areas
-      "DEWAR",
-      "EAGLE CENTER",
-      "FINCHFORD",
-      "GLASGOW",
-      "VOORHIES",
-      "WASHBURN",
-      
-      // Townships
-      "BARCLAY",
-      "BENNINGTON",
-      "BIG CREEK",
-      "BLACK HAWK",
-      "CEDAR",
-      "CEDAR FALLS",
-      "EAGLE",
-      "EAST WATERLOO",
-      "FOX",
-      "LESTER",
-      "LINCOLN",
-      "MOUNT VERNON",
-      "ORANGE",
-      "POYNER",
-      "SPRING CREEK",
-      "UNION",
-      "WASHINGTON",
-
-  };
 }

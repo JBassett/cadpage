@@ -1,24 +1,47 @@
 package net.anei.cadpage.parsers.VA;
 
-import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-/**
- * Albemarle County, VA
+/*
+Albemarle County, VA
+Contact: Joe Orsolini <muzz3256@gmail.com>
+Casey Taylor <ctaylor1341@gmail.com>
+Neale Nickels <neale.nickels@gmail.com>
+Contact: James Wyant <jwyant15@gmail.com>
+Contact: Alexander Colley <fish3170@gmail.com>
+Contact: Joe Orsolini <orsolini@earlysvillefire.org>
+Works for 911 center
+
+Sender: CAD@acuecc.org
+System: Premier CAD by Motorola
+
+EARLYSVILL EXTRICATION AD: SEMINOLE TRL&FRAYS MILL RD CTY: AC LOC: SB JUST S OF THE STOPLIGHT CALLER WAS GOING NB AND SAW A VEHICLE ROLL OVER SE
+EARLYSVILL EMS CALL AD: 1700 FOXTAIL PNES CTY: AC 93YOM, DIFF BREATHING, JUST DISCHARGED FROM HEALTHSOUTH, AWAKE/TALKING XST2: 2497 ASPENWOOD RD
+EARLYSVILL RES STRUCTURE FIRE AD: 4235 WOODTHRUSH LN CTY: AC SMOKE AND FIRE IN THE HOUSE XST: 5001 MEADOWLARK CT
+EARLYSVILL MVA AD: SEMINOLE TRL&LEWIS AND CLARK D CTY: AC LOC: NB LANE 5 OR 6 CARS INVOLVED, UNKNWON INJURIES
+EARLYSVILL ALARM ACTIVATION AD: 4924 FREE UNION RD CTY: AC LOC: RICHARD BOOTH RES GUEST HOUSE FIRE ALARM-# IS 973-1805 XST: 2001 TASMANIA DR XST
+EARLYSVILL CHIMNEY FIRE APT:11B AD:702 WOODBURN CT CTY:AC SPARKS COMING FROM THE CHIMNEY-FIRE STILL IN FIREPLACE-NO SMOKE IN APT XST:2036 WO
+EARLYSVILL BRUSH FIRE AD: 1589 THOMPSON FARM RD CTY: AC LOC: OFF OF FREE UNION RD CALLER ADV'D A LOT OF SMOKE IN THE AREA, POSSIBLY FROM A CONTRO
+
+Contact: Lance Blakey <lanceblakey@gmail.com>
+CFCHQ      SEIZURE/CONVULSION M AD: 222 SHAMROCK RD CTY: CH LOC: ARC OF THE PIEDMONT 53 YOF, SEIZURE, SOB, HX OF SEIZURES XST: 100 STRATFORD CT
+CFCHQ      REDUCED COMM FIRE AD: 1215 LEE ST - UVA CTY: CH LOC: UNIVERSITY HOSPITAL BURNING SMELL IN 7 CENTRAL
+CFCHQ      SEIZURE/CONVULSION M AD: 222 SHAMROCK RD CTY: CH LOC: ARC OF THE PIEDMONT 53 YOF, SEIZURE, SOB, HX OF SEIZURES XST: 100 STRATFORD CT
+
+Contact: Charles Thomas <ngvff3@gmail.com>
+Sender: CAD@acuecc.org
+NORTHGARDE TREE DOWN AD: 900 MONACAN TRAIL RD CTY: AC LOC: NB 2 TREES DOWN BLOCKING THE NB LANES XST: CROSSOVER XST2: CROSSOVER\r
+
  */
 
+
 public class VAAlbemarleCountyParser extends FieldProgramParser {
-  
-  private static final Pattern GEN_ALERT_PTN = Pattern.compile("TIME: (\\d\\d:\\d\\d) +(.*)");
-  private static final Pattern COUNTY_ADDR_PTN = Pattern.compile("([A-Z]+) +\\d+");
+    
   
   public VAAlbemarleCountyParser() {
-    super(CITY_CODES, "ALBEMARLE COUNTY", "VA",
-          "( PRI:PRI_ID! TYP:CALL | CALL! ) APT:APT? AD:ADDR! CTY:CITY! LOC:PLACE? CMT1:INFO? CMT2:INFO? TIME:TIME_UNIT XST:X? XST2:X?");
+    super("ALBEMARLE COUNTY", "VA",
+           "CALL! APT:APT? AD:ADDR! CTY:CITY! LOC:INFO? XST:X? XST2:X");
   }
   
   @Override
@@ -33,66 +56,7 @@ public class VAAlbemarleCountyParser extends FieldProgramParser {
     
     data.strSource = body.substring(0,10).trim();
     body = body.substring(10).trim();
-    
-    Matcher match = GEN_ALERT_PTN.matcher(body);
-    if (match.matches()) {
-      data.strCall = "GENERAL ALERT";
-      data.strTime =  match.group(1);
-      data.strPlace = match.group(2);
-      return true;
-    }
-
-    body = body.replace("TIME:", " TIME:");
-    if (!super.parseMsg(body, data)) return false;
-    
-    // Mutual aid calls outside the county save the address
-    // in the place field and the county name/district in the address
-    if (data.strPlace.length() > 0 && data.strCity.length() == 0) {
-      match = COUNTY_ADDR_PTN.matcher(data.strAddress);
-      if (match.matches()) {
-        data.strCity = match.group(1) + " COUNTY";
-        String addr = data.strPlace;
-        int pt = addr.indexOf(" - ");
-        if (pt >= 0) addr = addr.substring(0,pt).trim();
-        data.strPlace = data.strAddress;
-        data.strAddress = "";
-        parseAddress(addr, data);
-      }
-    }
-    
-    return true;
-  }
-  
-  @Override
-  public String getProgram() {
-    return "SRC " + super.getProgram();
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("PRI_ID")) return new MyPriorityIdField();
-    if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("CITY")) return new MyCityField();
-    if (name.equals("INFO")) return new MyInfoField();
-    if (name.equals("TIME_UNIT")) return new MyTimeUnitField();
-    return super.getField(name);
-  }
-  
-  private static final Pattern PRI_ID_PTN = Pattern.compile("(\\d) +FAF\\d{7}(\\d{5})");
-  private class MyPriorityIdField extends Field {
-
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = PRI_ID_PTN.matcher(field);
-      if (!match.matches()) abort();
-      data.strPriority = match.group(1);
-      data.strCallId = match.group(2);
-    }
-
-    @Override
-    public String getFieldNames() {
-      return "PRI ID";
-    }
+    return super.parseMsg(body, data);
   }
   
   // Address field may contain place name
@@ -114,72 +78,25 @@ public class VAAlbemarleCountyParser extends FieldProgramParser {
     }
   }
   
-  private class MyCityField extends CityField {
+  // City code isn't really a city.  It is a 2 character source code
+  // possibly followed by an info field.  And we ignore the source code in
+  // favor of the 10 character code at the beginning of the message
+  private class MyCityField extends SkipField {
     @Override
     public void parse(String field, Data data) {
-      int pt = field.indexOf(' ');
-      if (pt >= 0) {
-        data.strSupp = field.substring(pt+1).trim();
-        field = field.substring(0,pt);
-      }
-      super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CITY INFO";
+      if (field.length() > 3) data.strSupp = field.substring(3).trim();
     }
   }
   
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      if (field.startsWith("Original Location :")) {
-        String  place = field.substring(19).trim();
-        if (!data.strPlace.contains(place)) {
-          data.strPlace = append(data.strPlace, " - ", place);
-        }
-      } 
-      else {
-        if (field.startsWith("INCIDENT CLONED FROM PARENT:")) return;
-        data.strSupp = append(data.strSupp, "\n", field);
-      }
-    }
-  }
-  
-  private static final Pattern TIME_UNIT_PTN = Pattern.compile("(\\d\\d:\\d\\d) *(.*?)(?: ((?!AF|CF).*))?");
-  private class MyTimeUnitField extends Field {
-
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = TIME_UNIT_PTN.matcher(field);
-      if (!match.matches()) abort();
-      data.strTime = match.group(1);
-      String unit = ' ' +match.group(2);
-      unit = unit.replace(" AF", " ").replace(" CF", " ");
-      data.strUnit = unit.substring(1);
-      data.strSupp = append(data.strSupp, "\n", getOptGroup(match.group(3)));
-    }
-
-    @Override
-    public String getFieldNames() {
-      return "TIME UNIT";
-    }
-  }
-
   @Override
-  public String adjustMapAddress(String sAddress, boolean cross) {
-    return sAddress.replace("LEWIS AND CLARK", "LEWIS_AND_CLARK");
-  }
-
-  @Override
-  public String postAdjustMapAddress(String sAddress) {
-    return sAddress.replace("LEWIS_AND_CLARK", "LEWIS AND CLARK");
+  public Field getField(String name) {
+    if (name.equals("ADDR")) return new MyAddressField();
+    if (name.equals("CITY")) return new MyCityField();
+    return super.getField(name);
   }
   
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "AC", "",
-      "CH", "CHARLOTTESVILLE",
-      "SC", "SCOTTSVILLE"
-  });
+  @Override
+  public String getProgram() {
+    return "SRC " + super.getProgram();
+  }
 }

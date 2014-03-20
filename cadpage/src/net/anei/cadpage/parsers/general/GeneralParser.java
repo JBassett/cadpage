@@ -10,14 +10,12 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class GeneralParser extends SmartAddressParser {
   
-  private static final Pattern DATE_PATTERN = Pattern.compile("\\b(\\d\\d?[-/]\\d\\d?[-/]\\d\\d(\\d\\d)?)\\b[,;:]?");
-  private static final Pattern TIME_PATTERN = Pattern.compile("\\b(\\d\\d?(?::\\d\\d?){1,2})( [AP]M)?\\b(?:[,;:]| +hrs\\b)?", Pattern.CASE_INSENSITIVE);
-  private static final Pattern TIME2_PATTERN = Pattern.compile("\\b(\\d{1,2})(\\d{2}) *hrs\\b", Pattern.CASE_INSENSITIVE);
+  private static final Pattern DATE_PATTERN = Pattern.compile("\\b\\d\\d/\\d\\d/\\d\\d(\\d\\d)?\\b");
+  private static final Pattern TIME_PATTERN = Pattern.compile("\\b\\d\\d(?::\\d\\d)+\\b");
   private static final String DELIM_PATTERN_STR = ";|,|~|\\*|\\n|\\||\\b[A-Z][A-Za-z0-9-#]*:|\\bC/S:|\\b[A-Z][A-Za-z]*#";
   private static Pattern DELIM_PATTERN; // will be filled in by constructor
-  private static final Pattern CALL_ID_PATTERN = Pattern.compile("\\d{2,4}-\\d{5,}|[A-Z]{1,2}\\d{6,}|\\d{11,}");
+  private static final Pattern CALL_ID_PATTERN = Pattern.compile("\\d[\\d-]+\\d");
   private static final Pattern UNIT_PATTERN = Pattern.compile("([A-Z]{1,4}[0-9]{1,4}\\s+)+");
-  private static final Pattern MAP_PATTERN = Pattern.compile("\\b(?:quad|map|grid)-([A-Z0-9]+)[,:;]?",Pattern.CASE_INSENSITIVE);
   
   // Field types that we can identify 
   private enum FieldType {SKIP, CALL, PLACE, ADDRESS, CITY, APT, CROSS, BOX, UNIT, MAP, ID, PHONE, SUPP, CODE, SRC, NAME};
@@ -118,16 +116,9 @@ public class GeneralParser extends SmartAddressParser {
     // Accept anything, but only if someone else has identified this as a CAD page
     return isPositiveId();
   }
-  
-  /**
-   * @return set of flags to be passed to smart ParseAddress calls
-   */
-  protected int getParseAddressFlags() {
-    return FLAG_NO_IMPLIED_APT;
-  }
 
   @Override
-  public boolean parseMsg(String subject, String body, Data data) {
+  protected boolean parseMsg(String subject, String body, Data data) {
     
     if (!isPageMsg(subject, body)) return false;
     
@@ -137,37 +128,15 @@ public class GeneralParser extends SmartAddressParser {
     // Strip out any date and time fields
     Matcher match = DATE_PATTERN.matcher(body);
     if (match.find()) {
-      data.strDate = match.group(1).replace('-', '/');
+      data.strDate = match.group();
       body = match.replaceAll("");
     }
     match = TIME_PATTERN.matcher(body);
     if (match.find()) {
-      String time = match.group(1);
-      String ext = match.group(2);
-      body = match.replaceAll("");
-      if (ext != null) {
-        if (ext.charAt(1) == 'P') {
-          int pt = time.indexOf(':');
-          int hr = Integer.parseInt(time.substring(0,pt));
-          hr += 12;
-          time = Integer.toString(hr) + time.substring(pt);
-        }
-      }
-      data.strTime = time;
-    } else {
-      match = TIME2_PATTERN.matcher(body);
-      if (match.find()) {
-        data.strTime = match.group(1) + ':' + match.group(2);
-        body = match.replaceAll("");
-      }
-    }
-    
-    match = MAP_PATTERN.matcher(body);
-    if (match.find()) {
-      data.strMap = match.group(1);
+      data.strTime = match.group();
       body = match.replaceAll("");
     }
-    
+
     // Parse text into different fields separated by delimiters
     // that match DELIM_PATTERN
     match = DELIM_PATTERN.matcher(body);
@@ -208,7 +177,7 @@ public class GeneralParser extends SmartAddressParser {
         nextType = null;
         fld = body.substring(pt);
       }
-      fld = fld.trim().replaceAll("  +", " ");
+      fld = fld.trim();
       
       // fld is the data field being processed
       // delim is the delimiter that started this field
@@ -242,7 +211,7 @@ public class GeneralParser extends SmartAddressParser {
           // Otherwise run it through the smart parser just in case the
           // call desc is followed by an address
           else {
-            parseAddress(StartType.START_CALL, getParseAddressFlags(), fld, data);
+            parseAddress(StartType.START_CALL, FLAG_NO_IMPLIED_APT, fld, data);
             if (data.strSupp.length() == 0) data.strSupp = getLeft();
           }
           break;
@@ -258,8 +227,8 @@ public class GeneralParser extends SmartAddressParser {
           // use it as a call description
           foundAddr = true;
           StartType st = (data.strCall.length() == 0 ? StartType.START_CALL :
-                          data.strPlace.length() == 0 ? StartType.START_PLACE : StartType.START_OTHER);
-          Result res = parseAddress(st, getParseAddressFlags(), fld);
+                          data.strPlace.length() == 0 ? StartType.START_PLACE : StartType.START_SKIP);
+          Result res = parseAddress(st, fld);
           if (bestRes == null || res.getStatus() > bestRes.getStatus()) {
             if (secondAddr == null) secondAddr = bestAddr;
             bestAddr = fld;
@@ -333,8 +302,8 @@ public class GeneralParser extends SmartAddressParser {
         // If we haven't found an address yet, see if this is it
         if (!foundAddr) {
           StartType st = (data.strCall.length() == 0 ? StartType.START_CALL :
-                          data.strPlace.length() == 0 ? StartType.START_PLACE : StartType.START_OTHER);
-          Result res = parseAddress(st, getParseAddressFlags(), fld);
+                          data.strPlace.length() == 0 ? StartType.START_PLACE : StartType.START_SKIP);
+          Result res = parseAddress(st, FLAG_NO_IMPLIED_APT, fld);
           if (res.getStatus() > 0) {
             // Bingo!  Anything past the address goes into info
             foundAddr = true;
@@ -347,9 +316,9 @@ public class GeneralParser extends SmartAddressParser {
             // If we got any call info from anywhere, extra stuff goes into info 
             // otherwise it goes into the call description
             if (data.strCall.length() == 0) {
-              data.strCall =res.getLeft();
+              data.strCall = getLeft();
             } else {
-              data.strSupp = res.getLeft();
+              data.strSupp = getLeft();
             }
             continue;
           }
@@ -362,8 +331,8 @@ public class GeneralParser extends SmartAddressParser {
         }
         
         // Nope, lets see if it looks like a unit list
-        if (UNIT_PATTERN.matcher(fld + " ").matches()) {
-          data.strUnit = append(data.strUnit, ",", fld);
+        if (data.strUnit.length() == 0 && UNIT_PATTERN.matcher(fld + " ").matches()) {
+          data.strUnit = fld;
           continue;
         }
         

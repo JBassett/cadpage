@@ -1,29 +1,41 @@
 package net.anei.cadpage.parsers.PA;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-/**
- * Dauphin County, PA
+/*
+Dauphin County, PA
+Contact: Chris Gros <gichristopher6@gmail.com>
+Sender: @c-msg.net
+CodeMessaging client 446
+
+(29CAD) [!] Box:29-1 Loc:31 S RIVER RD HFT DAUP XSts:PETERS MOUNTAIN RD ,SYCAMORE AV Event Type:OVERDOSE / POISONING (INGESTION) Class: 1 Disp: P29
+(29CAD) [!] Box:29-6 Loc:100 S FOURTH ST HFX DAUP: @BEER AND SODA PLUS XSts:RISE ST ,PETERS MOUNTAIN RD Event Type:TRAFFIC / TRANSPORTATION ACCIDENT INJURIES Class: Disp: E29-1
+(29CAD) [!] Box:29-6 Loc:123 RIVERVIEW DR HFT DAUP Event Type:CHEST PAIN Class: 1 Disp: 13-2,6-4
+(29CAD) [!] Box:29-6 XSts:MARKET ST ,S THIRD ST Event Type:UNCONSCIOUS / FAINTING (NEAR) Class: 2 Disp: 13-1
+(29CAD) [!] Box:29-4 Loc:388 DUNKEL SCHOOL RD HFT DAUP XSts:HILLTOP RD ,ROUNDTOP DR Event Type:ASSIST / SERVICE CALLS SELECT SUB-TYPE IF APPROPRIATE Class: Disp: P29
+(29CAD) [!] Box:29-1 Loc:499 S RIVER RD HFT DAUP XSts:AMITY LN ,SHAMOS SCHOOL RD Event Type:PSYCHIATRIC / SUICIDE ATTEMPT Class: 2 Disp: 13-1
+(29CAD) [!] Box:29-1 Loc:3188 PETERS MOUNTAIN RD HFT DAUP XSts:HILL DR ,ROADCAP LN Event Type:ABDOMINAL PAINS / PROBLEMS Class: 1 Disp: 13-1,6-4
+(29CAD) [!] Box:29-6 Loc:502 N SECOND ST HFT DAUP XSts:GREEN ST ,LOCUST ST Event Type:HEART PROBLEMS / A.I.C.D. Class: 1 Disp: 13-2,6-4
+(29CAD) [!] Box:29-1 Loc:3777 PETERS MOUNTAIN RD HFT DAUP: @GIANT XSts:LEISURE LN ,SWEIGARD DR Event Type:CONVULSIONS / SEIZURES Class: 1 Disp: 13-2,6-5
+(29CAD) [!] Box:29-5 Loc:123 BRUBAKER RD RDT DAUP XSts:S RIVER RD ,MOUNTAIN RD Event Type:BREATHING PROBLEMS Class: 1 Disp: 13-2
+(29CAD) [!] Box:29-5 Loc:S RIVER RD RDT DAUP XSts:INGLENOOK RD ,RAMP Event Type:TRAFFIC / TRANSPORTATION ACCIDENT INJURIES Class: Disp: E29-1
+(29CAD) [!] Box:29-4 XSts:N RIVER RD ,MCCLELLAN RD Event Type:SMOKE INVESTIGATION Class: 3 Disp: X29
+(29CAD) [!] Box:29-1 Loc:176 DUSTY TRAIL RD HFT DAUP XSts:CREEK SIDE DR ,DEAD END Event Type:OUTSIDE FIRE NATURAL COVER Class: 1 Disp: E29-1,A20
+(29CAD) [!] Box:29-6 Loc:117 ARMSTRONG ST HFX DAUP XSts:N FRONT ST ,FISHER ST Event Type:CARDIAC OR RESPIRATORY ARREST / DEATH AED RESPONSE Class: 1 Disp: P29
+(29CAD) [!] Box:29-6 Loc:201 MARKET ST HFX DAUP XSts:S SECOND ST ,S THIRD ST Event Type:CHEST PAIN Class: Disp: M/PC81,13-1,20-2
+(29CAD) [!] Box:29-2 Loc:676 DUNKEL SCHOOL RD HFT DAUP XSts:CATERPILLAR LN ,KEIFFER RD Event Type:BREATHING PROBLEMS Class: 1 Disp: 13-2,6-5
+(21CAD) [!] Box:21-4 Loc:179 WOLFE RD WST DAUP XSts:RAKERS MILL RD ,HENNINGER RD Event Type:BREATHING PROBLEMS Class: 1 Disp: P21
+
  */
+
 public class PADauphinCountyParser extends FieldProgramParser {
-  
-  private static final Pattern SRC_PTN = Pattern.compile("^(\\d{7}) +");
-  private static final Pattern WEST_HANOVER_PTN = Pattern.compile("(\\d{6}) - (\\d\\d?/\\d\\d?/\\d{4} \\d\\d?:\\d\\d:\\d\\d [AP]M) - (.*) - West Hanover", Pattern.DOTALL);
-  private static final DateFormat DATE_TIME_FMT = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa");
-  private static final Pattern SPECIAL_PTN = Pattern.compile("([-A-Z0-9]+) +(2ND DISPATCH|ER(?: WITH \\d)?(?!.*BOX:)) (.*)");
-  
-  private String selectValue = "";
   
   public PADauphinCountyParser() {
     super(CITY_CODES, "DAUPHIN COUNTY", "PA",
-           "( SELECT/SPECIAL UNIT CALL ADDR/S! | UNIT_CALL EVENT:ID? Box:BOX! Loc:ADDR/S XSts:X Event_Type:CALL Class:PRI Disp:UNIT )", FLDPROG_IGNORE_CASE);
+           "Box:BOX! Loc:ADDR/S XSts:X Event_Type:CALL! Class:PRI! Disp:UNIT!");
   }
   
   @Override
@@ -33,40 +45,9 @@ public class PADauphinCountyParser extends FieldProgramParser {
 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
-    
-    String[] flds = subject.split("\\|");
-    if (flds[flds.length-1].equals("!")) {
-      if (flds.length > 1) data.strSource = flds[0];
-    }
-    
-    Matcher match = WEST_HANOVER_PTN.matcher(body);
-    if (match.matches()) {
-      data.strSource = match.group(1);
-      setDateTime(DATE_TIME_FMT, match.group(2), data);
-      body = match.group(3).trim();
-    } 
-    
-    else {
-      match = SRC_PTN.matcher(body);
-      if (match.find()) {
-        if (data.strSource.length() == 0) data.strSource = match.group(1);
-        body = body.substring(match.end());
-      }
-      
-      if (body.endsWith(" - COMPANY 33 ALERT")) {
-        body = body.substring(0, body.length()-19).trim();
-      }
-    }
-    
-    selectValue = "";
-    match = SPECIAL_PTN.matcher(body);
-    if (match.matches()) {
-      selectValue = "SPECIAL";
-      return parseFields(new String[]{match.group(1), match.group(2), match.group(3)}, data);
-    }
-
+    if (!subject.endsWith("CAD|!")) return false;
+    data.strSource = subject.substring(0,subject.length()-2);
     if (!super.parseMsg(body, data)) return false;
-    if (data.strCall.length() == 0) return false;
     if (data.strAddress.length() == 0) {
       data.strAddress = data.strCross.replace('/', '&');
       data.strCross = "";
@@ -75,63 +56,24 @@ public class PADauphinCountyParser extends FieldProgramParser {
   }
   
   @Override
-  protected String getSelectValue() {
-    return selectValue;
-  }
-
-  @Override
   public String getProgram() {
-    return "SRC DATE TIME " + super.getProgram().replace(" X ", " ADDR X ");
-  }
-  
-  private static Pattern CALL_UNIT_PTN = Pattern.compile("^([A-Z]+[0-9][-0-9]*) +");
-  private class UnitCallField extends Field {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = CALL_UNIT_PTN.matcher(field);
-      if (match.find()) {
-        data.strUnit = match.group(1);
-        field  = field.substring(match.end());
-      }
-      data.strCall = field;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "UNIT CALL";
-    }
+    return "SRC " + super.getProgram();
   }
   
   private class MyAddressField extends AddressField {
     @Override
     public void parse(String field, Data data) {
-      String apt = "";
-      while (true) {
-        int pt = field.lastIndexOf(':');
-        if (pt < 0) break;
-        String place = field.substring(pt+1).trim();
+      int pt = field.indexOf(": @");
+      if (pt >= 0) {
+        data.strPlace = field.substring(pt+3).trim();
         field = field.substring(0,pt).trim();
-        
-        if (place.startsWith("APT")) {
-          place = place.substring(3).trim();
-          pt = place.indexOf('@');
-          if (pt >= 0) {
-            data.strPlace = append(place.substring(pt+1).trim(), " - ", data.strPlace);
-            place = place.substring(0,pt).trim();
-          }
-          apt = append(place, "-", apt);
-        } else {
-          if (place.startsWith("@")) place = place.substring(1).trim();
-          data.strPlace = append(place, " - ", data.strPlace);
-        }
       }
       super.parse(field, data);
-      data.strApt = append(data.strApt, "-", apt);
     }
     
     @Override
     public String getFieldNames() {
-      return "ADDR CITY PLACE APT";
+      return super.getFieldNames() + " PLACE";
     }
   }
   
@@ -143,76 +85,43 @@ public class PADauphinCountyParser extends FieldProgramParser {
     }
   }
   
-  private static final Pattern PRIORITY_PTN = Pattern.compile("^(\\d)\\b *");
-  private class MyPriorityField extends PriorityField {
-    @Override
-    public void  parse(String field, Data data) {
-      Matcher match = PRIORITY_PTN.matcher(field);
-      if (match.find()) {
-        data.strPriority = match.group(1);
-        field = field.substring(match.end());
-      }
-      data.strSupp = field;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "PRI INFO";
-    }
-  }
-  
-  // Sometimes there is some funny stuff at the end of the message that needs to be eliminated
-  private static final Pattern UNIT_PTN = Pattern.compile("^([-/A-Z0-9, ]*)");
-  private class MyUnitField extends UnitField {
-    @Override 
-    public void parse(String field, Data data) {
-      Matcher match = UNIT_PTN.matcher(field);
-      if (match.find()) field = match.group(1).trim();
-      super.parse(field, data);
-    }
-  }
-  
   @Override
   public Field getField(String name) {
-    if (name.equals("UNIT_CALL"))  return new UnitCallField();
     if (name.equals("ADDR")) return new MyAddressField();
     if (name.equals("X")) return new MyCrossField();
-    if (name.equals("PRI")) return new MyPriorityField();
-    if (name.equals("UNIT")) return new MyUnitField();
     return super.getField(name);
   }
   
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
+      
+      // Missing
+      // BERRYSBURG
+      // JEFFERSON TWP
+      // LYKENS TWP
+      // RUSH TWP
                    
-      "BEB DAUP",  "BERRYSBURG",
       "CWT DAUP",  "CONEWAGO TWP",
-      "DAB DAUP",  "DAUPHIN",
+//      "DAB DAUP",  "DAB DAUP",  // Unknown
       "DRY DAUP",  "DERRY TWP",
       "EHT DAUP",  "EAST HANOVER TWP",
       "ELZ DAUP",  "ELIZABETHVILLE",
-      "GRB DAUP",  "GRATZ",
-      "HBG DAUP",  "HARRISBURG",
+//      "HBG DAUP",  "HBG DAUP", // Unknown
       "HFT DAUP",  "HALIFAX TWP",
       "HFX DAUP",  "HALIFAX",
       "HSP DAUP",  "HIGHSPIRE",
       "HUM DAUP",  "HUMMELSTOWN",
-      "JFT DAUP",  "JEFFERSON TWP",
       "JKT DAUP",  "JACKSON TWP",
       "LDT DAUP",  "LONDONDERRY TWP",
       "LPT DAUP",  "LOWER PAXTON TWP",
       "LST DAUP",  "LOWER SWATARA TWP",
       "LYK DAUP",  "LYKENS",
-      "LYT DAUP",  "LYKENS TWP",
       "MDT DAUP",  "MIDDLETOWN",
-      "MFT DAUP",  "MIFFLIN TWP",
       "MPT DAUP",  "MIDDLE PAXTON TWP",
       "MSB DAUP",  "MILLERSBURG",
       "PAX DAUP",  "PAXTANG",
       "PEN DAUP",  "PENBROOK",
-      "PLB DAUP",  "PILLOW",
       "RDT DAUP",  "REED TWP",
       "ROY DAUP",  "ROYALTON",
-      "RUS DAUP",  "RUSH TWP",
       "SHT DAUP",  "SOUTH HANOVER TWP",
       "STL DAUP",  "STEELTON",
       "SUS DAUP",  "SUSQUEHANNA TWP",
@@ -223,35 +132,24 @@ public class PADauphinCountyParser extends FieldProgramParser {
       "WIL DAUP",  "WILLIAMSTOWN",
       "WLT DAUP",  "WILLIAMS TWP",
       "WST DAUP",  "WASHINTON TWP",
-      "WYT DAUP",  "WAYNE TWP",
 
       // Cumberland County
       "EPEN CUMB", "EAST PENNSBORO TWP",
-      "SVSP CUMB", "SILVER SPRING TWP",
+      "SVSP CUMB", "SILVER SPRING TWP", 
       
       // Lancaster County
-      "EDON LANC", "EAST DONEGAL TWP",
       "EZAB LANC", "ELIZABETHTOWN",
       "MTJT LANC", "MT JOY TWP",
       
       // Lebanon County
-      "ANVL LEBA", "ANNVILLE TWP",
-      "CLNA LEBA", "CLEONA",
-      "EHAN LEBA", "EAST HANOVER TWP",
-      "NLON LEBA", "NORTH LONDONDERRY TWP",
       "SLON LEBA", "SOUTH LONDONDERRY TWP",
-      
-      "LEBA EHAN", "EAST HANOVER TWP",
       
       // Northumberland County
       "JKST NORT", "JACKSON TWP",
       "JORD NORT", "JORDAN TWP",
-      "LMHY NORT", "LOWER MAHANOY TWP",
       "HNDB NORT", "HERNDON",
       
       // Perry County
-      "DUNC PERR", "DUNCANNON",
-      "MARY PERR", "MARYSVILLE",
       "RYET PERR", "RYE TWP",
       "WTFD PERR", "WHEATFIELD TWP"
 

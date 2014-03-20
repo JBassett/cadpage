@@ -3,49 +3,37 @@ package net.anei.cadpage.parsers.VA;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchOSSIParser;
 
+/*
+Wight County, VA
+Contact: "G.B. Wills III" <gbwillsiii@gmail.com>
+Sender: CAD@isleofwightUS.net
 
+11365 CENTRAL HILL RD;S CAROLINA AVE;COURTHOUSE HWY;FIRE ALARM;smoke detector zone 16 res last name babb 757-353-0490 [06/20/11 19:01:18 MPMARSH] 
+YELLOW HAMMER RD/FIRE TOWER RD;1050;[LAW] {37} ONE FINGER AND JAW/ SEC CONCUSION [06/22/11 04:02:28 SHILL] {37} HAVE INJURIES [06/22/11 04:02:04 SHILL] VSP AD: 
+23352 COURTHOUSE HWY;CONSULATE HEALTH CARE WINDSOR;KENSINGTON CT;JOYNER TOWN LN;FIRE ALARM;[LAW] WILL TRY TO CONTACT KEYHOLDER [06/22/11 12:20:01 MDUNN] zone
+77 CASTLE ST;LIBERTY AVE;BELLMONT ST;FIRE OTHER NOT LISTED;microwave hot and not in use [06/23/11 09:59:22 JTEMPLETON].   
+W WINDSOR BLVD/N PRINCE BLVD;ACCIDENT WITH INJURIES;supreme prking lot. 2 veh. chryslter pt cruiser vs dodge ram piick up [06/23/11 13:13:34 JTEMPLETON]
+
+Contact: Larry Regula <fshook03@gmail.com>
+Sender: CAD@isleofwightus.net
+CAD:1207 CARRSVILLE HWY;6D;SPRINGDALE APARTMENTS;FALLS AND RELATED INJURIES;JAMESTOWN LN;LEES MILL RD;99 yo female--has fallen, home nurse is unable to gain a
+
+ */
 public class VAIsleOfWightCountyParser extends DispatchOSSIParser {
   
   public VAIsleOfWightCountyParser() {
-    super("ISLE OF WIGHT COUNTY", "VA",
-           "FYI? ADDR APT2? DIST? ( X X? CALL | CALL X X? | PLACE CALL X X? | CALL ) INFO+");
+    super("WIGHT COUNTY", "VA",
+           "ADDR ( X X? CALL | PLACE X X? CALL | CALL ) INFO+");
   }
   
   @Override
   public String getFilter() {
-    return "@isleofwightUS.net";
+    return "CAD@isleofwightUS.net";
   }
   
   @Override
   public boolean parseMsg(String body, Data data) {
-    body = body.replace('\n', ' ');
     if (!body.startsWith("CAD:")) body = "CAD:" + body;
     return super.parseMsg(body, data);
-  }
-  
-  // Cross street doesn't permit name ending with PLACE on
-  // the theory that this is probably a place name
-  private class MyCrossField extends CrossField {
-    @Override
-    public boolean checkParse(String field, Data data) {
-      if (field.endsWith(" PLACE")) return false;
-      return super.checkParse(field, data);
-    }
-  }
-  
-  private class MyPlaceField extends PlaceField {
-    @Override
-    public void parse(String field, Data data) {
-      data.strPlace = append(field, " - ", data.strPlace);
-    }
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("APT2")) return new Apt2Field(3);
-    if (name.equals("DIST")) return new PlaceField("DIST:.*");
-    if (name.equals("PLACE")) return new MyPlaceField();
-    if (name.equals("X")) return new MyCrossField();
-    return super.getField(name);
   }
 }

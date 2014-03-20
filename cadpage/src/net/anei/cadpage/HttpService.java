@@ -5,111 +5,50 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.Process;
 
 public class HttpService extends Service {
   
-  // SSL Host Verifier that accepts everything
-  private static final HostnameVerifier PERMISSIVE_HOST_VERIFIER = new HostnameVerifier() {
-    public boolean verify(String hostname, SSLSession session) {
-      return true;
-    }
-  };
-  
-  /**
-   * Trust every server - dont check for any certificate
-   */
-  static {
-    // Create a trust manager that does not validate certificate chains
-    TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
-      public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-        return new java.security.cert.X509Certificate[] {};
-      }
-
-      public void checkClientTrusted(X509Certificate[] chain,
-          String authType) throws CertificateException {
-      }
-
-      public void checkServerTrusted(X509Certificate[] chain,
-          String authType) throws CertificateException {
-      }
-    } };
-
-    // Install the all-trusting trust manager
-    try {
-      SSLContext sc = SSLContext.getInstance("TLS");
-      sc.init(null, trustAllCerts, new java.security.SecureRandom());
-      HttpsURLConnection
-          .setDefaultSSLSocketFactory(sc.getSocketFactory());
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-  
   public static class HttpRequest {
     
     private Uri uri = null;
     private URL url = null;
-    
     private int connectTimeout = 60000;
     private int readTimeout = 30000;
-    
-    private boolean uiResult;
     
     private int status = -1;
     private String result = null;
     private String content = null;
     
     public HttpRequest(Uri uri) {
-      this(uri, false);
-    }
-    
-    public HttpRequest(Uri uri, boolean uiResult) {
       this.uri = uri;
-      this.uiResult = uiResult;
     }
     
     public HttpRequest(URL url) {
-      this(url, false);
-    }
-    
-    public HttpRequest(URL url, boolean uiResult) {
       this.url = url;
-      this.uiResult = uiResult;
     }
     
-    public HttpRequest(Uri uri, boolean uiResult, int connectTimeout, int readTimeout) {
+    public HttpRequest(Uri uri, int connectTimeout, int readTimeout) {
       this.uri = uri;
-      this.uiResult = uiResult;
       this.connectTimeout = connectTimeout;
       this.readTimeout = readTimeout;
     }
     
-    public HttpRequest(URL url, boolean uiResult, int connectTimeout, int readTimeout) {
+    public HttpRequest(URL url, int connectTimeout, int readTimeout) {
       this.url = url;
-      this.uiResult = uiResult;
       this.connectTimeout = connectTimeout;
       this.readTimeout = readTimeout;
     }
@@ -156,13 +95,8 @@ public class HttpService extends Service {
           InputStream is = null;
           try {
             connect = (HttpURLConnection)url.openConnection();
-            if (connect instanceof HttpsURLConnection) {
-              ((HttpsURLConnection)connect).setHostnameVerifier(PERMISSIVE_HOST_VERIFIER);
-            }
             connect.setConnectTimeout(connectTimeout);
             connect.setReadTimeout(readTimeout);
-            Log.v("ConnectTimeout:" + connect.getConnectTimeout());
-            Log.v("ReadTimeout:" + connect.getReadTimeout());
             connect.connect();
             status = connect.getResponseCode();
             result = connect.getResponseMessage();
@@ -178,30 +112,12 @@ public class HttpService extends Service {
             status = 408;
             result = "IO Error";
           }
-          catch (SecurityException ex) {
-            status = 408;
-            result = "Security Exception";
-          }
           finally {
             if (is != null)
               try { is.close(); } catch (IOException ex) {}
             if (connect != null) connect.disconnect();
           }
           Log.i("Result:" + status + ": " + result + '\n' + content);
-        }
-        
-        // If ansync result requested, run the result status on our worker thread
-        if (! uiResult) {
-          process();
-        }
-        
-        // Otherwise, run result processing on the UI thread
-        else {
-          CadPageApplication.getMainHandler().post(new Runnable(){
-            @Override
-            public void run() {
-              process();
-           }});
         }
       }
     }
@@ -226,10 +142,10 @@ public class HttpService extends Service {
      * @param content response contents
      */
     protected void processContent(String content) {
-      content = HTML_TAGS_PTN.matcher(content).replaceAll("");
-      processBody(content);
+      Matcher match = BODY_PTN.matcher(content);
+      if (match.find()) processBody(match.group(1));
     }
-    private static final Pattern HTML_TAGS_PTN = Pattern.compile("</?(?:html|body)/?>", Pattern.CASE_INSENSITIVE);
+    private static final Pattern BODY_PTN = Pattern.compile("<body>(.*?)</body>", Pattern.CASE_INSENSITIVE);
 
     /**
      * This will be called when the HTTP request returns a successful result
@@ -238,15 +154,20 @@ public class HttpService extends Service {
      */
     protected void processBody(String body) {}
   }
+  
+  private static Handler mHandler;
 
   // Wake lock and synchronize lock
-  private static PowerManager.WakeLock sWakeLock = null;
+  private static PowerManager.WakeLock mWakeLock = null;
   
   // Master request queue
   private static Queue<HttpRequest> reqQueue =new LinkedList<HttpRequest>();
 
   @Override
   public void onCreate() {
+    
+    // Create a handler which (we hope) will link to the main dispatch thread msg queue
+    mHandler = new Handler();
     
     // Launch the HttpServiceThread that is going to do all of the work
     new HttpServiceThread();
@@ -255,19 +176,6 @@ public class HttpService extends Service {
   @Override
   public IBinder onBind(Intent intent) {
     return null;
-  }
-
-  @Override
-  public int onStartCommand(Intent intent, int flags, int startId) {
-    if (flags != 0) holdPowerLock(this);
-    super.onStartCommand(intent, flags, startId);
-    return Service.START_REDELIVER_INTENT;
-  }
-  
-  @Override
-  public void onDestroy() {
-    Log.v("Shutting down HttpService");
-    if (sWakeLock != null) sWakeLock.release();
   }
 
   private final class HttpServiceThread extends Thread {
@@ -291,6 +199,7 @@ public class HttpService extends Service {
           synchronized(reqQueue) {
             req = reqQueue.poll();
             if (req == null) {
+              if (mWakeLock != null) mWakeLock.release();
               stopSelf();
               return;
             }
@@ -298,12 +207,24 @@ public class HttpService extends Service {
           
           // Build and fire off the Http request
           req.connect();
+          
+          // And call the request process response method on the main dispatch thread
+          final HttpRequest req2 = req;
+          mHandler.post(new Runnable(){
+            @Override
+            public void run() {
+              req2.process();
+            }});
         }
       } 
       
       // Any exceptions that get thrown should be rethrown on the dispatch thread
       catch (final Exception ex) {
-        TopExceptionHandler.reportException(ex);
+        mHandler.post(new Runnable(){
+          @Override
+          public void run() {
+            throw new RuntimeException(ex.getMessage(), ex);
+          }});
       }
     }
   }
@@ -319,7 +240,12 @@ public class HttpService extends Service {
     synchronized (reqQueue) {
       
       // If we haven't established a power wake lock, do that now.
-      holdPowerLock(context);
+      if (mWakeLock == null) {
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".HttpService");
+        mWakeLock.setReferenceCounted(false);
+      }
+      if(!mWakeLock.isHeld()) mWakeLock.acquire();
       
       // Add new request to request queue and launch the HttpService
       // We don't need to pass anything, just make sure it got started
@@ -327,16 +253,4 @@ public class HttpService extends Service {
       context.startService(new Intent(context, HttpService.class));
     }
   }
-
-  private static void holdPowerLock(Context context) {
-    synchronized (HttpService.class) {
-      if (sWakeLock == null) {
-        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        sWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, Log.LOGTAG+".HttpService");
-        sWakeLock.setReferenceCounted(false);
-      }
-      if(!sWakeLock.isHeld()) sWakeLock.acquire();
-    }
-  }
-
 }

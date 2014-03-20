@@ -1,6 +1,5 @@
 package net.anei.cadpage.parsers.MN;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
@@ -10,9 +9,26 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  * This class parses messages from some as yet unidentified CAD software vendor
  **/
 
-/**
- * Hennepin county, MN
- */
+/*
+Hennepin county, MN
+Contact: basarajoseph@gmail.com <basarajoseph@gmail.com>
+Sender: sheriff@cadpaging.co.hennepin.mm.us
+
+NAME-KENDRA;  LOC-4001 STINSON BLVD NE [#404;  EVTYPE-STROKE;  COMMENTS-POSSIBLE STROKE --- USE MAIN ENTRANCE TO THE 4TH FL
+NAME-BRINATTE,HELEN;  LOC-2626 KENZIE TER [#114 [@WALKER ON KENZIE APT;  EVTYPE-ILL;  COMMENTS-2626 KENZIE TER : cross stre
+NAME-;  LOC-2600 39TH AVE NE [#100 [@SILVER LAKE CLINIC;  EVTYPE-BREATH;  COMMENTS-2600 39TH AVE NE : cross streets : SILVE
+NAME-MRS SILGE;  LOC-3804 HIGHCREST RD [#109 [@LAKEHILL APT;  EVTYPE-ASTFIR;  COMMENTS-3804 HIGHCREST RD : cross streets : 
+NAME-areson, dale;  LOC-2512 SILVER LA [#204 [@EQUINOX APT;  EVTYPE-FALL;  COMMENTS-2512 SILVER LA : cross streets : SILVER
+NAME-SARAH;  LOC-3701 CHANDLER DR [#312 [@CHANDLER PLACE APT;  EVTYPE-ILL;  COMMENTS-3701 CHANDLER DR : cross streets : DIA
+NAME-;  LOC-3700 FOSS RD [#152;  EVTYPE-ILL;  COMMENTS-3700 FOSS RD : cross streets : CHANDLER DR  75 YO FEMALE - ILL
+NAME-STANLEY SEC;  LOC-2804 29TH AVE NE;  EVTYPE-ALMHSE;  COMMENTS-2804 29TH AVE NE: cross streets : COOLIDGE ST NE & WILSO
+NAME-DIANE;  LOC-2600 KENZIE TER [@AUTUMN WOODS APT#208;  EVTYPE-FALL;  COMMENTS-2600 KENZIE TER : cross streets : LOWRY GR
+NAME-ERIC;  LOC-3201 DIAMOND EIGHT TER [#106 [@DIAMOND EIGHT TERRACE APT;  EVTYPE-CHOKE;  COMMENTS-3201 DIAMOND EIGHT TER :
+NAME-;  LOC-3114 RANKIN RD;  EVTYPE-ALLERG;  COMMENTS-3114 RANKIN RD : cross streets : 32ND AVE NE & TOWNVIEW AVE  thinks s
+NAME-PEKAREK;  LOC-3008 RANKIN RD;  EVTYPE-HEART;  COMMENTS-3008 RANKIN RD : cross streets : EAST GATE RD & CROFT DR  43 YO
+
+*/
+
 public class MNHennepinCountyParser extends FieldProgramParser {
   
   private static final Pattern FIELD_PTN = Pattern.compile("; *([A-Z]+)-");
@@ -50,16 +66,12 @@ public class MNHennepinCountyParser extends FieldProgramParser {
   }
   
   // Cross stree field may have more info at end separated by double blanks
-  private static final Pattern CROSS_BREAK = Pattern.compile("  |\n");
   private class MyCrossField extends CrossField {
     @Override
     public void parse(String field, Data data) {
-      Matcher match = CROSS_BREAK.matcher(field);
-      if (match.find()) {
-        data.strSupp = append(data.strSupp, "\n", field.substring(match.end()).trim());
-        field = field.substring(0,match.start()).trim();
-      }
-      super.parse(field, data);
+      Parser p = new Parser(field);
+      super.parse(p.get("  "), data);
+      data.strSupp = append(data.strSupp, " / ", p.get());
     }
   }
   

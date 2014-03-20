@@ -59,24 +59,12 @@ public class ManageNotification {
       myNM.notify(notif, notification);
     }
   }
-  
-  /**
-   * @return true if some kind of notification should be launched when page is received
-   */
-  public static boolean isNotificationEnabled() {
-    return ManagePreferences.notifyEnabled() || ManagePreferences.notifyOverride();
-  }
 
   /*
    * The main notify method
    */
   public static boolean show(Context context, SmsMmsMessage message) {
-    boolean result = show(context, message, true);
-    if (result) {
-      ClearAllReceiver.setCancel(context, ManagePreferences.notifyTimeout(), 
-                                 ClearAllReceiver.ClearType.NOTIFY);
-    }
-    return result;
+    return show(context, message, true);
   }
   
   
@@ -106,7 +94,7 @@ public class ManageNotification {
     }
 
     // The default intent when the notification is clicked (Inbox)
-    Intent smsIntent = CallHistoryActivity.getLaunchIntent(context, true);
+    Intent smsIntent = CallHistoryActivity.getLaunchIntent(context);
 
     contentTitle = "Alert";
     contentText = call;
@@ -437,7 +425,7 @@ public class ManageNotification {
     // If the media player is active, we *REALLY* need an acknowledge function
     if (mMediaPlayer != null) return true;
     
-    // Otherwise, we need a acknowledge function if reminders are active
-    return ManagePreferences.notifyRepeat();
+    // Otherwise ask the Reminder Receiver it if has an active reminder out
+    return ReminderReceiver.isAckNeeded();
   }
 }

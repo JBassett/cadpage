@@ -1,13 +1,29 @@
 package net.anei.cadpage.parsers.NY;
 
 import java.util.Properties;
-import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Nassau County, NY (Massepequa)
+Contact: Rob Foley <efd6012@gmail.com>
+Sender: paging@rednmxcad.com
 
+Rescue: 100 VETERANS BLVD, Town: MASS, Cross: HICKSVILLE RD, Map: C-5, Block#: 160-NORTH, Time: 10:07:10
+Washdown/spill: 21 LARCH LN, Town: MPK, Cross: WHITEWOOD DR, Map: E-8, Block#: 878-WEST, Time: 09:30:27
+Vehicle Accident: 21 LARCH LN, Town: MPK, Cross: WHITEWOOD DR, Map: E-8, Block#: 878-WEST, Time: 09:28:13
+Automatic Alarm: 5500 SUNRISE HWY, Town: MASS, Cross: UNQUA RD, Map: G-5, Block#: 487 SOUTH, Time: 04:19:08
+Rescue: 217 EASTLAKE AVE, Town: MPK, Cross: MASSACHUSETTS AVE, Map: F-4, Block#: 262-EAST, Time: 03:35:56
+Rescue: 66 HARBOR LN, Town: MPK, Cross: NASSAU ST, Map: D-8, Block#: 820-WEST, Time: 15:31:32
+
+*/
 public class NYNassauCountyMassepequaParser extends FieldProgramParser {
+  
+  private static final Properties CITY_CODES = buildCodeTable(new String[]{
+      "MASS", "MASSEPEQUA",
+      "MPK",  "MASSEPEQUA PARK"
+  });
   
   public NYNassauCountyMassepequaParser() {
     super(CITY_CODES, "NASSAU COUNTY", "NY", 
@@ -16,7 +32,7 @@ public class NYNassauCountyMassepequaParser extends FieldProgramParser {
   
   @Override
   public String getFilter() {
-    return "paging@rednmxcad.com,massapequafd@rednmxcad.com";
+    return "paging@rednmxcad.com";
   }
   
   @Override
@@ -46,16 +62,4 @@ public class NYNassauCountyMassepequaParser extends FieldProgramParser {
     if (name.equals("ADDR")) return new MyAddressField();
     return super.getField(name);
   }
-  
-  @Override
-  public String adjustMapAddress(String address) {
-    return WESTFIELD_MALL_PTN.matcher(address).replaceAll("1 WESTFIELD MALL");
-  }
-  private static final Pattern WESTFIELD_MALL_PTN = Pattern.compile("\\b\\d+ +WESTFIELD MALL\\b", Pattern.CASE_INSENSITIVE);
-  
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "E/M",  "EAST MASSAPEQUA",
-      "MASS", "MASSAPEQUA",
-      "MPK",  "MASSAPEQUA PARK"
-  });
 }

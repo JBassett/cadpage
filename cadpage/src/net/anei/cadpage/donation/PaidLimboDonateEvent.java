@@ -17,9 +17,7 @@ public class PaidLimboDonateEvent extends DonateScreenEvent {
   
   public PaidLimboDonateEvent() {
     super(AlertStatus.YELLOW, R.string.donate_paid_limbo_title, R.string.donate_paid_limbo_text,
-           ReqMoneyGroup.instance(), 
-           MagicWordEvent.instance(),
-           DonateWhatsUpEvent.instance());
+           ReqMoneyGroup.instance(), MagicWordEvent.instance());
   }
 
   @Override
@@ -31,6 +29,9 @@ public class PaidLimboDonateEvent extends DonateScreenEvent {
   protected Object[] getTextParms(int type) {
     
     switch (type) {
+      
+    case PARM_TITLE:
+      return new Object[]{DonationManager.instance().daysTillExpire()};
       
     case PARM_TEXT:
       Date expireDate = DonationManager.instance().expireDate();

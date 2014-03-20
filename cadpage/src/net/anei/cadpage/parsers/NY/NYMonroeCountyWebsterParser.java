@@ -1,155 +1,101 @@
 package net.anei.cadpage.parsers.NY;
 
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import net.anei.cadpage.parsers.CodeTable;
+import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.StandardCodeTable;
-import net.anei.cadpage.parsers.dispatch.DispatchA7BaseParser;
 
-/**
- * Monroe County, NY (Webster) 
- */
-public class NYMonroeCountyWebsterParser extends DispatchA7BaseParser {
-  
-  private static final Pattern MARKER = Pattern.compile("^([A-Z]{4}) +B:([ 0-9]\\d{2}[A-Z0-9]?)? +(\\d[A-Z]?) +");
+/*
+Monroe County, NY (Webster) 
+Contact: Matt Micsak <wfd316@gmail.com>
+Sender: paging@rednmxcad.com
+System: Red Alert
+
+L: 701 AUDLEY END\nT: STRUCTURE FIRE\nO: \nB: \nC1: FINCHINGFIELD LA\nC2: WOODBRIDGE LA\nX: PLASTIC CONTAINER CAUGHT FIRE ON STOVE..COMP SAYS THAT CONTAINER IS SMOLD
+L: 286 PHILLIPS RD\nT: AUTOMATIC FIRE ALARM\nO: SMELTER RES - 265451\nB:\nC1: N CHIGWELL LA\nC2: MEADOW BREEZE LA\nX: FIRE ALRM ,GEN, C/C - ONLY CORNER STREET ALRM
+L: 736 BLUE CREEK DR\nT: AUTOMATIC FIRE ALARM\nO: FRANCO RESIDENCE\nB:\nC1: JOHN GLENN BL\nC2: LITHUANICA LA\nX: FIRE ALRM--SMOKE DETECTOR--UNK WHERE----C/C-----PH#
+L: 1271 FAIRPRT NINE MILE PT RD\nT: MVAIA - W/INJURIES\nO:\nB:\nC1: BAINBRIDGE LA\nC2: PLANK RD\nX: PRECAUTIONARY FOR CHEST PAIN DUE TO MVA
+
+Contact: John Overacker <joveracker@fairportfd.org>
+A: FAIF BOX: 0176\nL: 2 LEWIS ST\nT: CARDIAC/RESP-NOT BREATHING\nO: \nB: \nC1: POTTER PL\nC2: FILKINS ST\nX: 46 YO/M NOT BREATHING -- COLD TO THE TOUCH
+
+Contact: Mark Smith <smity725@gmail.com>
+Sender: chilifd@rednmxcad.com
+L: 50 COTTAGE GROVE CI BOX: 0622\nT: CHIE - 6D2 : TRB BREATHING- DIFF SPEAKING            \nB: ROCH PRESB  PH:\nC1: BUFFALO RD\nC2: DEAD END\nX: 43 YO F PROB BREAT
+
+*/
+
+
+public class NYMonroeCountyWebsterParser extends FieldProgramParser {
   
   public NYMonroeCountyWebsterParser() {
     super(CITY_CODES, "MONROE COUNTY", "NY",
-          "BOX:BOX? L:ADDR! BOX:BOX? T:CALL! O:NAME? B:PLACE? PH:PHONE? C1:X? C2:X? X:INFO!");
+          "BOX:BOX? L:ADDR! BOX:BOX? T:CALL! O:NAME? B:PLACE! PH:PHONE? C1:X! C2:X! X:INFO!");
   }
   
   @Override
   public String getFilter() {
-    return "@rednmxcad.com,messaging@iamresponding.com,pagerchanges@monroecounty.gov";
+    return "@rednmxcad.com";
   }
 
   @Override
   protected boolean parseMsg(String body, Data data) {
-    int pt = body.indexOf("\n\n");
-    if (pt >= 0) body = body.substring(0,pt).trim();
-    body = body.replace('\n', ' ').trim();
-    Matcher match = MARKER.matcher(body);
-    if (match.find()) {
-      data.strSource = match.group(1);
-      data.strBox = getOptGroup(match.group(2));
-      data.strPriority = match.group(3);
-      body = body.substring(match.end()).trim();
-    }
-    if (!body.startsWith("L:") && !body.startsWith("A:") && !body.startsWith("BOX:")) body = "L:" + body;
-    if (!super.parseMsg(body, data)) return false;
-    if (data.strSupp.startsWith(",")) data.strSupp = data.strSupp.substring(1).trim();
-    return true;
+    body = body.replace(" BOX:", "\nBOX:").replace(" PH:", "\nPH:");
+    return parseFields(body.split("\n"), data);
   }
-  
-  @Override
-  public String adjustMapAddress(String addr) {
-    // PK is abbreviation of PARK instead of the expected PIKE
-    addr = PK_PATTERN.matcher(addr).replaceAll("PARK");
-    addr = SPENCERPRT_PTN.matcher(addr).replaceAll("SPENCERPORT");
-    addr = OGDENPARMATL_PTN.matcher(addr).replaceAll("OGDEN PARMA TOWN LINE");
-    return addr;
-  }
-  private static final Pattern PK_PATTERN = Pattern.compile("\\bPK\\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern SPENCERPRT_PTN = Pattern.compile("\\bSPENCERPRT\\b", Pattern.CASE_INSENSITIVE);
-  private static final Pattern OGDENPARMATL_PTN = Pattern.compile("\\bOGDEN PARMA T ?L\\b", Pattern.CASE_INSENSITIVE);
-  
-  @Override
-  public String getProgram() {
-    return "SRC BOX PRI " + super.getProgram();
-  }
-  
-  private class MyCallField extends CallField {
-    @Override
-    public void parse(String field, Data data) {
-      String call = CALL_CODES.getCodeDescription(field);
-      if (call != null) {
-        data.strCode = field;
-        data.strCall = call;
-      } else {
-        data.strCall = field;
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CODE CALL";
-    }
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("CALL")) return new MyCallField();
-    return super.getField(name);
-  }
-  
-  private static final CodeTable CALL_CODES = new StandardCodeTable();
   
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      
-      "AVO", "AVON",
-      "BAT", "BATAVIA",
-      "BER", "BERGEN",
-      "BRI", "BRIGHTON",
-      "BRO", "BROCKPORT",
-      "BRS", "BRISTOL",
-      "CAL", "CALEDONIA",
-      "CHI", "CHILI",
-      "CHU", "CHURCHVILLE",
-      "CLA", "CLARKSON",
-      "CLR", "CLARENDON",
-      "ERO", "EAST ROCHESTER",
-      "FAI", "FAIRPORT",
-      "FAR", "FARMINGTON",
-      "FRP", "FAIRPORT",
-      "GAT", "GATES",
-      "GRE", "GREECE",
-      "HAM", "HAMLIN",
-      "HEN", "HENRIETTA",
-      "HIL", "HILTON",
-      "HFL", "HONEOYE FALLS",
-      "HOL", "HOLEY",
-      "HON", "HONEOYE FALLS",
-      "IRO", "IRONDEQUOIT",
-      "KEN", "KENDALL",
-      "LER", "LEROY",
-      "LIM", "LIMA",
-      "LIV", "LIVONIA",
-      "LYN", "LYONS",
-      "MAC", "MACEDON",
-      "MAR", "MARION",
-      "MED", "MEDINA",
-      "MEN", "MENDON",
-      "MUR", "MURRAY",
-      "NEW", "NEWARK",
-      "OGD", "OGDEN",
-      "ONT", "ONTARIO",
-      "PAL", "PALMYRA",
-      "PAR", "PARMA",
-      "PEN", "PENFIELD",
-      "PER", "PERINTON",
-      "PIT", "PITTSFORD",
-      "PIV", "PITTSFORD",
-      "RIG", "RIGA",
-      "ROC", "ROCHESTER",
-      "RUS", "RUSH",
-      "SAV", "SAVANNAH",
-      "SCO", "SCOTTSVILLE",
-      "SOD", "SODUS",
-      "SPE", "SPENCERPORT",
-      "SWE", "SWEDEN",
-      "VIC", "VICTOR",
-      "WAL", "WALWORTH",
-      "WBL", "WEST BLOOMFIELD",
-      "WBT", "WEBSTER",
-      "WBV", "WEBSTER",
-      "WEB", "WEBSTER",
-      "WHE", "WHEATLAND",
-      "WLM", "WILLIAMSON",
-      "VIC", "VICTOR"
-      
+      "AL", "Aldan",
+      "AS", "Aston Twp",
+      "BE", "Bethel Twp",
+      "BM", "Birmingham Twp",
+      "BR", "Brookhaven",
+      "CC", "City Of Chester",
+      "CF", "Chadds Ford Twp",
+      "CH", "Chester Heights",
+      "CL", "Clifton Heights",
+      "CN", "Concord Twp",
+      "CO", "Collingdale",
+      "CW", "Colwyn",
+      "DB", "Darby",
+      "DT", "Darby Twp",
+      "ED", "Eddystone",
+      "EG", "Edgemont Twp",
+      "EL", "East Lansdowne",
+      "ES", "Essington Section Of Tinnicum Twp",
+      "FL", "Folcroft",
+      "GL", "Glenolden",
+      "HV", "Haverford Twp",
+      "LA", "Lansdowne",
+      "LC", "Lower Chichester Twp",
+      "LS", "Lester Section Of Tinnicum Twp",
+      "MB", "Millbourne",
+      "MD", "MiddletownTwp",
+      "ME", "Media",
+      "MH", "Marcus Hook",
+      "MO", "Morton",
+      "MP", "Marple Twp",
+      "NP", "Nether Providence Twp",
+      "NT", "Newtown Twp",
+      "NW", "Norwood",
+      "PK", "Parkside",
+      "PP", "Prospect Park",
+      "RN", "RadnorTwp",
+      "RP", "Ridley Park",
+      "RT", "RidleyTwp",
+      "RU", "Rutledge",
+      "RV", "Rose Valley",
+      "SH", "Sharon Hill",
+      "SP", "Springfield Twp",
+      "SW", "Swarthmore",
+      "TC", "Chester Twp",
+      "TN", "Tinnicum Twp",
+      "TR", "Trainer",
+      "UC", "Upper Chichester Twp",
+      "UD", "Upper Darby Twp",
+      "UL", "Upland",
+      "UP", "Upper Providence Twp",
+      "YE", "Yeadon",
   });
   
 }

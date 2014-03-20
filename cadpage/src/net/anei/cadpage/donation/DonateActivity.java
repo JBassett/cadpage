@@ -1,12 +1,11 @@
 package net.anei.cadpage.donation;
 
-import net.anei.cadpage.Safe40Activity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
-public class DonateActivity extends Safe40Activity {
+public class DonateActivity extends Activity {
   
   private static final String EXTRA_SCREEN_NAME = "net.anei.cadpage.DonateActivty.SCREEN_NAME";
 
@@ -33,7 +32,6 @@ public class DonateActivity extends Safe40Activity {
 
   @Override
   protected Dialog onCreateDialog(int id) {
-    if (isFinishing()) return null;
     return event.createDialog(this, id);
   }
 

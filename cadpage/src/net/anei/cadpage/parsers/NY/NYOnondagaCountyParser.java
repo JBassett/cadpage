@@ -12,10 +12,7 @@ Onondaga County, NY
 public class NYOnondagaCountyParser extends GroupBestParser {
 
   public NYOnondagaCountyParser() {
-    super(new NYOnondagaCountyAParser(), 
-           new NYOnondagaCountyBParser(),
-           new NYOnondagaCountyCParser(),
-           new NYOnondagaCountyDParser());
+    super(new NYOnondagaCountyAParser(), new NYOnondagaCountyBParser());
   }
 }
 	

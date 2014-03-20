@@ -3,120 +3,81 @@ package net.anei.cadpage.parsers.SD;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.anei.cadpage.parsers.CodeSet;
+import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.SmartAddressParser;
 
-/**
- * Pennington County, SD
- */
-public class SDPenningtonCountyParser extends SmartAddressParser {
-  
-  private static final Pattern UNIT_PTN = Pattern.compile("^([A-Z0-9]+) +\\(Primary\\);? *");
-  private static final Pattern DATE_TIME_PTN = Pattern.compile("[- ]*\\b(\\d\\d/\\d\\d/\\d\\d) +(\\d\\d:\\d\\d(?::\\d\\d)?)\\b[- ]*");
-  private static final Pattern CITY_PTN = Pattern.compile("(.*?) *, *([A-Z ]+?) *, SD +\\d{5} *(.*?)");
-  private static final Pattern CODE_PTN1 = Pattern.compile(" *\\bCode: *([-A-Z0-9]+): *");
-  private static final Pattern CODE_PTN2 = Pattern.compile("^Code: *([-A-Z0-9]+): *");
-  
+/*
+Pennington county, SD
+Contact: josh van Vlack <joshvanvlack@live.com>
+Sender: dispatch@co.pennington.sd.us
+
+(page ) Unit:29H1 Status:dispatched diabetic 12823 old hill city rd pennco Problem: blood sugar issues. Patient info: 1 patient(s) 58 years old; female
+(page ) Unit:29H1 Status:dispatched seizure 209 Main St Hill City Cafe ProQA Medical Dispatch Message Sent; Dispatch code: 12-D-02 Problem :SE
+(page ) Unit:HC Status:Dispatched FALARM 23835 Highway 385 Mistletoe Ranch pennco fire alarm showing downstairs smoke detector DEPT56. PREM PHONE 605-574-2512
+(page ) Unit:HC Status:dispatched Falarm 602 Main St Hillyo Manor Hill City Pull Station fire alarm prem#605-574-2476
+(page ) Unit:29H2 Status:Dispatched fall 302 Main Street Hill city Elementary Hill City ProQA medical dispatch code 17-b-01G
+(page ) Unit:29H2 Status:dispatched breath 745 chute Rooster dr Matkins trailer court Hill City ProQA medical dispatch message sent; dispatch code: 06
+(page ) Unit:29H2 Status:EMS 133 Main St Alpine Inn hill city unk age/unk specifics/rp will come back to the phone/possible heart attack
+(page ) Unit:29H1 Status:disatched EMS 557 e main street Hill City call at the Hill City Clinic
+(page ) Unit:29H1 Status:dispatched breath 101 main st exxon Hill City 52 year old, male, conscious, breathing, breathing problems. difficulty speaking
+(page ) Unit:29H1 Status:Dispatched Stroke 24185 Tin Horse Trl pennco 61 year old, female, conscious, breathing, abnormal breathing (clear evidence of stroke)
+
+Contact: Alexander Ingalls <alexingalls09@gmail.com>
+(Page ) Unit:RV Status:DISPATCHED FIRE 300 E  SIGNAL DR NATIONAL WEATHER SERVICERapid City  1/4 ACRE MOVING TO THE WEST TOWARDS THE TALL GRASS.  1/4 ACRE
+(Page ) Unit:RV Status:DISPATCHED SUIC 2064 S VALLEY DR PENNCO  RPT**  MALE SUBJ HUNG HIMSELF AT ABOVE LOC  13:10
+
+*/
+
+public class SDPenningtonCountyParser extends FieldProgramParser {
+ 
   public SDPenningtonCountyParser() {
-    super(CITY_LIST, "PENNINGTON COUNTY", "SD");
-    setFieldList("UNIT CALL ADDR APT CITY CODE INFO DATE TIME");
-    setupCallList(CALL_LIST);
+    super(CITY_LIST, "PENNINGTON COUNTY", "SD",
+           "Unit:UNIT! Status:STATUS! Problem:INFO Patient_info:INFO");
   }
-
+  
   @Override
   public String getFilter() {
-    return "dispatch@co.pennington.sd.us,dispatch@pennco.org";
+    return "dispatch@co.pennington.sd.us";
   }
   
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
-    if (!subject.equalsIgnoreCase("Dispatch")) return false;
-    
-    // Parser unit information
-    while (true) {
-      Matcher match = UNIT_PTN.matcher(body);
-      if (!match.find()) break;
-      data.strUnit = append(data.strUnit, " ", match.group(1));
-      body = body.substring(match.end());
-    }
-    if (data.strUnit.length() == 0) return false;
-    
-    // Process Date/time splits 
-    Matcher match = DATE_TIME_PTN.matcher(body);
-    if (match.find()) {
-      data.strDate = match.group(1);
-      data.strTime = match.group(2);
-      String save = body.substring(0,match.start());
-      int last = match.end();
-      String info = "";
-      while (match.find()) {
-        data.strDate = match.group(1);
-        data.strTime = match.group(2);
-        info = append(info, "\n", body.substring(last,match.start()));
-        last = match.end();
-      }
-      data.strSupp = append(info, "\n", body.substring(last));
-      body = save;
-    }
-    
-    String callAddr = null;
-    match = CITY_PTN.matcher(body);
-    if (match.matches()) {
-      callAddr = match.group(1);
-      data.strCity = match.group(2);
-      body = match.group(3);
-    } else {
-      int pt = body.indexOf(',');
-      if (pt >= 0) {
-        String extra = body.substring(pt+1).trim();
-        parseAddress(StartType.START_ADDR, FLAG_ONLY_CITY, extra, data);
-        if (data.strCity.length() > 0) {
-          callAddr =  body.substring(0,pt).trim();
-          body = getLeft();
-        }
-      }
-    }
-    if (callAddr != null) {
-      parseAddress(StartType.START_CALL, FLAG_START_FLD_REQ | FLAG_IGNORE_AT | FLAG_NO_CITY | FLAG_ANCHOR_END, callAddr, data);
-      if (data.strCode.length() == 0) {
-        match = CODE_PTN2.matcher(body);
-        if (match.find()) {
-          data.strCode = match.group(1);
-          body = body.substring(match.end());
-        }
-      }
-      data.strSupp = append(data.strSupp, "\n", body);
-    } else {
-      parseAddress(StartType.START_CALL, FLAG_START_FLD_REQ | FLAG_IGNORE_AT, body, data);
-      if (data.strAddress.length() == 0) return false;
-      String info = getLeft();
-      match = CODE_PTN1.matcher(info);
-      if (match.find()) {
-        data.strCode = match.group(1);
-        info = append(info.substring(0,match.start()), " / ", info.substring(match.end()));
-      }
-      data.strSupp = append(data.strSupp, "\n", info);
-    }
-    if (data.strCity.equals("PENNCO")) data.strCity = "";
-    return true;
+    if (!subject.equalsIgnoreCase("page")) return false;
+    return super.parseMsg(body, data);
   }
   
-  private static final CodeSet CALL_LIST = new CodeSet(
-      "BREATH",
-      "CARDIAC-E",
-      "CHEST",
-      "CHEST-D",
-      "FALARM DELTA",
-      "FALARM",
-      "SICK",
-      "SMFIRE",
-      "SICK PERSON DELTA LEVEL"
-  );
+  private static final Pattern CODE_PTN = Pattern.compile("\\b\\d{1,2}-[A-Za-z]-\\d{1,2}[A-Za-z]?\\b");
+  private class StatusField extends AddressField {
+    
+    @Override
+    public void parse(String field, Data data) {
+      int pt = field.indexOf(" ProQA ");
+      if (pt > 0) {
+        Matcher match = CODE_PTN.matcher(field);
+        if (match.find(pt+7)) {
+          data.strCode = match.group();
+        }
+        field = field.substring(0,pt).trim();
+      }
+      parseAddress(StartType.START_CALL, FLAG_PAD_FIELD | FLAG_IGNORE_AT, field, data);
+      data.strPlace = getPadField();
+      data.strSupp = getLeft();
+      if (data.strCity.equalsIgnoreCase("PENNCO")) data.strCity = "";
+    }
+    
+    @Override
+    public String getFieldNames() {
+      return "CALL ADDR APT PLACE CITY INFO CODE";
+    }
+  }
+  
+  @Override
+  public Field getField(String name) {
+    if (name.equals("STATUS")) return new StatusField();
+    return super.getField(name);
+  }
   
   private static final String[] CITY_LIST = new String[]{
-    "PENNCO",
-    
     "ASHLAND HEIGHTS",
     "COLONIAL PINE HILLS",
     "CREIGHTON",
@@ -131,19 +92,7 @@ public class SDPenningtonCountyParser extends SmartAddressParser {
     "WALL",
     "WASTA",
     "WICKSVILLE",
-    "PENNCO",
     
-    "ELK VALE",
-    "ELLSWORTH AFB",
-    "MUD BUTTE",
-    "PIEDMONT",
-    "TILFORD",
-    "WHITE OWL",
-    "BOX ELDER",
-    "STURGIS",
-    "BLACKHAWK",
-    "SUMMERSET",
-    "FAITH",
-    "MEADCO"
+    "PENNCO"
   };
 }

@@ -1,19 +1,30 @@
 package net.anei.cadpage.parsers.NC;
 
-/**
- * Union County, NC
- */
-import java.util.regex.Pattern;
-
-import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchOSSIParser;
 
+/* 
+Union County, NC
+Contact: David Bruce <dbruce0571@gmail.com>
+Sender: cad@uc.co.union.nc.us
+
+CAD:3711 WHITE STORE RD;WINGATE;OUTSIDE FIRE;S09;WITMORE RD;NASH RD;02/15/2011 13:21:38
+CAD:3812 E HWY 74;WINGATE;SICK PERSON EMD;S09;FX-CF2;BIVENS ST;N STEWART ST;02/18/2011 16:03:05;FOOD LION WINGATE
+
+Contact: James Murray <jmurray1555@gmail.com>
+Sender: CAD@co.union.nc.us
+CAD:3626 HAYES RD;INDIAN TRAIL;BREATHING PROBLEMS EMD;S19;BR-2;OLD CHARLOTTE HWY;OLD CHARLOTTE HWY;09/26/2011 19:37:34
+
+Contact: Scott Kimrey <skimrey@windstream.net>
+Sender: CAD@co.union.nc.us
+CAD:604 SUNSET ST;MARSHVILLE;STRUCTURE FIRE EFD;CFD;S08
+
+*/
 
 public class NCUnionCountyParser extends DispatchOSSIParser {
   
   public NCUnionCountyParser() {
-    super(CITY_LIST, "UNION COUNTY", "NC",
-           "( CANCEL ADDR CITY? ID? | FYI? ID? ADDR CITY? ID? CALL ) SRC? CUSTOM? INFO+? DATETIME ID? PLACE");
+    super("UNION COUNTY", "NC",
+           "ADDR CITY CALL SRC! INFO X/Z+? DATETIME PLACE");
   }
   
   @Override
@@ -21,84 +32,9 @@ public class NCUnionCountyParser extends DispatchOSSIParser {
     return "cad@uc.co.union.nc.us,cad@webmail.co.union.nc.us,cad@co.union.nc.us";
   }
   
-  // Custom field is an optional 6 characater field that
-  // different departments use for different purposes.  We will look at the
-  // previous source field to figure out which department this is and what
-  // they want us to do with it.
-  
-  private static final Pattern SRC_CHANNEL_PTN = Pattern.compile("S\\d\\d");
-  private class CustomField extends Field {
-    
-    @Override
-    public boolean canFail() {
-      return true;
-    }
-    
-    @Override
-    public boolean checkParse(String field, Data data) {
-      if (field.length() > 6 || field.contains(" ")) return false;
-      parse(field, data);
-      return true;
-    }
-
-    @Override
-    public void parse(String field, Data data) {
-      if (SRC_CHANNEL_PTN.matcher(data.strSource).matches()) {
-        data.strChannel = field;
-      } else {
-        data.strUnit = field;
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "UNIT CH";
-    }
-  }
-  
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      if (checkAddress(field) > 0) {
-        data.strCross = append(data.strCross, " & ", field);
-      } else if (data.strPlace.length() == 0) {
-        data.strPlace = field;
-      } else {
-        data.strSupp = append(data.strSupp, " / ", field);
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "X PLACE INFO";
-    }
-  }
-  
   @Override
   protected Field getField(String name) {
-    if (name.equals("CANCEL")) return new CallField("CANCEL|UNDER CONTROL");
-    if (name.equals("SRC")) return new SourceField("[A-Z0-9]{2,4}", true);
-    if (name.equals("CUSTOM")) return new CustomField();
-    if (name.equals("INFO")) return new MyInfoField();
     if (name.equals("DATETIME")) return new DateTimeField("\\d\\d/\\d\\d/\\d{4} \\d\\d:\\d\\d:\\d\\d");
-    if (name.equals("ID")) return new IdField("\\d{5,}");
     return super.getField(name);
   }
-  
-  private static final String[] CITY_LIST = new String[]{
-    "FAIRVIEW",
-    "HEMBY BRIDGE",
-    "INDIAN TRAIL",
-    "LAKE PARK",
-    "MARSHVILLE",
-    "MARVIN",
-    "MINERAL SPRINGS",
-    "MONROE",
-    "STALLINGS",
-    "UNIONVILLE",
-    "WAXHAW",
-    "WEDDINGTON",
-    "WESLEY CHAPEL",
-    "WINGATE"
-  };
 }

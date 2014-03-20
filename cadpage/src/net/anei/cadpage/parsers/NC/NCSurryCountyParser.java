@@ -1,63 +1,43 @@
 package net.anei.cadpage.parsers.NC;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.SmartAddressParser;
 
-/**
- * Surry County, NC
- */
-public class NCSurryCountyParser extends SmartAddressParser {
-  
-  private static final Pattern MASTER = Pattern.compile("SC911::?(?:Call #|=)(\\d{6,}-\\d{4}) \\[(?:Address|Location)\\] (.*?) \\[X St\\] (.*?) \\[Type\\] (.*)");
+/* 
+Surry County, NC
+Contact: Zackary Welch <zwelch85@gmail.com>
+Sender: SC911-CallAlert!!@co.surry.nc.us
+
+SC911-CallAlert!!@co.surry.nc.us S: M:SC911 - Call Alert!!:Call Number - 110425-043* Address - 105 DUTCH LN* City - MOUNT AIRY* Call Type - CARDIAC D* *﻿
+SC911-CallAlert!!@co.surry.nc.us S: M:SC911 - Call Alert!!:Call Number - 110424-196* Address - 1642 S MAIN ST* City - MOUNT AIRY* Call Type - RESP DIS D* *﻿
+SC911-CallAlert!!@co.surry.nc.us S: M:SC911 - Call Alert!!:Call Number - 110424-100* Address - 120 W PINE ST* City - MOUNT AIRY* Call Type - UNRESPONSIVE* *﻿
+SC911-CallAlert!!@co.surry.nc.us S: M:SC911 - Call Alert!!:Call Number - 110420-120* Address - 70 MAYBERRY MALL RD* City - MOUNT AIRY* Call Type - FALL* *﻿
+SC911-CallAlert!!@co.surry.nc.us S: M:SC911 - Call Alert!!:Call Number - 110419-061* Address - 908 REEVES DR* City - MOUNT AIRY* Call Type - CARD ARR E* *﻿
+SC911-CallAlert!!@co.surry.nc.us S: M:SC911 - Call Alert!!:Call Number - 110419-291* Address - 1053 N MAIN ST* City - MOUNT AIRY* Call Type - SICK C* *﻿
+SC911-CallAlert!!@co.surry.nc.us S: M:SC911 - Call Alert!!:Call Number - 110430-103* Address - 1020 NEWSOME ST* City - MOUNT AIRY* Call Type - ACCIDENT PI* *
+
+Contact: Adam Eldridge <nshsbball25@gmail.com>
+SC911-CallAlert!!@co.surry.nc.us SC911 - Call Alert!!:Call Number - 110906-334* Address - 304 JEFFERIES ST* City - MOUNT AIRY* Call Type - LIFELINE* * 
+
+*/
+
+public class NCSurryCountyParser extends FieldProgramParser {
   
   public NCSurryCountyParser() {
-    super(CITY_LIST, "SURRY COUNTY", "NC");
-    setFieldList("ID ADDR APT CITY X CALL");
+    super("SURRY COUNTY", "NC",
+        "Call_Number:ID! Address:ADDR! City:CITY! Call_Type:CALL!");
   }
   
   @Override
   public String getFilter() {
-    return "SC911:@co.surry.nc.us,sc911@co.surry.nc.us";
+    return "SC911-CallAlert!!@co.surry.nc.us";
   }
   
   @Override
   public boolean parseMsg(String body, Data data) {
-    Matcher match = MASTER.matcher(body);
-    if (!match.matches()) return false;
-    data.strCallId = match.group(1);
-    String addr = match.group(2).replace("//", "&").trim();
-    String state = null;
-    int pt = addr.lastIndexOf(',');
-    if (pt >= 0) {
-      state = addr.substring(pt+1).trim();
-      addr = addr.substring(0,pt).trim();
-    }
-    parseAddress(StartType.START_ADDR, FLAG_ANCHOR_END, addr, data);
-    if (state != null) {
-      if (state.length() == 2) {
-        if (!state.equals(data.defState)) data.strState = state; 
-      } else if (data.strCity.length() == 0) {
-        data.strCity = state;
-      }
-    }
-    
-    data.strCross = match.group(3).trim().replace(" TO ", " & ");
-    if (data.strCross.equals("TO")) data.strCross = "";
-    else if (data.strCross.endsWith(" TO")) {
-      data.strCross = data.strCross.substring(0,data.strCross.length()-3).trim();
-    }
-    data.strCall = match.group(4).trim();
-    return true;
+    if (!body.startsWith("SC911 - Call Alert!!:")) return false;
+    body = body.substring(21).trim();
+    body = body.replace(" - ", ": ");
+    return parseFields(body.split("\\*"),data);
   }
-  
-  private static final String[] CITY_LIST = new String[]{
-    "DOBSON",
-    "ELKIN",
-    "MOUNT AIRY",
-    "PILOT MOUNTAIN",
-    "SURRY COUNTY"
-  };
 }

@@ -1,15 +1,34 @@
 package net.anei.cadpage.parsers.IL;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Properties;
-import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchProQAParser;
 
+/*
+Medstar IL (Medical only in Randolf, Clinton, and St Clair counties)
+Contact: l.keirstead@yahoo.com,6154407605@vzwpix.com
+Sender: emsdispatch@medstarems.net
+System: ProQA
+[- part 1 of 1]  RC:Run# 34870/64 WEST BOUND//across from weight station/////male subj white car hit by a truck isp en route/<PROQA_DET>
+[- part 1 of 1]  RC:Run# 34859/505 LEMANS WAY///SCC PG 15/FAIRVIEW HEIGHTS///55yof unc diff b possible overdose on pills - adavan tramadol/<PROQA_DET>
+[- part 1 of 1]  RC:Run# 34577/20 KINDER ST//cah/SCC PG 11/EAST SAINT LOUIS///31f c/b chest and back px cardiac hx  ProQA comments: chest px/10D04
+[- part 1 of 1]  RC:Run# 34384/1308 CORLISS//westinghouse and n greenmount//SHILO///38m c/b rapid heart rate/<PROQA_DET>
+[- part 1 of 1]  RC:Run# 34620/13 LOISEL DR///SCC PG 14/EAST SAINT LOUIS///70 M C/B CONFUSED ProQA comments: UNK/31D03
+(- part 1 of 1) RC:Run# 35456/STATE HWY 157 & STATE HWY 15//Centerville/SCC PG 13/EAST SAINT LOUIS///pedestian struck/<PROQA_DET>
+
+** Dispatch oopsie **
+(- part 1 of 1) RC:Run# 35411/St Elizabeths B'vll/IN PATIENT/634 1/SCC PG 26/BELLEVILLE/119 KENSINGTON HEIGHTS RD//f extreme weakness unable to support s
+
+Contact: Scott Fry <emtbasic12@gmail.com>
+1 of 2\nFRM:emsdispatch@medstarems.net\nSUBJ:- part 1 of 1\nMSG:RC:Run# 17158/St Elizabeths B'vll/IN PATIENT/347-2/SCC PG26/BELLEVILLE/429 S MAIN\n(Con't) 2 of 2\nST//CONFUSED POSS COMBATIVE NSE PCS AND FACESHEET REQ ***MEDICARE****\n(End)
+
+Contact: Mark Bearth <mark.bearth@gmail.com>
+RC:Run# 17411/451 3RD ST////BECKEMEYER///ST ANTHONY'S CHURCH  75YOM UNC/BREATHING NURSE ON SCENE ProQA comme
+
+
+ */
 
 
 public class ILMedstarParser extends DispatchProQAParser {
@@ -18,9 +37,8 @@ public class ILMedstarParser extends DispatchProQAParser {
       "SCC", "ST CLAIR COUNTY"
   });
   
-  private static final Pattern MAP_PAT = Pattern.compile("(.*?) +PG *(\\d+)");
-  private static final Pattern APT_PAT = Pattern.compile("(?:RM|ROOM|APT|SUITE) .*|[-\\d ]+", Pattern.CASE_INSENSITIVE);
-  private static final Pattern CROSS_PAT = Pattern.compile(".*(?:&| AND ).*", Pattern.CASE_INSENSITIVE);
+  private static final Pattern CITY_PAT = Pattern.compile("[ A-Z]+");
+      
   
   public ILMedstarParser() {
     super(COUNTY_CODES, "", "IL", null);
@@ -29,13 +47,6 @@ public class ILMedstarParser extends DispatchProQAParser {
   @Override
   public String getFilter() {
     return "emsdispatch@medstarems.net";
-  }
-  
-  @Override
-  public boolean parseMsg(String body, Data data) {
-    int pt = body.indexOf("ProQA comments:");
-    if (pt >= 0) body = body.substring(0,pt).trim();
-    return super.parseMsg(body,  data);
   }
   
   @Override
@@ -57,190 +68,36 @@ public class ILMedstarParser extends DispatchProQAParser {
       // After that things get complicated  
       case 2:
         
-        // See if it has a room signature
-        if (APT_PAT.matcher(fld).matches()) {
-          data.strApt = fld;
-          break;
-        }
-        
         // Short 3 character fields are asssumed to be dispatcher initials
         // and ignored
         if (fld.length() <= 3) break;
         
         // Anything with a ' PG ' in it should be a county code and map page number
-        Matcher match = MAP_PAT.matcher(fld);
-        if (match.matches()) {
-          data.strCity = convertCodes(match.group(1), COUNTY_CODES);
-          data.strMap = match.group(2);
+        int pt = fld.indexOf(" PG ");
+        if (pt >= 0) {
+          data.strCity = convertCodes(fld.substring(0, pt).trim(), COUNTY_CODES);
+          data.strMap = fld.substring(pt+4).trim();
           break;
         }
         
         // Anything consisting of blanks and upper case letters is assumed to be a city
         // Any regular text lines found up to know become cross streets
-        if (CITY_SET.contains(fld.toUpperCase())) {
-          if (fld.equalsIgnoreCase("SHILO")) fld = "SHILOH";
+        if (CITY_PAT.matcher(fld).matches()) {
           data.strCity = fld;
-          fld = append(data.strCall, " / ", data.strSupp);
-          if (CROSS_PAT.matcher(data.strCall).matches()) {
-            data.strCross = fld;
-          } else {
-            data.strPlace = fld;
-          }
-          data.strCall = data.strSupp = "";
+          data.strCross = data.strCall;
+          data.strCall = "";
           ndx++;
           break;
         }
         
-        // Otherwise fall through case and treat as call or info text
+        // Otherwise fall through case and treat as call text
       case 3:
         if (fld.equals("<PROQA_DET>")) break;
-        if (data.strCall.length() == 0) {
-          data.strCall = fld;
-        } else if (data.strSupp.length() > 0) {
-          data.strSupp = data.strSupp + " / " + fld;
-        } else if (isCallExtend(data.strCall, fld)) {
-          data.strCall = data.strCall + "/" + fld;
-        } else {
-          data.strSupp = fld;
-        }
+        if (data.strCall.length() > 0) data.strCall += " / ";
+        data.strCall += fld;
         break;
       }
     }
     return true;
   }
-  
-  private boolean isCallExtend(String call, String info) {
-    call = call.toUpperCase();
-    info = info.toUpperCase();
-    if (call.endsWith(" C") && info.startsWith("B ")) return true;
-    if (call.endsWith(" Y") && info.startsWith("O ")) return true;
-    if (info.equals("SUICIDE ATTEMPT")) return true;
-    if (info.equals("RAPE")) return true;
-    if (info.startsWith("BACK INJURIES")) return true;
-    if (info.startsWith("LACERATIONS")) return true;
-    if (info.startsWith("FAINTING")) return true;
-    return false;
-  }
-  
-  private static final Set<String> CITY_SET = new HashSet<String>(Arrays.asList(new String[]{
-      // Clinton County
-      
-      // Cities
-      "BREESE",
-      "CARLYLE",
-      "CENTRALIA",
-      "TRENTON",
-      // Villages
-      "ALBERS",
-      "AVISTON",
-      "BARTELSO",
-      "BECKEMEYER",
-      "DAMIANSVILLE",
-      "GERMANTOWN",
-      "HOFFMAN",
-      "KEYESPORT",
-      "HUEY",
-      "NEW BADEN",
-      "ST ROSE",
-      // Townships
-      "BREESE",
-      "BROOKSIDE",
-      "CARLYLE",
-      "CLEMENT",
-      "EAST FORK",
-      "GERMANTOWN",
-      "IRISHTOWN",
-      "LAKE",
-      "LOOKING GLASS",
-      "MERIDIAN",
-      "SAINT ROSE",
-      "SANTA FE",
-      "SUGAR CREEK",
-      "WADE",
-      "WHEATFIELD",
-      
-      // St Clair County
-      
-      // Cities and Towns
-      "ALORTON",
-      "BELLEVILLE",
-      "BROOKLYN",
-      "CAHOKIA",
-      "CASEYVILLE",
-      "CENTREVILLE",
-      "COLLINSVILLE",
-      "DUPO",
-      "EAST CARONDELET",
-      "EAST ST LOUIS",
-      "EAST SAINT LOUIS",
-      "FAIRMONT CITY",
-      "FAIRVIEW HEIGHTS",
-      "FAYETTEVILLE",
-      "FREEBURG",
-      "LEBANON",
-      "LENZBURG",
-      "MARISSA",
-      "MASCOUTAH",
-      "MILLSTADT",
-      "NEW ATHENS",
-      "O'FALLON",
-      "SAUGET",
-      "SCOTT AFB",
-      "SHILOH",
-      "SHILO",    // Dispatch typo
-      "SMITHTON",
-      "ST. LIBORY",
-      "SUMMERFIELD",
-      "SWANSEA",
-      "WASHINGTON PARK",
-      // Townships
-      "BELLEVILLE",
-      "CANTEEN",
-      "CASEYVILLE",
-      "CENTREVILLE",
-      "ENGELMANN",
-      "FAYETTEVILLE",
-      "FREEBURG",
-      "LEBANON",
-      "LENZBURG",
-      "MARISSA",
-      "MASCOUTAH",
-      "MILLSTADT",
-      "NEW ATHENS",
-      "O'FALLON",
-      "PRAIRIE DU LONG",
-      "ST CLAIR",
-      "SHILOH VALLEY",
-      "SMITHTON",
-      "STITES",
-      "STOOKEY",
-      "SUGARLOAF",
-      
-      // Randolf County
-      
-      // Cities and Towns
-      "BALDWIN",
-      "CHESTER",
-      "COULTERVILLE",
-      "ELLIS GROVE",
-      "EVANSVILLE",
-      "KASKASKIA",
-      "PERCY",
-      "PRAIRIE DU ROCHER",
-      "RED BUD",
-      "ROCKWOOD",
-      "RUMA",
-      "SPARTA",
-      "STEELEVILLE",
-      "TILDEN",
-      // Unincorprated communities
-      "GLENN",
-      "GRIGG",
-      "MENARD",
-      "MODOC",
-      "SCHULINE",
-      "WALSH",
-      "WELGE",
-      "WINE HILL"
-  }));
 }

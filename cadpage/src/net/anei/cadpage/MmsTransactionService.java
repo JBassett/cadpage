@@ -56,7 +56,7 @@ public class MmsTransactionService extends Service {
   // Timer interval, negative to disable timer
   private static final int TIMER_INTERVAL = -1;
   
-  private Handler mainHandler = CadPageApplication.getMainHandler();
+  private Handler mainHandler = new Handler();
   private ServiceHandler mServiceHandler;
   private Looper mServiceLooper;
   private PowerManager.WakeLock mWakeLock;
@@ -227,7 +227,6 @@ public class MmsTransactionService extends Service {
         pdu = new PduParser(pushData).parse();
       } catch (Exception ex) {
         Log.e(ex);
-        EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
       }
       if (null == pdu) {
         Log.e("Invalid PUSH data");
@@ -280,7 +279,6 @@ public class MmsTransactionService extends Service {
           cur = qr.query(MMS_URI, MMS_COL_LIST, "tr_id=?", new String[]{message.getMmsMsgId()}, null);
         } catch (IllegalStateException ex) {
           Log.e(ex);
-          EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
           continue;
         }
         if (cur == null) continue;
@@ -307,15 +305,9 @@ public class MmsTransactionService extends Service {
           mainHandler.post(new Runnable(){
             @Override
             public void run() {
-              try {
-                if (startService(intent) == null) {
-                  Log.e("Tranaction.RETRIEVE_TRANSACTION service not found");
-                }
-              } catch (Exception ex) {
-                Log.e(ex);
-                EmailDeveloperActivity.logSnapshot(MmsTransactionService.this, "MMS processing failure");
+              if (startService(intent) == null) {
+                Log.e("Tranaction.RETRIEVE_TRANSACTION service not found");
               }
-              
             }});
           entry.loading = true;
           continue;

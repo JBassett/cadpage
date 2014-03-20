@@ -7,6 +7,35 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.MsgParser;
 
 
+/*
+Madison County - Greator Lenox Amulance Service (GLAS), NY
+Contact: "Kyle M. Cashel" <kcashel@gmail.com>
+Contact: "emtdebbie33@yahoo.com" <emtdebbie33@yahoo.com>
+Contact: Erick Haas <ericknjenn@gmail.com>
+Sender: messaging@iamresponding.com
+
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Sick Person\n7738 WISE RD , LENOX ( / N COURT)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Assist\n400 LAMB AV , CANASTOTA VILLAGE ( / DEPPOLITI AV)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Heart Problem\n@MADISON COUNTY DSS (133 NORTH COURT ST (WAMPSVILLE VIL
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Convulsions/Seizures\n7216 NELSON RD , LENOX (SENECA TRNPK / PAVONE PL)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Sick Person\n400 LAMB AV , CANASTOTA VILLAGE ( / DEPPOLITI AV)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Chest Pain\n123 CAYUGA AV , SULLIVAN ( ONEIDA LAKE AV / ROUTE 31)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Sick Person\n7885 TACKABURY RD , LENOX ( DITCH BANK RD / INDIAN OPENING RD)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG: Chest Pain\n3881 COTTONS RD , LINCOLN ( CLOCKVILLE RD / NELSON RD)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:MVA - Personal Injury\n@MM 261.7 (261 70 I90 )
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:MVA - Unknown\nRAILROAD \ DEPOT (, CANASTOTA VILLAGE)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Sick Person\n400 LAMB AV , CANASTOTA VILLAGE ( / DEPPOLITI AV)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:MVA - Personal Injury\n5050 BURLESON RD , LINCOLN ( VEDDER RD / FOREST AV)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Falls\n400 LAMB AV #144, CANASTOTA VILLAGE ( / DEPPOLITI AV)
+(Greater Lenox) Convulsions/Seizures\n7216 NELSON RD , LENOX ( SENECA TRNPK / PAVONE PL)
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:MVA - Unknown\nCANAL RD , LENOX
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Chest Pain\n@THERMOLD & RMH CORPORATION (7059 HARP RD (LENOX) )
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Chest Pain\n@THERMOLD & RMH CORPORATION (7059 HARP RD (LENOX) )
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Traumatic Injuries\n@SCHOOL CANASTOTA ROBERTS ST JR SR HIGH SCHOOL (302 ROBERTS ST (CANASTOTA VILLAGE) )
+FRM:messaging@iamresponding.com\nSUBJ:Greater Lenox\nMSG:Psychiatric/Suicide Attempt\r\n403 S PETERBORO , CANASTOTA VILLAGE ( / RASBACH)
+
+*/
+
 
 public class NYMadisonCountyGLASParser extends MsgParser {
   
@@ -14,7 +43,6 @@ public class NYMadisonCountyGLASParser extends MsgParser {
   
   public NYMadisonCountyGLASParser() {
     super("MADISON COUNTY", "NY");
-    setFieldList("CALL PLACE ADDR APT CITY X");
   }
   
   @Override
@@ -35,15 +63,15 @@ public class NYMadisonCountyGLASParser extends MsgParser {
     if (sPart1.startsWith("@")) {
      data.strPlace = sPart1.substring(1).trim(); 
      if (sPart2.length() > 0) {
-       parseAddress(sPart2.replace("\\", "&"), data);
+       parseAddress(sPart2, data);
        data.strCross = sPart3;
      } else {
        Parser p = new Parser(sPart3);
-       parseAddress(p.get('(').replace("\\", "&"), data);
+       parseAddress(p.get('('), data);
        data.strCity = p.get(')');
      }
     } else {
-      parseAddress(sPart1.replace("\\", "&"), data);
+      parseAddress(sPart1, data);
       data.strCity = sPart2;
       if (sPart3.startsWith("/")) sPart3 = sPart3.substring(1).trim();
       if (sPart3.startsWith(",")) {
@@ -57,7 +85,7 @@ public class NYMadisonCountyGLASParser extends MsgParser {
     int pt = data.strCity.lastIndexOf(' ');
     if (pt >= 0) {
       String last = data.strCity.substring(pt+1).trim().toUpperCase();
-      for (String city : new String[]{"VILLAGE", "INSIDE"}) {
+      for (String city : new String[]{"VILLAGE"}) {
         if (city.equals(last)) break;
         if (city.startsWith(last)) {
           data.strCity = data.strCity.substring(0,pt+1) + city;

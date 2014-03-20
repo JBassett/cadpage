@@ -1,7 +1,6 @@
 package net.anei.cadpage.vendors;
 
 import net.anei.cadpage.R;
-import net.anei.cadpage.Safe40Activity;
 import 
 android.app.Activity;
 import android.app.AlertDialog;
@@ -15,7 +14,7 @@ import android.content.Intent;
 /**
  * Dummy activity that does nothing more than present a stand alone dialog
  */
-public class NoticeActivity extends Safe40Activity {
+public class NoticeActivity extends Activity {
   
   private static final String EXTRAS_MSG = "net.anei.cadpage.NoticeActivity.MESSAGE";
   
@@ -38,8 +37,6 @@ public class NoticeActivity extends Safe40Activity {
 
   @Override
   protected Dialog onCreateDialog(int id) {
-    
-    if (isFinishing()) return null;
     switch (id) {
 
       case NOTICE_DLG:

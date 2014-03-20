@@ -3,34 +3,35 @@ package net.anei.cadpage.parsers.ME;
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+York County, ME (replacement)
+Contact: Sean Perkins <sperkins@waterborofire.org>
+Sender: dispatch@sanfordmaine.org
+
+(Sanford RCC Page) MEDICAL EMERGENCY\n47\nGOODWINS ACRES \nDAYTON\nFire District: DAY\n4/25/2012 08:26
+(Sanford RCC Page) MOTOR VEHICLE ACCIDENT-PI/HAZ\n47\nGOODWINS ACRES \nDAYTON\nFire District: DAY\n4/25/2012 07:18
+(Sanford RCC Page) MEDICAL EMERGENCY\n2 EVERGREEN DR \nWaterboro\nFire District: WATF3\n4/24/2012 20:22
+(Sanford RCC Page) MEDICAL EMERGENCY\n22 COYNE RD \nWaterboro\nFire District: WATF4\n4/24/2012 10:37
+(Sanford RCC Page) MEDICAL EMERGENCY\n10 HUMMINGBIRD LN \nWaterboro\nFire District: WATF\n4/24/2012 07:29
+
+*/
 
 public class MEYorkCountyParser extends FieldProgramParser {
   
   public MEYorkCountyParser() {
     super(CITY_LIST, "YORK COUNTY", "ME",
-           "CALL PLACE? ADDR/Z CITY District:SRC DATETIME!");
+           "CALL PLACE? ADDR/Z CITY Fire_District:SRC DATETIME!");
   }
   
   @Override
   public String getFilter() {
-    return "dispatch@sanfordmaine.org,2159700406,no_reply_paging@sanfordmaine.org";
+    return "dispatch@sanfordmaine.org";
   }
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
     
-    do {
-      if (subject.equals("Sanford RCC Page")) break;
-      if (body.startsWith("SANFORD RCC (Sanford RCC Page) ")) {
-        body = body.substring(33).trim();
-        break;
-      }
-      return false;
-    } while (false);
-    
-    if (body.endsWith(" UNSUBSCRIBE")) body = body.substring(0,body.length()-12).trim();
-    body = body.replace("\nFire District:", "\nDistrict:");
-    
+    if (!subject.equals("Sanford RCC Page")) return false;
     return parseFields(body.split("\n"), data);
   }
   

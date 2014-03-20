@@ -5,40 +5,30 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchBParser;
 
+/*
+Northampton County, PA
+Contact: Matt Winter <mattgwinter@gmail.com>
+Sender: @notifync.orgaddress
+DispatchBParser subclass
 
+[e49]ALS >ADVANCED LIFE SUPPORT CALL 602 E 21ST ST Apt: 119 Bldg NORTHAMPTON DIANE ECK Map: Grids:0,0 Cad: 2011-0000086714
+[e49]BLS >BASIC LIFE SUPPORT CALL 1323 NEWPORT AVE Apt: REAR Bldg NORTHAMPTON TONY FERRERA Map: Grids:0,0 Cad: 2011-00000
+[e49]MVAI >MVA WITH INJURIES 248 AT PENNSVILLE LIGHT LEHIGH TWP NATALIE BRODIANO Cad: 2011-0000086361
+[e49]ALS >ADVANCED LIFE SUPPORT CALL 612 E 10TH ST NORTHAMPTON ROBERTS PAMELA Map: Grids:0,0 Cad: 2011-0000086262
+[e49]BLS >BASIC LIFE SUPPORT CALL 1001 WASHINGTON AVE Apt: 105 Bldg NORTHAMPTON MEGAN MOREY Map: Grids:0,0 Cad: 2011-000008
+[e49]ALS >ADVANCED LIFE SUPPORT CALL 5962 KEYSTONE DR EAST ALLEN CHRISTINA WIGMER Map: Grids:0,0 Cad: 2011-0000086103
+[e49]BLS >BASIC LIFE SUPPORT CALL 1323 NEWPORT AVE NORTHAMPTON TONY CABRERA Map: Grids:0,0 Cad: 2011-0000086010
+
+Contact: "richierrs@aol.com" <richierrs@aol.com>
+Sender: alert@notifync.org
+Subject:#6550\n[f14]MVAU >MVA WITH UNKNOW INJUIRIES WILLOW PARK RD BETHLEHEM TWP P1736 Map: Grids:0,0 Cad: 2011-0000131105
+
+Contact: Edmund Lamontagne <edmundl79@gmail.com>
+*3750: *alert_6JP4@notifync.org /  / [f25]ODOR >ODOR / OTHER THAN SMOKE ARNDT RD FORKS Map: Grids:0,0 Cad: 2011-0000171220 <20110000171220>
+
+*/
 
 public class PANorthamptonCountyParser extends DispatchBParser {
-  
-  private static final Pattern MARKER = Pattern.compile(">.* Cad: ");
-  
-  @Override
-  public String getFilter() {
-    return "@notifync.org,14100";
-  }
- 
-  @Override
-  protected boolean isPageMsg(String body) {
-    return MARKER.matcher(body).find();
-  }
-
-  public PANorthamptonCountyParser() {
-    super(CITY_LIST, "NORTHAMPTON COUNTY", "PA");
-  }
-  
-  @Override
-  public boolean parseMsg(String subject, String body, Data data) {
-    data.strUnit = new Parser(subject).getLast('|');
-    int pt = body.indexOf('\n');
-    if (pt >= 0) body = body.substring(0,pt).trim();
-    body = body.replace(" CALL ", " AT ");
-    if (!super.parseMsg(body, data)) return false;
-    return true;
-  }
-  
-  @Override
-  public String getProgram() {
-    return "UNIT " + super.getProgram();
-  }
   
   private static final String[] CITY_LIST = new String[]{
     "BETHLEHEM",
@@ -73,7 +63,6 @@ public class PANorthamptonCountyParser extends DispatchBParser {
     "HANOVER TWP",
     "LEHIGH TWP",
     "LOWER MOUNT BETHEL TWP",
-    "LOWER MT BETHEL",
     "LOWER NAZARETH TWP",
     "LOWER SAUCON TWP",
     "MOORE TWP",
@@ -82,25 +71,38 @@ public class PANorthamptonCountyParser extends DispatchBParser {
     "UPPER MOUNT BETHEL TWP",
     "UPPER NAZARETH TWP",
     "WASHINGTON TWP",
-    "WILLIAMS TWP",
-
-    "ALLEN",
-    "BETHLEHEM",
-    "BUSHKILL",
-    "EAST ALLEN",
-    "FORKS",
-    "HANOVER",
-    "LEHIGH",
-    "LOWER MOUNT BETHEL",
-    "LOWER NAZARETH",
-    "LOWER SAUCON",
-    "MOORE",
-    "PALMER",
-    "PLAINFIELD",
-    "UPPER MOUNT BETHEL",
-    "UPPER NAZARETH",
-    "WASHINGTON",
-    "WILLIAMS"
-
+    "WILLIAMS TWP"
   };
+  
+  private static final Pattern MARKER = Pattern.compile(">.* Cad: ");
+  
+  @Override
+  public String getFilter() {
+    return "@notifync.org";
+  }
+ 
+  @Override
+  protected boolean isPageMsg(String body) {
+    return MARKER.matcher(body).find();
+  }
+
+  public PANorthamptonCountyParser() {
+    super(CITY_LIST, "NORTHAMPTON COUNTY", "PA");
+  }
+  
+  @Override
+  public boolean parseMsg(String subject, String body, Data data) {
+    data.strUnit = new Parser(subject).getLast('|');
+    body = body.replace(" CALL ", " AT ");
+    if (!super.parseMsg(body, data)) return false;
+    return true;
+  }
+
+  @Override
+  protected boolean parseAddrField(String field, Data data) {
+    // TODO Auto-generated method stub
+    return super.parseAddrField(field, data);
+  }
+  
+  
 }

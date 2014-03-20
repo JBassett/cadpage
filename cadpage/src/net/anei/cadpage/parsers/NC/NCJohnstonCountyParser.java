@@ -1,166 +1,116 @@
 package net.anei.cadpage.parsers.NC;
 
 
-import java.util.Properties;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchOSSIParser;
 
+/*
+Johnston County, NC
+Contact: "Ole Dean K." <koehmstedt@gmail.com>
+Sender: CAD@johnstonnc.com,93001xxx
 
+CAD:Evacuation In-Progress;70 MYSTICAL CT; GARN;(S)JORDAN RIDGE (N)
+CAD:OPS5;CLD;52C02C;CARBON MONOXIDE ALARM;70 MYSTICAL CT;(S)JORDAN RIDGE (N);GALAXY DR;DENA HOLLOMAN;12/28/2010 22:20:35;CLD1
+CAD:CLDFR;CLD;17B01G;INJURED PERSON;104 LAKEVIEW CT;(S)SOUTH RIDGE (N);SOUTH RIDGE DR;DOBERT, HENRY;12/28/2010 11:00:58;CLDR1
+CAD:OPS;CLD;10C02;CHEST PAINS;643 BIG PINE RD;PEACE LN;GOVERNMENT RD;ESTERLENE MILLER;02/09/2011 15:21:31;CLDR2
+CAD:OPS;CLD;06D02;DIFFICULTY BREATHING;101 CHERRY CT;ALLEN RD;DAVIS, JOHN;02/09/2011 15:08:36;CLDR1
+CAD:OPS4;CLD;52B01S;FIRE ALARM;330 STEEL BRIDGE RD;CONTENDER DR;CLEVELAND RD;BROADVIEW;02/09/2011 12:18:09;CLD1
+CAD:OPS4;CLD;MVA PERSONAL INJURY;WATKINS RD/CLEVELAND RD;SPRINT PCS;02/08/2011 07:18:56;CLD1
+CAD:OPS4;CLD;GAS LEAK NATURAL GAS/PROPANE;105 JOSEPHINE RD;CLEVELAND RD;MOONLIGHT DR;POLENTA ELEMENTARY SCHOOL;SUSAN;02/08/2011
+CAD:No Add`l Personnel / Unit;105 JOSEPHINE RD; GARN
+CAD:OPS7;CLD;VEHICLE FIRE;314 I-40 HWY;314.5;SPRINT PCS;02/07/2011 15:54:03;CLD1
+CAD:Standby At The Station;314 I-40 HWY; BENS;314.5
+CAD:No Add`l Personnel / Unit;314 I-40 HWY; BENS;314.5
+
+Contact: jerry lynch <ncemt6707@gmail.com>
+CAD:OPS;FOD;17A01G;INJURED PERSON;439 LONG BRANCH RD;BLACK CREEK RD;BANKS ST;DUPREE, KENNETH L & CATHERINE;02/14/2011 07:25:26;FODR1
+CAD:OPS;STA6;17A01;INJURED PERSON;439 LONG BRANCH RD;BLACK CREEK RD;BANKS ST;DUPREE, KENNETH L & CATHERINE;02/14/2011 07:08:53;EMS62
+CAD:OPS;STA6;CVA/STROKE;3800-B US 701 HWY S;STEWART RD;PEACH ORCHARD RD;BENSON AREA MEDICAL CENTER INC;02/14/2011 15:49:44;FOR6X,EMS52
+
+CAD:OPS;STA6;26C01;SUDDEN ILLNESS;565 BOYETTE RD;(S)FOUR OAKS ASSISTED LIVING (N);KEEN RD;US 301 HWY S;OAKVIEW COMMONS;OAKVIEW
+CAD:OPS;STA6;DIFFICULTY BREATHING;200 E WELLONS ST;S BAKER ST;BROWN ST;KINGS RESTAURANT;03/29/2011 02:33:20;EMS62
+
+Contact: Ole Dean K. <koehmstedt@gmail.com>
+CAD:CLD;06D02;DIFF BREATHING 06-D-02;77 CARRIAGE CREEK DR;(S)CARRIAGE CREEK (N);STEEP HILL CT;BRADLEY, EDWARD;08/07/2011 20:15:39;CLDR1
+
+Contact: Daniel Fry <dfry79@gmail.com>
+Sender: CAD@johnstonnc.com
+CAD:No Add`l Personnel / Unit;1203 LIVE OAK CHURCH RD; SELM;6(S)PECAN GROVE MHP (N)
+
+Contact: Dean COR <dean.koehmstedt@raleighnc.gov>
+Sender: 93001024
+CAD:OPS;CLD;31D02;UNCONSCIOUS PERSON 31-D-02;16 CARRIAGE CREEK DR;(S)CARRIAGE CREEK (N);CLEVELAND RD;STEEP HILL CT;MCDANIELS, ALBERT M;01/26/2012 06:25:19;CLDR1
+
+Contact: "Dan_berg" <dan_berg@hotmail.com>
+FRM:cad paging \nMSG:CAD:OPS;CLD;06D01;DIFF BREATHING 06-D-01;107 GARNET LN;(S)SWIFTVIEW (N);GOVERNMENT RD;AVERY, B A;03/14/2012 09:54:04;CLDR1
+
+*/
 
 public class NCJohnstonCountyParser extends DispatchOSSIParser {
   
-  private static final Pattern ENROUTE_PTN = Pattern.compile("CAD:([A-Z0-9]+),Enroute,.*");
-  
-  private String lastCrossPlaceFld;
-  
   public NCJohnstonCountyParser() {
-    super(CITY_CODES, "JOHNSTON COUNTY", "NC",
-           "( CALL ADDR/Z CITY! APT? X_PLACE_INFO+ | " +
-             "CALL CITY ADDR! APT? X_PLACE_INFO+ | " + 
-             "CH? SRC+? CODE? CALL ADDR APT? X_PLACE_INFO+? DATETIME! UNIT CITY% )");
+    super("JOHNSTON COUNTY", "NC",
+           "( INFO SRC CODE? | ) CALL ADDR! X? X? X2? NAME");
   }
 
   @Override
   public String getFilter() {
     return "CAD@johnstonnc.com,93001";
   }
-  
-  @Override
-  public boolean parseMsg(String body, Data data) {
-    
-    // Enroute messages parse as general alerts with a unit field
-    Matcher match = ENROUTE_PTN.matcher(body);
-    if (match.matches()) {
-      data.strCall = "GENERAL ALERT";
-      data.strUnit = match.group(1);
-      data.strPlace = body;
-      return true;
-    }
-    
-    lastCrossPlaceFld = "";
-    return super.parseMsg(body, data);
-  }
-  
-  @Override
-  public String getProgram() {
-    return super.getProgram() + " UNIT PLACE";
-  }
-  
+
+  // Source code validates that is is not more than 5 characters long
   private class MySourceField extends SourceField {
-    public MySourceField() {
-      setPattern("[A-Z][A-Z0-9]{1,4}", true);
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      data.strSource = append(data.strSource, ",", field);
-    }
-  }
-  
-  private static final Pattern NS_CROSS_PTN = Pattern.compile("(.*?) *\\(S\\) *(.*?) *\\(N\\)|(?:[NSEW]B +)?DIST:.*");
-  private class MyCrossPlaceInfoField extends Field {
-    @Override
-    public void parse(String field, Data data) {
-      
-      // see if it has the expected (N)..(S) pattern
-      // Or looks like a decimal number
-      // If it is, put it in the place or cross street field
-      // depending on whether or not it looks like an address
-      Matcher match = NS_CROSS_PTN.matcher(field);
-      if (match.matches()) {
-        String tmp = match.group(2);
-        if (tmp != null) {
-          String prefix = match.group(1);
-          if (prefix.length() > 0) {
-            if (NUMERIC.matcher(prefix).matches()) {
-              data.strApt = append(data.strApt, "-", match.group(1));
-            } else {
-              data.strPlace = append(data.strPlace, " - ", prefix);
-            }
-          }
-          field = tmp;
-        }
-        data.strPlace = append(data.strPlace, " - ", field);
-        return;
-      }
-      
-      // If duplicate of last field, skip it
-      if (field.equals(lastCrossPlaceFld)) return;
-      lastCrossPlaceFld = field;
-      
-      // See if it looks like a cross street or a place name
-      if (field.contains("70 BUS HWY") || checkAddress(field) > 0) {
-        data.strCross = append(data.strCross, " / ", field); 
-      } else {
-        data.strSupp = append(data.strSupp, " / ", cleanWirelessCarrier(field));
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "PLACE X INFO";
-    }
-  }
-  
-  private static final Pattern DATE_TIME_PTN = Pattern.compile("\\d\\d/[\\d:/ ]*");
-  private class MyDateTimeField extends DateTimeField {
+
     @Override
     public boolean canFail() {
       return true;
     }
-    
+
     @Override
     public boolean checkParse(String field, Data data) {
-      
-      // Looser pattern match standard than the default date/time field
-      // if we only have the first 3 characters of what looks like a date/time
-      // field, that is good enough
-      if (!DATE_TIME_PTN.matcher(field).matches()) return false;
+      if (field.length() > 5) return false;
       parse(field, data);
       return true;
+    }
+  }
+  
+  // Code field must match particular pattern
+  private static final Pattern CODE_PATTERN = Pattern.compile("\\d\\d[A-Z]\\d\\d[A-Z]?");
+  private class MyCodeField extends CodeField {
+    public MyCodeField() {
+      setPattern(CODE_PATTERN);
+    }
+  }
+  
+  // Cross street won't pass normal address validation
+  // We will take anything that doesn't look like a name with a comma
+  private class MyCrossField extends CrossField {
+    @Override
+    public boolean checkParse(String field, Data data) {
+      if (field.contains(",")) return false;
+      parse(field, data);
+      return true;
+    }
+  }
+  
+  // Cross street won't pass normal address validation
+  // We will take anything that doesn't look like a name with a comma
+  private class MyCross2Field extends CrossField {
+    @Override
+    public boolean checkParse(String field, Data data) {
+      if (field.contains(",")) return false;
+      return super.checkParse(field, data);
     }
   }
 
   @Override
   protected Field getField(String name) {
-    if (name.equals("CH")) return new ChannelField("OPS.*|.*FR|VPR.*|2ND", true);
     if (name.equals("SRC")) return new MySourceField();
-    if (name.equals("CODE")) return new CodeField("\\d{1,3}[A-Z]\\d\\d[A-Za-z]?", true);
-    if (name.equals("APT")) return new AptField("APT.*|SUITE.*|LOT.*");
-    if (name.equals("X_PLACE_INFO")) return new MyCrossPlaceInfoField();
-    if (name.equals("DATETIME")) return new MyDateTimeField();
+    if (name.equals("CODE")) return new MyCodeField();
+    if (name.equals("X")) return new MyCrossField();
+    if (name.equals("X2")) return new MyCross2Field();
     return super.getField(name);
   }
-  
-  @Override
-  public String adjustMapAddress(String addr) {
-    return US70BUSHWY_PTN.matcher(addr).replaceAll("70 BUS");
-  }
-  Pattern US70BUSHWY_PTN = Pattern.compile("\\b70 BUS HWY\\b", Pattern.CASE_INSENSITIVE);
-  
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "ANGI", "ANGIER",
-      "ARCL", "ARCHER LODGE",
-      "BENS", "BENSON",
-      "CLAY", "CLAYTON",
-      "DUNN", "DUNN",
-      "ERWN", "ERWIN",
-      "FOUR", "FOUR OAKS",
-      "GARN", "GARNER",
-      "KENL", "KENLY",
-      "MICR", "MICRO",
-      "PINE", "PINE LEVEL",
-      "PRIN", "PRINCETON",
-      "RALE", "RALEIGH",
-      "SELM", "SELMA",
-      "SMIT", "SMITHFIELD",
-      "WISM", "WILSON'S MILLS",
-      "WEND", "WENDELL",
-      "WILL", "WILLOW SPRING",
-      "ZEBU", "ZEBULON"
-
-  });
 }

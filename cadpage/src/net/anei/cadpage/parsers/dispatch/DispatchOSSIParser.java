@@ -41,19 +41,20 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class DispatchOSSIParser extends FieldProgramParser {
   
-  private static final Pattern LEAD_ID_PTN = Pattern.compile("^(\\d+):");
   private static final Pattern DATE_TIME_PTN = Pattern.compile("(\\d\\d/\\d\\d/\\d{2,4}) (\\d\\d:\\d\\d:\\d\\d)\\b");
   
   private boolean leadID = false;
-  private boolean optLeadId = false;
-  private boolean dateTime = false;
   private boolean dateTimeReq = false;
   
   // Pattern searching for a leading square bracket or semicolon
   private Pattern delimPattern = Pattern.compile("\\[|;");
   
   // Pattern searching for "PROBLEM: or "RESPONDER SCRIPT:"
-  private static final Pattern KEYWORD = Pattern.compile("\\b(?:PROBLEM:|RESPONDER SCRIPT:)");
+  private static final Pattern KEYWORD = Pattern.compile("\\b(PROBLEM:|RESPONDER SCRIPT:)");
+  
+  // Pattern marking a trailing token that may need to be removed
+  private static final Pattern TAIL_PAT = Pattern.compile("CLDR?[0-9]");
+
   
   public DispatchOSSIParser(String defCity, String defState, String program) {
     super(defCity, defState, "SKIP");
@@ -74,21 +75,12 @@ public class DispatchOSSIParser extends FieldProgramParser {
     if (program.startsWith("ID:")) {
       leadID = true;
       program = program.substring(3).trim();
-    } else if (program.startsWith("ID?:")) {
-      leadID = true;
-      optLeadId = true;
-      program = program.substring(4).trim();
-    }
-    if (program.endsWith(" DATETIME")) {
-      dateTime = true;
-      program = program.substring(0,program.length()-9);
     }
     if (program.endsWith(" DATETIME!")) {
-      dateTime = true;
       dateTimeReq = true;
       program = program.substring(0,program.length()-10);
     }
-    setProgram(program, 0);
+    setProgram(program);
   }
   
   protected void setDelimiter(char delim) {
@@ -103,11 +95,11 @@ public class DispatchOSSIParser extends FieldProgramParser {
     
     // If format has a leading ID, strip that off
     if (leadID) {
-      Matcher match = LEAD_ID_PTN.matcher(body);
-      if (match.find()) {
-        data.strCallId = match.group(1);
-        body = body.substring(match.end()).trim();
-      } else if (!optLeadId) return false;
+      int pt = body.indexOf(':');
+      if (pt < 0) return false;
+      data.strCallId = body.substring(0,pt).trim();
+      if (!NUMERIC.matcher(data.strCallId).matches()) return false;
+      body = body.substring(pt+1).trim();
     }
     
     // Body must start with 'CAD:'
@@ -171,29 +163,33 @@ public class DispatchOSSIParser extends FieldProgramParser {
 
     int ndx = fields.size()-1;
     if (ndx < 0) return false;
+
+    // If the trailing field is present, start by removing it
+    if (TAIL_PAT.matcher(fields.get(ndx)).matches()) {
+      fields.remove(ndx--);
+      if (ndx < 0) return false;
+    }
     
     // Almost there.  Check to see if the last term looks like a date/time stamp
     // or the truncated remains of a date/time stamp.  If it does, remove it
     String field = fields.get(ndx);
-    if (dateTime) {
-      boolean isDateTime = false;
-      if (field.length()>0 && Character.isDigit(field.charAt(0))) {
-        field = field.replaceAll("\\d", "N");
-        if ("NN/NN/NNNN NN:NN:NN".startsWith(field)) isDateTime = true;
-      }
-      if (isDateTime) {
-        field = fields.get(ndx);
-        if (field.length() >= 10) {
-          data.strDate = field.substring(0,10);
-          field = field.substring(10).trim();
-          if (field.length() == 8) data.strTime = field;
-          else if (field.length() >= 5) data.strTime = field.substring(0,5);
-        }
-          
-        fields.remove(ndx);
-      }
-      else if (dateTimeReq) return false;
+    boolean dateTime = false;
+    if (field.length()>0 && Character.isDigit(field.charAt(0))) {
+      field = field.replaceAll("\\d", "N");
+      if ("NN/NN/NNNN NN:NN:NN".startsWith(field)) dateTime = true;
     }
+    if (dateTime) {
+      field = fields.get(ndx);
+      if (field.length() >= 10) {
+        data.strDate = field.substring(0,10);
+        field = field.substring(10).trim();
+        if (field.length() == 8) data.strTime = field;
+        else if (field.length() >= 5) data.strTime = field.substring(0,5);
+      }
+        
+      fields.remove(ndx);
+    }
+    else if (dateTimeReq) return false;
       
     // We have a nice clean array of data fields, pass it to the programmer
     // field processor to parse
@@ -207,9 +203,7 @@ public class DispatchOSSIParser extends FieldProgramParser {
   
   @Override
   protected Field getField(String name) {
-    if (name.equals("FYI")) return new SkipField("FYI:|Update:", true);
-    if (name.equals("CANCEL")) return new CallField("CANCEL", true);
-    if (name.equals("DATETIME")) return new DateTimeField("\\d\\d/\\d\\d/\\d{4} +\\d\\d:\\d\\d:\\d\\d", true);
+    if (name.equals("FYI")) return new SkipField("FYI:");
     return super.getField(name);
   }
 }

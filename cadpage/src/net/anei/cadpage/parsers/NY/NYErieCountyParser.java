@@ -6,10 +6,8 @@ import net.anei.cadpage.parsers.GroupBestParser;
 public class NYErieCountyParser extends GroupBestParser {
   
   public NYErieCountyParser() {
-    super(new NYErieCountyBParser(),
-           new NYErieCountyCParser(),
-           new NYErieCountyDParser(),
-           new NYErieCountyEParser(),
-           new NYErieCountyRedAlertParser());
+    super(new NYErieCountyAParser(), 
+          new NYErieCountyBParser(),
+          new NYErieCountyRedAlertParser());
   }
 }

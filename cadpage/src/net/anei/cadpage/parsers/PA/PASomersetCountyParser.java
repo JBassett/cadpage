@@ -6,7 +6,18 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchBParser;
 
+/*
+Somerset County, PA
+Contact: "Kevin" <Pastorkbroadwater@verizon.net>
+Sender: alert@ecm2.com
 
+Code:  MVA   >MOTOR VEHICLE ACCIDENT\nCode Detail:  Address:  XS:  City:  Caller:  Caller Ph:  Map:  Grid: CAD INC #:  2011-0000029533\n\nUnformatted Message: 9-1-1 CENTER:GRANT ST AT MAIN ST MEYERSDALE RICH SECHLER 8142891447 Cad: 2011-0000029533
+Code:  FIRES >STRUCTURE FIRE\nCode Detail:  Address: 9-1-1 CENTER:605 PINEY RUN RD  XS:  ENGLES MILL RD SALISBURY WEIMER SUSAN  City:  Caller:  Caller Ph:  Map:  Grid: CAD INC #: 2011-0000028647\n\nUnformatted Message: 9-1-1 CENTER:605 PINEY RUN RD XS: ENGLES MILL RD SALISBURY WEIMER SUSAN 8146624073 Map: Grids:, Cad: 2011-0000028647
+Code:  FIRES >STRUCTURE FIRE\nCode Detail:  Address: 9-1-1 CENTER:5467 MOUNT DAVIS RD  XS:  SAINT PAUL RD MEYERSDALE BENDER LINDA  City:  Caller:  Caller Ph:  Map:  Grid: CAD INC #: 2011-0000030088\n\nUnformatted Message: 9-1-1 CENTER:5467 MOUNT DAVIS RD XS: SAINT PAUL RD MEYERSDALE BENDER LINDA 8146622352 Map: Grids:, Cad: 2011-0000030088
+Code:  SPILL >SPILL (TYPE)\nCode Detail:  Address: 9-1-1 CENTER:1041 SHAW MINES RD  XS:  City:  Caller: Caller Ph:  Map:  Grid: CAD INC #:  2011-0000029694\n\nUnformatted Message: 9-1-1 CENTER:1041 SHAW MINES RD XS: SKYLINE DR MEYERSDALE 130 Map: Grids:, Cad: 2011-0000029694
+Code:  TC    >TRAFFIC CONTROL\nCode Detail:  Address: 9-1-1 CENTER:1222 GLADE CITY RD  XS:  DEAL RD MEYERSDALE LOTTIG,C  City:  Caller:  Caller Ph:  Map:  Grid: CAD INC #: 2011-0000030890\n\nUnformatted Message: 9-1-1 CENTER:1222 GLADE CITY RD XS: DEAL RD MEYERSDALE LOTTIG,C 8146348503 Map: Grids:, Cad: 2011-0000030890
+
+*/
 
 public class PASomersetCountyParser extends DispatchBParser {
   
@@ -18,7 +29,7 @@ public class PASomersetCountyParser extends DispatchBParser {
   
   @Override
   public String getFilter() {
-    return "alert@ecm2.com,911CENTER@co.somerset.pa.us";
+    return "alert@ecm2.com";
   }
   
   @Override
@@ -27,26 +38,10 @@ public class PASomersetCountyParser extends DispatchBParser {
   }
   
   @Override
-  public boolean parseMsg(String subject, String body, Data data) {
-    do {
-      Matcher match = MASTER.matcher(body);
-      if (match.matches()) {
-        body = match.group(1) + " @ " + match.group(2);
-        break;
-      }
-      
-      if (body.startsWith("911CENTER:") && subject.length() > 0) {
-        body = subject + " " + body.substring(10);
-        break;
-      }
-      
-      if (subject.contains(">")) {
-        body = subject + " @ " + body;
-        break;
-      }
-      return false;
-    } while (false);
-    
+  public boolean parseMsg(String body, Data data) {
+    Matcher match = MASTER.matcher(body);
+    if (!match.matches()) return false;
+    body = match.group(1) + " @ " + match.group(2);
     body = body.replace(" AT ", " & ");
     return super.parseMsg(body, data);
   }

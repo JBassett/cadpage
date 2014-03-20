@@ -1,138 +1,27 @@
 package net.anei.cadpage.parsers.FL;
 
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import net.anei.cadpage.parsers.dispatch.DispatchPrintrakParser;
 
-import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.SmartAddressParser;
+/*
+Citrus County, FL
+Contact: "Martin Giles" <mgiles@crystalriverfl.org>
+Sender: CC_Message_Notification@usamobility.net
 
+FDF01 TYP: MISC FIRE AD: 8038 W PURVIS CT CTY: CRYSTAL RIVER CN: PHILIP CMT1: TREE ON POWERLINE SMOKING. PROGRESS ENERGY FDCA07 FDSTA1 XST2:
+FDF01 TYP: VEHICLE FIRE AD: 1035 S SUNCOAST BLVD CTY: HOMOSASSA LOC: CRYSTAL CHEVROLET CMT1: Original Location : CRYSTAL CHEVROLET CMT2: S/B
+FDF01 TYP: BRUSH FIRE AD: N BASSWOOD AVE&W CHECKERBERRY CTY: CRYSTAL RIVER CMT1: BRUSHFIRE 1/2 ACRE IN THE AREA OF THE ABOVE FDSTA9 FDSTA1 [
+FDF01 TYP: STRUCTURE FIRE AD: 2525 S PINE RIDGE AVE CTY: HOMOSASSA CN: MCKELVEY, JOHN CMT1: SMOKE COMING FROM THE BACK OF THE AREA FDCA03 FD
 
-public class FLCitrusCountyParser extends SmartAddressParser {
-  
-  private static final Pattern TRUNC_CITY_PTN = Pattern.compile("(?: [A-Z][a-z]+)+(?: [A-Z])?$");
-  private static final Pattern MASTER1 = Pattern.compile("Unit:([A-Z0-9]+) Status:Dispatched ([A-Z0-9]+) - (.*?) (\\d{2}[A-Z]) (.*)");
-  private static final Pattern MASTER2 = Pattern.compile("((?:[A-Z]+\\d+ )+) ([A-Z]\\d{1,2}[A-Z]) (.*) ([A-Z0-9]+?) - (.*) (\\d{4}-\\d{8})");
-  private static final Pattern CITY_BRK_PTN = Pattern.compile("(.*? [A-Z]+)(?: - [A-Z]{2})?([A-Z][a-z].*)");
+ */
 
+public class FLCitrusCountyParser extends DispatchPrintrakParser {
   
   public FLCitrusCountyParser() {
-    super(CITY_LIST, "CITRUS COUNTY", "FL");
+    super("CITRUS COUNTY", "FL");
   }
   
   @Override
   public String getFilter() {
-    return "777,888,ddevoe@sheriffcitrus.org";
-  }
-  
-  @Override
-  public boolean parseMsg(String subject, String body, Data data) {
-    do {
-      if (body.startsWith("CITRUS COUNTY FIRE DEPARTMENT ")) {
-        body = body.substring(30).trim();
-        break;
-      }
-      if (subject.equals("Message from HipLink")) break;
-      return false;
-    } while (false);
-    
-    // There is a problem with truncated cities.  See if we can identify and restore a truncated
-    // camel case city at the end of the text body
-    Matcher match = TRUNC_CITY_PTN.matcher(body);
-    if (match.find()) {
-      String truncCity = match.group().trim();
-      SortedSet<String> set = CITY_SET.tailSet(truncCity);
-      if (!set.isEmpty()) {
-        String city = set.first();
-        if (city.startsWith(truncCity)) {
-          body = body.substring(0,match.start()) + ' ' + city;
-        }
-      }
-    }
-    
-    match = MASTER1.matcher(body);
-    if (match.matches()) {
-      setFieldList("UNIT CODE CALL MAP ADDR APT X CITY INFO");
-      data.strUnit = match.group(1);
-      data.strCode = match.group(2);
-      data.strCall = match.group(3);
-      data.strMap = match.group(4);
-      String sAddr = match.group(5).trim();
-      parseAddress(StartType.START_ADDR, FLAG_PAD_FIELD | FLAG_CROSS_FOLLOWS, sAddr, data);
-      data.strCross = getPadField();
-      data.strSupp = getLeft();
-      return true;
-    }
-    
-    match = MASTER2.matcher(body);
-    if (match.matches()) {
-      setFieldList("UNIT MAP ADDR APT PLACE CITY CODE CALL ID");
-      data.strUnit = match.group(1).trim();
-      data.strMap = match.group(2);
-      String sAddr = match.group(3).trim();
-      data.strCode = match.group(4);
-      data.strCall = match.group(5);
-      data.strCallId = match.group(6);
-      
-      match = CITY_BRK_PTN.matcher(sAddr);
-      if (match.matches()) {
-        parseAddress(StartType.START_ADDR, FLAG_NO_CITY, match.group(1).trim(), data);
-        data.strPlace = getLeft();
-        data.strCity = match.group(2);
-      } else {
-        parseAddress(StartType.START_ADDR, FLAG_PAD_FIELD | FLAG_ANCHOR_END, sAddr, data);
-        data.strPlace = getPadField();
-      }
-      return true;
-    }
-    return false;
-  }
-  
-  @Override
-  public String adjustMapAddress(String addr) {
-    return addr.replace("GULF TO LAKE", "GULF-TO-LAKE");
-  }
-  
-  private static final String[] CITY_LIST = new String[]{
-    
-    // Incorporated
-    "CRYSTAL RIVER",
-    "INVERNESS",
-    
-    // Unincorporated
-    "BEVERLY HILLS",
-    "BLACK DIAMOND",
-    "CHASSAHOWITZKA",
-    "CITRUS HILLS",
-    "CITRUS SPRINGS",
-    "FLORAL CITY",
-    "HERNANDO",
-    "HOLDER",
-    "HOMOSASSA SPRINGS",
-    "HOMOSASSA",
-    "INVERNESS HIGHLANDS NORTH",
-    "INVERNESS HIGHLANDS SOUTH",
-    "LECANTO",
-    "MEADOWCREST",
-    "PINE RIDGE",
-    "PINEOLA",
-    "RED LEVEL",
-    "SUGARMILL WOODS"
-  }; 
-  
-  private static final TreeSet<String> CITY_SET = new TreeSet<String>();
-  static {
-    for (String city : CITY_LIST) CITY_SET.add(toCamelCase(city));
-  }
-  private static String toCamelCase(String city) {
-    StringBuilder sb = new StringBuilder();
-    boolean downshift = false;
-    for (char chr : city.toCharArray()) {
-      if (downshift) chr = Character.toLowerCase(chr);
-      sb.append(chr);
-      downshift = (chr != ' ');
-    }
-    return sb.toString();
+    return "CC_Message_Notification@usamobility.net";
   }
 }

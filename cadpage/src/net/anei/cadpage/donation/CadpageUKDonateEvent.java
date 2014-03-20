@@ -1,7 +1,6 @@
 package net.anei.cadpage.donation;
 
 import net.anei.cadpage.R;
-import net.anei.cadpage.donation.DonationManager.DonationStatus;
 
 /**
   
@@ -17,16 +16,13 @@ public class CadpageUKDonateEvent extends DonateScreenEvent {
   
   public CadpageUKDonateEvent() {
     super(AlertStatus.GREEN, R.string.donate_cadpage_uk_title, R.string.donate_cadpage_uk_text,
-           Vendor2Event.instance(),
            AndroidDonateEvent.instance(),
-           PaypalDonateEvent.instance(),
-           MagicWordEvent.instance());
+           PaypalDonateEvent.instance());
   }
   
   @Override
   public boolean isEnabled() {
-    return (DonationManager.instance().status() == DonationStatus.SPONSOR &&
-            "UK".equals(DonationManager.instance().sponsor()));
+    return ("UK".equals(DonationManager.instance().sponsor()));
   }
 
   private static final CadpageUKDonateEvent instance = new CadpageUKDonateEvent();

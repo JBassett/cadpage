@@ -7,13 +7,13 @@ package net.anei.cadpage.donation;
 public class ReqMoneyGroup extends EventGroup {
   
   public ReqMoneyGroup() {
-    super(Vendor2Event.instance(),
-          AndroidDonateEvent.instance(), 
+    super(AndroidDonateEvent.instance(), 
           DonateAndroidUnsuportedEvent.instance(), 
           AndroidDonateBetaEvent.instance(),
           AndroidDonateProblemEvent.instance(),
           DonateResetMarketEvent.instance(),
-          SobStoryDonateEvent.instance());
+          SobStoryDonateEvent.instance(),
+          DonateWhatsUpEvent.instance());
   }
   
   private static final ReqMoneyGroup instance = new ReqMoneyGroup();

@@ -7,16 +7,42 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Adams County, CO
+Contact: "Matt Kehoe" <mjkehoe@gmail.com>
+Sender: ipspage@adcom911.org
+
+Subject:IPS I/Page Notification E 64TH AVE/MONACO ST ADAM CCPD 09:51:48 TYPE CODE: ACCI CALLER NAME: TIME: 09:51:48 Comments: -104.90947
+Subject:IPS I/Page Notification 6950 NIAGARA ST ADAM CCPD 11:04:10 TYPE CODE: EMS CALLER NAME: FELIX - 13YO TIME: 11:04:10 Comments: 15YO
+Subject:IPS I/Page Notification 10220 BRIGHTON RD ADAM CCPD:DIVERSIFIES TRUCK AND RV 17:22:11 TYPE CODE: NONSTR CALLER NAME: BOB TIME: 17:
+Subject:IPS I/Page Notification US HIGHWAY 85 NB/E 77TH AVE ADAM ADAM 03:34:04 TYPE CODE: NONSTR CALLER NAME: ASHLEY TIME: 03:34:04 Commen
+Subject:IPS I/Page Notification 9900 E 102ND AVE ADAM CCPD:USF 06:06:49 TYPE CODE: FRALRM CALLER NAME: ADT TIME: 06:06:49 Comments: WATER
+Subject:IPS I/Page Notification\n26900 E COLFAX AVE ARAP ARAP,454: @FOX RIDGE FARMS 17:19:15 TYPE CODE: EMS CALLER NAME:  TIME: 17:19:15 Co
+
+Contact: Derrick Keeton <derrickkeeton@gmail.com>
+IPS I/Page Notification / 10433 SALIDA ST ADAM CCPD 06:51:58 TYPE CODE: FRALRM CALLER NAME:  TIME: 06:51:58\n\n\n
+
+Contact: JC Langley <ashaman01@gmail.com>
+(IPS I/Page Notification) E 470 EB ADAM ADAM: @E 470 EB/E 56TH AVE 22:58:36 TYPE CODE: NONSTR CALLER NAME:  TIME: 22:58:36 Comments:  -104.701552 +39.798521 WH
+
+Contact: "Schuppe, Michael" <mschuppe@brightonfire.org>
+Sender: ipspage@adcom911.org
+Subject:IPS I/Page Notification\n510.5 S 2nd Ave major incident-- hazmat  no additional equip needed at this time\r\n\r\n\r
+
+Contact: support@active911.com
+(IPS I/Page Notification) 8055 WASHINGTON ST ADAM ADAM: @STATION 31 13:45:48 TYPE CODE: EMS CALLER NAME: FIL MARTINEZ TIME: 13:45:48 Comments:  TEST CARD
+
+ */
 
 
 public class COAdamsCountyParser extends FieldProgramParser {
   
   private static final Pattern CAD_MARKER = 
-        Pattern.compile("^(?:Subject:)?IPS I/Page Notifica(?:tion|\\.\\.\\.) (?:/ )?");
+        Pattern.compile("^(?:Subject:)?IPS I/Page Notification (?:/ )?");
   
   public COAdamsCountyParser() {
     super(CITY_TABLE, "ADAMS COUNTY", "CO",
-           "ADDR! TYPE_CODE:CALL! CALLER_NAME:NAME! TIME:TIME% Comments:INFO");
+           "ADDR! TYPE_CODE:CALL! CALLER_NAME:NAME! TIME:TIME! Comments:INFO");
   }
   
   @Override
@@ -35,12 +61,10 @@ public class COAdamsCountyParser extends FieldProgramParser {
     if (super.parseMsg(body, data)) return true;
     
     // Fallback parsing address followed by call description
-    data.initialize(this);
-    parseAddress(StartType.START_CALL, FLAG_AT_SIGN_ONLY, body, data);
-    if (getStatus() == 0) return false;
-    if (data.strCall.length() == 0) data.strCall = getLeft();
-    else data.strSupp = getLeft();
-    return (data.strCall.length() > 0);
+    data.initialize();
+    parseAddress(StartType.START_ADDR, body, data);
+    data.strCall = getLeft();
+    return (getStatus() > 0);
   }
   
   
@@ -62,13 +86,7 @@ public class COAdamsCountyParser extends FieldProgramParser {
         field = field.substring(0,pt).trim();
         if (sPlace.startsWith("@")) sPlace = sPlace.substring(1).trim();
       }
-      
-      pt = field.lastIndexOf(',');
-      if (pt >= 0) {
-        data.strApt = field.substring(pt+1).trim();
-        field = field.substring(0,pt).trim();
-      }
-      parseAddress(StartType.START_ADDR, FLAG_ANCHOR_END, field, data);
+      parseAddress(StartType.START_ADDR, field.replace(',', ' '), data);
       if (sPlace != null) {
         String sCross = null;
         pt = sPlace.indexOf('/');
@@ -85,7 +103,7 @@ public class COAdamsCountyParser extends FieldProgramParser {
     
     @Override
     public String getFieldNames() {
-      return "ADDR CITY APT PLACE";
+      return "ADDR APT PLACE CITY";
     }
   }
   
@@ -97,40 +115,16 @@ public class COAdamsCountyParser extends FieldProgramParser {
     }
   }
   
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = GPS_PATTERN.matcher(field);
-      if (match.find()) {
-        setGPSLoc(match.group(), data);
-        field = field.substring(match.end()).trim();
-      }
-      super.parse(field, data);
-    }
-    
-    @Override 
-    public String getFieldNames() {
-      return "GPS INFO";
-    }
-  }
-  
   @Override
   public Field getField(String name) {
     if (name.equals("ADDR")) return new MyAddressField();
     if (name.equals("TIME")) return new MyTimeField();
-    if (name.equals("INFO")) return new MyInfoField();
     return super.getField(name);
   }
   
   private static final Properties CITY_TABLE = buildCodeTable(new String[]{
       "ADAM ADAM", "",
-      "ADAM ARV",  "ARVADA",
-      "ADAM AUR",  "AURORA",
-      "ADAM BPD",  "BRIGHTON",
-      "ADAM CCPD", "COMMERCE CITY",
-      "ADAM FHPD", "FEDERAL HEIGHTS",
-      "ADAM TPD",  "THORNTON",
-      "ADAM WES",  "WESTMINSTER",
+      "ADAM CCPD", "",
       "ARAP ARAP", "ARAPAHOE COUNTY"
   });
 }

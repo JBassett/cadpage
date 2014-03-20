@@ -1,6 +1,5 @@
 package net.anei.cadpage.donation;
 
-import net.anei.cadpage.SmsMmsMessage;
 import android.app.Activity;
 import android.graphics.Color;
 import android.preference.Preference;
@@ -42,13 +41,6 @@ public abstract class DonateEvent {
   }
   
   /**
-   * @return event alert status
-   */
-  public AlertStatus getAlertStatus() {
-    return alertStatus;
-  }
-  
-  /**
    * Get any parameters associated with any display strings
    */
   protected final static int PARM_TITLE = 0;
@@ -62,14 +54,6 @@ public abstract class DonateEvent {
    * @param activity current context
    */
   abstract protected void doEvent(Activity activity);
-  
-  /**
-   * @param msg Current message being processed
-   * @return true if event is enabled
-   */
-  public boolean isEnabled(SmsMmsMessage msg) {
-    return isEnabled();
-  }
   
   /**
    * @return true if event is enabled
@@ -168,8 +152,8 @@ public abstract class DonateEvent {
    * @param button button to be set up
    * @return true if button was set up, false otherwise
    */
-  public boolean setButton(final Activity activity, Button button, SmsMmsMessage msg) {
-    if (!isEnabled(msg)) return false;
+  public boolean setButton(final Activity activity, Button button) {
+    if (!isEnabled()) return false;
     String title = activity.getString(titleId, getTextParms(PARM_TITLE));
     button.setText(setAlertColor(title));
     

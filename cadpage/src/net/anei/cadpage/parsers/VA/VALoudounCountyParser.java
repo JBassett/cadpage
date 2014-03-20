@@ -1,161 +1,87 @@
 package net.anei.cadpage.parsers.VA;
 
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import net.anei.cadpage.parsers.FieldProgramParser;
+import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-public class VALoudounCountyParser extends FieldProgramParser {
+/***
+
+Call:12D02E-SEIZURES CONT,42914 OVERLY SQ-CH Apt:,X-St:NORRINGTON SQ KIR,A6092,Box:1908 ,ADC:5520 G06 [90]
+Call:17D03-FALL PATIENT N,42848 RECTORS CHASE WAY-AB Apt:,X-St:HOYSVILLE MANOR D,A6092 904 ACO9,Box:2618 ,ADC:5400 G03 [89]
+Call:20D01H-HEAT EXPOSURE,STONE SPRINGS BLVD-AL/MINERAL SPRINGS CIR-AL Apt:,X-St:GREENSTONE DR & M,A6092 9942 ACO9,Box:0910 ,ADC:5520 B02 [77]
+
+([cad13] ) Call:30A01-TRAUMA NOT DAN,775 GATEWAY DR SE-LB Apt:CLUBHS,X-St:SYCOLIN RD SE VAN,M6132 ACO13,Box:2013 ,ADC:515
+([cad13] ) Call:PUBR-PUBLIC SERVICE-,60 IDA LEE DR NW-LB Apt:,X-St:KING ST N  ,A6133 A6134 Z613,Box:0113 ,ADC:5157 K01 [2
+([cad13] ) Call:ALS-ALS EMERGENCY   ,16591 COURAGE CT-LB Apt:,X-St:LOUDOUN CENTER PL,M6131 ACO13,Box:2024 ,ADC:5158 C08 [
+
+Contact: rebecca mckenna <emtco9516@gmail.com>
+bmckenna+caf_=5712385054=vtext.com@arcolavfd.org Call:31A01-FAINTED NOW AL,24801 PINEBROOK RD-CH Apt:110,X-St:TALL CEDARS PKWY ,A619 M6091 ACO19,Box:1921 ,ADC:5520 F01 [97]
+
+Contact: Ffightertl2 <ffightertl2@yahoo.com>
+Sender: CC_Message_Notification@usamobility.net
+1 of 2\nFRM:CC_Message_Notification@usamobility.net\nMSG:Call:CHIM-CHIMNEY FIRE,13396 BERLIN TPKE-LV Apt:,X-St:MILLTOWN CREEK RO,W612 ER602 TL602\n(Con't) 2 of 2\nK623 A6122 BC602 ECO12 ACO12,Box:1222 ADC:4922 G01 [14]\n\n-- \n[LC602](End)
+
+
+***/
+
+public class VALoudounCountyParser extends MsgParser {
+
+  private static final Properties LCFRCityCodes = buildCodeTable(new String[]{
+        "CH", "Chantilly",
+        "LB", "Leesburg",
+        "AL", "Aldie",
+        "ST", "Sterling",
+        "MB", "Middleburg",
+        "AB", "Ashburn",
+        "SP", "Sterling",
+        "BL", "Bluemont",
+        "CE", "Centreville",
+        "HA", "Hamilton",
+        "LV", "Lovettsville",
+        "PA", "Paris",
+        "PV", "Purceville",
+        "PS", "Paeonian",
+        "RH", "Round Hill",
+        "UP", "Upperville",
+        "FX19", "Fairfax",
+        "FX11", "Fairfax",
+        "FX", "Fairfax",
+        "FQ", "Faquier"});
   
-  private static final Pattern MISSING_COMMA_PTN = Pattern.compile("(?<!,) (?=APT:|X-ST:|BOX:|ADC:|FDID:)");
-  private static final Pattern TRAILER_PTN = Pattern.compile(" +(?:(\\d\\d?:\\d\\d? +[AP]M)|\\[\\d*\\]?)$");
-  private static final DateFormat TIME_FMT = new SimpleDateFormat("hh:mm aa");
   public VALoudounCountyParser() {
-    super("LOUDOUN COUNTY", "VA",
-          "CALL:CALL! ADDR/y! APT:APT! X-ST:X! UNIT BOX:BOX% ADC:MAP% FDID:ID");
+    super("LOUDOUN COUNTY", "VA");
   }
 
   @Override
   protected boolean parseMsg(String body, Data data) {
     
-    // Strip off trailing disclaimer
-    int pt = body.indexOf('\n');
-    if (pt >= 0) body = body.substring(0,pt).trim();
+    // Clean off extra junk at both ends
+    int pt = body.indexOf("Call:");
+    if (pt < 0) return false;
     
-    // There are two different related formats, upshifting the text string
-    // does a lot to  merge them into a common form
-    body = body.toUpperCase();
-    
-    // So does adding missing comma delimiters
-    // A simple replaceAll doesn't seem to work with lookahead and lookbehind groups :(
-    StringBuffer sb = new StringBuffer();
-    Matcher match = MISSING_COMMA_PTN.matcher(body);
-    while (match.find()) match.appendReplacement(sb, ",");
-    match.appendTail(sb);
-    body = sb.toString();
-    
-    // strip off trailing time or sequence number
-    match = TRAILER_PTN.matcher(body);
-    if (match.find()) {
-      String time = match.group(1);
-      if (time != null) setTime(TIME_FMT, time, data);
-      body = body.substring(0,match.start());
-    }
+    body = body.substring(pt);
+    pt = body.lastIndexOf('[');
+    if (pt >= 0) body = body.substring(0, pt).trim();
 
-    // Invoke the main parser
-    if (! super.parseFields(body.split(","), data)) return false;
-    parseCityCode(data.strCity, data);
-    if (data.strCity.length() == 0 && data.strBox.length() >= 2) {
-      parseCityCode(data.strBox, data);
-    }
+    // Needs some massaging before it can be run through the standard parser
+    body = body.replace(" Apt:", ",Apt:");
+    Properties props = parseMessage(body, ",", new String[]{"Addr", "Unit"});
+    data.strCall = props.getProperty("Call", "");
+    parseAddressCity(props.getProperty("Addr", ""), data);
+    if (data.strAddress.length() == 0) return false;
+    data.strApt = props.getProperty("Apt");
+    if (data.strApt == null) return false;
+    data.strCross = props.getProperty("X-St");
+    if (data.strCross == null) return false;
+    data.strUnit = props.getProperty("Unit", "");
+    data.strBox = props.getProperty("Box", "");
+    String sMap = props.getProperty("ADC", "");
+    pt = sMap.indexOf('[');
+    if (pt >= 0) sMap = sMap.substring(0,pt).trim();
+    data.strMap = sMap;
+    data.strCity = convertCodes(data.strCity, LCFRCityCodes);
+    
     return true;
   }
-  
-  private void parseCityCode(String code, Data data) {
-    if (code.length() >= 2) {
-      String city = convertCodes(code.substring(0,2), CITY_CODES);
-      if (city != null) {
-        int pt = city.indexOf('/');
-        if (pt >= 0) {
-          data.strState = city.substring(pt+1);
-          city = city.substring(0,pt);
-        }
-        data.strCity = city;
-      }
-    }
-  }
-  
-  public String getProgram() {
-    return super.getProgram().replace("X", "X UNIT").replace("CITY", "CITY ST") + " TIME";
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("CALL")) return new MyCallField();
-    if (name.equals("X")) return new MyCrossField();
-    return super.getField(name);
-  }
-  
-  private static final Pattern CALL_CODE_PTN = Pattern.compile("^([A-Z0-9]+)-");
-  private class MyCallField extends CallField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher  match = CALL_CODE_PTN.matcher(field);
-      if (match.find()) {
-        data.strCode = match.group(1);
-        field = field.substring(match.end()).trim();
-      }
-      super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CODE CALL";
-    }
-  }
-  
-  private static final Pattern CROSS_UNIT_PTN = Pattern.compile("(?:(?: +|^)(?:[A-Z]+\\d+[A-Z]?|CODE|EC|ACO?))+(?: A)?,?$");
-  private class MyCrossField extends CrossField {
-    @Override
-    public void parse(String field, Data data) {
-      
-      // The newer format lacks a comma between the cross street an unit fields
-      // If we did not find a unit field, try splitting units off from the
-      // cross street
-      Matcher match = CROSS_UNIT_PTN.matcher(field);
-      if (match.find()) {
-        data.strUnit = match.group().trim();
-        field = field.substring(0,match.start());
-      }
-      
-      // Sometimes there is an & separator, and sometimes there is not.
-      if (field.contains("&")) {
-        super.parse(field, data);
-      } else {
-        parseAddress(StartType.START_ADDR, FLAG_ONLY_CROSS, field, data);
-        data.strCross = append(data.strCross, " & ", getLeft());
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "X UNIT";
-    }
-  }
-  
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "AB", "ASHBURN",
-      "AL", "ALDIE",
-      "BL", "BLUEMONT",
-      "CE", "CENTREVILLE",
-      "CH", "CHANTILLY",
-      "HA", "HAMILTON",
-      "LB", "LEESBURG",
-      "LV", "LOVETTSVILLE",
-      "MB", "MIDDLEBURG",
-      "PA", "PARIS",
-      "PS", "PAEONIAN",
-      "PV", "PURCELLVILLE",
-      "SP", "STERLING",
-      "ST", "STERLING",
-      "RH", "ROUND HILL",
-      "UP", "UPPERVILLE",
-      "WA", "WATERFORD",
-
-      "FX19", "FAIRFAX",
-      "FX11", "FAIRFAX",
-      
-      "DU", "DULLES AIRPORT",
-      "FQ", "FAUQUIER COUNTY",
-      "FR", "FREDERICK COUNTY/MD",
-      "FX", "FAIRFAX COUNTY",
-      "JE", "JEFFERSON COUNTY/WV",
-      "PW", "PRINCE WILLIAM COUNTY"
-
-   });
 }

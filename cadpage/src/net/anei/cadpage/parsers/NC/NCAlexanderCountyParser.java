@@ -5,6 +5,48 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.SmartAddressParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/* 
+Alexander County, NC
+Contact: Josh Reese <jrreese1@catamount.wcu.edu>
+Contact: Foster, Greg <gfoster@alexandercountync.gov>
+Sender: CAD@alexandercountync.gov
+
+(CAD:91 GREEN ACRES LN;FALL;31D03;ICARD RIDGE RD)
+CAD:2370 NC 90 HWY E;NC DEPT OF TRANSPORTATION;TRAFFIC ACCIDENT;ADAMS POND LN;WINTERHAVEN RD
+CAD:1522 BLACK OAK RIDGE RD;STANDARD STRUCTURE FIRE;JONES RD;CARSON CHAPEL RD
+CAD:400 LEE MATHESON RD;HEART PROBLEMS;19D04;BOSTON RD;TAYLORSVILLE MFG RD
+CAD:33 LEWITTES RD;PIEDMONT FIBERGLASS;LARGE ALARM;NC 90 HWY E;RUSSELL LN
+
+Contact: Josh Davis <paramedicdavis@gmail.com>
+|CAD:80 PRESLAR LN;BREATHING PROBLEMS;06D02;NC 127 HWY
+
+Contact: Chappy <kchapman@taylorsvillefire.org>
+CAD:350 SCHOOL DR;TAYLORSVILLE HOUSE;LARGE ALARM;LILEDOUN RD;E JAY DR
+
+Contact: trent tedder <emt4448@yahoo.com>
+CAD:65 MOONEY DR;TRAUMATIC INJURIES;30A02;US 64 90 HWY W
+
+Contact: "Foster, Greg" <gfoster@alexandercountync.gov>
+CAD:224 CRESTVIEW DR/US 64 HWY W;TRAFFIC ACCIDENT;29B04
+CAD:1 JENKINS MOOSE RD/LILEDOUN RD;WEATHER RELATED
+CAD:505 NC 16 HWY N;UNCONSCIOUS OR FAINTING;31D02;GRAVEL HILL CT;NAT GUARD ARMORY RD
+CAD:2818 NC 90 HWY E;CHEST PAIN;10D03;JESSICA LEE LN;WHITE PLAINS RD
+CAD:21 MAIN AVENUE DR;BB&T BANK;TRAFFIC ACCIDENT;29D02m;E MAIN AV;TOWN PARK ST
+
+Contact: "" <drewrescue1@att.net>
+CAD:8510 NC 90 HWY E;SHURTAPE TECHNOLOGIES INC;TRAUMATIC INJURIES;30B02;SHUFORD RD;RURITAN PARK RD
+
+Contact: Greg Foster <gfoster630@gmail.com>
+CAD:7400 NC 16 HWY N;DEAL APPLE ORCHARDS;LZ SETUP;OLD NC 16 HWY;DEAL ORCHARD LN
+
+Contact: kevin chapman <kchapman3042@gmail.com>
+CAD:FYI: ;93 TELEPHONE EXCHANGE RD;TRAUMATIC INJURIES;30B01;SPENCER LN;HONEY LN
+CAD:765 CARRIGAN RD;PREGNANCY OR CHILDBIRTH;24D03;HAPPY PLAINS RD;HARD ROCK LN
+
+Contact: Landon Russ <landonruss1993@gmail.com>
+CAD:13 WIER CIR;STROKE;28C01L;4TH ST SW;5TH AV SW
+
+*/
 
 public class NCAlexanderCountyParser extends SmartAddressParser {
   
@@ -13,7 +55,6 @@ public class NCAlexanderCountyParser extends SmartAddressParser {
   
   public NCAlexanderCountyParser() {
     super("ALEXANDER COUNTY", "NC");
-    setFieldList("ADDR PLACE CALL CODE X");
   }
   
   @Override
