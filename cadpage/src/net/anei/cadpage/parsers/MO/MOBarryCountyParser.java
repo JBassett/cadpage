@@ -1,40 +1,21 @@
 package net.anei.cadpage.parsers.MO;
 
 
-import java.util.regex.Pattern;
-
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.dispatch.DispatchB2Parser;
+import net.anei.cadpage.parsers.dispatch.DispatchBParser;
 
 
+/*
+Barry County, MO
+Contact: Ryan Joy <crazyrockj@gmail.com>
 
-public class MOBarryCountyParser extends DispatchB2Parser {
-  
-  private static final Pattern FARM_ROAD_PTN = Pattern.compile("\\bFARM ROAD\\b");
-  private static final Pattern FR_PTN = Pattern.compile("\\bFR\\b");
- 
-  public MOBarryCountyParser() {
-    super("BC911:", CITY_LIST, "BARRY COUNTY", "MO");
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_KEEP_STATE_HIGHWAY | MAP_FLG_SUPPR_CR;
-  }
-  
-  @Override
-  public boolean parseMsg(String body, Data data) {
-    String save = body;
-    body = FARM_ROAD_PTN.matcher(body).replaceAll("FR");
-    if (!super.parseMsg(body, data)) return false;
-    if (data.strCity.equalsIgnoreCase("BARRY COUNTY")) data.strCity = "";
-    
-    if (save.length() != body.length()) {
-      data.strAddress = FR_PTN.matcher(data.strAddress).replaceAll("FARM ROAD");
-      data.strCross = FR_PTN.matcher(data.strCross).replaceAll("FARM ROAD");
-    }
-    return true;
-  }
+BC911:ALM >ALARMS 23544 FARM ROAD 2040 BARRY COUNTY JULIE KEENER 8775350563 Map: Grids:0,0 Cad: 2011-0000015066
+BC911:MVAUNK>MOTOR VEH ACC UNKNOWN INJ STATE HIGHWAY 39 JENKINS VERIZON WIRELESS Cad: 2011-0000009418
+BC911:FIRES >STRUCTURE FIRE 23270 STATE HIGHWAY TT BARRY COUNTY CAHD REAVIS 3350036 Map: Grids:0,0 Cad: 2011-0000015655
+
+*/
+
+public class MOBarryCountyParser extends DispatchBParser {
   
   private static final String[] CITY_LIST = new String[]{
     "BARRY COUNTY",
@@ -89,8 +70,21 @@ public class MOBarryCountyParser extends DispatchB2Parser {
     "WASHBURN TWP",
     "WHEATON TWP",
     "WHITE RIVER TWP",
-    
-    // Worth County
-    "DENVER"
   };
+ 
+  public MOBarryCountyParser() {
+    super(CITY_LIST, "BARRY COUNTY", "MO");
+  }
+  
+  @Override
+  protected boolean isPageMsg(String body) {
+    return body.startsWith("BC911:");
+  }
+  
+  @Override
+  public boolean parseMsg(String body, Data data) {
+    if (!super.parseMsg(body, data)) return false;
+    if (data.strCity.equalsIgnoreCase("BARRY COUNTY")) data.strCity = "";
+    return true;
+  }
 }

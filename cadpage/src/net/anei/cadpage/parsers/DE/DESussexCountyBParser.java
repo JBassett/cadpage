@@ -1,67 +1,66 @@
 package net.anei.cadpage.parsers.DE;
 
 import java.util.Properties;
-import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Sussex County, DE
+Contact: Samuel Millman <fire7281@gmail.com>
+Contact: "fdbuff@aol.com" <fdbuff@aol.com>
+Sender: rc.212@c-msg.net
+System: Code Messaging
+
+(*CAD*) [CAD] Sta: 78AS3   Loc: 12319 Sussex Hwy   City: 19950   --- Sick Person(Specific Diag)-BLSPremise 12319 Sussex Hwy
+(*CAD*) [CAD] Sta: 78AST   Loc: 7229 Seashore Hwy   --- Falls-BLS
+(*CAD*) [CAD] Sta: 78AST   Loc: 14490 Broad Ave   City: 19950   --- Breathing Problems-ALS    Premise 14490 Broad Ave
+(*CAD*) [CAD] Sta: 78AST   Loc: 12404 Double Fork Rd   City: 19950   --- Medical Alert         Premise 12404 Double Fork Rd
+(*CAD*) [CAD] Sta: 78AST   Loc: 16976 Sussex Hwy       Canterbury Apt   --- Chest Pain-ALS
+(*CAD*) [CAD] Sta: 78AS3   Loc: 203 E Market St   City: 19950   --- Hemorrhage/Lacerations-BLS  Premise 203 E Market St
+(*CAD*) [CAD] Sta: 78AS1   Loc: 13757 Mile Stretch Rd   City: 19950   --- Stroke-ALS          Premise 13757 Mile Stretch Rd
+(*CAD*) [CAD] Sta: 78AST   Loc: 14490 Broad Ave   City: 19950   --- Breathing Problems-ALS    Premise 14490 Broad Ave
+(*CAD*) [CAD] Sta: 78AS2   Loc: 13757 Mile Stretch Rd   City: 19950   --- Stroke-ALS          Premise 13757 Mile Stretch Rd
+(*CAD*) [CAD] Sta: 78AST   Loc: 18029 Spellman Ln   City: 19941   --- Unknown Problem(Man Down)-BLS
+
+Contact: "greenwoodfire@aol.com" <greenwoodfire@aol.com>
+Sender: rc.212@c-msg.net
+Sta: 78AS2 Loc: 10725 Beach Hwy City: 19950 --- Traffic/TransportationAcdntALSPremise 10725 Beach Hwy
+
+ */
 
 public class DESussexCountyBParser extends FieldProgramParser {
   
-  private static final Pattern ALT_START_SEQ = Pattern.compile("^Sta: +Inc#: +([-\\d]+) +(.*)");
-  
   public DESussexCountyBParser() {
     super(CITY_CODES, "SUSEX COUNTY", "DE",
-           "Inc0:ID? Sta:SRC! Call_at:ADDR! Loc:PLACE! City:CITY! Problem:CALL! Inc#:ID? Lat:GPS? Long:GPS? DISP:TIME Cross_St:X");
-  }
-  
-  @Override
-  public String getFilter() {
-    return "@c-msg.net,cad@sussexcountyde.gov";
+           "Sta:SRC! Loc:ADDR! City:CITY Call:CALL! Premise:SKIP");
   }
 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
-    
-    // CodeMessaging does some data massaging.  Which we will try to reverse
-    if(body.startsWith("Sta: ")) {
-      body = body.replace(" Loc::", " Call at:").replace(" ---:", " Problem:").replace(" City: :", " City:");
-    } else {
-      body = "Sta: " + body;
-    }
-    
-    body = ALT_START_SEQ.matcher(body).replaceAll("Inc0: $1 Sta: $2");
-    body = body.replace(" Loc::", " Loc0:").replace("City: :", "City:").replace("Loc:", " Loc:").replace("City:", " City:");
-    if (!super.parseMsg(body, data)) return false;
-    setGPSLoc(data.strGPSLoc, data);
-    return true;
+    body = body.replaceAll(" --- ", " Call: ").replaceAll("Premise ", " Premise: ");
+    return super.parseMsg(body, data);
   }
   
   private class MyAddressField extends AddressField {
     
     @Override
     public void parse(String field, Data data) {
-      if (field.startsWith("0 ")) field = field.substring(2).trim();
+      Parser p = new Parser(field);
+      data.strPlace = p.getLastOptional("  ");
+      field = p.get().trim();
       super.parse(field, data);
     }
-  }
-  
-  private class MyGPSField extends GPSField {
+    
     @Override
-    public void parse(String field, Data data) {
-      int len = field.length();
-      if (len >= 6) {
-        field = field.substring(0,len-6) + '.' + field.substring(len-6);
-      }
-      data.strGPSLoc = append(data.strGPSLoc, " ", field);
+    public String getFieldNames() {
+      return super.getFieldNames() + " PLACE";
     }
   }
   
   @Override
   public Field getField(String name) {
     if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("GPS")) return new MyGPSField();
     return super.getField(name);
   }
   
@@ -70,7 +69,6 @@ public class DESussexCountyBParser extends FieldProgramParser {
       "19331", "BETHEL",
       "19333", "BRIDGEVILLE",
       "19339", "DAGSBORO",
-      "19933", "BRIDGEVILLE",
       "19940", "DELMAR",
       "19941", "ELLENDALE",
       "19944", "FENWICK ISLAND",
@@ -78,7 +76,6 @@ public class DESussexCountyBParser extends FieldProgramParser {
       "19947", "GEORGETOWN",
       "19950", "GREENWOOD",
       "19951", "HARBESON",
-      "19952", "HARRINGTON",
       "19956", "LAUREL",
       "19958", "LEWES",
       "19960", "LINCOLN",

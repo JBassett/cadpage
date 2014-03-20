@@ -1,257 +1,81 @@
 package net.anei.cadpage.parsers.dispatch;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-// See if we can pull in OHLickingCounty & WVBooneCounty
+/*
+Base class for locations handling Emergitech CAD software
+
+Knox County, OH
+Dispatch:[SD35]- NATURE: FIRE TRASH/DUMPSTER FIRE LOCATION: 21 JOHNSV ILLE RD CENTERBURG BETWEEN COLUMBUS RD / UPDIKE RD COMMENTS : MATRESS ON FIRE IN PARK ACROSS FROM SUNOCO STATION 
+Dispatch:[SD24]- NATURE: FIRESINGLE FAMILY RES STRUCTURE LOCATION: 42 20 ST RT 3 COMMENTS: MUTUAL AID BST&G STRUCTURE FIRE//HOUSE FILLED W/SMOKE////X ROADS OLD 3C//MEREDITH STATE RD
+Dispatch:[SD35]- NATURE: CARDIAC OR RESPIRATORY ARREST/DEATH LOCATION : 212 FAIRVIEW AVE SUITE: BLDG CENTERBURG BETWEEN JONES AVE / LEONARD AVE COMMENTS: X Y 39 YOF TRACH AND VE NTILATOR PATIENT FULL CODE PROQA MEDICAL: NEW CASE NUMBER A SSIGNED CALL 11-1010849 BY SD35 (POS 02) AT 07:13:06 PROQA MEDICAL: ABORT CALL 11-1010849 BY SD35 (POS 02) AT 07:13:13 - DID NOT USE PROQA MEDICAL: STOPPED CALL 11-1010849 BY SD3 5 (POS 02) AT 07:13:13
+Dispatch:[SD8]- NATURE: FALLS/BACK INJURY (TRAUMATIC) LOCATION: 164 W HOUCK ST SUITE: 109 CENTERBURG BETWEEN N PRESTON ST / WILL IS ST COMMENTS: FEMALE HAS FALLEN
+Dispatch:[SD24]- NATURE: UNCONCIOUS/PASSING OUT (NONTRAUMATI LOCATION : 164 W HOUCK ST SUITE: 112 CENTERBURG BETWEEN N PRESTON ST / WILLIS ST COMMENTS: PROQA MEDICAL: NEW CASE NUMBER ASSIGN ED CALL 11-1010741 BY SD24 (POS 01) AT 08:13:03 88 YOM UNRE SPONSIVE//BREATHING AT THIS TIME
+
+Fairfield County, OH
+[DIS44]- NATURE: ACAL LOCATION: 114 ACADEMY ST PLEASANTV ILLE BETWEEN S MAIN ST / LINCOLN AV COMMENTS: NO APT GIVENGENDERAL FIRE -DIS44 Fairfield 911
+[DIS15]- NATURE: S29 LOCATION: 2295 ELDER RD NE PLEASAN T TWP BETWEEN US RT 22 / BERRY RD COMMENTS: 67 YOF SEVERE A BD & SIDE PAINS. -DIS15 Fairfield
+[DIS20]- NATURE: C4 LOCATION: 4815 OLD MILLERSPORT RD NE PLEASANT TWP BETWEEN OLD MILL RD / CARROLL-EASTERN RD CO MMENTS: REF TO 2 VEHICLES, 1 INTO CO
+[DIS45]- NATURE: S29 LOCATION: 2890 LANCASTER-THORNVILL E RD NE PLEASANT TWP BETWEEN PLEASANT WAY / COONPATH RD AC CESS BY ST RT 188 COMMENTS: 44 YOM
+[DIS48]- NATURE: C28 LOCATION: 206 MARKET ST PLEASANTVI LLE BETWEEN W WALNUT ST / S MAIN ST COMMENTS: PILE OF LEAVE S 4-5 FT FROM A STRUCTURE ---SEEMS
+[DIS45]- NATURE: C28 LOCATION: COONPATH RD NW / LANCAST ER-KIRKERSVILLE RD NW GREENFIELD TWP BETWEEN CLAYPOOL DR / DEAD END COMMENTS: CALLER IS ADV TH
+[DIS19]- NATURE: C4 LOCATION: COONPATH RD NW / ELECTIO N HOUSE RD NW GREENFIELD TWP BETWEEN CLAYPOOL DR / DEAD END COMMENTS: REF TO 2 VEHICLES..UNKNOW
+[DIS50]- NATURE: C4 LOCATION: 4496 CINCINNATI-ZANESVIL LE RD NE PLEASANT TWP BETWEEN IRELAND ROAD / SNOKE HILL RD ACCESS BY US RT 22 COMMENTS: +039.73
+[DIS40]- NATURE: S29 LOCATION: 6570 MC CLEERY RD NW LIB ERTY TWP BETWEEN LEONARD RD / PLEASANTVILLE RD COMMENTS: 38 YOM WITH SEVERE ABDOMINAL PAIN -DI
+
+ */
+
 
 public class DispatchEmergitechParser extends FieldProgramParser {
   
-  private static final String UNIT_PTN = "\\[([-A-Z0-9]+)\\]-+ ?";
-  private static final Pattern HOUSE_DECIMAL_PTN = Pattern.compile("\\b(\\d+)\\.0{1,2}(?= )");
-  private static final Pattern COMMENTS_PTN = Pattern.compile("/?C ?O ?M ?M ?E ?N ?T ?S ?:");
-  private static final Pattern BETWEEN_PTN = Pattern.compile("\\bB ?E ?T ?W ?E ?E ?N\\b");
-  
-  private String[] prefixList = null;
   private Pattern markerPattern;
-  int[] extraSpacePosList;
-  private Set<String> specialWordSet = new HashSet<String>(Arrays.asList(new String[]{
-      "APPLE",
-      "EAST",
-      "ELECTION",
-      "MAIN",
-      "MARKET",
-      "NORTH",
-      "SECOND",
-      "SHORE",
-      "SOUTH",
-      "WEST"
-  }));
+  int extraSpacePos;
   
-  
-  /** 
-   * @param extraSpacePos Single extra blank column<br/>
-   * Positive values of offsets from beginning of message<br/>
-   * Negative values are offsets from beginning of address field 
-   * @param cityList list of cities
-   * @param defCity default city
-   * @param defState default state
-   */
-  public DispatchEmergitechParser(int extraSpacePos, String[] cityList, String defCity, String defState) {
-    this((String)null, new int[]{extraSpacePos}, cityList, defCity, defState);
-  }
-  
-  /** 
-   * @param prefixList List of possible prefix values that must be found at start of text.  The
-   * first is the primary value index offsets will be calculated with.  Any others are considered
-   * earlier version that will be replaced with the primary value before the space adjustment is made
-   * @param extraSpacePos Single extra blank column<br/>
-   * Positive values of offsets from beginning of message<br/>
-   * Negative values are offsets from beginning of address field 
-   * @param cityList list of cities
-   * @param defCity default city
-   * @param defState default state
-   */
-  public DispatchEmergitechParser(String[] prefixList, int extraSpacePos, 
-                                  String[] cityList, String defCity, String defState) {
-    this(prefixList, false, new int[]{extraSpacePos}, cityList, defCity, defState);
-  }
-
-  
-  /** 
-   * Constructor
-   * @param prefix Prefix that must be found at beginning of text page<br/>
-   * An empty string means that no prefix value is expected<br/>
-   * A null string means no prefix value is expected, and the following unit field is optional
-   * @param extraSpacePos Single extra blank column<br/>
-   * Positive values of offsets from beginning of message<br/>
-   * Negative values are offsets from beginning of address field 
-   * @param cityList list of cities
-   * @param defCity default city
-   * @param defState default state
-   */
   public DispatchEmergitechParser(String prefix, int extraSpacePos,
-                                   String[] cityList, String defCity, String defState) {
-    this(prefix, new int[]{extraSpacePos}, cityList, defCity, defState);
-  }
-  
-  /** 
-   * Constructor
-   * @param prefix Prefix that must be found at beginning of text page<br/>
-   * An empty string means that no prefix value is expected<br/>
-   * A null string means no prefix value is expected, and the following unit field is optional
-   * @param extraSpacePos1 Single extra blank column<br/>
-   * Positive values of offsets from beginning of message<br/>
-   * Negative values are offsets from beginning of address field 
-   * @param extraSpacePos2 Single extra blank column<br/>
-   * Positive values of offsets from beginning of message<br/>
-   * Negative values are offsets from beginning of address field 
-   * @param cityList list of cities
-   * @param defCity default city
-   * @param defState default state
-   */
-  public DispatchEmergitechParser(String prefix, int extraSpacePos1, int extraSpacePos2, 
-                                   String[] cityList, String defCity, String defState) {
-    this(prefix, new int[]{extraSpacePos1, extraSpacePos2}, cityList, defCity, defState);
-  }
-  
-  /** 
-   * Constructor
-   * @param prefix Prefix that must be found at beginning of text page<br/>
-   * An empty string means that no prefix value is expected<br/>
-   * A null string means no prefix value is expected, and the following unit field is optional
-   * @param extraSpacePosList Array of extra blank columns<br/>
-   * Positive values of offsets from beginning of message<br/>
-   * Negative values are offsets from beginning of address field 
-   * @param cityList list of cities
-   * @param defCity default city
-   * @param defState default state
-   */
-  public DispatchEmergitechParser(String prefix, int[] extraSpacePosList,
                            String[] cityList, String defCity, String defState) {
-
-    // An empty prefix just means no prefix is expected
-    // a null prefix means no prefix is expected and the entire unit block is optional
-    this(prefix == null ? "" : prefix
-        , prefix == null, extraSpacePosList, cityList, defCity, defState);
-  }
-  
-  /** 
-   * Primary constructor
-   * @param prefixList List of possible prefix values that must be found at start of text.  The
-   * first is the primary value index offsets will be calculated with.  Any others are considered
-   * earlier version that will be replaced with the primary value before the space adjustment is made
-   * @param optUnit True if unit field following prefix is optional
-   * @param extraSpacePosList Array of extra blank columns<br/>
-   * Positive values of offsets from beginning of message<br/>
-   * Negative values are offsets from beginning of address field 
-   * @param cityList list of cities
-   * @param defCity default city
-   * @param defState default state
-   */
-  public DispatchEmergitechParser(String[] prefixList, boolean optUnit, int[] extraSpacePosList,
-                          String[] cityList, String defCity, String defState) {
-    this(prefixList[0], optUnit, extraSpacePosList, cityList, defCity, defState);
-    if (prefixList.length > 1) this.prefixList = prefixList;
-  }
-  
-  /** 
-   * Primary constructor
-   * @param prefix Prefix that must be found at beginning of text page
-   * @param optUnit True if unit field following prefix is optional
-   * @param extraSpacePosList Array of extra blank columns<br/>
-   * Positive values of offsets from beginning of message<br/>
-   * Negative values are offsets from beginning of address field 
-   * @param cityList list of cities
-   * @param defCity default city
-   * @param defState default state
-   */
-  public DispatchEmergitechParser(String prefix, boolean optUnit, int[] extraSpacePosList,
-                          String[] cityList, String defCity, String defState) {
     super(cityList, defCity, defState,
-           "( Nature:CALL Location:ADDR/S2! Comments:INFO | CALL NATURE:CALL? LOCATION:ADDR/S2PN! BETWEEN:X? COMMENTS:INFO )");
-    
-    if (!optUnit) {
-      markerPattern = Pattern.compile("^" + prefix + UNIT_PTN);
-    } else {
-      markerPattern = Pattern.compile("^" + prefix + "(?:" + UNIT_PTN + ")?");
-    }
-    this.extraSpacePosList = extraSpacePosList;
-  }
-  
-  /**
-   * Add words and names to special list of words that we do not always recognize
-   * when they are split by an extraneous blank.  This happens one one of the terms
-   * on either side of the split happens to be a recognizable word.  Usually one
-   * of the ordinal directions
-   * @param words list of words to be added
-   */
-  protected void addSpecialWords(String ... words) {
-    for (String word : words) {
-      specialWordSet.add(word);
-    }
+           "NATURE:CALL! LOCATION:ADDR/S! BETWEEN:X? COMMENTS:INFO");
+    markerPattern = Pattern.compile("^" + prefix + "\\[([A-Z0-9]+)\\]- ");
+    this.extraSpacePos = extraSpacePos;
   }
   
   @Override
-  protected boolean parseMsg(String body, Data data) {
-    
-    // If we have a list of old prefix strings, convert them to the new value
-    if (prefixList != null) {
-      for (int ndx = 0; ndx < prefixList.length; ndx++) {
-        String prefix = prefixList[ndx];
-        if (body.startsWith(prefix)) {
-          if (ndx > 0) body = prefixList[0] + body.substring(prefix.length());
-          break;
-        }
-      }
-    }
-    
+  public boolean parseMsg(String body, Data data) {
     Matcher match = markerPattern.matcher(body);
     if (!match.find()) return false;
-    String unit = match.group(1);
-    if (unit != null) data.strUnit = unit;
-    
-    // See if this is the new fangled dash delimited format.  Makes things so much easier
-    String tmp = body.substring(match.end());
-    if (tmp.startsWith("- ")) { 
-      tmp = tmp.substring(2).trim();
-      if (tmp.endsWith(" -")) tmp = tmp + ' ';
-      tmp = HOUSE_DECIMAL_PTN.matcher(tmp).replaceFirst("$1");
-      return parseFields(tmp.split(" - "), 3, data);
-    }
-    
-    // There are usually 2 extraneous blanks.  The first one tends to fall in the
-    // address field and we will spend a lot of time trying to excise it.  The
-    // second tends to fall in the cross street or comment fields, where an extra
-    // blank isn't that critical.  We will, however, try to rebuild a COMMENTS:
-    // keyword that has been split
-    body = COMMENTS_PTN.matcher(body).replaceFirst("COMMENTS:");
-    
-    // Ditto for BETWEEN
-    body = BETWEEN_PTN.matcher(body).replaceFirst("BETWEEN");
-    
-    body = body.replace(" /LOCATION:", " LOCATION:");
+    data.strUnit = match.group(1);
     
     // If extraSpacePos is positive, the extraneous blank is found in a fixed
-    // position relative to the message text.  Also check for keywords that
-    // might get split with one side looking like a real word
-    if (extraSpacePosList != null) {
-      for (int extraSpacePos : extraSpacePosList) {
-        int oldLen = body.length();
-        if (extraSpacePos >= 0) {
-          body = removeBlank(extraSpacePos, body);
-        } else {
-          int ndx = body.indexOf(" LOCATION:");
-          if (ndx >= 0) {
-            ndx += 10;
-            while (ndx < body.length() && body.charAt(ndx) == ' ') ndx++;
-            body = removeBlank(ndx - extraSpacePos, body);
-          }
-        }
-        if (body.length() != oldLen) break;
-      }
-    }
+    // position relative to the message text
+    if (extraSpacePos > 0) body = removeBlank(extraSpacePos, body);
     
     // Carry on with more normal adjustments
     body = body.substring(match.end()).trim().replace(" BETWEEN ", " BETWEEN: ");
-    if (!super.parseMsg(body, data)) return false;
-    if (data.strCall.length() == 0) {
-      data.strCall = data.strSupp;
-      data.strSupp = "";
-      if (data.strCall.length() == 0) data.strCall = "ALERT";
-    }
-    return true;
+    return super.parseMsg(body, data);
   }
   
   @Override
   public String getProgram() {
-    return "UNIT " + super.getProgram() + " CALL";
+    return "UNIT " + super.getProgram();
+  }
+  
+  private class AddressField extends FieldProgramParser.AddressField {
+    @Override
+    public void parse(String field, Data data) {
+      if (extraSpacePos < 0) field = removeBlank(-extraSpacePos, field);
+      super.parse(field, data);
+    }
+  }
+
+
+  @Override
+  protected Field getField(String name) {
+    if (name.equals("ADDR")) return new AddressField();
+    return super.getField(name);
   }
 
   /**
@@ -266,90 +90,22 @@ public class DispatchEmergitechParser extends FieldProgramParser {
     // If field doesn't extend position, or character in that position is
     // not a blank, we don't have to do anything.
     if (field.length() <= pos || field.charAt(pos) != ' ') return field;
-    
-    // Get the words in front of and behind the blank
+   
+    // Get the word in front of this blank, if it is a recognized dictionary
+    // word, don't mess with it
     int pt = field.lastIndexOf(' ', pos-1);
     if (pt < 0) pt = -1;
-    String word1 = field.substring(pt+1,pos);
-    
+    String word = field.substring(pt+1,pos);
+    if (isDictionaryWord(word)) return field;
+   
+    // Ditto for word in back of this blank
     pt = field.indexOf(' ', pos+1);
     if (pt < 0) pt = field.length();
-    String word2 = field.substring(pos+1,pt);
-
-    // Next we are going to make a number of tests to confirm that the space
-    // should or should not be removed
-    // But first see if the combined workd is in our special word set.  if it
-    // is, we are going to change it and can skip the other checking
-    if (!isWord(word1+word2)) {
-        
-      // If we did not find it there, see with either the  least or trail word
-      // is a recognized dictionary word.  If it is, don't change anything
-      if (isWord(word1) || isWord(word2)) return field;
-      
-      // if one, but not both, of the words contain only numeric digits
-      // don't change anything
-      if (NUMERIC.matcher(word1).matches() ^ NUMERIC.matcher(word2).matches()) return field;
-    }
+    word = field.substring(pos+1,pt);
+    if (isDictionaryWord(word)) return field;
    
     // Otherwise, assume this is an extraneous blank and remove it
     field = field.substring(0,pos) + field.substring(pos+1);
     return field;
-  }
-  
-  /**
-   * Determine if word is a recognized word, meaning it in either our special word list
-   * or the smart address dictionary.
-   * @param word word to be checked
-   * @return true if word is a recognized word
-   */
-  private boolean isWord(String word) {
-    return specialWordSet.contains(word) || isDictionaryWord(word);
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("X")) return new MyCrossField();
-    if (name.equals("INFO")) return new MyInfoField();
-    return super.getField(name);
-  }
-  
-  private class MyCrossField extends CrossField {
-    @Override
-    public void parse(String field, Data data) {
-      if (field.startsWith("*")) field = field.substring(1).trim();
-      super.parse(field, data);
-    }
-  }
-  
-  private static final Pattern INFO_GPS_PTN = Pattern.compile("(\\+\\d{3}\\.\\d{6})(\\-\\d{3}\\.\\d{6})(?:CF=\\d+%)?(?:CALLBK=(\\(\\d{3}\\)\\d{3}-\\d{4}))?");
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      
-      // What should be a simple pattern check for GPS coordinates gets complicaated
-      // because random blanks get inserted anywhere.  We solve this by squeezing
-      // all blanks out of the field first, then doign our pattern check, then
-      // counting how many non-blank characters need to be removed from the front
-      // of the field :(
-      Matcher match = INFO_GPS_PTN.matcher(field.replace(" ", ""));
-      if (match.lookingAt()) {
-        setGPSLoc(match.group(1)+','+match.group(2), data);
-        data.strPhone = getOptGroup(match.group(3));
-        
-        int pos = 0;
-        for (int ii = 0; ii<match.end(); ii++) {
-          while (field.charAt(pos) == ' ') pos++;
-          pos++;
-        }
-        while (pos < field.length() && field.charAt(pos) == ' ') pos++;
-        field = field.substring(pos);
-      }
-      super.parse(field, data);
-    }
-
-    @Override
-    public String getFieldNames() {
-      return "GPS PHONE INFO";
-    }
   }
 }

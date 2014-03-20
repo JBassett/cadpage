@@ -7,15 +7,12 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Handler;
 
 /**
  * Main CadPage application
  * which is where we need to do our one time initialization
  */
 public class CadPageApplication extends Application {
-  
-  private static Handler mainHandler = null;
 
   /* (non-Javadoc)
    * @see android.app.Application#onCreate()
@@ -23,8 +20,6 @@ public class CadPageApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    mainHandler = new Handler();
-    Log.v("Intialization startup");
     getVersionInfo(this);
     try {
       VendorManager.instance().setup(this);
@@ -41,20 +36,6 @@ public class CadPageApplication extends Application {
       
       // Restore any pending SMS message merges
       SmsMsgAccumulator.setup(this);
-      
-      // See if a new version of Cadpage has been installed
-      if (ManagePreferences.newVersion(versionCode)) {
-        
-        // Reset vendor status
-        VendorManager.instance().newReleaseReset(this);
-        
-        // The rules keep changing here
-        // Currently we always ask for a registration ID at every new release load
-        // regardless of whether or not the user is actually using direct paging.  It
-        // is going to mean a big increase for Google serer workload.  But it is what
-        // there regular GCM library does.  So that is what we are going to do
-        C2DMService.register(this, true);
-      }
       
     } catch (Exception ex) {
       TopExceptionHandler.initializationFailure(this, ex);
@@ -101,9 +82,5 @@ public class CadPageApplication extends Application {
   
   public static boolean isBetaRelease() {
     return versionCode % 10 > 0;
-  }
-  
-  public static Handler getMainHandler() {
-    return mainHandler;
   }
 }

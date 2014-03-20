@@ -8,10 +8,10 @@
   
   <string name="donate_server_url">https://cadpageweb.appspot.com/lookup</string>
   
-  <string name="free_release_text">  <!-- TRANSLATE -->
+  <string name="free_release_text">
     This is the free version of Cadpage.  This version will never bother you
     for financial contributions to future Cadpage development.  Customer support
-    is minimal, and updates will be infrequent at best.\n
+    is minimal, and updates will run 4-6 months behind the standard version.\n
     \n
     If you are new Cadpage user, you should start out using the standard
     Cadpage version.  You can run it for at least 30 days for free during
@@ -20,7 +20,7 @@
     If you are willing to pay to Cadpage developers to continue supporting 
     Cadpage development, you should use the standard version.\n
     \n
-    If you cannot afford to pay the $10/year standard payment, you should use the standard
+    If you can"'"t afford to the $10 standard payment, you should use the standard
     version and ask for a free subscription.\n
     \n
     If you are adamantly opposed to paying anything on general principle, you
@@ -32,13 +32,12 @@
   <string name="donate_btn_done">Done</string>
   <string name="donate_btn_OK">OK</string>
   <string name="donate_btn_yes">Yes</string>
-  <string name="donate_btn_no">No</string>
   
   <string name="donate_free_title">This is the free version of Cadpage</string>
   <string name="donate_free_text">
     This is the free version of Cadpage.  It is functionally equivalent to the
     standard version of Cadpage, except that customer support is minimal and
-    updates will be very infrequent. 
+    updates will run 4-6 months behind the standard version. 
   </string>
   
   <string name="donate_life_title">Thank you for your support</string>
@@ -56,23 +55,7 @@
   
   <string name="donate_paid_title">Your Cadpage subscription is current</string>
   <string name="donate_paid_text">
-    You have a current Cadpage subscription that is good until\n%s
-  </string>
-  
-  <string name="donate_sponsor_title">Sponsored by %s</string>
-  <string name="donate_sponsor_text">
-    You are using a service sponsored by\n%1$s until %2$s\n 
-    Support for Cadpage development and maintenance is provided by this
-    sponsor.  No further payment is expected from you as long as you
-    are using services provided by this sponsor.
-  </string>
-  
-  <string name="donate_sponsor_noexp_title">Sponsored by %s</string>
-  <string name="donate_sponsor_noexp_text">
-    You are using a service sponsored by\n%s\n 
-    Support for Cadpage development and maintenance is provided by this
-    sponsor.  No further payment is expected from you as long as you
-    are using services provided by this sponsor.
+    You have a current Cadpage subscription that is good until %s
   </string>
   
   <string name="donate_paid_warn_title">Your subscription will expire in %d days</string>
@@ -82,34 +65,15 @@
     published after that date.
   </string>
   
-  <string name="donate_sponsor_warn_title">%1$s sponsorship will expire in %2$d days</string>
-  <string name="donate_sponsor_warn_text">
-    You are using a service sponsored by %1$s that will expire on %2$s.  Please contact %1$s
-    about renewing their Cadpage sponsorship.
-  </string>
-  
   <string name="donate_paid_limbo_title">Your Cadpage subscription has expired</string>
   <string name="donate_paid_limbo_text">
     Your current Cadpage subscription expired on %s.  You can continue to 
     use Cadpage as long as you do not install a release published after that date.
   </string>
   
-  <string name="donate_sponsor_limbo_title">%s sponsorship has expired</string>
-  <string name="donate_sponsor_limbo_text">
-    Your using a service sponsored by %1$s that expired on %2$s.  You can continue to 
-    use Cadpage as long as you do not install a release published after that date.  Please
-    contact %1$s about renewing their Cadpage sponsorship.
-  </string>
-  
   <string name="donate_paid_expire_title">Your Cadpage subscription has expired</string>
   <string name="donate_paid_expire_text">
     Your current Cadpage subscription expired on %s.
-  </string>
-  
-  <string name="donate_sponsor_expire_title">%s sponsorship has expired</string>
-  <string name="donate_sponsor_expire_text">
-    Your using a service sponsored by %1$s that expired on %2$s. Please
-    contact %1$s about renewing their Cadpage sponsorship.
   </string>
   
   <string name="donate_demo_title">Cadpage demo expires in %d days</string>
@@ -123,7 +87,7 @@
     You have been using Cadpage for %1$d days.  Your cadpage demo expired %2$d days ago.  
   </string>
   
-  <string name="donate_android16_title">"Hey, I've already paid for this"</string>
+  <string name="donate_android16_title">"Hey, I've already contributed"</string>
   <string name="donate_android16_text">
     Our sincere apologies.  Cadpage tracks you by your Google Market account
     and you are running Android 1.6 which does not gives us the ability to 
@@ -131,25 +95,24 @@
     ride as long as you are running Android 1.6.
   </string>
   
-  <string name="donate_no_user_title">"Hey, I've already paid for this"</string>
+  <string name="donate_no_user_title">"Hey, I've already contributed"</string>
   <string name="donate_no_user_text">
     Our sincere apologies.  Cadpage tracks you by your Google Market account
     "and you don't seem to have one.  Try logging into the Android Market with"
     your Paypal account and see if that helps.
   </string>
   
-  <string name="donate_wrong_user_title">"Hey, I've already paid for this"</string>
+  <string name="donate_wrong_user_title">"I've made a Paypal payment"</string>
   <string name="donate_wrong_user_text">
-    Our sincere apologies.  Please click the button below to generate an email.  
-    It helps if the email includes your full name somewhere so we can use it to
-    look you up in our payment records.  We will do our best to get this fixed.
-
+    Our sincere apologies.  Cadpage tracks you by your Google Market account
+    "which is %s. If this doesn't match the Paypal account you used to pay"
+    us, we will need some help figuring out who you are. Just clicking the
+    button below will send us an email that will hopefully clear things up.
   </string>
   
   <string name="donate_android_title">Purchase through Android Market</string>
   <string name="donate_paypal_title">Purchase through PayPal</string>
   <string name="donate_whats_up_title">What\'s this all about??</string>
-  <string name="donate_active911_parse_info_title">Tell me more</string>
   <string name="donate_email_title">Send Email</string>
   
   <string name="donate_android_unsupported_text">
@@ -167,13 +130,7 @@
   
   <string name="donate_magic_word_title">I have an authorization code</string>
   <string name="donate_magic_word_text">Enter authorization code</string>
-  <string name="donate_magic_word_reject">
-      Sorry, that is not a recognized Cadpage authorization code\n\n
-      If you have an activation code for CodeMessaging or Active911, this is
-      not the right place for them.  Go back to Cadpage Settings and select\n
-      Direct Paging Vendors > (approriate vendor) > Register\n
-      and follow the directions
-  </string>
+  <string name="donate_magic_word_reject">Sorry, that is not a recognized authorization code</string>
   
   <string name="donate_android_problem_title">I can\'t make Android Market payments</string>
   <string name="donate_android_problem_text">
@@ -182,9 +139,12 @@
   
   <string name="donate_reset_market_title">Recalculate Payment Status</string>
   
-  <string name="donate_sob_story_title">"I can't afford $10 this year"</string>
+  <string name="donate_sob_story_title">"I can't afford $10"</string>
   <string name="donate_sob_story_text">
-    "Tell us why you cannot afford a $10/year payment.  We are really easy on these."
+    "Tell us why you can't afford a $10 payment.  We're really easy on these.\n\n"
+    Is there anything we can do to make Cadpage easier to use?  Do you any
+    suggestions on better ways we can finance the considerable costs of maintaining
+    Cadpage?
   </string>
   
   <string name="clear_data_title">Reinstall Cadpage</string>
@@ -199,24 +159,6 @@
   <string name="donate_exempt_text">
     You are exempt from any demo or subscription limits until the next Cadpage
     version update which must be done in the next %d days.
-  </string>
-  
-  <string name="donate_cadpage_nz_title">New Zealand location</string>
-  <string name="donate_cadpage_nz_text">
-    You are using a location in New Zealand.\n
-    We are not charging New Zealand users at this time.  Partly because non-US location
-    support is still experimental and partly because we want encourage more
-    users to try it there.  We may change this at some later time if/when
-    Cadpage becomes well established there.
-  </string>
-  
-  <string name="donate_cadpage_se_title">Sweden location</string>
-  <string name="donate_cadpage_se_text">
-    You are using a location in Sweden.\n
-    We are not charging Swedish users at this time.  Partly because non-US location
-    support is still experimental and partly because we want encourage more
-    users to try it there.  We may change this at some later time if/when
-    Cadpage becomes well established there.
   </string>
   
   <string name="donate_cadpage_uk_title">United Kingdom location</string>
@@ -245,40 +187,12 @@
     better location can be implemented.
   </string>
   
-  <string name="donate_new_user_title">New User</string>
-  <string name="donate_new_user_text">
-    Cadpage will not do anything with your current default settings.  You need to go
-    into the Location Settings and either select a location corresponding to your 
-    area or set the From: (filter) to the email address or phone number that sends
-    you your text pages
+  <string name="donate_sponsor_title">Sponsored by %s</string>
+  <string name="donate_sponsor_text">
+    You are using a service sponsored by\n%s\n 
+    Support for Cadpage development and maintenance is provided by this
+    sponsor.  No further payment is expected from you as long as you
+    are using services provided by this sponsor.
   </string>
-  
-  <string name="donate_active911_parse_warn_title">Active911 parser alert</string>
-  <string name="donate_active911_parse_warn_text">
-    The information in this alert was not provided by Cadpage.  
-    This alert was processed with a new parsing system that Active911 is setting
-    up to replace the Cadpage parsing system.  We are working with Active911 to
-    restore Cadpage parsing services.  
-  </string>
-  
-  <string name="vendor_title">Register with %s</string>
-  <string name="vendor_text">
-    You appear to be getting text pages from %s.  You can register to get direct pages from
-    them, which don\'t rely on text messaging, eliminating several problems associated
-    with text messages.  
-  </string>
-  
-  <string name="vendor_help_title">What is direct paging?</string>
-  <string name="vendor_help_text">
-    Direct paging allows message servicing agencies to push pages to Cadpage directly through 
-    the data networks, without relying on text paging.  Which eliminates both the text message fees
-    and the length limits carriers impose on text messages.  And most agencies pay Cadpage out of
-    the money they get from departments and dispatch centers, so we don\'t expect direct paging users
-    to purchase a Cadpage subscription.
-  </string>
-  
-  <string name="vendor_ignore_title">Leave things the way they are</string>
-  
-  <string name="vendor_register_title">Register for direct paging</string>
   
 </resources>

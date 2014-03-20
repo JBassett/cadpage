@@ -1,31 +1,37 @@
 package net.anei.cadpage.parsers.CA;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-/**
- * Ventura County, CA
+/*
+Ventura County, CA
+Contact: Chase Morgan <chasemorgan43@gmail.com>
+Sender: Fcc-do-not-reply@Ventura.org
+System: InfoRad
+
+[FCC Page]  Incident Dispatch:  E43    BREATHING  2090 Yosemite Ave              11H1-B1 2 / 3  11-0032427  
+[FCC Page]  Incident Dispatch:  E43    BREATHING  1756 Chaps Ct                  11H1-C4 2 / 3  10-0072877
+[FCC Page]  Incident Dispatch:  E43    BREATHING  2012 N Tam Ct                  11H1-B3 2 / 3  11-0032306
+[FCC Page]  Incident Dispatch:  E43    PUBLIC SER 2692 Fallen Leaf Ct            11F3-E2 2 / 3  11-0032318
+[FCC Page]  Incident Dispatch:  E43    FIRE MISC  1700 Tapo St                   11G2-B6 2 / 3  11-0032394
+[FCC Page]  Incident Dispatch:  E43    VEHICLE FI Wb 118 At / Kuehner Dr         11H1-A4 2 / 3  11-0032367
+
+Contact: Fred Martinez <raidernation.fm@gmail.com>
+Sender: FCC-DO-NOT-REPLY@ventura.org
+FCC Page / Incident Dispatch:  Q73    TC         W Pleasant Valley Rd / S C St  552-G5  48/ 47 12-0024847\n
+
  */
+
+
 public class CAVenturaCountyParser extends MsgParser {
-  
-  private static final Pattern TRAIL_PTN = Pattern.compile("(\\d{3}-[A-Z]\\d) +(\\d{1,2}) */ *(\\d{1,2}) *(\\d\\d-\\d{7})$");
   
   public CAVenturaCountyParser() {
     super("VENTURA COUNTY", "CA");
-    setFieldList("UNIT CALL ADDR MAP CH ID");
   }
   
   @Override
   public String getFilter() {
-    return "Fcc-do-not-reply@Ventura.org,Fcc@ventura.org,FCC-Page@ventura.org";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
+    return "Fcc-do-not-reply@Ventura.org";
   }
 
   @Override
@@ -41,37 +47,14 @@ public class CAVenturaCountyParser extends MsgParser {
       return false;
     } while (false);
     
-    if (!body.startsWith("Incident Dispatch:")) return false;
-    
-    // There are (at least) 2 fixed field formats.  We look for a distinctive
-    // trailing signature to determine which one to use
-    Matcher match = TRAIL_PTN.matcher(body);
-    if (!match.find()) return false;
-    
-    data.strMap = match.group(1);
-    data.strChannel = match.group(2) + '/' + match.group(3);
-    data.strCallId = match.group(4);
-    
-    int len = match.start();
-    if (len == 64) {
-      data.strUnit = body.substring(18,24).trim();
-      data.strCall = body.substring(24,34).trim();
-      parseAddress(body.substring(34,64).trim(), data);
-      return true;
-    }
-    
-    if (len == 69) {
-      data.strUnit = body.substring(20,26).trim();
-      data.strCall = body.substring(27,37).trim();
-      parseAddress(body.substring(38, 68).trim(), data);
-      return true;
-    }
-    return false;
+    if (!body.startsWith("Incident Dispatch: ")) return false;
+    if (body.length() < 94) return false;
+    data.strUnit = body.substring(19,27).trim();
+    data.strCall = body.substring(27,38).trim();
+    parseAddress(body.substring(38,69).trim(), data);
+    data.strMap = body.substring(69,77).trim();
+    data.strChannel = body.substring(77,84).trim();
+    data.strCallId = body.substring(84).trim();
+    return true;
   }
-  
-  @Override
-  public String adjustMapAddress(String addr) {
-    return BLOCK_PTN.matcher(addr).replaceAll("");
-  }
-  private static final Pattern BLOCK_PTN = Pattern.compile("[ -]?block", Pattern.CASE_INSENSITIVE);
 }

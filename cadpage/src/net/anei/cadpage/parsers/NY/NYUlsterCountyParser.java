@@ -1,83 +1,61 @@
 package net.anei.cadpage.parsers.NY;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import net.anei.cadpage.parsers.FieldProgramParser;
+import java.util.Properties;
+import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-/**
- * Ulster County, NY
- */
-public class NYUlsterCountyParser extends FieldProgramParser {
-  
-  private static final Pattern MARKER = Pattern.compile("\\(\\(\\d+\\)[-/ A-Z0-9]*\\)");
+/***
+Ulster County, NY
+Contact: Andrew Buboltz <ajb5620@gmail.com>
+Sender: cad@co.ulster.ny.us
 
+((2058) RLIN/ ) Unit:ENG6 UnitSts: Loc:487 WASHINGTON AV  XSts:TAYLOR/CITY LINE Venue:King City Inc:Autoalarm Date:11/05/2010  Time:20:44 GENERAL FIRE ALARM Addtl
+((63937) MDAV/ ) Unit:ENG6 UnitSts: Loc:86 HOFFMAN XSts:BROADWAY/MARYS  AV Venue:King City Inc:Struct Fir Date:11/03/2010 Time:21:22 SMOKE CODITION IN  AREA Addtl
+((59728) SQUI/ )  Unit:ENG6 UnitSts: Loc:77 CORNELL XSts:TREMPER AV/SMITH AV Venue:King  City Inc:Haz Mat Date:11/02/2010 Time:00:45 UNKNOWN ODOR IN BUILDING  Addt
+((2203) BKIN/ ) Unit:ENG6 UnitSts: Loc:89 NEWKIRK AV XSts:HASBROUCK AV/MAPLE  Venue:King City Inc:Struct Fir Date:11/05/2010 Time:21:39 BASEMENT FULL OF SMOKE 
+
+Contact: Stephen Quick <stephen.d.quick@gmail.com>
+Sender: CAD@CO.ULSTER.NY.US
+FRM:CAD@CO.ULSTER.NY.US\nSUBJ:(16733) MGAF/\nMSG:Unit:PG68-2 UnitSts: Loc:85 MAIN XSts:WALL/GREEN Venue:King City\nInc:Struct Fir\n(Con't) 2 of 2\nDate:01/31/2012 Time:14:32 BUILDING ON FIRE Addtl:CNTX:(End)
+
+***/
+
+public class NYUlsterCountyParser extends MsgParser {
+
+  private static final String[]Kingstonkeywords = new String[]{"Unit","UnitSts","Loc", "XSts", "Venue", "Inc","Date", "Time"};
+  
   public NYUlsterCountyParser() {
-    super("ULSTER COUNTY", "NY",
-           "Unit:UNIT! UnitSts:SKIP Loc:ADDR/SXa! XSts:X! Common:PLACE Venue:CITY Inc:CALL! Date:DATE Time:TIME Addtl:INFO Nature:INFO CNTX:INFO", FLDPROG_ANY_ORDER);
+    super("ULSTER COUNTY", "NY");
   }
   
   @Override
   public String getFilter() {
-    return "cad@co.ulster.ny.us,777";
+    return "cad@co.ulster.ny.us";
   }
 
   @Override
   protected boolean parseMsg(String body, Data data) {
 
     body = body.replace('\n', ' ');
-    Matcher match = MARKER.matcher(body);
-    if (match.find()) body = body.substring(match.end()).trim();
-    if (!super.parseMsg(body, data)) return false;
+    if (!isPageMsg(body, Kingstonkeywords)) return false;
 
-    data.strCity = data.strCity.replaceAll(" +", " ");
-    if (data.strCity.toUpperCase().startsWith("KING CITY")) data.strCity="KINGSTON";
-    else if (data.strCity.equalsIgnoreCase("Out of Cty")) data.strCity = "";
+    Properties props = parseMessage(body, Kingstonkeywords);
+    data.strCity = props.getProperty("Venue", "").replaceAll(" +", " ");
+    if (data.strCity.toUpperCase().startsWith("KING CITY")) { data.strCity="KINGSTON";} 
+    data.strCall = props.getProperty("Inc", "");
+    parseAddress(props.getProperty("Loc", ""), data);
+    data.strCross = props.getProperty("XSts", "");
+    data.strUnit = props.getProperty("Unit", "");
+    data.strDate = props.getProperty("Date", "");
+    String sSupp = props.getProperty("Time","");
+    int ipt = sSupp.indexOf(' ');
+    if (ipt >= 0) {
+      data.strSupp = sSupp.substring(ipt+1).trim();
+      sSupp = sSupp.substring(0,ipt).trim();
+    }
+    data.strTime = sSupp;
     return true;
-  }
-  
-  private static final Pattern TIME_PTN = Pattern.compile("^\\d\\d:\\d\\d\\b");
-  private class MyTimeField extends TimeField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = TIME_PTN.matcher(field);
-      if (!match.find()) return;
-      data.strTime = match.group();
-      data.strSupp = field.substring(match.end()).trim();
-    }
     
-    @Override
-    public String getFieldNames() {
-      return "TIME INFO";
-    }
-  }
-  
-  private static final Pattern DATE_TIME_PTN = Pattern.compile("(\\d\\d/\\d\\d/\\d{4}) +(\\d\\d:\\d\\d)");
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = DATE_TIME_PTN.matcher(field);
-      if (match.matches()) {
-        data.strDate = match.group(1);
-        data.strTime = match.group(2);
-      } else {
-        super.parse(field, data);
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "INFO DATE TIME";
-    }
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("DATE")) return new DateField("\\d\\d/\\d\\d/\\d{4}", true);
-    if (name.equals("TIME")) return new MyTimeField();
-    if (name.equals("INFO")) return new MyInfoField();
-    return super.getField(name);
   }
 }
 

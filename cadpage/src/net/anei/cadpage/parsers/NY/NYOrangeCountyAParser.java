@@ -8,6 +8,24 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Orange County, NY
+Contact: George Ewings <gewings@gmail.com>
+Contact: Seth Armstrong <setharmstrong31@gmail.com>
+Contact: Dave Abbott <davea@a1-services.com>
+Contact: Burton Struble <burton.struble@gmail.com>
+Contact: kevin torres <nycff103@gmail.com>
+
+Contact: Ken Rypkema <kenryp119@gmail.com> "mail.vailsgatefd.com" <krypkema@mail.vailsgatefd.com>
+Sender:messaging@iamresponding.com
+(Vails Gate) CARBON MONOXIDE DETR  1 KEARNEY DR  NEW WINDSOR  DEPT 45 TIME: 19:17 XST: MARSHALL DR XST2: 17 TRUEX DR\n\n\nThis
+(Vails Gate) EXTRICATION  ST RTE 32&amp;ORRS MILLS RD  CORNWALL  SPRINT PCS WIRELESS  CALLER REPORTS CAR INTO TREE POSS ENTRAPEMENT  Parent Inc MCO11112
+(Vails Gate) ROLLOVER MVA  2406 ST RTE 32  CORNWALL  JESSICA  ONE CAR ROLLOVER//UNK INJS  Parent Inc MCO111126000959 UPDATE PriUnt to CO/CODIS TIME: 23:
+(Vails Gate) AUTOMATIC FIRE ALARM  273 WINDSOR HWY  NEW WINDSOR  VECTOR SECURITY  LAUDRY ROOM SMOKE DETECTOR   Location : HUDSON VALLEY VETERIAN TIME: 1
+(Vails Gate) AUTOMATIC FIRE ALARM  516 REED ST  NEW WINDSOR  SGT THOMAS  CALLER STS THERE IS A FIRE ALARM STS BLINKING SYSTEM TROUBLE AND ALSO SAY  S DA
+(Vails Gate) AUTOMATIC FIRE ALARM  935 UNION AVE  NEW WINDSOR  CENTRAL STATION  ZONE 32 OFFICE SMOKE DETECTOR/ ALARM CO IS ATTEMPTING KEY HOLDER/ PREM N
+
+ */
 
 
 public class NYOrangeCountyAParser extends FieldProgramParser {
@@ -16,12 +34,12 @@ public class NYOrangeCountyAParser extends FieldProgramParser {
   
   public NYOrangeCountyAParser() {
     super("ORANGE COUNTY", "NY",
-           "ID? CALL ADDR CITY! INFO+ LOCATION:PLACE? TIME:TIME% XST:X XST2:X");
+           "CALL ADDR CITY! INFO+ LOCATION:PLACE? TIME:TIME XST:X XST2:X");
   }
   
   @Override
   public String getFilter() {
-    return "messaging@iamresponding.com,777";
+    return "messaging@iamresponding.com";
   }
   
   @Override
@@ -34,7 +52,8 @@ public class NYOrangeCountyAParser extends FieldProgramParser {
     
     body = KEYWORD_PTN.matcher(body).replaceAll(" $0");
     String[] flds = body.split("  +");
-    return parseFields(flds, 3, data);
+    if (flds.length < 3) return false;
+    return parseFields(flds, data);
   }
   
   @Override
@@ -50,20 +69,9 @@ public class NYOrangeCountyAParser extends FieldProgramParser {
     }
   }
   
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      if (field.startsWith("INCIDENT CLONED FROM")) return;
-      if (field.startsWith("PARENT:")) return;
-      super.parse(field, data);
-    }
-  }
-  
   @Override
   public Field getField(String name) {
-    if (name.equals("ID")) return new IdField("F\\d{9,}|\\d{5,}");
     if (name.equals("CITY")) return new MyCityField();
-    if (name.equals("INFO")) return new MyInfoField();
     return super.getField(name);
   }
   

@@ -5,21 +5,49 @@ import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.SmartAddressParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.dispatch.DispatchProQAParser;
 
+/*    
+Calvert County, MD
+Contact: michael smith <lee020988@gmail.com>, 4436247957@vtext.com
+Sender: dispatch@co.cal.md.us
 
+M Priority 3 Medical  00:02 03/12/11 8536 BAYSIDE RD CHESAPEAKE BEACH 2011-00000445 CO1 abdom. pain
+R Auto Accident Serious S5 R1 A59 A19 M102  21:41 03/11/11 W CHESAPEAKE BEACH RD DUNKIRK 2011-00016920  entrapment  a truck hit a another car
+F Local Box E12  19:23 03/10/11 3741 3RD ST NORTH BEACH 2011-00000438  NEIGHBORS ARE TRYING TO APPROACH IT. THERE IS A CAR UNDER THE TREE, IT
+M Priority 2 Medical A19 M102  17:19 03/10/11 950 E  MT HARMONY RD OWINGS 2011-00000435  ProQA Medical Key Questions have been completed; Disp Dispatch Code:
+F Fire Alarm E11 E51 T1  16:30 03/10/11 1850 PROSPER LN OWINGS 2011-00000433 SNEADES ACE-OW ProQA Fire Questionnaire Completed;
+F Area Box E61 E21 E52 E11 TN5 TN7 T2 S6 A68 NDC  17:52 03/09/11 65 WALTON RD HUNTINGTOWN 2011-00000443  ProQA Fire Questionnaire Completed; D 
+M Priority 2 Medical A19 NOMED  10:45 03/09/11 8818 CHESAPEAKE LIGHTHOUSE DR NORTH BEACH 2011-00000428  ProQA Medical Questionnaire Completed;
+
+New text format
+Contact: Marcus Richman <richmanmh@gmail.com>
+(Dispatch Info) M Priority 3 Medical A79  11:44 03/22/11 Box 303 12680 HG TRUEMAN RD LUSBY 2011-00000525 SCHOOL-DOW ES ProQA Medical Questionnaire Completed;
+
+Contact: Kevin Harness <kay.kh32@gmail.com>
+(Dispatch Info) M Priority 1 Medical E33 A38 SMA796 M105  11:20 04/18/11 Box 302 1105 BACK CREEK LOOP SOLOMONS
+
+Contact: Steve Nero <steve21800@gmail.com>
+(Dispatch Info) M Priority 3 Medical A37  16:52 04/24/11 Box 302 11740 ASBURY CIR SOLOMONS ASBURY APTS-SOUT
+
+Contact: Josh Paiva <jp58709@gmail.com>
+(Dispatch Info) M Priority 1 Medical E33 A37 SMA796 M105  19:25 05/09/11 Box 301 14575 S  SOLOMONS ISLAND RD SOLOMONS Sol Pie
+
+*/
 
 public class MDCalvertCountyParser extends SmartAddressParser {
   
-  private static final Pattern TIME_DATE_PTN = Pattern.compile("\\b(\\d\\d:\\d\\d) (\\d\\d/\\d\\d/\\d\\d)\\b");
+  private static final String[] CITY_LIST = new String[] {
+    "CHESAPEAKE BEACH", "NORTH BEACH", 
+    "DUNKIRK", "HUNTINGTOWN", "LUSBY","OWINGS", "PRINCE FREDERICK", "ST LEONARD", "SOLOMONS",
+    "BARSTOW", "BROOMES ISLAND", "DARES BEACH", "DOWELL", "LOWER MARLBORO", "PORT REPUBLIC", "SUNDERLAND"
+  };
+  
   private static final Pattern UNIT_PTN = Pattern.compile("\\b(?:[BETSRAM]\\d{1,3}|TN\\d|NDC|NMED|COM)\\b");
-  private static final Pattern PRIORITY_PTN = Pattern.compile("M Priority (\\d) +(.*)");
+  private static final Pattern TIME_DATE_PTN = Pattern.compile("\\b(\\d\\d:\\d\\d) (\\d\\d/\\d\\d/\\d\\d)\\b");
   private static final Pattern ID_PTN = Pattern.compile("\\b\\d{4}-\\d{8}\\b");
-  private static final Pattern INFO_BREAK_PTN = Pattern.compile("^[-A-Z ]+?(\\b)(?:$|[A-Z]*[a-z0-9])");
   
   public MDCalvertCountyParser() {
     super(CITY_LIST, "CALVERT COUNTY", "MD");
-    setFieldList("TIME DATE PRI CALL UNIT BOX ADDR PLACE CITY ID CODE INFO");
   }
   
   @Override
@@ -41,76 +69,24 @@ public class MDCalvertCountyParser extends SmartAddressParser {
       data.strUnit = strCall.substring(unitMatch.start());
       strCall = strCall.substring(0,unitMatch.start()).trim();
     }
-    Matcher priMatch = PRIORITY_PTN.matcher(strCall);
-    if (priMatch.matches()) {
-      data.strPriority = priMatch.group(1);
-      strCall = priMatch.group(2);
-    }
     data.strCall = strCall;
     
-    String addr = body.substring(timeDateMatch.end()).trim();
-    Parser p = new Parser(addr);
+    Matcher idMatch = ID_PTN.matcher(body);
+    boolean foundID = idMatch.find(timeDateMatch.end());
+    String strAddress = (foundID ? body.substring(timeDateMatch.end(), idMatch.start())
+                                 : body.substring(timeDateMatch.end())).trim();
+    Parser p = new Parser(strAddress);
     if (p.get(' ').equalsIgnoreCase("BOX")) {
       data.strBox = p.get(' ');
-      addr = p.get();
+      strAddress = p.get();
     }
+    parseAddress(StartType.START_ADDR, strAddress, data);
+    data.strPlace = getLeft();
     
-    String left;
-    Matcher idMatch = ID_PTN.matcher(addr);
-    if (idMatch.find()) {
+    if (foundID) {
       data.strCallId = idMatch.group();
-      parseAddress(StartType.START_ADDR, FLAG_ANCHOR_END, addr.substring(0,idMatch.start()).trim(), data);
-      left = addr.substring(idMatch.end()).trim();
-    } else {
-      parseAddress(StartType.START_ADDR, addr, data);
-      left = getLeft();
-    }
-    
-    // We pretty much always expect to find a place name.  If we didn't, see
-    // if we can parse it from the front of the leftover stuff
-    if (data.strCity.length() == 0) {
-      parseAddress(StartType.START_ADDR, FLAG_ONLY_CITY, left, data);
-      left = getLeft();
-    }
-    
-    // What is left is either a place name or supplemental info.  
-    // And there is no consistent way to separate them
-    int brk = 0;
-    Matcher match = INFO_BREAK_PTN.matcher(left);
-    if (match.find()) {
-      brk = match.start(1);
-      if (brk > 35) brk = 0;
-    }
-    data.strPlace = left.substring(0,brk).trim();
-    left = left.substring(brk);
-    
-    DispatchProQAParser.parseProQAData(true, left, data);
-    
-    // Special case
-    if (data.strPlace.equals("MARYS") && data.strAddress.endsWith(" ST")) {
-      data.strPlace = "ST MARYS";
-      data.strAddress = data.strAddress.substring(0, data.strAddress.length()-3).trim();
+      data.strSupp = body.substring(idMatch.end()).trim();
     }
     return true;
   }
-  
-  private static final String[] CITY_LIST = new String[] {
-    "CHESAPEAKE BEACH", 
-    "NORTH BEACH", 
-    "DUNKIRK", 
-    "HUNTINGTOWN", 
-    "LUSBY",
-    "OWINGS", 
-    "PRINCE FREDERICK", 
-    "SAINT LEONARD",
-    "ST LEONARD", 
-    "SOLOMONS",
-    "BARSTOW", 
-    "BROOMES ISLAND", 
-    "DARES BEACH", 
-    "DOWELL", 
-    "LOWER MARLBORO", 
-    "PORT REPUBLIC", 
-    "SUNDERLAND"
-  };
 }

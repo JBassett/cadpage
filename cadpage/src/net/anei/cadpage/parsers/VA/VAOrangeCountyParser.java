@@ -6,15 +6,48 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Orange county, VA
+Contact: Mike Cianci <ciancims@gmail.com>
+Sender: orange911@oorange.org
+
+[7/13/2011 08:26] orange911@oorange.org: [Orange911]  [LOCATION]: GERMANNA HWY  [NATURE]: AA- Auto Accident  [INCIDENT#]: 2011-00003013 00:41 Locust Grove BOX 2901 Map Page 20
+[7/18/2011 08:42] orange911@oorange.org: [Orange911]  [LOCATION]: 11111 PLANK RD  [NATURE]: AA- Auto Accident  [INCIDENT#]: 2011-00003105 08:39
+[7/20/2011 15:46] orange911@oorange.org: [Orange911]  [LOCATION]: 35059 GERMANNA HEIGHTS DR  [NATURE]: Medical Alarm  [INCIDENT#]: 2011-00003133 15:44 A AND K BLVD / GERMANNA HWY Locust Grove BOX 2901
+[7/21/2011 22:40] orange911@oorange.org: [Orange911]  [LOCATION]: 602 YORKTOWN BLVD  [NATURE]: Unconscious  [INCIDENT#]: 2011-00003155 22:36 CONSTITUTION BLVD / HOLLYFIELD PARK RD Locust Grove BOX 290
+[7/22/2011 04:30] orange911@oorange.org: [Orange911]  [LOCATION]: 504 CORNWALLIS AVE  [NATURE]: Fire Alarm RES  [INCIDENT#]: 2011-00003158 04:27 WOODLAWN TRL / WASHINGTON ST Locust Grove BOX 2900 Map
+[7/22/2011 05:14] orange911@oorange.org: [Orange911]  [LOCATION]: 116 REPUBLIC AVE  [NATURE]: Unconscious  [INCIDENT#]: 2011-00003159 05:11 PARLIAMENT ST / FREEDOM RD Locust Grove BOX 2900 Map Page 30
+[7/22/2011 13:35] orange911@oorange.org: [Orange911]  [LOCATION]: 415 HARRISON CIR  [NATURE]: Public Service   [INCIDENT#]: 2011-00003167 13:33 MANASSAS PT / RAMSAY RD Locust Grove BOX 2900 Map Page 3
+[7/22/2011 18:17] orange911@oorange.org: [Orange911]  [LOCATION]: SCFR 7  [NATURE]: Station Fill  [INCIDENT#]: 2011-00003170 18:15 Spotsylvania County
+[7/22/2011 18:26] orange911@oorange.org: [Orange911]  [LOCATION]: 25505 ELYS FORD ROAD  [NATURE]: Smell of Smoke RES  [INCIDENT#]: 2011-00003171 18:24 Spotsylvania County
+[7/22/2011 22:51] orange911@oorange.org: [Orange911]  [LOCATION]: 144 MADISON CIR  [NATURE]: Public Service   [INCIDENT#]: 2011-00003178 22:48 SUSSEX RD / LAKEVIEW PKWY Locust Grove BOX 2900 Map Page
+[7/23/2011 08:53] orange911@oorange.org: [Orange911]  [LOCATION]: CHESTERFIELD RD  [NATURE]: Unconscious  [INCIDENT#]: 2011-00003183 08:49 Locust Grove BOX 2901 Map Page 5
+[7/23/2011 20:36] orange911@oorange.org: [Orange911]  [LOCATION]: 33011 INDIANTOWN RD  [NATURE]: AA- W/ ENT  [INCIDENT#]: 2011-00003197 20:14 UNKNOWN / LILLY PAD LN Locust Grove BOX 2907 Map Page 4
+[7/23/2011 20:37] orange911@oorange.org: [Orange911]  [LOCATION]: 33011 INDIANTOWN RD  [NATURE]: AA- W/ ENT  [INCIDENT#]: 2011-00003197 20:14 UNKNOWN / LILLY PAD LN Locust Grove BOX 2907 Map Page 4
+[7/24/2011 09:39] orange911@oorange.org: [Orange911]  [LOCATION]: 112 JEFFERSON AVE  [NATURE]: Fire Alarm RES  [INCIDENT#]: 2011-00003204 09:36 MONTICELLO CIR / MONTICELLO CIR Locust Grove BOX 2900 Ma
+[7/24/2011 13:34] orange911@oorange.org: [Orange911]  [LOCATION]: 838 EASTOVER PKWY  [NATURE]: Illness  [INCIDENT#]: 2011-00003208 13:14 LARKSPUR LN / WILDERNESS LN Locust Grove BOX 2900 Map Page 316
+[7/25/2011 16:55] orange911@oorange.org: [Orange911]  [LOCATION]: 208 PINE VALLEY RD  [NATURE]: Structure Fire RES  [INCIDENT#]: 2011-00003226 16:52 DEAD END / APPLEVIEW CT Locust Grove BOX 2900 Map P
+[7/29/2011 14:17] orange911@oorange.org: [Orange911]  [LOCATION]: 2130 GERMANNA HWY  [NATURE]: Fire Alarm NHSA  [INCIDENT#]: 2011-00003273 14:15 SPOTSWOOD DR / HAMPTON LN Locust Grove BOX 2903 Map Pag
+[7/29/2011 14:29] orange911@oorange.org: [Orange911]  [LOCATION]: 2130 GERMANNA HWY  [NATURE]: Fire Alarm NHSA  [INCIDENT#]: 2011-00003274 14:27 SPOTSWOOD DR / HAMPTON LN Locust Grove BOX 2903 Map Pag
+[7/23/2011 15:36] orange911@oorange.org: [Orange911]  Orange County is under severe thunderstorm warning until 1545.  Storm is capable of producing damaging winds in excess of 60 mph.
+
+Contact: Kenneth Lebrun <klebrun24@gmail.com>
+Sender: messaging@iamresponding.com
+(GVFC)  LAMS DR   Outside Fire   [INCIDENT#]: 2011-00005083 19:09 Louisa County\n\n
+(GVFC)  8627 JAMES MADISON HWY   AA- Auto Accident  [INCIDENT#]: 2011-00005159 05:43 Louisa County  driver is out  one vehicle  map
+
+ */
 
 
 public class VAOrangeCountyParser extends FieldProgramParser {
   
   private static final Pattern SUBJECT_PTN = Pattern.compile("(\\d{1,2}/\\d{1,2}/\\d{4}) (\\d\\d:\\d\\d)");
+  private static final Pattern DELIM = Pattern.compile(" {2,}");
+    
   
   public VAOrangeCountyParser() {
     super(CITY_LIST, "ORANGE COUNTY", "VA",
-           "[LOCATION]:ADDR/S5XPP! [NATURE]:CALL! [INCIDENT#]:ID BOX:BOX Map:MAP");
+           "ADDR! CALL! [INCIDENT#]:ID! BOX:BOX Map:MAP");
   }
   
   @Override
@@ -26,62 +59,34 @@ public class VAOrangeCountyParser extends FieldProgramParser {
   protected boolean parseMsg(String subject, String body, Data data) {
     
     if (subject.length() == 0) return false;
-    
-    // Sometimes leading square bracket terms do not make it into the subject line
-    // So we will try to fix that here.
-    while (body.startsWith("[")) {
-      int pt = body.indexOf(']');
-      if (pt < 0) return false;
-      subject = subject + '|' + body.substring(1,pt).trim();
-      body = body.substring(pt+1).trim();
+    if (!body.contains("[INCIDENT#]:")) {
+      int pt = body.indexOf("[Orange911]  ");
+      if (pt >= 0) return data.parseGeneralAlert(body.substring(pt+13).trim());
+      return false;
     }
-    
-    // Now that we have built it up, split up the subject line
-    String[] subParts = subject.split("\\|");
-    
-    // Detect and try to fix IAR alterations
-    if (subParts.length == 1 && !subject.contains(" ")) {
-      data.strSource = subject;
-      int pt = body.indexOf("  ");
-      if (pt < 0) return false;
-      body = "[LOCATION]:" + body.substring(0,pt+2) + "[NATURE]:" + body.substring(pt+2);
-    }
-    
-    // Otherwise process the different subject parts
-    else {
-      boolean good = false;
-      String lastTerm = null;
-      for (String part : subParts) {
-        part = part.trim();
-        if (part.equals("Orange911")) {
-          good = true;
-          continue;
-        }
-        Matcher match = SUBJECT_PTN.matcher(part);
-        if (match.matches()) {
-          data.strDate = match.group(1);
-          data.strTime = match.group(2);
-          continue;
-        }
-        lastTerm = part;
+
+    do {
+      Matcher match = SUBJECT_PTN.matcher(subject);
+      if (match.matches()) {
+        data.strDate = match.group(1);
+        data.strTime = match.group(2);
+        break;
       }
-      if (!good) return false;
-      if (body.startsWith(":")) {
-        body = '[' + lastTerm + ']' + body;
-      }
-    }
     
-    // See if this should be a general alert
-    if (!body.contains("[INCIDENT#]:") && !body.contains("[NATURE]:")) {
-      return data.parseGeneralAlert(this, body);
-    }
+      else if (!subject.contains(" ")) {
+        data.strSource = subject;
+        break;
+      }
       
-    body = body.replace(" BOX ", "  BOX: ").replace(" Map ", "  Map: ").replace("[", " [");
-    body = body.trim();
-    if (!super.parseMsg(body, data)) return false;
-    data.strPlace = data.strPlace.replace(" Village of", "");
-    data.strAddress = data.strAddress.replace("DAILY DR", "DAILEY DR");  // Dispatch typo
-    return true;
+      return false;
+    } while (false);
+      
+    int pt = body.indexOf("[LOCATION]:");
+    if (pt > 0) body = body.substring(pt);
+    body = body.replace("[NATURE]:", "").replace("[LOCATION]:", "");
+    body = body.replace(" BOX ", "  BOX: ").replace(" Map ", "  Map: ");
+    body =body.trim();
+    return parseFields(DELIM.split(body), data);
   }
   
   @Override
@@ -102,28 +107,15 @@ public class VAOrangeCountyParser extends FieldProgramParser {
       if (data.strTime.length() == 0) data.strTime = sTime;
       
       field = p.get();
-      parseAddress(StartType.START_OTHER, FLAG_ONLY_CITY, field, data);
-      data.strCross = getStart();
-      parseInfo(getLeft(), data);
+      parseAddress(StartType.START_PLACE, FLAG_ONLY_CITY, field, data);
+      data.strCross = data.strPlace.replace("/", " / ");
+      data.strPlace = "";
+      data.strSupp = getLeft();
     }
     
     @Override
     public String getFieldNames() {
       return "ID X CITY INFO";
-    }
-  }
-  
-  private class MyCallField extends CallField {
-    @Override
-    public void parse(String field, Data data) {
-      Parser p = new Parser(field);
-      super.parse(p.get("  "), data);
-      parseInfo(p.get(), data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CALL INFO";
     }
   }
   
@@ -135,7 +127,7 @@ public class VAOrangeCountyParser extends FieldProgramParser {
       super.parse(field, data);
     }
   }
-
+  
   private class MyMapField extends MapField {
     @Override
     public void parse(String field, Data data) {
@@ -144,29 +136,12 @@ public class VAOrangeCountyParser extends FieldProgramParser {
       } else {
         if ("Page ".startsWith(field)) return;
       }
-      Parser p = new Parser(field);
-      super.parse(p.get(' '), data);
-      String id = p.get(' ');
-      if (data.strCallId.length() == 0) data.strCallId = id;
-      String time = p.get();
-      if (data.strTime.length() == 0) data.strTime = time;
+      super.parse(field, data);
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "MAP ID TIME";
-    }
-  }
-  
-  private static void parseInfo(String info, Data data) {
-    int pt = info.indexOf(" E911 Info ");
-    if (pt >= 0) info = info.substring(0,pt).trim();
-    data.strSupp = append(data.strSupp, "  ", info);
   }
   
   @Override
   public Field getField(String name) {
-    if (name.equals("CALL")) return new MyCallField();
     if (name.equals("ID")) return new MyIdField();
     if (name.equals("BOX")) return new MyBoxField();
     if (name.equals("MAP")) return new MyMapField();

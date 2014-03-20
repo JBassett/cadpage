@@ -11,10 +11,7 @@ version update which must be done in the next %d days.
 public class DonateExemptEvent extends DonateScreenEvent {
 
   protected DonateExemptEvent() {
-    super(AlertStatus.YELLOW, R.string.donate_exempt_title, R.string.donate_exempt_text,
-           Vendor2Event.instance(),
-           DonateResetMarketEvent.instance(),
-           MagicWordEvent.instance());
+    super(AlertStatus.YELLOW, R.string.donate_exempt_title, R.string.donate_exempt_text);
   }
 
   @Override

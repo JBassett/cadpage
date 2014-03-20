@@ -2,8 +2,6 @@ package net.anei.cadpage;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,6 +21,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.telephony.SmsMessage;
 import android.telephony.SmsMessage.MessageClass;
+import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 
 import static net.anei.cadpage.BroadcastBindings.*;
@@ -81,9 +80,6 @@ public class SmsMmsMessage implements Serializable {
   // custom response menu
   private String responseMenu = null;
   private boolean responseMenuVisible = true;
-  
-  // Flag indicating location tracking has been activated
-  private boolean tracking = false;
   
   // Temporary fields being monitored to see if they will be of any
   // use in identifying multi-part messages
@@ -152,35 +148,6 @@ public class SmsMmsMessage implements Serializable {
     reportDataChange();
   }
   
-
-  /**
-   * @return true if message was parsed with Active911 parser
-   */
-  public boolean isActive911ParsedMsg() {
-    
-    // All we do is check the parsed message parser code is Active911.
-    // Active911 always sends us this parser code, but if the original message
-    // was parsed with a Cadpage parser, the message will contain its own
-    // parser code override, which will override the "Active911" value.
-    MsgInfo info = getInfo();
-    if (info == null) return false;
-    MsgParser parser = info.getParser();
-    if (parser == null) return false;
-    String parserCode = parser.getParserCode();
-    return parserCode != null && parserCode.equals("Active911");
-  }
-  
-  /**
-   * @return Active911 message ID if appropriate, null otherwise
-   */
-  public String getActive911MsgCode() {
-    if (ackURL == null) return null;
-    Matcher match = ACTIVE911_CODE_PTN.matcher(ackURL);
-    if (!match.find()) return null;
-    return match.group(1);
-  }
-  private static final Pattern ACTIVE911_CODE_PTN = Pattern.compile("[&\\?]q=([A-Za-z0-9]+)\\b");
-  
   private void reportDataChange() {
     if (msgId > 0) SmsMessageQueue.getInstance().notifyDataChange();
   }
@@ -199,10 +166,7 @@ public class SmsMmsMessage implements Serializable {
      * Fetch data from raw SMS
      */
     fromAddress = sms.getDisplayOriginatingAddress();
-    if (fromAddress == null) fromAddress = "";
-    try {
-      messageClass = sms.getMessageClass();
-    } catch (NullPointerException ex) {}
+    messageClass = sms.getMessageClass();
     sentTime = sms.getTimestampMillis();
 
     String body;
@@ -328,7 +292,7 @@ public class SmsMmsMessage implements Serializable {
     this.timestamp = timestamp;
     this.messageType = messageType;
     this.location = "GeneralAlert";
-    this.parseInfo = bldParseInfo(false, subject, messageBody, false);
+    this.parseInfo = bldParseInfo(false, subject, messageBody);
   }
 
   /**
@@ -380,7 +344,7 @@ public class SmsMmsMessage implements Serializable {
    */
   public boolean isDiscoveryQuery(Context context) {
     if (messageBody == null) return false;
-    messageBody = VendorManager.instance().discoverQuery(context, fromAddress, messageBody);
+    messageBody = VendorManager.instance().discoverQuery(context, messageBody);
     return (messageBody == null);
   }
 
@@ -414,27 +378,25 @@ public class SmsMmsMessage implements Serializable {
   }
 
   private void buildParseInfo() {
-    boolean keepLeadBreak = ManagePreferences.splitKeepLeadBreak();
     parseInfo = bldParseInfo();
     if (extraMsgBody != null) {
       String msgSubject = parseInfo.getSubject();
       String parseMsgBody = parseInfo.getMessageBody();
       String delim = (ManagePreferences.splitBlankIns() ? " " : "");
       for (String msgBody : extraMsgBody) {
-        Message pInfo = bldParseInfo(true, subject, msgBody, keepLeadBreak);
+        Message pInfo = bldParseInfo(true, subject, msgBody);
         parseMsgBody = parseMsgBody + delim + pInfo.getMessageBody();
       }
-      parseInfo = bldParseInfo(false, msgSubject, parseMsgBody, false);
+      parseInfo = bldParseInfo(false, msgSubject, parseMsgBody);
     }
   }
   
   private Message bldParseInfo() {
-    return bldParseInfo(true, subject, messageBody, false);
+    return bldParseInfo(true, subject, messageBody);
   }
   
-  private Message bldParseInfo(boolean preParse, String msgSubject, String body, boolean keepLeadBreak) {
-    boolean insBlank = ManagePreferences.splitBlankIns();
-    return new Message(preParse, fromAddress, msgSubject, body, insBlank, keepLeadBreak){
+  private Message bldParseInfo(boolean preParse, String msgSubject, String body) {
+    return new Message(preParse, fromAddress, msgSubject, body){
 
       @Override
       protected void setLocationCode(String location) {
@@ -494,13 +456,10 @@ public class SmsMmsMessage implements Serializable {
     // If specific location was requested with a C2DM message, use it to get
     // a parser.  This is one of the only times we will ignore a bad location
     // code
-    if (reqLocation != null && !ManagePreferences.overrideVendorLoc()) {
+    if (reqLocation != null) {
       try {
         parser = ManageParsers.getInstance().getParser(reqLocation);
-        location = reqLocation;
-      } catch (RuntimeException ex) {
-        Log.e(ex);
-      }
+      } catch (RuntimeException ex) {}
     }
     
     // If that didn't work, get the default location parser
@@ -525,12 +484,6 @@ public class SmsMmsMessage implements Serializable {
     // If we didn't build a parse message info object when this was constructed
     // we never will have and pared message information
     if (parseInfo == null) return null;
-    
-    // Early versions of the Cadpage parser were setting location to the secondary 
-    // parser name which is cause subsequent attempt to parse the information with the
-    // wrong parser to fail.  We don't do that anymore, but we do want to fix calls
-    // that were parsed with that version.
-    if (reqLocation != null && reqLocation.startsWith("Cadpage")) location = reqLocation;
     
     // Some special logic if the previous location was General
     // And the current location code preference is not general
@@ -750,18 +703,6 @@ public class SmsMmsMessage implements Serializable {
     if (url.length() > 0) return url;
     return null;
   }
-
-  /**
-   * Get the "More Info" button title resource ID specific to this message
-   * @return the title resource ID
-   */
-  public int getInfoTitle() {
-    if (vendorCode != null && infoURL != null) {
-      int resId = VendorManager.instance().getMoreInfoResId(vendorCode);
-      if (resId > 0) return resId;
-    }
-    return  R.string.more_info_item_text;
-  }
   
   /**
    * Called when the user has done anything to indicate they are aware of the page
@@ -769,7 +710,7 @@ public class SmsMmsMessage implements Serializable {
    */
   public void acknowledge(Context context) {
     if (ackNeeded) {
-      C2DMService.sendResponseMsg(context, ackReq, ackURL, "ACK", vendorCode);
+      C2DMReceiver.sendResponseMsg(context, ackReq, ackURL, "ACK", vendorCode);
       ackNeeded = false;
       reportDataChange();
     }
@@ -781,39 +722,7 @@ public class SmsMmsMessage implements Serializable {
    * @param respCode response code to be sent
    */
   public void sendResponse(Context context, String respCode) {
-    C2DMService.sendResponseMsg(context, ackReq, ackURL, respCode, vendorCode);
-    ackNeeded = false;
-    
-    // A response code of anything other than 'N' will be taken as an 
-    // active response which can start the location tracking logic
-    if (!respCode.startsWith("N")) triggerTracking(context);
-  }
-  
-  /**
-   * User has performed an action that could trigger a location tracking request from the server
-   * See if it should happen
-   */
-  private void triggerTracking(Context context) {
-    
-    // If tracking has already been initiated, don't check again
-    if (tracking) return;
-    tracking = true;
-    
-    // Has sender requested location tracking
-    OptionReader or = new OptionReader();
-    if (!or.init('L')) return;
-    int limit = Math.min(30, or.getParm(5));
-    int minTime = or.getParm(10);
-    int minDist = or.getParm(10);
-    
-    // See how long tracking is last following message receipt.  If time is 
-    // up, don't do anything
-    long delta = timestamp + limit * 60000L - System.currentTimeMillis();
-    
-    if (delta <= 0) return;
-    
-    // We are good to go with tracking request
-    TrackingPromptActivity.addLocationRequest(context, ackURL, (int)delta, minDist, minTime);
+    C2DMReceiver.sendResponseMsg(context, ackReq, ackURL, respCode, vendorCode);
     
   }
   
@@ -850,8 +759,7 @@ public class SmsMmsMessage implements Serializable {
       defCity = ManagePreferences.defaultCity();
       defState = ManagePreferences.defaultState();
     }
-    int gps_option = ManagePreferences.gpsMapOption();
-    return info.getMapAddress(gps_option, defCity, defState);
+    return info.getMapAddress(useGPS, defCity, defState);
   }
   
   /**
@@ -897,14 +805,9 @@ public class SmsMmsMessage implements Serializable {
       putExtraString(intent, EXTRA_PARSE_PHONE, info.getPhone());
       putExtraString(intent, EXTRA_PARSE_PRIORITY, info.getPriority());
       putExtraString(intent, EXTRA_PARSE_CHANNEL, info.getChannel());
-      putExtraString(intent, EXTRA_PARSE_GPSLOC, info.getGPSLoc());
-      putExtraString(intent, EXTRA_PARSE_DISP_DATE, info.getDate());
-      putExtraString(intent, EXTRA_PARSE_DISP_TIME, info.getTime());
-      putExtraString(intent, EXTRA_PARSE_INFO_URL, info.getInfoURL());
     }
     
-    Log.v("Broadcasting intent");
-    ContentQuery.dumpIntent(intent);
+    
     context.sendBroadcast(intent, PERMISSION);
   }
   
@@ -921,7 +824,9 @@ public class SmsMmsMessage implements Serializable {
     sb.append("\n\nMessage Contents\n");
     
     sb.append("Time:");
-    sb.append(DATE_TIME_FMT.format(timestamp));
+    sb.append(DateFormat.getLongDateFormat(context).format(timestamp));
+    sb.append(" ");
+    sb.append(DateFormat.getTimeFormat(context).format(timestamp));
 
     sb.append("\nFrom:");
     sb.append(fromAddress);
@@ -941,11 +846,11 @@ public class SmsMmsMessage implements Serializable {
     sb.append(getSubject());
     
     sb.append("\nBody:");
-    sb.append(Message.escape(messageBody));
+    sb.append(escape(messageBody));
     if (extraMsgBody != null) {
       for (String body : extraMsgBody) {
         sb.append("\nBody:");
-        sb.append(Message.escape(body));
+        sb.append(escape(body));
       }
     }
     
@@ -975,8 +880,6 @@ public class SmsMmsMessage implements Serializable {
     sb.append("\nresponseMenuActive:");
     sb.append(responseMenuVisible);
     
-    sb.append("\ninfoURL:");
-    sb.append(infoURL);
     
     sb.append("\nCall ID:");
     sb.append(callId);
@@ -997,15 +900,56 @@ public class SmsMmsMessage implements Serializable {
     
     sb.append('\n');
   }
-  private static final DateFormat DATE_TIME_FMT = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS");
- 
-  public boolean duplicate(SmsMmsMessage msg) {
+
+  /**
+   * Escape a string containing tabs, newlines, or multiple spaces so it
+   * will better survive transmission through an email message
+   * @param message message to be escaped
+   * @return escaped message
+   */
+  private static final Pattern MULT_SPACES = Pattern.compile(" {2,}");
+  private static final Pattern UNPRINTABLE = Pattern.compile("[^\\p{Print}\n]");
+  static String escape(String message) {
+    if (message == null) return message;
+    message = message.replace("\\", "\\\\");
+    message = message.replace("\t", "\\t");
+    message = message.replace("\n", "\\n\n");
+    message = message.replace("\r", "\\r");
+    message = message.replace("\f", "\\f");
+    message = message.replace("\b", "\\b");
+    Matcher match = MULT_SPACES.matcher(message);
+    if (match.find()) {
+      StringBuffer sb = new StringBuffer();
+      do {
+        match.appendReplacement(sb, "\\\\" + (match.end()-match.start()) + "s");
+      } while (match.find());
+      match.appendTail(sb);
+      message = sb.toString();
+    }
+    match = UNPRINTABLE.matcher(message); 
+    if (match.find()) {
+      StringBuffer sb = new StringBuffer();
+      do {
+        int code = message.charAt(match.start());
+        match.appendReplacement(sb, String.format("\\\\u%04x",code));
+      } while (match.find());
+      match.appendTail(sb);
+      message = sb.toString();
+    }
+    return message;
+  }
+  
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof SmsMmsMessage)) return false;
+    SmsMmsMessage msg = (SmsMmsMessage)obj;
     if (messageType != msg.messageType) return false;
-    if (messageType == MESSAGE_TYPE_MMS) {
-      return match(contentLoc, msg.contentLoc) &&
-          match(mmsMsgId, msg.mmsMsgId);
-    } else {
+    if (!match(fromAddress, msg.fromAddress)) return false;
+    if (messageType == MESSAGE_TYPE_SMS) {
       return match(messageBody, msg.messageBody); 
+    } else {
+      return match(contentLoc, msg.contentLoc) &&
+              match(mmsMsgId, msg.mmsMsgId);
     }
   }
   
@@ -1017,48 +961,5 @@ public class SmsMmsMessage implements Serializable {
   
   Message getParseInfo() {
     return parseInfo;
-  }
-  
-  /**
-   * Class to interpret numeric subparameter from acknowledgment request string
-   * Number parameters must follow a single letter parameter that keys them.  Multiple
-   * numeric parameters can be separated with slashes
-   */
-  private class OptionReader {
-    private int pt = -1;
-
-    /**
-     * Initialize reader starting with particular characater key
-     * @param chr desired character key
-     * @return true if character key is present, false otherwise
-     */
-    public boolean init(char chr) {
-      if (ackReq == null) return false;
-      pt = ackReq.indexOf(chr);
-      if (pt < 0) return false;
-      pt++;
-      return true;
-    }
-    
-    /**
-     * Return next number parameter following initial character key
-     * @param defValue value to return if no number is specified
-     * @return number parameter or default value
-     */
-    public int getParm(int defValue) {
-      if (pt < 0 || pt >= ackReq.length()) return defValue;
-      int result = defValue;
-      char chr = ackReq.charAt(pt);
-      if (Character.isDigit(chr)) {
-        result = 0;
-        do {
-          result = result*10 + (chr-'0');
-          if (++pt >= ackReq.length()) chr = 'X';
-          else chr = ackReq.charAt(pt);
-        } while (Character.isDigit(chr));
-      }
-      if (chr == '/') pt++;
-      return result;
-    }
   }
 }

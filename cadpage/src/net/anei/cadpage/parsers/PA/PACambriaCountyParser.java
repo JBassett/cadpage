@@ -7,7 +7,34 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Cambria County, PA
+Contact: jacob berkey <jwb932@gmail.com>
+Sender: alerts@cambria.ealertgov.com
 
+[29] 11 Time: 15:02:29 Nature: 17A01G-Alpha FALL Location: 216 MAIN ST-JO | Sta 35
+[29] 11 Time: 11:54:47 Nature: 29B01-Bravo VEH ACC WITH INJURIES Location: 110 PLAZA DR-LY | Sta 30, Sta 23, Sta 35
+[29] 11 Time: 08:03:01 Nature: 10C02-Charlie CHEST PAIN Location: 315 LOCUST ST-JO | Sta 35 
+[29] 11 Time: 06:45:29 Nature: 17B03G-Bravo FALL Location: WALNUT ST-JO/MAIN ST-JO | Sta 35
+[28] 11 Time: 21:39:31 Nature: 06D03A-Delta BREATHING PROBLEMS Location: 205 CHANDLER AVE-JO | Sta 35, Sta 21, Sta 36
+
+Contact: Ben Smith <cnfederatediesel@gmail.com>
+Contact: Paul Zabinsky <pzabinsky@gmail.com>
+Date: 06/02/11\nTime: 20:47:52\nNature: 10C01-Charlie CHEST PAIN\nLocation: 1518 W 2ND ST-CR\n| Sta 75
+Date: 06/04/11\nTime: 11:03:04\nNature: 06D02-Delta  BREATHING PROBLEMS\nLocation: 908 SHORT AVE-CR\n| Sta 75
+Date: 06/04/11\nTime: 17:24:03\nNature: STB-STAND BY\nLocation: 721 MAIN ST-PORB\n| Sta 73
+Date: 06/05/11\nTime: 18:00:42\nNature: 52C04G-Charlie FIRE ALARM\nLocation: 111 ASHCROFT AVE-CB\n| Sta 70
+Date: 06/13/11\nTime: 15:53:48\nNature: 02D02-Delta  ALLERGIC REACTION\nLocation: 1237 ST AUGUSTINE RD-CF\n| Sta 60, Sta 67
+
+Contact: Paul Bomboy <training@easthillsems.com>
+Sender: Cambria 9-1-1
+FRM:Cambria 9-1-1\nMSG:Date: 11/07/11\nTime: 18:02:55\nNature: 10C01-Charlie CHEST PAIN\nLocation: 349 VO TECH DR-RI\n|
+
+Contact: support@active911.com
+Sender; "Cambria 9-1-1" <alerts@cambria.ealertgov.com>
+Date: 01/24/12\nTime: 18:02:50\nNature: 69D03-Delta STRUCTURE FIRE\nLocation: 7458 ADMIRAL PEARY HWY-CB\nSta 70, Sta 71, Sta 72, Sta 75
+
+*/
 
 public class PACambriaCountyParser extends FieldProgramParser {
   
@@ -17,7 +44,7 @@ public class PACambriaCountyParser extends FieldProgramParser {
   
   public PACambriaCountyParser() {
     super(CITY_CODES, "CAMBRIA COUNTY", "PA",
-           "( Date:DATE | ) ( Time:TIME! Nature:CALL! Add:ADDR/y! Cross:X? UNIT | DATE:DATE! TIME CALL ADDR/y X UNIT ) Sta:UNIT");
+           "Date:DATE? Time:TIME! Nature:CALL! Location:ADDR/y! UNIT Sta:UNIT");
   }
   
   @Override
@@ -34,54 +61,14 @@ public class PACambriaCountyParser extends FieldProgramParser {
       body = body.substring(match.end()).trim();
     }
     
-    body = body.replace("Location:", "Add:");
-    String[] flds = body.split("\\|");
-    if (flds.length < 5) flds = body.split("\n\\|?");
-    if (flds.length >= 5) {
-      return parseFields(flds, data);
-    }
     body = BAR_PTN.matcher(body).replaceAll("$1Sta: ");
     if (body.endsWith("|")) body = body.substring(0,body.length()-1).trim();
-    flds = body.split("\n");
+    String[] flds = body.split("\n");
     if (flds.length >= 5) {
       return parseFields(flds, data);
     } else {
       return super.parseMsg(body.replace('\n', ' '), data);
     }
-  }
-  
-  private class MyAddressField extends AddressField {
-    @Override
-    public void parse(String field, Data data) {
-      for (String city : CITY_LIST) {
-        int pt = field.length() - city.length();
-        if (pt < 0) continue;
-        if (!city.equals(field.substring(pt).toUpperCase())) continue;
-        if (pt > 0 && field.charAt(pt-1)!=' ') continue;
-        data.strCity = field.substring(pt);
-        field = field.substring(0,pt).trim();
-        break;
-      }
-      super.parse(field, data);
-    }
-  }
-  
-  private static final Pattern CITY_CODE_PTN = Pattern.compile("-[A-Z]{2} ");
-  private static final Pattern CITY_CODE_END_PTN = Pattern.compile("-[A-Z]{2}$");
-  private class MyCrossField extends CrossField {
-    @Override
-    public void parse(String field, Data data) {
-      field = CITY_CODE_PTN.matcher(field).replaceAll(" & ");
-      field = CITY_CODE_END_PTN.matcher(field).replaceAll("");
-      super.parse(field.trim(), data);
-    }
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("X")) return new MyCrossField();
-    return super.getField(name);
   }
   
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
@@ -147,10 +134,6 @@ public class PACambriaCountyParser extends FieldProgramParser {
       "WI", "WILMORE",
       "WM", "WESTMONT",
       "WS", "WEST TAYLOR TWP",
-      "WT", "WASHINGTON TWP",
+      "WT", "WASHINGTON TWP"
   });
-  
-  private static final String[] CITY_LIST = new String[] {
-    "CENTRAL CITY"
-  };
 }

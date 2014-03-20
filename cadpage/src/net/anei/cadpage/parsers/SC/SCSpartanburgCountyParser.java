@@ -6,9 +6,27 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchPrintrakParser;
 
-/**
- * Spartanburg County, SC
+/*
+Spartanburg County, SC
+Contact: Richard Brown <firefighterjacob@gmail.com>
+Sender: 911info@spartanburgcounty.org
+System: Motorola CAD premeire
+
+GLFD - CF/14072 TYP: ..FUEL SPILL........ AD: DOGWOOD CLUB RD&S PINE ST CMT1: <<< FUEL SPILL >>> CMT2: <<< SEND GLENDALE AND PACOLET ON ALL STRUCTURE
+GLFD - CF/13375 TYP: COMMERC FIRE ALARM. AD: 2720 COUNTRY CLUB RD LOC: PARK PLACE ASSISTED LIVING CMT1: <<< SEND GLENDALE AND PACOLET ON ALL STRUCTURE
+GLFD - CF/13440 TYP: FIRE ALARM(RESDENTL) AD: 200 JOHNSON LAKE RD LOC: MURF/RESD/5831013 CMT1: <<< SEND GLENDALE AND PACOLET ON ALL STRUCTURE FIRES &
+GLFD - CF/09993 TYP: MVA W/INJURY..... AD: CLIFTON GLENDALE RD&GLENDALE A CMT1: <<< SEND GLENDALE AND PACOLET ON ALL STRUCTURE FIRES & ALARMS >>> CMT2
+GLFD - CF/10647 TYP: BRUSH FIRE......... AD: 170 FRETWELL RD CMT1: <<< SEND GLENDALE AND PACOLET ON ALL STRUCTURE FIRES & ALARMS >>> CMT2: <<< BRUSH,
+
+Contact: Andrew Couchey <abcouchey@gmail.com>
+BSFD - CF/20546 TYP: COMMERC FIRE ALARM. AD: 2251 OLD FURNACE RD LOC: BOILING SPRINGS HIGH CMT1: << BOILING SPRINGS FIRE DISTRICT >> CMT2: <<< COMMERC
+
+Contact: Hector Cardona <krzcolombian@gmail.com>
+(Email Copy from Emergin Integration Suite) TRFD - CF/27137 TYP: ..SUICIDE THREAT ..` AD: 326 STODDARD DR CMT1: <<< SUICIDE THREAT (NOT ATTEMPTED) >>>
+(Email Copy from Emergin Integration Suite) TRFD - CF/27162 TYP: NON-INJURY MVA... AD: CANADY RD&INMAN RD CMT1: <<< NON INJURY VEHICLE ACCIDENT >>> CM
+
  */
+
 public class SCSpartanburgCountyParser extends DispatchPrintrakParser {
   
   public SCSpartanburgCountyParser() {

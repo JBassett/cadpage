@@ -1,104 +1,94 @@
 package net.anei.cadpage.parsers.MD;
 
 import java.util.Properties;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.anei.cadpage.parsers.FieldProgramParser;
+import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
-/**
- * Montgomery County, MD
- */
-public class MDMontgomeryCountyParser extends FieldProgramParser {
-  
-  private static final Pattern MARKER = Pattern.compile("\\* (D|\\d[a-z]{2}) \\*");
-  private static final Pattern STATION_PTN = Pattern.compile("^Sent by Montgomery CAD to.*(FS\\d+),.* Montgomery CAD");
+/*
+Montgomery County, MD
+Contact: Alain Pankopf <hockeylaxboy11@gmail.com>
+Sender: rc.355@c-msg.net,@mcen.montgomerycountymd.gov 
+
+MCo / [mCAD] * D * 2301 * BUILDING FIRE * 1620 E JEFFERSON ST ,RO * E723 E703 E721 E726 E705B AT723 AT703 RS703 A723 BC703 BC704 D3 D5 DFRS INV CEALRM CODE BCNOT
+MCo / [mCAD] * D * 0302 * BUILDING FIRE * 733 MONROE ST ,RO * E723 E733 E726 E725 E721 AT703 AT723 RS741B M723 BC703 BC704 D3 D5 DFRS INV CEALRM CODE BCNOT
+MCo / [mCAD] * D * 0301 * HOUSE FIRE * 1006 DE BECK DR ,RO * E703 E723 E721 E725 E733 AT703 T731 RS703 A703 BC703 BC704 D3 D5 DFRS INV CEALRM CODE BCNOT
+MCo / [mCAD] * D * 2312 * UNCONFIRMED POWDER * 5700 BOU AVE ,MCG (TARGET STORE) * E723 AT723 A723 M703 HM707 E720 D3 BC703 DFRS BCNOT HIRT ECC
+MCo / [mCAD] * D * 0801 * BOX ALARM * 17211 KING JAMES WAY ,MCG * E728 E731 E703 T731 RS703 A708C BC705 BC703 D8 D3 DFRS INV CEALRM CODE BCNOT
+MCo / [mCAD] * D * 0503 * HOUSE FIRE * 4805 FLANDERS AVE ,MCG * E705B E723 E720 E750 E726 AT723 AT751 RS742 A705B BC704 BC703 D5 D3 DFRS INV CEALRM CODE BCNOT
+MCo / [mCAD] * D * 0318 * STABBING - ALS1 * 9300 KEY WEST AVE / 15200 SHADY GROVE RD ,RO * M703 BCNOT EMSNOT E703 D3 ECC25 DFRS
+MCo / [mCAD] * D * 0301 * PIC w/ ENTRAPMENT -ALS1 * 1180 EDMONSTON DR / 1100 WADE AVE ,RO * M703 RS703 E703 D3 EMS EMSNOT BCNOT DFRS
+
+Contact: Keith Stakes <kstakes2@aol.com>
+Sender: MC Emergency Network
+CAD MSG: * D * 3132 * BOX ALARM * 209 FOUNTAIN GREEN LA ,GA  * E708 E722 E729 E734 E728 T731 AT708 RS703 M73M
+CAD MSG: * D * 2424 * PIC w/ ENTRAPMENT -ALS1 * 13400 NEW HAMPSHIRE AVE / 2 RANDOLPH RD ,MCG  * A724 E724
+
+Contact: "Ebow Holdbrook-Smith" <ebowhold4u@gmail.com>
+CAD MSG: * D * 3525 * PIC w/VEH OVERTURNED-ALS1 * S270C 121-27 @ 17000 S270 X18 TO X16 HWY ,MCG  * M735 T7
+
+Contact: Morgan Kee <morgan.kee@gmail.com>
+(MCo) [mCAD] * D * 4009 * PIC w/ ENTRAPMENT -ALS1 * 4700 BROOM DR / 18400 WICKHAM RD ,MCG * A740 E740 M704 RS704 D4 EMS EMSNOT BCNOT DFRS
+
+Contact: Robert Murphy <robertmurphy30@gmail.com>
+FRM:General Alerts\nMSG:CAD MSG: * D *  * MAF FULL * 14615 PHILIP DR * AT715 BCNOT DFRS=
+
+Contact: Christopher Finelli <chris.finelli@gmail.com>
+CAD MSG: * D * 0609 * RSC - RESET ALARM * 4908 AUBURN AVE ,MCG  * RS741B ECC1
+
+Contact: Tim Whirley <t.whirley76@gmail.com>
+Sender: alrt_7H8G@mcen.montgomerycountymd.gov
+CAD MSG: * D * 1704 * ABDOMINAL PAIN * 7500 MATTINGLY LA ,MCG  * A717 ECC30
+
+*/
+
+public class MDMontgomeryCountyParser extends MsgParser {
   
   public MDMontgomeryCountyParser() {
-    super(CITY_CODES, "MONTGOMERY COUNTY", "MD",
-          "BOX CALL ADDR UNIT!");
+    super("MONTGOMERY", "MD");
   }
   
 	public String getFilter() {
-		return "rc.355@c-msg.net,MC Emergency Network,@mcen.montgomerycountymd.gov,411911,MCEN";
+		return "rc.355@c-msg.net,MC Emergency Network,@mcen.montgomerycountymd.gov";
 	}
 	
 	@Override
 	protected boolean parseMsg(String body, Data data) {
   
-	  Matcher match = MARKER.matcher(body);
-	  if (!match.find()) return false;
-	  body = body.substring(match.end()).trim();
-	  int pt = body.indexOf('\n');
-	  if (pt >= 0) {
-	    String extra = body.substring(pt+1).trim();
-	    match = STATION_PTN.matcher(extra);
-	    if (match.find()) data.strSource = match.group(1);
-	    body = body.substring(0,pt).trim();
-	  }
-	  return parseFields(body.split("\\*"), 4, data);
-	}
-	
-	@Override
-	public String getProgram() {
-	  return super.getProgram() + " SRC";
-	}
-	
-	private final Field CITY_FIELD = new CityField();
-	private class MyAddressField extends AddressField {
-	  @Override
-	  public void parse(String field, Data data) {
-	    Parser p = new Parser(field);
-	    field = p.get('(');
-	    data.strPlace = p.get(')');
-	    p = new Parser(field);
-	    data.strPlace = append(p.getOptional('@'), " - ", data.strPlace);
-	    super.parse(p.get(','), data);
-      CITY_FIELD.parse(p.get(), data);
-      if (data.strCity.equals("DC")) {
-        data.strCity = "WASHINGTON";
-        data.strState = "DC";
+	  int pt = body.indexOf("* D * ");
+	  if (pt < 0) return false;
+	  body = body.substring(pt+6).trim();
+    
+    Properties props = parseMessage(body, "\\*", new String[]{"BOX","Call","Addr","Units"});
+    data.strBox = props.getProperty("BOX", "");
+    data.strCall = props.getProperty("Call", "");
+    Parser p = new Parser(props.getProperty("Addr", ""));
+    String strAddress = p.get('(');
+    data.strPlace = p.get(')');
+    p = new Parser(strAddress);
+    p.getLastOptional(',');
+    strAddress = p.get();
+    parseAddress(strAddress, data);
+    for (String unit : props.getProperty("Units", "").split(" +")) {
+      if (validUnit(unit)) {
+        if (data.strUnit.length() > 0) data.strUnit += ' ';
+        data.strUnit += unit;
       }
     }
-	  
-	  @Override
-	  public String getFieldNames() {
-	    return super.getFieldNames() + " CITY ST PLACE";
-	  }
-	}
-	
-	@Override
-	public Field getField(String name) {
-	  if (name.equals("ADDR")) return new MyAddressField();
-	  return super.getField(name);
-	}
-	
-	@Override
-	public String adjustMapAddress(String address) {
-	  return address.replace("BIT AND SPUR", "BIT_AND_SPUR");
-	}
-	
-	@Override
-	public String postAdjustMapAddress(String address) {
-    return address.replace("BIT_AND_SPUR", "BIT AND SPUR");
-	}
+    return true;
+  }
+
+	// Determine if unit code is valid reportable unit
   
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "C4",  "CHEVY CHASE",
-      "CV",  "CHEVY CHASE",
-      "DC",  "DC",
-      "FH",  "FRIENDSHIP HEIGHTS",
-      "GA",  "GAITHERSBURG",
-      "MCG", "",
-      "NC",  "NORTH CHEVY CHASE",
-      "PG",  "PRINCE GEORGES COUNTY",
-      "PO",  "POOLESVILLE",
-      "RO",  "ROCKVILLE",
-      "SS",  "SILVER SPRING",
-      "TP",  "TACOMA PARK"
-  });
-}
+  private static final Pattern UNIT = Pattern.compile("[A-Z]+\\d{3}[A-Z]?");
+  private boolean validUnit(String unit) {
+    
+    // We could do the actual type lookup, but just checking for three
+    // trailing digits should be enough
+    return UNIT.matcher(unit).matches();
+  }
+  
 /***
 valid units consist of specific prefix followed by 3 digits.
 
@@ -129,3 +119,4 @@ U – Unit
 W – Tanker (Water Tender)
 XTP – Urban Search & Rescue Roll-off Transport Unit
 ***/  
+}

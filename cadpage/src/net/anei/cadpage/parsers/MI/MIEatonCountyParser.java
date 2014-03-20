@@ -1,20 +1,41 @@
 package net.anei.cadpage.parsers.MI;
 
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchOSSIParser;
 
-/**
- * Eaton County, MI
+/*
+Eaton County, MI
+Contact: Steve Grosshans <firefighter925@gmail.com>
+Contact: Chris Sloan <sloanc35@gmail.com>
+Sender: cad@eatoncounty.org
+
+CAD:FYI: ;20110000176;10/04/2011 20:35:39;BRUSH FIRE;W MT HOPE HWY/N SHAYTOWN RD;CALLER PASSERBY [10/04/11 20:36:48 KANTCLIFF] N OF ABOVE ADDRESS
+CAD:FYI: ;20110000177;10/09/2011 09:45:21;MEDICAL ASSIST;3286 E EATON HWY;Event spawned from EMS PRIORITY 2. [10/09/2011 09:45:21
+CAD:FYI: ;20110000178;10/10/2011 07:59:43;MEDICAL ASSIST;10763 N SHAYTOWN RD;Event spawned from EMS PRIORITY 3. [10/10/2011 07:59:
+CAD:FYI: ;20110000179;10/11/2011 15:13:37;MEDICAL ASSIST;9040 W GRAND LEDGE HWY;Event spawned from EMS PRIORITY 1
+CAD:FYI: ;20110000180;10/11/2011 19:55:29;WIRES DOWN;11600 N IONIA RD;SEMI WENT BY TOOK DOWN WIRE RIPPED METER BOX FROM CALLERS HOUSE
+CAD:FYI: ;20110000485;09/16/2011 20:40:28;MEDICAL ASSIST;1931 GIDNER RD;Event spawned from EMS PRIORITY 1. [09/16/2011 20:40:28 JBLOUNT] {122} REQ MANPOWER [09/
+CAD:FYI: ;20110000487;09/20/2011 00:38:14;MEDICAL ASSIST;2704 S PERKEY RD;Event spawned from EMS PRIORITY 1. [09/20/2011 00:38:14 KANTCLIFF] [LAW] VICTIM IS TER
+CAD:FYI: ;20110000484;09/16/2011 19:23:15;SPECIAL RESCUE;ACKLEY RD/BELL HWY;Event spawned from UNKNOWN PROBLEM. [09/16/2011 19:23:15 JBLOUNT] ONE MAY BE CAUGHT
+CAD:FYI: ;20110000471;09/08/2011 14:27:39;MEDICAL ASSIST;414 RAILROAD ST;Event spawned from EMS PRIORITY 1. [09/08/2011 14:27:39 ROWENS] HX LEAKY VALVE IN HEART
+CAD:FYI: ;20110000486;09/17/2011 19:48:03;COMPLAINT FIRE INVESTIGATION;800 E SHAW ST;EVERYONE IS OUTSIDE, REF EMS. [09/17/11 19:49:20 JBLOUNT]
+CAD:FYI: ;20110000482;09/15/2011 19:42:53;COMPLAINT FIRE INVESTIGATION;W FIVE POINT HWY/MATTHEWS RD;W OF MATTHEWS [09/15/11 19:43:57 KANTCLIFF] NE SIDE OF THE R
+CAD:FYI: ;20110000481;09/15/2011 08:19:47;COMMERCIAL FIRE ALARM;417 MAYNARD ST;BEEN GOING FOR 5 MINS. [09/15/11 08:21:10 MBIALKOWSKI] CLLR IN THE NORTH WING. GO
+CAD:FYI: ;20110000480;09/14/2011 19:20:41;MISCELLANEOUS FIRE RUN;S PERKEY RD/E CLINTON TRL;Event spawned from MISCELLANEOUS INCIDENT. [09/14/2011 19:20:41 CYARG
+
+
+Contact: Rebecca Bell <rjbell06@gmail.com>
+CAD:FYI: ;EEMS;20120003108;01/29/2012 01:17:26;PRIORTY3;7291 TUCKER RD;ERCY;70/F VOMITTING THE PAST 3-4 HRS [01/29/12 01:21:07 MLUNDQUIST]
+
  */
 public class MIEatonCountyParser extends DispatchOSSIParser {
   
   public MIEatonCountyParser() {
-    super(CITY_CODES, "EATON COUNTY", "MI",
-           "( FYI SRC? ID? DATETIME? CALL | CANCEL )  ADDR CITY? X+? INFO+");
+    super("EATON COUNTY", "MI",
+           "SKIP CALL? ID DATETIME CALL ADDR INFO+");
   }
   
   @Override
@@ -24,13 +45,23 @@ public class MIEatonCountyParser extends DispatchOSSIParser {
 
   @Override
   protected boolean parseMsg(String body, Data data) {
-    int pt = body.indexOf('\n');
-    if (pt >= 0) body = body.substring(0,pt).trim();
+    if (!body.startsWith("CAD:FYI: ;")) return false;
     return super.parseMsg(body, data);
   }
   
+  private class MyIdField extends IdField {
+    public MyIdField() {
+      setPattern(Pattern.compile("\\d{11}"), true);
+    }
+  }
+  
+  private class MyDateTimeField extends DateTimeField {
+    public MyDateTimeField() {
+      setPattern(Pattern.compile("\\d\\d/\\d\\d/\\d{4} \\d\\d:\\d\\d:\\d\\d"), true);
+    }
+  }
+  
   private static final Pattern PRIORITY_PTN = Pattern.compile("Event spawned .* PRIORITY (\\d).*");
-  private static final Pattern SPECIAL_PTN = Pattern.compile("\\bRESPONSE: \\*\\*\\*PRIORITY (\\d)\\*\\*\\*|\\bCode: ([-A-Z0-9]+):|\\bQuestions:|\\bAborted by Medical Priority with code:|\\bEvent spawned from ");
   private class MyInfoField extends InfoField {
     
     @Override
@@ -38,89 +69,22 @@ public class MIEatonCountyParser extends DispatchOSSIParser {
       Matcher match = PRIORITY_PTN.matcher(field);
       if (match.matches()) {
         data.strPriority = match.group(1);
-        return;
+      } else {
+        super.parse(field, data);
       }
-      match = SPECIAL_PTN.matcher(field);
-      StringBuffer sb = new StringBuffer();
-      while (match.find()) {
-        String pri = match.group(1);
-        if (pri != null) data.strPriority = pri;
-        String code = match.group(2);
-        if (code != null) data.strCode = code;
-        match.appendReplacement(sb, " ");
-      }
-      match.appendTail(sb);
-      
-      field = sb.toString().replace("  +", " ").trim();
-      super.parse(field, data);
     }
     
     @Override
     public String getFieldNames() {
-      return "PRI CODE INFO";
+      return "PRI INFO";
     }
   }
   
   @Override
   public Field getField(String name) {
-    if (name.equals("SRC")) return new SourceField("[A-Z]{3,4}", true);
-    if (name.equals("ID")) return new IdField("\\d{7}|\\d{11}", true);
-    if (name.equals("DATETIME")) return new DateTimeField("\\d\\d/\\d\\d/\\d{4} \\d\\d:\\d\\d:\\d\\d", true);
+    if (name.equals("ID")) return new MyIdField();
+    if (name.equals("DATETIME")) return new MyDateTimeField();
     if (name.equals("INFO")) return new MyInfoField();
-    if (name.equals("CANCEL")) return new CallField("CANCEL", true);
     return super.getField(name);
   }
-  
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "ASYR", "ASSYRIA TWP",      // Barry County
-      "BATH", "BATH",
-      "BCRK", "BATTLE CREEK",
-      "BKFD", "BROOKFIELD TWP",
-      "BLVU", "BELLEVUE",
-      "BNTN", "BENTON TWP",
-      "BVTP", "BELLEVUE TWP",
-      "CHAR", "CHARLOTTE",
-      "CHST", "CHESTER TWP",
-      "CRML", "CARMEL TWP",
-      "DDAL", "DIMONDALE",
-      "DEWT", "DEWITT",           // Clinton County
-      "DLHI", "DELHI TWP",        // Ingham County
-      "DLTA", "LANSING",
-      "DOWL", "DOWLING",
-      "EAGL", "EAGLE",            // Clinton County  
-      "EATN", "EATON TWP",
-      "ERCY", "EATON RAPIDS",
-      "ERTP", "EATON RAPIDS TWP",
-      "FRPT", "FREEPORT",
-      "GDLG", "GRAND LEDGE",
-      "HAST", "HASTINGS",
-      "HMLN", "HAMLIN TWP",
-      "HOLT", "HOLT",
-      "IONA", "IONIA",            // Ionia County
-      "KLMO", "KALAMO TWP",
-      "LADE", "LANSING DELTA",
-      "LAKO", "LAKE ODESSA",
-      "LANS", "LANSING CITY",
-      "LAWI", "LANSING SOUTH",
-      "LTWP", "LANSING TWP",      // Ingham County
-      "MARS", "MARSHALL",
-      "MASN", "MASON",
-      "MLKN", "MULLIKEN",
-      "NASH", "NASHVILLE",
-      "OLVT", "OLIVET",
-      "ONID", "ONEIDA TWP",
-      "ONON", "ONONDAGA",
-      "PORT", "PORTLAND",         // Ionia County
-      "PTVL", "POTTERVILLE",
-      "RXND", "ROXAND TWP",
-      "SNFD", "SUNFIELD",
-      "SNTP", "SUNFIELD TWP",
-      "SPRG", "SPRINGPORT",
-      "VVIL", "VERMONTVILLE",
-      "VVTP", "VERMONTVILLE TWP",
-      "WATR", "WATERTOWN TWP",
-      "WIND", "WINDSOR TWP",
-      "WLTN", "WALTON TWP",
-      "WOOD", "WOODLAND"
-  });
 }

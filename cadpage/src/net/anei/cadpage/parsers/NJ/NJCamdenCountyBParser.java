@@ -4,6 +4,18 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.SmartAddressParser;
 
 
+/*
+Camden County, NJ (alternate)
+Contact: Dave <davem@usa.net>
+Sender: ccfsup@camdencounty.com
+
+(CCCAlert) REQ FOR FM TO RESPOND - 508 MAIN AVE. BEDROOM FIRE. UNDER CONTROL.
+(CCCAlert) 2 BLS UNITS AND RESCUE OPERATING AT RT 561 AND MORRIS DRIVE FOR AN OVERTURNED DUMP TRUCK ON TOP OF A VEHICLE
+(CCCAlert) e1351 ol at s135 with a vehicle that has hit the side of the building reporting structural damage 
+(CCCAlert) REQ FOR FM TO RESPOND - 508 MAIN AVE. BEDROOM FIRE. UNDER CONTROL.
+(CCCAlert) DWELLING 1513 BRICK RD / SQ1331 ON LOCATION REPORTING  2 STY SINGLE FAMILY SMOKE SHOWING FROM FRONT DOOR
+
+*/
 
 public class NJCamdenCountyBParser extends SmartAddressParser {
   
@@ -11,7 +23,6 @@ public class NJCamdenCountyBParser extends SmartAddressParser {
 
   public NJCamdenCountyBParser() {
     super("CAMDEN COUNTY", "NJ");
-    setFieldList("CALL ADDR APT INFO");
   }
   
   @Override

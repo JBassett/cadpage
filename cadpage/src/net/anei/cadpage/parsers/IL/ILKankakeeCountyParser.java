@@ -3,203 +3,26 @@ package net.anei.cadpage.parsers.IL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.anei.cadpage.parsers.CodeSet;
 import net.anei.cadpage.parsers.SmartAddressParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Kankakee County, IL
+Contact: "Steven Spraker" <sspraker@k3twpfire.com>
+Sender: dispatchmessage@nwsmessage.net
+
+[NWS Message]  ALARM:FIRE Location: KANKAKEE TERRACE 100 BELLE AIRE AVE Bourbonnais 05/27/11 05:29 Incident #: 2011-00001016
+[NWS Message]  SMOKE/ODOR Location: COURT STREET FORD 558 WILLIAM LATHAM DR Bourbonnais 05/09/11 15:57 Incident #: 2011-00000889
+[NWS Message]  WIRES DOWN Location: 968 N 2750E RD Kankakee 05/30/11 11:09 Incident #: 2011-00000111
+[NWS Message]  AMB:MUTUAL AID Location: 4552/3400N RD 06/01/11 14:00 Incident #: 2011-00000113
+[NWS Message]  AMBULANCE Location: 55 SAINT FRANCIS DR Bourbonnais 06/01/11 12:38 Incident #: 2011-00001056
+[NWS Message] AMBULANCE Location: 1355 N  ARTHUR BURCH DR F11 Bourbonnais 06/03/11 14:32 Incident #: 2011-00001066
+[NWS Message]  AMBULANCE Location: 874 EDWIN DR Bourbonnais 06/01/11 14:24 Incident #: 2011-00004870
+
+*/
+
 
 public class ILKankakeeCountyParser extends SmartAddressParser {
-  
-  private static final Pattern MASTER_PTN3 =
-      Pattern.compile("(.*)(\\d\\d/\\d\\d/\\d\\d) (\\d\\d:\\d\\d)(?: +(\\d{4}-\\d{8}))?(?: +(.*))?");
-  private static final Pattern LEAD_DIR_PTN = Pattern.compile("([NSEW])\\b *(.*)");
-  private static final Pattern APT_PTN = Pattern.compile("(.*?) *\\b(?:APT|RM|LOT) +([^ ]+) *(.*)", Pattern.CASE_INSENSITIVE);
-  
-  private static final Pattern MASTER_PTN2 = 
-      Pattern.compile("(.+) Location: (.+) \\d\\d/\\d\\d/\\d\\d \\d\\d:\\d\\d Incident #: *(.*)");
-  private static final Pattern HOUSE_SLASH_PTN = Pattern.compile("^\\d+(/)[^ ]");
-  private static final Pattern ADDR_CALLBK_PTN = Pattern.compile("(.*?)[/ ]+CALLBK.*");
-  
-  private static final Pattern MASTER_PTN1 = Pattern.compile("([A-Z0-9 ]+?)  +(.*?)(?: +(\\d{4}-\\d{8}))?");
-  private static final Pattern PLACE_CITY_BRK_PTN = Pattern.compile("\\b([A-Z0-9]+)([A-Z][a-z]+)\\b");
-  private static final Pattern SRC_PTN = Pattern.compile("(Aroma Fire|Bourbonnais Fire|Herscher Fire|K3 Twp Fire|Manteno Fire|Momence Fire|Saline/Limestone Fire|Otto Fire|Saline/Limestone Fire|St.Anne Fire|Station #\\d+) +(.*)");
-  
-  public ILKankakeeCountyParser() {
-    super(CITY_LIST, "KANKAKEE COUNTY", "IL");
-    setupCallList(CALL_LIST);
-  }
-  
-  @Override
-  public String getFilter() {
-    return "dispatchmessage@nwsmessage.net";
-  }
-  
-  @Override
-  protected boolean parseMsg(String subject, String body, Data data) {
-
-    // Check for message signature
-    if (!subject.equals("NWS Message")) return false;
-    
-    // There are now three formats, Wish they would make up their minds
-    Matcher match = MASTER_PTN2.matcher(body);
-    if (match.matches()) {
-      setFieldList("CALL PLACE ADDR APT CITY ID");
-      data.strCall = match.group(1).trim();
-      String sAddr = match.group(2);
-      Matcher match2 = HOUSE_SLASH_PTN.matcher(sAddr);
-      if (match2.find()) sAddr = sAddr.substring(0,match2.start(1)) + " " + sAddr.substring(match2.end(1));
-      match2 = ADDR_CALLBK_PTN.matcher(sAddr);
-      if (match2.matches()) sAddr = match2.group(1);
-      parseAddress(StartType.START_PLACE, FLAG_START_FLD_NO_DELIM | FLAG_ANCHOR_END, sAddr, data);
-      data.strCallId = match.group(3);
-      
-      // If we didn't find an address, transfer place to address
-      if (data.strAddress.length() == 0) {
-        data.strAddress = data.strPlace;
-        data.strPlace = "";
-      }
-      
-      // If we did find an address
-      // try to parse apt from end of parsed address
-      else { 
-        String addr = data.strAddress;
-        String apt = data.strApt;
-        data.strAddress = data.strApt = "";
-        parseAddress(StartType.START_ADDR, FLAG_NO_CITY, addr, data);
-        if (apt.length() == 0) apt = data.strApt;
-        data.strApt = append(apt, "-", getLeft());
-      }
-      
-      return true;
-    }
-    
-    match = MASTER_PTN3.matcher(body);
-    if (match.matches()) {
-      setFieldList("CALL ADDR APT CITY PLACE DATE TIME ID X");
-      body = match.group(1).trim();
-      data.strDate = match.group(2);
-      data.strTime = match.group(3);
-      data.strCallId = getOptGroup(match.group(4));
-      data.strCross = getOptGroup(match.group(5));
-      
-      // Sometimes there is no blank separating the place name
-      // from the city name.  We will try to identify these by looking
-      // for multiple upper case letters followed by a lower case leter
-      body = PLACE_CITY_BRK_PTN.matcher(body).replaceFirst("$1 $2");
-      
-      parseAddress(StartType.START_CALL, FLAG_PAD_FIELD_EXCL_CITY | FLAG_CROSS_FOLLOWS, body, data);
-      if (data.strAddress.length() == 0) return false;
-      
-      String pad = getPadField();
-      match = LEAD_DIR_PTN.matcher(pad);
-      if (match.matches()) {
-        data.strAddress = append(data.strAddress, " ", match.group(1));
-        pad = match.group(2);
-      }
-      if (pad.length() < 5) {
-        data.strApt = append(data.strApt, "-", pad);
-      } else {
-        data.strPlace = pad;
-      }
-
-      String place = getLeft();
-      match = APT_PTN.matcher(place);
-      if (match.matches()) {
-        data.strApt = append(data.strApt, "-", match.group(2));
-        place = append(match.group(1), " ", match.group(3));
-      }
-      if (checkAddress(place) > 0 && !place.toUpperCase().endsWith(" TERRACE")) {
-        data.strCross = append(data.strCross, " / ", place);
-      } else if (data.strApt.length() == 0 && place.length() < 5) {
-        data.strApt = append(data.strApt, "-", place);
-      } else {
-        data.strPlace = append(data.strPlace, " - ", place);
-      }
-      return true;
-    }
-    
-    match = MASTER_PTN1.matcher(body);
-    if (match.matches()) {
-      setFieldList("UNIT SRC ADDR APT PLACE CITY CALL ID");
-      data.strUnit = match.group(1).trim();
-      body = match.group(2).trim();
-      data.strCallId = getOptGroup(match.group(3));
-      
-      // Sometimes there is no blank separating the place name
-      // from the city name.  We will try to identify these by looking
-      // for multiple upper case letters followed by a lower case leter
-      body = PLACE_CITY_BRK_PTN.matcher(body).replaceFirst("$1 $2");
-      
-      // compress multiple blanks
-      body = body.replaceAll("  +", " ");
-      
-      // See if we can identify source field from pattern search.  If not
-      // we will have to trust the SAP
-      StartType st = StartType.START_OTHER;
-      match = SRC_PTN.matcher(body);
-      if (match.matches()) {
-        st = StartType.START_ADDR;
-        data.strSource = match.group(1);
-        body = match.group(2);
-      }
-      parseAddress(st, FLAG_IMPLIED_INTERSECT | FLAG_PAD_FIELD, body, data);
-      if (data.strSource.length() == 0) data.strSource = getStart();
-      String pad = getPadField();
-      if (pad.length() < 5) {
-        data.strApt = append(data.strApt, " ", pad);
-      } else {
-        data.strPlace = pad;
-      }
-      data.strCall = getLeft();
-      return data.strCity.length() > 0;
-    }
-    
-    return false;
-  }
-  
-  private static final CodeSet CALL_LIST = new CodeSet(
-      "911:UNKNOWN",
-      "911:ABANDONED",
-      "ACCIDENT",
-      "ALARM CALL",
-      "ALARM:AUTOMATIC",
-      "ALARM:AUTOMATIC/SHAPIRO",
-      "ALARM:BOX",
-      "ALARM:CO DET",
-      "ALARM:FIRE",
-      "ALARM:STILL",
-      "AMB:MUTUAL AID",
-      "AMBULANCE",
-      "AMBULANCE:ASSIST",
-      "BATTERY",
-      "CONTROL BURN",
-      "DEATH INVESTIGATION",
-      "DECEASED SUBJ",
-      "DIS CONDUCT",
-      "DISABLED VEH",
-      "DISTURBANCE",
-      "DOM DIST",
-      "FIGHT",
-      "FIRE:BRUSH",
-      "FIRE:MUTAL AID",
-      "FIRE:STRUCTURE",
-      "FIRE:VEHICLE",
-      "ILLEGAL BURNING",
-      "INDECENT EXPOSURE",
-      "MABAS RADIO DRILL",
-      "MENTAL CASE",
-      "MISSING PERSON",
-      "NEW",
-      "OTHER DUTIES",
-      "REMOVAL",
-      "RIVERSIDE AMB",
-      "SHOTS FIRED",                                                                                                                                                                                                 
-      "SMOKE/ODOR",
-      "ABANDONED",
-      "WEAPONS",
-      "WELFARE CHECK",
-      "WIRES DOWN"
-  );
   
   private static final String[] CITY_LIST = new String[]{
     "KANKAKEE",
@@ -218,36 +41,44 @@ public class ILKankakeeCountyParser extends SmartAddressParser {
     "IRWIN",
     "LIMESTONE",
     "MANTENO",
-    "ST ANNE",
+    "ST. ANNE",
     "REDDICK",
     "SAMMONS POINT",
     "SUN RIVER TERRACE",
     "UNION HILL",
 
-    "PEMBROKE TOWNSHIP",
-    "SOLLITT TOWNSHIP",
-    "YEAGER TOWNSHIP",
-    "PEWING TOWNSHIP",
-    
-    "KANKAKEE COUNTY",
-    
-    "WILMINGTON",
-    
-    // Ford County
-    "KEMPTON",
-    
-    // Grundy County
-    "BRACEVILLE",
-    
-    // Iroquois County
-    "ASHKUM",
-    "BEAVERVILLE",
-    
-    // Kankakee County
-    "CABERY",
-    
-    // Will County
-    "BRAIDWOOD",
-    "CUSTER PARK"
+    "PEMBROKE",
+    "SOLLITT",
+    "YEAGER",
+    "PEWING",
   };
+  
+  private static final Pattern MASTER_PTN = 
+      Pattern.compile("(.+) Location: (.+) \\d\\d/\\d\\d/\\d\\d \\d\\d:\\d\\d Incident #: (.+)");
+  private static final Pattern HOUSE_SLASH_PTN = Pattern.compile("^\\d+(/)[^ ]");
+  
+  public ILKankakeeCountyParser() {
+    super(CITY_LIST, "KANKAKEE COUNTY", "IL");
+  }
+  
+  @Override
+  public String getFilter() {
+    return "dispatchmessage@nwsmessage.net";
+  }
+  
+  @Override
+  protected boolean parseMsg(String subject, String body, Data data) {
+    
+    if (!subject.equals("NWS Message")) return false;
+    Matcher match = MASTER_PTN.matcher(body);
+    if (!match.find()) return false;
+    data.strCall = match.group(1).trim();
+    String sAddr = match.group(2);
+    Matcher match2 = HOUSE_SLASH_PTN.matcher(sAddr);
+    if (match2.find()) sAddr = sAddr.substring(0,match2.start(1)) + " " + sAddr.substring(match2.end(1));
+    parseAddress(StartType.START_PLACE, FLAG_ANCHOR_END, sAddr, data);
+    data.strCallId = match.group(3);
+    
+    return true;
+  }
 }

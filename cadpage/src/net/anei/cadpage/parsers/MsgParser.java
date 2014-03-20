@@ -4,11 +4,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -20,179 +18,12 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  * This class is responsible for parsing useful information from an SMS page message
  */
 public abstract class MsgParser {
-  
-  private static final int GPS_POS_LAT =  0x01;  // Lattitude should be positive
-  private static final int GPS_NEG_LAT =   0x02;  // Lattitude should be negative
-  private static final int GPS_POS_LONG = 0x04;  // Longitidue should be positive
-  private static final int GPS_NEG_LONG =  0x08;  // Longitude should be negative
-  private static final int GPS_LARGE_LAT = 0x10;  // Abs value of latitude should exceed abs value of longitude
-  private static final int GPS_LARGE_LONG = 0x20;  // Abs value of longitude should exceed abs value of latitidue
 
   /**
    * Country code passed to constructor to set up tables for specific countries
-   * The country code is also responsible for converting GPS coordinates to a normal
-   * Google standard form.  Because there is no standard as to which coordinate comes
-   * first and whether or not they are signed, this conversion has to make various
-   * assumptions about what legitimate GPS coordinates look like that can vary from
-   * country to country
    */
-  public static enum CountryCode {
-    
-    US(GPS_POS_LAT | GPS_NEG_LONG | GPS_LARGE_LONG),  // United States 
-    UK(GPS_POS_LAT | GPS_LARGE_LAT),                  // United Kingdom
-    AU(GPS_NEG_LAT | GPS_POS_LONG | GPS_LARGE_LONG),  // Australia
-    NZ(GPS_NEG_LAT | GPS_POS_LONG | GPS_LARGE_LONG),  // New Zealand
-    SE(GPS_POS_LAT | GPS_POS_LONG | GPS_LARGE_LAT);   // Sweden
-    
-    private int gpsFlags;
-    
-   CountryCode(int gpsFlags) {
-      this.gpsFlags = gpsFlags;
-    }
-
-   /**
-    * Look for GPS coordinates in address line.  If found, parse them into a
-    * set of coordinates that Google Maps will recognize
-    */
-   public String parseGPSCoords(String address) {
-     Matcher match = GPS_PATTERN.matcher(address);
-     if (!match.find()) return null;
-     
-     return parseGPSCoords(match);
-   }
-   
-   /**
-    * Extract GPS coordiantes from pattern matcher.  The Matcher
-    * object must have been created by calling GPS_PATTERN.matcher()
-    * @param match Pattern match
-    * @return parsed GPS coordinates
-    */
-   public String parseGPSCoords(Matcher match) {
-
-     // Calculate the coordinate values
-     double c1 = cvtGpsCoord(match.group(2));
-     double c2 = cvtGpsCoord(match.group(4));
-     
-     // If they used the X: ... Y: ... labels, swap the parameters
-     // because we and google expect the latitude to come first
-     if (match.group(1) != null && match.group(3) != null && match.group(3).startsWith("Y:")) {
-       double tmp = c1;
-       c1 = c2;
-       c2 = tmp;
-     }
-     
-     // There isn't a consistent standard as to which is latitude and
-     // which is longitude, so we will have to make some guesses.
-     double latitude, longitude;
-     
-     // First step is to identify which is latitude and which is longitude
-     // If one must be larger hat the other, we can use their relative sizes
-     // to determine that
-     double ac1 = Math.abs(c1);
-     double ac2 = Math.abs(c2);
-     if (ac1 == 1.0 && ac2 == 1.0) return null;
-     if (ac1 == 0.0 && ac2 == 0.0) return null;
-     if ((gpsFlags & GPS_LARGE_LAT) != 0) {
-       if (ac1 > ac2) {
-         latitude = c1;
-         longitude = c2;
-       } else {
-         latitude = c2;
-         longitude = c1;
-       }
-     } else if ((gpsFlags & GPS_LARGE_LONG) != 0) {
-       if (ac2 > ac1) {
-         latitude = c1;
-         longitude = c2;
-       } else {
-         latitude = c2;
-         longitude = c1;
-       }
-     } 
-     
-     // No luck there  there are some other tricks we can try if one
-     // coordinate is negative but the other is not.  Then check to
-     // see which coordinate is supposed to be negative
-     else if (c1 < 0 ^ c2 < 0) {
-       if ((gpsFlags & GPS_NEG_LAT|GPS_NEG_LONG) == GPS_NEG_LAT) {
-         if (c1 < 0) {
-           latitude = c1;
-           longitude = c2;
-         } else {
-           latitude = c2;
-           longitude = c1;
-         }
-       } else if ((gpsFlags & (GPS_NEG_LAT|GPS_NEG_LONG)) == GPS_NEG_LONG) {
-         if (c2 < 0) {
-           latitude = c1;
-           longitude = c2;
-         } else {
-           latitude = c2;
-           longitude = c1;
-         }
-       } else {
-         latitude = c1;
-         longitude = c2;
-       }
-     } 
-     
-     // Lacking any other information, assume first is lattitude and second is longitude
-     else {
-       latitude = c1;
-       longitude = c2;
-     }
-     
-     // Rest is easy, make sure anything that should be negative is negative
-     if ((gpsFlags & GPS_NEG_LAT) != 0) {
-       if (latitude > 0) latitude = - latitude;
-     }
-     if ((gpsFlags & GPS_NEG_LONG) != 0) {
-       if (longitude > 0) longitude = - longitude;
-     }
-     
-     // And convert the result to a GPS string
-     return String.format(Locale.US, "%+8.6f,%+8.6f", latitude, longitude);
-   }
-
-   /**
-    * Convert GPS coordinate in degree:min:sec form  or degree min form to strait degrees
-    */
-   private static double cvtGpsCoord(String coord) {
-     Matcher match = GPS_COORD_PTN.matcher(coord);
-     if (!match.matches()) throw new RuntimeException("This cannot possibly fail");
-     String tmp = match.group(1);
-     if (tmp != null) return Double.parseDouble(tmp);
-     
-     String sign;
-     double degrees;
-     double minutes;
-     sign = match.group(2);
-     if (sign != null) {
-       degrees = Double.parseDouble(match.group(3));
-       minutes = Double.parseDouble(match.group(4));
-     } else {
-       sign = match.group(5);
-       degrees = Double.parseDouble(match.group(6));
-       minutes = Double.parseDouble(match.group(7));
-       double seconds = Double.parseDouble(match.group(8));
-       minutes += seconds/60.0;
-     }
-     
-     degrees += minutes/60;
-     if (sign.equals("-")) degrees = - degrees;
-     return degrees;
-   }
-  };
+  public enum CountryCode {US, UK, AU};
   
-  /**
-   * Pattern that identifies GPS coordinates in an arbitrary field
-   */
-  private static final String GPS_COORD_PTN_STR = "([-+]?[0-9]+\\.[0-9]{2,})\\??|([-+]?)([0-9]+)\\?? +([0-9]+\\.[0-9]{1,})['`]?|([-+]?)([0-9]+)[: \\?] *([0-9]+)[:'`] ?([0-9]+\\.[0-9]{1,})\"?";
-  private static final Pattern GPS_COORD_PTN = Pattern.compile(GPS_COORD_PTN_STR);
-  private static final String GPS_COORD_PTN_STR2 = GPS_COORD_PTN_STR.replace("(", "").replace(")","");
-  public static final Pattern GPS_PATTERN = 
-      Pattern.compile("\\b(X: *|LAT: *)?[NS]?(" + GPS_COORD_PTN_STR2 + ")[NnSs]?[,\\W] ?\\W*(Y: *|LON: *|x )?[EW]?(" + GPS_COORD_PTN_STR2 + ")[EW]?\\b", Pattern.CASE_INSENSITIVE);
-
   /**
    * Parse flag indicates that sender address filtering should not be checked
    */
@@ -206,28 +37,17 @@ public abstract class MsgParser {
   
   /**
    * Parse flag indicates that messages from dispatch that are not CAD pages
-   * should be treated as general alerts.  This include messages identified as
-   * run reports 
+   * should be treated as general alerts 
    */
   public static final int PARSE_FLG_GEN_ALERT = 0x04;
   
   /**
-   * Parse flag indicates that messages that have been identified as run reports
-   * should be returned.  But messages identified as  general reports should not
-   */
-  
-  public static final int PARSE_FLG_RUN_REPORT = 0x08;
-  
-  /**
    * Parser flag indicating that we are being called from a parser test class.
    * This suppresses the usual logic that reports general alerts identified
-   * by individual parsers as parsing failures if the general alert processing
+   * by individual parsers as parsing failurs if the general alert processing
    * flag was not passed.
    */
-  public static final int PARSE_FLG_TEST_MODE = 0x10;
-  
-  // Pattern matching a terminated string of digits
-  public static final Pattern NUMERIC = Pattern.compile("\\b\\d+\\b");
+  public static final int PARSE_FLG_TEST_MODE = 0x08;
 
   /**
    * Force flag forces processing of message
@@ -244,16 +64,12 @@ public abstract class MsgParser {
   // Parser country code
   private CountryCode countryCode;
   
-  // Parser specific table of GPS coordinates associated with
-  // specific addresses (typically mile markers)
-  private Properties gpsLookupTable = null;
-  
   // Save parse flags so we can check message status from methods that
   // were not passed the parse flags
   private int parseFlags;
   
-  // List of field terms to be used when generating tests for this parser
-  private String fieldList = null;
+  // Pattern matching a terminated string of digits
+  public static final Pattern NUMERIC = Pattern.compile("\\b\\d+\\b");
   
   public MsgParser(String defCity, String defState) {
     this(defCity, defState, CountryCode.US);
@@ -268,14 +84,6 @@ public abstract class MsgParser {
     int ipt = clsName.lastIndexOf('.');
     parserCode = clsName.substring(ipt+1, clsName.length()-6);
 
-  }
-  
-  /**
-   * Set up GPS address lookup table
-   * @param gpsLookupTable table of GPS coordinates keyed by address string
-   */
-  protected void setupGpsLookupTable(Properties gpsLookupTable) {
-    this.gpsLookupTable = gpsLookupTable;
   }
 
   /**
@@ -299,30 +107,6 @@ public abstract class MsgParser {
     return countryCode;
   }
   
-  public void setFieldList(String fieldList) {
-    this.fieldList = fieldList;
-  }
-  
-  /**
-   * Misnamed for unfortunate historical reason.  This is not to be confused
-   * with the real program field set by FieldProgramParser.setProgram
-   * @return list of field terms to be used to generate tests for this parser
-   */
-  public String getProgram() {
-    return fieldList;
-  }
-  
-  /**
-   * Return call description CodeSet object.  We do not use this in any way
-   * shape or form, but delaring it here gives any subclasses a way to 
-   * report their call description list to the test suite which can use
-   * it to validate that all call descriptions are included
-   * @return call description CodeSet object
-   */
-  public CodeSet getCallList() {
-    return null;
-  }
-  
   /**
    * Determine if message is a valid CAD message for this parser, and parse
    * all information from the message if it is
@@ -338,6 +122,7 @@ public abstract class MsgParser {
     // And we only have one global copy of parsing flags for each parser
     // Save parse flags for future reference
     this.parseFlags = parseFlags;
+
     
     // See what the parseMsg method thinks of this
     Data data = parseMsg(msg, parseFlags);
@@ -350,7 +135,7 @@ public abstract class MsgParser {
     msg.setInfo(new MsgInfo(data));
     return true;
   }
-
+  
   /**
    * build information object from information parsed from message
    * @param msg message to be parsed
@@ -358,19 +143,10 @@ public abstract class MsgParser {
    * @return new message information object if successful, false otherwise
    */
   protected Data parseMsg(Message msg, int parseFlags) {
-    return parseMsg(msg, parseFlags, getFilter());
-  }
 
-  /**
-   * build information object from information parsed from message
-   * @param msg message to be parsed
-   * @param parseFlags
-   * @param sender filter to be used to check message sender 
-   * @return new message information object if successful, false otherwise
-   */
-  protected Data parseMsg(Message msg, int parseFlags, String filter) {
     // If parser filter is not being overridden, and the message address does not
     // match the parser filter, message should be rejected
+    String filter = getFilter();
     boolean overrideFilter = (parseFlags & PARSE_FLG_SKIP_FILTER) != 0;
     if (! overrideFilter && ! matchFilter(msg.getAddress(), filter)) return null;
     
@@ -378,15 +154,13 @@ public abstract class MsgParser {
     // We have to do this again because the GroupBestParser will call 
     // this method is sub parsers without calling the initial inPageMsg() method
     this.parseFlags = parseFlags;
-    boolean parseGenAlert = (parseFlags & PARSE_FLG_GEN_ALERT) != 0;
-    boolean parseRunReport = parseGenAlert || (parseFlags & PARSE_FLG_RUN_REPORT) != 0;
     
     // Decode the call page and place the data in the database
     String strSubject = msg.getSubject();
-    String strMessage = htmlFilter(msg.getMessageBody());
+    String strMessage = msg.getMessageBody();
     Data data = new Data(this);
     if (strMessage == null) return data;
-    if (parseHtmlMsg(strSubject, strMessage, data)) {
+    if (parseMsg(strSubject, strMessage, data)) {
       
       // Generally, if the parse was happy with the call, we are happy.  One exception
       // is when individual parser determine a message should be a general alert because
@@ -394,23 +168,22 @@ public abstract class MsgParser {
       // identify it as coming from Dispatch.  If the user didn't want to process
       // general alerts, and we aren't running in a test class, change this to
       // an outright failure
-      if ((parseFlags & PARSE_FLG_TEST_MODE) == 0) {
-        if (!parseGenAlert && data.strCall.equals("GENERAL ALERT")) return null;
-        if (!parseRunReport && data.strCall.equals("RUN REPORT")) return null;
+      if (data.strCall.equals("GENERAL ALERT")) {
+        if ((parseFlags & (PARSE_FLG_GEN_ALERT | PARSE_FLG_TEST_MODE)) == 0) return null;
       }
       return data;
     }
     
     // If this isn't a valid CAD page, see if we should treat it as a general alert
     // If not then return failure
-    if (parseGenAlert && isPositiveId()) {
+    if ((parseFlags & PARSE_FLG_GEN_ALERT) != 0 && isPositiveId()) {
       return ManageParsers.getInstance().getAlertParser().parseMsg(msg, parseFlags);
     }
     
     // Otherwise return null
     return null;
   }
-
+  
   /**
    * Determine if this message has been identified as coming from the dispatch
    * center we are parsing messages for
@@ -428,78 +201,26 @@ public abstract class MsgParser {
     
     return true;
   }
-  
-  protected boolean parseHtmlMsg(String subject, String body, Data data) {
-    return parseUntrimmedMsg(subject, decodeHtmlSequence(body), data);
+
+  /**
+   * Parse information object from message
+   * @param strSubject message subject to be parsed
+   * @param strMessage message text to be parsed
+   * @param data data object to be constructed
+   * @return true if successful, false otherwise
+   */
+  protected boolean parseMsg(String strSubject, String strMessage, Data data) {
+    return parseMsg(strMessage, data);
   }
 
   /**
    * Parse information object from message
-   * @param subject message subject to be parsed
-   * @param body message text to be parsed
+   * @param strMessage message text to be parsed
    * @param data data object to be constructed
    * @return true if successful, false otherwise
    */
-  protected boolean parseUntrimmedMsg(String subject, String body, Data data) {
-    return parseMsg(subject, body.trim(), data);
-  }
-
-  /**
-   * Parse information object from message
-   * @param subject message subject to be parsed
-   * @param body message text to be parsed
-   * @param data data object to be constructed
-   * @return true if successful, false otherwise
-   */
-  protected boolean parseMsg(String sbject, String body, Data data) {
-    return parseMsg(body, data);
-  }
-
-  /**
-   * Parse information object from message
-   * @param body message text to be parsed
-   * @param data data object to be constructed
-   * @return true if successful, false otherwise
-   */
-  protected boolean parseMsg(String body, Data data) {
+  protected boolean parseMsg(String strMessage, Data data) {
     throw new RuntimeException("parseMsg method was not overridden");
-  }
-
-  /**
-   * If parser subclass provides an HTML filter pattern, and if messages starts with an HTML tag
-   * use the HTML filter to extract the useful message data from the HTML message
-   * @param body message body
-   * @return adjusted message body
-   */
-  private String htmlFilter(String body) {
-    if (body == null) return null;
-    Pattern ptn = getHtmlFilter();
-    if (ptn == null) return body;
-    if (!body.startsWith("<html>") && !body.startsWith("<HTML>")) return body;
-    String result = "";
-    for (String line : body.split("\n")) {
-      Matcher match = ptn.matcher(line);
-      if (match.matches()) {
-        if (match.groupCount() > 0) {
-          for (int ndx = 0; ndx < match.groupCount(); ndx++) {
-            String tmp = match.group(ndx);
-            if (tmp != null) {
-              line = tmp;
-              break;
-            }
-          }
-        }
-        result = append(result, "\n", line.trim());
-      }
-    }
-    return result;
-  }
-  
-  /**
-   * @return Pattern used to extract data message from an HTML message
-   */
-  protected Pattern getHtmlFilter() {
-    return null;
   }
   
   /**
@@ -510,32 +231,7 @@ public abstract class MsgParser {
     
     // UK locations are free for now
     if (countryCode == CountryCode.UK) return "UK";
-    if (countryCode == CountryCode.AU) return "AU";
-    if (countryCode == CountryCode.NZ) return "NZ";
-    if (countryCode == CountryCode.SE) return "SE"; 
-    return null;
-  }
-  
-  /**
-   * @return returns sponsor purchase date if it should be used to compute
-   * a sponsor expiration date or null if the sponsorship should not expire
-   * there is no sponsor expiration date.
-   */
-  public Date getSponsorDate () {
-    String dateStr = getSponsorDateString();
-    if (dateStr == null) return null;
-    try {
-      return DATE_FORMAT.parse(dateStr);
-    } catch (ParseException ex) {
-      throw new RuntimeException(ex);
-    }
-  }
-  private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
- 
-  /**
-   * @return sponsor purchase date in MMDDYYYY form, or null if not defined
-   */
-  protected String getSponsorDateString() {
+    if (countryCode == CountryCode.AU) return "AU"; 
     return null;
   }
   
@@ -552,12 +248,6 @@ public abstract class MsgParser {
    * MAP_FLG_SUPPR_EXT suppresses EXT removal
    * MAP_FLG_ADD_DEFAULT_CNTY always add default county
    * MAP_FLG_SUPPR_DIRO suppresses [NEWS]O -> & adjustment
-   * MAP_FLG_SUPPR_ADD_PLACE suppress logic to add place name to naked streets
-   * MAP_FLG_PREFER_GPS recomend GPS coordinates of map address for mapping purposes
-   * MAP_FLG_CR_CRES convert CR to CRES instead of CIR 
-   * MAP_FLG_SUPPR_CR supress CR -> CIR adjustment
-   * MAP_FLG_CR_CREEK convert CR to CREEK instead of CIR
-   * MAP_FLG_SUPPR_TE suppress TE -> TER adjustment
    */
   public int getMapFlags() {
     return 0;
@@ -566,13 +256,6 @@ public abstract class MsgParser {
   public static final int MAP_FLG_SUPPR_EXT = MsgInfo.MAP_FLG_SUPPR_EXT;
   public static final int MAP_FLG_ADD_DEFAULT_CNTY = MsgInfo.MAP_FLG_ADD_DEFAULT_CNTY;
   public static final int MAP_FLG_SUPPR_DIRO = MsgInfo.MAP_FLG_SUPPR_DIRO;
-  public static final int MAP_FLG_PREFER_GPS = MsgInfo.MAP_FLG_PREFER_GPS;
-  public static final int MAP_FLG_SUPPR_SR = MsgInfo.MAP_FLG_SUPPR_SR;
-  public static final int MAP_FLG_CR_CRES = MsgInfo.MAP_FLG_CR_CRES;
-  public static final int MAP_FLG_SUPPR_CR = MsgInfo.MAP_FLG_SUPPR_CR;
-  public static final int MAP_FLG_CR_CREEK = MsgInfo.MAP_FLG_CR_CREEK;
-  public static final int MAP_FLG_SUPPR_TE = MsgInfo.MAP_FLG_SUPPR_TE;
-  public static final int MAP_FLG_KEEP_STATE_HIGHWAY = MsgInfo.MAP_FLG_KEEP_STATE_HIGHWAY;
 
 
   /**
@@ -585,20 +268,11 @@ public abstract class MsgParser {
   protected boolean isPageMsg(String body, String[] keywords) {
     int ipt = 0;
     for (String keyword : keywords) {
-      keyword = keyword + ":";
       ipt = body.indexOf(keyword, ipt);
       if (ipt < 0) return false;
       ipt += keyword.length();
     }
     return true;
-  }
-  
-  /**
-   * @return Alias code.  This code will be non-null for parsers that are different aliases of another parser
-   * and all of the parsers that are aliases of one another will return the same code.
-   */
-  public String getAliasCode() {
-    return null;
   }
   
   /**
@@ -615,8 +289,6 @@ public abstract class MsgParser {
     
     // Overridden in special cased, but general default is to build a name
     // from the default city and state
-    String defCity = getDefaultCity();
-    String defState = getDefaultState();
     if (defCity.length() == 0) return "";
 
     char[] carry = defCity.toCharArray();
@@ -675,42 +347,26 @@ public abstract class MsgParser {
   * @return Array of data fields broken up by defined keywords
   */
  protected static String[] parseMessageFields(String body, String[] keyWords) {
-   return parseMessageFields(body, keyWords, ':', false, false);
- }
- 
- /** 
-  * General purpose parser for formats where there is not a clear delimiter
-  * between key: value item pairs.
-  * @param body message body to be parsed
-  * @param keyWords list of expected keywords
-  * @param breakChar character that marks the end of all keywords
-  * @param anyOrder true if if keywords can occur in any order
-  * @param ignoreCase true if case should be ignored when comparing keywords
-  * @return Array of data fields broken up by defined keywords
-  */
- protected static String[] parseMessageFields(String body, String[] keyWords, 
-                                                char breakChar, boolean anyOrder, boolean ignoreCase) {
    
    List<String> fields = new ArrayList<String>();
    int iKey = -1;  // Current key table pointer
    int iStartPt = 0;   // current data field start index
-   int iColonPt = -1;
-   int iNxtKey;
+   int iColonPt = iStartPt;
    
    // Loop processing each keyword found
    do {
      
      // Start searching for the next keyword starting at the current data field
      int iEndPt = -1;
-     iNxtKey = -1;
+     int iNxtKey = -1;
      
-     // This loop checks each break characters looking for one that
+     // This loop checks each ':' characters looking for one that
      // matches an available keyword
      while (true) {
        
        // Find the next colon character, if there isn't one, bail out
-       int iDataPt = iColonPt+1;
-       iColonPt = body.indexOf(breakChar, iDataPt);
+       int iDataPt = iColonPt;
+       iColonPt = body.indexOf(':', iColonPt+1);
        if (iColonPt < 0) break;
        
        int ipt = iColonPt;
@@ -723,13 +379,11 @@ public abstract class MsgParser {
          int len = key.length();
          int iTempPt = ipt - len;
          if (iTempPt < iDataPt) continue;
-         if (iTempPt > iDataPt) {
+         if (iTempPt > 0) {
            char chr = body.charAt(iTempPt-1);
            if (!Character.isWhitespace(chr)) continue;
          }
-         String keyword = body.substring(iTempPt, ipt);
-         if (ignoreCase) keyword = keyword.toUpperCase();
-         if (!keyword.equals(key)) continue;
+         if (!body.substring(iTempPt,ipt).equals(key)) continue;
          iNxtKey = ndx;
          iEndPt = iTempPt;
          break;
@@ -752,22 +406,18 @@ public abstract class MsgParser {
        // if it is, we will trim that part off.
        iEndPt = body.length();
        int iTempPt = iEndPt;
-       String[] trailers = new String[]{null, null, null};
-       for (int cnt = 0; cnt < trailers.length; cnt++) {
+       for (int cnt = 1; cnt <= 2; cnt++) {
          iTempPt = body.lastIndexOf(' ', iTempPt-1);
          if (iTempPt < 0) break;
-         trailers[cnt] = body.substring(iTempPt+1);
-       }
-       boolean found = false;
-       for (int ndx = iKey+1; ndx < keyWords.length; ndx++) {
-         for (String tail : trailers) {
-           if (tail != null && keyWords[ndx].startsWith(tail)) {
-             iEndPt = body.length()-tail.length()-1;
-             found = true;
+         String tail = body.substring(iTempPt+1);
+         for (int ndx = iKey+1; ndx < keyWords.length; ndx++) {
+           if (keyWords[ndx].startsWith(tail)) {
+             iEndPt = iTempPt;
+             iTempPt = 0;
              break;
            }
          }
-         if (found) break;
+         if (iTempPt == 0) break;
        }
      }
      
@@ -781,9 +431,9 @@ public abstract class MsgParser {
      // Save current field and get ready to start looking for the
      // end of the next keyword
      if (iEndPt > 0) fields.add(body.substring(iStartPt, iEndPt).trim());
-     if (!anyOrder) iKey = iNxtKey;
+     iKey = iNxtKey;
      iStartPt = iEndPt;
-   } while (iNxtKey >= 0);
+   } while (iKey >= 0);
    
    return fields.toArray(new String[fields.size()]);
  }
@@ -851,17 +501,6 @@ public abstract class MsgParser {
   * Perform any parser specific customizations involved in calcualting a
   * map address
   * @param sAddress original map address
-  * @param cross true if we are adjusting a cross street instead of the main address
-  * @return customized map address
-  */
- public String adjustMapAddress(String sAddress, boolean cross) {
-   return adjustMapAddress(sAddress);
- }
- 
- /**
-  * Perform any parser specific customizations involved in calcualting a
-  * map address
-  * @param sAddress original map address
   * @return customized map address
   */
  public String adjustMapAddress(String sAddress) {
@@ -869,63 +508,14 @@ public abstract class MsgParser {
  }
 
  /**
-  * Perform an final parser specific custom adjustments to the calcualted
-  * map search address 
-  * @param sAddress calculated map search address
-  * @return adjusted map search address
-  */
- public String postAdjustMapAddress(String sAddress) {
-   return sAddress;
- }
- 
- /**
-  * Perform parser specific conversions to city field before it is used to 
-  * generate the map address
-  * @param city city field
-  * @return adjusted city field
-  */
- public String adjustMapCity(String city) {
-   return city;
- }
- 
- public String lookupGpsCoordinates(String address, String apt) {
-   if (gpsLookupTable == null) return null;
-   address = adjustGpsLookupAddress(address, apt);
-   if (address == null) return null;
-   return gpsLookupTable.getProperty(address);
- }
-
- /**
-  * Call to perform any adjustments on the raw address field before
-  * trying to match it to an GPS location table entry
-  * @param address raw address field
-  * @return adjusted address field
-  */
- protected String adjustGpsLookupAddress(String address) {
-   return address;
- }
-
- /**
-  * Call to perform any adjustments on the raw address field before
-  * trying to match it to an GPS location table entry
-  * @param address raw address field
-  * @param address apt/lot number
-  * @return adjusted address field
-  */
- protected String adjustGpsLookupAddress(String address, String apt) {
-   return adjustGpsLookupAddress(address);
- }
- 
-/**
   * Parse address line into address and city fields
   * @param addressLine address line to be parsed
   * @param data message info object to be filled
   * @param parseCity true if cities should be parsed with dashes
   */
  private static final Pattern INTERSECT = Pattern.compile("/|&");
- private static final Pattern APT = Pattern.compile("(?!RMP|SUITES)((?:\\bAPTS|\\bAPT(?!S)|\\bUNIT|\\bSUITE|\\bROOM|\\bSTE|\\bRM|\\bFLOOR|\\bFLR|\\bLOT)(?![A-Z].)|#APT|#)[ #\\.]*(.+)$",Pattern.CASE_INSENSITIVE);
+ private static final Pattern APT = Pattern.compile("(?:\\bAPT|#APT|#|\\bUNIT)#* *(.+)$",Pattern.CASE_INSENSITIVE);
  private static final Pattern DOT = Pattern.compile("\\.(?!\\d)");
- private static final Pattern DOUBLE_SLASH = Pattern.compile("//+");
  private static void parseAddress(String addressLine, MsgInfo.Data data, 
                                      boolean parseCity) {
    addressLine = addressLine.trim();
@@ -934,15 +524,10 @@ public abstract class MsgParser {
    // except those followed by a digit which are presumed to be decimal points
    addressLine = DOT.matcher(addressLine).replaceAll("");
    
-   addressLine = stripLeadingZero(addressLine);
-   addressLine = DOUBLE_SLASH.matcher(addressLine).replaceAll("/");
-   
-   // Pick off trailing apartment
+   // Pick off trailing address
    Matcher match = APT.matcher(addressLine);
    if (match.find()) {
-     String sPrefix = match.group(1);
-     if (!sPrefix.startsWith("FL")) sPrefix = "";
-     data.strApt = append(sPrefix, " ", match.group(2));
+     data.strApt = match.group(1);
      addressLine = addressLine.substring(0,match.start()).trim();
    }
 
@@ -952,20 +537,18 @@ public abstract class MsgParser {
      if (parseCity) {
        int pt = addr.lastIndexOf('-');
        if (pt > 0) {
-         if (data.strCity.length() == 0) data.strCity = addr.substring(pt+1).trim();
+         data.strCity = addr.substring(pt+1).trim();
          addr = addr.substring(0, pt).trim();
        }
      }
-     data.strAddress = append(data.strAddress, " & ", addr);
+     if (data.strAddress.length() > 0) data.strAddress += " & ";
+     data.strAddress += addr;
    }
    data.strAddress = data.strAddress.replace("1%2", "1/2");
+   if (data.strAddress.startsWith(" & ")) data.strAddress = data.strAddress.substring(3).trim();
+   if (data.strAddress.endsWith(" & ")) data.strAddress = data.strAddress.substring(0,data.strAddress.length()-3);
  }
   
-  protected static String stripLeadingZero(String addressLine) {
-    return LEAD_ZERO_PTN.matcher(addressLine).replaceFirst("");
-  }
-  private static final Pattern LEAD_ZERO_PTN = Pattern.compile("^[-0 ]+( |$)|^0+(?=[1-9])");
-
   /**
    * Set formated date/time field
    * @param dateFmt Date format to be used to parse date/time string
@@ -976,8 +559,7 @@ public abstract class MsgParser {
   public static boolean setDateTime(DateFormat dateFmt, String field, Data data) {
     try {
        Date date = dateFmt.parse(field);
-       DateFormat fmt = dateFmt.getCalendar().get(Calendar.YEAR) == 1970 ? DATE_FMT2 : DATE_FMT;
-       data.strDate = fmt.format(date);
+       data.strDate = DATE_FMT.format(date);
        data.strTime = TIME_FMT.format(date);
        return true;
     } catch (ParseException ex) {
@@ -995,8 +577,7 @@ public abstract class MsgParser {
   public static boolean setDate(DateFormat dateFmt, String field, Data data) {
     try {
        Date date = dateFmt.parse(field);
-       DateFormat fmt = dateFmt.getCalendar().get(Calendar.YEAR) == 1970 ? DATE_FMT2 : DATE_FMT;
-       data.strDate = fmt.format(date);
+       data.strDate = DATE_FMT.format(date);
        return true;
     } catch (ParseException ex) {
       return false;
@@ -1021,55 +602,8 @@ public abstract class MsgParser {
   }
   
   private static final DateFormat DATE_FMT = new SimpleDateFormat("MM/dd/yyyy");
-  private static final DateFormat DATE_FMT2 = new SimpleDateFormat("MM/dd");
   private static final DateFormat TIME_FMT = new SimpleDateFormat("HH:mm:ss");
  
-  
-  /**
-   * Set GPS Coordinates in standard Google search format
-   * handling special case where trailing zeros have been dropped
-   * from the coordinates
-   * @param location GPS coordinates to be saved
-   * @param data data information object
-   */
-  public void setTrimmedGPSLoc(String location, Data data) {
-    location = END_NUMBER.matcher(location).replaceAll("000");
-    setGPSLoc(location, data);
-  }
-  private static final Pattern END_NUMBER = Pattern.compile("(?<=\\d)(?= |$)");
-  
-  
-  /**
-   * Set GPS Coordinates in standard Google search format
-   * @param location GPS coordinates to be saved
-   * @param data data information object
-   * @return location field after removing the GPS coordinates
-   */
-  public String setGPSLoc(String location, Data data) {
-    Matcher match = GPS_PATTERN.matcher(location);
-    if (!match.find()) return location;
-    data.strGPSLoc = data.countryCode.parseGPSCoords(match);
-    if (data.strGPSLoc == null) data.strGPSLoc = "";
-    location = location.substring(0,match.start()).trim() + ' ' + location.substring(match.end()).trim();
-    return location.trim();
-  }
-  
-  /**
-   * Determine if this is a personal name or a place name
-   * @param field field to be checked
-   * @return true if should be place name, false if a personal name
-   */
-  protected boolean checkPlace(String field) {
-    if (field.contains(",")) return false;
-    if (field.toUpperCase().startsWith("MR")) return false;
-    int cnt = 0;
-    char last = 'X';
-    for (char chr : field.toCharArray()) {
-      if (chr == ' ' && last != ' ') cnt++;
-      last = chr;
-    }
-    return cnt >= 2;
-  }
 
  /**
   * Build a code table for use by convertCodeTable
@@ -1077,12 +611,29 @@ public abstract class MsgParser {
   * as a key/value pair to be inserted into the code table
   * @return resulting code table
   */
- public static Properties buildCodeTable(String[] table) {
+ protected static Properties buildCodeTable(String[] table) {
    Properties props = new Properties();
    for (int ndx = 0; ndx < table.length-1; ndx+=2) {
      props.put(table[ndx], table[ndx+1]);
    }
    return props;
+ }
+ 
+ /**
+  * Determine if this is a personal name or a place name
+  * @param field field to be checked
+  * @return true if should be place name, false if a personal name
+  */
+ protected boolean checkPlace(String field) {
+   if (field.contains(",")) return false;
+   if (field.toUpperCase().startsWith("MR")) return false;
+   int cnt = 0;
+   char last = 'X';
+   for (char chr : field.toCharArray()) {
+     if (chr == ' ' && last != ' ') cnt++;
+     last = chr;
+   }
+   return cnt >= 2;
  }
  
  /**
@@ -1092,7 +643,7 @@ public abstract class MsgParser {
   * @param field address field containing possible abbreviated street name
   * @return address field with street name expanded to full name
   */
- protected static String expandStreet(String fullName, String field) {
+ protected String expandStreet(String fullName, String field) {
    int trigLen  = fullName.lastIndexOf(' ');
    if (trigLen < 0) return field;
    trigLen += 2;
@@ -1174,7 +725,7 @@ public abstract class MsgParser {
   * @param str2 second string
   * @return appended string
   */
- protected static String append(String str1, String connector, String str2) {
+ protected String append(String str1, String connector, String str2) {
    if (str1.length() == 0) return str2;
    if (str2.length() == 0) return str1;
    return str1 + connector + str2;
@@ -1185,7 +736,7 @@ public abstract class MsgParser {
   * @param input resuts of the Matcher.group() call
   * @return unnullified and trimmed result.
   */
- protected static String getOptGroup(String input) {
+ protected String getOptGroup(String input) {
    return (input == null ? "" : input.trim());
  }
 
@@ -1194,7 +745,7 @@ public abstract class MsgParser {
   * @param line input data string
   * @return input data string purged of any extended charset characters
   */
- protected static String cleanExtendedChars(String line) {
+ protected String cleanExtendedChars(String line) {
    StringBuilder sb = null;
    for (int ndx = 0; ndx < line.length(); ndx++) {
      char ch = line.charAt(ndx);
@@ -1214,7 +765,7 @@ public abstract class MsgParser {
   * @param st start position
   * @return substring
   */
- public static String substring(String body, int st) {
+ public String substring(String body, int st) {
    return substring(body, st, Integer.MAX_VALUE);
  }
  
@@ -1227,70 +778,12 @@ public abstract class MsgParser {
   * @param end end position
   * @return substring
   */
- public static String substring(String body, int st, int end) {
+ public String substring(String body, int st, int end) {
    int len = body.length();
    if (st >= len) return "";
    if (end > len) end = len;
    return body.substring(st, end).trim();
  }
-
- /**
-  * Clean name or place field of any references to wireless carrier names
-  * @param name name to be cleaned
-  * @return return cleaned result
-  */
- protected static String cleanWirelessCarrier(String name) {
-   return cleanWirelessCarrier(name, false);
- }
-
- /**
-  * Clean name or place field of any references to wireless carrier names
-  * @param name name to be cleaned
-  * @param partial true if partial match should be removed, false if a complete match is required
-  * @return return cleaned result
-  */
- protected static String cleanWirelessCarrier(String name, boolean partial) {
-   Matcher match = WIRELESS_CARRIER_PTN.matcher(name);
-   boolean found = (partial ? match.find() : match.matches());
-   if (found) name = name.substring(0,match.start()).trim();
-   return name;
- }
- private static final Pattern WIRELESS_CARRIER_PTN = Pattern.compile("\\b(?:VERIZON(?: WIRELESS)?(?: INTRADO \\(PSAP\\))?|(?:ATT? ?& ?T|ATT)(?: MOBILITY)?(?: \\(TCS\\))?|ATTMO|CONNEXON|T-MOBILE|SPRINT(?:PCS)?(?: NEXTEL- CDMA)?|US CELLULAR|METRO ?PCS|CORR WIRELESS)\\b.*", Pattern.CASE_INSENSITIVE);
-
- /**
-  * Strip optional constant string value from beginning of field
-  * @param field field to be adjusted
-  * @param val constant string value
-  * @return adjusted field value
-  */
- public String stripFieldStart(String field, String val) {
-   if (field.startsWith(val)) field = field.substring(val.length()).trim();
-   return field;
- }
-
- /**
-  * Strip optional constant string value from end of field
-  * @param field field to be adjusted
-  * @param val constant string value
-  * @return adjusted field value
-  */
- public String stripFieldEnd(String field, String val) {
-   if (field.endsWith(val)) field = field.substring(0,field.length()-val.length()).trim();
-   return field;
- }
-
- /**
-  * Remove common HTML sequences
-  * @param body
-  * @return
-  */
- public static  String decodeHtmlSequence(String body) {
-   body = HTML_PTN.matcher(body).replaceAll("");
-   body = BR_PTN.matcher(body).replaceAll("\n");
-   return body.replace("&nbsp;",  " ").replace("&amp;",  "&").replace("&gt;", ">").replace("&lt;", "<");
- }
- private static final Pattern HTML_PTN = Pattern.compile("^.*<HTML>|<BODY>|</BODY>|</HTML>.*$", Pattern.CASE_INSENSITIVE);
- private static final Pattern BR_PTN = Pattern.compile("< *br */?>", Pattern.CASE_INSENSITIVE);
  
  /**
   * Worker class that will parse a into consecutive substrings up to the
@@ -1319,30 +812,6 @@ public abstract class MsgParser {
      this.spt = 0;
      this.ept = line.length();
    }
-   
-   /**
-    * @return true if parser contains no more information
-    */
-   public boolean isEmpty() {
-     return spt == ept;
-   }
-   
-   /**
-    * Retrieve the next complete line from the parser buffer
-    * @return null if buffer is empty, otherwise returns next line
-    */
-   public String getLine() {
-     if (isEmpty()) return null;
-     return get('\n');
-   }
-   
-   public String getUntrimmedLine() {
-     if (isEmpty()) return null;
-     Matcher match = getMatcher(NEXT_LINE_PTN);
-     if (match == null) return null;
-     return match.group(1);
-   }
-   private static final Pattern NEXT_LINE_PTN = Pattern.compile("(.*?)(?:\n|$)");
    
    /**
     * @param delim delimiter
@@ -1479,7 +948,6 @@ public abstract class MsgParser {
     * @return everything up to next occurrence of delimiter
     */
    private String get(char delim, boolean optional, boolean required) {
-     if (delim == ' ') skipBlanks(); 
      return get(line.indexOf(delim, spt), 1, optional, required);
    }
    
@@ -1490,7 +958,6 @@ public abstract class MsgParser {
     * @return everything up to next occurrence of delimiter
     */
    private String get(String delim, boolean optional, boolean required) {
-     if (isAllBlanks(delim)) skipBlanks();
      return get(line.indexOf(delim, spt), delim.length(), optional, required);
    }
    
@@ -1501,7 +968,6 @@ public abstract class MsgParser {
     * @return everything up to next occurrence of delimiter
     */
    private String getLast(char delim, boolean optional, boolean required) {
-     if (delim == ' ') skipLastBlanks();
      return getLast(line.lastIndexOf(delim, ept-1), 1, optional, required);
    }
    
@@ -1512,7 +978,6 @@ public abstract class MsgParser {
     * @return everything up to next occurrence of delimiter
     */
    private String getLast(String delim, boolean optional, boolean required) {
-     if (isAllBlanks(delim)) skipLastBlanks();
      int len = delim.length();
      return getLast(line.lastIndexOf(delim, ept-len), len, optional, required);
    }
@@ -1534,29 +999,6 @@ public abstract class MsgParser {
      return get(ndx, len, optional, required);
    }
    
-   private boolean isAllBlanks(String delim) {
-     for (char chr : delim.toCharArray()) {
-       if (chr != ' ') return false;
-     }
-     return true;
-   }
-
-   /**
-    * Skip the start pointer over any leadning blanks
-    * this is called with the delimiter contains nothing but blanks
-    */
-   private void skipBlanks() {
-     while (spt < ept && line.charAt(spt)==' ') spt++;
-   }
-
-   /**
-    * Skip the end pointer over any trailing blanks
-    * this is called with the delimiter contains nothing but blanks
-    */
-   private void skipLastBlanks() {
-     while (ept > spt && line.charAt(ept-1)==' ') ept--;
-   }
-
    /**
     * @param npt index returned by indexof search
     * @param len length of delimiter searched for
@@ -1573,6 +1015,7 @@ public abstract class MsgParser {
      }
      String result = line.substring(spt, npt).trim();
      spt = npt + len;
+     while (spt < ept && line.charAt(spt)==' ') spt++;
      return result;
    }
    
@@ -1592,6 +1035,7 @@ public abstract class MsgParser {
      }
      String result = line.substring(npt+len, ept).trim();
      ept = npt;
+     while (ept > spt && line.charAt(ept-1)==' ') ept--;
      return result;
    }
    
@@ -1603,20 +1047,13 @@ public abstract class MsgParser {
     */
    public Matcher getMatcher(Pattern ptn) {
      Matcher match = ptn.matcher(line);
-     if (!match.find(spt)) return null;
+     if (!match.find(spt)) {
+       spt = ept;
+       return null;
+     }
      
      spt = match.end();
      return match;
-   }
-   
-   /**
-    * Convenience method to return first group of a pattern match
-    * @param ptn Pattern to be searched for
-    * @return First group value if match found, empty string otherwise
-    */
-   public String getMatcherValue(Pattern ptn) {
-     Matcher match = getMatcher(ptn);
-     return match == null ? "" : match.group(1);
    }
  }
 
@@ -1635,7 +1072,7 @@ public abstract class MsgParser {
    if (sFilter.length() <= 1) return true;
    
    // Filter can consist of multiple address filters separated by comas
-   for (String tFilter : FILTER_SPLIT.split(sFilter)) {
+   for (String tFilter : sFilter.split(",")) {
      tFilter = tFilter.trim();
      
      // A subfilter with length of 0 or 1 is invalid and is ignored
@@ -1644,26 +1081,17 @@ public abstract class MsgParser {
      if (tFilter.length() <= 1) continue;
      
      // If filter consists only of numeric digits, it needs to match the
-     // beginning of what is presumably a phone number. Taking some pains
-     // to eliminate the spurious +1 that sometimes gets added to the the
-     // sender phonen number
-     if (DIGITS.matcher(tFilter).matches()) {
-       String tmp = sAddress;
-       if (tmp.startsWith("+")) tmp = tmp.substring(1);
-       if (tmp.startsWith("1") && ! tFilter.startsWith("1")) tmp = tmp.substring(1);
-       if (tmp.startsWith(tFilter)) return true;
-     } 
-     
-     // Otherwise it can
+     // beginning of what is presumably a phone number.  Otherwise it can
      // match any substring of the sender address.  This last
      // check should be case insensitive, which we accomplish by downshifting
      // both the address and the filter
-     else {
+     if (DIGITS.matcher(tFilter).matches()) {
+       if (sAddress.startsWith(tFilter)) return true;
+     } else {
        if (sAddress.toLowerCase().contains(tFilter.toLowerCase())) return true;
      }
    }
    return false;
   }
-  private static final Pattern DIGITS = Pattern.compile("\\d+");
-  private static final Pattern FILTER_SPLIT = Pattern.compile("[\n,]");
+ private static final Pattern DIGITS = Pattern.compile("\\d+");
 }

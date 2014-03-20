@@ -1,20 +1,40 @@
 package net.anei.cadpage.parsers.IL;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.SmartAddressParser;
 
+/*
+Richland County, IL
+Contact: "Olney FD" <office@olneyfd.com
+Sender: messaging@iamresponding.com
+System: Information Technologies, Inc
+FIRE/RESCUE will turn into department code soon
 
+FIRE/RESCUE - 5755 N SHIPLEY OLNEY - BARN ON FIRE
+FIRE/RESCUE - DEERFARM/SHIPLEY -
+FIRE/RESCUE - S PALMER ST NOBLE -
+FIRE/RESCUE - 225 S PALMER ST NOBLE - VEH ON FIRE
+FIRE/RESCUE - 4752 N SHIPLEY OLNEY -
+FIRE/RESCUE - 380 W SOUTH NOBLE - DAN ROBINSON REQUEST NOBLE FIRE RESPOND AS HE HAS A HOT ELCECTICAL SMELL COMING FROM HIS HALLWAY BELIVED TO BE THE ATTIC.
+FIRE/RESCUE - E PARKERSBURG LN - -
+FIRE/RESCUE - 325N NOBLE - -
+FIRE/RESCUE - 225 S PALMER ST NOBLE - VEH ON FIRE
+FIRE/RESCUE - S PALMER ST NOBLE -
+FIRE/RESCUE - 5755 N SHIPLEY OLNEY - BARN ON FIRE
+FIRE/RESCUE - 2631 E ELBOW LN NOBLE - - REC'D 911 CELL CALL OF A BRUSH OR FIELD FIRE. ORIGINAL CALL WAS N OF 450N AND BETWEEN 600E AND 700E. TONED OUT NFD. 2203 MCCORMICK CALLED AND ADV'D THAT ALAN WALKER HAD A CONTROLLED BURN LAST NIGHT AND IS NOT SURE IF THEY HAVE STARTED IT BACK UP THIS MORNING, BUT WILL BE RESPONDING TO CHECK. MN
+FIRE/RESCUE - 3772 E TWIN BRIDGE LN - -
 
-public class ILRichlandCountyParser extends SmartAddressParser {
+*/
 
-  private static final Pattern MASTER1 = Pattern.compile("Address: +(.*?) +- +(\\d?) +Sector: +(.*?) +GEO: +(.*?) +ESZ: +(.*?) +Ward: *(.*?) *");
-  private static final Pattern MASTER2 = Pattern.compile("Address: +(.*?) +--(\\d\\d/\\d\\d/\\d{4}) (\\d\\d:\\d\\d(?::\\d\\d)?) ([A-Z0-9]+)-");
-  private static final Pattern MASTER3 = Pattern.compile("(.*?) - (.*?) - (.*)");
+public class ILRichlandCountyParser extends FieldProgramParser {
+  
+  private static final Pattern DELIM = Pattern.compile(" -(?= |$)");
+  
   public ILRichlandCountyParser() {
-    super(CITY_LIST, "RICHLAND COUNTY", "IL");
+    super(CITY_LIST, "RICHLAND COUNTY", "IL",
+           "SRC ADDR/S INFO+");
   }
   
   @Override
@@ -23,82 +43,16 @@ public class ILRichlandCountyParser extends SmartAddressParser {
   }
 
   @Override
-  protected boolean parseMsg(String subject, String body, Data data) {
-    
-    if (body.endsWith("-")) body += ' ';
-    
-    Matcher match;
-
-    // There are two new formats
-    if (subject.equals("OLNE 1600")) {
-      
-      String[] flds = body.split(" *\n *");
-      
-      match = MASTER1.matcher(flds[0]);
-      if (match.matches()) {
-        setFieldList("CALL ADDR APT CITY PRI MAP X");
-        data.strCall = "ALERT";
-        parseMyAddress(match.group(1), data);
-        data.strPriority = match.group(2);
-        String map = "";
-        for (int jj = 3; jj<=6; jj++) {
-          map = append(map, "-", match.group(jj));
-        }
-        data.strMap = map;
-        
-        if (flds.length > 1) {
-          if (flds[1].startsWith("Intersection:")) {
-            data.strCross = flds[1].substring(13);
-          } else {
-            if (!"Intersection:".startsWith(flds[1])) return false;
-          }
-        }
-        return true;
-      }
-      match = MASTER2.matcher(flds[0]);
-      if (match.matches()) {
-        if (flds.length < 2) return false;
-        setFieldList("ADDR APT CITY DATE TIME UNIT CALL");
-        parseMyAddress(match.group(1), data);
-        data.strDate = match.group(2);
-        data.strTime = match.group(3);
-        data.strUnit = match.group(4);
-        data.strCall = flds[1];
-        return true;
-      }
-      
-      return false;
+  protected boolean parseMsg(String body, Data data) {
+    if (!parseFields(DELIM.split(body,-1), 3, data)) return false;
+    int len = data.strSupp.length();
+    if (len == 0) {
+      data.strCall = "ALERT";
+    } else if (len <= 40) {
+      data.strCall = data.strSupp;
+      data.strSupp = "";
     }
-    
-    match = MASTER3.matcher(body);
-    if (match.matches()) {
-      setFieldList("SRC ADDR APT CITY INFO");
-      data.strSource = match.group(1).trim();
-      parseAddress(StartType.START_ADDR, FLAG_ANCHOR_END, match.group(2).trim(), data);
-      String info = match.group(3).trim();
-      if (info.startsWith("-")) info = info.substring(1).trim();
-      if (info.endsWith("-")) info = info.substring(0,info.length()-1).trim();
-      data.strSupp = info;
-      
-      int len = data.strSupp.length();
-      if (len == 0) {
-        data.strCall = "ALERT";
-      } else if (len <= 40) {
-        data.strCall = data.strSupp;
-        data.strSupp = "";
-      }
-      return true;
-    }
-    
-    return false;
-  }
-  
-  private void parseMyAddress(String field, Data data) {
-    Parser p = new Parser(field);
-    String city = p.getLastOptional(',');
-    if (city.equals("IL")) city = p.getLastOptional(',');
-    parseAddress(p.get(), data);
-    data.strCity = city;
+    return true;
   }
   
   private static final String[] CITY_LIST = new String[]{

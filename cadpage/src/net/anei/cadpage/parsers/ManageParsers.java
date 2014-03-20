@@ -62,7 +62,7 @@ public class ManageParsers {
         try {
           parser = (MsgParser)Class.forName(className).newInstance();
         } catch (Exception ex) {
-          throw new RuntimeException("Failed to instantiate " + className + '\n' + ex.getMessage(), ex);
+          throw new RuntimeException(ex.getMessage(), ex);
         }
       }
       
@@ -88,15 +88,13 @@ public class ManageParsers {
   private String getParserClassname(String location) {
     
     String pkg = null;
-    if (location.startsWith("ZCA")) {
-      pkg = location.substring(0,5);
-    } else if (location.startsWith("Z")) {
+    if (location.charAt(0) == 'Z') {
       pkg = location.substring(0,3);
     } else if (Character.isUpperCase(location.charAt(1))) {
       pkg = location.substring(0,2);
     } else if (location.startsWith("Dispatch")) {
       pkg = "dispatch";
-    } else if (location.startsWith("General") || location.startsWith("Standard")) {
+    } else if (location.startsWith("General")) {
       pkg = "general";
     }
     StringBuffer sb = new StringBuffer();
@@ -153,31 +151,19 @@ public class ManageParsers {
   
   // fixed map mapping old to new location codes
   private static final Properties OLD_CODE_TABLE = MsgParser.buildCodeTable(new String[]{
+        "NCChattamCounty",    "NCChathamCounty",
+        "MDCentreville",      "MDQueenAnnesCounty",
+        "PADelewareCounty",   "PADelawareCounty",
+        "OHDelewareCounty",   "OHDelawareCounty",
+        "NJBergenCounty",     "NJMICOM",
+        "COPuebloRFD",        "COPuebloCounty",
+        "VAWightCounty",      "VAIsleOfWightCounty",
+        "COGreeley",          "COWeldCounty",
+        "CTNorthBranford",    "CTNewHavenCounty",       // 11/20/2011 
+        "ILRoscoe",           "ILWinnebagoCounty",      // 11/21/2011 
         "PADelawareCountyE",  "PADelawareCountyD",      // 12/30/2011 
         "CTRoxbury",          "CTNorthwestPublicSafety",// 03/21/2012 
         "PAErieCountyEnergyCare", "PAErieCountyEmergyCare", //04/07/2012
-        "NYAmherst",          "NYErieCountyD",          // 07/09/2012
-        "NYErieCountyA",      "NYErieCounty",           // 07/09/2012
-        "NJWayneCounty",      "NJWayneTownship",        // 07/20/2012
-        "MNBloomington",      "MNMinneapolisStPaul",    // 09/21/2012
-        "NCGrahmCounty",      "NCGrahamCounty",         // 10/04/2012
-        "CTMontville",        "CTNewLondonCounty",      // 10/13/2012
-        "VAFranklinCountyB",  "VAFranklin",             // 11/15/2012
-        "VAFranklinCountyA",  "VAFranklinCounty",       // 11/15/2012
-        "TXNassauBay",        "TXLaPorte",              // 01/06/2013
-        "NVLasVegas",         "NVClarkCounty",          // 01/26/2013
-        "ORMarionCountyN",    "ORMarionCounty",         // 03/14/2013
-        "OHXenia",            "OHGreeneCounty",         // 03/18/2013
-        "NCGreensboro",       "NCGuilfordCounty",       // 03/22/2013
-        "NCDavieCountyA",     "NCDavieCounty",          // 09/30/2013
-        "NCDavieCountyB",     "NCDavieCounty",          // 09/30/2013
-        "NJHudsonCounty",     "NJJCMCEMSHudCEN",        // 11/22/2013
-        "NJJCMCEMSHudCEN",    "NJJCMCEMSJerseyCity",    // 12/27/2013
-        "CTLitchfieldCountyB","CTNewMilford",           // 12/28/2013
-        "TXMontgomeryCountyC","TXMontgomeryCountyB",    // 02/26/2014
-        "VALexingtonRockbridgeCounty", "VARockbridgeCounty",   //03/05/2014
-        "MDHarford",          "MDHarfordCounty"         // 03/09/2014
-        
   });
 
 }

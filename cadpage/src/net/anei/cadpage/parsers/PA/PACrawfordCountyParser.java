@@ -1,14 +1,23 @@
 package net.anei.cadpage.parsers.PA;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchBParser;
 
+/*
+Crawford County, PA
+Contact: Patriot Jon <patriot.jon21@gmail.com>
+Sender: OESCAD@WINDSTREAM.NET
+DispatchBParser base after combining subject and text
+
+FRM:\nSUBJ:TWDU >TREES/WIRES DOWN URGENT\nMSG:OESCAD:STATE HWY 18 SPRING TWP THARP, DENNIS Cad: 2012-0000000067
+FRM:OESCAD@WINDSTREAM.NET\nSUBJ:TWDU  >TREES/WIRES DOWN URGENT\nMSG:OESCAD:STATE HWY 18 SPRING TWP THARP, DENNIS Cad: 2012-0000000067
+FRM:OESCAD@WINDSTREAM.NET\nSUBJ:SFR   >STRUCTURE FIRE\nMSG:OESCAD:150 S MAIN ST XS: SPRING ST SPRINGBORO BORO PIERI, PIERINO Map:E-3\n(Con't) 2 of 2\nGrids:0,0 Cad: 2012-0000000547(End)
+1 of 2\nFRM:OESCAD@WINDSTREAM.NET\nSUBJ:CS    >CARDIAC SYMPTOMS\nMSG:OESCAD:135 MEAD AVE XS: BEAVER ST SPRINGBORO BORO NAAS, DAVID C Map:E-3\n(Con't) 2 of 2\nGrids:0,0 Cad: 2012-0000001348(End)
+1 of 2\nFRM:OESCAD@WINDSTREAM.NET\nSUBJ:UNC   >UNCONSCIOUS SUBJECT\nMSG:OESCAD:104 CUSSEWAGO ST Apt: A Bldg XS: SPRINGBORO RD SPRINGBORO BORO\n(Con't) 2 of 2\nHOOVER,KYLE Map:E-3 Grids:0,0 Cad: 2012-0000001631(End)
+
+*/
 
 public class PACrawfordCountyParser extends DispatchBParser {
-  private static final Pattern MARKER = Pattern.compile("^(?:CRAWFORD COUNTY +911 +)?OESCAD(?:@WINDSTREAM.NET)?:|CRAWFORD COUNTY +911(?: CRAWFORD_COUNTY_911)?:|CRAWFORD_COUNTY_911:");
 
   public PACrawfordCountyParser() {
     super(CITY_LIST, "CRAWFORD COUNTY", "PA");
@@ -26,24 +35,10 @@ public class PACrawfordCountyParser extends DispatchBParser {
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
-    int pt = body.indexOf(" Reply STOP ");
-    if (pt >= 0) body = body.substring(0,pt).trim();
-    
-    boolean good = subject.contains(">");
-    Matcher match = MARKER.matcher(body);
-    if (match.find()) {
-      good = true;
-      body = body.substring(match.end()).trim();
-    }
-    if (!good) return false;
-    body = subject + " " + body;
-    if (!super.parseMsg(body, data)) return false;
-    if (data.strCity.toUpperCase().endsWith(" BORO")) {
-      data.strCity = data.strCity.substring(0,data.strCity.length()-5).trim();
-    }
-    
-    if (data.strCallId.length() == 0) data.expectMore = true;
-    return true;
+    if (!subject.contains(">")) return false;
+    if (!body.startsWith("OESCAD:")) return false;
+    body = subject + " " + body.substring(7).trim();
+    return super.parseMsg(body, data);
   }
   
   private static final String[] CITY_LIST = new String[]{
@@ -51,9 +46,6 @@ public class PACrawfordCountyParser extends DispatchBParser {
     // Cities
     "MEADVILLE",
     "TITUSVILLE",
-    
-    "MEADVILLE CITY",
-    "TITUSVILLE CITY",
     
     // Boroughs
     "BLOOMING VALLEY",
@@ -70,22 +62,7 @@ public class PACrawfordCountyParser extends DispatchBParser {
     "TOWNVILLE",
     "VENANGO",
     "WOODCOCK",
-
-    "BLOOMING VALLEY BORO",
-    "CAMBRIDGE SPRINGS BORO",
-    "CENTERVILLE BORO",
-    "CONNEAUT LAKE BORO",
-    "CONNEAUTVILLE BORO",
-    "COCHRANTON BORO",
-    "HYDETOWN BORO",
-    "LINESVILLE BORO",
-    "SAEGERTOWN BORO",
-    "SPARTANSBURG BORO",
-    "SPRINGBORO BORO",
-    "TOWNVILLE BORO",
-    "VENANGO BORO",
-    "WOODCOCK BORO",
-
+    
     // Townships
     "ATHENS TWP",
     "BEAVER TWP",

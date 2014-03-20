@@ -4,9 +4,7 @@ import android.app.KeyguardManager;
 import android.app.KeyguardManager.KeyguardLock;
 import android.app.KeyguardManager.OnKeyguardExitResult;
 import android.content.Context;
-import android.os.Build;
 
-@SuppressWarnings("deprecation")
 public class ManageKeyguard {
   private static KeyguardManager myKM = null;
   private static KeyguardLock myKL = null;
@@ -18,10 +16,8 @@ public class ManageKeyguard {
   }
 
   public static synchronized void disableKeyguard(Context context) {
-    
-    // There are better ways to do this starting at API level 13
-    if (Build.VERSION.SDK_INT >= 13) return;
-    
+    // myKM = (KeyguardManager)
+    // context.getSystemService(Context.KEYGUARD_SERVICE);
     initialize(context);
 
     if (myKM.inKeyguardRestrictedInputMode()) {

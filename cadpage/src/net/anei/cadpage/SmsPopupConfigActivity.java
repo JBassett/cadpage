@@ -5,25 +5,14 @@ import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.parsers.ManageParsers;
 import net.anei.cadpage.parsers.MsgParser;
-import net.anei.cadpage.parsers.ParserList;
-import net.anei.cadpage.parsers.ParserList.ParserCategory;
-import net.anei.cadpage.parsers.ParserList.ParserEntry;
 import net.anei.cadpage.preferences.DialogPreference;
 import net.anei.cadpage.preferences.EditTextPreference;
 import net.anei.cadpage.preferences.LocationCheckBoxPreference;
 import net.anei.cadpage.preferences.LocationListPreference;
 import net.anei.cadpage.preferences.LocationManager;
-import net.anei.cadpage.preferences.OnDialogClosedListener;
 import net.anei.cadpage.vendors.VendorManager;
-import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -33,24 +22,19 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.view.KeyEvent;
 
 public class SmsPopupConfigActivity extends PreferenceActivity {
-  
-  private static final int REQ_SCANNER_CHANNEL = 1;
   
   private String parserFilter = "";
   private String parserDefCity = "";
   private String parserDefState = "";
   private CheckBoxPreference overrideFilterPref;
-  private net.anei.cadpage.preferences.EditTextPreference filterPref;
+  private EditTextPreference filterPref;
   private CheckBoxPreference genAlertPref;
   
   private CheckBoxPreference overrideDefaultPref;
   private EditTextPreference defCityPref;
   private EditTextPreference defStatePref;
-  
-  private Preference scannerPref;
   
   private String saveLocation;
 
@@ -65,7 +49,10 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     addPreferencesFromResource(R.xml.preferences);
 
     // Set preferences initialized flag
-    ManagePreferences.setInitialized(true);
+    SharedPreferences.Editor editor = 
+        PreferenceManager.getDefaultSharedPreferences(this).edit();
+    editor.putBoolean(getString(R.string.pref_initialized_key), true);
+    editor.commit();
     
     // Set up the two enable components preferences
     Preference pref = findPreference(getString(R.string.pref_enabled_key));
@@ -135,25 +122,13 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
 
     genAlertPref = (CheckBoxPreference)
         findPreference(getString(R.string.pref_gen_alert_key));
-    filterPref = (net.anei.cadpage.preferences.EditTextPreference)
-        findPreference(getString(R.string.pref_filter_key));
+    filterPref = (EditTextPreference)findPreference(getString(R.string.pref_filter_key));
     filterPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener(){
       @Override
       public boolean onPreferenceChange(Preference preference, Object newValue) {
         String filter = (String)newValue;
         genAlertPref.setEnabled(filter.length() > 1 || parserFilter.length() > 0);
         return true;
-      }
-    });
-    filterPref.setDialogClosedListener(new OnDialogClosedListener(){
-      @Override
-      public void onDialogClosed(boolean positiveResult) {
-        if (positiveResult) {
-          if ("General".equals(saveLocation)) {
-            DonationManager.instance().reset();
-            MainDonateEvent.instance().refreshStatus();
-          }
-        }
       }
     });
 
@@ -210,59 +185,6 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     overrideDefaultPref.getOnPreferenceChangeListener().
         onPreferenceChange(overrideDefaultPref, ManagePreferences.overrideDefaults());
     
-    // Set up Scanner channel selection preference
-    scannerPref = findPreference(getString(R.string.pref_scanner_channel_key));
-    if (scannerPref != null) {
-      String channel = ManagePreferences.scannerChannel();
-      scannerPref.setSummary(channel);
-      scannerPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
-        @Override
-        public boolean onPreferenceClick(Preference pref) {
-          
-          // When clicked, ask the scanner app to select a favorite channel
-          Intent intent = new Intent("com.scannerradio.intent.action.ACTION_PICK");
-          try {
-            startActivityForResult(intent, REQ_SCANNER_CHANNEL);
-          } catch (ActivityNotFoundException ex) {
-            
-            // Scanner radio either isn't installed, or isn't responding to the ACTION_PICK
-            // request.  Check the package manager to which, if any, are currently installed
-            PackageManager pkgMgr = getPackageManager();
-            String pkgName = "com.scannerradio_pro";
-            boolean installed = false;
-            try {
-              pkgMgr.getPackageInfo(pkgName, 0);
-              installed = true;
-            } catch (PackageManager.NameNotFoundException ex2) {}
-            if (! installed) {
-              pkgName = "com.scannerradio";
-              try {
-                pkgMgr.getPackageInfo(pkgName, 0);
-                installed = true;
-              } catch (PackageManager.NameNotFoundException ex2) {}
-            }
-            
-            // OK, show a dialog box asking if they want to install Scanner Radio
-            final String pkgName2 = pkgName;
-            new AlertDialog.Builder(SmsPopupConfigActivity.this)
-              .setMessage(installed ? R.string.scanner_not_current : R.string.scanner_not_installed)
-              .setPositiveButton(R.string.donate_btn_yes, new DialogInterface.OnClickListener(){
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                  Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + pkgName2));
-                  intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                  SmsPopupConfigActivity.this.startActivity(intent);
-                }
-              })
-              .setNegativeButton(R.string.donate_btn_no, null)
-              .create().show();
-
-          }
-          return true;
-        }
-      });
-    }
-    
     // Email developer response
     Preference emailPref = findPreference(getString(R.string.pref_email_key));
     emailPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
@@ -296,26 +218,6 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     super.onDestroy();
   }
 
-  @Override
-  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    if (requestCode == REQ_SCANNER_CHANNEL) {
-      if (resultCode != RESULT_OK || data == null) return;
-      Log.v("onActivityResult()");
-      ContentQuery.dumpIntent(data);
-      String description = data.getStringExtra("description");
-      Intent scanIntent = data.getParcelableExtra("playIntent");
-      if (description == null || scanIntent == null) return;
-      ContentQuery.dumpIntent(scanIntent);
-      
-      ManagePreferences.setScannerChannel(description);
-      scannerPref.setSummary(description);
-      ManagePreferences.setScannerIntent(scanIntent);
-      return;
-    }
-    super.onActivityResult(requestCode, resultCode, data);
-  }
-  
 
 
   /**
@@ -393,10 +295,6 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
 
     boolean enabled = myPrefs.getBoolean(getString(R.string.pref_enabled_key), true);
     mEnabledPreference.setChecked(enabled);
-    
-    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-    activityActive = true; 
-
   }
   
   // If location code changes during this session, force a rebuild of
@@ -410,6 +308,9 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   
   @Override
   protected void onStart() {
+    
+    C2DMReceiver.registerActivity(this);
+    
     oldLocation = ManagePreferences.location();
     oldTextSize = ManagePreferences.textSize();
     oldSplitBlank = ManagePreferences.splitBlankIns();
@@ -426,6 +327,8 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     if (!location.equals(oldLocation) || ! textSize.equals(oldTextSize)) {
       SmsMessageQueue.getInstance().notifyDataChange();
     }
+    
+    C2DMReceiver.unregisterActivity(this);
   }
   
   /**
@@ -436,91 +339,62 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
    */
   private void setupLocationMenu(int resId, boolean multi, LocationManager locMgr) {
     
-    // Get the preference screen we will be building
+    // Get a list of all of the location codes and state names.
     Resources res = getResources();
+    String[] stateNames = res.getStringArray(R.array.pref_state_names);
+    String[] locValues = res.getStringArray(R.array.pref_location_values);
+    String[] locNames = res.getStringArray(R.array.pref_location_options);
+    
+    // Get the preference screen we will be building
     PreferenceScreen main = (PreferenceScreen)findPreference(res.getString(resId));
-    buildLocationMenu(ParserList.MASTER_LIST, main, multi, locMgr);
-  }
- 
-  /**
-   * Construct a preference screen corresponding to a configured parser category    
-   * @param parserCategory parser category 
-   * @param screen preference screen being set up
-   * @param multi true if we are setting up a mutiple location selection menu
-   * @param locMgr Location manager
-   */
-  private void buildLocationMenu(ParserCategory parserCategory, PreferenceScreen screen, boolean multi, LocationManager locMgr) {
-    for (ParserEntry entry : parserCategory.getParserList()) {
-      if (!entry.isCategory()) throw new RuntimeException("Top level parser entry " + entry.getParserName() + " must be a category");
-      Preference pref = buildLocationItem(entry.getCategory(), screen, multi, locMgr);
-      screen.addPreference(pref);
-    }
-  }
+    int stNdx = 0;
+    String stCode = null;
+    int startNdx = -1;
+    for (int ndx = 0; ndx <= locValues.length; ndx++) {
+      String stPrefix = (ndx < locValues.length ? locValues[ndx].substring(0,2) : "**");
+      if (stCode == null || ! stCode.equals(stPrefix)) {
+        if (stCode != null) {
+          String stName = stateNames[stNdx++];
+          if (! stName.startsWith(stCode)) {
+            throw new RuntimeException("Found state " + stName + " while looking for " + stCode);
+          }
+          if (! multi) {
+            LocationListPreference list = new LocationListPreference(this, locMgr, main);
+            String state = stName.substring(3);
+            list.setTitle(state);
+            list.setDialogTitle(state);
+            int locCnt = ndx - startNdx;
+            String[] values = new String[locCnt];
+            String[] options = new String[locCnt];
+            System.arraycopy(locValues, startNdx, values, 0, locCnt);
+            System.arraycopy(locNames, startNdx, options, 0, locCnt);
+            for (int ii = 0; ii<locCnt; ii++) {
+              options[ii] = stripStateAbbrv(options[ii]);
+            }
+            list.setEntryValues(values);
+            list.setEntries(options);
+          
+            main.addPreference(list);
+          } else {
+            PreferenceScreen sub = getPreferenceManager().createPreferenceScreen(this);
+            sub.setTitle(stName.substring(3));
+            for (int ii = startNdx; ii<ndx; ii++) {
+              sub.addPreference(
+                  new LocationCheckBoxPreference(this, locValues[ii], 
+                                                 stripStateAbbrv(locNames[ii]), 
+                                                 locMgr)
+              );
+            }
+            
+            main.addPreference(sub);
+          }
+        }
+        if (ndx >= locValues.length) break;
 
-  /**
-   * Construct a prefence item corresponding to a single parser entry 
-   * @param category root preference category
-   * @param parent parent preference screen
-   * @param multi true if we are setting up multiple location selection menu
-   * @param locMgr location manager
-   * @return constructed preference
-   */
-  private Preference buildLocationItem(ParserCategory category, PreferenceScreen parent, boolean multi, LocationManager locMgr) {
-    
-    // Current rules are that category must contain only  subcategory or only parser entries.  See which this is
-    String catName = category.getName();
-    ParserEntry[] entries = category.getParserList();
-    boolean subcat = false;
-    boolean plist = false;
-    for (ParserEntry entry : entries) {
-      if (entry.isCategory()) subcat = true;
-      else plist = true;
-    }
-    if (subcat && plist) throw new RuntimeException("Parser group " + catName + " mixes parser and category entries"); 
-    if (!subcat && !plist) throw new RuntimeException("Parser group " + catName + " is empty");
-    
-    // If it only contains subcategories, build a new preference screen with them
-    if (subcat) {
-      PreferenceScreen sub = getPreferenceManager().createPreferenceScreen(this);
-      sub.setTitle(catName);
-      buildLocationMenu(category, sub, multi, locMgr);
-      return sub;
-    }
-    
-    // Otherwise we are handing a parser list
-    // What we do next depends on whether this is a single or multiple selection menu
-    
-    // If we are doing multiple selections, create a new preference screen and fill it
-    // a location checkbox for each parser entry
-    if (multi) {
-      PreferenceScreen sub = getPreferenceManager().createPreferenceScreen(this);
-      sub.setTitle(catName);
-      for (ParserEntry entry : entries) {
-        sub.addPreference(
-            new LocationCheckBoxPreference(this, entry.getParserName(), 
-                                           stripStateAbbrv(entry.getLocName()), 
-                                           locMgr)
-        );
+        startNdx = ndx;
+        stCode = stPrefix;
       }
-      return sub;
     }
-    
-    // If we are doing single location selections, build a list preference
-    // that can select from any of the parsers in this category
-    LocationListPreference list = new LocationListPreference(this, locMgr, parent);
-    list.setTitle(catName);
-    list.setDialogTitle(catName);
-    
-    String[] values = new String[entries.length];
-    String[] names = new String[entries.length];
-    for (int ndx = 0; ndx < entries.length; ndx++) {
-      ParserEntry entry = entries[ndx];
-      values[ndx] = entry.getParserName();
-      names[ndx] = stripStateAbbrv(entry.getLocName());
-    }
-    list.setEntryValues(values);
-    list.setEntries(names);
-    return list;
   }
   
   private static String stripStateAbbrv(String name) {
@@ -529,38 +403,4 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     return name;
   }
 
-  // This is all supposed to work around a bug causing crashes for
-  // java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState
-  
-  private boolean activityActive = false;
-  
-  protected void onPause() { 
-     super.onPause(); 
-     activityActive = false; 
-  } 
-  
-  public boolean onKeyUp(int keyCode, KeyEvent event)  { 
-     if (!activityActive) return false;
-     return super.onKeyUp(keyCode, event);
-  } 
-  
-  public boolean onKeyDown(int keyCode, KeyEvent event) { 
-     if (!activityActive) return false;
-     return super.onKeyDown(keyCode, event);
-  }
- 
-  
-  
-  @Override
-  protected void onSaveInstanceState(Bundle outState) {
-
-    outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
-    super.onSaveInstanceState(outState);
-
-//    int orientation = Safe40Activity.getDisplayOrientation(this);
-    
-    //Lock the screen orientation to the current display orientation : Landscape or Portrait
-//    this.setRequestedOrientation(orientation);
-
-  }
 }

@@ -16,10 +16,8 @@ import net.anei.cadpage.parsers.MsgParser;
 import net.anei.cadpage.vendors.VendorManager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
-import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 public class ManagePreferences {
@@ -30,7 +28,7 @@ public class ManagePreferences {
   // (OK, if you know what you are doing, and the only new settings added
   // are boolean settings that default to false, you can get away with not
   // changing this)
-  private static final int PREFERENCE_VERSION = 33;
+  private static final int PREFERENCE_VERSION = 24;
   
   private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
   
@@ -96,9 +94,6 @@ public class ManagePreferences {
     // Set the install date if it hasn't already been set
     setInstallDate();
     
-    // Clear GCM registration in progress flag
-    if (registerReqActive()) setRegisterReqActive(false);
-    
     // Finally set the application enable status
     String enableStr = (enabled() ? enableMsgType() : "");
     SmsPopupUtils.enableSMSPopup(context, enableStr);
@@ -156,10 +151,6 @@ public class ManagePreferences {
   
   public static boolean initialized() {
     return prefs.getBoolean(R.string.pref_initialized_key);
-  }
-  
-  public static void setInitialized(boolean newVal) {
-    prefs.putBoolean(R.string.pref_initialized_key, newVal);
   }
   
   public static boolean initBilling() {
@@ -275,10 +266,6 @@ public class ManagePreferences {
     return prefs.getBoolean(R.string.pref_split_chk_sender_key);
   }
   
-  public static boolean splitKeepLeadBreak() {
-    return prefs.getBoolean(R.string.pref_split_keep_lead_break_key);
-  }
-  
   public static boolean revMsgOrder() {
     return prefs.getBoolean(R.string.pref_rev_msg_order_key);
   }
@@ -286,62 +273,6 @@ public class ManagePreferences {
   public static boolean suppressDupMsg() {
     return prefs.getBoolean(R.string.pref_suppress_dup_msg_key);
   }
-  
-  public static boolean overrideVendorLoc() {
-    return prefs.getBoolean(R.string.pref_override_vendor_loc_key);
-  }
-  
-  public static boolean activeScanner() {
-    return prefs.getBoolean(R.string.pref_activate_scanner_key);
-  }
-  
-  public static String scannerChannel() {
-    String channel = prefs.getString(R.string.pref_scanner_channel_key, null);
-    if (channel == null) channel = "<None Selected>";
-    return channel;
-  }
-  
-  public static void setScannerChannel(String newVal) {
-    prefs.putString(R.string.pref_scanner_channel_key, newVal);
-  }
-  
-  public static Intent scannerIntent() {
-    String value = prefs.getString(R.string.pref_scanner_channel_app_node_key, null);
-    if (value == null) return null;
-    if (!value.startsWith(SCAN_VERSION)) return null;
-    value = value.substring(SCAN_VERSION.length());
-    String[] fields = value.split(SCAN_FLD_DELIM);
-    if (fields.length != 4) return null;
-    Intent intent = new Intent(fields[0]);
-    Bundle bundle = new Bundle();
-    bundle.putString(SCAN_ACTION_KEY, fields[1]);
-    bundle.putString(SCAN_DESCRIPTION_KEY, fields[2]);
-    bundle.putString(SCAN_LOCALE_KEY, fields[3]);
-    intent.putExtra(SCAN_BUNDLE_KEY, bundle);
-    return intent;
-  }
-  
-  public static void setScannerIntent(Intent playIntent) {
-    String newVal = null;
-    String action = playIntent.getAction();
-    Bundle bundle = playIntent.getBundleExtra(SCAN_BUNDLE_KEY);
-    if (bundle != null) {
-      String action2 = bundle.getString(SCAN_ACTION_KEY);
-      String description = bundle.getString(SCAN_DESCRIPTION_KEY);
-      String locale = bundle.getString(SCAN_LOCALE_KEY);
-      if (action != null && action2 != null && description != null && locale != null) {
-        newVal = SCAN_VERSION + action + SCAN_FLD_DELIM + action2 + SCAN_FLD_DELIM + description + SCAN_FLD_DELIM + locale;
-      }
-    }
-    prefs.putString(R.string.pref_scanner_channel_app_node_key, newVal);
-  }
-  
-  private static final String SCAN_VERSION = "00";
-  private static final String SCAN_BUNDLE_KEY = "com.twofortyfouram.locale.intent.extra.BUNDLE";
-  private static final String SCAN_ACTION_KEY = "action";
-  private static final String SCAN_DESCRIPTION_KEY = "description";
-  private static final String SCAN_LOCALE_KEY = "localeDirectoryLine";
-  private static final String SCAN_FLD_DELIM = "<!>";
   
   public static boolean publishPages() {
     return prefs.getBoolean(R.string.pref_publish_pages_key);
@@ -361,10 +292,6 @@ public class ManagePreferences {
   
   public static String notifySound() {
     return prefs.getString(R.string.pref_notif_sound_key);
-  }
-  
-  public static int notifyTimeout() {
-    return prefs.getIntValue(R.string.pref_notif_timeout_key);
   }
   
   public static boolean vibrate() {
@@ -424,12 +351,20 @@ public class ManagePreferences {
     return prefs.getIntValue(R.string.pref_notif_repeat_interval_key);
   }
   
+  public static int repeatTimes() {
+    return prefs.getIntValue(R.string.pref_notif_repeat_times_key);
+  }
+  
   public static boolean popupEnabled() {
     return prefs.getBoolean(R.string.pref_popup_enabled_key);
   }
   
   public static void setPopupEnabled(boolean newVal) {
     prefs.putBoolean(R.string.pref_popup_enabled_key, newVal);
+  }
+  
+  public static boolean onlyShowOnKeyguard() {
+    return prefs.getBoolean(R.string.pref_onlyShowOnKeyguard_key);
   }
   
   public static boolean noShowInCall() {
@@ -467,21 +402,12 @@ public class ManagePreferences {
     return prefs.getBoolean(R.string.pref_delete_unopen_key);
   }
   
+  public static boolean autoRotate() {
+    return prefs.getBoolean(R.string.pref_autorotate_key);
+  }
+  
   public static String mapNetworkChk() {
     return prefs.getString(R.string.pref_map_network_chk_key);
-  }
-  
-  public static int gpsMapOption() {
-    String val = prefs.getString(R.string.pref_gps_map_option_key);
-    return val.charAt(0) - '0';
-  }
-  
-  public static String reportPosition() {
-    return prefs.getString(R.string.pref_report_position_key);
-  }
-  
-  public static void setReportPosition(String newVal) {
-    prefs.putString(R.string.pref_report_position_key, newVal);
   }
 
   public static int historyCount() {
@@ -573,6 +499,14 @@ public class ManagePreferences {
     MainDonateEvent.instance().refreshStatus();
   }
   
+  public static Date minExpireDate() {
+    try {
+      return DATE_FORMAT.parse(prefs.context.getString(R.string.min_expire_date));
+    } catch (ParseException ex) {
+      return null;
+    }
+  }
+  
   public static int paidYear() {
     return prefs.getInt(R.string.pref_paid_year_key, 0);
   }
@@ -587,7 +521,6 @@ public class ManagePreferences {
       if (year > curYear) {
         prefs.putInt(R.string.pref_prev_year_key, curYear);
         prefs.putInt(R.string.pref_paid_year_key, year);
-        prefs.putString(R.string.pref_prev_purchase_date_key, purchaseDateString());
         DonationManager.instance().reset();
         MainDonateEvent.instance().refreshStatus();
       }
@@ -595,9 +528,6 @@ public class ManagePreferences {
       if (year == curYear) {
         int prevYear = prefs.getInt(R.string.pref_prev_year_key, 0);
         prefs.putInt(R.string.pref_paid_year_key, prevYear);
-        prefs.putInt(R.string.pref_prev_year_key, 0);
-        setPurchaseDateString(prefs.getString(R.string.pref_prev_purchase_date_key, ""));
-        prefs.putString(R.string.pref_prev_purchase_date_key, "");
         DonationManager.instance().reset();
         MainDonateEvent.instance().refreshStatus();
       }
@@ -623,32 +553,14 @@ public class ManagePreferences {
   
   public static String purchaseDateString() {
     String dateStr = prefs.getString(R.string.pref_purchase_date_key, null);
-    if (dateStr == null) dateStr = currentDateString();
+    if (dateStr == null) dateStr = DATE_FORMAT.format(new Date());
     return dateStr;
-  }
-  
-  public static String currentDateString() {
-    return DATE_FORMAT.format(new Date());
   }
   
   public static void setPurchaseDateString(String  sDate) {
     prefs.putString(R.string.pref_purchase_date_key, sDate);
     DonationManager.instance().reset();
     MainDonateEvent.instance().refreshStatus();
-  }
-  
-  public static String sponsor() {
-    return prefs.getString(R.string.pref_sponsor_key, null);
-  }
-  
-  public static void setSponsor(String sponsor) {
-    String oldSponsor = sponsor();
-    if (oldSponsor == null && sponsor == null) return;
-    prefs.putString(R.string.pref_sponsor_key, sponsor);
-    if ((oldSponsor == null) != (sponsor == null)) {
-      DonationManager.instance().reset();
-      MainDonateEvent.instance().refreshStatus();
-    }
   }
   
   public static boolean freeRider() {
@@ -785,87 +697,12 @@ public class ManagePreferences {
     MainDonateEvent.instance().refreshStatus();
   }
   
-  public static long authLastCheckTime() {
-    return prefs.getLong(R.string.pref_auth_last_check_time_key, 0L);
-  }
-  
-  public static void setAuthLastCheckTime() {
-    setAuthLastCheckTime(System.currentTimeMillis());
-  }
-  
-  public static void setAuthLastCheckTime(long newVal) {
-    prefs.putLong(R.string.pref_auth_last_check_time_key, newVal);
-  }
-  
   public static String registrationId() {
     return prefs.getString(R.string.pref_registration_id_key, null);
   }
   
-  public static boolean setRegistrationId(String regId) {
-    String oldRegId = registrationId();
-    prefs.putString(R.string.pref_prev_registration_id_key, oldRegId);
+  public static void setRegistrationId(String regId) {
     prefs.putString(R.string.pref_registration_id_key, regId);
-    if (regId == null) return (oldRegId == null);
-    else return !regId.equals(oldRegId);
-  }
-  
-  public static boolean newVersion(int versionCode) {
-    int prevVersion = prefs.getInt(R.string.pref_prev_version_code, 0);
-    if (versionCode == prevVersion) return false;
-    prefs.putInt(R.string.pref_prev_version_code, versionCode);
-    return true;
-  }
-  
-  public static boolean registerReqActive() {
-    return prefs.getBoolean(R.string.pref_register_req_active_key);
-  }
-  
-  public static void setRegisterReqActive(boolean newVal) {
-    prefs.putBoolean(R.string.pref_register_req_active_key, newVal);
-  }
-  
-  public static int registerReq() {
-    return prefs.getInt(R.string.pref_register_req_key, 0);
-  }
-  
-  public static void setRegisterReq(int newVal) {
-    prefs.putInt(R.string.pref_register_req_key, newVal);
-  }
-  
-  public static int reregisterDelay() {
-    return prefs.getInt(R.string.pref_reregister_delay_key, 0);
-  }
-  
-  public static void setReregisterDelay(int newVal) {
-    prefs.putInt(R.string.pref_reregister_delay_key, newVal);
-  }
-  
-  public static Date registerDate() {
-    String dateStr = prefs.getString(R.string.pref_register_date_key, null);
-    if (dateStr == null) return null;
-    try {
-      return DATE_FORMAT.parse(dateStr);
-    } catch (ParseException ex) {
-      throw new RuntimeException(ex);
-    }
-  }
-  
-  public static void setRegisterDate() {
-    Date curDate = new Date();
-    setRegisterDate(curDate);
-  }
-  
-  public static void setRegisterDate(Date date) {
-    String dateStr = DATE_FORMAT.format(date);
-    prefs.putString(R.string.pref_register_date_key, dateStr);
-  }
-  
-  public static boolean reconnect() {
-    return prefs.getBoolean(R.string.pref_reconnect_key);
-  }
-  
-  public static void setReconnect(boolean newVal) {
-    prefs.putBoolean(R.string.pref_reconnect_key, newVal);
   }
   
   public static String ledColor() {
@@ -892,46 +729,6 @@ public class ManagePreferences {
     prefs.putString(R.string.pref_flashled_pattern_custom_key, pattern);
   }
   
-  public static long lastLocTime() {
-    return prefs.getLong(R.string.pref_last_loc_time_key, 0L);
-  }
-  
-  public static void setLastLocTime(long newVal) {
-    prefs.putLong(R.string.pref_last_loc_time_key, newVal);
-  }
-  
-  public static float lastLocAcc() {
-    return prefs.getFloat(R.string.pref_last_loc_acc_key, 1.E30F);
-  }
-  
-  public static void setLastLocAcc(float newVal) {
-    prefs.putFloat(R.string.pref_last_loc_acc_key, newVal);
-  }
-  
-  public static boolean directPageActive() {
-    return prefs.getBoolean(R.string.pref_direct_page_active_key);
-  }
-  
-  public static void setDirectPageActive(boolean newVal) {
-    prefs.putBoolean(R.string.pref_direct_page_active_key, newVal);
-  }
-  
-  public static long lastGcmEventTime() {
-    return prefs.getLong(R.string.pref_last_gcm_event_time_key, 0L);
-  }
-  
-  public static void setLastGcmEventTime(long newVal) {
-    prefs.putLong(R.string.pref_last_gcm_event_time_key, newVal);
-  }
-  
-  public static String lastGcmEventType() {
-    return prefs.getString(R.string.pref_last_gcm_event_type_key, null);
-  }
-  
-  public static void setLastGcmEventType(String newVal) {
-    prefs.putString(R.string.pref_last_gcm_event_type_key, newVal);
-  }
-  
   public static void clearAll() {
     SharedPreferences.Editor settings = prefs.mPrefs.edit();
     settings.clear();
@@ -954,7 +751,8 @@ public class ManagePreferences {
         R.string.pref_screen_size_key,
         R.string.pref_initialized_key,
         R.string.pref_enabled_key,
-        
+        R.string.pref_enable_msg_type_key,
+        R.string.pref_mms_timeout_key,
         R.string.pref_location_key,
         R.string.pref_override_filter_key,
         R.string.pref_filter_key,
@@ -963,21 +761,13 @@ public class ManagePreferences {
         R.string.pref_override_default_key,
         R.string.pref_defcity_key,
         R.string.pref_defstate_key,
-        R.string.pref_enable_msg_type_key,
-        R.string.pref_timeout_key,
-        R.string.pref_mms_timeout_key,
         R.string.pref_loglimit_key,
         R.string.pref_msgtimeout_key,
         R.string.pref_split_min_msg_key,
-        R.string.pref_rev_msg_order_key,
         R.string.pref_split_blank_ins_key,
         R.string.pref_split_chk_sender_key,
-        R.string.pref_split_keep_lead_break_key,
+        R.string.pref_rev_msg_order_key,
         R.string.pref_suppress_dup_msg_key,
-        R.string.pref_override_vendor_loc_key,
-        R.string.pref_activate_scanner_key,
-        R.string.pref_scanner_channel_key,
-        R.string.pref_scanner_channel_app_node_key,
         R.string.pref_publish_pages_key,
         
         R.string.pref_notif_enabled_key,
@@ -995,24 +785,24 @@ public class ManagePreferences {
         R.string.pref_flashled_pattern_custom_key,
 
         R.string.pref_notif_repeat_key,
+        R.string.pref_notif_repeat_times_key,
         R.string.pref_notif_repeat_interval_key,
-        R.string.pref_notif_timeout_key,
 
-        R.string.pref_history_limit_key,
-        R.string.pref_delete_unopen_key,
-        R.string.pref_map_network_chk_key,
-        R.string.pref_gps_map_option_key,
-        R.string.pref_report_position_key,
-        
         R.string.pref_popup_enabled_key,
+        R.string.pref_onlyShowOnKeyguard_key,
         R.string.pref_noShowInCall_key,
         R.string.pref_passthrusms_key,
         
         R.string.pref_screen_on_key,
+        R.string.pref_timeout_key,
         R.string.pref_textsize_key,
         R.string.pref_dimscreen_key,
         R.string.pref_privacy_key,
         R.string.pref_show_personal_key,
+
+        R.string.pref_history_limit_key,
+        R.string.pref_delete_unopen_key,
+        R.string.pref_autorotate_key,
         
         R.string.pref_button1_key,
         R.string.pref_button2_key,
@@ -1044,7 +834,6 @@ public class ManagePreferences {
         R.string.pref_install_date_key,
         R.string.pref_purchase_date_key,
         R.string.pref_free_rider_key,
-        R.string.pref_sponsor_key,
         R.string.pref_free_sub_key,
         R.string.pref_auth_location_key,
         R.string.pref_auth_extra_date_key,
@@ -1052,48 +841,15 @@ public class ManagePreferences {
         R.string.pref_auth_exempt_date_key,
         R.string.pref_auth_last_date_key,
         R.string.pref_auth_run_days_key,
-        R.string.pref_auth_last_check_time_key,
-        R.string.pref_prev_year_key,
-        R.string.pref_prev_purchase_date_key,
         
-        R.string.pref_registration_id_key,
-        R.string.pref_prev_registration_id_key,
-        R.string.pref_prev_version_code,
-        R.string.pref_register_req_active_key,
-        R.string.pref_register_req_key,
-        R.string.pref_reregister_delay_key,
-        R.string.pref_register_date_key,
-        R.string.pref_reconnect_key,
-        
-        R.string.pref_last_loc_time_key,
-        R.string.pref_last_loc_acc_key,
-        
-        R.string.pref_direct_page_active_key,
-        R.string.pref_last_gcm_event_type_key,
-        R.string.pref_last_gcm_event_time_key
+        R.string.pref_registration_id_key
     };
 
     Map<String, ?> map = prefs.mPrefs.getAll();
     
-    Object regId = null;
     for (int key : pref_keys) {
       String keyName = context.getString(key);
-      Object value = map.get(keyName);
-      if (key == R.string.pref_registration_id_key) regId = value;
-      if (key == R.string.pref_prev_registration_id_key) {
-        if (value != null && value.equals(regId)) value = "< Same >";
-      }
-      if (key == R.string.pref_last_gcm_event_time_key){
-        try {
-          long time = (Long)value;
-          if (time > 0) {
-            value = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS").format(time);
-          }
-        } catch (Exception ex) {
-          value = null;
-        }
-      }
-      sb.append(String.format("%s: %s\n", keyName, value));
+      sb.append(String.format("%s: %s\n", keyName, map.get(keyName)));
     }
 
     // Add locale info
@@ -1201,26 +957,6 @@ public class ManagePreferences {
     return result;
   }
   
-  protected long getLong(int resPrefId, long defValue) {
-    return mPrefs.getLong(context.getString(resPrefId), defValue);
-  }
-  
-  protected long getLong(int resPrefId) {
-    long result = mPrefs.getLong(context.getString(resPrefId), Long.MAX_VALUE);
-    if (result == Long.MAX_VALUE) throw new RuntimeException("No configured preference value found");
-    return result;
-  }
-  
-  protected float getFloat(int resPrefId, float defValue) {
-    return mPrefs.getFloat(context.getString(resPrefId), defValue);
-  }
-  
-  protected float getFloat(int resPrefId) {
-    float result = getFloat(resPrefId, Float.MAX_VALUE);
-    if (result == Float.MAX_VALUE) throw new RuntimeException("No configured preference value found");
-    return result;
-  }
-  
   protected void putBoolean(int resPrefId, boolean newVal) {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
@@ -1241,22 +977,6 @@ public class ManagePreferences {
     SharedPreferences.Editor settings = mPrefs.edit();
     String key = context.getString(resPrefId);
     settings.putInt(key, newVal);
-    settings.commit();
-    notifyListeners(key);
-  }
-
-  protected void putLong(int resPrefId, long newVal) {
-    SharedPreferences.Editor settings = mPrefs.edit();
-    String key = context.getString(resPrefId);
-    settings.putLong(key, newVal);
-    settings.commit();
-    notifyListeners(key);
-  }
-  
-  protected void putFloat(int resPrefId, float newVal) {
-    SharedPreferences.Editor settings = mPrefs.edit();
-    String key = context.getString(resPrefId);
-    settings.putFloat(key, newVal);
     settings.commit();
     notifyListeners(key);
   }

@@ -14,8 +14,7 @@ public class AuthDonateEvent extends DonateScreenEvent {
 
   protected AuthDonateEvent() {
     super(AlertStatus.GREEN, R.string.donate_auth_title, R.string.donate_auth_text,
-           ReqMoneyGroup.instance(),
-           DonateWhatsUpEvent.instance());
+           ReqMoneyGroup.instance());
   }
 
   @Override

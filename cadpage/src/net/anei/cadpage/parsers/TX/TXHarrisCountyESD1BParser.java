@@ -1,107 +1,65 @@
 package net.anei.cadpage.parsers.TX;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Harris County ESD #1, TX
+Contact: Nathan Mathews <nbmathews807@gmail.com>
+Contact: Richy Hancock <richy@huffmanfire.org>
+Sender: cadnoreply@proxy.hcec.com
+Sender: 930010nn
+ID#:11-06-20685 - - TRASH FIRE - 111 Bayou Dr - Apt:C - Bldg: - Key Map: 498D - Cross Streets:EAST FWY/MARKET - Box #:2002
+ID#:11-06-20710 - - FIRE - PreAlert - 16217 Ridlon - Apt: - Bldg: intra SERVICES - Key Map: 498C - Cross Streets:SHEILA LN/WOODLAND D
+ID#:11-06-20658 - - 29A1 MOTOR VEHICLE A - East Fwy / Delldale - Apt: - Bldg: - Key Map: 498E - Cross Streets: - Box #:2004
+ID#:11-06-20627 - - 29A1 MOTOR VEHICLE A - 16410 Ave D - Apt:1 - Bldg: AVE D APTS - Key Map: 498D - Cross Streets:WOODLAND DR/CEDAR L
+
+ID#:11-07-25331 - - ALARMS - 1518 Great Dover Cir - Apt: - Bldg: - Key Map: 458W
+ID#:11-07-25341 - 06D02 - 6D1 RESPIRATORY - 11870 Greenloch Ln - Apt: - Bldg: - Key Map: 416K - Cross Streets:GREENCANYON DR/GREENROC 
+ID#:11-07-25342 - 25A01 - PSYCHIATRIC - 15215 S Brentwood Dr - Apt: - Bldg: - Key Map: 498E - Cross Streets:Dead End/DELLDALE - Box #:2004
+ID#:11-07-25378 - - Stroke (CVA) - 11715 Greenglen Dr - Apt: - Bldg: - Key Map: 416K - Cross Streets:JOHN RALSTON RD/GREENROCK LN - B 
+ID#:11-07-25416 - - HEMORRHAGE/LACERATIO - 12370 S San Circle Dr - Apt: - Bldg: UNK TRAILER PARK - Key Map: 456C - Cross Streets:BARK 
+ID#:11-08-25733 - 55B04 - ELECTRICAL HAZARD - 16102 E Ih 10 - Apt: - Bldg: OLD RIVER CHURCH DAY - Key Map: 498G - Cross Streets:IH 10 EAST BAYOU RAMP/IH 10 SH -
+ID#:11-08-25969 - 29D02m - 29D5 MOTOR VEHICLE A - 539 S Sheldon Rd - Apt: - Bldg: - Key Map: 498K - Cross Streets:JACINTO PORT BLVD/MARKET - Box #:2001
+ID#:11-08-25936 - 29B04 - Traffic/Trans Incide - E BW 8 N / WOODFOREST BW 8 NB - Apt: - Bldg: - Key Map: 457Y - Cross Streets: - Box #:2005
+ID#:11-08-26006 - - Citizen Assist - 5500 E Bw 8 N - Apt: - Bldg: big tex storage - Key Map: 457Y - Cross Streets:BW 8 NB WALLISVILLE EXIT RAMP/ - Box #:2005
+ID#:11-08-28674 - Units:M151 - 32B01 - 32B1 UNKNOWN PROBLEM - 606 Commons Vista Dr - Apt: - Bldg: - Key Map: 298Q - Cross Streets:COM
+ID#:11-08-29430 - - FALLS - 17015 Faring Rd - Apt: - Bldg: - Key Map: 418X - Cro
+ID#:11-08-29436 - - ALARMS - 1714 Hidden Terrace Dr - Apt: - Bldg: - Key Map: 458S - Cross Streets:HIDDEN CREST DR/HIDDEN MANOR D - Box #:2005
+ID#:11-08-26039 - - FUEL SPILL - 15880 Wallisville Rd - Apt: - Bldg: LEGEND OAKS - EAST - Key Map: 457V - Cross Streets:HIDDEN PARK DR/HYACINTH PATH W - Box #:2005
+ID#:11-08-26105 - 21B01 - HEMORRHAGE/LACERATIO - 11803 Greenmesa Dr - Apt: - Bld
+ID#:11-08-26080 - 13D01 - DIABETIC PROBLEMS - 10710 Green River Dr - Apt: - Bldg
+ID#:11-08-26159 - - Stab / GSW (B) - 919 Holbech - Apt: - Bldg: - Key Map: 497D
+ID#:11-08-26160 - - HEART PROBLEMS - 9402 Abbotshall Ln - Apt: - Bldg: - Key Map: 456D - Cross Streets:ARBOR FIELD LN/STONEFIELD MANO - Box #:3304
+
+ID#:11-08-29410 - Address changed to:uvalde/kinsman - Cross Streets: - Key Map:NOT F
+ID#:11-08-26067 - Address changed to:620 SHELDON RD - Cross Streets:AVE C/RIDLON - Key Map:498B
+ID#:11-08-26080 - Address changed to:10710 Greens Crossing Blvd - Cross Streets
+
+ID#:11-08-29436 - UNIT:L32 - DISP: 21:06:25 - ER: - OUT: - TO: - AT: - AIR: 21:0
+
+*/
 
 public class TXHarrisCountyESD1BParser extends FieldProgramParser {
   
-  private static final Pattern REPORT_PTN = Pattern.compile("^ID#:[^ ]+ *- *UNIT:[^ ]+ .*- *DISP:");
-  private static final Pattern DELIM = Pattern.compile("(?<=^|[^\\d])-|-(?=[^\\d])");
+  private static final Pattern DELIM = Pattern.compile(" *(?: -)+ *| *(?:- )+ *");
 
   public TXHarrisCountyESD1BParser() {
     super("HARRIS COUNTY", "TX",
-           "( CODE_CALL ADDR UNIT! KM:MAP! Xst's:X " + 
-           "| ID/Z ADDRCH! Cross_Streets:X Key_Map:MAP " +
-           "| ( ID UNIT2? | UNIT ) CODE CALL! PREALERT? ADDR! Apt:APT! Bldg:PLACE Key_Map:MAP% Cross_Streets:X Box_#:BOX )");
+           "ID#:ID! ( ADDRCH! Cross_Streets:X Key_Map:MAP " + 
+           "| UNIT? CODE? CALL! PREALERT? ADDR! Apt:APT Bldg:APT Key_Map:MAP% Cross_Streets:X Box_#:BOX )");
   }
   
   @Override
   public String getFilter() {
-    return "cadnoreply@proxy.hcec.com,93001,agaleucia@avfd.com";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
+    return "cadnoreply@proxy.hcec.com,93001";
   }
   
   @Override
   public boolean parseMsg(String body, Data data) {
-    if (REPORT_PTN.matcher(body).find()) {
-      data.strCall = "RUN REPORT";
-      data.strPlace = body;
-      return true;
-    }
     return parseFields(DELIM.split(body), data);
-  }
-
-  @Override
-  public String getProgram() {
-    return super.getProgram() + " PLACE";
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("CODE_CALL")) return new CodeCallField();
-    if (name.equals("ID")) return new MyIdField();
-    if (name.equals("ADDRCH"))  return new AddressChangeField();
-    if (name.equals("UNIT")) return new MyUnitField();
-    if (name.equals("UNIT2")) return new MyUnit2Field();
-    if (name.equals("CODE")) return new MyCodeField();
-    if (name.equals("CALL")) return new MyCallField();
-    if (name.equals("PREALERT")) return new PreAlertField();
-    if (name.equals("APT")) return new MyAptField();
-    return super.getField(name);
-  }
-  
-  private static final Pattern CALL_CODE_PTN = Pattern.compile("(\\d{1,2}[a-z]\\d{1,2}[a-z]?) +([^ ].*)");
-  private class CodeCallField extends Field {
-    @Override
-    public boolean canFail() {
-      return true;
-    }
-    
-    @Override
-    public boolean checkParse(String field, Data data) {
-      Matcher match = CALL_CODE_PTN.matcher(field);
-      if (!match.matches()) return false;
-      data.strCode = match.group(1);
-      data.strCall = match.group(2);
-      return true;
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      if (!checkParse(field, data)) abort();
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CODE CALL";
-    }
-  }
-  
-  private class MyIdField extends IdField {
-    @Override
-    public boolean canFail() {
-      return true;
-    }
-    
-    @Override
-    public boolean checkParse(String field, Data data) {
-      if (!field.startsWith("ID#:")) return false;
-      super.parse(field.substring(4).trim(), data);
-      return true;
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      if (!checkParse(field, data)) abort();
-    }
   }
   
   // Address change field 
@@ -109,20 +67,14 @@ public class TXHarrisCountyESD1BParser extends FieldProgramParser {
     @Override
     public boolean checkParse(String field, Data data) {
       if (!field.startsWith("Address changed to:")) return false;
-      data.strCall = "Address changed to:";
       field = field.substring(19).trim();
       super.parse(field, data);
       return true;
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "CALL " + super.getFieldNames();
-    }
   }
   
   // Unit field only exists if it is tagged
-  private class MyUnit2Field extends MyUnitField {
+  private class MyUnitField extends UnitField {
     
     @Override
     public boolean canFail() {
@@ -137,35 +89,10 @@ public class TXHarrisCountyESD1BParser extends FieldProgramParser {
     }
   }
   
-  private static final Pattern UNIT_PTN = Pattern.compile("[A-Z]+[0-9]+|");
-  private class MyUnitField extends UnitField {
-    @Override
-    public void parse(String field, Data data) {
-      if (!UNIT_PTN.matcher(field).matches()) abort();
-      super.parse(field, data);
-    }
-  }
-  
   // Code field has to fit specific pattern
-  private static final Pattern CODE_PTN = Pattern.compile("\\d\\d[A-Z]\\d\\d[A-Za-z]?|");
   private class MyCodeField extends CodeField {
     public MyCodeField() {
-      setPattern(CODE_PTN, true);
-    }
-  }
-  
-  private class MyCallField extends CallField {
-    @Override
-    public void parse(String field, Data data) {
-      int pt = field.indexOf(' ');
-      if (pt >= 0) {
-        String code = field.substring(0,pt);
-        if (CODE_PTN.matcher(code).matches()) {
-          if (data.strCode.length() == 0) data.strCode = code;
-          field = field.substring(pt+1).trim();
-        }
-      }
-      super.parse(field, data);
+      setPattern(Pattern.compile("\\d\\d[A-Z]\\d\\d[A-Za-z]?"));
     }
   }
   
@@ -190,4 +117,15 @@ public class TXHarrisCountyESD1BParser extends FieldProgramParser {
       data.strApt = append(field, "-", data.strApt);
     }
   }
+  
+  @Override
+  public Field getField(String name) {
+    if (name.equals("ADDRCH"))  return new AddressChangeField();
+    if (name.equals("UNIT")) return new MyUnitField();
+    if (name.equals("CODE")) return new MyCodeField();
+    if (name.equals("PREALERT")) return new PreAlertField();
+    if (name.equals("APT")) return new MyAptField();
+    return super.getField(name);
+  }
+  
 }

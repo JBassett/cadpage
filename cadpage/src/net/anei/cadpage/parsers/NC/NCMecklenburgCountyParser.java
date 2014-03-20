@@ -1,12 +1,14 @@
 package net.anei.cadpage.parsers.NC;
 
 import net.anei.cadpage.parsers.GroupBestParser;
-import net.anei.cadpage.parsers.GroupBlockParser;
 
+/*
+Mecklenburg County, NC
+*/
 
 public class NCMecklenburgCountyParser extends GroupBestParser {
   
   public NCMecklenburgCountyParser() {
-    super(new NCMecklenburgCountyAParser(), new GroupBlockParser(), new NCMecklenburgCountyBParser());
+    super(new NCMecklenburgCountyAParser(), new NCMecklenburgCountyBParser());
   }
 }

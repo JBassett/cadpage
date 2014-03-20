@@ -33,6 +33,9 @@ public class TestNotificationDialogPreference extends DialogPreference {
 
     // Create a test SmsMmsMessage
     String testPhone = "123-456-7890";
+ //   SmsPopupDbAdapter mDbAdapter = new SmsPopupDbAdapter(context);
+
+  
 
     SmsMmsMessage message =
       new SmsMmsMessage(testPhone, "", context.getString(R.string.pref_notif_test_title),

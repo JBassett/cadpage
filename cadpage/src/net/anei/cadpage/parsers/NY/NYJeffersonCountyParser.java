@@ -6,6 +6,41 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Jefferson County, NY
+
+Contact: "jayscad@yahoo.com" <jayscad@yahoo.com>,jay greening <jagx91@gmail.com>
+Sender: tirescue@googlegroups.com
+BREATHING PROBL|18077 REED POINT RD:ORLEANS(T)|77 YO MALE DIFF BREATHING
+ABDOMINAL PAIN|18081 REED POINT RD:ORLEANS(T)|79F  :ProQA Medical Case Entry Finished You are responding to a patient with abdominal pain.  The patient is a  79-year-old female, who is conscious and breathing.  Abdominal Pain / Problems.  Caller Statement: ABDOMINAL PAIN.
+ASSIST-EMS|I 81 MM 176 N:ALEXANDRIA(T)|1 mile south of 50 in the north bound lane   vehicle appears to be stuck in mediun    unkn9ow if occupied  :3D63 REQUESTING EMS RESPOND.  ONE FEMALE OCCUPANT COMPLAINING OF WRIST PAIN.
+CHEST PAIN|622 JOHN ST:CLAYTON(V)|59 FEMALE/CARDIAC ISSUES
+MVA-PI|SHIMEL RD & STATE ROUTE 411:ORLEANS(T)|1 VEH OFF ROAD - MINOR INJURY
+FIRE ALARM|37382 ORLEANS CEMETERY RD:ORLEANS(T)|CAPUTO RESIDENCE GENERAL SMOKE ALARM
+(DISPATCH:4392) MVA-PI|I 81 MM 176 N:ALEXANDRIA(T)|SPUN OUT IN THE MIDDLE OF DRIVING LANE YELLOW SEDAN NORTHBOUND LANE. CALL 
+
+Sender: lvfd27@googlegroups.com
+FALL|34226 CARTER STREET RD:ORLEANS(T)|  CALLBACK=(315)489-3188 LAT=  LON=  
+UNC=    06315-489-3188 12/05 17:38:29  071                                 
+Verizon Wireless            WPH1                 Honey Flats Road - SW  
+Sector                   LaFargeville                  NY                     
+                                LAT:+044.158612  LON:-075.905035ELV:+00000  
+COF:1709      COP:100MTN:315-511-4647       CPF:VZW  -911ai.com-             
+ESN:01315
+
+Jay Greening <jagx91@hotmail.com>
+((LVFD) DISPATCH:4391,27FR) SICK PERSON|30950 STATE ROUTE 180  ;NORTHER NY AGRICULTRUAL MUSEUM:ORLEANS(T)|
+
+Contact: Mauser*Girl <mausergirl@gmail.com>
+From: 6245
+sentto-76513067-101-1314862564-3159559896=vtext.com@returns.groups.yahoo.com ([carthageambulance] DISPATCH:1191) FALL|1045 WEST ST:CARTHAGE(V)|83 Y/F FELL OUT OF BED BROKEN NOSE AN
+
+Contact: support@active911.com
+Agency name: Adams Fire Dept. 
+(DISPATCH:1) CHIMNEY FIRE|12636 COUNTY ROUTE 66:ADAMS(T)|CHIMNEY FIRE   CALLBACK=(315)783-7406 LAT=  LON= UNC=    05315-783-7406 03/08 13:43:40  086CAUTION:  WIRELESS CALL         WIRELESS-AT&amp;T MOBILITY(TCS) WPH1   18864         CADY RD                                        ADAMS CENTER                  NYCELL = 3034  SECTOR = 3                             LAT:+043.910222  LON:-075.996056ELV:+00000 COF:0         COP:000MTN:315-511-4609       CPF:ATTMO-911ai.com-            ESN:00888                                VERIFY PD                       VERIFY FD                       VERIFY EMS
+(DISPATCH:29,1) TEST-FIRE/EMS|310 S MAIN ST; MANNSVILLE MANOR FIRE DEPART:MANNSVILLE(V)|
+
+ */
 
 
 public class NYJeffersonCountyParser extends FieldProgramParser {
@@ -17,7 +52,6 @@ public class NYJeffersonCountyParser extends FieldProgramParser {
 
   @Override
   protected boolean parseMsg(String body, Data data) {
-    body = body.replace('\n', ' ').replaceAll("  +", " ");
     String[] flds = body.split("\\|", -1);
     if (flds.length != 3) return false;
     return parseFields(flds, data);
@@ -42,44 +76,9 @@ public class NYJeffersonCountyParser extends FieldProgramParser {
     }
   }
   
-  private static final Pattern CALLBACK_PTN = Pattern.compile("\\bCALLBACK=([^ ]*) LAT=([^ ]*) LON=([^ ]*)");
-  private static final Pattern LATLON_PTN = Pattern.compile("LAT:([^ ]*) +LON:([-+\\.0-9]*)");
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      int cutoff = field.length();
-      Matcher match = CALLBACK_PTN.matcher(field);
-      if (match.find()) {
-        cutoff = Math.min(cutoff, match.start());
-        data.strPhone = match.group(1);
-        setGPSLoc(append(match.group(2), " ", match.group(3)), data);
-      }
-      
-      if (data.strGPSLoc.length() == 0) {
-        match = LATLON_PTN.matcher(field);
-        if (match.find()) {
-          cutoff = Math.min(cutoff, match.start());
-          setGPSLoc(append(match.group(1), " ", match.group(2)), data);
-        }
-      }
-
-      int pt = field.indexOf(":ProQA");
-      if (pt >= 0) cutoff = Math.min(cutoff, pt);
-      
-      field = field.substring(0,cutoff).trim();
-      super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "INFO PHONE GPS";
-    }
-  }
-  
   @Override
   public Field getField(String name) {
     if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("INFO")) return new MyInfoField();
     return super.getField(name);
   }
 }

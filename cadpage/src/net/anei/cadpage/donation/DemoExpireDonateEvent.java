@@ -17,8 +17,7 @@ public class DemoExpireDonateEvent extends DonateScreenEvent {
            NoUserDonateEvent.instance(), 
            WrongUserDonateEvent.instance(),
            DonateExtraDayEvent.instance(),
-           ClearDataConfirmEvent.instance(),
-           DonateWhatsUpEvent.instance());
+           ClearDataConfirmEvent.instance());
   }
 
   @Override

@@ -1,11 +1,10 @@
 package net.anei.cadpage.parsers.MD;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 import net.anei.cadpage.parsers.GroupBestParser;
 
+/*
+Worcester County, MD
+*/
 
 public class MDWorcesterCountyParser extends GroupBestParser {
  
@@ -39,21 +38,6 @@ public class MDWorcesterCountyParser extends GroupBestParser {
     "SINNEPUXENT",
     "SOUTH POINT",
     "TAYLORVILLE",
-    "WHITEON",
-    
-    // Somerset County
-    "WESTOVER",
-    "PRINCESS ANNE",
-    
-    // Accomack County, VA
-    "HORNTOWN",
-    "NEW CHURCH",
-    "OAK HALL"
+    "WHITEON"
   };
-  
-  public static final Set<String> VA_CITY_SET = new HashSet<String>(Arrays.asList(new String[]{
-      "HORNTOWN",
-      "NEW CHURCH",
-      "OAK HALL"
-  }));
 }

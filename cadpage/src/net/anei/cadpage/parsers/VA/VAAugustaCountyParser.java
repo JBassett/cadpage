@@ -1,29 +1,40 @@
 package net.anei.cadpage.parsers.VA;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchOSSIParser;
 
-/**
- * Agusta County, VA
+/* 
+Agusta County, VA
+Contact: Josh Sprouse <firemedic1812@gmail.com>
+Contact: Christopher Botkin <botkincs@gmail.com>
+Sender:cad@co.augusta.va.us
+
+CAD: Chest Pain:81 Fountain Cave RD:RT 605 - Wonderly / 10203: Cave Hill LN:Rockfish RD
+CAD: OB EMERGENCY:WEYERS CAVE SHELL/ TEXACO:149 WEYERS CAVE RD:P O BOX 184:TRIANGLE DR:SR 222:CNTY-1
+CAD:LANDING ZONE:BEVERLEY MANOR ELEMENTARY SCH:116 CEDAR GREEN RD:STEVENS LN:PARKERSBURG TPKE
+CAD:AUTOMOBILE ACCIDENT:1519 PARKERSBURG TPKE:159-03:NUCKOLES LN:EIDSON HILL LN:CNTY-2
+CAD:CONTROL BURN INVESTIGATION:300-BLK TRINITY POINT RD:PARKERSBURG TPKE:MILLERS HOLLOW LN:CNTY-2
+CAD:AUTOMOBILE ACCIDENT:3426 MORRIS MILL RD:AREA OF:GALLOPING HILLS RD:SHELLEY LN
+CAD:ELECTRICAL FIRE - DLOC:135 CRAWFORD DR:CRAWFORD MANOR - 11104:MADISON DR:WAYBURN ST:CNTY-
+CAD:CONTROL BURN INVESTIGATION:3445 OLD GREENVILLE RD:RT 613 / 245-04:GLORY LN:CHESTNUT RIDGE RD:CNTY-2
+CAD:AUTOMOBILE ACCIDENT:I81NB AREA MM 217.9
+
+Contact: Doug Brydge <dbrydge@gmail.com>
+Sender: CAD@co.augusta.va.us
+CAD@co.augusta.va.us Msg: CAD:FYI: :AUTOMOBILE ACCIDENT:BROADVIEW ACRES:SANGERS LN/JEFFERSON HWY
+
  */
+
 public class VAAugustaCountyParser extends DispatchOSSIParser {
   
-  private static final Pattern DELIM_PTN = Pattern.compile("(?<!CAD|DIST|FYI|Update):");
-  
+  private static final Pattern MAP_PTN = Pattern.compile("\\b\\d{3}-?\\d{2}$");
   
   public VAAugustaCountyParser() {
-    this("AUGUSTA COUNTY", "VA");
-  }
-  
-  public VAAugustaCountyParser(String defCity, String defState) {
-    super(defCity, defState,
-           "FYI? CALL! ( ADDR/SZ! END | PLACE? ADDR/S! MAP? INFO+ )");
+    super("AUGUSTA COUNTY", "VA",
+           "FYI? EMPTY? CALL! PLACE? ADDR/S! MAP? EXTRA? X X INFO");
   }
   
   @Override
@@ -32,53 +43,11 @@ public class VAAugustaCountyParser extends DispatchOSSIParser {
   }
   
   @Override
-  public String getAliasCode() {
-    return "VAAugustaCounty";
-  }
-
-  @Override
   public boolean parseMsg(String body, Data data) {
-    body = DELIM_PTN.matcher(body).replaceAll(";");
-    return super.parseMsg(body, data);
-  }
-  
-  private class MyAddressField extends AddressField {
-    @Override
-    public boolean checkParse(String field, Data data) {
-      
-      // Anything starting with a digit is assumed to be an address
-      if (field.length() == 0) return false;
-      if (Character.isDigit(field.charAt(0))) {
-        parse(field, data);
-        return true;
-      }
-      
-      return super.checkParse(field, data);
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      int pt = field.indexOf(" - ");
-      if (pt >= 0) {
-        String city = field.substring(pt+3).trim();
-        field = field.substring(0,pt).trim();
-        if (CITY_SET.contains(city.toUpperCase())) {
-          data.strCity = city;
-        } else {
-          data.strPlace = append(data.strPlace, " - ", city);
-        }
-      }
-      super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return super.getFieldNames() + " CITY";
-    }
+    return super.parseMsg(body.replace(':',';').replace("CAD;","CAD:"), data);
   }
 
   // Map field recognizes and isolates a trailing map pattern
-  private static final Pattern MAP_PTN = Pattern.compile("\\b\\d{3}-?\\d{2}$");
   private class MyMapField extends MapField {
 
     @Override
@@ -99,90 +68,26 @@ public class VAAugustaCountyParser extends DispatchOSSIParser {
     }
   }
   
-  // Info field contains all kinds of sloppy stuff
-  private static final Pattern INFO_APT_PTN = Pattern.compile("(?:ROOM|RM|APT) *(.*)");
-  private static final Pattern INFO_CHANNEL_PTN = Pattern.compile("CNTY-.*|SEOC|WEOC");
-  private static final Pattern INFO_MAP_PTN = Pattern.compile("\\d{2,3}-\\d{2}");
-  private class MyInfoField extends InfoField {
+  // Extra field contains all kinds of sloppy stuff
+  private class ExtraField extends Field {
     
     @Override
     public void parse(String field, Data data) {
-      
-      // Info field are frequently broken up by slashes :(
-      for (String fld : field.split("/")) {
-        fld = fld.trim();
-        
-        if (fld.equals(data.strAddress)) continue;
-        
-        String tmp = fld.toUpperCase();
-        if (tmp.startsWith("PO ") || tmp.startsWith("P O ")) continue;
-        Matcher match = INFO_APT_PTN.matcher(fld);
-        if (match.matches()) {
-          data.strApt = append(data.strApt, "-", match.group(1));
-          continue;
-        }
-        
-        if (INFO_MAP_PTN.matcher(fld).matches()) {
-          data.strMap = fld;
-          continue;
-        }
-        
-        if (data.strChannel.length() == 0 && INFO_CHANNEL_PTN.matcher(fld).matches()) {
-          data.strChannel = fld;
-          continue;
-        }
-        
-        int pt = fld.indexOf('(');
-        if (pt >= 0) {
-          String city = fld.substring(0,pt).trim();
-          if (CITY_SET.contains(city.toUpperCase())) {
-            data.strCity = city;
-            continue;
-          }
-        }
-        
-        int addrStat = checkAddress(fld);
-        if (addrStat > 0) {
-          // If this is better than a naked road, see if
-          // we previously misidentified a place name as an
-          // address
-          if (addrStat > 1 && data.strPlace.length() == 0 && checkAddress(data.strAddress) == STATUS_STREET_NAME) {
-            data.strPlace = data.strAddress;
-            data.strAddress = "";
-            parseAddress(fld, data);
-            continue;
-          }
-          data.strCross = append(data.strCross, " & ", fld);
-          continue;
-        }
-        
-        if (data.strPlace.length() == 0) {
-          data.strPlace = fld;
-          continue;
-        }
-        
-        data.strSupp = append(data.strSupp, " / ", fld);
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "APT MAP PLACE X INFO CH";
+      String tmp = field.toUpperCase();
+      if (tmp.startsWith("PO ") || tmp.startsWith("P O ")) return;
+      if (data.strPlace.length() == 0) data.strPlace = field;
+      else data.strSupp = append(data.strSupp, " / ", field);
     }
   }
 
   @Override
   protected Field getField(String name) {
-    if (name.equals("ADDR")) return new MyAddressField();
     if (name.equals("MAP")) return new MyMapField();
-    if (name.equals("INFO")) return new MyInfoField();
+    if (name.equals("EXTRA")) return new ExtraField();
+    if (name.equals("FYI")) return new SkipField("FYI");
+    if (name.equals("EMPTY")) return new SkipField("");
     return super.getField(name);
   }
-
-  private static final Set<String> CITY_SET = new HashSet<String>(Arrays.asList(
-      "FISHERSVILLE",
-      "STAUNTON",
-      "WAYNSBORO"
-  ));
+  
   
 }

@@ -1,46 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="release_date">03162014</string>
-  <string name="release_version">v1.7.12</string>
+  <string name="release_date">05172012</string>
+  <string name="release_version">v1.5.37</string>
   <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
   <string name="release_magic_word2">quantum</string>
+  <string name="min_expire_date">10012012</string>
   <string name="release_text">
-Split screen timeout and notification timeout into two separate settings.\n
-\n
 New Locations:\n
-Talladega County, AL\n
-Madison County, IL\n
-Elkhart County, IN\n
-Atlantic County, NC\n
-Havelock, NC\n
-Summit County, OH (alt)\n
-Washington County, OH (alt)\n
-Tulsa, OK (alt)\n
-Delaware County, PA (alt)\n
-Greene County, PA\n
-Darlington County, SC\n
-Hunt County, TX\n
-Clarke County, VA\n
-Walla Walla County, WA\n
+Chester County, PA (alt)\n
+Lackawanna County, PA\n
+Susquehanna County, PA\n
+Washington County, RI\n
+Roanoke County, VA\n
 \n
 Location Parsing Fixes:\n
-Fresno County, CA\n
-Larimer County, CO\n
-Kankakee County, IL\n
-Porter County, IN\n
-Anne Arundel County, MD\n
-Greene County, MO\n
-Burlington County, NC\n
-Davie County, NC\n
+Tolland County, CT\n
+Prince George\'s County, MD\n
+Washington County, MD\n
+Suffolk County, NY\n
 Bucks County, PA\n
-Chester County, PA\n
-Bell County, TX\n
-Warren County, VA\n
-Grant County, WA\n
-Prince George, BC\n
+Erie County, PA\n
+Washgington County, PA\n
+Washington County, TN\n
+Bexar County, TX\n
+Louisa County, VA\n
 \n
-General Fixes:\n
-Fixed problem with screen not turning off after alert.\n
-  </string>
+Alas, lots of new location requests, falling behind again :(\n
+  </string>  
 </resources>
   

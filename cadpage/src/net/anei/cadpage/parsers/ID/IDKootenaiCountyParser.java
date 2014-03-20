@@ -1,16 +1,29 @@
 package net.anei.cadpage.parsers.ID;
 
-import java.util.Properties;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Kootenai County, ID
+Contact: "pbarkle1@mac.com" <pbarkle1@mac.com>
+Contact: "Larry & Elaine Simms" <lesimms@gmail.com>
+Contact: Paul Barkley <PFB@mac.com>
+System: Spillman coupled through Hiplink
+Sender: Varies
+
+KOOTENAI COUNTY SHERIFF KCFR\nFIRE STRUCTURE \n1576 W TUALATIN DR\nF1A  \nF1V\nOPS1 \nVISIBLE FLAMES    IN GARAGE\n13:12:17 04/30/2011 - T.TAYLOR\nRES IS UNOCC\n13:12:50 04/30/2011 - T.TAYLOR\nVEH IN GARAGE    RP SAYS HER HOUSE IS GOING TO BLOW UP\n13:13:00 04/30/2011 - D.WILSON       \nFLAME\nSent by CLI  Sat Apr 30 13:16:15 2011\n0000 Confirm 0001 Refuse TXT STOP to opt-out
+HAUS\nACCIDENT INJURY\nN WATERFORD LOOP & N HAUSER LAKE RD\nGW7A \nB751\nOPS4 \nMC ACCIDENT    WENT OFF RDWY    CAB    POSS BROKEN COLLARS     CUTS ON FACE   \nCONTROLLED
+KCFR\nFIRE STRUCTURE \nN SMITH LN & E MULLAN AVE\nF1C  \nF1V\nOPS1 \nTRAILER FULLY ENGULFED ON SMITH RD JUST OFF MULLAN   FLAMES FROM WINDOWS AND\nROOF \n10:49:32 05/28/20
+
+*/
+
 
 public class IDKootenaiCountyParser extends FieldProgramParser {
   
   public IDKootenaiCountyParser() {
-    super(CITY_CODES, "KOOTENAI COUNTY", "ID",
+    super("KOOTENAI COUNTY", "ID",
           "SRC CALL ADDR UNIT+? CH! INFO+");
   }
   
@@ -22,42 +35,15 @@ public class IDKootenaiCountyParser extends FieldProgramParser {
     int pt = body.indexOf("\nSent by CLI");
     if (pt >= 0) body = body.substring(0,pt).trim();
     
-    return parseFields(body.split("\n"), 5, data);
+    String[] flds = body.split("\n");
+    if (flds.length < 5) return false;
+    return parseFields(flds, data);
   }
   
-  @Override
-  public Field getField(String name) {
-    if (name.equals("ADDR")) return new  MyAddressField();
-    if (name.equals("UNIT")) return new MyUnitField();
-    if (name.equals("CH")) return new ChannelField("|OPS.*");
-    if (name.equals("INFO")) return new MyInfoField();
-    return super.getField(name);
-  }
-  
-  private class MyAddressField extends AddressField {
-    @Override
-    public void parse(String field, Data data) {
-      Parser p = new Parser(field);
-      data.strCity = convertCodes(p.getLastOptional(','), CITY_CODES);
-      parseAddress(p.get(';'), data);
-      String place = p.get();
-      if (place.startsWith("#")) {
-        data.strApt = append(data.strApt, "-", place.substring(1).trim());
-      } else {
-        data.strPlace = place;
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "ADDR APT PLACE CITY";
-    }
-  }
-  
-  private class MyUnitField extends UnitField {
-    @Override
-    public void parse(String field, Data data) {
-      data.strUnit = append(data.strUnit, " ", field);
+  // Radio channel must start with OPS
+  private class MyChannelField extends ChannelField {
+    public MyChannelField() {
+      setPattern(Pattern.compile("OPS.*"));
     }
   }
   
@@ -71,21 +57,10 @@ public class IDKootenaiCountyParser extends FieldProgramParser {
     }
   }
   
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "ATH", "ATHOL",
-      "BA",  "BAYVIEW",
-      "CDA", "COEUR D'ALENE",
-      "DG",  "DALTON GARDENS",
-      "FL",  "FERNAN LAKE",
-      "HA",  "HAYDEN",
-      "HAR", "HARRISON",
-      "HAU", "HAUSER LAKE",
-      "HL",  "HAYDEN LAKE",
-      "KEL", "KELLOGG", 
-      "MOS", "MOSCOW",
-      "PF",  "POST FALLS",
-      "RA",  "RATHDRUM",
-      "RL",  "ROSE LAKE",
-      "SL",  "SPIRIT LAKE"
-  });
+  @Override
+  public Field getField(String name) {
+    if (name.equals("CH")) return new MyChannelField();
+    if (name.equals("INFO")) return new MyInfoField();
+    return super.getField(name);
+  }
 }
