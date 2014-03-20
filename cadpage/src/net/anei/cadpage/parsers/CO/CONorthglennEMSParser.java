@@ -12,6 +12,6 @@ public class CONorthglennEMSParser extends DispatchProQAParser {
   
   @Override
   public String getFilter() {
-    return "@northglennambulance.com";
+    return "dispatch@northglennambulance.com";
   }
 }

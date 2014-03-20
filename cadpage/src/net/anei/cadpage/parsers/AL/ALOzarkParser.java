@@ -16,7 +16,6 @@ public class ALOzarkParser extends SmartAddressParser {
   
   public ALOzarkParser() {
     super("OZARK", "AL");
-    setFieldList("CALL ADDR APT X INFO NAME");
   }
   
   @Override

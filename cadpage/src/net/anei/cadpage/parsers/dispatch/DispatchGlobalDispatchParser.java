@@ -6,137 +6,84 @@ import java.util.regex.Pattern;
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+/*
+Gasconade County, MO
+
+MESSAGE / M50 CHEST PAIN  4449 MARIES CR 426 OUT OF COUNTY MapRegions:  CrossStreets: Description:  Dispatch: 3/25/2011 03:51:43\n\n\n\n\n
+MESSAGE / M51 MOTOR VEHICLE ACCIDENT-INJURIES  HWY 89  MapRegions:  CrossStreets: Description:  Dispatch: 3/26/2011 11:29:32\n\n\n\n\n
+MESSAGE / M51 MOTOR VEHICLE ACCIDENT-UNKNOWN INJ  HWY 89  MapRegions:  CrossStreets: Description:  Dispatch: 3/26/2011 11:39:53\n\n\n\n\n
+M51 FALL- PERSON FELL 408 N ALVARADO AVE BELLE MapRegions: CrossStreets: E BELAIR AVE 0.03 mi S E ROHRER DR 0.13 mi N Description: Dispatch: 3/24/2011 11:47:54
+M50 SICK PERSON- SICK CASE 4644 HIGHWAY B, Apt. BOX 14 GASCONADE COUNTY MapRegions: PAGE 103 CrossStreets: ELK HEAD RD 0.08 mi SW RED BIRD RD 0.46 mi N Description: HALF MILE SOUTH OF REDBIRD RD Dispatch: 3/24/2011 11:25:45
+M50 SICK PERSON- SICK CASE 901 W EIGHTH ST BELLE MapRegions: CrossStreets: S SHOCKLEY AVE 0.01 mi NE S APPLE AVE 0.19 mi E Description: Dispatch: 3/24/2011 21:05:48
+
+Contact:  bretth530 <bretth530@gmail.com>
+501 FALL- PERSON FELL FRENE VALLEY HEALTHCARE SOUTH 1016 W HIGHWAY 28 OWENSVILLE MapRegions: OFD SECTOR 1, PAGE 072 CrossStreets: HIGHWAY Y 0.05 mi N S L&D DR 0.44 mi SW Description: 96 YOA FALL BROKEN WRIST Dispatch: 4/3/2011 06:00:43
+501 ACCIDENTAL INJURY  1009 SPRINGFIELD RD, Apt. APT 21 OWENSVILLE MapRegions: OFD SECTOR 1, PAGE 065, PAGE 122 CrossStreets: CHERRY AVE 0.06 mi SE INDUSTRIAL DR 0.22 mi NE Description:  Dispatch: 4/6/2011 12:08:04\n\n\n\n
+O164 O171 O172 501 MOTOR VEHICLE ACCIDENT WITH RESCUE GASCONADE COUNTY E-911 405 E LINCOLN AVE OWENSVILLE MapRegions: OFD SECTOR 1, PAGE 073, PAGE 123 CrossStreets: OLIVE ST 0.08 mi E N WALNUT ST 0.04 mi W Description: TEST CALL FOR OFD***********TEST**********TEST Dispatch: 5/10/2011 1:39:36 PM Dispatch: 5/10/2011 1:39:36 PM Dispatch: 5/10/2011 1:39:36 PM Dispatch: 5/10/2011 1:39:36 PM
+O164 O171 O172 O170 501 726 O160 GAS LEAK OUTSIDE  2935 LAKE NORTHWOODS RD OWENSVILLE MapRegions: OFD SECTOR 1, PAGE 057, PAGE 117 CrossStreets: HIGHWAY 19 0.22 mi W Description: STRUTMANS. PROPANE TANK ROLLED OVER.\n\nCALLER STATES THAT HE WAS MOWING GRASS AND SAW THE PROPANE TANK ROLL OVER WITH GAS LEAKING . CALLER STATES THAT THE TANK IS ABOUT 50 FEET    FROM THE HOUSE. INITIAL CALLER STATES THAT HE KNOCKED ON THE DOOR WITH NO ANSWER, CALLER IS CALLING FROM THE NEIGHBORS HOUSE WHICH IS ALSO THE SISTER. ADVISED CALLER TO STAY AWAY AND STAY SAFE. CALLER IS STATING A VERY STRONG SMELL OF GAS . \n CALLED THE RP BACK AN\n More?
+502 TRAUMATIC INJURY  412 S CUBA ST OWENSVILLE MapRegions: OFD SECTOR 1, PAGE 073, PAGE 125 CrossStreets: E JEFFERSON AVE 0.06 mi N E MADISON AVE 0.02 mi SW Description:  Dispatch: 5/11/2011 18:14:27\n\n\n\n
+
+Ray County, MO
+
+RCAD WHFD FALLS 514 ARAPAHOE DR  HOMESTEAD VILLAGE CrossStreets: CHEROKEE DR 0.05 mi W HIGHWAY Y 0.16 mi E Description: BETTY JAMES 85 YO FEMALE\nFAL
+LFD EMS 31004 NOTTINGHAM LN   Description:  CrossStreets: SILVEY RD 6443.06 mi NW SILVEY RD 6443.06 mi NW
+WHFD RCAD FALLS 33408 W 160TH ST  RAY COUNTY Description: 91 yof\nfell from standing position\nconsious and breathing\ncomplaining of l hip pain\nup in 
+WHFD RCAD RCSO DEATH 32534 MAGNOLIA LN  RAY COUNTY Description: 61 yo female\n
+WHFD RCAD TRAUMATIC INJURIES (SPECIFIC) 2062 E RIDGE DR  RAY COUNTY Description: 15 YO MALE\nBICYLCE ACCIDENT\nFELL FROM BIKE\nCONSCIOUS\nBREATHING\nNO S
+WHFD RCAD M43 800 ABDOMINAL PAIN 12595 ORRICK RD  RAY COUNTY Description: 28 YOLD FEMALE \nCONS AND BREATH \nSEVERE STOMACH PAIN LOWER ABDOMEN \nLUPUS
+
+LMED1 LSQ1 L602 SICK PERSON (SPECIFIC DIAGNOSIS) 215 E 5TH ST 3A LAWSON Description: 123254415\nPT IS PATRICIA BIDDIX\nHIGH BP\n67 YO FEMALE\nBURNING SE
+LMED1 HEART PROBLEM / AICD 618 SHEPHERD LN   Description: 17 YO Rapid Heart rate\n\n
+LMED1 LSQ1 L602 SICK PERSON (SPECIFIC DIAGNOSIS) 316 KINGS DR  LAWSON Description: 90 yof\nill since for in morning\nhigh sugar\nbreathing difficulty\nu
+LMED1 LSQ1 L602 SEIZURE 34030 W 204TH ST  RAY COUNTY Description: camp wilderness retreat\n13/f\nbreathing\ncons\nseizing at this time\n1st seizure for a
+LMED1 LSQ1 L602 LACERATION 202 E MOSS ST  LAWSON Description: puncture wound in l foot\n42 yof\nconsious and breathing\nnausea CrossStreets: S DONIPHAN
+
+800 WHP1 WHT2 WHSQ1 LP4 LP1 LT1 OT2 RFD RCAD WHFD WHR1 FIRE STRUCTURE 11783 SIEGEL CEMETERY RD  RAY COUNTY Description: EXCELSIOR SPRINGS\nOUTSIDE CI
+800 WHB1 WHT2 WHFD WHR1 FIRE NATURAL COVER OR BRUSH 33637 HIGHWAY U  RAY COUNTY Description: SMALL BRUSH FIRE THAT IS NEXT TO A CROP FIELD\nRP IS STA
+WHP1 800 WHFD WHR1 FIRE ALARM 34684 HIGHWAY 10  RAY COUNTY Description: gen fire alarm. covers all zones\n\nkeyholder ron rouse 816-864-4434
+
+107 N RAYMORE ST  WOOD HEIGHTS WHFD RCAD RCSO 800 M42 WHR1 678 Clear: 22:48:39 Available: 23:34:02
+15595 BLACKBERRY TRAIL  WHFD 800 LFD 802 LT1 LP1 WHP1 Dispatch: 5/24/2011 23:15:33 Enroute: 23:15:35 OnScene: 23:23:58
+15141 W COUNTY LINE RD  RAY COUNTY WHFD RCAD 671A 675A 800 M44 WHR1 Clear: 22:20:51 Available: 23:05:20
+
+672 671A RCAD WHFD MENTAL 10-96 15041 S BEACH FRONT DR  CRYSTAL LAKES Description: 16 yr old male\n6'1 205\nl CrossStreets: APACHE DR 0.07 mi E EAGLE 
+
+*/
+
+
 public class DispatchGlobalDispatchParser extends FieldProgramParser {
   
-  // Station and unit codes lead the call/address field
   public static final int LEAD_SRC_UNIT_ADDR = 1;
-  
-  // Station and unit codes follow the call/address field
   public static final int TRAIL_SRC_UNIT_ADDR = 2;
-  
-  // Call description follows the address
-  public static final int CALL_FOLLOWS_ADDR = 4;
-  
-  // Place name occurs between address and city name
-  public static final int PLACE_FOLLOWS_ADDR = 8;
-  
-  private static final Pattern CALL_NUMBER_PTN = Pattern.compile("^Call Number: *(\\d+) +");
-  private static final Pattern KEYWORD_PTN = Pattern.compile("(?:MapRegions|Description|CrossStreets|Description|Dispatch|Primary_Incident|):");
-  private static final Pattern DELIM_PTN = Pattern.compile("\n| (?=CrossStreets:|Dispatch:)");
   
   private Pattern stationPtn;
   private Pattern unitPtn;
   private boolean leadStuff;
   private boolean trailStuff;
   
-  private String select;
-  
-  public DispatchGlobalDispatchParser(String defCity, String defState) {
-    this(null, defCity, defState, 0, null, null);
-  }
-  
   public DispatchGlobalDispatchParser(String[] cityList, String defCity, String defState) {
     this(cityList, defCity, defState, 0, null, null);
-  }
-  
-  public DispatchGlobalDispatchParser(String defCity, String defState, int flags) {
-    this(null, defCity, defState, flags, null, null);
-  }
-  
-  public DispatchGlobalDispatchParser(String[] cityList, String defCity, String defState, int flags) {
-    this(cityList, defCity, defState, flags, null, null);
   }
   
   public DispatchGlobalDispatchParser(String[] cityList, String defCity, String defState,
                                        int flags, Pattern stationPtn, Pattern unitPtn) {
     super(cityList, defCity, defState,
-          calcAddressTerm(flags, cityList != null) +
-          " Call_Received_Time:DATE_TIME_CITY MapRegions:MAP Description:INFO INFO+ CrossStreets:X PLACE Description:INFO INFO+ Dispatch:DATETIME Primary_Incident:ID Call_Number:ID Description:INFO INFO+ ReferenceText:INFO Dispatch:SKIP");
+           "ADDR/SC! MapRegions:MAP Description:INFO CrossStreets:X Description:INFO Dispatch:DATETIME Dispatch:SKIP");
     this.stationPtn = stationPtn;
     this.unitPtn = unitPtn;
     leadStuff = (flags & LEAD_SRC_UNIT_ADDR) != 0;
     trailStuff = (flags & TRAIL_SRC_UNIT_ADDR) != 0;
   }
   
-  private static final String calcAddressTerm(int flags, boolean inclCity) {
-    StringBuilder sb = new StringBuilder("( SELECT/NEW ");
-    if ((flags & LEAD_SRC_UNIT_ADDR) != 0) sb.append("UNIT ");
-    if ((flags & CALL_FOLLOWS_ADDR) == 0) sb.append("CALL! ");
-    sb.append("ADDR! ");
-    if (inclCity) sb.append("CITY? ");
-    if ((flags & CALL_FOLLOWS_ADDR) != 0) sb.append("( CALL! Primary_Incident:ID! | PLACE CALL! ) ");
-    if ((flags & TRAIL_SRC_UNIT_ADDR) != 0) sb.append("UNIT ");
-    sb.append(" | ADDR2/S");
-    sb.append((flags & CALL_FOLLOWS_ADDR) != 0 ? "XC" : "CX");
-    if ((flags & PLACE_FOLLOWS_ADDR) != 0) sb.append('P');
-    sb.append("! )");
-    return sb.toString();
-  }
-  
   @Override
   public boolean parseMsg(String body, Data data) {
-    Matcher match = CALL_NUMBER_PTN.matcher(body);
-    if (match.find()) {
-      data.strCallId = match.group(1);
-      body = body.substring(match.end());
-    }
-    
-    // See if this is the new fangled line break separated format
-    // Beware of false positives, occasionally an old format will
-    // have enough newlines to trigger the old logic
-    match = KEYWORD_PTN.matcher(body);
-    int pt = (match.find() ? match.start() : body.length());
-    if (body.substring(0,pt).contains("\n")) {
-      select = "NEW";
-      if (!parseFields(DELIM_PTN.split(body), data)) return false;
-      if (data.strMap.length() > 0 || data.strSupp.length() > 0 || 
-          data.strCross.length() > 0 || data.strTime.length() > 0) return true;
-      
-      // Still questionable.  If there is a unit field and pattern, see if
-      // they match
-      if (data.strUnit.length() > 0 && unitPtn != null) {
-        boolean good = true;
-        for (String unit : data.strUnit.split(" +")) {
-          if (!unitPtn.matcher(unit).matches()) {
-            good = false;
-            break;
-          }
-        }
-        if (good) return true;
-      }
-      return false;
-    }
-    
-    // Otherwise use the standard line break format
-    select = "OLD";
     if (! super.parseMsg(body, data)) return false;
     if (data.strCall.length() == 0) return false;
     if (data.strCity.length() == 0 && data.strUnit.length() == 0 && data.strCross.length() == 0 && !body.contains(" Description:")) return false;
     return true;
   }
   
-  @Override
-  public String getProgram() {
-    return "ID " + super.getProgram();
-  }
-  
-  
-  @Override
-  protected String getSelectValue() {
-    return select;
-  }
-
-  protected class BaseAddressField extends AddressField {
-    
-    @Override
-    public void parse(String field, Data data) {
-      field = field.replaceAll(",", "");
-      super.parse(field, data);
-    }
-  }
-
-
-  protected class BaseAddress2Field extends AddressField {
+  private class MyAddressField extends AddressField {
     
     @Override
     public void parse(String field, Data data) {
@@ -150,14 +97,12 @@ public class DispatchGlobalDispatchParser extends FieldProgramParser {
         // each word as station, unit or neither
         String[] words = field.split(" +");
         int[] types = new int[words.length];
-        int stReg = 0;
-        if (leadStuff) {
-          for (stReg = 0; stReg<words.length; stReg++) {
-            String word = words[stReg];
-            types[stReg] = (stationPtn != null && stationPtn.matcher(word).matches() ? 1 :
-                            unitPtn != null && unitPtn.matcher(word).matches() ? 2 : 0);
-            if (types[stReg] == 0) break;
-          }
+        int stReg;
+        for (stReg = 0; stReg<words.length; stReg++) {
+          String word = words[stReg];
+          types[stReg] = (stationPtn != null && stationPtn.matcher(word).matches() ? 1 :
+                          unitPtn != null && unitPtn.matcher(word).matches() ? 2 : 0);
+          if (types[stReg] == 0) break;
         }
         int endReg = words.length-1;
         if (stReg < words.length) {
@@ -195,23 +140,8 @@ public class DispatchGlobalDispatchParser extends FieldProgramParser {
     }
   }
   
-  private class BaseDateTimeCityField extends Field {
-    @Override
-    public void parse(String field, Data data) {
-      Parser p = new Parser(field);
-      data.strDate = p.get(' ');
-      data.strTime = p.get(' ');
-      data.strCity = p.get();
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "DATE TIME CITY";
-    }
-  }
-  
   private static final Pattern DATE_TIME_PTN = Pattern.compile("\\[(\\d\\d/\\d\\d/\\d{4}) (\\d\\d:\\d\\d:\\d\\d) \\d+\\]");
-  protected class BaseInfoField extends InfoField {
+  private class MyInfoField extends InfoField {
     @Override
     public void parse(String field, Data data) {
       Matcher match = DATE_TIME_PTN.matcher(field);
@@ -222,24 +152,15 @@ public class DispatchGlobalDispatchParser extends FieldProgramParser {
         if (field.startsWith("/ ")) field = field.substring(2).trim(); 
       }
       field = field.replaceAll("\\s{2,}", " ");
-      data.strSupp = append(data.strSupp, ". ", field);
-    }
-  }
-
-  private class BaseIdField extends IdField {
-    @Override
-    public void parse(String field, Data data) {
-      data.strCallId = append(data.strCallId, "/", field);
+      super.parse(field, data);
     }
   }
   
+  
   @Override
   public Field getField(String name) {
-    if (name.equals("ADDR")) return new BaseAddressField();
-    if (name.equals("ADDR2")) return new BaseAddress2Field();
-    if (name.equals("DATE_TIME_CITY")) return new BaseDateTimeCityField();
-    if (name.equals("INFO")) return new BaseInfoField();
-    if (name.equals("ID")) return new BaseIdField();
+    if (name.equals("INFO")) return new MyInfoField();
+    if (name.equals("ADDR")) return new MyAddressField();
     return super.getField(name);
   }
 }

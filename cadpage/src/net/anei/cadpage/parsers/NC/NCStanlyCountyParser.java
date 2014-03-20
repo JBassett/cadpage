@@ -11,6 +11,18 @@ import net.anei.cadpage.parsers.dispatch.DispatchOSSIParser;
 
 public class NCStanlyCountyParser extends DispatchOSSIParser {
   
+  private static final Properties CITY_CODES = buildCodeTable(new String[]{
+      "ALB", "ALBEMARLE",
+      "BAD", "BADIN",
+      "LOC", "LOCUST",
+      "MTP", "MT PLEASANT",
+      "NEW", "NEW LONDON",
+      "NOR", "NORWOOD",
+      "OAK", "OAKBORO",
+      "RFD", "RICHFIELD",
+      "SFD", "STANFIELD"
+  });
+  
   private List<String> addressList = new ArrayList<String>();
   
   public NCStanlyCountyParser() {
@@ -26,9 +38,9 @@ public class NCStanlyCountyParser extends DispatchOSSIParser {
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
-    if (!body.startsWith("CAD:")) body = "CAD:" + body;
+    boolean result = super.parseMsg(subject, body, data);
     addressList.clear();
-    return super.parseMsg(subject, body, data);
+    return result;
   }
   
   // Things get complicated here, the address field just accumulates fields
@@ -53,7 +65,7 @@ public class NCStanlyCountyParser extends DispatchOSSIParser {
       int addrNdx = addressList.size()-1;
       if (addrNdx < 0) abort();
       String sAddr = addressList.get(addrNdx);
-      if (addrNdx > 0 && checkAddress(sAddr) == STATUS_STREET_NAME) {
+      if (addrNdx > 0 && checkAddress(sAddr) == 1) {
         sAddr = addressList.get(--addrNdx) + " & " + sAddr;
       }
       parseAddress(sAddr, data);
@@ -73,17 +85,4 @@ public class NCStanlyCountyParser extends DispatchOSSIParser {
     if (name.equals("ADDR")) return new MyAddressField();
     return super.getField(name);
   }
-  
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "ALB", "ALBEMARLE",
-      "BAD", "BADIN",
-      "GLH", "GOLD HILL",
-      "LOC", "LOCUST",
-      "MTP", "MT PLEASANT",
-      "NEW", "NEW LONDON",
-      "NOR", "NORWOOD",
-      "OAK", "OAKBORO",
-      "RFD", "RICHFIELD",
-      "SFD", "STANFIELD"
-  });
 }

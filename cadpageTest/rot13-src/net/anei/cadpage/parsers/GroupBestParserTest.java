@@ -5,44 +5,12 @@ vzcbeg arg.narv.pnqcntr.cnefref.PB.PBNqnzfPbhaglCnefre;
 vzcbeg arg.narv.pnqcntr.cnefref.PB.PBObhyqrePbhaglCnefre;
 vzcbeg arg.narv.pnqcntr.cnefref.PB.PBJryqPbhaglCnefre;
 vzcbeg arg.narv.pnqcntr.cnefref.PB.PBAbegutyraaRZFCnefre;
-vzcbeg arg.narv.pnqcntr.cnefref.AW.AWZreprePbhaglCnefre;
-vzcbeg arg.narv.pnqcntr.cnefref.GK.GKZbagtbzrelPbhaglCnefre;
-vzcbeg arg.narv.pnqcntr.cnefref.trareny.TrarenyCnefre;
 
 vzcbeg bet.whavg.Grfg;
 vzcbeg fgngvp bet.whavg.Nffreg.*;
 
 
 choyvp pynff TebhcOrfgCnefreGrfg rkgraqf OnfrCnefreGrfg {
-  
-  @Grfg
-  choyvp ibvq grfgCeboyrz() {
-  }
-  
-  @Grfg
-  choyvp ibvq grfgTrarenyNyreg() {
-    
-    frgCnefre(arj TebhcOrfgCnefre(arj TrarenyCnefre(), arj GKZbagtbzrelPbhaglCnefre()), "", "");
-    frgRkcYbpPbqr("GKZbagtbzrelPbhaglO");
-    frgQrsnhygf("ZBAGTBZREL PBHAGL", "GK");
-
-    qbGrfg("G17",
-        "(PNQ Zrffntr) 13-008577 - 7) 04/16/2013 18:45:46 18:45:46.000-[7] [Abgvsvpngvba] [Jbbqynaqf Sver]-Ceboyrz punatrq sebz Snyy gb Hapbafpvbhf/Snvagvat ol Jbbqynaqf Sver [Funerq]",
-        "PNYY:TRARENY NYREG",
-        "VQ:13-008577 - 7",
-        "CYNPR:[Jbbqynaqf Sver]-Ceboyrz punatrq sebz Snyy gb Hapbafpvbhf/Snvagvat ol Jbbqynaqf Sver",
-        "QNGR:04/16/2013",
-        "GVZR:18:45:46");
-    
-    frgCnefre(arj TebhcOrfgCnefre(arj TrarenyCnefre(), arj AWZreprePbhaglCnefre()), "", "");
-    frgRkcYbpPbqr("AWZreprePbhagl");
-    frgQrsnhygf("ZREPRE PBHAGL", "AW");
-    qbGrfg("G2",
-        "HAVG: YF6 ; YNGR GHEA-NEBHAQ ;CYRNFR PNYY YVSRPBZZ JVGU LBHE FGNGHF ; (#1\e\a",
-        "HAVG:YF6",
-        "PNYY:TRARENY NYREG",
-        "CYNPR:YNGR GHEA-NEBHAQ ;CYRNFR PNYY YVSRPBZZ JVGU LBHE FGNGHF ; (#1");
-  }
   
   @Grfg
   choyvp ibvq grfgErnyCnefre() {
@@ -339,52 +307,12 @@ choyvp pynff TebhcOrfgCnefreGrfg rkgraqf OnfrCnefreGrfg {
     nffregRdhnyf("cynpr", rkcCynpr, zft.trgVasb().trgCynpr());
   }
   
-  @Grfg
-  choyvp ibvq grfgNyvnfvat1() {
-    ZftCnefre cnefre = arj TebhcOrfgCnefre(
-        arj GrfgTebhcCnefre("ORAGBA PBHAGL", "BE", "111,222", "C1", "KK", gehr),
-        arj GrfgTebhcCnefre("ORAGBA PBHAGL", "BE", "111,222", "C2", "KK", gehr)
-    );
-    nffregRdhnyf("Svygre", "111,222", cnefre.trgSvygre());
-    nffregRdhnyf("Ybpanzr", "Oragba Pbhagl, BE", cnefre.trgYbpAnzr());
-    qbNyvnfGrfg(cnefre, "111", "ORAGBA PBHAGL", "BE");
-    qbNyvnfSnvy(cnefre, "333");
-  }
-  
-  @Grfg
-  choyvp ibvq grfgNyvnfvat2() {
-    ZftCnefre cnefre = arj TebhcOrfgCnefre(
-        arj GrfgTebhcCnefre("ORAGBA PBHAGL", "BE", "111,222", "C1", "KK", gehr),
-        arj GrfgTebhcCnefre("YVAA PBHAGL", "BE", "111,333", "C2", "KK", gehr)
-    );
-    nffregRdhnyf("Svygre", "111,222,333", cnefre.trgSvygre());
-    nffregRdhnyf("Ybpanzr", "", cnefre.trgYbpAnzr());
-    qbNyvnfGrfg(cnefre, "111", "", "BE");
-    qbNyvnfGrfg(cnefre, "222", "", "BE");
-    qbNyvnfGrfg(cnefre, "333", "", "BE");
-    qbNyvnfSnvy(cnefre, "444");
-  }
-  
-  cevingr ibvq qbNyvnfGrfg(ZftCnefre cnefre, Fgevat fraqre, Fgevat rkcPvgl, Fgevat rkcFgngr) {
-    Zrffntr zft = arj Zrffntr(snyfr, fraqre, "GRFG FHOWRPG", "GRFG ZFT", gehr, snyfr);
-    nffregGehr("Zft cnefr snvyrq", cnefre.vfCntrZft(zft, 0));
-    ZftVasb vasb = zft.trgVasb();
-    nffregRdhnyf("PNYY", "NBX", vasb.trgPnyy());
-    nffregRdhnyf("QPVGL", rkcPvgl, vasb.trgQrsPvgl());
-    nffregRdhnyf("QFG", rkcFgngr, vasb.trgQrsFgngr());
-  }
-  
-  cevingr ibvq qbNyvnfSnvy(ZftCnefre cnefre, Fgevat fraqre) {
-    Zrffntr zft = arj Zrffntr(snyfr, fraqre, "GRFG FHOWRPG", "GRFG ZFT", gehr, snyfr);
-    nffregSnyfr("Zft cnefr qvq abg snvy", cnefre.vfCntrZft(zft, 0));
-  }
-
   // Grfg zrffntr gung ergnvaf ybpngvba pbqr
   cevingr fgngvp pynff GrfgZrffntr rkgraqf Zrffntr {
     cevingr Fgevat ybpngvba;
 
     choyvp GrfgZrffntr(Fgevat nqqerff, Fgevat obql) {
-      fhcre(snyfr, nqqerff, "", obql, gehr, snyfr);
+      fhcre(snyfr, nqqerff, "", obql);
     }
     
     @Bireevqr
@@ -433,44 +361,6 @@ choyvp pynff TebhcOrfgCnefreGrfg rkgraqf OnfrCnefreGrfg {
       } ryfr {
         qngn.fgePnyy = anzr;
       }
-      erghea gehr;
-    }
-  }
-  
-  cevingr fgngvp pynff GrfgTebhcCnefre rkgraqf ZftCnefre {
-    
-    cevingr Fgevat svygre;
-    cevingr Fgevat cnefrePbqr;
-    cevingr Fgevat nyvnfPbqr;
-    cevingr obbyrna cnff;
-    
-    choyvp GrfgTebhcCnefre(Fgevat qrsPvgl, Fgevat qrsFgngr, Fgevat svygre, Fgevat cnefrePbqr, Fgevat nyvnfPbqr, obbyrna cnff) {
-      fhcre(qrsPvgl, qrsFgngr);
-      guvf.svygre = svygre;
-      guvf.cnefrePbqr = cnefrePbqr;
-      guvf.nyvnfPbqr = nyvnfPbqr;
-      guvf.cnff = cnff;
-    }
-
-    @Bireevqr
-    choyvp Fgevat trgSvygre() {
-      erghea svygre;
-    }
-    
-    @Bireevqr
-    choyvp Fgevat trgCnefrePbqr() {
-      erghea cnefrePbqr;
-    }
-    
-    @Bireevqr
-    choyvp Fgevat trgNyvnfPbqr() {
-      erghea nyvnfPbqr;
-    }
-
-    @Bireevqr
-    cebgrpgrq obbyrna cnefrZft(Fgevat fgeZrffntr, Qngn qngn) {
-      vs (!cnff) erghea snyfr;
-      qngn.fgePnyy = "NBX";
       erghea gehr;
     }
   }

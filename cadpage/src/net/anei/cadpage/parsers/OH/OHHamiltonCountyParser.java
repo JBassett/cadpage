@@ -11,21 +11,14 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 public class OHHamiltonCountyParser extends SmartAddressParser {
   
   private static final Pattern MASTER = Pattern.compile("HC:(.*?)(?: \\*\\*? (.*?) \\*\\*( .*?)??)?(?: (\\d{1,2}:\\d\\d)( .*)?)?");
-  private static final Pattern APT_PTN = Pattern.compile("(.*?) +APT: *([^ ]+) +(.*)");
  
   public OHHamiltonCountyParser() {
     super(CITY_CODES, "HAMILTON COUNTY", "OH");
-    setFieldList("ADDR CITY APT PLACE CALL INFO TIME UNIT X");
   }
   
   @Override
   public String getFilter() {
     return "hc@hamilton-co.org,9300,messaging@iamresponding.com,6245";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
   }
   
   @Override
@@ -44,7 +37,7 @@ public class OHHamiltonCountyParser extends SmartAddressParser {
     // call description in front of the address that duplicates the
     // asterisk delimited field so we just skip it
     if (call != null) {
-      parseAddress(StartType.START_OTHER, addr, data);
+      parseAddress(StartType.START_SKIP, addr, data);
       String sPlace = getLeft();
       if (sPlace.startsWith("APT ")) {
         Parser p = new Parser(sPlace.substring(4).trim());
@@ -59,23 +52,7 @@ public class OHHamiltonCountyParser extends SmartAddressParser {
     
     // New format just has one field with a call description, address, and additional information
     else {
-      
-      // Sometimes the put an APT: label and field between the call and address
-      // which makes things easier
-      StartType st = StartType.START_CALL;
-      int flags = FLAG_START_FLD_REQ;
-      match = APT_PTN.matcher(addr);
-      if (match.matches()) {
-        st = StartType.START_ADDR;
-        flags = 0;
-        data.strCall = match.group(1);
-        data.strApt = match.group(2);
-        addr = match.group(3);
-      }
-      
-      // otherwise we have to do this the hard way.
-      
-      parseAddress(st, flags, addr, data);
+      parseAddress(StartType.START_CALL, addr, data);
       info = getLeft();
       if (info.startsWith("LOC:")) {
         info = info.substring(4).trim();
@@ -83,14 +60,6 @@ public class OHHamiltonCountyParser extends SmartAddressParser {
         if (pt >= 0) info = info.substring(0,pt).trim();
         data.strPlace = info;
       } else {
-        int pt = info.indexOf(" Original Location :");
-        if (pt >= 0) {
-          String place = info.substring(pt+20).trim();
-          if (!data.strAddress.contains(place)) {
-            data.strPlace = place;
-          }
-          info = info.substring(0,pt).trim();
-        }
         data.strSupp = info;
       }
     }

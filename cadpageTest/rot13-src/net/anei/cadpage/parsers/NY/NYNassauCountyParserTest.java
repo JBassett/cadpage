@@ -44,30 +44,6 @@ choyvp pynff ALAnffnhPbhaglCnefreGrfg {
     }
   }
   
-  choyvp fgngvp pynff GrfgU rkgraqf ALAnffnhPbhaglUCnefreGrfg {
-    choyvp GrfgU() {
-      frgCnefre(arj ALAnffnhPbhaglCnefre());
-    }
-  }
-  
-  choyvp fgngvp pynff GrfgV rkgraqf ALAnffnhPbhaglVCnefreGrfg {
-    choyvp GrfgV() {
-      frgCnefre(arj ALAnffnhPbhaglCnefre());
-    }
-  }
-  
-  choyvp fgngvp pynff GrfgW rkgraqf ALAnffnhPbhaglWCnefreGrfg {
-    choyvp GrfgW() {
-      frgCnefre(arj ALAnffnhPbhaglCnefre());
-    }
-  }
-  
-  choyvp fgngvp pynff GrfgX rkgraqf ALAnffnhPbhaglXCnefreGrfg {
-    choyvp GrfgX() {
-      frgCnefre(arj ALAnffnhPbhaglCnefre());
-    }
-  }
-  
   choyvp fgngvp pynff GrfgErqNyreg rkgraqf ALAnffnhPbhaglErqNyregCnefreGrfg {
     choyvp GrfgErqNyreg() {
       frgCnefre(arj ALAnffnhPbhaglCnefre());
@@ -91,9 +67,5 @@ choyvp pynff ALAnffnhPbhaglCnefreGrfg {
       frgCnefre(arj ALAnffnhPbhaglCnefre());
     }
   }
-  choyvp fgngvp pynff GrfgOrgucntr rkgraqf ALAnffnhPbhaglOrgucntrCnefreGrfg {
-    choyvp GrfgOrgucntr() {
-      frgCnefre(arj ALAnffnhPbhaglCnefre());
-    }
-  }
+  
 }

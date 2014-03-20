@@ -43,14 +43,6 @@
           android:showSilent="true"
           android:dependency="@string/pref_notif_enabled_key"
           android:defaultValue="content://settings/system/notification_sound" />
-        <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_notif_timeout_key"
-          android:title="@string/pref_notif_timeout_title"
-          android:summary="@string/pref_notif_timeout_summary"
-          android:entries="@array/pref_notif_timeout_entries"
-          android:entryValues="@array/pref_notif_timeout_values"
-          android:defaultValue="@string/pref_notif_timeout_default"
-          android:dependency="@string/pref_notif_enabled_key" />
         <net.anei.cadpage.preferences.TestNotificationDialogPreference
           android:key="@string/pref_notif_test_key"
           android:dialogIcon="@drawable/android:ic_dialog_alert"
@@ -115,6 +107,14 @@
           android:summaryOff="@string/pref_notif_repeat_summaryoff"
           android:defaultValue="@string/pref_notif_repeat_default" />
         <net.anei.cadpage.preferences.ListPreference
+          android:key="@string/pref_notif_repeat_times_key"
+          android:title="@string/pref_notif_repeat_times_title"
+          android:summary="@string/pref_notif_repeat_times_summary"
+          android:entries="@array/pref_notif_repeat_times_entries"
+          android:entryValues="@array/pref_notif_repeat_times_values"
+          android:defaultValue="@string/pref_notif_repeat_times_default"
+          android:dependency="@string/pref_notif_repeat_key" />
+        <net.anei.cadpage.preferences.ListPreference
           android:key="@string/pref_notif_repeat_interval_key"
           android:title="@string/pref_notif_repeat_interval_title"
           android:summary="@string/pref_notif_repeat_interval_summary"
@@ -155,14 +155,6 @@
           android:dialogTitle="@string/pref_map_network_chk_title"
           android:defaultValue="@string/pref_map_network_chk_default" />
       <net.anei.cadpage.preferences.ListPreference
-          android:key="@string/pref_gps_map_option_key"
-          android:title="@string/pref_gps_map_option_title"
-          android:summary="@string/pref_gps_map_option_summary"
-          android:entries="@array/pref_gps_map_option_entries"
-          android:entryValues="@array/pref_gps_map_option_values"
-          android:dialogTitle="@string/pref_gps_map_option_title"
-          android:defaultValue="@string/pref_gps_map_option_default" />
-      <net.anei.cadpage.preferences.ListPreference
           android:key="@string/pref_report_position_key"
           android:title="@string/pref_report_position_title"
           android:summary="@string/pref_report_position_summary"
@@ -178,6 +170,13 @@
           android:summaryOn="@string/pref_popup_enabled_summaryon"
           android:summaryOff="@string/pref_popup_enabled_summaryoff"
           android:defaultValue="true" />
+        <CheckBoxPreference
+          android:key="@string/pref_onlyShowOnKeyguard_key"
+          android:title="@string/pref_onlyShowOnKeyguard_title"
+          android:summaryOn="@string/pref_onlyShowOnKeyguard_summaryon"
+          android:summaryOff="@string/pref_onlyShowOnKeyguard_summaryoff"
+          android:defaultValue="@string/pref_onlyShowOnKeyguard_default" 
+          android:dependency="@string/pref_popup_enabled_key"/>
         <CheckBoxPreference
           android:key="@string/pref_noShowInCall_key"
           android:title="@string/pref_noShowInCall_title"
@@ -551,25 +550,11 @@
           android:defaultValue="@string/pref_split_chk_sender_default" />
           
       <CheckBoxPreference
-          android:key="@string/pref_split_keep_lead_break_key"
-          android:title="@string/pref_split_keep_lead_break_title"
-          android:summaryOn="@string/pref_split_keep_lead_break_summaryon"
-          android:summaryOff="@string/pref_split_keep_lead_break_summaryoff"
-          android:defaultValue="@string/pref_split_keep_lead_break_default" />
-      
-      <CheckBoxPreference
           android:key="@string/pref_suppress_dup_msg_key"
           android:title="@string/pref_suppress_dup_msg_title"
           android:summaryOn="@string/pref_suppress_dup_msg_summaryon"
           android:summaryOff="@string/pref_suppress_dup_msg_summaryoff"
           android:defaultValue="@string/pref_suppress_dup_msg_default" />
-      
-      <CheckBoxPreference
-          android:key="@string/pref_override_vendor_loc_key"
-          android:title="@string/pref_override_vendor_loc_title"
-          android:summaryOn="@string/pref_override_vendor_loc_summaryon"
-          android:summaryOff="@string/pref_override_vendor_loc_summaryoff"
-          android:defaultValue="@string/pref_override_vendor_loc_default" />
       
       <CheckBoxPreference
           android:key="@string/pref_activate_scanner_key"
@@ -635,13 +620,6 @@
       android:dialogIcon="@drawable/ic_launcher" 
       android:dialogTitle="@string/pref_releasenotes_diagtitle"
       android:dialogMessage="@string/release_text"/>
-    <PreferenceScreen
-      android:title="@string/pref_cadpage_active911_title"
-      android:summary="@string/pref_cadpage_active911_summary">
-      <intent
-        android:action="android.intent.action.VIEW"
-        android:data="@string/pref_cadpage_active911_url" />
-    </PreferenceScreen>
     <PreferenceScreen
       android:title="@string/pref_review_title"
       android:summary="@string/pref_review_summary">

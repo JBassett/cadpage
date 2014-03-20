@@ -394,7 +394,7 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     boolean enabled = myPrefs.getBoolean(getString(R.string.pref_enabled_key), true);
     mEnabledPreference.setChecked(enabled);
     
-    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     activityActive = true; 
 
   }
@@ -410,6 +410,9 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
   
   @Override
   protected void onStart() {
+    
+    C2DMReceiver.registerActivity(this);
+    
     oldLocation = ManagePreferences.location();
     oldTextSize = ManagePreferences.textSize();
     oldSplitBlank = ManagePreferences.splitBlankIns();
@@ -426,6 +429,8 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     if (!location.equals(oldLocation) || ! textSize.equals(oldTextSize)) {
       SmsMessageQueue.getInstance().notifyDataChange();
     }
+    
+    C2DMReceiver.unregisterActivity(this);
   }
   
   /**
@@ -557,10 +562,10 @@ public class SmsPopupConfigActivity extends PreferenceActivity {
     outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
     super.onSaveInstanceState(outState);
 
-//    int orientation = Safe40Activity.getDisplayOrientation(this);
+    int orientation = Safe40Activity.getDisplayOrientation(this);
     
     //Lock the screen orientation to the current display orientation : Landscape or Portrait
-//    this.setRequestedOrientation(orientation);
+    this.setRequestedOrientation(orientation);
 
   }
 }

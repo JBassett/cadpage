@@ -46,7 +46,7 @@ choyvp pynff VAUbjneqPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "Fhowrpg:OERNGUVAT CEBOYRZ\aYbp:221 F UBJNEQ FG KFg:ZNVA FG T UBYVQNL YA Tevq:Q210 Havgf:NTGSQ Ezx:PNAPRE CNGVRAG QVSSVPHYGL OERNGUV",
         "PNYY:OERNGUVAT CEBOYRZ",
         "NQQE:221 F UBJNEQ FG",
-        "K:ZNVA FG / T UBYVQNL YA",
+        "K:ZNVA FG T UBYVQNL YA",
         "ZNC:Q210",
         "HAVG:NTGSQ",
         "VASB:PNAPRE CNGVRAG QVSSVPHYGL OERNGUV");
@@ -95,9 +95,8 @@ choyvp pynff VAUbjneqPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G8",
         "Fhowrpg:TNF BQBE\aYbp:325 F ZNCYR FG T KFg:ZNVA FG T UNYY FG Tevq:Q210 Havgf:R11 N11 Ezx:FZRYYF ANGHENY TNF VAFVQR URE ERFVQRAPR",
         "PNYY:TNF BQBE",
-        "NQQE:325 F ZNCYR FG",
-        "NCG:T",
-        "K:ZNVA FG / T UNYY FG",
+        "NQQE:325 F ZNCYR FG T",
+        "K:ZNVA FG T UNYY FG",
         "ZNC:Q210",
         "HAVG:R11 N11",
         "VASB:FZRYYF ANGHENY TNF VAFVQR URE ERFVQRAPR");

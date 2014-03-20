@@ -1,8 +1,7 @@
 package net.anei.cadpage.parsers;
 
+import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Enumeration;
-import java.util.Properties;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -16,48 +15,20 @@ public class CodeSet {
     @Override
     public int compare(String str1, String str2) {
       return -str1.compareTo(str2);
-    }
-  });
-  
-  // Minimum entry length
-  private int minCodeLen = Integer.MAX_VALUE;
+    }});
   
   public CodeSet(String ... table) {
-    for (String code : table) add(code);
-  }
-  
-  public CodeSet(Properties codeTable) {
-    @SuppressWarnings("unchecked")
-    Enumeration<String> e = (Enumeration<String>) codeTable.propertyNames();
-    while (e.hasMoreElements()) {
-      add(e.nextElement());
-    }
-  }
-  
-  protected void add(String code) {
-    if (code.length() < minCodeLen) minCodeLen = code.length();
-    codeSet.add(code);
+    codeSet.addAll(Arrays.asList(table));
   }
 
 
   /**
    * Look for a code that is a prefix to search string
-   * @param code search string
+   * @param str search string
    * @return longest table entry that is a prefix of search string or
    *          null if there is no such entry
    */
-  public String getCode(String code) {
-    return getCode(code, false);
-  }
-
-  /**
-   * Look for a code that is a prefix to search string
-   * @param code search string
-   * @param reqSpace true if successful match requires a blank terminator
-   * @return longest table entry that is a prefix of search string or
-   *          null if there is no such entry
-   */
-  public String getCode(String code, boolean reqSpace) {
+  public String getCode(String str) {
     
     // Search the code dictionary sorted map for the highest entry less than or
     // equal to call code.  If the code starts with this string, we have a
@@ -66,17 +37,14 @@ public class CodeSet {
     
     // We reversed the tree order so we can accomplish this trick without
     // needing a backward read feature, with Android seems to be lacking
-    
-    if (code.length() < minCodeLen) return null;
-    String  minCode = code.substring(0, minCodeLen);
-    SortedSet<String> tail =  codeSet.tailSet(code);
+    String firstWord = new MsgParser.Parser(str).get(' ');
+    SortedSet<String> tail =  codeSet.tailSet(str);
     for (String key : tail) {
-      if (code.startsWith(key)) {
-        if (!reqSpace) return key;
-        int len = key.length();
-        if (len == code.length() || code.charAt(len) == ' ') return key;
+      if (str.startsWith(key)) {
+        if (str.length() == key.length() ||
+            str.charAt(key.length()) == ' ') return key;
       }
-      if (!code.startsWith(minCode)) break;
+      if (!key.startsWith(firstWord)) break;
     }
     return null;
   }

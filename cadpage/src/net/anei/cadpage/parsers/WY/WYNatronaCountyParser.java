@@ -22,7 +22,7 @@ public class WYNatronaCountyParser extends FieldProgramParser {
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
-    if (!subject.equalsIgnoreCase("Message From Hiplink")) return false;
+    if (!subject.equals("Message From Hiplink")) return false;
     return parseFields(body.split("\n"), 4, data);
   }
   
@@ -82,7 +82,7 @@ public class WYNatronaCountyParser extends FieldProgramParser {
       Matcher match = CALLBACK_PTN.matcher(field);
       if (match.matches()) {
         data.strPhone = match.group(1);
-        setGPSLoc(match.group(2) + ' ' + match.group(3), data);
+        data.strGPSLoc = match.group(2) + ' ' + match.group(3);
         return;
       }
       match = CHANNEL_PTN.matcher(field);

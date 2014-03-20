@@ -15,7 +15,6 @@ public class MAYarmouthParser extends MsgParser {
   
   public MAYarmouthParser() {
     super("YARMOUTH", "MA");
-    setFieldList("ADDR PLACE PRI MAP CALL INFO");
   }
 
   @Override

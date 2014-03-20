@@ -9,7 +9,6 @@
    <string name="pref_paid_year_key">paid_year</string>
    <string name="pref_prev_year_key">prev_paid_year</string>
    <string name="pref_purchase_date_key">purchase_date</string>
-   <string name="pref_prev_purchase_date_key">prev_purchase_date</string>
    <string name="pref_free_rider_key">free_rider</string>
    <string name="pref_free_sub_key">free_sub</string>
    <string name="pref_sponsor_key">sponsor</string>
@@ -22,12 +21,7 @@
    <string name="pref_auth_run_days_key">pef_auth_run_days</string>
    <string name="pref_auth_last_check_time_key">auth_last_check_time</string>
    <string name="pref_registration_id_key">registration_id</string>
-   <string name="pref_prev_registration_id_key">prev_registration_id</string>
    <string name="pref_prev_version_code">prev_version_code</string>
-   <string name="pref_register_req_active_key">register_req_active</string>
-   <string name="pref_register_req_key">register_req</string>
-   <string name="pref_reregister_delay_key">reregister_delay</string>
-   <string name="pref_register_date_key">register_date</string>
    
    <string name="pref_payment_status_key">paymentstatus</string>
    
@@ -42,6 +36,7 @@
    <string name="pref_dimscreen_key">dimscreen</string>
    <string name="pref_privacy_key">privacy</string>
    <string name="pref_show_personal_key">show_personal</string>
+   <string name="pref_onlyShowOnKeyguard_key">showonkeyguard</string>
    <string name="pref_noShowInCall_key">noshowincall</string>
    <string name="pref_notif_enabled_key">notification</string>
    <string name="pref_notif_override_key">override</string>
@@ -58,7 +53,7 @@
    <string name="pref_flashled_pattern_custom_key">flashled_pattern_custom</string>
    <string name="pref_notif_repeat_key">notif_repeat</string>
    <string name="pref_notif_repeat_interval_key">notif_repeat_interval</string>
-   <string name="pref_notif_timeout_key">notif_timeout</string>
+   <string name="pref_notif_repeat_times_key">notif_repeat_num</string>
    <string name="pref_resp_type_key">resp_type</string>
    <string name="pref_resp_merge_key">resp_merge</string>
    <string name="pref_button1_key">button1</string>
@@ -83,7 +78,6 @@
    <string name="pref_xtra_resp_button2_key">xtra_resp_button2</string>
    <string name="pref_xtra_resp_button3_key">xtra_resp_button3</string>
    <string name="pref_map_network_chk_key">map_network_chk</string>
-   <string name="pref_gps_map_option_key">gps_map_option</string>
    <string name="pref_report_position_key">report_location</string>
    <string name="pref_delete_unopen_key">delete_unopen</string>
    <string name="pref_screen_on_key">screenon</string>
@@ -105,10 +99,8 @@
    <string name="pref_history_limit_key">historylimit</string>
    <string name="pref_split_blank_ins_key">splitBlankIns</string>
    <string name="pref_split_chk_sender_key">splitChkSender</string>
-   <string name="pref_split_keep_lead_break_key">splitKeepLeadBreak</string>
    <string name="pref_rev_msg_order_key">rev_msg_order</string>
    <string name="pref_suppress_dup_msg_key">supDupMsg</string>
-   <string name="pref_override_vendor_loc_key">overrideDirectLoc</string>
    <string name="pref_activate_scanner_key">activeScanner</string>
    <string name="pref_scanner_channel_key">scannerChannel</string>
    <string name="pref_scanner_channel_app_node_key">scannerChannelNode</string>
@@ -118,9 +110,4 @@
    <string name="pref_textsize_key">textsize</string>
    <string name="pref_direct_paging_key">direct_paging</string>
    <string name="pref_reconnect_key">reconnect</string>
-   <string name="pref_last_loc_time_key">last_loc_time</string>
-   <string name="pref_last_loc_acc_key">last_loc_acc</string>
-   <string name="pref_direct_page_active_key">direct_page_active</string>
-   <string name="pref_last_gcm_event_time_key">last_gcm_event_time</string>
-   <string name="pref_last_gcm_event_type_key">last_gcm_event_type</string>
 </resources>

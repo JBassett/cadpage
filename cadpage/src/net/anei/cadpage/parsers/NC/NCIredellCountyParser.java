@@ -1,6 +1,5 @@
 package net.anei.cadpage.parsers.NC;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.MsgParser;
@@ -10,11 +9,10 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class NCIredellCountyParser extends MsgParser {
   
-  private static final Pattern MASTER_PTN = Pattern.compile("((?:A|FA|FD|FM|FR)\\d+?(?=[ A-Z]|10-)|MFD|MRS|ICRS|SFD) *([^,]+), *([^,]*)(?:, *(\\d{2}-\\d{5,6}))?");
+  private static final Pattern SRC_PTN = Pattern.compile("F[RD]\\d+|[A-Z]{1,2}FD");
   
   public NCIredellCountyParser() {
     super("IREDELL COUNTY", "NC");
-    setFieldList("UNIT CALL ADDR ID");
   }
   
   @Override
@@ -24,12 +22,10 @@ public class NCIredellCountyParser extends MsgParser {
   
   @Override
   public boolean parseMsg(String body, Data data) {
-    Matcher match = MASTER_PTN.matcher(body);
-    if (!match.matches()) return false;
-    data.strUnit = getOptGroup(match.group(1));
-    data.strCall = match.group(2).trim();
-    parseAddress(match.group(3), data);
-    data.strCallId = getOptGroup(match.group(4));
-    return data.strAddress.length() > 0;
+    Parser p = new Parser(body);
+    data.strSource = p.get(' ');
+    data.strCall = p.get(',');
+    data.strAddress = p.get();
+    return (data.strAddress.length() > 0 && SRC_PTN.matcher(data.strSource).matches());
   }
 }

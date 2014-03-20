@@ -27,12 +27,6 @@ Pbagnpg: "Wvzzl Vfnnpf" <Wvzzl.Vfnnpf@gbjabsobbar.arg>
 Fraqre: jpp911@jngnhtnpbhagl.bet
 ONZOBB EQ / QRRESVRYQ NCGF ZQY 10Q01 2012023649 19:08:31 HAXABJA CEBOYRZ (ZNA QBJA) 321F-QRRESVRYQ EQ-EG NVECBEG RAQ BS ONZOBB EQ
 
-Pbagnpg: Qna Cynar <gnpyvsr03@tznvy.pbz>
-Fraqre: jpp911@jngnhtnpbhagl.bet
-7395 HF UJL 221 F OYBJVAT EBPX;2013004925;04:06:00;F5; @ GBJA YVZVGF BS OYBJVAT EBPX BSS LBANUYBFFRR EQ
-1640 BYQ 421 F OBBAR;2013004926;05:23:03;F5; 421F-@ OERZPB YG BYQ 421 F
-214 TERRE YA IVYNF;2013004909;19:07:06;10-60; 421A-CNFG AP UJL 105 OLC-2AQ YG TERRE YA
-
 */
 
 
@@ -128,7 +122,9 @@ choyvp pynff APJngnhtnPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G1",
         "ONZOBB EQ / QRRESVRYQ NCGF ZQY 10Q01 2012023649 19:08:31 HAXABJA CEBOYRZ (ZNA QBJA) 321F-QRRESVRYQ EQ-EG NVECBEG RAQ BS ONZOBB EQ",
-        "NQQE:ONZOBB EQ & QRRESVRYQ NCGF",
+        "NQQE:ONZOBB EQ",
+        "ZNQQE:/ QRRESVRYQ NCGF,ONZOBB EQ",
+        "CYNPR:/ QRRESVRYQ NCGF",
         "PBQR:10Q01",
         "VQ:2012023649",
         "GVZR:19:08:31",
@@ -136,41 +132,8 @@ choyvp pynff APJngnhtnPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VASB:321F-QRRESVRYQ EQ-EG NVECBEG RAQ BS ONZOBB EQ");
 
   }
-  
-  @Grfg
-  choyvp ibvq grfgQnaCynar() {
-
-    qbGrfg("G1",
-        "7395 HF UJL 221 F OYBJVAT EBPX;2013004925;04:06:00;F5; @ GBJA YVZVGF BS OYBJVAT EBPX BSS LBANUYBFFRR EQ",
-        "NQQE:7395 HF UJL 221 F",
-        "ZNQQE:7395 HF 221 F",
-        "PVGL:OYBJVAT EBPX",
-        "VQ:2013004925",
-        "GVZR:04:06:00",
-        "PNYY:F5",
-        "VASB:@ GBJA YVZVGF BS OYBJVAT EBPX BSS LBANUYBFFRR EQ");
-
-    qbGrfg("G2",
-        "1640 BYQ 421 F OBBAR;2013004926;05:23:03;F5; 421F-@ OERZPB YG BYQ 421 F",
-        "NQQE:1640 BYQ 421 F",
-        "PVGL:OBBAR",
-        "VQ:2013004926",
-        "GVZR:05:23:03",
-        "PNYY:F5",
-        "VASB:421F-@ OERZPB YG BYQ 421 F");
-
-    qbGrfg("G3",
-        "214 TERRE YA IVYNF;2013004909;19:07:06;10-60; 421A-CNFG AP UJL 105 OLC-2AQ YG TERRE YA",
-        "NQQE:214 TERRE YA",
-        "PVGL:IVYNF",
-        "VQ:2013004909",
-        "GVZR:19:07:06",
-        "PNYY:10-60",
-        "VASB:421A-CNFG AP UJL 105 OLC-2AQ YG TERRE YA");
-   
-  }
 
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj APJngnhtnPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj APJngnhtnPbhaglCnefreGrfg().trarengrGrfgf("G1", "NQQE PVGL CYNPR PBQR VQ GVZR PNYY VASB");
   }
 }

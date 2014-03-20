@@ -47,14 +47,6 @@ Cntrpbcl-YBP:PNEGRE EQ / ZVQYNAQ EQ QRFP:WHFG A BS VAG - 31 SR URNG FGEBXR NCG: 
 Cntrpbcl-YBP:PNEGRE EQ / FNEYR EQ QRFP:HCQNGRQ VASB -CBFF NG NQZVENY NCG: GLC:*Z*FVPX CREFBA VA CEBTERFF
 Cntrpbcl-YBP:10340 ZVQYNAQ EQ QRFP:NFFVFG CQ J/RAGEL NCG: GLC:*Z*ZHGHNY NVQ
 
-Pbagnpg: Wnfba Whqq <wnfba.whqq651@tznvy.pbz>
-Fraqre: 34292
-YBP:F 27GU / R UBYYNAQ QRFP:BAR SRZNYR HAPBAFPVBHF GLC:*Z*VAWHEL
-
-Pbagnpg: gvzbgul tenl <tenlfterratenff@tznvy.pbz>
-Fraqre: 34292
-YBP:1651 NCCYROYBFFBZ YA A QRFP:77 Z QVSS OERNGUVAT GLC:*Z*FVPX CR
-
  */
 
 choyvp pynff ZVFntvanjPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -69,7 +61,7 @@ choyvp pynff ZVFntvanjPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G1",
         "YBP:F CBEGFZBHGU EQ / XVAT EQ QRFP:YNG: <43.384720>  YBAT: <-83.837678> NCG: GLC:*Z*CQN CVA VA WHFG BPPH",
         "NQQE:F CBEGFZBHGU EQ & XVAT EQ",
-        "TCF:+43.384720,-83.837678",
+        "TCF:43.384720,-83.837678",
         "PNYY:CQN CVA VA WHFG BPPH");
   }
   
@@ -102,7 +94,7 @@ choyvp pynff ZVFntvanjPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G5",
         "YBP:F CBEGFZBHGU EQ / XVAT EQ QRFP:YNG: <43.384720>  YBAT: <-83.837678> NCG: GLC:*Z*CQN CVA VA WHFG BPPH",
         "NQQE:F CBEGFZBHGU EQ & XVAT EQ",
-        "TCF:+43.384720,-83.837678",
+        "TCF:43.384720,-83.837678",
         "PNYY:CQN CVA VA WHFG BPPH");
 
     qbGrfg("G6",
@@ -218,28 +210,6 @@ choyvp pynff ZVFntvanjPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VASB:NFFVFG CQ J/RAGEL",
         "PNYY:ZHGHNY NVQ");
 
-  }
-  
-  @Grfg
-  choyvp ibvq grfgWnfbaWhqq() {
-
-    qbGrfg("G1",
-        "YBP:F 27GU / R UBYYNAQ QRFP:BAR SRZNYR HAPBAFPVBHF GLC:*Z*VAWHEL",
-        "NQQE:F 27GU & R UBYYNAQ",
-        "VASB:BAR SRZNYR HAPBAFPVBHF",
-        "PNYY:VAWHEL");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgGvzbgulTenl() {
-
-    qbGrfg("G1",
-        "YBP:1651 NCCYROYBFFBZ YA A QRFP:77 Z QVSS OERNGUVAT GLC:*Z*FVPX CR",
-        "NQQE:1651 NCCYROYBFFBZ YA A",
-        "VASB:77 Z QVSS OERNGUVAT",
-        "PNYY:FVPX CR");
-    
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

@@ -3,7 +3,6 @@ package net.anei.cadpage.parsers;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -41,7 +40,7 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  *    rest of the CAD page
  *    
  * 4) An optional plus sign [+] which indicates that this field should repeat
- *    Indefinitely.  Typically this will only be used for INFO fields
+ *    Indefinitely.  Typically this only be used for INFO fields
  *    
  * 5) An option question mark [?] which indicates that this field may not be
  *    present.  The question mark may or may not be followed by a trigger 
@@ -54,8 +53,6 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  *    
  * Field Qualifiers
  *   All conditional fields
- *     Y - Force condition approval. Reject result if field contents do not
- *         satisfy condition checks
  *     Z - suppress condition checks.  This is useful is this fields condition
  *     check is less reliable than another field behind it
  *     
@@ -63,26 +60,17 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  *     y - parse -xx city convention
  *     i - implied intersection convention
  *     s - accept sloppy addresses
- *     a - no implied appartment (only with smart parser logic)
+ *     a - no implied address (only with smart parser logic)
  *     S - Invoke smart parser logic, this is followed by some optional flag
  *         characters, followed by up two 3 field designation characters
  *         Flag characters
- *         0 - @ or AT can mark beginning of address or place
+ *         0 - @ or AT can mark begining of address or place
  *         1 - @ or AT marks beginning of place
  *         2 - Only @ will be treated as start maker.  Ignore "AT"
- *         3 - Address followed by cross street or something similar
- *         4 - Empty address should be accepted
- *         5 - Turn on the FLAG_CROSS_FOLLOWS even if we don't have a following
- *             cross street.  Useful to work around city names that start with N or S
- *         6 - additional checks to detect non-numeric implied apartment fields
- *         7 - There may not be a blank between start field and address :(
- *         8 - There may not be a street suffix :(:(:(
  *         First field character determines what can come ahead of the address
  *         X - nothing
  *         C - call description (req)
  *         c - call description (opt)
- *         L - Call and Place (call req)
- *         l - Call and Place (opt)
  *         P - Place name (opt)
  *         p - place name (req)
  *         S - something we can skip (opt)
@@ -102,11 +90,6 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  *         X - nothing
  *         P - place name
  *         S - something we can skip
- *         a - apartment
- *         x - cross streets
- *   
- *   Date and Date/Time fields
- *         d - replace dashes with slashes
  *         
  * SPECIAL FIELD NAMES
  * 
@@ -166,12 +149,6 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  * much terminates field processing.  The the tagged field is declared optional
  * with a ? qualifier and no matching data field is found, the tagged field is
  * simply ignored and processing picks up with the next field.
- * 
- * Debugging
- * 
- * There are only four points where this class determines that a page fails to parse.
- * All are marked with a // BREAKPOINT comment.  Put a breakpoint on all 4 of them
- * and you can probably tell why the parse is failing in short order.
  */
 
 public class FieldProgramParser extends SmartAddressParser {
@@ -188,6 +165,9 @@ public class FieldProgramParser extends SmartAddressParser {
   
   // table converting city codes to city names
   private Properties cityCodes = null;
+  
+  // Original program string
+  private String programStr;
   
   // Start of program steps
   private StepLink startLink;
@@ -208,11 +188,6 @@ public class FieldProgramParser extends SmartAddressParser {
   private boolean ignoreCase;
   
   private Map<String, Step> keywordMap = null;
-  
-  // List of step fields executed in the process of parsing a text string
-  // This is used by the getProgram() method to calculate a field
-  // order list that can be used to generate a test for this parsing
-  private Field[] fieldRecord = null;
   
   public static String setExpectFlag(String program, String fldTerm) {
     if (fldTerm == null) return program;
@@ -241,11 +216,7 @@ public class FieldProgramParser extends SmartAddressParser {
   }
   
   public FieldProgramParser(String defCity, String defState, String programStr) {
-    this(defCity, defState, CountryCode.US, programStr);
-  }
-  
-  public FieldProgramParser(String defCity, String defState, CountryCode country, String programStr) {
-    super(defCity, defState, country);
+    super(defCity, defState);
     setProgram(programStr, 0);
   }
   
@@ -272,35 +243,12 @@ public class FieldProgramParser extends SmartAddressParser {
   protected void setBreakChar(char breakChar) {
     this.breakChar = breakChar;
   }
-  
-
-  @Override
-  public void setFieldList(String fieldList) {
-    fieldRecord = null;
-    super.setFieldList(fieldList);
-  }
 
   /**
-   * This is only called by the test generation logic in an attempt
-   * to determine the order of fields within the text message.  Originally
-   * it did this by returning the uncompiled program string.  Now
-   * it tries to build this string while executing the compiled program
-   * @return uncompiled program string or reasonable facimile thereof
+   * @return uncompiled program string
    */
-  @Override
   public String getProgram() {
-    if (fieldRecord == null) return super.getProgram();
-    StringBuilder sb = new StringBuilder();
-    for (Field field : fieldRecord) {
-      if (field != null) {
-        String names = field.getFieldNames();
-        if (names != null) {
-          if (sb.length() > 0) sb.append(' ');
-          sb.append(names);
-        }
-      }
-    }
-    return sb.toString();
+    return programStr;
   }
   
   /**
@@ -317,30 +265,12 @@ public class FieldProgramParser extends SmartAddressParser {
     if (program == null) return;
     
     parseTags = false;
+    this.programStr = program;
     
     // Construct a head link and tail node and compile the tokens between them
     this.startLink = new StepLink(0);
-    Step tail = new Step();
+    Step tail = new Step(null, null, null, false);
     compile(this.startLink, program, tail, null);
-    
-    // Make a cleanup pass through all of the defined steps
-    // removing any skip steps and
-    // decrementing the data index increment for any success links for select
-    // steps by one.  This is necessary because select steps do not actually
-    // consume a data position
-    // One last complication.  Do not remove skip steps following an optionaltagged
-    // field.  They may be necessary to provide a landing space for an untagged data
-    // field.
-    List<Step> stepList = getAllSteps();
-    initStepScan();
-    for (Step step : stepList) {
-      if (step.tag != null && step.optional){
-        Step nextStep = step.getNextStep();
-        if (nextStep != null) nextStep.markChecked();
-      }
-      if (!step.isChecked()) step.removeSkip();
-      step.backSelectLink();
-    }
     
     // Now that we no longer need it, reduce the tail node
     tail.removeSkip();
@@ -363,18 +293,12 @@ public class FieldProgramParser extends SmartAddressParser {
     // If we are processing fields in any order, build a keyword > Field
     if (anyOrder) {
       keywordMap = new LinkedHashMap<String, Step>();
-      stepScan(new StepScanListener<Map<String,Step>>(){
-        @Override
-        public void processStep(Step step, Map<String, Step> keywordMap) {
-          if (step.tag != null && step.field != null) {
-            keywordMap.put(step.tag, step);
-          }
+      for (Step step = startLink.getStep(); step != null; step = step.nextStep) {
+        if (step.tag != null && step.field != null) {
+          keywordMap.put(step.tag, step);
         }
-      }, keywordMap);
+      }
     }
-    
-//    System.out.println(program);
-//    System.out.println(toString());
   }
   
   /**
@@ -392,12 +316,12 @@ public class FieldProgramParser extends SmartAddressParser {
     
     // Empty string is a special, easily handled, case
     if (program.length() == 0) {
-      headLink.setLink(tail);
+      headLink.setLink(tail, 0);
       return;
     }
     
     // Split program string into field terms
-    String[] fieldTerms = tokenize(program);
+    String[] fieldTerms = tokenize(program);;
     
     // Build arrays of term info and of field steps for each field term
     FieldTermInfo[] infoList = new FieldTermInfo[fieldTerms.length];
@@ -415,7 +339,13 @@ public class FieldProgramParser extends SmartAddressParser {
       }
       if (ignoreCase & info.tag != null) info.tag = info.tag.toUpperCase(); 
       infoList[ndx] = info;
-      fieldSteps[ndx] = new Step(info.tag, (info.branch ? null : info.name), info.qual, info.trigger, info.required, info.optional);
+      Field field = null;
+      if (!info.branch){ 
+        field = getField(info.name);
+        field.setQual(info.qual);
+        field.setTrigger(info.trigger);
+      }
+      fieldSteps[ndx] = new Step(info.tag, field, info.required, info.optional);
     }
 
     // Initialize stuff, and link the heading link to the first step
@@ -432,6 +362,7 @@ public class FieldProgramParser extends SmartAddressParser {
       // Get the previous link, and current, and next steps in normal sequence
       Step step = fieldSteps[ndx];
       Step next = ndx+1 < fieldTerms.length ? fieldSteps[ndx+1] : tail;
+      step.setNextStep(next);
       
       // Check term info for things that would disrupt the natural order of
       // things
@@ -444,31 +375,13 @@ public class FieldProgramParser extends SmartAddressParser {
         // We are looking for a normal testable field that can resolve the condition
         // status of the untestable one.  If we find repeat or optional step
         // or tagged step before that, all is lost
-        if (info.repeat || info.optional) {
+        if (info.repeat || info.optional || info.branch) {
           throw new RuntimeException("Deferred optional status of " + fieldTerms[optBreak] + 
                                       " not resolved before " + fieldTerms[ndx]);
         }
         
         // OK, is this our testable determination step?
-        // Conditional branches are testable by definition
-        if (info.branch || step.canFail()) {
-          
-          // All outgoing links will be relative to this step
-          // If this is a conditional branch step, is will be split up into
-          // multiple steps of unknown length.  The only way to keep the 
-          // data links strait is to lock the data field index to this step
-          
-          // An additional problem comes up when logic flow needs to jump
-          // from the field before to the field after a decisions step.  If
-          // the decision step happens to be a  conditional branch the field
-          // index needs to be locked to the decision step and the actual
-          // field increments needs to be one less than usual
-          Step branchStep = null;
-          int jumpOver = 2;
-          if (info.branch) {
-            branchStep = step;
-            jumpOver = 1;
-          }
+        if (step.canFail()) {
           
           // There are three reasons why a condition check is deferred
           // First we could be processing a conditional branch subprogram
@@ -481,19 +394,19 @@ public class FieldProgramParser extends SmartAddressParser {
             headLink.setLink(step, delta);
             
             // Failure link jumps to failure step, reversing the index adjustment
-            step.getFailLink().setLink(failStep, -delta, branchStep);
+            step.getFailLink().setLink(failStep, -delta);
             
             // Success link can go two different ways
             // if the decision step is the first step, success links to the next step
             if (delta == 0) {
-              step.getSuccLink().setLink(next, +1);
+              step.getSuccLink().setLink(next);
             }
             
             // Otherwise, success link jumps back to first step, and the step
             // before the decision step bypasses the decision step
             else {
-              step.getSuccLink().setLink(fieldSteps[optBreak], -delta, branchStep);
-              fieldSteps[ndx-1].getSuccLink().setLink(next, jumpOver, branchStep);
+              step.getSuccLink().setLink(fieldSteps[optBreak], -(delta+1));
+              fieldSteps[ndx-1].getSuccLink().setLink(next, 1);
             }
             
             // The conditional branch decision has been made, 
@@ -501,7 +414,7 @@ public class FieldProgramParser extends SmartAddressParser {
             failStep = null;
             
           }
-          // Or it could be terminating an earlier repeat block
+          // First it could be terminating an earlier repeat block
           else if (optRepeat) {
             
             // Redirect all links to the conditional repeat node to this, decision, node
@@ -511,13 +424,13 @@ public class FieldProgramParser extends SmartAddressParser {
             
             // Failure link jumps back to the optional repeat node, which we now assume
             // does exist
-            step.getFailLink().setLink(optStep, -(delta-1), branchStep);
+            step.getFailLink().setLink(optStep, -(delta-1));
             
             // Success link is trickier
             // If optional node and decision node are next to each other,
             // Success link just moves on the the next node normally
             if (delta == 1) {
-              step.getSuccLink().setLink(next, +1);
+              step.getSuccLink().setLink(next);
             }
             
             // If there is a sequence of steps between the option and decision
@@ -525,8 +438,8 @@ public class FieldProgramParser extends SmartAddressParser {
             // link of the last one jumps over the decision step to point to
             // the following step
             else {
-              step.getSuccLink().setLink(fieldSteps[optBreak+1], -(delta-1), branchStep);
-              fieldSteps[ndx-1].getSuccLink().setLink(next, jumpOver, branchStep);
+              step.getSuccLink().setLink(fieldSteps[optBreak+1], -delta);
+              fieldSteps[ndx-1].getSuccLink().setLink(next, 1);
             }
           }
           
@@ -535,28 +448,25 @@ public class FieldProgramParser extends SmartAddressParser {
             
             // The decision step needs to 
             // be cloned because it will have to appear twice in the step program.
-            // The new step will not be a decision step and will flow
+            // The original step will not be a decision step and will flow
             // normally to the next step
-            // Tricky note..  It is critical the the existing step be the decision step
-            // because it may be used by existing relative step index links
             Step newStep = step.cloneStep();
-            step.redirect(newStep, 0, null, true);
-            newStep.getSuccLink().setLink(next, +1);
+            step.getSuccLink().setLink(next);
 
             // redirect all links to the optional step to the decision step
             // assuming that the optional field does not exist
-            optStep.redirect(step, delta-1);
+            optStep.redirect(newStep, delta-1);
             
             // A step failure here implies that the optional field does exist
             // Failure branch will jump back to the optional branch, and proceed
             // normally from there, which includes processing the original step
             // for this field without a failure option
-            step.getFailLink().setLink(optStep, -(delta-1), branchStep);
+            newStep.getFailLink().setLink(optStep,-(delta-1));
             
             // If the optional and decision steps are next to each other
             // the success branch can just move on the the next step normally
             if (delta == 1) {
-              step.getSuccLink().setLink(next, +1);
+              newStep.getSuccLink().setLink(next);
             }
             
             // Otherwise, the success branch will execute a chain of steps cloned from all
@@ -564,22 +474,18 @@ public class FieldProgramParser extends SmartAddressParser {
             // (which may be empty if the two are next to each other) then
             // skip this step and take up normal processing with the next step
             else {
-              int incAdj = -(delta-1);
-              Step prevStep = step;
-              Step tmpBrStep = branchStep;
+              int incAdj = -delta;
+              Step prevStep = newStep;
               for (int jj = optBreak+1; jj<ndx; jj++) {
-                Step tmpStep = fieldSteps[jj].cloneStep();
-                prevStep.getSuccLink().setLink(tmpStep, incAdj, tmpBrStep);
-                prevStep = tmpStep;
-                incAdj = 1;
-                tmpBrStep = null;
+                newStep = fieldSteps[jj].cloneStep();
+                prevStep.getSuccLink().setLink(newStep, incAdj);
+                prevStep.removeSkip();
+                prevStep = newStep;
+                incAdj = 0;
               }
-              prevStep.getSuccLink().setLink(next, jumpOver, branchStep);
+              prevStep.getSuccLink().setLink(next, 1);
+              prevStep.removeSkip();
             }
-            
-            // If this was a branch step, it needs to be compiled now because
-            // it will not be found in the regular step list durring the third pass
-            if (info.branch) compileBranch(newStep, fieldTerms[ndx]); 
           }
           
           // And finally, reset the optional break so we can resume
@@ -590,7 +496,7 @@ public class FieldProgramParser extends SmartAddressParser {
         // Otherwise, we are still searching for a decision mode, follow
         // normal logic flow
         else {
-          step.getSuccLink().setLink(next, +1);
+          step.getSuccLink().setLink(next);
         }
       }
       
@@ -600,13 +506,10 @@ public class FieldProgramParser extends SmartAddressParser {
         
         // It does, normal chain links back to the same step, processing
         // Consecutive fields until something happens
-        step.getSuccLink().setLink(step, +1);
+        step.getSuccLink().setLink(step);
         
-        // We need to set a next link to get out of here, lest next link searches
-        // wind up in an infinite loop
-        step.setNextStep(next);
-        
-        // If this is an optional repeat, things get complicated
+        // If optional flag is set as well as repeat flag, we have some other
+        // weirdness
         if (info.tag == null && info.optional) {
           
           // If the step can detect failures, we can set the failure branch
@@ -617,14 +520,10 @@ public class FieldProgramParser extends SmartAddressParser {
           
           // If it can't detect failures, we have to defer the decision
           // which is going to pretty much work the way the regular deferred
-          // optional field words.  Although we still have the success link
-          // pointing to itself, it will eventually be redirected to the 
-          // actual decisions step.  So it is no longer necessary to retain
-          // the next step link
+          // optional field words
           else {
             optRepeat = true;
             optBreak = ndx;
-            step.setNextStep(null);
           }
         }
       }
@@ -633,7 +532,7 @@ public class FieldProgramParser extends SmartAddressParser {
       else if (info.tag == null && info.optional) {
         
         // In any case, logic from from this step goes to the next step
-        step.getSuccLink().setLink(next, +1);
+        step.getSuccLink().setLink(next);
         
         // If this step can do its own validity testing, life is wonderful
         // We just set the fail condition to process the next step with the
@@ -655,7 +554,7 @@ public class FieldProgramParser extends SmartAddressParser {
       // Otherwise, there is nothing unusual or extraordinary about this step
       // It will just link to the next step and field.
       else {
-        step.getSuccLink().setLink(next, +1);
+        step.getSuccLink().setLink(next);
       }
     }
     
@@ -666,62 +565,44 @@ public class FieldProgramParser extends SmartAddressParser {
                                   " was never resolved");
     }
     
-    // And now for a third pass to expand any conditional branch terms
+    // And now for a final third pass to expand any conditional branch terms
     for (int ndx = 0; ndx < fieldTerms.length; ndx++) {
       if (infoList[ndx].branch) {
-        compileBranch(fieldSteps[ndx], fieldTerms[ndx]);
+        
+        // Split the branch step into a branch head and tail steps
+        Step branchHead = fieldSteps[ndx];
+        Step branchTail = branchHead.split();
+        
+        //  Next break the field term up into the different conditional branches
+        String[] branchTerms = splitBranches(fieldTerms[ndx]);
+        
+        // Loop through each of the optional branches
+        int cnt = 0;
+        for (String branchTerm : branchTerms) {
+          branchTerm = branchTerm.trim();
+          
+          // We need a temporary skip step with no data increment to link 
+          // each conditional branch chains to the next.  Except for the
+          // last one where we have no failure step
+          Step linkStep = (++cnt == branchTerms.length ? null : new Step());
+          
+          // Each branch will be compiled using the branch head step as the
+          // start step, the branch tail step as the tail step, and the new
+          // link step as the branch failure step
+          compile(branchHead.getSuccLink(), branchTerm, branchTail, linkStep);
+          branchHead.setNextStep(branchHead.getSuccLink().getStep());
+          branchHead.removeSkip();
+          branchHead = linkStep;
+        }
+        branchTail.removeSkip();
       }
     }
-  }
-
-  /**
-   * Compile a conditonal branch step identified in an earlier pass
-   * @param branchHead Branch step that needs to be recompiled
-   * @param term Field term associated with branch step
-   */
-  private void compileBranch(Step branchHead, String term) {
     
-    // Split the branch step into a branch head and tail steps
-    // and a separate failure link
-
-    StepLink failLink = branchHead.failLink;
-    branchHead.failLink = null;
-    Step branchTail = branchHead.split();
-    
-    Step brFailStep = null;
-    if (failLink != null) {
-      brFailStep = new Step();
-      brFailStep.succLink = failLink;
-    }
-    
-    //  Next break the field term up into the different conditional branches
-    String[] branchTerms = splitBranches(term);
-    
-    // Loop through each of the optional branches
-    int cnt = 0;
-    for (String branchTerm : branchTerms) {
-      branchTerm = branchTerm.trim();
-      
-      // We need a temporary skip step with no data increment to link 
-      // each conditional branch chains to the next.  Except for the
-      // last one which will be given the original failure link
-      Step linkStep = (++cnt == branchTerms.length ? brFailStep : new Step());
-      
-      // Each branch will be compiled using the branch head step as the
-      // start step, the branch tail step as the tail step, and the new
-      // link step as the branch failure step
-      compile(branchHead.getSuccLink(), branchTerm, branchTail, linkStep);
-      branchHead = linkStep;
-    }
-    
-    // Each compile step transfered control to the tail step as though it
-    // were the next step in sequence, meaning that they incremented the
-    // data pointer for it.  But in fact, we want the tail step to hold
-    // the index of the last data field processed.  Which means we have
-    // to go through all of its in links and back the data increment by one
-    // for all of them
-    for (StepLink link : branchTail.getInLinks()) {
-      if (link.getStep() == branchTail) link.chainLink(branchTail, -1, null);
+    // Fourth pass to remove any remaining SKIP steps
+    // We can't do this in the 2nd pass because a subsequent node might have
+    // tried to link back to it
+    for (Step step : fieldSteps) {
+      step.removeSkip();
     }
   }
   
@@ -792,7 +673,7 @@ public class FieldProgramParser extends SmartAddressParser {
   
   /**
    * Split a conditional branch program into component branches
-   * @param program conditional branch program
+   * @param program conditional branch probram
    * @return array of conditional branch components
    */
   private static String[] splitBranches(String program) {
@@ -811,7 +692,15 @@ public class FieldProgramParser extends SmartAddressParser {
     if (lev != 0) throw new RuntimeException("Mismatched () in branch token: " + program);
     return branches.toArray(new String[branches.size()]);
   }
-
+  
+  /**
+   * Check for any skip nodes that missed our optimization process
+   * only called by the test suite
+   */
+  void checkForSkips() {
+    startLink.getStep().checkForSkips();
+  }
+  
   // Enum report required status of a program step
   // NORMAL - nothing special
   // REQUIRED - If not present, message will be rejected
@@ -931,16 +820,13 @@ public class FieldProgramParser extends SmartAddressParser {
    */
   protected boolean parseFields(String[] fields, Data data) {
     
-    fieldRecord = new Field[fields.length];
-    
     // If we are running in any field order mode, things get a lot easier
     if (anyOrder) {
       
       // Clear the checked flags for all steps
-      initStepScan();
+      for (Step step : keywordMap.values()) step.checked = false;
       
       // Loop through all of the fields
-      int fldNdx = 0;
       for (String field : fields) {
         
         // Break field into keyword and value
@@ -955,7 +841,7 @@ public class FieldProgramParser extends SmartAddressParser {
         if (step == null) return false;
         
         // Flag step as processed
-        step.markChecked();
+        step.checked = true;
         
         // and use it to process this value
         if (step.field != null) {
@@ -964,16 +850,13 @@ public class FieldProgramParser extends SmartAddressParser {
           } catch (FieldProgramException ex) {
             return false;
           }
-          fieldRecord[fldNdx++] = step.field;
         }
       }
       
       // Make another pass checking that all required fields have been entered
       for (Step step : keywordMap.values()) {
-        if (!step.isChecked() && step.required != EReqStatus.NORMAL) {
-          if (step.required == EReqStatus.REQUIRED) {
-            return false;     // BREAKPOINT
-          }
+        if (!step.checked && step.required != EReqStatus.NORMAL) {
+          if (step.required == EReqStatus.REQUIRED) return false; 
           data.expectMore = true;
         }
       }
@@ -1020,8 +903,6 @@ public class FieldProgramParser extends SmartAddressParser {
 
     public boolean link(StepLink link) {
       if (link == null) return true;
-      Step relStep = link.getRelStep();
-      if (relStep != null) index = relStep.getFieldIndex();
       index += link.getInc();
       lastStep = step;
       step =  link.getStep();
@@ -1041,85 +922,23 @@ public class FieldProgramParser extends SmartAddressParser {
     }
   }
   
-  // Tools to support scanning all of the steps currently part of the program tree
-  
-  // Master scan code
-  private int masterScanCode = 0;
-  
-  /*
-   * Initialize new step scan
-   */
-  private void initStepScan() {
-    masterScanCode++;
-  }
-  
-  /**
-   * Return a list of all current steps in step program
-   * @return the list of current steps
-   */
-  private List<Step> getAllSteps() {
-    List<Step> stepList = new ArrayList<Step>();
-    stepScan(new StepScanListener<List<Step>>(){
-      @Override
-      public void processStep(Step step, List<Step> stepList) {
-        stepList.add(step);
-      }
-    }, stepList);
-    return stepList;
-  }
-  
-  /**
-   * Step Scan Listener interface
-   */
-  private interface StepScanListener<T> {
-    public void processStep(Step step, T info);
-  }
-
-  /**
-   * Scan all current steps in program step tree, invoking the scan step listener for each one.
-   * Listener must not do anything to change any program step links.  Otherwise results are unpredictable
-   * @param listener listener to be invoked for each step
-   * @param info general information object to be passed to listener 
-   */
-  private <T> void stepScan(StepScanListener<T> listener, T info) {
-    initStepScan();
-    stepScan(startLink, listener, info);
-  }
-  
-  private <T> void stepScan(StepLink link, StepScanListener<T> listener, T info) {
-    if (link == null) return;
-    Step step = link.getStep();
-    if (step == null) return;
-    
-    if (step.isChecked()) return;
-    step.markChecked();
-    listener.processStep(step, info);
-    stepScan(step.succLink, listener, info);
-    stepScan(step.failLink, listener, info);
-    stepScan(step.nextStepLink, listener, info);
-  }
   
   // This class performs one program step
   private class Step {
     
     private String tag;
-    private String name;
-    private String qual;
-    private char trigger;
     private EReqStatus required;
     private boolean optional;
     
     private Field field;
-    private StepLink succLink = new StepLink(0);
+    private StepLink succLink = new StepLink(1);
     private StepLink failLink= null;
-    private StepLink nextStepLink = null;
+    private Step nextStep = null;
     
-    // List of all links pointing to this step,
-    // including relative field link references
+    // List of all links pointing to this step
     private List<StepLink> inLinks = new ArrayList<StepLink>();
     
-    // Index of field last processed by this step
-    private int fieldIndex = -1;
+    private boolean checked = false;
     
     /**
      * Constructor
@@ -1128,21 +947,17 @@ public class FieldProgramParser extends SmartAddressParser {
      * @param required required status
      * @param optional optional flag setting
      */
-    public Step(String tag, String name, String qual, char trigger, EReqStatus required, boolean optional) {
+    public Step(String tag, Field field, EReqStatus required, boolean optional) {
       this.tag = tag;
-      this.name = name;
-      this.qual = qual;
-      this.trigger = trigger;
-      field = null;
-      if (name != null){ 
-        field = getField(name);
-        field.setQual(qual);
-        field.setTrigger(trigger);
-      }
+      this.field = field;
       this.required = required;
       this.optional = (tag != null) && optional;
       
       if (tag != null) parseTags = true;
+      
+      // Select field is a special case.  It doesn't actually process a field, so the
+      // success link increment needs to be backed down to zero
+      if (field instanceof SelectField) succLink.setLink(null, -1);
     }
 
     /**
@@ -1150,31 +965,9 @@ public class FieldProgramParser extends SmartAddressParser {
      * as a temporary link point when we compile conditional branches
      */
     public Step() {
-      this.tag = null;
-      this.name = null;
-      this.qual = null;
-      this.trigger = 0;
       this.field = null;
       this.required = null;
-      this.optional = false;
-    }
-
-    // integer code used to mark steps that have been processed during a full step scan
-    private int scanCode = 0;
-
-    /**
-     * Determine if step has been checked during current scan
-     * @return
-     */
-    public boolean isChecked() {
-      return scanCode == masterScanCode;
-    }
-    
-    /**
-     * Mark step as checked during current scan
-     */
-    public void markChecked() {
-      scanCode = masterScanCode;
+      succLink = new StepLink(0);
     }
 
     /**
@@ -1197,22 +990,14 @@ public class FieldProgramParser extends SmartAddressParser {
      * @param nextStep new next step value
      */
     public void setNextStep(Step nextStep) {
-      if (nextStep != null) {
-        if (nextStepLink == null) nextStepLink = new StepLink(0);
-        nextStepLink.setLink(nextStep);
-      } else if (nextStepLink != null) {
-        nextStepLink.setLink(null);
-        nextStepLink = null;
-      }
+      this.nextStep = nextStep;
     }
     
     /**
      * @return next step
      */
     public Step getNextStep() {
-      StepLink link = (nextStepLink != null ? nextStepLink : succLink);
-      if (link == null) return null;
-      return link.getStep();
+      return nextStep;
     }
     
     /**
@@ -1220,13 +1005,6 @@ public class FieldProgramParser extends SmartAddressParser {
      */
     public List<StepLink> getInLinks() {
       return inLinks;
-    }
-    
-    public int getFieldIndex() {
-      if (fieldIndex < 0) {
-        throw new RuntimeException("Relative link reference to unprocesse step");
-      }
-      return fieldIndex;
     }
     
     /**
@@ -1242,46 +1020,21 @@ public class FieldProgramParser extends SmartAddressParser {
      * @return a clone of the current step
      */
     public Step cloneStep() {
-      Step newStep = new Step();
-      newStep.tag = tag;
-      newStep.name = name;
-      newStep.qual = qual;
-      newStep.trigger = trigger;
-      newStep.field = field;
-      newStep.required = required;
-      newStep.optional = optional;
-      newStep.nextStepLink = nextStepLink;
+      Step newStep = new Step(tag, field, required, optional);
+      newStep.nextStep = nextStep;
       return newStep;
     }
 
     /**
      * Split a branch step into two different steps.  The original step will
      * retain all of the incoming links, the returned step will retain the
-     * original outgoing link with the data index increment reduced by one.
-     * relative field positioning links will be split between the head and tail
-     * nodes depending on whether they negative or postive increments
-     * @return the outgoing step
+     * original outgoing link with the data index increment reduced by one
+     * @return
      */
     public Step split() {
-      
-      // Clone this step
       Step step = cloneStep();
-      step.succLink = succLink;
+      step.succLink.setLink(succLink.getStep(), -1);
       succLink = new StepLink(0);
-      
-      // Check all of the incoming links.  Any field position links with
-      // positive increments should be moved to the tail step.
-      // We have to move the targeted links to a separate temporary list
-      // because the act of changing them will remove them from the incoming
-      // link list, which we are not allowed to do while we are still 
-      // iterating through it
-      List<StepLink> tmpList = new ArrayList<StepLink>();
-      for (StepLink link : inLinks) {
-        if (link.getRelStep() == this && link.getInc() > 0) tmpList.add(link);
-      }
-      for (StepLink link : tmpList) {
-        link.setLink(link.getStep(), link.getInc(), step);
-      }
       return step;
     }
 
@@ -1297,17 +1050,7 @@ public class FieldProgramParser extends SmartAddressParser {
       if (! isSkipStep() || failLink != null) return;
       if (succLink.getStep() == this) return;
       
-      // If our success link is relative to another node
-      // and there are any links to anywhere that are relative
-      // to this node, than this node must be retained to save
-      // the field index that will be used ty that second link
-      if (succLink.getRelStep() != null) {
-        for (StepLink link : inLinks) {
-          if (link.getRelStep() != null) return;
-        }
-      }
-      
-      redirect(succLink.getStep(), succLink.getInc(), succLink.getRelStep());
+      redirect(succLink.getStep(), succLink.getInc());
       
       // Not really necessary, but this will clear the targets incoming links entry to
       // this step, allowing it to be GCed.
@@ -1332,52 +1075,7 @@ public class FieldProgramParser extends SmartAddressParser {
      * @param incAdj Data field increment adjustment
      */
     public void redirect(Step newStep, int incAdj) {
-      redirect(newStep, incAdj, null, false);
-    }
-    
-    /**
-     * Redirect all links pointing to this step to some other step
-     * possibly adjusting the data field increment
-     * @param newStep New step that links should be redirected to
-     * @param incAdj Data field increment adjustment
-     * @Param relStep Step used to anchor the field increment
-     */
-    public void redirect(Step newStep, int incAdj, Step relStep) {
-      redirect(newStep, incAdj, relStep, false);
-    }
-    
-    /**
-     * Redirect all links pointing to this step to some other step
-     * possibly adjusting the data field increment
-     * @param newStep New step that links should be redirected to
-     * @param incAdj Data field increment adjustment
-     * @Param relStep Step used to anchor the field increment
-     * @Param close step is being cloned rather than removed
-     */
-    public void redirect(Step newStep, int incAdj, Step relStep, boolean clone) {
-      while (! inLinks.isEmpty()) {
-        StepLink link = inLinks.remove(0);
-        boolean found = false;
-        if (link.getStep() == this) {
-          found = true;
-          link.chainLink(newStep, incAdj, relStep);
-        } 
-        if (link.getRelStep() == this) {
-          found = true;
-          if (!clone) link.chainRelLink(newStep, incAdj);
-        }
-        if (!found) {
-          throw new RuntimeException("Misdirected incoming link");
-        }
-      }
-    }
-    
-    public void backSelectLink() {
-      if (field != null && (field instanceof SelectField)) {
-        if (succLink != null) {
-          succLink.chainLink(succLink.getStep(), -1, null);
-        }
-      }
+      while (! inLinks.isEmpty()) inLinks.remove(0).setLink(newStep, incAdj);
     }
 
     /**
@@ -1394,15 +1092,11 @@ public class FieldProgramParser extends SmartAddressParser {
 
       int ndx = state.getIndex();
       Step lastStep = state.getLastStep();
-      
-      // Save the processed field index
-      fieldIndex = ndx;
 
       // Have we passed the end of the data stream
-      //  and are not a select field, which doesn't need data to work
-      if (ndx >= flds.length && !(field != null && field instanceof SelectField)) {
+      if (ndx >= flds.length) {
         
-        // If this is an END step, take the success link
+        // Yep, if this is an END step, take the success link
         if (field instanceof EndField) {
           return state.link(succLink);
         }
@@ -1414,29 +1108,16 @@ public class FieldProgramParser extends SmartAddressParser {
           return state.link(failLink);
         } 
         
-        // Otherwise, there is no field processing associated with this step
-        // and there is a success link that moves us backward through the
-        // field list, then take the success link.  This is very rare, but it
-        // happens when a decision making conditional branch leaves a tail
-        // link node that happens to fall past the end of data
-        if (field == null && succLink != null && succLink.getInc() < 0) {
-          return state.link(succLink);
-        }
-        
         // Otherwise we are finished
         return true;
       }
-      
-      // Check for special doNotTrim processing
-      boolean doNotTrim = (field != null && field.doNotTrim());
       
       // Now we have to deal with any tag complications
       // Default is to process this step with this data field
       // Tag processing is suppressed for Select field steps since they really
       // do no field processing
       Step procStep = this;
-      String curFld = ndx < flds.length ? flds[ndx] : "";
-      if (!doNotTrim) curFld = curFld.trim();
+      String curFld = flds[ndx].trim();
       if (parseTags && !(field instanceof SelectField)) {
         Step startStep = this;
         int startNdx = ndx;
@@ -1451,8 +1132,7 @@ public class FieldProgramParser extends SmartAddressParser {
           if (pt >= 0) {
             curTag = curFld.substring(0, pt).trim();
             if (ignoreCase) curTag = curTag.toUpperCase();
-            curVal = curFld.substring(pt+1);
-            if (!doNotTrim) curVal = curVal.trim();
+            curVal = curFld.substring(pt+1).trim();
           }
           
           // If this is an option tagged step, take failure branch
@@ -1475,7 +1155,7 @@ public class FieldProgramParser extends SmartAddressParser {
             procStep = startStep;
             while (procStep != null && !curTag.equals(procStep.tag)) {
               if (procStep.required == EReqStatus.REQUIRED) skipReq = true;;
-              procStep = procStep.getNextStep();
+              procStep = procStep.nextStep;
             }
             
             // Did we find one
@@ -1489,7 +1169,7 @@ public class FieldProgramParser extends SmartAddressParser {
               
               // If we had to skip over a required field, return failure
               if (skipReq) {
-                state.setResult(false);      // << BREAKPOINT
+                state.setResult(false);
                 return true;
               }
               
@@ -1510,38 +1190,19 @@ public class FieldProgramParser extends SmartAddressParser {
             Step tStep = procStep;
             while (tStep != null) {
               if (tStep.tag != null && tStep.tag.startsWith(curFld)) return true;
-              tStep = tStep.getNextStep();
+              tStep = tStep.nextStep;
             }
           }
           
           // if the current start step is also untagged, process it normally
           if (startStep.tag == null) break;
-
-          // Current step is tagged, current data field is untagged
-          // If the current step tag matches the previous step tag we assume that
-          // the untagged field inherits a tag label form a previous data field.
-          if (lastStep != null && startStep.tag.equals(lastStep.tag)) break;
           
-          // No luck there.  If the the current step is an optional tagged step, skip ahead to
-          // see if we can find a untagged step to match this with data field.
-          // To make life just a bit more complicated, we have to adjust the current data
-          // field position if the last optional tagged step that got us to this step
-          // has an increment other than one
-          if (startStep.optional) { 
-            int inc;
-            Step tStep = startStep;
-            do {
-              inc = startStep.getSuccLink().getInc();
-              tStep = tStep.getNextStep();
-            } while (tStep != null && tStep.tag != null && tStep.optional);
-            if (tStep != null && tStep.tag == null) {
-              ndx += (inc-1);
-              procStep = tStep;
-              break;
-            }
-          }
-
-          // Still no luck, Skip this data field and go on to the next one
+          // If the current step is tagged, untagged data fields will usually be 
+          // ignored until we come to the tagged step.  An exception is made if
+          // the current step tag matches the previous step tag, in which case it
+          // is assumed that the untagged data field inherits the tag from a
+          // previous data field.
+          if (lastStep != null && startStep.tag.equals(lastStep.tag)) break;
           if (++ndx >= flds.length) {
             
             // There is no data field matching this steps tag
@@ -1577,30 +1238,21 @@ public class FieldProgramParser extends SmartAddressParser {
       
       // Get current field and state information
       int ndx = state.getIndex();
-      fieldIndex = ndx;
       
       // Next we invoke our field object to process the current data field.
-      // If there is a fail step and step is no tagged, we will ask the 
-      // field object to check to see if this is a valid data field before 
-      // parsing it.  if there is not, it will not be given that option
-      
-      // If step is tagged the fail link is only taken if a matching data field
-      // is not found.  We would not be here unless the data field had a matching
-      // tag, so the fail step should never be taken at this point
+      // If there is a fail step, we will ask the field object to check to
+      // see if this is a valid data field before parsing it.  if there is
+      // not, it will not be given that option
       boolean success = true;
       try {
         if (field != null) {
           field.setFieldList(flds, ndx);
-          if (tag == null && failLink != null) {
+          if (failLink != null) {
             success = field.doCheckParse(curFld, data);
           }
           else {
             field.doParse(curFld, data);
           }
-          
-          // Keep a record of which fields successfully processed
-          // which data fields
-          if (success && ndx < fieldRecord.length) fieldRecord[ndx] = field;
         }
       } catch (FieldProgramException ex) {
         state.setResult(false);
@@ -1620,51 +1272,48 @@ public class FieldProgramParser extends SmartAddressParser {
 
       // If this is a required step, return failure
       if (required == EReqStatus.REQUIRED) {
-        return false;      // << BREAKPOINT
+        return false;
       }
       if (required == EReqStatus.EXPECTED) data.expectMore = true; 
       return true;
     }
-    
-    public String toString(Map<Step,Integer> stepMap) {
-      StringBuilder sb = new StringBuilder();
-      sb.append(getQualName());
-      sb.append(getLinkName("  S:", succLink, stepMap));
-      sb.append(getLinkName("  F:", failLink, stepMap));
-      sb.append(getLinkName("  N:", nextStepLink, stepMap));
-      return sb.toString();
+
+    public void checkForSkips() {
+      
+      // Use the checked flag to ensure we check the same node twice
+      
+      if (checked) return;
+      checked = true;
+      
+      // If this is a skip node,optimization has failed
+      if (isSkipStep()) {
+        throw new RuntimeException("Skip node still present in program tree");
+      }
+      
+      // Check both branches
+      if (succLink != null && succLink.getStep() != null) succLink.getStep().checkForSkips();
+      if (failLink != null && failLink.getStep() != null) failLink.getStep().checkForSkips();
+      
     }
     
-    private String getQualName() {
-      StringBuilder sb = new StringBuilder();
-      if (tag != null) {
-        sb.append(tag);
-        sb.append(':');
-      }
-      sb.append(name != null ? name : "-----");
-      if (qual != null) {
-        sb.append('/');
-        sb.append(qual);
-      }
-      if (trigger != 0) {
-        sb.append('?');
-        sb.append(trigger);
-      }
-      else if (optional) {
-        sb.append('?');
-      }
-      else if (required == EReqStatus.REQUIRED) {
-        sb.append('!');
-      }
-      else if (required == EReqStatus.EXPECTED) {
-        sb.append('%');
-      }
-      return sb.toString();
+    @Override
+    public String toString() {
+      return "" + hashCode() + "  " + getFieldName() + getLinkName("Succ", succLink) + getLinkName("Fail", failLink); 
     }
     
-    private String getLinkName(String prefix, StepLink link, Map<Step,Integer> stepMap) {
+    private String getFieldName() {
+      if (field == null) return "-----";
+      String name = field.getClass().getName();
+      int pt = name.lastIndexOf('$');
+      if (pt < 0) pt = name.lastIndexOf('.');
+      if (pt >= 0) name = name.substring(pt+1);
+      if (name.endsWith("Field")) name = name.substring(0,name.length()-5);
+      return name;
+    }
+    
+    private String getLinkName(String title, StepLink link) {
       if (link == null) return "";
-      return prefix + link.toString(stepMap);
+      return "  " + title + ": " + link.toString();
     }
   }
   
@@ -1672,9 +1321,8 @@ public class FieldProgramParser extends SmartAddressParser {
    * This class contains the information needed to link a Step to another Step
    */
   private static class StepLink {
-    private Step step;     // Next step to process
-    private int inc;       // Data field increment
-    private Step relStep;  // If not null, data increment is relative to the data field processed by this step 
+    private Step step;
+    private int inc;
     
     public StepLink(int inc) {
       this.step = null;
@@ -1689,85 +1337,22 @@ public class FieldProgramParser extends SmartAddressParser {
       return inc;
     }
     
-    public Step getRelStep() {
-      return relStep;
-    }
-    
     public void setLink(Step step) {
-      setLink(step, 0, null);
+      setLink(step, 0);
     }
     
     public void setLink(Step step, int incAdj) {
-      setLink(step, incAdj, null);
+      if (this.step != null) this.step.getInLinks().remove(this);
+      this.step = step;
+      if (step != null) step.getInLinks().add(this);
+      this.inc += incAdj;
     }
     
-    public void setLink(Step step, int incAdj, Step relStep) {
-      
-      if (this.step != step) {
-        if (this.step != null) this.step.getInLinks().remove(this);
-        this.step = step;
-        if (step != null) step.getInLinks().add(this);
-      }
-      
-      if (this.relStep != relStep) {
-        if (this.relStep != null) this.relStep.getInLinks().remove(this);
-        this.relStep = relStep;
-        if (relStep != null) relStep.getInLinks().add(this);
-      }
-      
-      this.inc = incAdj;
+    @Override
+    public String toString() {
+      return (step == null ? "-----" : step.hashCode()) + "/" + inc;
     }
     
-    /**
-     * Adjust link from one target to another, possibly adjusting the data index
-     * as we do
-     * @param step new target step
-     * @param inc relative change in data index 
-     * @param relStep data index change relative to this step
-     */
-    public void chainLink(Step step, int inc, Step relStep) {
-      
-      // If the chained link has a relative to step, it completely
-      // replaces the previous data index fields.  Otherwise we retain
-      // the previous relative to step (which may be null) and add the
-      // two link increments together
-      if (relStep == null) {
-        inc += this.inc;
-        relStep = this.relStep;
-      }
-      
-      // Apply the new fields to this link
-      setLink(step, inc, relStep);
-    }
-    
-    /**
-     * Adjust link when the relative to step is dropped as an unneeded skip step.  The relative
-     * to step will be moved to the target of the dropped steps outgoing link and various
-     * increment adjustments will be made
-     * @param step new target step
-     * @param inc relative change in data index 
-     */
-    public void chainRelLink(Step step, int inc) {
-      setLink(this.step, this.inc-inc, step);
-    }
-    
-    public String toString(Map<Step,Integer> stepMap) {
-      StringBuilder sb = new StringBuilder();
-      sb.append(inc);
-      if (relStep != null) {
-        sb.append('(');
-        sb.append(stepMap.get(relStep));
-        sb.append(')');
-      }
-      sb.append('/');
-      if (step == null) {
-        sb.append("----");
-      } else {
-        sb.append(stepMap.get(step));
-      }
-      return sb.toString();
-    }
-
   }
 
   /*
@@ -1778,7 +1363,6 @@ public class FieldProgramParser extends SmartAddressParser {
     private String qual = null;
     
     private boolean noVerify;
-    private boolean forceVerify;
 
     private char trigger = 0;
     
@@ -1805,10 +1389,7 @@ public class FieldProgramParser extends SmartAddressParser {
 
     public void setQual(String qual) {
       this.qual = qual;
-      if (qual != null) {
-        this.noVerify = qual.contains("Z");
-        this.forceVerify = qual.contains("Y");
-      }
+      if (qual != null) this.noVerify = qual.contains("Z");
     }
     
     public String getQual() {
@@ -1879,8 +1460,6 @@ public class FieldProgramParser extends SmartAddressParser {
         Matcher match = pattern.matcher(field);
         if (!match.matches()) return false;
         if (match.groupCount() == 1) field = match.group(1);
-        parse(field, data);
-        return true;
       }
       return checkParse(field, data);
     }
@@ -1911,11 +1490,7 @@ public class FieldProgramParser extends SmartAddressParser {
           if (match.groupCount() == 1) field = match.group(1);
         } else if (hardPattern) abort();
       }
-      if (forceVerify) {
-        if (!checkParse(field, data)) abort();
-      } else {
-        parse(field, data);
-      }
+      parse(field, data);
     }
     
     /*
@@ -1933,7 +1508,7 @@ public class FieldProgramParser extends SmartAddressParser {
     protected String getRelativeField(int ndx) {
       ndx += index;
       if (ndx < 0 || ndx >= fieldList.length) return "";
-      return fieldList[ndx].trim();
+      return fieldList[ndx];
     }
     
     /**
@@ -1947,19 +1522,18 @@ public class FieldProgramParser extends SmartAddressParser {
      * Abort field program processing and return parse failure
      */
     protected void abort() {
-      throw new FieldProgramException();                // << BREAKPOINT
+      throw new FieldProgramException();
     }
     
     /**
-     * @return blank separated names of the base info fields that might be set by this field
+     * Return blank separated names of the base info fields that might be set by this field
+     * If this returns null, the name of of the field term used to look up
+     * this field will be used.  It should be overridden by any field processor
+     * that sets an info field other than the one described by its name
+     * @return
      */
-    abstract public String getFieldNames();
-    
-    /**
-     * @return true if data fields should not be trimmed before being processed.
-     */
-    public boolean doNotTrim() {
-      return false;
+    public String getFieldNames() {
+      return null;
     }
   }
 
@@ -1980,11 +1554,6 @@ public class FieldProgramParser extends SmartAddressParser {
     public void parse(String field, Data data) {
       data.strCall = append(data.strCall, " / ", field);
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "CALL";
-    }
   }
 
   /**
@@ -2002,12 +1571,7 @@ public class FieldProgramParser extends SmartAddressParser {
     
     @Override
     public void parse(String field, Data data) {
-      data.strPlace = append(data.strPlace, " - ", cleanWirelessCarrier(field));
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "PLACE";
+      data.strPlace = field;
     }
   }
 
@@ -2049,117 +1613,75 @@ public class FieldProgramParser extends SmartAddressParser {
       super.setQual(qual);
       if (qual == null) return;
       
-      String smartQual = null;
       int pt = qual.indexOf('S');
       if (pt >= 0) {
-        smartQual = qual.substring(pt+1);
-        qual = qual.substring(0,pt).trim();
+        startType = StartType.START_ADDR;
+        parseFlags = FLAG_ANCHOR_END;
+        boolean addPlace = false;
+        do {
+          if (++pt >= qual.length()) break;
+          char chr = qual.charAt(pt);
+          if (chr == '0') {
+            parseFlags |= FLAG_AT_BOTH;
+            addPlace = true;
+            if (++pt >= qual.length()) break;
+          }
+          if (chr == '1') {
+            parseFlags |= FLAG_AT_PLACE;
+            addPlace = true;
+            if (++pt >= qual.length()) break;
+          }
+          if (chr == '2') {
+            parseFlags |= FLAG_AT_SIGN_ONLY;
+            if (++pt >= qual.length()) break;
+          }
+          chr = qual.charAt(pt);
+          int pt2 = "cPsCpS".indexOf(chr);
+          if (pt2 >= 0) {
+            if (pt2 >= 3) {
+              pt2 -= 3;
+              parseFlags |= FLAG_START_FLD_REQ;
+            }
+            startField = new String[]{"CALL","PLACE",null}[pt2];
+            startType = new StartType[]{StartType.START_CALL,StartType.START_PLACE,StartType.START_SKIP}[pt2];
+          }
+          
+          if (++pt >= qual.length()) break;
+          chr = qual.charAt(pt);
+          pt2 = "CPSaUNIx".indexOf(chr);
+          if (pt2 >= 0) {
+            parseFlags &= ~FLAG_ANCHOR_END;
+            tailField = new String[]{"CALL","PLACE","SKIP","APT","UNIT","NAME","INFO", "X"}[pt2];
+            tailData = getField(tailField);
+            if (chr == 'I') parseFlags |= FLAG_IGNORE_AT;
+          }
+          
+          if (++pt >= qual.length()) break;
+          chr = qual.charAt(pt);
+          pt2 = "PS".indexOf(chr);
+          if (pt2 >= 0) {
+            parseFlags |= FLAG_PAD_FIELD;
+            padField = new String[]{"PLACE","SKIP"}[pt2];
+            padData = getField(padField);
+          }
+          
+        } while (false);
+        if (addPlace) {
+          if (tailField == null) tailField = "PLACE";
+          else tailField = "PLACE " + tailField;
+        }
+        qual = qual.substring(0,pt);
       }
-      
       incCity = qual.contains("y");
       sloppy  = qual.contains("s");
       if (qual.contains("i")) {
-        startType = StartType.START_ADDR;
-        parseFlags = FLAG_ANCHOR_END | FLAG_IMPLIED_INTERSECT;
+        if (startType == null) {
+          startType = StartType.START_ADDR;
+          parseFlags = FLAG_ANCHOR_END;
+        }
+        parseFlags |= FLAG_IMPLIED_INTERSECT;
       }
-      if (qual.contains("a")) parseFlags |= FLAG_NO_IMPLIED_APT;
-      
-      if (smartQual == null) return;
-      startType = StartType.START_ADDR;
-      parseFlags |= FLAG_ANCHOR_END;
-      parseFlags |= getExtraParseAddressFlags();
-      boolean addPlace = false;
-      pt = 0;
-      while (true) {
-        if (pt >= smartQual.length()) break;
-        char chr = smartQual.charAt(pt);
-        if (!Character.isDigit(chr)) break;
-        switch (chr-'0') {
-        case 0:
-          parseFlags |= FLAG_AT_BOTH;
-          addPlace = true;
-          break;
-        
-        case 1:
-          parseFlags |= FLAG_AT_PLACE;
-          break;
-          
-        case 2:  
-          parseFlags |= FLAG_AT_SIGN_ONLY;
-          break;
-      
-        case 3:
-          parseFlags |= FLAG_CROSS_FOLLOWS;
-          break;
-
-        case 4:
-          parseFlags |= FLAG_EMPTY_ADDR_OK;
-          break;
-          
-        case 5:
-          parseFlags |= FLAG_CROSS_FOLLOWS;
-          break;
-        
-       case 6:
-          parseFlags |= FLAG_RECHECK_APT;
-          break;
-        
-        case 7:
-          parseFlags |= FLAG_START_FLD_NO_DELIM;
-          break;
-          
-        case 8:
-          parseFlags |= FLAG_OPT_STREET_SFX;
-          break;
-        }
-          
-        pt++;
-      }
-
-      do {
-        if (pt >= smartQual.length()) break;
-        char chr = smartQual.charAt(pt);
-        int pt2 = "cPslCpSL".indexOf(chr);
-        if (pt2 >= 0) {
-          if (pt2 >= 4) {
-            pt2 -= 4;
-            parseFlags |= FLAG_START_FLD_REQ;
-          }
-          startField = new String[]{"CALL","PLACE",null,"CALL PLACE"}[pt2];
-          startType = new StartType[]{StartType.START_CALL,StartType.START_PLACE,StartType.START_OTHER,StartType.START_CALL_PLACE}[pt2];
-        }
-        
-        if (++pt >= smartQual.length()) break;
-        chr = smartQual.charAt(pt);
-        pt2 = "CPSaUNIx".indexOf(chr);
-        if (pt2 >= 0) {
-          parseFlags &= ~FLAG_ANCHOR_END;
-          if (chr == 'x') parseFlags |= FLAG_CROSS_FOLLOWS;
-          tailField = new String[]{"CALL","PLACE","SKIP","APT","UNIT","NAME","INFO","X"}[pt2];
-          tailData = getAddressField(tailField);
-          if (chr == 'I') parseFlags |= FLAG_IGNORE_AT;
-        }
-        
-        if (++pt >= smartQual.length()) break;
-        chr = smartQual.charAt(pt);
-        pt2 = "PSax".indexOf(chr);
-        if (pt2 >= 0) {
-          parseFlags |= (chr == 'P' || chr == 'x' ? FLAG_PAD_FIELD : FLAG_PAD_FIELD_EXCL_CITY);
-          if (chr == 'x') parseFlags |= FLAG_CROSS_FOLLOWS;
-          padField = new String[]{"PLACE","SKIP", "APT", "X"}[pt2];
-          padData = getAddressField(padField);
-        }
-      } while (false);
-        
-      if (addPlace) {
-        if (tailField == null) tailField = "PLACE";
-        else tailField = "PLACE " + tailField;
-      }
-    }
-    
-    private Field getAddressField(String name) {
-      if (name.equals("APT")) return new SpecialAptField();
-      return getField(name);
+      if (qual.contains("a") && startType != null) parseFlags |= FLAG_NO_IMPLIED_APT;
     }
 
     @Override
@@ -2184,7 +1706,7 @@ public class FieldProgramParser extends SmartAddressParser {
       else {
         Result res = parseAddress(startType, field);
         if (res.getStatus() <= 0) return false;
-        if ((parseFlags & FLAG_ANCHOR_END) != 0 && res.getLeft().length() > 0) return false;
+        if ((parseFlags & FLAG_ANCHOR_END) != 0 && getLeft().length() > 0) return false;
         
         // Looks good, lets parse out the data
         res.getData(data);
@@ -2204,10 +1726,7 @@ public class FieldProgramParser extends SmartAddressParser {
           parseAddress(field, data);
         }
       } else {
-        int flags = parseFlags;
-        if (data.strCity.length() > 0) flags |= FLAG_NO_CITY;
-        parseAddress(startType, flags, field, data);
-        if (padData != null) padData.parse(getPadField(), data);
+        parseAddress(startType, parseFlags, field, data);
         if (tailData != null) tailData.parse(getLeft(), data);
       }
     }
@@ -2235,29 +1754,12 @@ public class FieldProgramParser extends SmartAddressParser {
       return sb.toString().trim();
     }
   }
-  
-  /**
-   * Get any extra smart address parser flags that could not be passed as address field
-   * qualifiers for some reason
-   * @return extra smart address paser flags
-   */
-  protected int getExtraParseAddressFlags() {
-    return 0;
-  }
 
   /**
    * City field processor
    */
   public class CityField extends Field {
     
-    public CityField() {};
-    public CityField(String pattern) {
-      super(pattern);
-    }
-    public CityField(String pattern, boolean hardPattern) {
-      super(pattern, hardPattern);
-    }
-   
     @Override
     public boolean canFail() {
       return cities != null || cityCodes != null;
@@ -2285,11 +1787,6 @@ public class FieldProgramParser extends SmartAddressParser {
       } else {
         data.strCity = field;
       }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CITY";
     }
   }
   
@@ -2365,84 +1862,7 @@ public class FieldProgramParser extends SmartAddressParser {
     public void parse(String field, Data data) {
       data.strApt = append(data.strApt, "-", field);
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "APT";
-    }
   }
-  
-  /**
-   * Special apartment field procesor to handle a trailing apartment field
-   * that is part of a smart address field.  If it happens to start with
-   * a slash or ampersand, assume it should be part of an address intersection
-   */
-  private static final Pattern SPEC_APT_INTERSECT_PTN = Pattern.compile("(?:([A-Z0-9]{1,3}) *)?(?:[&/]|AND\\b|OFF\\b) *(.*)", Pattern.CASE_INSENSITIVE);
-  private static final Pattern SPC_APT_NOT_APT_PTN = Pattern.compile("NORTH|SOUTH|EAST|WEST|BLK",Pattern.CASE_INSENSITIVE);
-  private class SpecialAptField extends AptField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = SPEC_APT_INTERSECT_PTN.matcher(field);
-      if (match.matches()) {
-        data.strApt = append(data.strApt, " ", getOptGroup(match.group(1)));
-        data.strAddress = append(data.strAddress, " & ", match.group(2));
-      } else if (SPC_APT_NOT_APT_PTN.matcher(field).matches()) {
-        data.strAddress = append(data.strAddress, " ", field);
-      } else {
-        data.strApt = append(data.strApt, " ", field);
-      }
-    }
-  }
-  
-  /**
-   * Special Apartment field processor
-   */
-  public class Apt2Field extends AptField {
-    
-    private int lengthLimit;
-    
-    public Apt2Field() {
-      this(-1);
-    }
-    
-    public Apt2Field(int lengthLimit) {
-      this.lengthLimit = lengthLimit;
-    }
-    
-    @Override
-    public boolean canFail() {
-      return true;
-    }
-    
-    @Override
-    public boolean checkParse(String field, Data data) {
-      Matcher match = APT2_PTN.matcher(field);
-      if (!match.matches()) {
-        if (lengthLimit < 0 || field.length() > lengthLimit) return false;
-      } else {
-        String tmp = match.group(1);
-        if (tmp != null) field = tmp;
-      }
-      super.parse(field, data);
-      return true;
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = APT2_PTN.matcher(field);
-      if (match.matches()) {
-        String tmp = match.group(1);
-        if (tmp != null) field = null;
-      }
-      super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "APT";
-    }
-  }
-  private static final Pattern APT2_PTN = Pattern.compile("(?:APT|RM|ROOM|SUITE) *(.*)|(?:BLDG?|LOT).*");
 
   /**
    * Cross street field processor
@@ -2487,11 +1907,6 @@ public class FieldProgramParser extends SmartAddressParser {
       }
       data.strCross = append(data.strCross, " & ", field);
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "X";
-    }
   }
 
   /**
@@ -2510,11 +1925,6 @@ public class FieldProgramParser extends SmartAddressParser {
     @Override
     public void parse(String field, Data data) {
       data.strBox = field;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "BOX";
     }
   }
 
@@ -2535,11 +1945,6 @@ public class FieldProgramParser extends SmartAddressParser {
     public void parse(String field, Data data) {
       data.strUnit = field;
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "UNIT";
-    }
   }
 
   /**
@@ -2550,21 +1955,10 @@ public class FieldProgramParser extends SmartAddressParser {
     public StateField() {
       super("[A-Z]{2}", true);
     };
-    public StateField(String pattern) {
-      super(pattern);
-    }
-    public StateField(String pattern, boolean hardPattern) {
-      super(pattern, hardPattern);
-    }
 
     @Override
     public void parse(String field, Data data) {
       data.strState = field;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "ST";
     }
   }
 
@@ -2583,12 +1977,7 @@ public class FieldProgramParser extends SmartAddressParser {
 
     @Override
     public void parse(String field, Data data) {
-      data.strMap = append(data.strMap, "-", field);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "MAP";
+      data.strMap = field;
     }
   }
 
@@ -2610,11 +1999,6 @@ public class FieldProgramParser extends SmartAddressParser {
     @Override
     public void parse(String field, Data data) {
       data.strCallId = field;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "ID";
     }
   }
 
@@ -2638,11 +2022,6 @@ public class FieldProgramParser extends SmartAddressParser {
     @Override
     public void parse(String field, Data data) {
       data.strPhone = field;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "PHONE";
     }
   }
 
@@ -2684,22 +2063,6 @@ public class FieldProgramParser extends SmartAddressParser {
   }
 
   /**
-   * Unknown field processor
-   */
-  public class UnknownField extends Field {
-    
-    @Override
-    public void parse(String field, Data data) {
-      data.strSupp = append(data.strSupp, " / ", field);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return null;
-    }
-  }
-
-  /**
    * Source field processor
    */
   public class SourceField extends Field {
@@ -2715,11 +2078,6 @@ public class FieldProgramParser extends SmartAddressParser {
     @Override
     public void parse(String field, Data data) {
       data.strSource = field;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "SRC";
     }
   }
 
@@ -2740,11 +2098,6 @@ public class FieldProgramParser extends SmartAddressParser {
     public void parse(String field, Data data) {
       data.strCode = field;
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "CODE";
-    }
   }
 
   /**
@@ -2762,12 +2115,7 @@ public class FieldProgramParser extends SmartAddressParser {
 
     @Override
     public void parse(String field, Data data) {
-      data.strName = cleanWirelessCarrier(field);
-   }
-    
-    @Override
-    public String getFieldNames() {
-      return "NAME";
+      data.strName = field;
     }
   }
 
@@ -2787,7 +2135,6 @@ public class FieldProgramParser extends SmartAddressParser {
 
     @Override
     public void parse(String field, Data data) {
-      field = cleanWirelessCarrier(field);
       if (checkPlace(field)) data.strPlace = field;
       else data.strName = field;
     }
@@ -2815,11 +2162,6 @@ public class FieldProgramParser extends SmartAddressParser {
     public void parse(String field, Data data) {
       data.strPriority = field;
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "PRI";
-    }
   }
 
   /**
@@ -2839,11 +2181,6 @@ public class FieldProgramParser extends SmartAddressParser {
     public void parse(String field, Data data) {
       data.strChannel = field;
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "CH";
-    }
   }
 
   /**
@@ -2861,12 +2198,7 @@ public class FieldProgramParser extends SmartAddressParser {
 
     @Override
     public void parse(String field, Data data) {
-      setGPSLoc(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "GPS";
+      data.strGPSLoc = field;
     }
   }
 
@@ -2876,8 +2208,7 @@ public class FieldProgramParser extends SmartAddressParser {
   public class DateField extends Field {
     
     private DateFormat fmt = null;
-    private boolean hardPattern = false;
-    private boolean convertDashes = false;
+    boolean hardPattern = false;
     
     public DateField() {};
     public DateField(String pattern) {
@@ -2895,12 +2226,6 @@ public class FieldProgramParser extends SmartAddressParser {
     }
     
     @Override
-    public void setQual(String qual) {
-      convertDashes = qual != null && qual.contains("d");
-      super.setQual(qual);
-    }
-    
-    @Override
     public boolean canFail() {
       return hardPattern || super.canFail();
     }
@@ -2910,7 +2235,6 @@ public class FieldProgramParser extends SmartAddressParser {
       if (fmt != null) {
         if (!checkParse(field, data) && hardPattern) abort();
       } else {
-        if (convertDashes) field = field.replace('-', '/');
         data.strDate = field;
       }
     }
@@ -2920,15 +2244,9 @@ public class FieldProgramParser extends SmartAddressParser {
       if (fmt != null) {
         return setDate(fmt, field, data);
       } else {
-        if (convertDashes) field = field.replace('-', '/');
         parse(field, data);
         return true;
       }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "DATE";
     }
   }
 
@@ -2957,7 +2275,7 @@ public class FieldProgramParser extends SmartAddressParser {
     
     @Override
     public boolean canFail() {
-      return hardPattern || fmt != null || super.canFail();
+      return hardPattern || super.canFail();
     }
 
     @Override
@@ -2978,12 +2296,7 @@ public class FieldProgramParser extends SmartAddressParser {
         return true;
       }
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "TIME";
-    }
- }
+  }
 
   /**
    * Date/Time field processor
@@ -2992,7 +2305,6 @@ public class FieldProgramParser extends SmartAddressParser {
     
     DateFormat fmt = null;
     boolean hardPattern = false;
-    private boolean convertDashes = false;
     
     public DateTimeField () {};
     public DateTimeField (String pattern) {
@@ -3011,18 +2323,6 @@ public class FieldProgramParser extends SmartAddressParser {
       this.hardPattern = hardPattern;
     }
     
-    public DateTimeField(String pattern, DateFormat fmt, boolean hardPattern) {
-      super(pattern, hardPattern);
-      this.fmt = fmt;
-      this.hardPattern = hardPattern;
-    }
-    
-    @Override
-    public void setQual(String qual) {
-      convertDashes = qual != null && qual.contains("d");
-      super.setQual(qual);
-    }
-    
     @Override
     public boolean canFail() {
       return hardPattern || super.canFail();
@@ -3036,7 +2336,6 @@ public class FieldProgramParser extends SmartAddressParser {
         int pt = field.indexOf(' ');
         if (pt >= 0) {
           data.strDate = field.substring(0,pt).trim();
-          if (convertDashes) data.strDate = data.strDate.replace('-', '/');
           data.strTime = field.substring(pt+1).trim();
         }
       }
@@ -3050,7 +2349,6 @@ public class FieldProgramParser extends SmartAddressParser {
         int pt = field.indexOf(' ');
         if (pt < 0) return false;
         data.strDate = field.substring(0,pt).trim();
-        if (convertDashes) data.strDate = data.strDate.replace('-', '/');
         data.strTime = field.substring(pt+1).trim();
         return true;
       }
@@ -3116,11 +2414,6 @@ public class FieldProgramParser extends SmartAddressParser {
     public void parse(String field, Data data) {
       data.strInfoURL = field;
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "URL";
-    }
   }
   
   /**
@@ -3139,11 +2432,6 @@ public class FieldProgramParser extends SmartAddressParser {
     @Override
     public void parse(String field, Data data) {
     }
-    
-    @Override
-    public String getFieldNames() {
-      return null;
-    }
   }
   
   /**
@@ -3152,7 +2440,7 @@ public class FieldProgramParser extends SmartAddressParser {
    * but has ability to verify initials contents
    */
   private static final Pattern INITLS_PAT = Pattern.compile("[A-Za-z]{2,3}");
-  public class InitialsField extends SkipField {
+  public class InitialsField extends Field {
     
     public InitialsField() {
       setPattern(INITLS_PAT);
@@ -3176,11 +2464,6 @@ public class FieldProgramParser extends SmartAddressParser {
     @Override
     public boolean checkParse(String field, Data data) {
       return field.length() == 0;
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      if (!checkParse(field, data)) abort();
     }
   }
   
@@ -3226,12 +2509,8 @@ public class FieldProgramParser extends SmartAddressParser {
 
     @Override
     public boolean checkParse(String field, Data data) {
-      return code.equals(getSelectValue(data));
+      return code.equals(getSelectValue());
     }
-  }
-  
-  protected String getSelectValue(Data data) {
-    return getSelectValue();
   }
   
   protected String getSelectValue() {
@@ -3254,7 +2533,6 @@ public class FieldProgramParser extends SmartAddressParser {
     if (name.equals("ZIP")) return new ZipField();
     if (name.equals("ADDRCITY")) return new AddressCityField();
     if (name.equals("APT")) return new AptField();
-    if (name.equals("APT2")) return new Apt2Field();
     if (name.equals("X")) return new CrossField();
     if (name.equals("BOX")) return new BoxField();
     if (name.equals("UNIT")) return new UnitField();
@@ -3263,7 +2541,7 @@ public class FieldProgramParser extends SmartAddressParser {
     if (name.equals("ID")) return new IdField();
     if (name.equals("PHONE")) return new PhoneField();
     if (name.equals("INFO")) return new InfoField();
-    if (name.equals("UNK")) return new UnknownField();    // For unknown fields never known to be non-empty
+    if (name.equals("UNK")) return new InfoField();    // For unknown fields never known to be non-empty
     if (name.equals("SRC")) return new SourceField();
     if (name.equals("CODE")) return new CodeField();
     if (name.equals("NAME")) return new NameField();
@@ -3293,21 +2571,10 @@ public class FieldProgramParser extends SmartAddressParser {
   
   @Override
   public String toString() {
-    
-    if (startLink == null) return "Null Program";
-    List<Step> stepList = getAllSteps();
-    Map<Step,Integer> stepMap = new HashMap<Step,Integer>();
-    int ndx = 1;
-    for (Step step : stepList) stepMap.put(step, (ndx++));
-    
-    StringBuilder sb = new StringBuilder("Start:" + startLink.toString(stepMap));
-    sb.append('\n');
-    ndx = 1;
-    for (Step step : stepList) {
-      if (ndx > 1) sb.append('\n');
-      sb.append(ndx++);
-      sb.append(": ");
-      sb.append(step.toString(stepMap));
+    StringBuilder sb = new StringBuilder("Start:" + startLink.toString());
+    for (Step step = startLink.getStep(); step != null; step = step.nextStep) {
+      sb.append('\n');
+      sb.append(step.toString());
     }
     return sb.toString();
   }

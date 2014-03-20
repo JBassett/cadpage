@@ -29,12 +29,11 @@ public class ALLauderdaleCountyParser extends FieldProgramParser {
   
   @Override
   public String getFilter() {
-    return "911paging@florenceal.org,911paging";
+    return "911paging@florenceal.org";
   }
 
   @Override
   protected boolean parseMsg(String body, Data data) {
-    body = body.replace("TIME:", " TIME:");
     if (!super.parseMsg(body, data)) return false;
     if (data.strAddress.length() == 0) {
       if (data.strCross.length() == 0) return false;
@@ -80,7 +79,7 @@ public class ALLauderdaleCountyParser extends FieldProgramParser {
       Matcher match = CELL_INFO_PTN.matcher(field);
       if (match.find()) {
         data.strPhone = match.group(1);
-        setGPSLoc(match.group(2), data);
+        data.strGPSLoc = match.group(2);
         field = field.substring(match.end()).trim();
       }
       super.parse(field, data);

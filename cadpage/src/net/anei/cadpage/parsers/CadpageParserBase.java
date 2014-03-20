@@ -13,13 +13,9 @@ public class CadpageParserBase  extends FieldProgramParser{
   private Map<String,Field> fieldMap = new HashMap<String,Field>();
   
   public CadpageParserBase() {
-    this("", "", CountryCode.US);
-  }
-  
-  public CadpageParserBase(String defCity, String defState, CountryCode country) {
     // Pass empty strings to subclass constructor, we never really try to run a 
     // field program or use the default city/state values
-    super(defCity, defState, country, "");
+    super("", "", "");
     initMap();
   }
   
@@ -27,15 +23,15 @@ public class CadpageParserBase  extends FieldProgramParser{
     setMap("PRI");
     setMap("DATE");
     setMap("TIME");
-    setMap("CALL");
+    setMap("CALL",        "title");
     setMap("PLACE", "PL");
-    setMap("ADDR");
-    setMap("CITY");
+    setMap("ADDR",        "address");
+    setMap("CITY",        "city");
     setMap("ST");
     setMap("APT");
     setMap("X");
     setMap("BOX");
-    setMap("MAP");
+    setMap("MAP",         "map_code");
     setMap("CH");
     setMap("UNIT");
     setMap("INFO");
@@ -43,18 +39,12 @@ public class CadpageParserBase  extends FieldProgramParser{
     setMap("PHONE", "PH");
     setMap("CODE");
     setMap("GPS");
-    setMap("ID");
+    setMap("ID",           "cad_code");
     setMap("SRC");
     setMap("DCITY");
     setMap("DST");
     setMap("MADDR");
-    setMap("MCITY");
-    setMap("URL");
-    setMap("CO");
-    setMap("REC_GPS");
-    setMap("PARSER");
-    setMap("DATETIME");
-    setMap("TIMEDATE");
+    setMap("URL",         "response_url");
   }
 
   /**
@@ -69,70 +59,34 @@ public class CadpageParserBase  extends FieldProgramParser{
   
   @Override
   public Field getField(String name) {
+    if (name.equals("ADDR")) return new MyAddressField();
     if (name.equals("DCITY")) return new DefCityField();
     if (name.equals("DST")) return new DefStateField();
-    if (name.equals("MADDR")) return new MapAddressField();
-    if (name.equals("MCITY")) return new MapCityField();
-    if (name.equals("CO")) return new CountryField();
-    if (name.equals("REC_GPS")) return new PreferGPSField();
-    if (name.equals("PARSER")) return new ParserField();
+    if (name.equals("MADDR")) return new SkipField();
     return super.getField(name);
+  }
+  
+  // We need an address field that just saves the address.  The default
+  // field process handles all kinds of cool things
+  private class MyAddressField extends AddressField {
+    @Override
+    public void parse(String field, Data data) {
+      data.strAddress = field;
+    }
   }
 
   // And something to save the default city and state
-  private class DefCityField extends SkipField {
+  private class DefCityField extends Field {
     @Override 
     public void parse(String field, Data data) {
       data.defCity = field;
     }
   }
   
-  private class DefStateField extends SkipField {
+  private class DefStateField extends Field {
     @Override 
     public void parse(String field, Data data) {
       data.defState = field;
-    }
-  }
-  
-  private class CountryField extends SkipField {
-    @Override
-    public void parse(String field, Data data) {
-      try {
-        // We used the wrong code for United Kingdom.  Don't want to change it
-        // now, but we will accept the correct code.
-        if (field.equals("GB")) field = "UK";
-        data.countryCode = CountryCode.valueOf(field);
-      } catch (Exception ex) {}
-    }
-  }
-  
-  private class PreferGPSField extends SkipField {
-    @Override 
-    public void parse(String field, Data data) {
-      data.preferGPSLoc = (field.length() > 0 && "YES".startsWith(field));
-    }
-  }
-  
-  private class MapAddressField extends SkipField {
-    @Override
-    public void parse(String field, Data data) {
-      data.strBaseMapAddress = field;
-    }
-  }
-  
-  private class MapCityField extends SkipField {
-    @Override
-    public void parse(String field, Data data) {
-      data.strMapCity = field;
-    }
-  }
-  
-  private class ParserField extends SkipField {
-    @Override
-    public void parse(String field, Data data) {
-      try {
-        data.parser = ManageParsers.getInstance().getParser(field);
-      } catch (Exception ex) {}
     }
   }
   

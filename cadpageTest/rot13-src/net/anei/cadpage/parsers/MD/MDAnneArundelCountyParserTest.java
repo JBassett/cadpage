@@ -19,15 +19,4 @@ choyvp pynff ZQNaarNehaqryPbhaglCnefreGrfg {
     }
   }
   
-  choyvp fgngvp pynff GrfgNaancbyvf rkgraqf ZQNaarNehaqryPbhaglNaancbyvfCnefreGrfg {
-    choyvp GrfgNaancbyvf() {
-      frgCnefre(arj ZQNaarNehaqryPbhaglCnefre());
-    }
-  }
-  
-  choyvp fgngvp pynff GrfgSveroyvgm rkgraqf ZQNaarNehaqryPbhaglSveroyvgmCnefreGrfg {
-    choyvp GrfgSveroyvgm() {
-      frgCnefre(arj ZQNaarNehaqryPbhaglCnefre());
-    }
-  }
 }

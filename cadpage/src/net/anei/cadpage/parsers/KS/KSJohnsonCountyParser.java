@@ -9,12 +9,12 @@ public class KSJohnsonCountyParser extends FieldProgramParser {
 
   public KSJohnsonCountyParser() {
     super("JOHNSON COUNTY", "KS",
-           "SRC Add:ADDR! Apt:APT Loc:PLACE Nature:CALL! Grid:MAP! Incident:ID Cross:X");
+           "Add:ADDR! Apt:APT Loc:PLACE Nature:CALL! Grid:MAP! Incident:ID Cross:X");
   }
   
   @Override
   public String getFilter() {
-    return "93001,ecc1@jocogov.org,ecc2@jocogov.org,ecc3@jocogov.org,ecc4@jocogov.org,@jocofd1.org,@jocoems.org,2183500185";
+    return "93001,ecc1@jocogov.org,ecc2@jocogov.org";
   }
   
   @Override
@@ -22,19 +22,5 @@ public class KSJohnsonCountyParser extends FieldProgramParser {
     
     body = body.replaceAll("Incident#", "Incident:");
     return super.parseMsg(body, data);
-  }
-  
-  private class MyMapField extends MapField {
-    @Override
-    public void parse(String field, Data data) {
-      if (field.endsWith(".")) field = field.substring(0,field.length()-1).trim();
-      super.parse(field, data);
-    }
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("MAP")) return new MyMapField();
-    return super.getField(name);
   }
 }

@@ -17,13 +17,14 @@ public class NCForsythCountyParser extends FieldProgramParser {
       "CL", "CLEMMONS",
       "HP", "HIGH POINT",
       "KE", "KERNERSVILLE",
-      "KI", "KING",
       "LE", "LEWISVILLE",
       "RH", "RURAL HALL",
       "TO", "TOBACCOVILLE",
       "WA", "WALKERTOWN",
       "WS", "WINSTON-SALEM"
   });
+  
+  private static final Pattern MA_PATTERN = Pattern.compile("@(.+):"); 
   
   public NCForsythCountyParser() {
     super(CITY_CODES, "FORSYTH COUNTY", "NC",
@@ -41,7 +42,7 @@ public class NCForsythCountyParser extends FieldProgramParser {
     if (!super.parseMsg(body, data)) return false;
     
     if (data.strCity.equals(data.defCity)) data.strCity = "";
-    if (data.strCross.endsWith("/")) data.strCross = data.strCross.substring(0,data.strCross.length()-1).trim();
+    if (data.strCross.equals("/")) data.strCross = "";
     
     // Intersections seem to be saved as cross streets, at least some of the time
     if (data.strAddress.length() == 0) {
@@ -53,41 +54,26 @@ public class NCForsythCountyParser extends FieldProgramParser {
     return true;
   }
   
-  @Override
-  public String getProgram() {
-    return super.getProgram() + " ADDR";
-  }
-  
-  
-  private static final Pattern MA_PATTERN = Pattern.compile("@([A-Z ]+):"); 
-  private static final Pattern MA_PATTERN2 = Pattern.compile("^\\d+ +([A-Z ]+ CO(?:UNTY)?):");
-  private static final Pattern APT_PTN = Pattern.compile("[,:](?:APT|RM|(?! )) *(.*?)$");
   private static final Pattern FC_PTN = Pattern.compile("\\bFC\\b");
   private class MyAddressField extends AddressField {
     
     @Override
     public void parse(String fld, Data data) {
       Matcher match = MA_PATTERN.matcher(fld);
-      boolean found = match.find();
-      if (!found) {
-        match = MA_PATTERN2.matcher(fld);
-        found = match.find();
-      }
-      if (found) {
+      if (match.find()) {
         data.strCity = match.group(1);
-        if (data.strCity.endsWith(" CO")) data.strCity = data.strCity + "UNTY";
         fld = fld.substring(match.end()).trim();
-      } 
+      }
       int pt = fld.indexOf('@');
       if (pt >= 0) {
         data.strPlace = fld.substring(pt+1).trim();
         fld = fld.substring(0,pt).trim();
       }
       
-      match = APT_PTN.matcher(fld);
-      if (match.find()) {
-        data.strApt = match.group(1);
-        fld = fld.substring(0,match.start()).trim();
+      pt = fld.indexOf(",RM ");
+      if (pt >= 0) {
+        data.strApt = fld.substring(pt+4).trim();
+        fld = fld.substring(0,pt).trim();
       }
       
       super.parse(fld, data);

@@ -11,8 +11,7 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  */
 public class CadpageParser  extends CadpageParserBase {
   
-//  private static final Pattern KEYWORD = Pattern.compile("\\b([\\w]+):");
-  private static final Pattern KEYWORD = Pattern.compile("(?:^|\n)([\\w]+):");
+  private static final Pattern KEYWORD = Pattern.compile("\\b([\\w]+):");
   
   @Override
   public String getLocName() {
@@ -99,27 +98,15 @@ public class CadpageParser  extends CadpageParserBase {
     append(sb, "NAME", info.getName(), delim);
     append(sb, "PH", info.getPhone(), delim);
     append(sb, "CODE", info.getCode(), delim);
+    append(sb, "GPS", info.getGPSLoc(), delim);
     append(sb, "ID", info.getCallId(), delim);
     append(sb, "SRC", info.getSource(), delim);
     append(sb, "URL", info.getInfoURL(), delim);
     if (info.getCity().length() == 0) append(sb, "DCITY", info.getDefCity(), delim);
     if (info.getState().length() == 0) append(sb, "DST", info.getDefState(), delim);
-    CountryCode country = info.getCountryCode();
-    if (country != CountryCode.US) {
-      append(sb, "CO", country.toString(), delim);
-    }
-    append(sb, "GPS", info.getGPSLoc(), delim);
-    if (info.isPreferGPSLoc()) append(sb, "REC_GPS", "Y", delim);
     if (inclMapAddr) {
-      append(sb, "MADDR", info.getBaseMapAddress(2), delim);
-      String mapCity = info.getMapCity();
-      if (!mapCity.equals(info.getCity())) {
-        append(sb, "MCITY", mapCity, delim);
-      }
+      append(sb, "MADDR", info.getBaseMapAddress(false), delim);
     }
-    MsgParser parser = info.getParser();
-    if (parser != null) append(sb, "PARSER", parser.getParserCode(), delim);
-    
     return sb.toString();
   }
   
@@ -131,4 +118,7 @@ public class CadpageParser  extends CadpageParserBase {
       sb.append(value);
     }
   }
+  
+  
+
 }

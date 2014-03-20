@@ -12,7 +12,7 @@ public class VAAccomackCountyParser extends DispatchOSSIParser {
   
   public VAAccomackCountyParser(String county) {
     super(county, "VA",
-           "FYI? CALL ADDR! ( CITYST | SKIP MAP MAP ) X X ( ID | INFO )");
+           "CALL ADDR! ( CITYST | SKIP MAP MAP ) X X ( ID | INFO )");
   }
   
   @Override
@@ -22,7 +22,7 @@ public class VAAccomackCountyParser extends DispatchOSSIParser {
   
   @Override
   public String getFilter() {
-    return "cad@esva911.org,14100";
+    return "cad@esva911.org";
   }
 
   // We need a special field parser to handle the CITYST field
@@ -45,11 +45,6 @@ public class VAAccomackCountyParser extends DispatchOSSIParser {
       Parser p = new Parser(field);
       data.strCity = p.get(' ');
       data.strState = p.get();
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CITY ST";
     }
   }
   

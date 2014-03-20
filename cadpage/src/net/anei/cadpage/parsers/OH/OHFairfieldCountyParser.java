@@ -21,15 +21,8 @@ public class OHFairfieldCountyParser extends DispatchEmergitechParser {
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
     
-    // Remove prefix
-    if (body.startsWith("Dispatch:")) {
-      body = body.substring(9).trim();
-    }
-    
     // If preparser removed the dispatch unit, put it back
-    else if (subject.length() > 0) {
-      body = '[' + subject + "]" + body; 
-    }
+    if (subject.length() > 0) body = '[' + subject + "]" + body; 
     return super.parseMsg(body, data);
   }
 

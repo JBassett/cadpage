@@ -4,6 +4,9 @@ import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
+
+
+
 public class PAChesterCountyD1Parser extends PAChesterCountyBaseParser {
   
   private static final Pattern DELIM = Pattern.compile("\\*\\*");
@@ -19,6 +22,8 @@ public class PAChesterCountyD1Parser extends PAChesterCountyBaseParser {
 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
+    
+    if (isVariantGMsg(body)) return false;
 
     // subject is truncated version of address that we don't care about
     // but it has to be non-empty
@@ -29,6 +34,15 @@ public class PAChesterCountyD1Parser extends PAChesterCountyBaseParser {
 
     // Split and parse by double asterisk delimiters
     return parseFields(DELIM.split(body), data);
+  }
+  
+  // Call field strips trailing asterisk marker
+  private class MyCallField extends CallField {
+    @Override
+    public void parse(String field, Data data) {
+      if (field.endsWith(" *")) field = field.substring(0,field.length()-2);
+      super.parse(field, data);
+    }
   }
   
   // Address has to expand on the base class MyAddressField
@@ -57,7 +71,7 @@ public class PAChesterCountyD1Parser extends PAChesterCountyBaseParser {
   
   @Override
   public Field getField(String name) {
-    if (name.equals("TIME")) return new TimeField("\\d\\d:\\d\\d", true);
+    if (name.equals("CALL")) return new MyCallField();
     if (name.equals("ADDRPLX")) return new MyAddressPlaceCrossField();
     return super.getField(name);
   }

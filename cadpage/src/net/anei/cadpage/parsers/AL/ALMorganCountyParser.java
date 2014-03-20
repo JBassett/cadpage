@@ -18,7 +18,6 @@ public class ALMorganCountyParser extends SmartAddressParser {
 
   public ALMorganCountyParser() {
     super("MORGAN COUNTY", "AL");
-    setFieldList("PLACE ADDR CALL PRI X ID SRC");
   }
   
   @Override

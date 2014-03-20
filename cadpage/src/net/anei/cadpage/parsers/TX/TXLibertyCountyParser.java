@@ -14,18 +14,12 @@ public class TXLibertyCountyParser extends SmartAddressParser {
   
   public TXLibertyCountyParser() {
     super(CITY_CODES, "LIBERTY COUNTY", "TX");
-    setFieldList("CALL ADDR PLACE INFO");
   }
   
   public String getFilter() {
     return "lcso@lcffa.org";
   }
   
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
- 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
     

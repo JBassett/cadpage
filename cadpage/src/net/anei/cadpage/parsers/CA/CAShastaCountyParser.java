@@ -13,17 +13,11 @@ public class CAShastaCountyParser extends SmartAddressParser {
   
   public CAShastaCountyParser() {
     super("SHASTA COUNTY", "CA");
-    setFieldList("CALL ADDR SRC X MAP ID UNIT INFO");
   }
   
   @Override
   public String getFilter() {
     return "vtext.com@gmail.com,5304482408,5304109246";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
   }
 
   @Override

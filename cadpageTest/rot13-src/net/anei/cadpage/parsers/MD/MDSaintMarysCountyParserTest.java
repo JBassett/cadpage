@@ -172,7 +172,7 @@ choyvp pynff ZQFnvagZnelfPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:23:14:28",
         "PNYY:Urneg Ceboyrzf",
         "NQQE:22521 VIREFBA QE",
-        "NCG:3",
+        "NCG:HAVG3",
         "K:NZORE QE / PHY QR FNP",
         "PVGL:PNYVSBEAVN",
         "HAVG:PB9",
@@ -204,7 +204,6 @@ choyvp pynff ZQFnvagZnelfPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:18:34:06",
         "PNYY:Oernguvat Qvssvphygvrf",
         "NQQE:22030 BKSBEQ PG",
-        "NCG:NCG",
         "K:TYBHPRFGRE PG / QRNQ RAQ",
         "PVGL:YRKVATGBA CNEX",
         "HAVG:NYF PB39 PB6E",
@@ -304,6 +303,7 @@ choyvp pynff ZQFnvagZnelfPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:15:07:57",
         "PNYY:Fvpx Crefba",
         "NQQE:JVYYBJF EQ",
+        "ZNQQE:JVYYBJF EQ & QRNQ RAQ",
         "K:QRNQ RAQ",
         "CYNPR:46656 SYBJRE BS GUR SBERFG EQ",
         "PVGL:YRKVATGBA CNEX",
@@ -809,7 +809,7 @@ choyvp pynff ZQFnvagZnelfPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:06:28:12",
         "PNYY:Fvpx Crefba",
         "NQQE:44790 YBPHFG EVQTR PG",
-        "NCG:843",
+        "NCG:HAVG843",
         "K:FHEERL JL",
         "CYNPR:NCG 843 YBPHFG EVQTR",
         "PVGL:JVYQRJBBQ",
@@ -1007,7 +1007,7 @@ choyvp pynff ZQFnvagZnelfPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "GVZR:06:28:39",
         "PNYY:Fvpx Crefba",
         "NQQE:13425 CBVAG YBBXBHG EQ",
-        "NCG:4",
+        "NCG:HAVG4",
         "K:PHEYRLF EQ",
         "CYNPR:FBHGU EVQTR",
         "PVGL:EVQTR",
@@ -1050,6 +1050,6 @@ choyvp pynff ZQFnvagZnelfPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   }
 
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj ZQFnvagZnelfPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj ZQFnvagZnelfPbhaglCnefreGrfg().trarengrGrfgf("G1", "GVZR PNYY NQQE NCG K CYNPR PVGL HAVG VASB");
   }
 }

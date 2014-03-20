@@ -14,7 +14,7 @@ public class NCRockinghamCountyParser extends DispatchOSSIParser {
   
   public NCRockinghamCountyParser() {
     super(CITY_CODES, "ROCKINGHAM COUNTY", "NC",
-           "ID?: CALL ADDR X/Z+? CITY ( PLACE CODE UNIT | CODE UNIT | PLACE? UNIT ) CH? X? INFO+");
+           "CALL ADDR X/Z+? CITY ( PLACE CODE UNIT | CODE UNIT | PLACE? UNIT ) CH? X? INFO+");
   }
   
   @Override

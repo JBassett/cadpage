@@ -26,7 +26,6 @@ public class COGarfieldCountyParser extends SmartAddressParser {
     super("GARFIELD COUNTY", "CO");
     setupCallList(CALL_LIST);
     setupMultiWordStreets("CHAIR BAR");
-    setFieldList("CALL PLACE ADDR APT CITY MAP ID");
   }
   
   @Override
@@ -146,65 +145,36 @@ public class COGarfieldCountyParser extends SmartAddressParser {
   });
   
   private static final CodeSet CALL_LIST = new CodeSet(
-      "Accident",
       "ACCIDENT",
-      "Code",
       "CODE",
       
-      "EAbdominal",
       "EABDOMINAL",
-      "EAllergic Reaction ",
       "EALLERGIC REACTION ",
-      "EAssault",
       "EASSAULT",
-      "EBack Pain",
       "EBACK PAIN",
-      "EBleeding Non traumatic",
       "EBLEEDING NON TRAUMATIC",
-      "EBreathing Difficulty",
       "EBREATHING DIFFICULTY",
-      "EChest Pain",
       "ECHEST PAIN",
-      "EChoking",
       "ECHOKING",
-      "EDiabetic",
       "EDIABETIC",
-      "EFalls",
       "EFALLS",
-      "EGynecology Childbirth",
       "EGYNECOLOGY CHILDBIRTH",
-      "EMedical Alarm",
       "EMEDICAL ALARM",
-      "EMental Emotional Psych",
       "EMENTAL EMOTIONAL PSYCH",
-      "EOverdose Poisoning",
       "EOVERDOSE POISONING",
-      "ESeizures",
       "ESEIZURES",
-      "ESick Unknown",
       "ESICK UNKNOWN",
-      "EStabbing Gunshot",
       "ESTABBING GUNSHOT",
-      "ETrauma with Injury",
+      "FSTRUCTURE",
       "ETRAUMA WITH INJURY",
-      "EUnconscious Syncope",
       "EUNCONSCIOUS SYNCOPE",
       
-      "FAlarm",
       "FALARM",
-      "FBrush",
       "FBRUSH",
-      "FGas Leak",
       "FGAS LEAK",
-      "FOdor Check",
       "FODOR CHECK",
-      "FRiver Rescue",
       "FRIVER RESCUE",
-      "FSmoke Check",
       "FSMOKE CHECK",
-      "FStructure",
-      "FSTRUCTURE",
-      "FVehicle Fire",
       "FVEHICLE FIRE"
   );
 }

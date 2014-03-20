@@ -8,7 +8,7 @@ import net.anei.cadpage.parsers.dispatch.DispatchBParser;
 public class SCFlorenceCountyParser extends DispatchBParser {
  
   public SCFlorenceCountyParser() {
-    super(1, CITY_CODES, "FLORENCE COUNTY", "SC");
+    super(CITY_CODES, "FLORENCE COUNTY", "SC");
   }
   
   @Override
@@ -20,13 +20,14 @@ public class SCFlorenceCountyParser extends DispatchBParser {
   protected boolean parseMsg(String body, Data data) {
     
     // See if this is one of our pages
-    if (! body.startsWith("FLORENCE CO 911:") && !body.startsWith("FLORENCE_CO_911")) return false;
+    if (! body.startsWith("FLORENCE CO 911:")) return false;
     body = body.substring(16);
     int pt = body.indexOf('>');
-    if (pt >= 0) data.strCode = body.substring(0,pt).trim();
+    if (pt < 0) return false;
+    data.strCode = body.substring(0,pt).trim();
     
     // Call superclass parser
-    return super.parseMsg(body, data) && data.strCallId.length() > 0;
+    return super.parseMsg(body, data);
   }
   
   private static final String[] CITY_CODES = new String[]{

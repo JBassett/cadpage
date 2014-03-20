@@ -19,14 +19,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 public class CallHistoryActivity extends ListActivity {
   
   private static String EXTRA_NOTIFY = "net.anei.cadpage.CallHistoryActivity.NOTIFY";
   private static String EXTRA_SHUTDOWN = "net.anei.cadpage.CallHistoryActivity.SHUTDOWN";
-  private static String EXTRA_POPUP = "net.anei.cadpage.CallHistoryAcivity.POPUP";
   
   private static final int RELEASE_DIALOG = 1;
   
@@ -66,8 +64,6 @@ public class CallHistoryActivity extends ListActivity {
       Intent intent = new Intent(this, SmsPopupConfigActivity.class);
       startActivity(intent);
     }
-    
-    getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
     
     // Set up list heading
     TextView tv = new TextView(this);
@@ -118,11 +114,10 @@ public class CallHistoryActivity extends ListActivity {
     // We do some special processing if the intent was launched by the user
     // instead of through some internal trigger.
     if (Intent.ACTION_MAIN.equals(intent.getAction()) && 
-        intent.hasCategory(Intent.CATEGORY_LAUNCHER) &&
-        (intent.getFlags() & Intent.FLAG_FROM_BACKGROUND) == 0) {
+        intent.hasCategory(Intent.CATEGORY_LAUNCHER)) {
       
       // First clear any pending notification
-      ClearAllReceiver.clearAll(this);
+      ManageNotification.clear(this);
       
       // Second, launch the release info dialog if it hasn't already been displayed
       String release = getString(R.string.release_version);
@@ -141,17 +136,15 @@ public class CallHistoryActivity extends ListActivity {
     
     // Otherwise, if we should automatically display a call, do it now
     else {
-      boolean force = intent.getBooleanExtra(EXTRA_POPUP, false);
-      SmsMmsMessage msg = SmsMessageQueue.getInstance().getDisplayMessage(force);
+      SmsMmsMessage msg = SmsMessageQueue.getInstance().getDisplayMessage();
       if (msg != null)  {
         
         // Before we open the call display window, see if notifications were requested
         // And if they were, see if we should launch the Scanner channel open.
-        // We can't do this in the Broadcast Receiver because this window obscures it
+        // We can't do this in the Broadcast Recevier because this window obscurs it
         // completely, so their Activity won't launch.
         
         if (intent.getBooleanExtra(EXTRA_NOTIFY, false)) {
-          ManageNotification.show(this, msg);
           SmsReceiver.launchScanner(this);
         }
      
@@ -163,8 +156,6 @@ public class CallHistoryActivity extends ListActivity {
 
   @Override
   protected Dialog onCreateDialog(int id) {
-    
-    if (isFinishing()) return null;
     switch (id) {
 
       case RELEASE_DIALOG:
@@ -176,7 +167,6 @@ public class CallHistoryActivity extends ListActivity {
         .setPositiveButton(android.R.string.ok, null)
         .create();
     }
-    
     return super.onCreateDialog(id);
   }
 
@@ -252,7 +242,7 @@ public class CallHistoryActivity extends ListActivity {
   @Override
   protected void onResume() { 
       super.onResume(); 
-      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
       activityActive = true; 
   } 
   
@@ -277,10 +267,17 @@ public class CallHistoryActivity extends ListActivity {
     outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
     super.onSaveInstanceState(outState);
 
-//    int orientation = Safe40Activity.getDisplayOrientation(this);
+    int orientation = Safe40Activity.getDisplayOrientation(this);
     
     //Lock the screen orientation to the current display orientation : Landscape or Portrait
-//    this.setRequestedOrientation(orientation);
+    this.setRequestedOrientation(orientation);
+  }
+  
+  /**
+   * Launch activity
+   */
+  public static void launchActivity(Context context) {
+    launchActivity(context, false);
   }
   
   /**
@@ -296,27 +293,17 @@ public class CallHistoryActivity extends ListActivity {
   
   /**
    * Build intent to launch this activity
-   * @param context current context
-   * @return Intent that will launch Cadpage
+   * @param context
+   * @param message
+   * @return
    */
   public static Intent getLaunchIntent(Context context) {
-    return getLaunchIntent(context, false);
-  }
-  
-  /**
-   * Build intent to launch this activity
-   * @param context current context
-   * @param force force detail popup window
-   * @return Intent that will launch Cadpage
-   */
-  public static Intent getLaunchIntent(Context context, boolean force) {
     Intent intent = new Intent(context, CallHistoryActivity.class);
     int flags =
       Intent.FLAG_ACTIVITY_NEW_TASK |
       Intent.FLAG_ACTIVITY_SINGLE_TOP |
       Intent.FLAG_ACTIVITY_CLEAR_TOP;
     intent.setFlags(flags);
-    if (force) intent.putExtra(EXTRA_POPUP, true);
     return intent;
   }
 

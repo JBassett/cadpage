@@ -31,22 +31,6 @@ Nir Z - Org: R 18Gu Fg & R 18Gu Fg - Pnyy VQ: 933-3131
 609 Bprna Cxjl - Org: 18Gu Nir & Qvgznf Nir - 1fg sybbe - Pnyy VQ: 933-4081
 1579 R 5Gu Fg - Org: Elqre Nir / Ebqre Nir & Nirahr B - 1fg sybbe - Pnyy VQ: 942-8371
 
-Pbagnpg: Nneba Ebguzna <syngohfu97@tznvy.pbz>
-Fraqre: igrkg.pbz@tznvy.pbz
-syngohfu97+pns_=9179688745=igrkg.pbz@tznvy.pbz 2078 R 19Gu Fg - Org: Nirahr G & Nirahr H - 1fg sybbe - Pnyy VQ: 957-5211
-
-Pbagnpg: OELNA XRFFYRE <ungmd17@tznvy.pbz>
-Fraqre: ungmd17+pns_=7187571701=igrkg.pbz@tznvy.pbz
-117-01 84Gu Nir - Org: 117Gu Fg & 118Gu Fg / 84Gu Nir - Ncg: 409 - 4gu sybbe - Pnyy VQ: 10021301
-
-Pbagnpg: Rina Z. Encc <rina.encc@ectal.pbz>
-Fraqre: ey_pnyyvq@ungmnynu.bet
-1390 Oebnqjnl - Ncg: 214 - 2aq sybbe - Pnyy VQ: 102-551-40\a
-
-Pbagnpg: Fnzzl Urpug <fnzzlurpug@tznvy.pbz>
-Fraqre: fnzzls245+pns_=3474512227=igrkg.pbz@tznvy.pbz
-1068 R 15Gu Fg - Org Nirahr W & Nirahr X - Pnyy VQ: 108-493-10
-
 */
 
 choyvp pynff ALArjLbexPvglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -178,57 +162,13 @@ choyvp pynff ALArjLbexPvglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CYNPR:1fg sybbe",
         "VQ:933-4081");
 
-    qbGrfg("G18",
+    qbGrfg("G1",
         "1579 R 5Gu Fg - Org: Elqre Nir / Ebqre Nir & Nirahr B - 1fg sybbe - Pnyy VQ: 942-8371",
         "NQQE:1579 R 5Gu Fg",
         "K:Elqre Nir / Ebqre Nir & Nirahr B",
         "CYNPR:1fg sybbe",
         "VQ:942-8371");
 
-    qbGrfg("G19",
-        "syngohfu97+pns_=9179688745=igrkg.pbz@tznvy.pbz 2078 R 19Gu Fg - Org: Nirahr G & Nirahr H - 1fg sybbe - Pnyy VQ: 957-5211",
-        "NQQE:2078 R 19Gu Fg",
-        "K:Nirahr G & Nirahr H",
-        "CYNPR:1fg sybbe",
-        "VQ:957-5211");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgOelnaXrffyre() {
-
-    qbGrfg("G1",
-        "117-01 84Gu Nir - Org: 117Gu Fg & 118Gu Fg / 84Gu Nir - Ncg: 409 - 4gu sybbe - Pnyy VQ: 10021301",
-        "NQQE:117-01 84Gu Nir",
-        "ZNQQE:117 84Gu Nir",
-        "NCG:409",
-        "K:117Gu Fg & 118Gu Fg / 84Gu Nir",
-        "CYNPR:4gu sybbe",
-        "VQ:10021301");
-    
-  }
-  
-  @Grfg
-  choyvp ibvq grfgRinaZEncc() {
-
-    qbGrfg("G1",
-        "1390 Oebnqjnl - Ncg: 214 - 2aq sybbe - Pnyy VQ: 102-551-40\a",
-        "NQQE:1390 Oebnqjnl",
-        "NCG:214",
-        "CYNPR:2aq sybbe",
-        "VQ:102-551-40");
-   
-  }
-  
-  @Grfg
-  choyvp ibvq grfgFnzzlUrpug() {
-
-    qbGrfg("G1",
-        "1068 R 15Gu Fg - Org Nirahr W & Nirahr X - Pnyy VQ: 108-493-10",
-        "NQQE:1068 R 15Gu Fg",
-        "K:Nirahr W & Nirahr X",
-        "VQ:108-493-10");
-   
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

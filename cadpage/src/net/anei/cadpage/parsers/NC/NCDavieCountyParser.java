@@ -3,45 +3,73 @@ package net.anei.cadpage.parsers.NC;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.dispatch.DispatchA3Parser;
+import net.anei.cadpage.parsers.dispatch.DispatchVisionAirParser;
 
 /**
  * Davie County, NC
  */
-public class NCDavieCountyParser extends DispatchA3Parser {
+public class NCDavieCountyParser extends DispatchVisionAirParser {
+  
+  private static final Pattern DELIM = Pattern.compile("\\*(?: \\*)*"); 
   
   public NCDavieCountyParser() {
-    super(Pattern.compile("^911:Call ?#"), "DAVIE COUNTY", "NC",
-           "ID Address:ADDR! APT CH! City:CITY! ( INFO1 Type:CODE! CALL! INFO1 PH#:PHONE Units:UNIT | X/Z+? ( SKIP Location:INFO1! Complaint:CODE% Description:CALL% Caller:NAME PH#:PHONE Units:UNIT | Type:X! X INFO1+ PH#:CODE% Units:CALL% IRA:NAME PHONE UNIT% INFO+ NARR:INFO ) ) INFO+");
-  }
-  
-  @Override
-  public String getFilter() {
-    return "911@co.davie.nc.us";
+    super("911:Call #", "DAVIE COUNTY", "NC",
+           "ID Address:ADDR! City:CITY! INFO+ Type:CALL CALL NAME PH#:PHONE Units:UNIT IRA:SKIP? INFO+ NARR:EXTRA INFO+");
   }
   
   @Override
   public String getSponsor() {
     return "Davie County";
   }
-
+  
   @Override
-  protected String getSponsorDateString() {
-    return "02172014";
+  public String getSponsorDateString() {
+    return "10232012";
   }
 
   @Override
   protected boolean parseMsg(String body, Data data) {
-    body = body.replace(" LocCmmt:", " Location:").replace(" Comp:", " Complaint:").replace(" Ph#:", " PH#:");
-    body = body.replace("Desc:", "Description:");
-    return super.parseMsg(body, data);
+    int ipt = body.indexOf("911:Call #");
+    if (ipt < 0) return false;
+    body = body.substring(ipt+10).trim();
+    return parseFields(DELIM.split(body), data);
   }
   
+  private class MyAddressField extends AddressField {
+    @Override
+    public void parse(String field, Data data) {
+      field = field.replaceAll("//+", "/");
+      super.parse(field, data);
+    }
+  }
+  
+  private class MyCallField extends CallField {
+    @Override
+    public void parse(String field, Data data) {
+      data.strCall = append(data.strCall, " - ", field);
+    }
+  }
+  
+  private class MyInfo2Field extends InfoField {
+    @Override
+    public void parse(String field, Data data) {
+      data.strSupp = append(data.strSupp, " ", "Geo Comment: " + field);
+    }
+  }
+  
+  private class MyInfo3Field extends InfoField {
+    @Override
+    public void parse(String field, Data data) {
+      data.strSupp = append(data.strSupp, " ", "NBH: " + field);
+    }
+  }
+
   @Override
-  public String adjustMapAddress(String addr) {
-    return WA_PTN.matcher(addr).replaceAll("WAY");
+  protected Field getField(String name) {
+    if (name.equals("ADDR")) return new MyAddressField();
+    if (name.equals("CALL")) return new MyCallField();
+    if (name.equals("INFO2")) return new MyInfo2Field();
+    if (name.equals("INFO3")) return new MyInfo3Field();
+    return super.getField(name);
   }
-  private static final Pattern WA_PTN = Pattern.compile("\\bWA\\b", Pattern.CASE_INSENSITIVE);
-  
-  
 }

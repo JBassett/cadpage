@@ -18,7 +18,6 @@ public class NJMorrisCountyParser extends MsgParser {
   
   public NJMorrisCountyParser() {
     super("MORRIS COUNTY", "NJ");
-    setFieldList("PLACE APT ADDR CITY CALL INFO UNIT ID TIME");
   }
   
   @Override

@@ -4,18 +4,7 @@ vzcbeg arg.narv.pnqcntr.cnefref.OnfrCnefreGrfg;
 
 vzcbeg bet.whavg.Grfg;
 
-/*
-Wnpxfba Pbhagl, VA
-Pbagnpg: W.Y ZpRyserfu <wzpryserfu36@tznvy.pbz>
-Fraqre: @vawnpfb.pbz
- 
-(zrqvpny eha) 1047 R PE 400 F Jrtna Puhepu 80 l/b/s hapbafpvbhf
-(zrqvpny) 4904 J PE 440 A\a25lbz Purfg Cnva
-(Oebjafgbja ISQ) 10-50 Ebyybire 4062 A PE 225 J
-(zrqvpny) 383 F Pvepyr Qe zrqvpny haerfcbafvir znyr
-(zrqvpny eha) 1047 R PE 400 F Jrtna Puhepu 80 l/b/s hapbafpvbhf
 
-*/
 choyvp pynff VAWnpxfbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   
   choyvp VAWnpxfbaPbhaglCnefreGrfg() {
@@ -27,7 +16,7 @@ choyvp pynff VAWnpxfbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G1",
         "(zrqvpny eha) 1047 R PE 400 F Jrtna Puhepu 80 l/b/s hapbafpvbhf",
-        "PNYY:Jrtna Puhepu 80 l/b/s hapbafpvbhf",
+        "PNYY:Jrtna Puhepu 80 l / b / s hapbafpvbhf",
         "NQQE:1047 R PE 400 F",
         "ZNQQE:1047 R PBHAGL EBNQ 400 F");
 
@@ -51,12 +40,12 @@ choyvp pynff VAWnpxfbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G5",
         "(zrqvpny eha) 1047 R PE 400 F Jrtna Puhepu 80 l/b/s hapbafpvbhf",
-        "PNYY:Jrtna Puhepu 80 l/b/s hapbafpvbhf",
+        "PNYY:Jrtna Puhepu 80 l / b / s hapbafpvbhf",
         "NQQE:1047 R PE 400 F",
         "ZNQQE:1047 R PBHAGL EBNQ 400 F");
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj VAWnpxfbaPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj VAWnpxfbaPbhaglCnefreGrfg().trarengrGrfgf("G1", "FEP PNYY NQQE NCG VASB");
   }
 }

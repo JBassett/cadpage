@@ -29,9 +29,7 @@ public class NJMonmouthCountyAParser extends DispatchA11Parser {
     }
     
     if (subject.equals("MCSO Page Notification") || isPositiveId()) {
-      String[] fields = body.split("\n");
-      if (fields.length < 6) fields = body.split("  +"); 
-      return super.parseFields(fields, 6, data);
+      return super.parseMsg(body, data);
     }
     else return false;
   }

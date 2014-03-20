@@ -18,7 +18,7 @@ choyvp pynff CNPbzoOhpxfNaqYruvtuCnefreGrfg {
     }
   }
   
-  choyvp fgngvp pynff GrfgYruvtuPbhagl rkgraqf CNYruvtuPbhaglNCnefreGrfg {
+  choyvp fgngvp pynff GrfgYruvtuPbhagl rkgraqf CNYruvtuPbhaglCnefreGrfg {
     choyvp GrfgYruvtuPbhagl() {
       frgCnefre(arj GrfgCnefre());
     }
@@ -28,7 +28,7 @@ choyvp pynff CNPbzoOhpxfNaqYruvtuCnefreGrfg {
     choyvp GrfgCnefre() {
       fhcre(arj TrarenyCnefre(),
              arj CNOhpxfPbhaglCnefre(),
-             arj CNYruvtuPbhaglNCnefre());
+             arj CNYruvtuPbhaglCnefre());
     }
   }
 }

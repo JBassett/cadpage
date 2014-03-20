@@ -33,7 +33,7 @@ ASYRZVAT:6100 SNVETEBHAQ EQ QHAA JVYYVR ZPYRBQ YA/CIG EQ K OVEPUQNYR QE 20121720
 choyvp pynff APUnearggPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
   
   choyvp APUnearggPbhaglOCnefreGrfg() {
-    frgCnefre(arj APUnearggPbhaglOCnefre(), "UNEARGG PBHAGL", "AP");
+    frgCnefre(arj APUnearggPbhaglOCnefre(), "UNLJBBQ PBHAGL", "AP");
   }
   
   @Grfg
@@ -56,7 +56,7 @@ choyvp pynff APUnearggPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "NQQE:711 FHFNA GNEG EQ",
         "PVGL:QHAA",
         "K:ZPXNL NIR / CEVINGR QEVIR",
-        "ANZR:(UBFCVGNY) pfgf1-nqzva@pbearefgbarahefvatnaqeruno.pbz",
+        "ANZR:(UBFCVGNY) pfgf1-nqzva@pbearefgbarahefvatnaqeruno pbz",
         "CUBAR:9108928843",
         "VQ:201214939",
         "GVZR:10:24:48",
@@ -85,11 +85,11 @@ choyvp pynff APUnearggPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G5",
         "zoynxr:QHAA RZRETRAPL FREIVPRF,VAP. 101 J PHZOREYNAQ FG QHAA ENVYEBNQ GENPXF K F SNLRGGRIVYYR NIR nsg@qhaa-ap.bet 9108921211 201214946 11:54:07 K-RAGEL",
-        "CYNPR:QHAA RZRETRAPL FREIVPRF,VAP.",
+        "CYNPR:QHAA RZRETRAPL FREIVPRF,VAP",
         "NQQE:101 J PHZOREYNAQ FG",
         "PVGL:QHAA",
         "K:ENVYEBNQ GENPXF / F SNLRGGRIVYYR NIR",
-        "ANZR:nsg@qhaa-ap.bet",
+        "ANZR:nsg@qhaa-ap bet",
         "CUBAR:9108921211",
         "VQ:201214946",
         "GVZR:11:54:07",
@@ -120,8 +120,7 @@ choyvp pynff APUnearggPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G8",
         "PPNYYNUNA:RYYRA PYNEN 600 PNANY QE 0002O QHAA SNVETEBHAQ EQ K ZRZBEVNY NIR PYNEN RYYRA - CERZVFR 9102922030 201214962 14:10:49 K-RAGEL",
         "CYNPR:RYYRA PYNEN",
-        "NQQE:600 PNANY QE",
-        "NCG:0002O",
+        "NQQE:600 PNANY QE 0002O",
         "PVGL:QHAA",
         "K:SNVETEBHAQ EQ / ZRZBEVNY NIR",
         "ANZR:PYNEN RYYRA - CERZVFR",
@@ -164,10 +163,10 @@ choyvp pynff APUnearggPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:NAQREFBA FG / NAQREFBA FG",
         "ANZR:NNE CBJRE OBFF",
         "CUBAR:9109449018",
-        "VQ:201207-17",
+        "VQ:2012000773",
         "GVZR:15:38:54",
         "PNYY:GRFG PNYY GLCR",
-        "VASB:grfg");
+        "VASB:grfg BPN: 201207-17");
 
     qbGrfg("G13",
         "2012000774 TVAB(RA)10:51:45|TVAB(VAS)14:06:24|TVAB(BF)12:47:42|TVAB(PY)12:48:30|",
@@ -204,13 +203,13 @@ choyvp pynff APUnearggPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ASYRZVAT:6100 SNVETEBHAQ EQ QHAA JVYYVR ZPYRBQ YA/CIG EQ K OVEPUQNYR QE 201217203 13:22:54 K-RAGEL PNYYRE FGNGRQ NCCRNERQ GB OR N QBZRFGVP/FBZRBAR RYFR TBG BA GUR CUBAR NAQ FGNGRQ RIRELGUVAT JNF SVAR",
         "NQQE:6100 SNVETEBHAQ EQ",
         "PVGL:QHAA",
-        "K:JVYYVR ZPYRBQ YA/CIG EQ / OVEPUQNYR QE",
+        "K:JVYYVR ZPYRBQ YA / CIG EQ / OVEPUQNYR QE",
         "VQ:201217203",
         "GVZR:13:22:54",
         "VASB:K-RAGEL PNYYRE FGNGRQ NCCRNERQ GB OR N QBZRFGVP/FBZRBAR RYFR TBG BA GUR CUBAR NAQ FGNGRQ RIRELGUVAT JNF SVAR");
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj APUnearggPbhaglOCnefreGrfg().trarengrGrfgf("G1");
+    arj APUnearggPbhaglOCnefreGrfg().trarengrGrfgf("G1", "CYNPR NQQE PVGL K ANZR CUBAR PBQR VQ GVZR PNYY VASB");
   }
 }

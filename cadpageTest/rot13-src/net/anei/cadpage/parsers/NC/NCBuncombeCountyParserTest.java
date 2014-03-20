@@ -175,10 +175,6 @@ PNQ:4 PBIRJBBQ EQ/PBIRJBBQ YA;SF1;SFDQ1;FZBXR VA NERN;JVYYRGG,WRAAVSRE;(SE) VAIR
 PNQ:50 V240 J;SF1;SR1,SY1,SFNS10;(M)ZBGBE IRU NPPVQRAG HAXABJA;OEBNQJNL FG GB V240 J;OEBNQJNL FG GB V240 J;12012607\e\a
 PNQ:50 V240 J;SF1;SR1,SY1,SFNS10;(M)ZBGBE IRU NPPVQRAG HAXABJA;OEBNQJNL FG GB V240 J;OEBNQJNL FG GB V240 J;12012607\e\a
 
-Pbagnpg: Wrss Sbjyre <sver1501@sebagvre.pbz>
-Fraqre: PNQ@ohapbzorpbhagl.bet
-PNQ:13 XABYYEVQTR EQ;SF10;XNGFVTVNAVF, NAQERJ;HAXABJA CEBOYRZ;FRQTRSVRYQ EQ;FRQTRSVRYQ EQ
-
 */
 
 choyvp pynff APOhapbzorPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -1033,8 +1029,7 @@ choyvp pynff APOhapbzorPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "FEP:SF4",
         "PNYY:GENZNGVP VAWHEVRF",
         "CUBAR:8287776867",
-        "VASB:ERV ERPERNGVBANY RDHVCZRAG / R FPURAPX PERF",
-        "K:GBJA FDHNER OYIQ",
+        "VASB:ERV ERPERNGVBANY RDHVCZRAG / R FPURAPX PERF / GBJA FDHNER OYIQ",
         "VQ:12011452");
 
     qbGrfg("G12",
@@ -1171,7 +1166,7 @@ choyvp pynff APOhapbzorPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G2",
         "[] PNQ:219 BYQ AP 20 UJL;O2;JNYFU,QRAVFR;FVPX CREFBA;FHA INYYRL QE;QNYR GURYZN ZRZBEVNY QE\e\a\a",
         "NQQE:219 BYQ AP 20 UJL",
-        "ZNQQE:219 BYQ FGNGR 20",
+        "ZNQQE:219 BYQ AP 20",
         "HAVG:O2",
         "PNYY:FVPX CREFBA",
         "ANZR:JNYFU,QRAVFR",
@@ -1414,18 +1409,6 @@ choyvp pynff APOhapbzorPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
   }
   
-  @Grfg
-  choyvp ibvq grfgWrssSbjyre() {
-
-    qbGrfg("G1",
-        "PNQ:13 XABYYEVQTR EQ;SF10;XNGFVTVNAVF, NAQERJ;HAXABJA CEBOYRZ;FRQTRSVRYQ EQ;FRQTRSVRYQ EQ",
-        "NQQE:13 XABYYEVQTR EQ",
-        "FEP:SF10",
-        "PNYY:HAXABJA CEBOYRZ",
-        "ANZR:XNGFVTVNAVF, NAQERJ",
-        "K:FRQTRSVRYQ EQ & FRQTRSVRYQ EQ");
- 
-  }
 
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
     arj APOhapbzorPbhaglCnefreGrfg().trarengrGrfgf("G1");

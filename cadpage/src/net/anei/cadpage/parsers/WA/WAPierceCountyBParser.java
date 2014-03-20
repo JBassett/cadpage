@@ -1,5 +1,6 @@
 package net.anei.cadpage.parsers.WA;
 
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,14 +29,14 @@ public class WAPierceCountyBParser extends FieldProgramParser {
     return parseFields(body.split("\n"), 5, data);
   }
   
-  private static final Pattern CODE_TIME_PTN = Pattern.compile("([A-Z0-9]+) @(?: (\\d\\d:\\d\\d:\\d\\d))?");
+  private static final Pattern CODE_TIME_PTN = Pattern.compile("([A-Z0-9]+) @ (\\d\\d:\\d\\d:\\d\\d)");
   private class CodeTimeField extends Field {
     @Override
     public void parse(String field, Data data) {
       Matcher match = CODE_TIME_PTN.matcher(field);
       if (!match.matches()) abort();
       data.strCode = match.group(1);
-      data.strTime = getOptGroup(match.group(2));
+      data.strTime = match.group(2);
     }
     
     @Override
@@ -62,6 +63,18 @@ public class WAPierceCountyBParser extends FieldProgramParser {
   
   @Override
   public String adjustMapAddress(String sAddress) {
-    return WAPierceCountyParser.adjustMapAddressCommon(sAddress);
+    StringBuffer sb = new StringBuffer();
+    Matcher match = STREET_CODE_PTN.matcher(sAddress);
+    while (match.find()) {
+      match.appendReplacement(sb, convertCodes(match.group(), STREET_CODES));
+    }
+    match.appendTail(sb);
+    return sb.toString();
   }
+  private static final Pattern STREET_CODE_PTN = Pattern.compile("\\b(?:AVCT|KN|KS)\\b");
+  private static final Properties STREET_CODES = buildCodeTable(new String[]{
+      "AVCT",   "AVE CT",
+      "KN",     "KP N",
+      "KS",     "KP S"
+  });
 }

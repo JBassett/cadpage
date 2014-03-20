@@ -13,48 +13,39 @@ import net.anei.cadpage.parsers.MsgParser;
 public class CACalaverasCountyParser extends MsgParser {
   
   private static final Pattern MASTER = 
-      Pattern.compile("Inc# (\\d+):([^:]+):(?:([^@]+)@)?(.+?) , *([A-Z_]+) *(?:\\(([^]]*?)\\) *)?:Map +([^:]*):(?: :)? LAT/LONG (X: [-+]?\\d+ \\d+\\.\\d+ +Y: [-+]?\\d+ \\d+\\.\\d+): ([^:]*)(?::([^:]*))?(?::.*)?");
+      Pattern.compile("Inc# (\\d+):(?:([^@]+)@)?(.+?), *([A-Z_]+) *:Map  ([^:]*):(?: :)? LAT/LONG X: ([-+]?\\d+) (\\d+\\.\\d+) +Y: ([-+]?\\d+) (\\d+\\.\\d+): ([^:]*:[^:]+):(.*)");
   
   public CACalaverasCountyParser() {
-    this("CALAVERAS COUNTY");
-  }
-  
-  public CACalaverasCountyParser(String defCity) {
-    super(defCity, "CA");
-    setFieldList("ID CALL PLACE ADDR APT CITY MAP GPS INFO UNIT");
+    super("CALAVERAS COUNTY", "CA");
   }
   
   @Override
   public String getFilter() {
     return "tcucad@FIRE.CA.GOV";
   }
-  
-  @Override
-  public String getAliasCode() {
-    return "CACalaverasCounty";
-  }
-
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA | MAP_FLG_PREFER_GPS;
-  }
 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
     
+    if (!subject.equals("CAD Page")) return false;
     Matcher match = MASTER.matcher(body);
     if (!match.matches()) return false;
-    data.strCallId = match.group(1);
-    data.strCall = match.group(2);
-    data.strPlace = getOptGroup(match.group(3));
-    parseAddress(match.group(4).trim(), data);
-    data.strCity = match.group(5).replace('_', ' ').trim();
-    data.strPlace = append(data.strPlace, " - ", getOptGroup(match.group(6)));
-    data.strMap = match.group(7).trim();
-    setGPSLoc(match.group(8), data);
-    data.strSupp = match.group(9).trim();
-    data.strUnit = getOptGroup(match.group(10));
+    data.strCall = match.group(1);
+    data.strPlace = getOptGroup(match.group(2));
+    parseAddress(match.group(3).trim(), data);
+    data.strCity = match.group(4).replace('_', ' ').trim();
+    data.strMap = match.group(5).trim();
+    data.strGPSLoc = cvtGPSCoord(match.group(6), match.group(7)) + ' ' + cvtGPSCoord(match.group(8), match.group(9));
+    data.strCall = match.group(10).trim();
+    data.strUnit = match.group(11).trim();
     
     return true;
+  }
+
+  private String cvtGPSCoord(String degree, String minute) {
+    double dDegree = (float)Integer.parseInt(degree);
+    double dMinute = Double.parseDouble(minute);
+    double value = dDegree + Math.signum(dDegree)*dMinute/60.;
+    return String.format("%8.6f", value);
   }
 }

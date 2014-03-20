@@ -231,9 +231,7 @@ choyvp pynff PGArjYbaqbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:SQ - ZRQVPNY RZRETRAPL",
         "ANZR:XVZONYY ERFQ",
         "NQQE:2 FRN OERRMR NIR",
-        "VASB:85 l/b znyr, treareny jrnxarff hanoyr gb nzohyngr.",
-        "QNGR:10/5/2012",
-        "GVZR:09:50");
+        "VASB:85 l/b znyr, treareny jrnxarff hanoyr gb nzohyngr. / 10/5/2012 09:50");
 
     qbGrfg("G9",
         "[Vzp Fbyhgvbaf Cntr]  SQ - SVER, NHGB\a231 ZNVA FG\aRnfg Ylzr\aSver Qvfgevpg: AUD\a10/4/2012 22:01",
@@ -284,8 +282,7 @@ choyvp pynff PGArjYbaqbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PVGL:Yrqlneq",
         "HAVG:2P",
         "QNGR:10/19/2012",
-        "GVZR:06:15",
-        "VASB:83 LBS SNYY J/ YRT CNVA");
+        "GVZR:06:15");
 
     qbGrfg("G4",
         "(Vzp Fbyhgvbaf Cntr) NYF Zrqvpny\a80 IVARTNE UVYY EQ \aYrqlneq\aSver Qvfgevpg: 2P\a10/18/2012 16:26\a\e\a\e\a\e\a",
@@ -303,8 +300,7 @@ choyvp pynff PGArjYbaqbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PVGL:Yrqlneq",
         "HAVG:2P",
         "QNGR:10/17/2012",
-        "GVZR:18:57",
-        "VASB:BAR PNE");
+        "GVZR:18:57");
 
     qbGrfg("G6",
         "(Vzp Fbyhgvbaf Cntr) NYF Zrqvpny\a" +
@@ -323,8 +319,7 @@ choyvp pynff PGArjYbaqbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PVGL:Yrqlneq",
         "HAVG:2P",
         "QNGR:10/17/2012",
-        "GVZR:15:39",
-        "VASB:YIRF BAR ARRQRQ");
+        "GVZR:15:39");
 
   }
   
@@ -357,8 +352,7 @@ choyvp pynff PGArjYbaqbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PVGL:Yrqlneq",
         "HAVG:2P",
         "QNGR:10/19/2012",
-        "GVZR:06:15",
-        "VASB:83 LBS SNYY J/ YRT CNVA");
+        "GVZR:06:15");
 
     qbGrfg("G3",
         "(Vzp Fbyhgvbaf Cntr) ZIN JVGU VAW.\a69 IVARTNE UVYY EQ \aYrqlneq\aSver Qvfgevpg: 2P\a10/17/2012 18:57\aBAR PNE\e\a\e\a\e\a",
@@ -367,8 +361,7 @@ choyvp pynff PGArjYbaqbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PVGL:Yrqlneq",
         "HAVG:2P",
         "QNGR:10/17/2012",
-        "GVZR:18:57",
-        "VASB:BAR PNE");
+        "GVZR:18:57");
 
     qbGrfg("G4",
         "(Vzp Fbyhgvbaf Cntr) NYF Zrqvpny\a" +
@@ -387,8 +380,7 @@ choyvp pynff PGArjYbaqbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PVGL:Yrqlneq",
         "HAVG:1PBZ",
         "QNGR:10/16/2012",
-        "GVZR:12:57",
-        "VASB:1 ZRZORE ARRQRQ SBE GUR NZOB");
+        "GVZR:12:57");
 
   }
   

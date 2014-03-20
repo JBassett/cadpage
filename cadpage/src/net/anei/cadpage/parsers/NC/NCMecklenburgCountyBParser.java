@@ -1,5 +1,8 @@
 package net.anei.cadpage.parsers.NC;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,13 +14,13 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  */
 public class NCMecklenburgCountyBParser extends SmartAddressParser {
   
+  private static final Set<String> PRI_VALUES = new HashSet<String>(Arrays.asList(new String[]{"Charlie", "Delta", "Fire - Emergency"}));
   private static final Pattern CODE_PTN = Pattern.compile(" (\\d{2}[A-Z]{0,2})-");
   private static final Pattern UNIT_PTN = Pattern.compile("\\b[A-Z][A-Za-z]{1,4}\\d{1,3}\\b");
   
   
   public NCMecklenburgCountyBParser() {
     super("MECKLENBURG COUNTY", "NC");
-    setFieldList("ADDR APT INFO PRI CODE CALL X UNIT MAP ID");
     setupMultiWordStreets(
         "60 FOOT"
     );
@@ -25,11 +28,17 @@ public class NCMecklenburgCountyBParser extends SmartAddressParser {
   
   @Override
   public String getFilter() {
-    return "@minthillvfd.com,@huntersvillefd.com,alerts@cadpage.org,cadmail@medic911.com";
+    return "@minthillvfd.com,alerts@cadpage.org";
   }
   
   @Override
   public boolean parseMsg(String body, Data data) {
+    
+    // Rule out A variant message
+    if (body.length() >= 100) {
+      String sPriCode = substring(body,70,100);
+      if (PRI_VALUES.contains(sPriCode)) return false;
+    }
 
     Matcher match = CODE_PTN.matcher(body);
     if (!match.find()) return false;
@@ -47,7 +56,7 @@ public class NCMecklenburgCountyBParser extends SmartAddressParser {
     if (!match.find()) return false;
     data.strUnit = part2.substring(match.start()).trim();
     part2 = part2.substring(0,match.start()).trim();
-    parseAddress(StartType.START_CALL, FLAG_START_FLD_REQ | FLAG_ONLY_CROSS | FLAG_ANCHOR_END, part2, data);
+    parseAddress(StartType.START_CALL, FLAG_ONLY_CROSS | FLAG_ANCHOR_END, part2, data);
     
     int pt = part1.lastIndexOf(' ');
     if (pt >= 0) {
@@ -62,11 +71,5 @@ public class NCMecklenburgCountyBParser extends SmartAddressParser {
     
     return true;
   }
-  
-  @Override
-  public String adjustMapAddress(String addr) {
-    return PK_PTN.matcher(addr).replaceAll("PKWY");
-  }
-  private static final Pattern PK_PTN = Pattern.compile("\\bPK\\b", Pattern.CASE_INSENSITIVE);
 
 }

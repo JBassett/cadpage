@@ -298,7 +298,7 @@ choyvp pynff INYharaohetPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ISQF-G QHZCFGRE SVER 000000 ONVYRL EQ PSF# 2012-005849",
         "FEP:ISQF-G",
         "PNYY:QHZCFGRE SVER",
-        "NQQE:ONVYRL EQ",
+        "NQQE:000000 ONVYRL EQ",
         "VQ:2012-005849");
 
     qbGrfg("G32",
@@ -326,7 +326,7 @@ choyvp pynff INYharaohetPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "IEF-G SVER 000000 PBHEGUBHFR FD PSF# 2012-005862",
         "FEP:IEF-G",
         "PNYY:SVER",
-        "NQQE:PBHEGUBHFR FD",
+        "NQQE:000000 PBHEGUBHFR FD",
         "VQ:2012-005862");
 
     qbGrfg("G36",
@@ -402,8 +402,7 @@ choyvp pynff INYharaohetPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "IEF-G ERFPHR 519 ZNVA FG 106 PSF# 2012-006034",
         "FEP:IEF-G",
         "PNYY:ERFPHR",
-        "NQQE:519 ZNVA FG",
-        "NCG:106",
+        "NQQE:519 ZNVA FG 106",
         "VQ:2012-006034");
 
     qbGrfg("G47",

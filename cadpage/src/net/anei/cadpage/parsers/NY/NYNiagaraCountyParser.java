@@ -24,7 +24,6 @@ public class NYNiagaraCountyParser extends SmartAddressParser {
     
     public NYNiagaraCountyParser() {
       super("NIAGARA COUNTY", "NY");
-      setFieldList("ID CALL PLACE ADDR APT INFO DATE TIME");
     }
     
     @Override
@@ -90,7 +89,7 @@ public class NYNiagaraCountyParser extends SmartAddressParser {
 	    parseAddress(st, FLAG_NO_IMPLIED_APT, body, data);
 	    if (getStatus() == 0) {
 	      String callId = data.strCallId;
-	      if (!data.parseGeneralAlert(this, save)) return false;
+	      if (!data.parseGeneralAlert(save)) return false;
 	      data.strCallId = callId;
 	      return true;
 	    }

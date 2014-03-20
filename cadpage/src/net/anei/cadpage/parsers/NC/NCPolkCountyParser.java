@@ -41,8 +41,6 @@ public class NCPolkCountyParser extends DispatchSouthernParser {
     }
     match = TRAIL_TIME_PTN.matcher(body);
     if (match.find()) body = body.substring(0,match.start()).trim();
-    
-    body = body.replace('@', '&');
     if (!super.parseMsg(body, data)) return false;
     
     int pt = data.strAddress.toLowerCase().indexOf(" before ");
@@ -52,21 +50,15 @@ public class NCPolkCountyParser extends DispatchSouthernParser {
     }
     
     // Fix some after market additions
-    if (data.strName.length() == 0) {
-      data.strName = data.strPlace;
-      data.strPlace = "";
-    }
+    data.strName = data.strPlace;
+    data.strPlace = "";
     
     Parser p = new Parser(data.strSupp);
     p.getLastOptional(". ");
-    data.strCross = append(data.strCross, " / ", p.getLastOptional(" FROM ").replace(" TO ", " / "));
+    data.strCross = append(data.strCross, " / ", p.getLastOptional(" FROM "));
     data.strSupp = p.get();
     return true;
   }
+  
 
-  @Override
-  protected boolean isNotExtraApt(String apt) {
-    if (apt.startsWith("NR ")) return true;
-    return super.isNotExtraApt(apt);
-  }
 }

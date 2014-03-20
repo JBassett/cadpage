@@ -22,11 +22,6 @@ public class CASonomaCountyParser extends FieldProgramParser {
   public String getFilter() {
     return "sclec@sonoma-county.org,bc71@srcity.org,ps-cst@Sonoma-county.org";
   }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
@@ -34,15 +29,6 @@ public class CASonomaCountyParser extends FieldProgramParser {
     if (! super.parseMsg(body, data)) return false;
     if (data.strAddress.length() == 0) return false;
     return true;
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("ADDR2")) return new MyAddress2Field();
-    if (name.equals("TIME")) return new MyTimeField();
-    if (name.equals("INFO")) return new MyInfoField();
-    return super.getField(name);
   }
   
   private static final Pattern PLACE_MARKER = Pattern.compile(" *: *@? *");
@@ -80,7 +66,7 @@ public class CASonomaCountyParser extends FieldProgramParser {
     
     @Override
     public String getFieldNames() {
-      return "ADDR APT CITY SRC PLACE";
+      return "ADDR CITY SRC PLACE";
     }
   }
   
@@ -101,46 +87,34 @@ public class CASonomaCountyParser extends FieldProgramParser {
     }
   }
   
-  private static final Pattern GPS_PTN = Pattern.compile("^(?:N )?(-\\d{3}.\\d{4,}) (?:T )?(\\d{2}.\\d{4,})(?: METERS \\d+)? *");
-  private static final Pattern JUNK_PTN = Pattern.compile(" *(?:Unit ([A-Z0-9]+) (?:requested case number [A-Z0-9]+|.*)|\\*\\* Case number (?:[A-Z0-9]+ has been assigned for [:A-Z0-9]+|.*)|\\*\\* >>>> (?:by: [A-Z ]+ on terminal: [a-z0-9]+|.*)) *");
+  private static final String JUNK_MARKER = " ** Case number";
+  private static final Pattern END_JUNK_PTN = Pattern.compile(" on terminal: \\w+ +| case number [A-Z]{3}[0-9]{8} +");
   private class MyInfoField extends InfoField {
     @Override
     public void parse(String field, Data data) {
-      
-      Matcher match = GPS_PTN.matcher(field);
-      if (match.find()) {
-        setGPSLoc(match.group(1)+','+match.group(2), data);
-        field = field.substring(match.end());
-      }
-      
-      match = JUNK_PTN.matcher(field);
-      if (match.find()) {
-        int  last = 0;
-        String result = "";
-        do {
-          result = append(result, " - ", field.substring(last,match.start()));
-          last = match.end();
-          String unit = match.group(1);
-          if (unit !=  null) data.strUnit = append(data.strUnit, " ", unit);
-        } while (match.find());
-        result = append(result, " - ", field.substring(last));
-        field = result;
-      }
-      
-      int pt = field.indexOf("**");
+      int pt = field.indexOf(" **");
       if (pt >= 0) {
         String tail = field.substring(pt);
-        if ("** Case number ".startsWith(tail) || "** >>>> ".startsWith(tail)) {
+        if (tail.startsWith(JUNK_MARKER) || JUNK_MARKER.startsWith(tail)) {
           field = field.substring(0,pt).trim();
+          Matcher match = END_JUNK_PTN.matcher(tail);
+          pt = tail.length();
+          while (match.find()) pt = match.end();
+          field = append(field, " - ", tail.substring(pt).trim());
+            
         }
-      }
+      } else if (field.equals("**")) field = "";
       super.parse(field, data);
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "GPS INFO UNIT";
-    }
+  }
+  
+  @Override
+  public Field getField(String name) {
+    if (name.equals("ADDR")) return new MyAddressField();
+    if (name.equals("ADDR2")) return new MyAddress2Field();
+    if (name.equals("TIME")) return new MyTimeField();
+    if (name.equals("INFO")) return new MyInfoField();
+    return super.getField(name);
   }
   
   private static final Properties CITY_CODES = buildCodeTable(new String[]{

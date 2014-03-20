@@ -33,9 +33,7 @@ public class DESussexCountyBParser extends FieldProgramParser {
     
     body = ALT_START_SEQ.matcher(body).replaceAll("Inc0: $1 Sta: $2");
     body = body.replace(" Loc::", " Loc0:").replace("City: :", "City:").replace("Loc:", " Loc:").replace("City:", " City:");
-    if (!super.parseMsg(body, data)) return false;
-    setGPSLoc(data.strGPSLoc, data);
-    return true;
+    return super.parseMsg(body, data);
   }
   
   private class MyAddressField extends AddressField {

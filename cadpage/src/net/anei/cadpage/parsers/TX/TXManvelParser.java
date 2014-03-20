@@ -25,16 +25,6 @@ public class TXManvelParser extends FieldProgramParser {
   public String getSponsor() {
     return "Manvel Volunteer Fire Department";
   }
-  
-  @Override
-  public String getSponsorDateString() {
-    return "02172014";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
 
   @Override
   public boolean parseMsg(String subject, String body, Data data) {

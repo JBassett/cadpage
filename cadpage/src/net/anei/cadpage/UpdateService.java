@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
+import java.util.Random;
 
 public class UpdateService extends Service {
 
@@ -15,6 +16,8 @@ public class UpdateService extends Service {
     @Override
     public void onStart(Intent intent, int startId){
       
+      String fakeUpdate = null;
+      Random random = new Random();
       AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this
           .getApplicationContext());
 
@@ -22,6 +25,8 @@ public class UpdateService extends Service {
           .getIntArrayExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS);
       if (appWidgetIds.length > 0) {
         for (int widgetId : appWidgetIds) {
+          int nextInt = random.nextInt(100);
+          fakeUpdate = "Random: " + String.valueOf(nextInt);
           RemoteViews remoteViews = new RemoteViews(getPackageName(),R.layout.widget);
           //remoteViews.setTextViewText(R.id.TextView01, fakeUpdate);
           appWidgetManager.updateAppWidget(widgetId, remoteViews);

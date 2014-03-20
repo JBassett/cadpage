@@ -72,6 +72,7 @@ choyvp pynff BUZnqvfbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CEV:1",
         "NQQE:QRRE EHA FR YA & FCEVAT INYYRL FR EQ",
         "PVGL:QRRE PERRX GJC",
+        "K:A/N & A/N",
         "VASB:BA QRRE EHA YA");
 
     qbGrfg("G4",
@@ -110,6 +111,7 @@ choyvp pynff BUZnqvfbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CEV:1",
         "NQQE:HF 40 AR & YNSNLRGGR-CYNVA PVGL EQ",  // Tbbtyr pna'g svaq HF 40
         "PVGL:QRRE PERRX GJC",
+        "K:A/N & A/N",
         "VASB:BA 4");
 
   }

@@ -1,19 +1,21 @@
 package net.anei.cadpage.parsers.NY;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.dispatch.DispatchB3Parser;
+import net.anei.cadpage.parsers.dispatch.DispatchBParser;
 
 
 
-public class NYHerkimerCountyParser extends DispatchB3Parser {
-
-  private static final Pattern CITY_SUFFIX = Pattern.compile("^VILLAGE\\b", Pattern.CASE_INSENSITIVE);
+public class NYHerkimerCountyParser extends DispatchBParser {
+  
+  private static final String DEF_CITY = "HERKIMER COUNTY";
+  private static final String DEF_STATE = "NY";
+  
+  private static final String[] CITY_LIST =  
+    {"NORWAY", "NEWPORT", "RUSSIA", "POLAND", "NEWPORT", "FAIRFIELD",
+     "MIDDLEVILLE", "OHIO", "DEERFIELD", "LITTLE FALLS CITY"}; 
   
   public NYHerkimerCountyParser() {
-    super(CITY_LIST, "HERKIMER COUNTY", "NY");
+    super(CITY_LIST, DEF_CITY, DEF_STATE);
   }
   
   @Override
@@ -29,25 +31,23 @@ public class NYHerkimerCountyParser extends DispatchB3Parser {
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
     if (!super.isPageMsg(body) && !body.contains("Grids:,, NY")) return false; 
-    body = body.replaceAll("\n", " ").replaceAll(" Grids:,, NY ", " ");
-    if (body.endsWith(" MAP:")) body = body.substring(0,body.length()-5).trim();
-    if (!super.parseMsg(subject, body, data)) return false;
-    
-    // See if city suffix has bled over into name
-    Matcher match = CITY_SUFFIX.matcher(data.strName);
-    if (match.find()) data.strName = data.strName.substring(match.end()).trim();
-    return true;
+    body = "(" + subject + ") " + body.replaceAll("\n", " ").replaceAll(" Grids:,, NY ", " ");
+    return super.parseMsg(body, data);
   }
   
-  private static final String[] CITY_LIST = new String[]{  
-    "DEERFIELD", 
-    "LITTLE FALLS CITY",
-    "FAIRFIELD",
-    "MIDDLEVILLE", 
-    "NORWAY", 
-    "NEWPORT", 
-    "OHIO", 
-    "POLAND", 
-    "RUSSIA" 
-  }; 
+  @Override
+  public boolean parseAddrField(String line, Data data) {
+    if (line.length() < 10) return false;
+    if (line.charAt(0) == '(') {
+      int pt = line.indexOf(')');
+      if (pt < 0) return false;
+      data.strCall = line.substring(1, pt);
+      data.strCall = data.strCall.replaceAll("\\s+>", ">");
+      line = line.substring(pt+1).trim();
+    }
+    
+    // Call smart parser for rest of it
+    parseAddress(StartType.START_ADDR, line, data);
+    return true;
+  }
 }

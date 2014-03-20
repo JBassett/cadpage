@@ -31,7 +31,7 @@ choyvp pynff CNSnlrggrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G9",
         "SNLRGGR-911:SNPVAW>S-NPPVQRAG J/ VAWHEVRF INAPRF ZVYY EQ ABEGU HAVBA JVYFBA CNHY 7249637757 Znc: Tevqf:, Pnq: 2011-0000029638",
-        "PNYY:S-NPPVQRAG J/ VAWHEVRF",
+        "PNYY:S-NPPVQRAG J/VAWHEVRF",
         "NQQE:INAPRF ZVYY EQ",
         "PVGL:ABEGU HAVBA GJC",
         "ANZR:JVYFBA CNHY",
@@ -60,7 +60,7 @@ choyvp pynff CNSnlrggrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G13",
         "SNLRGGR-911:SNPVAW>S-NPPVQRAG J/ VAWHEVRF 2418 CVGGFOHETU EQ KF: ERFREIBVE EQ & OENQL YA SENAXYVA PUEVF 3046855898 Znc: Tevqf:, Pnq: 2011-0000029569",
-        "PNYY:S-NPPVQRAG J/ VAWHEVRF",
+        "PNYY:S-NPPVQRAG J/VAWHEVRF",
         "NQQE:2418 CVGGFOHETU EQ",
         "PVGL:SENAXYVA GJC",
         "K:ERFREIBVE EQ & OENQL YA",
@@ -80,7 +80,7 @@ choyvp pynff CNSnlrggrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G15",
         "SNLRGGR-911:SNPVAW>S-NPPVQRAG J/ VAWHEVRF OBYQRA EQ KF: PBBCRE EQ & CVGGFOHETU EQ SENAXYVA UVTTAF RERAFG 7245526428 Pnq: 2011-0000030796",
-        "PNYY:S-NPPVQRAG J/ VAWHEVRF",
+        "PNYY:S-NPPVQRAG J/VAWHEVRF",
         "NQQE:OBYQRA EQ",
         "ZNQQE:OBYQRA EQ & PBBCRE EQ",
         "K:PBBCRE EQ & CVGGFOHETU EQ",
@@ -116,12 +116,13 @@ choyvp pynff CNSnlrggrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZNQQE:OVGARE EQ & INAPRF ZVYY EQ",
         "K:INAPRF ZVYY EQ & EBHAQ ONEA EQ",
         "PVGL:SENAXYVA GJC",
+        "ANZR:IREVMBA JVERYRFF",
         "CUBAR:7248808596",
         "VQ:2011-0000031156");
   
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj CNSnlrggrPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj CNSnlrggrPbhaglCnefreGrfg().trarengrGrfgf("G9", "PNYY NQQE PVGL K CYNPR ANZR CUBAR ZNC VQ");
   }
 }

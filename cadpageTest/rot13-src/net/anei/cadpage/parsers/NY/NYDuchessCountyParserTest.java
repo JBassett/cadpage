@@ -8,12 +8,12 @@ vzcbeg bet.whavg.Grfg;
 /*
 Qhpurff Pbhagl, AL
 Pbagnpg: "pberl1193@tznvy.pbz" <pberl1193@tznvy.pbz>
-Fraqre: Cyrnfnaginyyrlsver@erfcbafr.fcbggrqqbtgrpu.pbz
 
-CI-1: CVNN C3|  | FNYG CBVAG GEACX naq QNIVQ QE , CYRNFNAG INYYRL, Arj Lbex |  NHGB NPPVQRAG 3 PNE ZIN |Pebff:| Npgvir
-CI-1: Zvfpryynarbhf| CI ZRGUBQVFG PUHEPU | 92 ZNEGVA EQ , CYRNFNAG INYYRL, Arj Lbex |  5 ZB PUVYQ YBPXRQ VA EHAAVAT IRUVPYR |Pebff:AB
-CI-1: CVNN C3|  | GFC F naq EBFFJNL EQ , CYRNFNAG INYYRL, Arj Lbex |  GJB PNE CVNN |Pebff:| Npgvir
-CI-1: RZF C1|  | 40 YBPHFG Nirahr , CYRNFNAG INYYRL, Arj Lbex |  16 LBZ ENCVQ URNEG ENGR |Pebff:OYNPX BNX QE - FUNTONEX NI| Npgvir
+CI-1: Glcr:RZF C2 |Nqqerff: 923 FNYG CBVAG GEACX, CYRNFNAG INYYRL, Arj Lbex |Angher: 17 LBZ SRRYVAT QVMML |Pebff:OYBFFBZ UVYY - JRFG 
+CI-1: Glcr:RZF C4 |Nqqerff: 1434 EBHGR 44 , CYRNFNAG INYYRL, Arj Lbex  |Angher: 57LBZ SRYY ,FUBHYQRE CNVA SNGURE SRYY |Pebff:JVYOHE EQ
+CI-1: Glcr:Nynez Sver |Nqqerff: 1903 EBHGR 44 , CYRNFNAG INYYRL, Arj Lbex |Angher: NSN -2AQ SYBBE CHYY-JRFG FVQR |Pebff:OERJFGRE YA -
+CI-1: Glcr:RZF C3 |Nqqerff: 11 JNYAHG QE , CYRNFNAG INYYRL, Arj Lbex  |Angher: 59 LBZ NOQBZVANY-CBFG FHETVPNY PBZCYVPNGVBAF |Pebff:JNG 
+CI-1: Glcr:RZF C1 |Nqqerff: 7 OEVFGBY QE , CYRNFNAG INYYRL, Arj Lbex |Angher: 70 LBS PURFG NAQ ONPX CNVA |Pebff:SERRQBZ EQ - SBERFG I
 
 */
 
@@ -27,40 +27,44 @@ choyvp pynff ALQhpurffPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   choyvp ibvq grfgCnefre() {
 
     qbGrfg("G1",
-        "CI-1: CVNN C3|  | FNYG CBVAG GEACX naq QNIVQ QE , CYRNFNAG INYYRL, Arj Lbex |  NHGB NPPVQRAG 3 PNE ZIN |Pebff:| Npgvir",
+        "CI-1: Glcr:RZF C2 |Nqqerff: 923 FNYG CBVAG GEACX, CYRNFNAG INYYRL, Arj Lbex |Angher: 17 LBZ SRRYVAT QVMML |Pebff:OYBFFBZ UVYY - JRFG ",
         "FEP:CI-1",
-        "PNYY:CVNN C3 - NHGB NPPVQRAG 3 PNE ZIN",
-        "NQQE:FNYG CBVAG GEACX naq QNIVQ QE",
-        "ZNQQE:FNYG CBVAG GEACX & QNIVQ QE",
+        "PNYY:RZF C2 / 17 LBZ SRRYVAT QVMML",
+        "NQQE:923 FNYG CBVAG GEACX",
         "PVGL:CYRNFNAG INYYRL",
-        "VASB:Npgvir");
+        "K:OYBFFBZ UVYY / JRFG");
 
     qbGrfg("G2",
-        "CI-1: Zvfpryynarbhf| CI ZRGUBQVFG PUHEPU | 92 ZNEGVA EQ , CYRNFNAG INYYRL, Arj Lbex |  5 ZB PUVYQ YBPXRQ VA EHAAVAT IRUVPYR |Pebff:AB",
+        "CI-1: Glcr:RZF C4 |Nqqerff: 1434 EBHGR 44 , CYRNFNAG INYYRL, Arj Lbex  |Angher: 57LBZ SRYY ,FUBHYQRE CNVA SNGURE SRYY |Pebff:JVYOHE EQ",
         "FEP:CI-1",
-        "PNYY:Zvfpryynarbhf - 5 ZB PUVYQ YBPXRQ VA EHAAVAT IRUVPYR",
-        "CYNPR:CI ZRGUBQVFG PUHEPU",
-        "NQQE:92 ZNEGVA EQ",
+        "PNYY:RZF C4 / 57LBZ SRYY ,FUBHYQRE CNVA SNGURE SRYY",
+        "NQQE:1434 EBHGR 44",
         "PVGL:CYRNFNAG INYYRL",
-        "K:AB");
+        "K:JVYOHE EQ");
 
     qbGrfg("G3",
-        "CI-1: CVNN C3|  | GFC F naq EBFFJNL EQ , CYRNFNAG INYYRL, Arj Lbex |  GJB PNE CVNN |Pebff:| Npgvir",
+        "CI-1: Glcr:Nynez Sver |Nqqerff: 1903 EBHGR 44 , CYRNFNAG INYYRL, Arj Lbex |Angher: NSN -2AQ SYBBE CHYY-JRFG FVQR |Pebff:OERJFGRE YA -",
         "FEP:CI-1",
-        "PNYY:CVNN C3 - GJB PNE CVNN",
-        "NQQE:GFC F naq EBFFJNL EQ",
-        "ZNQQE:GNPBAVP FGNGR CXJL F & EBFFJNL EQ",
+        "PNYY:Nynez Sver / NSN -2AQ SYBBE CHYY-JRFG FVQR",
+        "NQQE:1903 EBHGR 44",
         "PVGL:CYRNFNAG INYYRL",
-        "VASB:Npgvir");
+        "K:OERJFGRE YA");
 
     qbGrfg("G4",
-        "CI-1: RZF C1|  | 40 YBPHFG Nirahr , CYRNFNAG INYYRL, Arj Lbex |  16 LBZ ENCVQ URNEG ENGR |Pebff:OYNPX BNX QE - FUNTONEX NI| Npgvir",
+        "CI-1: Glcr:RZF C3 |Nqqerff: 11 JNYAHG QE , CYRNFNAG INYYRL, Arj Lbex  |Angher: 59 LBZ NOQBZVANY-CBFG FHETVPNY PBZCYVPNGVBAF |Pebff:JNG ",
         "FEP:CI-1",
-        "PNYY:RZF C1 - 16 LBZ ENCVQ URNEG ENGR",
-        "NQQE:40 YBPHFG Nirahr",
+        "PNYY:RZF C3 / 59 LBZ NOQBZVANY-CBFG FHETVPNY PBZCYVPNGVBAF",
+        "NQQE:11 JNYAHG QE",
         "PVGL:CYRNFNAG INYYRL",
-        "K:OYNPX BNX QE / FUNTONEX NI",
-        "VASB:Npgvir");
+        "K:JNG");
+
+    qbGrfg("G5",
+        "CI-1: Glcr:RZF C1 |Nqqerff: 7 OEVFGBY QE , CYRNFNAG INYYRL, Arj Lbex |Angher: 70 LBS PURFG NAQ ONPX CNVA |Pebff:SERRQBZ EQ - SBERFG I",
+        "FEP:CI-1",
+        "PNYY:RZF C1 / 70 LBS PURFG NAQ ONPX CNVA",
+        "NQQE:7 OEVFGBY QE",
+        "PVGL:CYRNFNAG INYYRL",
+        "K:SERRQBZ EQ / SBERFG I");
 
   }
   

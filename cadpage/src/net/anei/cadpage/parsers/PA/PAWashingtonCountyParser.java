@@ -63,9 +63,12 @@ public class PAWashingtonCountyParser extends FieldProgramParser {
   private class MyCrossField extends CrossField {
     @Override
     public void parse(String field, Data data) {
-      int flags = FLAG_ANCHOR_END | FLAG_IMPLIED_INTERSECT;
-      if (data.strAddress.length() > 0) flags |= FLAG_ONLY_CROSS;
-      parseAddress(StartType.START_ADDR, flags, field, data);
+      String saveAddr = data.strAddress;
+      parseAddress(StartType.START_ADDR, FLAG_ANCHOR_END | FLAG_IMPLIED_INTERSECT, field, data);
+      if (saveAddr.length() > 0) {
+        data.strCross = data.strAddress;
+        data.strAddress = saveAddr;
+      }
     }
   }
   

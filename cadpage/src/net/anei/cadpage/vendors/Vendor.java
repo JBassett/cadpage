@@ -1,11 +1,8 @@
 package net.anei.cadpage.vendors;
 
-import net.anei.cadpage.C2DMService;
+import net.anei.cadpage.C2DMReceiver;
 import net.anei.cadpage.CadPageApplication;
-import net.anei.cadpage.ContentQuery;
-import net.anei.cadpage.EmailDeveloperActivity;
 import net.anei.cadpage.HttpService;
-import net.anei.cadpage.Log;
 import net.anei.cadpage.SmsPopupUtils;
 import net.anei.cadpage.HttpService.HttpRequest;
 import net.anei.cadpage.ManagePreferences;
@@ -13,12 +10,10 @@ import net.anei.cadpage.R;
 import net.anei.cadpage.donation.DonationManager;
 import net.anei.cadpage.donation.MainDonateEvent;
 import net.anei.cadpage.donation.UserAcctManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import net.anei.cadpage.BroadcastBindings;
 
 abstract class Vendor {
 
@@ -245,8 +240,6 @@ abstract class Vendor {
     
     textPage = prefs.getBoolean("textPage", false);
     disableTextPageCheck = prefs.getBoolean("disableTextPageCheck", false);
-    
-    publishAccountInfo(context);
   }
   
   /**
@@ -258,7 +251,7 @@ abstract class Vendor {
   }
   
   /**
-   * Save the critical status members to persistent storage
+   * Save the critical status members to persistant storage
    */
   private void saveStatus() {
     SharedPreferences.Editor editor = prefs.edit();
@@ -306,8 +299,10 @@ abstract class Vendor {
     sb.append("\nenabled:" + enabled);
     sb.append("\ntextPage:" + textPage);
     sb.append("\ndisableTextPageCheck:" + disableTextPageCheck);
-    sb.append("\naccount:" + account);
-    sb.append("\ntoken:" + token);
+    if (enabled) {
+      sb.append("\naccount:" + account);
+      sb.append("\ntoken:" + token);
+    }
   }
 
   /**
@@ -379,15 +374,12 @@ abstract class Vendor {
     
     // If already enabled, we don't have to do anything
     if (enabled) {
-      sendReregister(context, ManagePreferences.registrationId(), true);
+      sendReregister(context, ManagePreferences.registrationId());
       return;
     }
 
     // Make sure we have network connectivity
     if (!SmsPopupUtils.haveNet(context)) return;
-    
-    // Turn on direct paging error reporting
-    ManagePreferences.setDirectPageActive(true);
 
     // Set registration in progress flag
     // and save the discovery URI
@@ -396,18 +388,15 @@ abstract class Vendor {
     
     // See if we already have a registration ID, if we do, use it to send
     // registration request to vendor server
-    // But we also will refresh the registration ID, just in case it has
-    // gotten stale from long periods of unuse.
     String regId = ManagePreferences.registrationId();
     if (regId != null) {
-      registerC2DMId(context, regId, true);
-      C2DMService.register(context, true);
+      registerC2DMId(context, regId);
     }
     
     // If we don't request one and and send the request to the server when
     // it comes back in
     else {
-      if (!C2DMService.register(context, uri != null)) showNotice(context, R.string.vendor_reg_failure_msg, null);
+      if (!C2DMReceiver.register(context)) showNotice(context, R.string.vendor_reg_failure_msg, null);
     }
   }
 
@@ -419,8 +408,6 @@ abstract class Vendor {
     
     if (!enabled) return;
     
-    Log.v("User initiated disconnect from " + title);
-    
     // Disable access and save that status change
     enabled = false;
     saveStatus();
@@ -428,25 +415,20 @@ abstract class Vendor {
     
     // Send an unregister request to the vendor server
     // we really don't care how it responds
-    Uri uri = buildRequestUri("unregister", ManagePreferences.registrationId(), true);
+    Uri uri = buildRequestUri("unregister", ManagePreferences.registrationId());
     HttpService.addHttpRequest(context, new HttpRequest(uri){});
     
     // Finally unregister from Google C2DM service.  If there are other vendor
     // services that are still active, they will request a new registration ID
-    C2DMService.unregister(context);
-
-    // If the user is loosing a sponsored payment status, reset the 30 day evaluation period
-    if (isSponsored()) ManagePreferences.setAuthRunDays(0);
+    C2DMReceiver.unregister(context);
   }
   
   /**
    * Called when a new or changed C2DM registration ID is reported
    * @param context current context
    * @param registrationId registration ID
-   * @param userReq true if user requested this action
-   * @return true if we actually did anything
    */
-  boolean registerC2DMId(final Context context, String registrationId, boolean userReq) {
+  void registerC2DMId(final Context context, String registrationId) {
     
     // If we are in process of registering with server, send the web registration request
     if (inProgress) {
@@ -468,30 +450,13 @@ abstract class Vendor {
       }
       inProgress = false;
       discoverUri = null;
-      return true;
     }
     
     // Otherwise, if we are registered with this server, pass the new registration
     // ID to them
     else if (enabled) {
-      sendReregister(context, registrationId, userReq);
-      return true;
+      sendReregister(context, registrationId);            
     }
-    
-    // Otherwise we have nothing to do
-    return false;
-  }
-
-  /**
-   * Check that a vendor from whom we have received a direct page is really fully
-   * registered
-   */
-  public void checkVendorStatus(Context context) {
-    // If we are enabled, nothing needs to be done
-    if (enabled) return;
-    
-    // Otherwise send a reg_query to this vendor
-    sendRegQuery(context, ManagePreferences.registrationId());
   }
   
   /**
@@ -499,9 +464,8 @@ abstract class Vendor {
    * @param context current context
    * @param registrationId registration ID
    */
-  private void sendReregister(final Context context, String registrationId, boolean userReq) {
-    Uri uri = buildRequestUri("reregister", registrationId, userReq);
-    uri = uri.buildUpon().appendQueryParameter("userReq", (userReq ? "Y" : "N")).build();
+  private void sendReregister(final Context context, String registrationId) {
+    Uri uri = buildRequestUri("reregister", registrationId);
     HttpService.addHttpRequest(context, new HttpService.HttpRequest(uri){
       
       @Override
@@ -515,32 +479,22 @@ abstract class Vendor {
         // Don't know what negative result means, but lets ignore it
         if (status < 0) return;
         
+        // A successful return indicates link is working, anything else
+        // indicates that it is broken
+        boolean newStat = ((status / 100) == 2);
+        
         // A 299 response indicates that the server has been having trouble with our registration ID
         // and we should request another one.
-        if (status == 299) C2DMService.register(context, true);
+        if (status == 299) C2DMReceiver.register(context);
         
-        // A 400 request indicates that the device we have tried to register is no longer valid
-        if (status == 400) {
-          enabled = false;
-          saveStatus();
-          reportStatusChange();
-        }
+        // If nothing has changed, all is well
+        if (enabled == newStat) return;
         
-        // That is all we have to do.  The GCM protocol, it has it's own way of 
+        // Otherwise, we are basically done.  The GCM protocol, it has it's own way of 
         // getting the new registration ID to our servers.  So we don't have to do anything 
         // drastic if the reregister request fails
         return;
       }});
-  }
-  
-  /**
-   * Send reg_query request to vendor
-   * @param context current context
-   * @param registrationId registration ID
-   */
-  void sendRegQuery(Context context, String registrationId) {
-    Uri uri = buildRequestUri("req_query", registrationId);
-    HttpService.addHttpRequest(context, new HttpService.HttpRequest(uri));
   }
 
   /**
@@ -559,38 +513,13 @@ abstract class Vendor {
     this.account = account;
     this.token = token;
     saveStatus();
-    if (enabled) publishAccountInfo(context);
     
     if (change) {
       reportStatusChange();
       showNotice(context, register ? R.string.vendor_connect_msg : R.string.vendor_disconnect_msg, null);
       if (register) setTextPage(false);
-      else {
-        C2DMService.unregister(context);
-        ManagePreferences.setAuthRunDays(0);
-      }
-      
-      if (!register) EmailDeveloperActivity.logSnapshot(context, "Vendor initiated disconnect");
+      else C2DMReceiver.unregister(context);
     }
-  }
-  
-  void publishAccountInfo(Context context) {
-    if (!enabled) return;
-    Intent intent = new Intent("net.anei.cadpage.ACCOUNT_INFO." + vendorCode);
-    intent.putExtra("account", account);
-    intent.putExtra("token", token);
-    Log.w("Publish Account Info");
-    ContentQuery.dumpIntent(intent);
-    context.sendBroadcast(intent, BroadcastBindings.PERMISSION);
-  }
-
-  /**
-   * Perform any vendor specific location code conversions
-   * @param location location code
-   * @return new location code
-   */
-  String convertLocationCode(String location) {
-    return location;
   }
 
   /**
@@ -612,27 +541,12 @@ abstract class Vendor {
    * @return request URI
    */
   private Uri buildRequestUri(String req, String registrationId) {
-    return buildRequestUri(req, registrationId, false);
-  }
-
-  /**
-   * Build a request URI
-   * @param req request type
-   * @param registrationId registration ID
-   * @param force force account and token information to be included even when
-   * vendor is not currently registered
-   * @return request URI
-   */
-  private Uri buildRequestUri(String req, String registrationId, boolean force) {
-
     String phone = UserAcctManager.instance().getPhoneNumber();
     Uri.Builder builder = getBaseURI(req).buildUpon();
     builder = builder.appendQueryParameter("req", req);
     builder = builder.appendQueryParameter("vendor", getVendorCode());
-    if (force || enabled) {
-      if (account != null) builder = builder.appendQueryParameter("account", account);
-      if (token != null) builder = builder.appendQueryParameter("token", token);
-    }
+    if (account != null) builder = builder.appendQueryParameter("account", account);
+    if (token != null) builder = builder.appendQueryParameter("token", token);
     if (phone != null) builder = builder.appendQueryParameter("phone", phone);
     builder = builder.appendQueryParameter("type", "GCM");
     if (registrationId != null) builder = builder.appendQueryParameter("CadpageRegId", registrationId);
@@ -662,10 +576,6 @@ abstract class Vendor {
   private void viewPage(Context context, Uri uri) {
     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    try {
-      context.startActivity(intent);
-    } catch (ActivityNotFoundException ex) {
-      showNotice(context, R.string.vendor_no_web_viewer_error, null);
-    }
+    context.startActivity(intent);
   }
 }

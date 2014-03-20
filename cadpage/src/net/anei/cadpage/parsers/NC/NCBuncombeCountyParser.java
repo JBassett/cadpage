@@ -33,7 +33,7 @@ public class NCBuncombeCountyParser extends DispatchOSSIParser {
   }
   
   private static final Pattern CHANGED_PTN = Pattern.compile("Changed ([A-Za-z]+) from .*? to (.*)");
-  private class MyChangeField extends CallField {
+  private class MyChangeField extends Field {
     
     @Override
     public boolean canFail() {
@@ -53,6 +53,7 @@ public class NCBuncombeCountyParser extends DispatchOSSIParser {
     @Override
     public void parse(String field, Data data) {
     }
+    
   }
   
   /**
@@ -120,7 +121,7 @@ public class NCBuncombeCountyParser extends DispatchOSSIParser {
         fieldProc = idField;
       }
       
-      else if (!field.startsWith("FM") && checkAddress(field) == STATUS_STREET_NAME) {
+      else if (!field.startsWith("FM") && checkAddress(field) == 1) {
         fieldProc = crossField;
       }
       

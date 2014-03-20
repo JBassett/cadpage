@@ -37,8 +37,7 @@ choyvp pynff APZbagtbzrelPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G1",
         "PNQ:QNLF VAA 531 RNFG ZNVA FG 105 OVFPBR 14:14:20 NFFNHYG - FRKHNY NFFNHYG zna na jbzna jnf svtugvat naq gura sz ghearq ba pnyyre.",
         "CYNPR:QNLF VAA",
-        "NQQE:531 RNFG ZNVA FG",
-        "NCG:105",
+        "NQQE:531 RNFG ZNVA FG 105",
         "PVGL:OVFPBR",
         "GVZR:14:14:20",
         "PNYY:NFFNHYG",
@@ -47,7 +46,7 @@ choyvp pynff APZbagtbzrelPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G2",
         "PNQ:1344 AP UJL 109 F ZG TVYRNQ ZQY 09R01 19:26:03 PNEQVNP BE ERFCVENGBEL NEERFG - QRNGU",
         "NQQE:1344 AP UJL 109 F",
-        "ZNQQE:1344 FGNGR 109 F",
+        "ZNQQE:1344 AP 109 F",
         "PVGL:ZG TVYRNQ",
         "PBQR:09R01",
         "GVZR:19:26:03",
@@ -57,7 +56,7 @@ choyvp pynff APZbagtbzrelPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G3",
         "PNQ:1344 AP UJL 109 F ZG TVYRNQ 19:21:52 HAPBAFPVBHF - SNVAGVAT (ARNE) R",
         "NQQE:1344 AP UJL 109 F",
-        "ZNQQE:1344 FGNGR 109 F",
+        "ZNQQE:1344 AP 109 F",
         "PVGL:ZG TVYRNQ",
         "GVZR:19:21:52",
         "PNYY:HAPBAFPVBHF",
@@ -97,6 +96,6 @@ choyvp pynff APZbagtbzrelPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   
 
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj APZbagtbzrelPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj APZbagtbzrelPbhaglCnefreGrfg().trarengrGrfgf("G1", "CYNPR NQQE NCG PVGL PBQR GVZR PNYY VASB");
   }
 }

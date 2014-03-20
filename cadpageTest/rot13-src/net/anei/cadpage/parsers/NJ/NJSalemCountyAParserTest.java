@@ -22,12 +22,6 @@ Flfgrz: Vagrenpg
 911-PRAGRE:40 >OYF 255 A EVIRE QE KF: ZRNQBJ EBNQ CRAAFIVYYR GJC PBARL, XRAARGU E 6785492 Znc: Tevqf: 00000 ,000 
 911-PRAGRE:40 >OYF 11 XRAG NIR Ncg: 412 Oyqt KF: ABEGU OEBNQJNL CRAAFIVYYR GJC SENAXYVA NYNEZ PB BCRE 2769 6782600 Znc: 
 
-Pbagnpg: Zvxr Xunvemnqn <zxunvemnqn@pbzpnfg.arg>
-Fraqre: 777633299916
-911-PRAGRE:40 >OYF 328 A OEBNQJNL JNL KF: XRAG NIR CRAAFIVYYR GJC ENLZBAQ ZREXF 3623457 Znc: Tevqf:00000,000
-911-PRAGRE:41 >NYF 9 JNGRE FG KF: ORAFBA NIR CRAAFIVYYR GJC TEBFMRJFXV, TRENYQ 6783759 Znc: Tevqf:00000,000
-911-PRAGRE:40 >OYF 3 UNEINEQ EQ KF: SBEG ZBGG EBNQ CRAAFIVYYR GJC YNJERAPR VVV,UNEEL 5142698 Znc: Tevqf:00000,000
-
 */
 
 choyvp pynff AWFnyrzPbhaglNCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -45,7 +39,7 @@ choyvp pynff AWFnyrzPbhaglNCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "NQQE:40 RNGBA EQ",
         "K:YVAPBYA QE NAQ F JNFUVATGBA QE",
         "PVGL:CRAAFIVYYR GJC",
-        "ANZR:GP02 / ZBAVGBEVAT PRAG");
+        "ANZR:GP02 / / ZBAVGBEVAT PRAG");
 
     qbGrfg("G2",
         "911-PRAGRE:02 >FGEHPGHER SVER-ZRQVHZ UNMNEQ 429 A OEBNQJNL JNL KF: EBHGR 130 BIRECNFF CRAAFIVYYR GJC XVZ ZVYYRE 3511754",
@@ -137,39 +131,7 @@ choyvp pynff AWFnyrzPbhaglNCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CUBAR:6782600");
   }
   
-  @Grfg
-  choyvp ibvq grfgZvxrXunvemnqn() {
-
-    qbGrfg("G1",
-        "911-PRAGRE:40 >OYF 328 A OEBNQJNL JNL KF: XRAG NIR CRAAFIVYYR GJC ENLZBAQ ZREXF 3623457 Znc: Tevqf:00000,000",
-        "PNYY:OYF",
-        "NQQE:328 A OEBNQJNL JNL",
-        "K:XRAG NIR",
-        "PVGL:CRAAFIVYYR GJC",
-        "ANZR:ENLZBAQ ZREXF",
-        "CUBAR:3623457");
-
-    qbGrfg("G2",
-        "911-PRAGRE:41 >NYF 9 JNGRE FG KF: ORAFBA NIR CRAAFIVYYR GJC TEBFMRJFXV, TRENYQ 6783759 Znc: Tevqf:00000,000",
-        "PNYY:NYF",
-        "NQQE:9 JNGRE FG",
-        "K:ORAFBA NIR",
-        "PVGL:CRAAFIVYYR GJC",
-        "ANZR:TEBFMRJFXV, TRENYQ",
-        "CUBAR:6783759");
-
-    qbGrfg("G3",
-        "911-PRAGRE:40 >OYF 3 UNEINEQ EQ KF: SBEG ZBGG EBNQ CRAAFIVYYR GJC YNJERAPR VVV,UNEEL 5142698 Znc: Tevqf:00000,000",
-        "PNYY:OYF",
-        "NQQE:3 UNEINEQ EQ",
-        "K:SBEG ZBGG EBNQ",
-        "PVGL:CRAAFIVYYR GJC",
-        "ANZR:YNJERAPR VVV,UNEEL",
-        "CUBAR:5142698");
-
-  }
-  
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj AWFnyrzPbhaglNCnefreGrfg().trarengrGrfgf("G1");
+    arj AWFnyrzPbhaglNCnefreGrfg().trarengrGrfgf("G1", "PNYY NQQE NCG K PVGL ANZR CUBAR");
   }
 }

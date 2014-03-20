@@ -1,6 +1,5 @@
 package net.anei.cadpage.parsers.NC;
 
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,7 +17,7 @@ public class NCNewHanoverCountyParser extends DispatchOSSIParser {
   
   @Override
   public String getFilter() {
-    return "messaging@iamresponding.com,@c-msg.net";
+    return "messaging@iamresponding.com";
   }
   
   private static final Pattern ASTERISK_PTN = Pattern.compile("\\*\\*+");
@@ -43,12 +42,7 @@ public class NCNewHanoverCountyParser extends DispatchOSSIParser {
       
       match = PLACE_PTN.matcher(field);
       if (match.matches()) {
-        String city = CITY_CODES.getProperty(field);
-        if (city != null) {
-          data.strCity = city;
-        } else {
-          data.strPlace = field;
-        }
+        data.strPlace = field;
         return;
       }
       
@@ -57,7 +51,7 @@ public class NCNewHanoverCountyParser extends DispatchOSSIParser {
     
     @Override
     public String getFieldNames() {
-      return "CH ID CITY PLACE INFO";
+      return "CH ID PLACE INFO";
     }
   }
   
@@ -76,8 +70,4 @@ public class NCNewHanoverCountyParser extends DispatchOSSIParser {
     if (name.equals("INFO")) return new MyInfoField();
     return super.getField(name);
   }
-  
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "WM",   "WILMINGTON"
-  });
 }

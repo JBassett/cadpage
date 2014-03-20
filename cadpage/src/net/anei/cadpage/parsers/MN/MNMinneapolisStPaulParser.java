@@ -31,13 +31,9 @@ public class MNMinneapolisStPaulParser extends DispatchPrintrakParser {
   public boolean parseMsg(String body, Data data) {
     if (ID_PTN.matcher(body).find()) {
       body = "INC: " + body;
-    } else if (!body.contains("TYP: ")) {
+    } else if (!body.startsWith("TYPE: ")) {
       body = "TYP: " + body;
     }
     return super.parseMsg(body, data);
-  }
-  
-  public String getProgram() {
-    return super.getProgram().replace("CALL", "CALL UNIT");
   }
 }

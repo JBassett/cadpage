@@ -12,13 +12,13 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 public class PABucksCountyAParser extends PABucksCountyBaseParser {
   
   private static final Pattern MARKER1 = Pattern.compile("(?:(Station [^/:]+) / )?([A-Z]+\\s+(?:Adr:|adr:|Box:).*)", Pattern.DOTALL);
-  private static final Pattern MARKER2 = Pattern.compile("^([A-Z0-9 ]+): *([A-Z]+) *");
+  private static final Pattern MARKER2 = Pattern.compile("^([A-Z0-9 ]+):([A-Z]+) *");
   private static final Pattern NAKED_DATE_TIME = Pattern.compile("(?<!: ?)\\d\\d/\\d\\d/\\d\\d +\\d\\d:\\d\\d:\\d\\d\\b");
   private static final Pattern GEN_ALERT_MARKER = Pattern.compile("^(\\d\\d/\\d\\d/\\d\\d) +(\\d\\d:\\d\\d:\\d\\d) +~TO~ [A-Z0-9]+ FROM [A-Z0-9]+:\n?");
   private static final Pattern SRC_MARKER = Pattern.compile("^([A-Z]+[0-9]+)[, ]");
   
   public PABucksCountyAParser() {
-    super("SRC type:CALL! Box:BOX? adr:ADDR! aai:INFO box:BOX map:MAP tm:TIME% TEXT:INFO? Run:UNIT");
+    super("SRC type:CALL! Box:BOX? adr:ADDR! aai:INFO box:BOX map:MAP tm:TIME% Run:UNIT");
   }
   
   @Override
@@ -65,11 +65,11 @@ public class PABucksCountyAParser extends PABucksCountyBaseParser {
     
     // Parse failure - but see if this is one of two kinds of recognized general message
     if (subject.equals("Important message from Bucks County RSAN")) {
-      data.parseGeneralAlert(this, saveBody);
+      data.parseGeneralAlert(saveBody);
     } else if (subject.equals("911 Data")) {
       match = GEN_ALERT_MARKER.matcher(saveBody);
       if (!match.find()) return false;
-      data.parseGeneralAlert(this, saveBody.substring(match.end()).trim());
+      data.parseGeneralAlert(saveBody.substring(match.end()).trim());
       data.strDate = match.group(1);
       data.strTime = match.group(2);
     } else return false;
@@ -81,11 +81,6 @@ public class PABucksCountyAParser extends PABucksCountyBaseParser {
       data.strPlace = data.strPlace.substring(match.end()).trim();
     }
     return true;
-  }
-
-  @Override
-  public String getProgram() {
-    return "UNIT " + super.getProgram();
   }
   
   private class MyCallField extends CallField {
@@ -126,7 +121,6 @@ public class PABucksCountyAParser extends PABucksCountyBaseParser {
           break;
         }
       }
-      if (field.startsWith(",")) field = field.substring(1).trim();
       super.parse(field, data);
     }
     

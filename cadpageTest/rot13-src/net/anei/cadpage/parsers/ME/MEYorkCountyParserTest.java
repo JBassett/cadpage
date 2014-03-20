@@ -17,9 +17,7 @@ Fraqre: qvfcngpu@fnasbeqznvar.bet
 
 Pbagnpg: "Nqnz W. Znfba" <nqnz.w.znfba@tznvy.pbz>
 Fraqre: qvfcngpu@fnasbeqznvar.bet
-Fraqre: 2159700406
 F:Fnasbeq EPP Cntr Z:ZRQVPNY RZRETRAPL\a139 JNFUVATGBA FG \aYvzrevpx\aQvfgevpg: YVZ\a12/2/2012 18:57\a\a
-FNASBEQ EPP (Fnasbeq EPP Cntr) ZBGBE IRUVPYR NPPVQRAG-CV/UNM\a(PNHGVBA IBVC PNYY)\a139 FBXBXVF GEY \aYvzrevpx\aQvfgevpg: YVZ\a5/7/2013 17:48 HAFHOFPEVOR
  
 */
 
@@ -37,6 +35,7 @@ choyvp pynff ZRLbexPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:ZRQVPNY RZRETRAPL",
         "CYNPR:47",
         "NQQE:TBBQJVAF NPERF",
+        "ZNQQE:47,TBBQJVAF NPERF",
         "PVGL:QNLGBA",
         "FEP:QNL",
         "QNGR:4/25/2012",
@@ -47,6 +46,7 @@ choyvp pynff ZRLbexPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:ZBGBE IRUVPYR NPPVQRAG-CV/UNM",
         "CYNPR:47",
         "NQQE:TBBQJVAF NPERF",
+        "ZNQQE:47,TBBQJVAF NPERF",
         "PVGL:QNLGBA",
         "FEP:QNL",
         "QNGR:4/25/2012",
@@ -92,23 +92,7 @@ choyvp pynff ZRLbexPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "FEP:YVZ",
         "QNGR:12/2/2012",
         "GVZR:18:57");
-
-    qbGrfg("G2",
-        "FNASBEQ EPP (Fnasbeq EPP Cntr) ZBGBE IRUVPYR NPPVQRAG-CV/UNM\a" +
-        "(PNHGVBA IBVC PNYY)\a" +
-        "139 FBXBXVF GEY \a" +
-        "Yvzrevpx\a" +
-        "Qvfgevpg: YVZ\a" +
-        "5/7/2013 17:48 HAFHOFPEVOR",
-
-        "PNYY:GBE IRUVPYR NPPVQRAG-CV/UNM",
-        "CYNPR:(PNHGVBA IBVC PNYY)",
-        "NQQE:139 FBXBXVF GEY",
-        "PVGL:Yvzrevpx",
-        "FEP:YVZ",
-        "QNGR:5/7/2013",
-        "GVZR:17:48");
-  
+   
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

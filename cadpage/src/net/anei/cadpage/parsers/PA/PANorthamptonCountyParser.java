@@ -13,7 +13,7 @@ public class PANorthamptonCountyParser extends DispatchBParser {
   
   @Override
   public String getFilter() {
-    return "@notifync.org,14100";
+    return "@notifync.org";
   }
  
   @Override
@@ -34,10 +34,11 @@ public class PANorthamptonCountyParser extends DispatchBParser {
     if (!super.parseMsg(body, data)) return false;
     return true;
   }
-  
+
   @Override
-  public String getProgram() {
-    return "UNIT " + super.getProgram();
+  protected boolean parseAddrField(String field, Data data) {
+    // TODO Auto-generated method stub
+    return super.parseAddrField(field, data);
   }
   
   private static final String[] CITY_LIST = new String[]{
@@ -73,7 +74,6 @@ public class PANorthamptonCountyParser extends DispatchBParser {
     "HANOVER TWP",
     "LEHIGH TWP",
     "LOWER MOUNT BETHEL TWP",
-    "LOWER MT BETHEL",
     "LOWER NAZARETH TWP",
     "LOWER SAUCON TWP",
     "MOORE TWP",
@@ -82,25 +82,6 @@ public class PANorthamptonCountyParser extends DispatchBParser {
     "UPPER MOUNT BETHEL TWP",
     "UPPER NAZARETH TWP",
     "WASHINGTON TWP",
-    "WILLIAMS TWP",
-
-    "ALLEN",
-    "BETHLEHEM",
-    "BUSHKILL",
-    "EAST ALLEN",
-    "FORKS",
-    "HANOVER",
-    "LEHIGH",
-    "LOWER MOUNT BETHEL",
-    "LOWER NAZARETH",
-    "LOWER SAUCON",
-    "MOORE",
-    "PALMER",
-    "PLAINFIELD",
-    "UPPER MOUNT BETHEL",
-    "UPPER NAZARETH",
-    "WASHINGTON",
-    "WILLIAMS"
-
+    "WILLIAMS TWP"
   };
 }

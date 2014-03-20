@@ -418,7 +418,7 @@ choyvp pynff PGZnqvfbaCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:OERNGUVAT CEBOYRZ- NYF UBG",
         "PBQR:6-P-1",
         "NQQE:F V-95",
-        "ZNQQE:F V 95",
+        "ZNQQE:V-95 FO RKVG 60>THVYSBEQ YVAR,F V 95",
         "CYNPR:V-95 FO RKVG 60>THVYSBEQ YVAR");
 
     qbGrfg("G37",
@@ -760,7 +760,7 @@ choyvp pynff PGZnqvfbaCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "Znqvfba: ZI NPPVQRAG-VAWHEVRF   F V-95   K-FGE: -   Cerzvfr: V-95 FO RKVG 62>RKVG 61",
         "PNYY:ZI NPPVQRAG-VAWHEVRF",
         "NQQE:F V-95",
-        "ZNQQE:F V 95",
+        "ZNQQE:V-95 FO RKVG 62>RKVG 61,F V 95",
         "CYNPR:V-95 FO RKVG 62>RKVG 61");
 
     qbGrfg("G84",
@@ -1141,6 +1141,6 @@ choyvp pynff PGZnqvfbaCnefreGrfg rkgraqf OnfrCnefreGrfg {
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj PGZnqvfbaCnefreGrfg().trarengrGrfgf("G1");
+    arj PGZnqvfbaCnefreGrfg().trarengrGrfgf("G1", "PNYY PBQR NQQE NCG K CYNPR");
   }
 }

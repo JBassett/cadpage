@@ -1,5 +1,7 @@
 package net.anei.cadpage.parsers.NC;
 
+import java.util.regex.Pattern;
+
 import net.anei.cadpage.parsers.MsgInfo.Data;
 import net.anei.cadpage.parsers.dispatch.DispatchOSSIParser;
 
@@ -10,7 +12,7 @@ public class NCBurkeCountyParser extends DispatchOSSIParser {
   
   public NCBurkeCountyParser() {
     super("BURKE COUNTY", "NC",
-           "( CANCEL ADDR | SRC CALL CODE? ADDR! X? X? ) INFO+");
+           "SRC CALL CODE? ADDR! X? X? INFO+");
   }
   
   @Override
@@ -24,10 +26,15 @@ public class NCBurkeCountyParser extends DispatchOSSIParser {
     return super.parseMsg(body, data);
   }
   
+  class MyCodeField extends CodeField {
+    public MyCodeField() {
+      setPattern(Pattern.compile("\\d\\d[A-Z]\\d\\d"));
+    }
+  }
+  
   @Override
   protected Field getField(String name) {
-    if (name.equals("CANCEL")) return new CallField("CANCEL", true);
-    if (name.equals("CODE")) return new CodeField("\\d\\d[A-Z]\\d\\d[A-Za-z]?", true);
+    if (name.equals("CODE")) return new MyCodeField();
     return super.getField(name);
   }
 }

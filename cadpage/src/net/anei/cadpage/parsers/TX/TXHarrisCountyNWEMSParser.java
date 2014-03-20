@@ -1,16 +1,20 @@
 package net.anei.cadpage.parsers.TX;
 
+import java.util.regex.Pattern;
+
+import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.dispatch.DispatchVisionAirParser;
 
 /**
  * Harris County NWEMS, TX
  */
-public class TXHarrisCountyNWEMSParser extends DispatchVisionAirParser {
+public class TXHarrisCountyNWEMSParser extends FieldProgramParser {
   
+  private static final Pattern DELIM = Pattern.compile("\\* ");
+
   public TXHarrisCountyNWEMSParser() {
-    super("", "HARRIS COUNTY", "TX",
-           "ID ADDR APT APT CITY ( X/Z X/Z MAP | ) EMPTY+? SPEC? CODE CALL NAME PHONE UNIT! INFO+? EXTRA EXTRA+");
+    super("HARRIS COUNTY", "TX",
+           "ID ADDR APT UNK UNK ( X/Z X/Z MAP EMPTY | EMPTY+? ) CODE CALL UNK UNK UNIT! INFO+");
   }
   
   public String getFilter() {
@@ -18,66 +22,23 @@ public class TXHarrisCountyNWEMSParser extends DispatchVisionAirParser {
   }
   
   @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
- 
-  @Override
   public boolean parseMsg(String body, Data data) {
-    if (!super.parseMsg(body, data)) return false;
-    if (data.strCity.equals("HARRIS CO")) data.strCity = "";
-    return true;
+    return parseFields(DELIM.split(body+" "), 10, data);
   }
   
-  private class MyAptField extends AptField {
+  private class MyAddressField extends AddressField {
     @Override
     public void parse(String field, Data data) {
-      data.strApt = append(field, "-", data.strApt);
-    }
-  }
-
-  private static final String[] COMMENT_MARKERS = new String[]{
-    "Landmark Comment:",
-    "Geo Comment:"
-  };
-  private class SpecialField extends Field {
-    @Override
-    public boolean canFail() {
-      return true;
-    }
-    
-    @Override 
-    public boolean checkParse(String field, Data data) {
-      for (String mark : COMMENT_MARKERS) {
-        if (field.startsWith(mark)) {
-          data.strSupp = append(data.strSupp, " / ", field.substring(mark.length()).trim());
-          return true;
-        }
-      }
-      if (field.startsWith("NBH:")) {
-        data.strPlace = field.substring(4).trim();
-        return true;
-      }
-      return false;
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      if (!checkParse(field, data)) abort();
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "INFO PLACE";
+      field = field.replace("//", "&");
+      super.parse(field, data);
     }
   }
   
   @Override
   public Field getField(String name) {
     if (name.equals("ID")) return new IdField("|\\d{9}", true);
-    if (name.equals("APT")) return new MyAptField();
+    if (name.equals("ADDR")) return new MyAddressField();
     if (name.equals("MAP")) return new MapField("\\d{3}[A-Z]{1,4}", true);
-    if (name.equals("SPEC")) return new SpecialField();
     return super.getField(name);
   }
 }

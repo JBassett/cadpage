@@ -7,7 +7,7 @@ public class NCMadisonCountyParser extends DispatchSouthernParser {
   
   
   public NCMadisonCountyParser() {
-    super(CITY_LIST, "MADISON COUNTY", "NC", DSFLAG_OPT_DISPATCH_ID);
+    super(CITY_LIST, "MADISON COUNTY", "NC");
   }
   
   private static final String[] CITY_LIST = new String[]{

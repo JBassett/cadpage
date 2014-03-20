@@ -9,7 +9,8 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class WVCabellCountyParser extends FieldProgramParser {
   
-  private static final Pattern MARKER_PTN = Pattern.compile("^CCERC911\n:");
+  private static final Pattern SUBJECT_PTN = Pattern.compile("\\(\\d+\\) CCERC911");
+  private static final Pattern MARKER_PTN = Pattern.compile("^CCERC911\r?\n:");
   
   public WVCabellCountyParser() {
     super("CABELL COUNTY", "WV",
@@ -18,24 +19,40 @@ public class WVCabellCountyParser extends FieldProgramParser {
   
   @Override
   public String getFilter() {
-    return "dispatch@ccerc911.org,7777";
+    return "dispatch@ccerc911.org";
   }
   
   @Override
-  protected boolean parseMsg(String body, Data data) {
-    Matcher match = MARKER_PTN.matcher(body);
-    if (match.find()) body = body.substring(match.end()).trim();
+  protected boolean parseMsg(String subject, String body, Data data) {
+    do {
+      if (SUBJECT_PTN.matcher(subject).matches()) break;
+      Matcher match = MARKER_PTN.matcher(body);
+      if (match.find()) {
+        body = body.substring(match.end()).trim();
+        break;
+      }
+      return false;
+    } while (false);
+    
     return parseFields(body.split("/"), data);
+  }
+  
+
+  private class MyIdField extends IdField {
+    public MyIdField() {
+      setPattern("\\d{9}", true);
+    }
   }
   
   private class MyDateField extends DateField {
     public MyDateField() {
       setPattern("\\d\\d-\\d\\d-\\d\\d", true);
     }
-    
-    @Override
-    public void parse(String field, Data data) {
-      super.parse(field.replace('-', '/'), data);
+  }
+  
+  private class MyTimeField extends TimeField {
+    public MyTimeField() {
+      setPattern("\\d\\d:\\d\\d:\\d\\d", true);
     }
   }
   
@@ -60,9 +77,9 @@ public class WVCabellCountyParser extends FieldProgramParser {
   
   @Override
   public Field getField(String name) {
-    if (name.equals("ID")) return new IdField("");
+    if (name.equals("ID")) return new MyIdField();
     if (name.equals("DATE")) return new MyDateField();
-    if (name.equals("TIME")) return new TimeField("\\d\\d:\\d\\d:\\d\\d", true);
+    if (name.equals("TIME")) return new MyTimeField();
     if (name.equals("ADDR")) return new MyAddressField();
     if (name.equals("X")) return new MyCrossField();
     return super.getField(name);

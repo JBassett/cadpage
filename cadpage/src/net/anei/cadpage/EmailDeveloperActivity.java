@@ -1,13 +1,5 @@
 package net.anei.cadpage;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,12 +30,6 @@ public class EmailDeveloperActivity extends Safe40Activity {
   private final static String EXTRA_PREFIX="net.anei.cadpage.EmailDeveloperActivity.";
   private final static String EXTRA_TYPE = EXTRA_PREFIX + "EMAIL_TYPE";
   private final static String EXTRA_MSG_ID = EXTRA_PREFIX + "EMAIL_MSG_ID";
-  
-  // log snapshot filename
-  private final static String LOG_SNAPSHOT_FILENAME = "LOG_SNAPSHOT.log";
-  
-  // Max snapshot filename age in msecs
-  private final static long LOG_SNAPSHOT_MAX_AGE = 30L*24*60*60*1000;
   
   
   private TextView textView;
@@ -139,37 +125,6 @@ public class EmailDeveloperActivity extends Safe40Activity {
     }
   }
   
-  /**
-   * Take a snapshot of the current Cadpage log and save it for possible future reporting
-   * @param context current context
-   * @param title title of snapshot event
-   */
-  public static void logSnapshot(final Context context, final String title) {
-    
-    new LogCollector("time", null, "CadPage:V"){
-      @Override
-      void collectLog(String logBuffer) {
-        
-        String buffer = 
-            "**************************************************************************************\n" +
-            "*** " + title +
-            "\n**************************************************************************************\n" +
-            logBuffer;
-
-        OutputStream os = null; 
-        try {
-          os = new BufferedOutputStream(context.openFileOutput(LOG_SNAPSHOT_FILENAME, Context.MODE_PRIVATE));
-          os.write(buffer.getBytes());
-          os.close();
-        } catch(IOException ioe) {}
-        finally {
-          if (os != null) try { os.close(); } catch (IOException ex) {}
-        }
-      }
-    };
-
-  }
-  
   public static void sendEmailRequest(final Context context, final EmailType type, 
                                         boolean includeMsg, int msgId,
                                         boolean includeCfg) {
@@ -205,10 +160,6 @@ public class EmailDeveloperActivity extends Safe40Activity {
       ManagePreferences.addConfigInfo(context, body);
       UserAcctManager acctMgr = UserAcctManager.instance();
       if (acctMgr != null) acctMgr.addAccountInfo(body);
-      
-      // See if there is any snapshot information to append
-      getSnapshotInfo(context, body);
-      
     }
     
     final String message = body.toString();
@@ -220,39 +171,13 @@ public class EmailDeveloperActivity extends Safe40Activity {
         @Override
         void collectLog(String logBuffer) {
           sendEmailRequest(context, type, vendorEmail2,
-                           message + 
-                           "\n**************************************************************************************\n" +
-                           logBuffer);
+                           message + "\nLog Buffer:\n" + logBuffer);
         }
       };
     } else {
       sendEmailRequest(context, type, vendorEmail, message);
     }
-  }
-  
-  /**
-   * Return contents of current log snapshot
-   * @param context current context
-   * @param body StringBuilder object where snapshot log data will be appended
-   */
-  private static void getSnapshotInfo(Context context, StringBuilder body) {
-    File file = new File(context.getFilesDir().getAbsolutePath() + "/" + LOG_SNAPSHOT_FILENAME);
-    if (! file.exists()) return;
-    long limit = System.currentTimeMillis() - file.lastModified();
-    if (limit > LOG_SNAPSHOT_MAX_AGE) return;
     
-    Reader rdr = null;
-    try {
-      rdr = new InputStreamReader(new BufferedInputStream(new FileInputStream(file)));
-      body.append('\n');
-      int chr;
-      while ((chr = rdr.read()) != -1) {
-        body.append((char)chr);
-      }
-    } catch (IOException ex) {}
-    finally {
-      if (rdr != null) try { rdr.close(); } catch (IOException ex) {}
-    }
   }
 
   private static void sendEmailRequest(Context context, EmailType type,
@@ -262,15 +187,8 @@ public class EmailDeveloperActivity extends Safe40Activity {
     // the info on emulators where no email clients are available
     // But, we have to surround this with start and end log markers so the log
     // collector won't pick it up and report it a second time
-    //
-    // Also, since we have started overflowing the maximum single log entry
-    // limit and developers are reading the log directly, let's strip out an
-    // log information from the message
     if (DeveloperToolsManager.instance().isDeveloper(context)) {
-      String msg = message;
-      int pt = msg.indexOf("\n********");
-      if (pt >= 0) msg = msg.substring(0,pt);
-      Log.w(LogCollector.START_MARKER + '\n' + msg + '\n' + LogCollector.END_MARKER);
+      Log.w(LogCollector.START_MARKER + '\n' + message + '\n' + LogCollector.END_MARKER);
     }
     
     // Build send email intent and launch it

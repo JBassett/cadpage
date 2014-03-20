@@ -20,13 +20,6 @@ SEZ:QVFCNGPU@wrssrefbapbhaglga.tbi\e\aZFT:QVFCNGPU:542 PBHAGL YVAR EQ QNAQEVQTR 
 SEZ:QVFCNGPU@wrssrefbapbhaglga.tbi\e\aZFT:QVFCNGPU:4800 GVZORE JNL FRIVREIVYYR 20:28:20 PURFG CNVA URNEG CEBOYRZF\e\a
 SEZ:QVFCNGPU@wrssrefbapbhaglga.tbi\e\aZFT:QVFCNGPU:542 PBHAGL YVAR EQ QNAQEVQTR 10:01:21 FGEBXR (PIN)\e\a
 
-Pbagnpg: Wbanguna Zbetna <wbangunazbetna535@tznvy.pbz>
-Fraqre: QVFCNGPU@wrssrefbapbhaglga911.bet
-1030 J UVTUJNL 11R ARJ ZNEXRG 12:23:48 PBAINYRFPRAG GENAFCBEG
-231 R OEBNQJNL OYIQ WRSSREFBA PVGL 02:06:10 SVER FZBXR VAIRFGVTNGVBA
-1858 A UVTUJNL 92 WRSSREFBA PVGL 06:17:46 FPURQHYRQ CNGVRAG GENAFCBEG
-1006 PNEFBA FG WRSSREFBA PVGL 08:24:45 QVNORGVP CEBOYRZF
-
 */
 
 choyvp pynff GAWrssrefbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -64,8 +57,7 @@ choyvp pynff GAWrssrefbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G4",
         "QVFCNGPU:283 J OEBNQJNL OYIQ 513 WRSSREFBA PVGL 08:00:21 PNEQVNP NEERFG PCE VA HFR",
-        "NQQE:283 J OEBNQJNL OYIQ",
-        "NCG:513",
+        "NQQE:283 J OEBNQJNL OYIQ 513",
         "PVGL:WRSSREFBA PVGL",
         "GVZR:08:00:21",
         "PNYY:PNEQVNP NEERFG PCE VA HFR");
@@ -100,41 +92,8 @@ choyvp pynff GAWrssrefbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
    
   }
   
-  @Grfg
-  choyvp ibvq grfgWbangunaZbetna() {
-
-    qbGrfg("G1",
-        "1030 J UVTUJNL 11R ARJ ZNEXRG 12:23:48 PBAINYRFPRAG GENAFCBEG",
-        "NQQE:1030 J UVTUJNL 11R",
-        "PVGL:ARJ ZNEXRG",
-        "GVZR:12:23:48",
-        "PNYY:PBAINYRFPRAG GENAFCBEG");
-
-    qbGrfg("G2",
-        "231 R OEBNQJNL OYIQ WRSSREFBA PVGL 02:06:10 SVER FZBXR VAIRFGVTNGVBA",
-        "NQQE:231 R OEBNQJNL OYIQ",
-        "PVGL:WRSSREFBA PVGL",
-        "GVZR:02:06:10",
-        "PNYY:SVER FZBXR VAIRFGVTNGVBA");
-
-    qbGrfg("G3",
-        "1858 A UVTUJNL 92 WRSSREFBA PVGL 06:17:46 FPURQHYRQ CNGVRAG GENAFCBEG",
-        "NQQE:1858 A UVTUJNL 92",
-        "PVGL:WRSSREFBA PVGL",
-        "GVZR:06:17:46",
-        "PNYY:FPURQHYRQ CNGVRAG GENAFCBEG");
-
-    qbGrfg("G4",
-        "1006 PNEFBA FG WRSSREFBA PVGL 08:24:45 QVNORGVP CEBOYRZF",
-        "NQQE:1006 PNEFBA FG",
-        "PVGL:WRSSREFBA PVGL",
-        "GVZR:08:24:45",
-        "PNYY:QVNORGVP CEBOYRZF");
-   
-  }
-  
 
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj GAWrssrefbaPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj GAWrssrefbaPbhaglCnefreGrfg().trarengrGrfgf("G1", "NQQE PVGL CYNPR PBQR VQ GVZR PNYY VASB");
   }
 }

@@ -9,7 +9,7 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class MIMidlandCountyParser extends FieldProgramParser {
   
-  private static final Pattern MARKER = Pattern.compile("CAD Page for CFS ([-A-Z0-9]+)(?:[ ,]+(.*))?", Pattern.DOTALL);
+  private static final Pattern SUBJECT_MASTER = Pattern.compile("CAD Page for CFS ([-A-Z0-9]+)(?: .*)?");
   
   public MIMidlandCountyParser() {
     super("MIDLAND COUNTY", "MI",
@@ -18,21 +18,14 @@ public class MIMidlandCountyParser extends FieldProgramParser {
   
   @Override
   public String getFilter() {
-    return "@midland911.org,9300";
+    return "dispatch@midland911.org";
   }
   
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
-    Matcher match = MARKER.matcher(subject);
-    if (match.matches()) {
-      data.strCallId = match.group(1);
-    } else {
-      match = MARKER.matcher(body);
-      if (!match.matches()) return false;
-      data.strCallId = match.group(1);
-      body = match.group(2);
-      if (body == null) return false;
-    }
+    Matcher match = SUBJECT_MASTER.matcher(subject);
+    if (!match.matches()) return false;
+    data.strCallId = match.group(1);
     
     body = body.replace(" APT:", "\nAPT:");
     return parseFields(body.split("\n"), data);
@@ -48,7 +41,7 @@ public class MIMidlandCountyParser extends FieldProgramParser {
     public void parse(String field, Data data) {
       Matcher match = GPS_PTN.matcher(field);
       if (!match.matches()) return;
-      setGPSLoc(match.group(1) + ',' + match.group(2), data);
+      data.strGPSLoc = match.group(1) + ',' + match.group(2);
     }
   }
   
@@ -56,10 +49,5 @@ public class MIMidlandCountyParser extends FieldProgramParser {
   public Field getField(String name) {
     if (name.equals("GPS")) return new MyGPSField();
     return super.getField(name);
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_PREFER_GPS;
   }
 }

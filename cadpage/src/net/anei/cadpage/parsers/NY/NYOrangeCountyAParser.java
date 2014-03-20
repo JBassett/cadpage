@@ -16,12 +16,12 @@ public class NYOrangeCountyAParser extends FieldProgramParser {
   
   public NYOrangeCountyAParser() {
     super("ORANGE COUNTY", "NY",
-           "ID? CALL ADDR CITY! INFO+ LOCATION:PLACE? TIME:TIME% XST:X XST2:X");
+           "ID? CALL ADDR CITY! INFO+ LOCATION:PLACE? TIME:TIME XST:X XST2:X");
   }
   
   @Override
   public String getFilter() {
-    return "messaging@iamresponding.com,777";
+    return "messaging@iamresponding.com";
   }
   
   @Override
@@ -34,7 +34,8 @@ public class NYOrangeCountyAParser extends FieldProgramParser {
     
     body = KEYWORD_PTN.matcher(body).replaceAll(" $0");
     String[] flds = body.split("  +");
-    return parseFields(flds, 3, data);
+    if (flds.length < 3) return false;
+    return parseFields(flds, data);
   }
   
   @Override
@@ -50,20 +51,10 @@ public class NYOrangeCountyAParser extends FieldProgramParser {
     }
   }
   
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      if (field.startsWith("INCIDENT CLONED FROM")) return;
-      if (field.startsWith("PARENT:")) return;
-      super.parse(field, data);
-    }
-  }
-  
   @Override
   public Field getField(String name) {
-    if (name.equals("ID")) return new IdField("F\\d{9,}|\\d{5,}");
+    if (name.equals("ID")) return new IdField("F\\d{9,}");
     if (name.equals("CITY")) return new MyCityField();
-    if (name.equals("INFO")) return new MyInfoField();
     return super.getField(name);
   }
   

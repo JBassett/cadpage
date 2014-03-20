@@ -20,12 +20,11 @@ public class ALBaldwinCountyParser extends MsgParser {
 
   public ALBaldwinCountyParser() {
     super("BALDWIN COUNTY", "AL");
-    setFieldList("SRC DATE TIME UNIT ID CALL ADDR APT");
   }
     
   @Override
   public String getFilter() {
-    return "noreply@emergencycallworx.com,cad@baldwin911.org";
+    return "noreply@emergencycallworx.com";
   }
   
   @Override

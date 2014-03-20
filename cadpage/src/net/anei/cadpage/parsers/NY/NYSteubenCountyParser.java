@@ -13,7 +13,6 @@ public class NYSteubenCountyParser extends SmartAddressParser {
   
   public NYSteubenCountyParser() {
     super(CITY_LIST, "STEUBEN COUNTY", "NY");
-    setFieldList("SRC PLACE ADDR APT CITY X CODE CALL INFO");
   }
   
   @Override
@@ -22,7 +21,7 @@ public class NYSteubenCountyParser extends SmartAddressParser {
   }
 
   private static final Pattern MARKER = Pattern.compile("^messaging@iamresponding.com \\( *(.*?) *\\) ");
-  private static final Pattern MASTER1 = Pattern.compile("/ *(.*?) *\\( *(.*?) *\\),?(.*?)(?: *\\b(\\d{1,2}[A-Z]\\d{1,2}) +)?(.*)");
+  private static final Pattern MASTER1 = Pattern.compile("/ *(.*?) *\\( *(.*?) *\\) *(?:(\\d{1,2}[A-Z]\\d{1,2}) +)?(.*)");
   private static final Pattern MASTER2 = Pattern.compile("(.*?) *, *(.*?) *\\( *(.*?/.*?) *\\) *(?:(\\d{1,2}[A-Z]\\d{1,2}) +)?(.*)");
   private static final Pattern MASTER3 = Pattern.compile("(.*?) *, *([^\\(\\)]*?) *(\\d{1,2}[A-Z]\\d{1,2}) +(.*)");
   private static final Pattern MASTER4 = Pattern.compile("(.*?) *, *([^\\(\\)]*?) (?:TOWN|VILLAGE) OF +(.*)");
@@ -97,20 +96,17 @@ public class NYSteubenCountyParser extends SmartAddressParser {
     body = body.replace("COUNTY ROUTE", "COUNTY ROAD");
     
     // There a couple basic patterns
-    // /<place> (<addr> <city> [cross]) [code] <call>
-    // /<place> (<addr>), <city> [code] <call>
+    // /<place> (<addr> <city>) [code] <call>
     if ((match = MASTER1.matcher(body)).matches()) {
+      parseAddress(match.group(1), data);
       data.strPlace = match.group(1);
       parseAddress(StartType.START_ADDR, match.group(2), data);
-      String left = cleanLeft(getLeft());
+      String left = getLeft();
+      if (left.startsWith("TOWN OF")) left = left.substring(7).trim();
+      else if (left.startsWith("VILLAGE OF")) left = left.substring(10).trim();
       data.strCross = left;
-      left = append(match.group(3).trim(), " ", match.group(5).trim());
-      data.strCode = getOptGroup(match.group(4));
-      if (data.strCity.length() == 0) {
-        parseAddress(StartType.START_ADDR, FLAG_ONLY_CITY, left, data);
-        left = cleanLeft(getLeft());
-      }
-      data.strSupp = append(data.strSupp, " / ", left);
+      data.strCode = cleanCode(match.group(3));
+      data.strSupp = append(data.strSupp, " / ", match.group(4));
     }
     
     // <addr> , <city> ( <cross> ) [code] <info>
@@ -130,7 +126,7 @@ public class NYSteubenCountyParser extends SmartAddressParser {
         }
       }
       data.strCross = cleanCross(cross);
-      data.strCode = getOptGroup(match.group(4));
+      data.strCode = cleanCode(match.group(4));
       data.strSupp = append(data.strSupp, " / ", match.group(5));
     }
     
@@ -138,7 +134,7 @@ public class NYSteubenCountyParser extends SmartAddressParser {
     else if ((match = MASTER3.matcher(body)).matches()) {
       parseAddress(match.group(1), data);
       data.strCity = cleanCity(match.group(2));
-      data.strCode = getOptGroup(match.group(3));
+      data.strCode = cleanCode(match.group(3));
       data.strSupp = append(data.strSupp, " / ", match.group(4));
     }
     
@@ -160,7 +156,7 @@ public class NYSteubenCountyParser extends SmartAddressParser {
     // Anything else is just a info
     // If we didn't find a matching start signature and didn't find a
     // master pattern match, the we had better conclude that this is not
-    // real a CAD page
+    // reall a CAD page
     else {
       if (!sigMatch) return false;
       data.strSupp = append(data.strSupp, " / ", body);
@@ -173,12 +169,6 @@ public class NYSteubenCountyParser extends SmartAddressParser {
       data.strCall = data.strCall + "ALERT";
     }
     return true;
-  }
-
-  protected String cleanLeft(String left) {
-    if (left.startsWith("TOWN OF")) left = left.substring(7).trim();
-    else if (left.startsWith("VILLAGE OF")) left = left.substring(10).trim();
-    return left;
   }
 
   private String cleanCity(String field) {
@@ -197,6 +187,10 @@ public class NYSteubenCountyParser extends SmartAddressParser {
     if (field.endsWith(";")) field = field.substring(0,field.length()-1).trim();
     if (field.endsWith("/")) field = field.substring(0,field.length()-1).trim();
     return field;
+  }
+  
+  private String cleanCode(String field) {
+    return (field == null ? "" : field);
   }
   
   private static final String[] CITY_LIST = new String[]{

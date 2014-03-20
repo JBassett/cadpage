@@ -76,22 +76,6 @@ public class CTGrotonParser extends FieldProgramParser {
     }
   }
   
-  private static final Pattern TIME_PTN = Pattern.compile("(\\d\\d:\\d\\d)\\b *(.*)");
-  private class MyTimeField extends TimeField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = TIME_PTN.matcher(field);
-      if (!match.matches()) abort();
-      data.strTime = match.group(1);
-      data.strSupp = match.group(2).trim();
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "TIME INFO";
-    }
-  }
-  
   private class MyInfoField extends InfoField {
     @Override
     public void parse(String field, Data data) {
@@ -105,7 +89,7 @@ public class CTGrotonParser extends FieldProgramParser {
     if (name.equals("ADDRCITY")) return new MyAddressCityField();
     if (name.equals("APT")) return new MyAptField();
     if (name.equals("SRCX")) return new SourceCrossField();
-    if (name.equals("TIME")) return new MyTimeField();
+    if (name.equals("TIME")) return new TimeField("\\d\\d:\\d\\d");
     if (name.equals("INFO")) return new MyInfoField();
     return super.getField(name);
   }
@@ -113,7 +97,6 @@ public class CTGrotonParser extends FieldProgramParser {
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
       "GRTN TOWN",  "GROTON",
       "MYSTIC",     "MYSTIC",
-      "STON",       "STONINGTON",
-      "STON MYST",  "MYSTIC"
+      "STON",       "STONINGTON"
   });
 }

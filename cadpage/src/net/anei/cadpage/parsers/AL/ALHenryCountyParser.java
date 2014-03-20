@@ -11,7 +11,6 @@ public class ALHenryCountyParser extends SmartAddressParser {
 
   public ALHenryCountyParser() {
     super("HENRY COUNTY", "AL");
-    setFieldList("CALL ADDR CITY INFO");
     
     
   }
@@ -27,7 +26,7 @@ public class ALHenryCountyParser extends SmartAddressParser {
     // has identified this as a dispatch page
     if (!isPositiveId()) return false;
     
-    body = body.replace('@', '&');
+    body = body.replace('@', '&').replace('.', ' ');
     parseAddress(StartType.START_CALL, FLAG_IGNORE_AT, body, data);
     data.strSupp = getLeft();
     Parser p = new Parser(data.strSupp);

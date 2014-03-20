@@ -48,12 +48,6 @@ fraqre: qbabgercyl@cvggpbhaglap.tbi
 ** Fcrpvny PBASVEZRQ SVER abgvprf
 (911 Sver Pnyy) >>NQQERFF: 0 - >>ABGRF: 3211 FHZZRE CY 3
 [911 Sver Pnyy] >>NQQERFF: 0  -   >>ABGRF: 305 NYVPR QE // ERQ PEBFF ABGVSVRQ // THP RYRPGEVP ABGVSVRQ // FNZ FZVGU ABGVSVRQ
-(911 Sver Pnyy) >>NQQERFF: 113  EVQTR CY  >>ABGRF: NCG 18
-(911 Sver Pnyy) >>NQQERFF: 0  -   >>ABGRF: 450 OHEEVATGBA EQ
-
-Pbagnpg: Gbol Evqrabhe <orneevqrabhe@tznvy.pbz>
-Fraqre: qbabgercyl@cvggpbhaglap.tbi
-(911 Sver Pnyy) S14|Epiq:12/20/2013 09:11|Efa:ZRQVPNY NYNEZ|Abgr:FNZR|Nqe:1810  ORYIBVE UJL
 
 */
 
@@ -203,8 +197,7 @@ choyvp pynff APCvggPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "QNGR:07/01/2012",
         "GVZR:02:42",
         "PNYY:ZNYR PURFG CNVA",
-        "NQQE:UBJRYY NAQ CVGG",
-        "ZNQQE:UBJRYY & CVGG");
+        "NQQE:UBJRYY NAQ CVGG");
 
     qbGrfg("G7",
         "(911 Sver Pnyy) S01|Epiq:07/01/2012 05:36|Efa:SVER NYNEZ NPGVINGVBA|Abgr:|Nqe:1055  JNGRESBEQ PBZZBAF QE\a\a" +
@@ -512,8 +505,7 @@ choyvp pynff APCvggPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "QNGR:07/01/2012",
         "GVZR:02:42",
         "PNYY:ZNYR PURFG CNVA",
-        "NQQE:UBJRYY NAQ CVGG",
-        "ZNQQE:UBJRYY & CVGG");
+        "NQQE:UBJRYY NAQ CVGG");
 
     qbGrfg("G7",
         "(911 Sver Pnyy) S01|Epiq:07/01/2012 05:36|Efa:SVER NYNEZ NPGVINGVBA|Abgr:|Nqe:1055  JNGRESBEQ PBZZBAF QE\a\a" +
@@ -781,30 +773,6 @@ choyvp pynff APCvggPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:PBASVEZRQ SVER",
         "VASB:ERQ PEBFF ABGVSVRQ // THP RYRPGEVP ABGVSVRQ // FNZ FZVGU ABGVSVRQ",
         "NQQE:305 NYVPR QE");
-
-    qbGrfg("G3",
-        "(911 Sver Pnyy) >>NQQERFF: 113  EVQTR CY  >>ABGRF: NCG 18",
-        "PNYY:PBASVEZRQ SVER",
-        "NQQE:113  EVQTR CY",
-        "NCG:18");
-
-    qbGrfg("G4",
-        "(911 Sver Pnyy) >>NQQERFF: 0  -   >>ABGRF: 450 OHEEVATGBA EQ",
-        "PNYY:PBASVEZRQ SVER",
-        "NQQE:450 OHEEVATGBA EQ");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgGbolEvqrabhe() {
-
-    qbGrfg("G1",
-        "(911 Sver Pnyy) S14|Epiq:12/20/2013 09:11|Efa:ZRQVPNY NYNEZ|Abgr:FNZR|Nqe:1810  ORYIBVE UJL",
-        "FEP:S14",
-        "QNGR:12/20/2013",
-        "GVZR:09:11",
-        "PNYY:ZRQVPNY NYNEZ",
-        "NQQE:1810  ORYIBVE UJL");
 
   }
 

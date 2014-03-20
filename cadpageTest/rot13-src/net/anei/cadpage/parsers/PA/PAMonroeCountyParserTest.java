@@ -22,10 +22,6 @@ PNQ ZFT: *Q R45W      EGR 196 / ELNAF EQ 203 2 PNE ZIN JVGU VAWHEL NAQ RAGENCZRA
 PNQ ZFT: *Q S1      JVAQVAT JNL / FUNQL FVQR QE 203 UBHFR SVER SYNZRF FUBJVAT  PNE VA QJ HAX VS NALBAR UBZR    ARNE FUNLF
 PNQ ZFT: *Q S2       CBPBAB ZBHAGNVA JRFG 215 CNAGURE YA          BSSVPR RKG 81400  // TRAENY SVER NYNEZ\e\a\e
 
-Pbagnpg: Ebo Xenzre <exenzre204460@tznvy.pbz>
-Fraqre: 1210100281
-SEZ: \aZFT:PNQ ZFT: *Q S1       3157 GHEXRL UVYY EQ 205 GURER JRER CRBCYR GUNG JRER PHGGVAT HC N UFR GENVYRE GB GNXR NJNL SBES
-
 */
 
 choyvp pynff CNZbaebrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -59,8 +55,9 @@ choyvp pynff CNZbaebrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:Sver Qvfcngpu",
         "CYNPR:TRVFVATRE SNZVYL CEN",
         "NQQE:PBZZREPR PG",
+        "ZNQQE:TRVFVATRE SNZVYL CEN,PBZZREPR PG",
         "PVGL:Pbbyonhtu",
-        "VASB:TRFVATRE ZG CBPBAB / OYNPX TENAQ NZ BA SVER/ HAX VS NALBAR VF VA VG/");
+        "VASB:TRFVATRE ZG CBPBAB / OYNPX TENAQ NZ BA SVER / HAX VS NALBAR VF VA VG /");
 
     qbGrfg("G4",
         "PNQ ZFT: *Q S1 UNGPUREL QE / CNENQVFR INYYRL EQ 208 EGR 940/GEBHG UNGPUREL// SHYYL VAIBYIRQ// AB IRUVPYRF VAG UR Q/J QBRFA",
@@ -69,7 +66,7 @@ choyvp pynff CNZbaebrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "NQQE:UNGPUREL QE & CNENQVFR INYYRL EQ",  // Pna'g svaq UNGPUREL QE
         "PVGL:Cnenqvfr",
         "K:EGR 940",
-        "VASB:/GEBHG UNGPUREL/ SHYYL VAIBYIRQ/ AB IRUVPYRF VAG UR Q/J QBRFA");
+        "VASB:/ GEBHG UNGPUREL / SHYYL VAIBYIRQ / AB IRUVPYRF VAG UR Q / J QBRFA");
 
     qbGrfg("G5",
         "PNQ ZFT: *Q S2 WNPX JVYYVNZF GVER / EGR 940 403 WNPX JVYYVNZF GVER 839-8300 BSSVPR/ONGUEBBZ FZBXR QRG JVYY NGRZ",
@@ -77,8 +74,9 @@ choyvp pynff CNZbaebrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:Sver Qvfcngpu",
         "CYNPR:WNPX JVYYVNZF GVER",
         "NQQE:EGR 940",
+        "ZNQQE:WNPX JVYYVNZF GVER,EGR 940",
         "PVGL:Zbhag Cbpbab",
-        "VASB:WNPX JVYYVNZF GVER 839-8300 BSSVPR/ONGUEBBZ FZBXR QRG JVYY NGRZ");
+        "VASB:WNPX JVYYVNZF GVER 839-8300 BSSVPR / ONGUEBBZ FZBXR QRG JVYY NGRZ");
 
     qbGrfg("G6",
         "PNQ ZFT: *Q R45W F V380 UJL / ZZ 1 CBP FHZ UJL 215 BAR IRU BSS GUR SRZNYR JVGU AHZOARFF NAQ UHFONAQ HANOYR GB TRG BS GUR",
@@ -112,7 +110,7 @@ choyvp pynff CNZbaebrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "NQQE:JUVGR GNVY QE & SNVEJNL QE",   // Pna'g svaq JUVGR GNVY QE
         "PVGL:Pbbyonhtu",
         "K:SNVEJNL QE",
-        "VASB:/FBZRGUVAT VA GUR ZVQQYR BS GUR FGERRG VF BA SVER/HAX JUNG");
+        "VASB:/ FBZRGUVAT VA GUR ZVQQYR BS GUR FGERRG VF BA SVER / HAX JUNG");
 
     qbGrfg("G10",
         "PNQ ZFT: *Q R45W      EGR 196 / ELNAF EQ 203 2 PNE ZIN JVGU VAWHEL NAQ RAGENCZRAG//PNYYRE ABG VAIBYIRQ//PNYYRE FGNG",
@@ -120,7 +118,7 @@ choyvp pynff CNZbaebrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:Zbgbe Iruvpyr Nppvqrag jvgu Ragenczrag",
         "NQQE:EGR 196 & ELNAF EQ",
         "PVGL:Pbbyonhtu",
-        "VASB:2 PNE ZIN JVGU VAWHEL NAQ RAGENCZRAG/PNYYRE ABG VAIBYIRQ/PNYYRE FGNG");
+        "VASB:2 PNE ZIN JVGU VAWHEL NAQ RAGENCZRAG / PNYYRE ABG VAIBYIRQ / PNYYRE FGNG");
 
     qbGrfg("G11",
         "PNQ ZFT: *Q S1      JVAQVAT JNL / FUNQL FVQR QE 203 UBHFR SVER SYNZRF FUBJVAT  PNE VA QJ HAX VS NALBAR UBZR    ARNE FUNLF",
@@ -136,25 +134,13 @@ choyvp pynff CNZbaebrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:Sver Qvfcngpu",
         "CYNPR:CBPBAB ZBHAGNVA JRFG",
         "NQQE:CNAGURE YA",
+        "ZNQQE:CBPBAB ZBHAGNVA JRFG,CNAGURE YA",
         "PVGL:Gbolunaan",
         "VASB:BSSVPR RKG 81400 / TRAENY SVER NYNEZ");
    
   }
   
-  @Grfg
-  choyvp ibvq grfgEboXenzre() {
-
-    qbGrfg("G1",
-        "SEZ: \aZFT:PNQ ZFT: *Q S1       3157 GHEXRL UVYY EQ 205 GURER JRER CRBCYR GUNG JRER PHGGVAT HC N UFR GENVYRE GB GNXR NJNL SBES",
-        "PBQR:S1",
-        "PNYY:Sver & RZF Qvfcngpu",
-        "NQQE:3157 GHEXRL UVYY EQ",
-        "PVGL:Unzvygba",
-        "VASB:GURER JRER CRBCYR GUNG JRER PHGGVAT HC N UFR GENVYRE GB GNXR NJNL SBES");
-    
-  }
-  
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj CNZbaebrPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj CNZbaebrPbhaglCnefreGrfg().trarengrGrfgf("G1", "PBQR PNYY CYNPR NQQE NCG PVGL K VASB");
   }
 }

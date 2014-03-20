@@ -8,7 +8,7 @@
   
   <string name="donate_server_url">https://cadpageweb.appspot.com/lookup</string>
   
-  <string name="free_release_text">  <!-- TRANSLATE -->
+  <string name="free_release_text">
     This is the free version of Cadpage.  This version will never bother you
     for financial contributions to future Cadpage development.  Customer support
     is minimal, and updates will be infrequent at best.\n
@@ -20,7 +20,7 @@
     If you are willing to pay to Cadpage developers to continue supporting 
     Cadpage development, you should use the standard version.\n
     \n
-    If you cannot afford to pay the $10/year standard payment, you should use the standard
+    If you can"'"t afford to the $10 standard payment, you should use the standard
     version and ask for a free subscription.\n
     \n
     If you are adamantly opposed to paying anything on general principle, you
@@ -38,7 +38,7 @@
   <string name="donate_free_text">
     This is the free version of Cadpage.  It is functionally equivalent to the
     standard version of Cadpage, except that customer support is minimal and
-    updates will be very infrequent. 
+    updates will run 4-6 months behind the standard version. 
   </string>
   
   <string name="donate_life_title">Thank you for your support</string>
@@ -56,7 +56,7 @@
   
   <string name="donate_paid_title">Your Cadpage subscription is current</string>
   <string name="donate_paid_text">
-    You have a current Cadpage subscription that is good until\n%s
+    You have a current Cadpage subscription that is good until %s
   </string>
   
   <string name="donate_sponsor_title">Sponsored by %s</string>
@@ -149,7 +149,6 @@
   <string name="donate_android_title">Purchase through Android Market</string>
   <string name="donate_paypal_title">Purchase through PayPal</string>
   <string name="donate_whats_up_title">What\'s this all about??</string>
-  <string name="donate_active911_parse_info_title">Tell me more</string>
   <string name="donate_email_title">Send Email</string>
   
   <string name="donate_android_unsupported_text">
@@ -184,7 +183,10 @@
   
   <string name="donate_sob_story_title">"I can't afford $10 this year"</string>
   <string name="donate_sob_story_text">
-    "Tell us why you cannot afford a $10/year payment.  We are really easy on these."
+    "Tell us why you can't afford a $10 payment.  We're really easy on these.\n\n"
+    Is there anything we can do to make Cadpage easier to use?  Do you any
+    suggestions on better ways we can finance the considerable costs of maintaining
+    Cadpage?
   </string>
   
   <string name="clear_data_title">Reinstall Cadpage</string>
@@ -203,17 +205,8 @@
   
   <string name="donate_cadpage_nz_title">New Zealand location</string>
   <string name="donate_cadpage_nz_text">
-    You are using a location in New Zealand.\n
+    You are using a location in the New Zealand.\n
     We are not charging New Zealand users at this time.  Partly because non-US location
-    support is still experimental and partly because we want encourage more
-    users to try it there.  We may change this at some later time if/when
-    Cadpage becomes well established there.
-  </string>
-  
-  <string name="donate_cadpage_se_title">Sweden location</string>
-  <string name="donate_cadpage_se_text">
-    You are using a location in Sweden.\n
-    We are not charging Swedish users at this time.  Partly because non-US location
     support is still experimental and partly because we want encourage more
     users to try it there.  We may change this at some later time if/when
     Cadpage becomes well established there.
@@ -251,14 +244,6 @@
     into the Location Settings and either select a location corresponding to your 
     area or set the From: (filter) to the email address or phone number that sends
     you your text pages
-  </string>
-  
-  <string name="donate_active911_parse_warn_title">Active911 parser alert</string>
-  <string name="donate_active911_parse_warn_text">
-    The information in this alert was not provided by Cadpage.  
-    This alert was processed with a new parsing system that Active911 is setting
-    up to replace the Cadpage parsing system.  We are working with Active911 to
-    restore Cadpage parsing services.  
   </string>
   
   <string name="vendor_title">Register with %s</string>

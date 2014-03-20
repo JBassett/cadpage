@@ -24,7 +24,6 @@ public class IAWoodburyCountyParser extends SmartAddressParser {
   
   public IAWoodburyCountyParser() {
     super(CITY_LIST, "WOODBURY COUNTY", "IA");
-    setFieldList("CALL ADDR CITY PLACE ST X SRC UNIT INFO");
   }
 
 

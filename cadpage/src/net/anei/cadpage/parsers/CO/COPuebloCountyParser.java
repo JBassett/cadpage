@@ -15,7 +15,6 @@ public class COPuebloCountyParser extends SmartAddressParser {
     
   public COPuebloCountyParser() {
     super("PUEBLO COUNTY", "CO");
-    setFieldList("CALL ADDR INFO");
   }
   
   @Override

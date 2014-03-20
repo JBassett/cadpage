@@ -13,17 +13,10 @@ public class DispatchVisionAirParser extends FieldProgramParser {
   
   private String[] prefixs;
   
-  /**
-   * @deprecated - Switch to DispatchA3 when convenient 
-   */
   public DispatchVisionAirParser(String prefix, String defCity, String defState, String program) {
     this(new String[]{prefix}, defCity, defState, program);
   }
   
-  
-  /**
-   * @deprecated - Switch to DispatchA3 when convenient 
-   */
   public DispatchVisionAirParser(String[] prefixs, String defCity, String defState, String program) {
     super(defCity, defState, program);
     this.prefixs = prefixs;
@@ -42,8 +35,8 @@ public class DispatchVisionAirParser extends FieldProgramParser {
       }
     }
     if (!found) return false;
-    if (body.endsWith("*")) body = body + " ";
-    return parseFields(DELIM.split(body), data);
+    if (body.endsWith("*")) body = body.substring(0,body.length()-1).trim();
+    return parseFields(DELIM.split(body), 12, data);
   }
   
   private class BaseAddressField extends AddressField {
@@ -63,16 +56,6 @@ public class DispatchVisionAirParser extends FieldProgramParser {
       super.parse(field, data);
     }
   }
-  
-  private static final Pattern LINE_PREFIX = Pattern.compile("^Line\\d+=");
-  private class BaseInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = LINE_PREFIX.matcher(field);
-      if (match.find()) field = field.substring(match.end()).trim();
-      super.parse(field, data);
-    }
-  }
 
   private static final Pattern EXTRA_MARKER = Pattern.compile("\\b(\\d?\\d/\\d?\\d/\\d{4}) (\\d?\\d:\\d?\\d:\\d?\\d(?: [AP]M)?) : (pos\\d+) : [A-Za-z0-9]+\\b");
   private static final DateFormat TIME_FMT = new SimpleDateFormat("hh:mm:ss aa");
@@ -86,7 +69,6 @@ public class DispatchVisionAirParser extends FieldProgramParser {
     
     @Override
     public boolean checkParse(String field, Data data) {
-      if (field.startsWith("Line18=")) field = field.substring(7).trim();
       Matcher match = EXTRA_MARKER.matcher(field);
       if (!match.find()) {
         if (field.length() < 3) return false;
@@ -107,7 +89,6 @@ public class DispatchVisionAirParser extends FieldProgramParser {
       field = field.substring(match.end()).trim();
       
       for (String fld1 : EXTRA_MARKER.split(field)) {
-        String connect = "\n";
         for (String fld2 : EXTRA_DELIM.split(fld1)) {
           fld2 = fld2.trim();
           if (fld2.length() == 0) continue;
@@ -145,10 +126,7 @@ public class DispatchVisionAirParser extends FieldProgramParser {
             if (saveCross.length() > 0) data.strCross = saveCross;
           }
           
-          if (fld2.length() > 0 && !fld2.equals(":") && !data.strSupp.contains(fld2)) {
-            data.strSupp = append(data.strSupp, connect, fld2);
-            connect = " / ";
-          }
+          data.strSupp = append(data.strSupp, " / ", fld2);
         }
       }
       return true;
@@ -156,8 +134,7 @@ public class DispatchVisionAirParser extends FieldProgramParser {
     
     @Override
     public void parse(String field, Data data) {
-      if (checkParse(field, data)) return;
-      data.strSupp = append(data.strSupp, "\n", field);
+      if (!checkParse(field, data)) abort();
     }
     
     @Override
@@ -170,7 +147,6 @@ public class DispatchVisionAirParser extends FieldProgramParser {
   protected Field getField(String name) {
     if (name.equals("ADDR")) return new BaseAddressField();
     if (name.equals("CALL")) return new BaseCallField();
-    if (name.equals("INFO")) return new BaseInfoField();
     if (name.equals("EXTRA")) return new BaseExtraField();
     return super.getField(name);
   }

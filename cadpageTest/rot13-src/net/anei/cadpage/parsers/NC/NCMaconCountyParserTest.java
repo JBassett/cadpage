@@ -27,12 +27,6 @@ Pbagnpg: Avpx Ybsgubhfr <znppunzcf75@tznvy.pbz>
 Fraqre: 8283715166
 911 PRAGRE:80 >QBZRFGVP QVFGHEONAPR NQQVATGBA OEVQTR EQ KF: TRBETVN EQ @ 3887 SENAXYVA FGBPXGBA, GURERFN 7069820877
 
-Pbagnpg: Elna Uhefrl <elnauhefrl@tznvy.pbz>
-
-ZNPBA911:ZRQ >RZRETRAPL EHA 43 FBHGU SEBAG FG KF: CNEX NIR @ 57 SENAXYVA ZLRE, WHQL 8283692141 Znc: Tevqf:0,0 Pnq: 2014-0000005117
-ZNPBA911:P1 >RZRETRAPL EHA 79 BNXJBBQ QE KF: CNHYVAR NIR SENAXYVA UNEEVFBA, PRPR 8285242878 Znc: Tevqf:0,0 Pnq: 2014-0000005103
-ZNPBA911:P1 >RZRETRAPL EHA 150 PEVFC FG KF: VBGYN FG @ 450 SENAXYVA TENAQIVRJ ZNABE PNER 8285244425 Znc: Tevqf:0,0 Pnq: 2014-0000005102
-
 */
 
 choyvp pynff APZnpbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -65,7 +59,7 @@ choyvp pynff APZnpbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:FGEHPGHER SVER",
         "NQQE:289 FHGGBA YA",
         "PVGL:SENAXYVA",
-        "ANZR:NNNNN, NNNNNNN& NNNNNN",
+        "ANZR:NNNNN, NNNNNNN & NNNNNN",
         "CUBAR:5555559999");
         
     qbGrfg("G4",
@@ -83,6 +77,7 @@ choyvp pynff APZnpbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "NQQE:31 FPEBTTF EQ",
         "K:YBHVFN PUNCRY @ 1020",
         "PVGL:SENAXYVA",
+        "ANZR:IREVMBA JVERYRFF",
         "CUBAR:8283713353");
 
     qbGrfg("G15",
@@ -112,42 +107,7 @@ choyvp pynff APZnpbaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CUBAR:7069820877");
   }
   
-  @Grfg
-  choyvp ibvq ElnaUhefrl2() {
-
-    qbGrfg("G1",
-        "ZNPBA911:ZRQ >RZRETRAPL EHA 43 FBHGU SEBAG FG KF: CNEX NIR @ 57 SENAXYVA ZLRE, WHQL 8283692141 Znc: Tevqf:0,0 Pnq: 2014-0000005117",
-        "PNYY:RZRETRAPL EHA",
-        "NQQE:43 FBHGU SEBAG FG",
-        "K:CNEX NIR @ 57",
-        "PVGL:SENAXYVA",
-        "ANZR:ZLRE, WHQL",
-        "CUBAR:8283692141",
-        "VQ:2014-0000005117");
-
-    qbGrfg("G2",
-        "ZNPBA911:P1 >RZRETRAPL EHA 79 BNXJBBQ QE KF: CNHYVAR NIR SENAXYVA UNEEVFBA, PRPR 8285242878 Znc: Tevqf:0,0 Pnq: 2014-0000005103",
-        "PNYY:RZRETRAPL EHA",
-        "NQQE:79 BNXJBBQ QE",
-        "K:CNHYVAR NIR",
-        "PVGL:SENAXYVA",
-        "ANZR:UNEEVFBA, PRPR",
-        "CUBAR:8285242878",
-        "VQ:2014-0000005103");
-
-    qbGrfg("G3",
-        "ZNPBA911:P1 >RZRETRAPL EHA 150 PEVFC FG KF: VBGYN FG @ 450 SENAXYVA TENAQIVRJ ZNABE PNER 8285244425 Znc: Tevqf:0,0 Pnq: 2014-0000005102",
-        "PNYY:RZRETRAPL EHA",
-        "NQQE:150 PEVFC FG",
-        "K:VBGYN FG @ 450",
-        "PVGL:SENAXYVA",
-        "ANZR:TENAQIVRJ ZNABE PNER",
-        "CUBAR:8285244425",
-        "VQ:2014-0000005102");
-
-  }
-  
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj APZnpbaPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj APZnpbaPbhaglCnefreGrfg().trarengrGrfgf("G1", "PNYY NQQE K PVGL ANZR CUBAR");
   }
 }

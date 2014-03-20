@@ -19,11 +19,6 @@ public class CARiversideCountyParser extends FieldProgramParser {
   public String getFilter() {
     return "messaging@iamresponding.com";
   }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
 
   @Override
   protected boolean parseMsg(String body, Data data) {
@@ -35,16 +30,9 @@ public class CARiversideCountyParser extends FieldProgramParser {
     
     @Override
     public void parse(String field, Data data) {
-      if (field.endsWith(")")) {
-        int pt = field.indexOf('(');
-        if (pt >= 0) {
-          data.strPlace = field.substring(pt+1, field.length()-1).trim();
-          field = field.substring(0,pt).trim();
-        }
-      }
       Parser p = new Parser(field);
       data.strCity = convertCodes(p.getLastOptional(','), CITY_CODES);
-      data.strPlace = append(p.getOptional('@'), " - ", data.strPlace);
+      data.strPlace =p.getOptional('@');
       parseAddress(p.get(), data);
     }
     
@@ -72,9 +60,7 @@ public class CARiversideCountyParser extends FieldProgramParser {
   }
   
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "ANZA", "ANZAS",
       "IDYL", "IDYLLWILD",
-      "MOUN", "MOUNTAIN CENTER",
       "PINC", "PINE COVE"
   });
 }

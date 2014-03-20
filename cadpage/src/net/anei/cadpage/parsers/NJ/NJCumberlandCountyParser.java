@@ -27,11 +27,7 @@ public class NJCumberlandCountyParser extends FieldProgramParser {
   public boolean parseMsg(String subject, String body, Data data) {
     if (body.startsWith("E911:")) body = body.substring(5).trim();
     if (subject.length() > 0) body = subject + "_" + body;
-    if (!parseFields(body.split("_"), data)) return false;
-    if (data.strUnit.endsWith("AC")) {
-      data.strCall = "ALL CALL - " + data.strCall;
-    }
-    return true;
+    return parseFields(body.split("_"), data);
   }
   
   private static final Pattern ADDR_PTN = Pattern.compile("^\\((.*)\\)");
@@ -69,7 +65,7 @@ public class NJCumberlandCountyParser extends FieldProgramParser {
     
     @Override
     public String getFieldNames() {
-      return "CITY ADDR PLACE"; 
+      return "CITY ADDR"; 
     }
   }
   

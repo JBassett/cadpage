@@ -79,11 +79,6 @@ public class NJBurlingtonCountyAParser extends FieldProgramParser {
       if (data.strAddress.contains("&") & data.strAddress.contains(field)) return;
       data.strAddress = append(data.strAddress, " & ", field);
     }
-    
-    @Override
-    public String getFieldNames() {
-      return "ADDR";
-    }
   }
   
   @Override

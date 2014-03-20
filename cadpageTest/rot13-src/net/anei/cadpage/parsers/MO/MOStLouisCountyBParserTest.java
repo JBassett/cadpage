@@ -6,8 +6,6 @@ vzcbeg bet.whavg.Grfg;
 
 /*
 Fg Ybhvf Pbhagl, ZB
-Cebonoyl qrnq!!
-
 Pbagnpg: Fgrir <fgrir@fgybhvfnefrany.pbz>
 Fraqre: Sebz:ocntr@fpsn911.bet
 
@@ -81,11 +79,10 @@ choyvp pynff ZBFgYbhvfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G6",
         "[.FPSN Cntr] NFFNHYG QVEG PURNC NS 8455 TENIBVF EQ 8455 TENIBVF EQ 1617 1134 Znc: NS Pneq# 7015, Z27-48 K-Fg: YNXRJBBQ NIR 0.11 zv R YNPRL NIR 0.05 zv J 21:32",
-        "PNYY:NFFNHYG",
-        "CYNPR:QVEG PURNC NS",
+        "PNYY:NFFNHYG QVEG PURNC NS",
         "NQQE:8455 TENIBVF EQ",
-        "HAVG:1617 1134",
-        "ZNC:Z27-48",
+        "HAVG:8455 TENIBVF EQ 1617 1134",
+        "ZNC:, Z27-48",
         "K:YNXRJBBQ NIR 0.11 zv R YNPRL NIR 0.05 zv J",
         "VASB:NS Pneq# 7015",
         "GVZR:21:32");
@@ -108,7 +105,7 @@ choyvp pynff ZBFgYbhvfPbhaglOCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ZNC:X30-49",
         "VASB:YR Pneq # 4234",
         "GVZR:02:45");
-  
+
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {

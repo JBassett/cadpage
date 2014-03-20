@@ -59,9 +59,6 @@ public class DonationManager {
   // Cached Sponsor name
   private String sponsor;
   
-  // Cached overpaid days
-  private int overpaidDays;
-  
   
   /**
    * Calculate all cached values
@@ -90,16 +87,6 @@ public class DonationManager {
     // Get sponsor name and expiration date from either the
     // Vendor manager or the current parser
     sponsor = VendorManager.instance().getSponsor();
-    JulianDate regJDate = null;
-    if (sponsor != null) {
-      Date regDate = ManagePreferences.registerDate();
-      if (regDate == null) {
-        ManagePreferences.setRegisterDate();
-        regJDate = curJDate;
-      } else {
-        regJDate = new JulianDate(regDate);
-      }
-    }
     expireDate = null;
     if (!VendorManager.instance().isRegistered()) {
       MsgParser parser = ManagePreferences.getCurrentParser();
@@ -112,19 +99,13 @@ public class DonationManager {
         expireDate = cal.getTime();
       }
     }
-
-    // Life gets complicated because we may be dealing with two sponsors, one that came from direct
-    // paging or parser sponsoring vendors, and the other that was reported by the authorization server
-    // and we won't know which one should be in the final result until we check on the subscription
-    // expiration status.  So save the first sponsor as the sponsoring vendor so it can be recovered.
-    String sponsoringVendor = (expireDate == null ? sponsor : null);
-    daysSinceInstall = ManagePreferences.calcAuthRunDays(sponsoringVendor == null ? curDate : null);
+    boolean vendorSponsored = sponsor != null && expireDate == null;
+    daysSinceInstall = ManagePreferences.calcAuthRunDays(!vendorSponsored ? curDate : null);
     int daysTillDemoEnds = DEMO_LIMIT_DAYS - daysSinceInstall;
     
     // Calculate subscription expiration date
     // (one year past the purchase date anniversary in the last paid year)
     // ((Use install date if there is no purchase date))
-    overpaidDays = 0;
     int daysTillSubExpire = -99999;
     int paidYear = ManagePreferences.paidYear();
     if (paidYear > 0) {
@@ -135,17 +116,10 @@ public class DonationManager {
       cal.set(Calendar.YEAR, paidYear+1);
       tDate = cal.getTime();
       
-      // If there is a sponsored vendor register date and they have a paid subscription
-      // expiration date, compute the number of days between them.  This is the number 
-      // of days they have been doubled billed by both us and the vendor
-      if (regJDate != null) {
-        overpaidDays = regJDate.diffDays(new JulianDate(tDate)); 
-      }
-      
       // If we have both a subscription and sponsor expiration date, choose the
       // latest one
       if (expireDate == null || tDate.after(expireDate)) {
-        sponsor = ManagePreferences.sponsor();
+        if (!vendorSponsored) sponsor = ManagePreferences.sponsor();
         expireDate = tDate;
       }
     }
@@ -166,15 +140,14 @@ public class DonationManager {
     
     // OK, we have calculated all of the intermediate stuff.  Now use that to
     // determine the overall status
-    String location = ManagePreferences.location();
     if (ManagePreferences.freeRider()) status = DonationStatus.LIFE;
     else if (ManagePreferences.authLocation().equals(ManagePreferences.location())) {
       status = DonationStatus.AUTH_DEPT;
     } else if (expireDate != null) {
       if (daysTillExpire > EXPIRE_WARN_DAYS) {
-        status = (sponsoringVendor == null && sponsor != null ? DonationStatus.SPONSOR : DonationStatus.PAID);
+        status = (!vendorSponsored && sponsor != null ? DonationStatus.SPONSOR : DonationStatus.PAID);
       }
-      else if (sponsoringVendor != null) status = DonationStatus.SPONSOR;
+      else if (vendorSponsored) status = DonationStatus.SPONSOR;
       else if (daysTillExpire >= 0) {
         if (daysTillExpire == daysTillSubExpire) {
           status = (sponsor != null ? DonationStatus.SPONSOR_WARN : DonationStatus.PAID_WARN);
@@ -186,22 +159,14 @@ public class DonationManager {
       }
       else status = (sponsor != null ? DonationStatus.SPONSOR_EXPIRE : DonationStatus.PAID_EXPIRE);
     } 
-    else if ((location == null || location.startsWith("General")) &&
-              ManagePreferences.filter().trim().length()<=1 &&
+    else if ("General".equals(ManagePreferences.location()) &&
+              ManagePreferences.filter().length()<=1 &&
               !VendorManager.instance().isRegistered()) {
       status = DonationStatus.NEW;
     } else if (sponsor != null) status = DonationStatus.SPONSOR;
     else {
       if (daysTillExpire >= 0) status = DonationStatus.DEMO;
       else status = DonationStatus.DEMO_EXPIRE;
-    }
-    
-    // If we did have a  master unexpiring vendor, and the final status indicates
-    // a Vendor paid status, clean things up by reporting the correct vendor and
-    // null expiration date
-    if (sponsoringVendor != null && status == DonationStatus.SPONSOR) {
-      sponsor = sponsoringVendor;
-      expireDate = null;
     }
     
     // If they don't have a clear green status, check for a special release exemption
@@ -302,13 +267,6 @@ public class DonationManager {
     return enabled;
   }
   
-  /**
-   * @return number of overpaid days
-   */
-  public int getOverpaidDays() {
-    return overpaidDays;
-  }
-  
   // Singleton instance
   private static DonationManager instance = new DonationManager();
   
@@ -337,12 +295,6 @@ public class DonationManager {
     
     // No luck, see if it matches yesterdays has code
     jDate = new JulianDate(jDate, -1);
-    type = validateAuthCode(code, jDate);
-    if (type > 0) return type;
-    
-    // OK, now that Jeanie can enter future codes, let's check
-    // tommorrow's codes
-    jDate = new JulianDate(jDate, 2);
     return validateAuthCode(code, jDate);
   }
   
@@ -359,11 +311,7 @@ public class DonationManager {
    * @return Today's authorization code
    */
   public static String getAuthCode(int type) {
-    return getAuthCode(type, new Date());
-  }
-  
-  public static String getAuthCode(int type, Date date) {
-    return calcAuthCode(type, new JulianDate(date));
+    return calcAuthCode(type, new JulianDate(new Date()));
   }
   
   /**

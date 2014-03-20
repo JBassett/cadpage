@@ -39,9 +39,8 @@ choyvp pynff APTenaivyyrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
     qbGrfg("G2",
         "OBJRA:3559 AP UJL 56 R r PERRQZBBE JNYGREF EQ K WNGNIVNA YA tnepvn,yvfn 9199391917 14:01:51 SNYY (CREFBA UNF SNYYRA) pnyyre nqivfrq 52.      lbn srznyr sryy va.",
         "ANZR:tnepvn,yvfn",
-        "NQQE:3559 AP UJL 56 R",
-        "ZNQQE:3559 FGNGR 56 R",
-        "NCG:r",
+        "NQQE:3559 AP UJL 56 R r",
+        "ZNQQE:3559 AP 56 R r",
         "PVGL:PERRQZBBE",
         "K:JNYGREF EQ / WNGNIVNA YA",
         "VQ:9199391917",
@@ -64,7 +63,7 @@ choyvp pynff APTenaivyyrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "EBLFGRE:1506 AP UJL 96 F SENAXYVAGBA OENTT, Znegva 9195283196 2012050157 04:09:11 SNYY (CREFBA UNF SNYYRA) 88 lbs sryy , oyrrqvat sebz erpgny nern, pbaf.",
         "ANZR:OENTT, Znegva",
         "NQQE:1506 AP UJL 96 F",
-        "ZNQQE:1506 FGNGR 96 F",
+        "ZNQQE:1506 AP 96 F",
         "PVGL:SENAXYVAGBA",
         "CUBAR:9195283196",
         "VQ:2012050157",
@@ -75,6 +74,6 @@ choyvp pynff APTenaivyyrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj APTenaivyyrPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj APTenaivyyrPbhaglCnefreGrfg().trarengrGrfgf("G1", "CYNPR NQQE PVGL K ANZR CUBAR PBQR VQ GVZR PNYY VASB");
   }
 }

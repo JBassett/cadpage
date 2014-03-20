@@ -14,17 +14,12 @@ public class VAPittsylvaniaCountyParser extends DispatchOSSIParser {
   private static final Pattern LEADER = Pattern.compile("^\\d+:(?!CAD:)");
   public VAPittsylvaniaCountyParser() {
     super(CITY_CODES, "PITTSYLVANIA COUNTY", "VA",
-           "ID?: EMPTY? CALL ADDR! CITY! ID? X? X? INFO+");
+           "ID: CALL ADDR! CITY! ID? X? X? INFO+");
   }
   
   @Override
   public String getFilter() {
     return "CAD@pittgov.org";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_DIRO;
   }
   
   @Override
@@ -47,12 +42,6 @@ public class VAPittsylvaniaCountyParser extends DispatchOSSIParser {
     if (name.equals("ID")) return new MyIdField();
     return super.getField(name);
   }
-  
-  @Override
-  public String adjustMapAddress(String addr) {
-    return US_PTN.matcher(addr).replaceAll("US");
-  }
-  private static final Pattern US_PTN = Pattern.compile("\\bU S\\b", Pattern.CASE_INSENSITIVE);
 
   private static final Properties CITY_CODES= buildCodeTable(new String[]{
       "BLA","Blairs",
@@ -62,19 +51,13 @@ public class VAPittsylvaniaCountyParser extends DispatchOSSIParser {
       "CAL","Callands",
       "CAS","Cascade",
       "DRY","Dry Fork",
-      "FRA","FRA",
       "HUR","Hurt",
       "JAV","Java",
       "KEE","Keeling",
       "PIT","Pittsville",
       "RIN","Ringgold",
-      "RNC","RNC",
-      "RNG","Ringgold",
       "SAN","Sandy Level",
       "SUT","Sutherlin",
       "LON","Long Island",
-      
-      // Henry County
-      "AXT","Axton"
   });
 }

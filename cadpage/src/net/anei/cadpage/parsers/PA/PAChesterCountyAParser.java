@@ -9,10 +9,8 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class PAChesterCountyAParser extends PAChesterCountyBaseParser {
   
-  private static final Pattern IAR_PTN = Pattern.compile("^[A-Z]+ +Final Type:");
-  
   public PAChesterCountyAParser() {
-    super("EMPTY Initial_Type:SKIP! Final_Type:CALL! Loc:ADDRCITY! btwn:X? AKA:INFO");
+    super("Final_Type:CALL! Loc:ADDRCITY! btwn:X? AKA:INFO");
   }
   
   @Override
@@ -24,10 +22,9 @@ public class PAChesterCountyAParser extends PAChesterCountyBaseParser {
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
     
-    data.strSource = subject;
+    if (isVariantGMsg(body)) return false;
     
-    // Fix up IAmResponding modifications :(
-    if (IAR_PTN.matcher(body).find()) body = "Initial Type:" + body;
+    data.strSource = subject;
 
     // Replace key chars for easier parsing
     body = body.replace("\n"," ");
@@ -42,7 +39,7 @@ public class PAChesterCountyAParser extends PAChesterCountyBaseParser {
     return "SRC " + super.getProgram();
   }
   
-  private class MyAddressCityField extends BaseAddressCityField {
+  private class MyAddressCityField extends AddressCityField {
     @Override
     public void parse(String field, Data data) {
       int pt = field.indexOf(" -- ");

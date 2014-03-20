@@ -23,11 +23,6 @@ public class NYSomersParser extends FieldProgramParser {
   }
   
   @Override
-  public String getFilter() {
-    return "somersfire@somersfd.com";
-  }
-  
-  @Override
   protected boolean parseMsg(String body, Data data) {
     
     Matcher match = MARKER.matcher(body);

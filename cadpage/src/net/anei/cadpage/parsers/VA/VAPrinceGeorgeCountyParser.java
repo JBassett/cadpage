@@ -17,7 +17,7 @@ public class VAPrinceGeorgeCountyParser extends DispatchOSSIParser {
   
   @Override
   public String getFilter() {
-    return "cad@messages.princegeorgeva.org,cad@princegeorgeva.org,cad@princegeorgecountyva.gov";
+    return "cad@messages.princegeorgeva.org,cad@princegeorgeva.org";
   }
 
   private static final String AUTO_AID_PFX = "FIRE AUTOMATIC AID - ";
@@ -40,24 +40,6 @@ public class VAPrinceGeorgeCountyParser extends DispatchOSSIParser {
 
   private static final Properties CITY_CODES= buildCodeTable(new String[]{
       "CARS", "CARSON",
-      "CHAR", "CHARLES CITY",
-      "CHES", "CHESTER",
-      "CHGT", "COLONIAL HEIGHTS",
-      "DEW",  "DEWITT",
-      "DIN",  "DINWIDDIE",
-      "DISP", "DISPUTANTA",
-      "FTLE", "FT LEE",
-      "HOPE", "HOPEWELL",
-      "MAT",  "MATOACA",
-      "MID",  "MIDLOTHIAN",
-      "PETE", "PETERSBURG",
-      "PORT", "PORTSMOUTH",
-      "PRG",  "PRINCE GEORGE",
-      "RIC",  "RICHMOND",
-      "SPRI", "SPRING GROVE",
-      "STON", "STONY CREEK",
-      "SUR",  "SURRY",
-      "SUS",  "SUSSEX",
-      "WAV",  "WAVERLY"
+      "PETE", "PETERSBURG"
   });
 }

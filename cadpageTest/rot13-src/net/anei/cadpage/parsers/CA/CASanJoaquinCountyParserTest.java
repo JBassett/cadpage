@@ -28,6 +28,7 @@ G26-2 12018956     Zrqvpny Nvq     25600 F Puevfzna Eq            J FPUHYGR EQ/R
 G9-1  12018957     Genssvp Pbyyvfv V 580 Ro / F Pbeeny Ubyybj Eq                       U580P1              Nffvtarq Havgf: R9-4,R9-8,G9-1,OP9-0,R26-1
       12019053     Zrqvpny Nvq     25600 F Puevfzna Eq            J FPUHYGR EQ/RYVFFNT G354O               Nffvtarq Havgf: G26-2
 
+
 Pbagnpg: Wbua <wbua499@yvir.pbz>
 Fraqre: YvsrpbzPryyCntvat@nze.arg
 
@@ -51,14 +52,6 @@ SEZ:YvsrpbzPryyCntvat@nze.arg\aZFT:G26-1     12018873    Qvfcngpurq:05:47:04Raeb
  1 bs 2\aSEZ:YvsrpbzPryyCntvat@nze.arg\aZFT:G26-2 12018956     Zrqvpny Nvq     25600 F Puevfzna Eq            J FPUHYGR EQ/RYVFFNT G354O           \a(Pba'g) 2 bs 2\a    Nffvtarq Havgf: G26-2\e\a(Raq)
  1 bs 2\aSEZ:YvsrpbzPryyCntvat@nze.arg\aZFT:G9-1  12018957     Genssvp Pbyyvfv V 580 Ro / F Pbeeny Ubyybj Eq                       U580P1          \a(Pba'g) 2 bs 2\a    Nffvtarq Havgf: R9-4,R9-8,G9-1,OP9-0,R26-1\e\a(Raq)
  1 bs 2\aSEZ:YvsrpbzPryyCntvat@nze.arg\aZFT:      12019053     Zrqvpny Nvq     25600 F Puevfzna Eq            J FPUHYGR EQ/RYVFFNT G354O           \a(Pba'g) 2 bs 2\a    Nffvtarq Havgf: G26-2\e\a(Raq)
- 1 bs 2\aSEZ:YvsrpbzPryyCntvat@nze.arg\aZFT:      13007092     Genssvp Pbyyvfv 37 39'46.96"a & 121 26'30.72"j                    U580S1          \a(Pba'g) 2 bs 2\a    Nffvtarq Havgf: R9-3,R26-2,R9-7,OP9-0,G9-1\a(Raq)
- 1 bs 2\aSEZ:YvsrpbzPryyCntvat@nze.arg\aZFT:      13007665     Irtrgngvba Sver V 205 Jo / V 580 Jo                       NYNZ4           \a(Pba'g) 2 bs 2\a    Nffvtarq Havgf: R9-5,R9-4,OP9-0,R26-2\a(Raq)
- 
- 
- 
-// Arrq zber jbex!! 
- 1 bs 2\aSEZ:YvsrpbzPryyCntvat@nze.arg\aZFT:R26-1 13020048     Zrqvpny Nvq      700 R Ebgu Eq             F INYYRWB PG/F NVECB Y114N               \a(Pba'g) 2 bs 2\a     386     ABEGNffvtarq Havgf:R26-1\a(Raq)
-R26-1 13020048     Zrqvpny Nvq      700 R Ebgu Eq             F INYYRWB PG/F NVECB Y114N                    386     ABEGNffvtarq Havgf:R26-1
 
  */
 
@@ -141,9 +134,9 @@ choyvp pynff PNFnaWbndhvaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "HAVG:R18-1",
         "VQ:11020566",
         "PNYY:Sver Nynez - Pb",
-        "NQQE:5045 F Fgngr Ebhgr 99",
-        "ZNQQE:5045 F FGNGR 99",
-        "K:R S R NEPU EQ/R FHAAL EQ",
+        "NQQE:5045 F Fgngr Ebhgr 99 R",
+        "ZNQQE:5045 F FGNGR 99 R",
+        "K:S R NEPU EQ / R FHAAL EQ",
         "ZNC:830N");
 
     qbGrfg("G2",
@@ -266,9 +259,9 @@ choyvp pynff PNFnaWbndhvaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "HAVG:R18-1",
         "VQ:11020566",
         "PNYY:Sver Nynez - Pb",
-        "NQQE:5045 F Fgngr Ebhgr 99",
-        "ZNQQE:5045 F FGNGR 99",
-        "K:R S R NEPU EQ/R FHAAL EQ",
+        "NQQE:5045 F Fgngr Ebhgr 99 R",
+        "ZNQQE:5045 F FGNGR 99 R",
+        "K:S R NEPU EQ / R FHAAL EQ",
         "ZNC:830N");
 
   }
@@ -429,39 +422,9 @@ choyvp pynff PNFnaWbndhvaPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:J FPUHYGR EQ/RYVFFNT",
         "ZNC:G354O");
 
-    qbGrfg("G14",
-        " 1 bs 2\a" +
-        "SEZ:YvsrpbzPryyCntvat@nze.arg\a" +
-        "ZFT:      13007092     Genssvp Pbyyvfv 37 39'46.96\"a & 121 26'30.72\"j                    U580S1          \a" +
-        "(Pba'g) 2 bs 2\a" +
-        "    Nffvtarq Havgf: R9-3,R26-2,R9-7,OP9-0,G9-1\a" +
-        "(Raq)",
-
-        "HAVG:R9-3,R26-2,R9-7,OP9-0,G9-1",
-        "VQ:13007092",
-        "PNYY:Genssvp Pbyyvfv",
-        "NQQE:37 39'46.96\"a & 121 26'30.72\"j",
-        "ZNQQE:+37.663044,-121.441867",
-        "ZNC:U580S1");
-
-    qbGrfg("G15",
-        " 1 bs 2\a" +
-        "SEZ:YvsrpbzPryyCntvat@nze.arg\a" +
-        "ZFT:      13007665     Irtrgngvba Sver V 205 Jo / V 580 Jo                       NYNZ4           \a" +
-        "(Pba'g) 2 bs 2\a" +
-        "    Nffvtarq Havgf: R9-5,R9-4,OP9-0,R26-2\a" +
-        "(Raq)",
-
-        "HAVG:R9-5,R9-4,OP9-0,R26-2",
-        "VQ:13007665",
-        "PNYY:Irtrgngvba Sver",
-        "NQQE:V 205 Jo & V 580 Jo",
-        "ZNQQE:V 205 & V 580",
-        "ZNC:NYNZ4");
-
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj PNFnaWbndhvaPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj PNFnaWbndhvaPbhaglCnefreGrfg().trarengrGrfgf("G1", "HAVG VQ PNYY NQQE K ZNC CYNPR NCG");
   }
 }

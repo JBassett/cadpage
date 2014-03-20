@@ -13,19 +13,17 @@ public class INHancockCountyParser extends FieldProgramParser {
   
   public INHancockCountyParser() {
     super(CITY_LIST, "HANCOCK COUNTY", "IN",
-           "CALL ( MUTADDR INFO | CALL+? ADDR/SXP CITY? X/Z+? MAP ) UNIT! INFO+");
+           "CALL ( MUTADDR INFO | CALL+? ADDR/SXP CITY? X/Z? MAP ) UNIT! INFO+");
   }
   
   @Override
   public String getFilter() {
-    return "mplus@hancockcoingov.org,777";
+    return "mplus@hancockcoingov.org";
   }
   
   @Override
   public boolean parseMsg(String body, Data data) {
-    if (! parseFields(body.split("/"), data)) return false;
-    if (data.strCity.equals("FORTVIL")) data.strCity = "FORTVILLE";
-    return true;
+    return parseFields(body.split("/"), data);
   }
   
   private static final Pattern MUTAID_PTN = Pattern.compile("(.*)-(.*) CO");
@@ -38,11 +36,6 @@ public class INHancockCountyParser extends FieldProgramParser {
       data.strCity = match.group(2).trim() + " COUNTY";
       return true;
     }
-    
-    @Override
-    public String getFieldNames() {
-      return super.getFieldNames() + " CITY";
-    }
   }
   
   // Address class, special case if field after address starts with &
@@ -52,27 +45,7 @@ public class INHancockCountyParser extends FieldProgramParser {
     @Override
     public boolean checkParse(String field, Data data) {
       field = field.replace(".", " ").trim().replaceAll("  +", " ");
-      if (!super.checkParse(field, data)) {
-        
-        // OK, this wasn't recognized as an address.  Let's check the next field
-        // to see if it looks like something that should follow an address
-        String next = getRelativeField(+1);
-        do {
-          
-          // Check for empty field
-          if (next.length() == 0) break;
-          
-          // Or a map field
-          if (MAP_PTN.matcher(next).matches()) break;
-          
-          // No go, this is not an address
-          return false;
-          
-        } while (false);
-        
-        // If we found something there, parse this field as an address
-        super.parse(field, data);
-      }
+      if (!super.checkParse(field, data)) return false;
       if (data.strPlace.startsWith("&")) {
         data.strCross = data.strPlace.substring(2).trim();
         data.strPlace = "";
@@ -86,29 +59,15 @@ public class INHancockCountyParser extends FieldProgramParser {
     }
   }
   
-  private static final Pattern MAP_PTN = Pattern.compile("\\d\\d?(?:00\\d\\d)?|[A-Z]{2}\\d+[NESW]?|");
-  private class MyMapField extends MapField {
-    public MyMapField() {
-      setPattern(MAP_PTN, true);
-    }
-  }
-  
   @Override
   public Field getField(String name) {
     if (name.equals("MUTADDR")) return new MutualAidAddressField();
     if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("MAP")) return new MyMapField();
+    if (name.equals("MAP")) return new MapField("\\d\\d(?:00\\d\\d)?", true);
     return super.getField(name);
   }
   
-  @Override
-  public String postAdjustMapAddress(String addr) {
-    return DIR_US_40_PTN.matcher(addr).replaceAll("$1");
-  }
-  private static final Pattern DIR_US_40_PTN = Pattern.compile("\\b[NSEW] +(US +40)\\b", Pattern.CASE_INSENSITIVE);
-  
   private static final String[] CITY_LIST = new String[]{
-    "FORTVIL",
     "FORTVILLE",
     "GREENFIELD",
     "MAXWELL",
@@ -126,12 +85,6 @@ public class INHancockCountyParser extends FieldProgramParser {
     "GREEN TWP",
     "JACKSON TWP",
     "SUGAR CREEK TWP",
-    "VERNON TWP",
-    
-    // Madison County
-    "PENDLETON",
-    
-    // Marion County
-    "CUMBERLAND"
+    "VERNON TWP"
   };
 }

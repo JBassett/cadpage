@@ -14,7 +14,6 @@ public class CTNewHavenCountyAParser extends SmartAddressParser {
   
   public CTNewHavenCountyAParser() {
     super(CITY_LIST, "NEW HAVEN COUNTY", "CT");
-    setFieldList("PRI CALL ADDR CITY SRC INFO");
   }
   
   @Override
@@ -113,6 +112,7 @@ public class CTNewHavenCountyAParser extends SmartAddressParser {
     "MIX DISTRICT",
     "MOUNT CARMEL",
     "SPRING GLEN",
+    "STATE STREET",
     "WEST WOODS",
     "HAMDEN HILLS",
     "WHITNEYVILLE",

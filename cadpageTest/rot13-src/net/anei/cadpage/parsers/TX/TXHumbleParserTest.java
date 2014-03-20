@@ -7,7 +7,7 @@ vzcbeg bet.whavg.Grfg;
 /* 
 Uhzoyr GK, (Uneevf Pbhagl)
 Pbagnpg: "Jnffryy, Zvpunry" <ZJnffryy@nisq.pbz>
-Fraqre: zft@pszft.pbz,nyreg@pszft.pbz
+Fraqre: zft@pszft.pbz
 [NISQ RZF] - Pneqvnp -- 17111 Qnja Funqbjf Qe, Uhzoyr -- Znc: 376U- -- Kfg'f: Sberfg Enva Ya Byq Neobe -- Havgf: R-Z29 -- 201105590
 [NISQ RZF] - Qvnorgvp Rzretrapl -- 5310 Zbbafunqbjf Qe, Uhzoyr -- Znc: 337F- -- Kfg'f: Cbpvgb Pg Jryyfjbbq Pg -- Havgf: R-Z29 -- 201105542
 [NISQ RZF] - Zrqvpny Pnyy -- 6810 Nzore Nfu Pg, Uhzoyr -- Znc: 337D- -- Kfg'f: Pevzfba Bnx Gey -- Havgf: R-Z19 -- 201105487
@@ -25,23 +25,6 @@ Fraqre: zft@pszft.pbz,nyreg@pszft.pbz
 (Puvrs NYG) [RZF] - Purfg Cnva - Pynzzl - 0218 Cbjrefpbheg - Znc: 337H- - Havgf: R-Z39 R-R39 R-Q59 - 201141272
 (Puvrs NYG) [SVER] - Sver Nynez - Pbzzrepvny - 5250 R Sz 1960, Uhzoyr - Znc: 337J- - Uhzoyr Zvav Jnerubhfr - Kfg'f: Zbba Genvy Qe Gvzore Sber - Havgf: NGSQ R-R39 - 20
 (Puvrs NYG) [SVER] - Hax Ceboyrz - Zrqvpny Nyr - 17811 Qrrc Funqr Pg, Uhzoyr - Znc: 377R- - Kfg'f: Pbavsre Evqtr Jnl - Havgf: R-Z29 R-R19 R-R39 - 201149242
-(Puvrs NYG) [RZF] -  Oernguvat Ceboyrzf  -  20035 J Ynxr Ubhfgba Cxjl  - Kfg'f: Sverfvta Qe/wnahnel Qe - Oyqt:Crq Nffbpv - Xrl Znc:337H - Obk #:N1901
-(Puvrs NYG) [RZF] -  10n1 Pneqvnp  -  18310 Inyvnag Oebbx Pg  -  Z19  - XZ:377P - Kfg'f: Qrnq Raq/ebfrohq Oraq Qe
-(Puvrs NYG) [RZF] -  32o1 Haxabja Ceboyrz  -  5823 Sberfg Gvzoref Qe  -  Z19  - XZ:337G - Kfg'f: Bnx Fgngvba Qe/xryyl Gvzoref Q
-
-PlSnve, GK (Ngnfpbpvgn GK)
-Pbagnpg:  "Fgbygm, Revp" <RFgbygm@nisq.pbz>
-Fraqre: zft@pszft.pbz
- 1 bs 2\aSEZ:zft@pszft.pbz\aFHOW:Puvrs NYG\aZFT:[SVER] - Sver Nynez - Erfvqragvny - 17202 Orerggn Oraq Qe - Znc: 376S- - Ngnfpbpvgn Genpr - Kfg'f:\a(Pba'g) 2 bs 2\aZhfpbel Qe Furnejngre Ora - Havgf: NGSQ R-R29 - 201300303\a(Raq)
- 1 bs 2\aSEZ:zft@pszft.pbz\aFHOW:Puvrs NYG\aZFT:[SVER] - Zbgbe Iruvpyr Vapvqrag - 2300 R Sz 1960 - Znc: 336F- - Kfg'f: Zbbafuvar Uvyy Eq 1fg Fg -\a(Pba'g) 2 bs 2\aHavgf: R-Z29 R-R29 R-R39 - 201300177\a(Raq)
- 1 bs 2\aSEZ:zft@pszft.pbz\aFHOW:Puvrs NYG\aZFT:[SVER] - Zbgbe Iruvpyr Vapvqrag - Gvzore Sberfg Qe & r Sz 1960 - Znc: 337F- - Bnxf Bs Ngnfpbpvgn -\a(Pba'g) 2 bs 2\aKfg'f: R Sz 1960 Terra Gvzoref Q - Havgf: R-Z29 R-R39 R-R29 - 201300087\a(Raq)
- 1 bs 2\aSEZ:zft@pszft.pbz\aFHOW:Puvrs NYG\aZFT:[SVER] - Fznyy Bhgfvqr Sver - 6818 Nzore Nfu Pg - Znc: 337D- - Xvatf Evire Ivyyntr - Kfg'f: Pevzfba\a(Pba'g 2 bs 2\aBnx Gey - Havgf: R-R39 SJ R-R19 - 201300006\a(Raq)
- 1 bs 2\aSEZ:zft@pszft.pbz\aFHOW:Puvrs NYG\aZFT:[SVER] - Yvtug Fgehpgher Vapvqrag - 7619 Oebamr Genvy Qe - Znc: 377Q- - Jnyqra Ba Ynxr Ubhfgba -\a(Pba'g) 2 bs 2\aKfg'f: Fnvysvfu Pbir Qe Gebcul C - Havgf: R-Q89 R-R19 R-Y19 - 201258397\a(Raq)
- 1 bs 2\aSEZ:zft@pszft.pbz\aFHOW:Puvrs NYG\aZFT:[SVER] - Erfvqragvny Sver - 7619 Oebamr Genvy Qe - Znc: 377Q- - Jnyqra Ba Ynxr Ubhfgba - Kfg'f:\a(Pba'g) 2 bs 2\aFnvysvfu Pbir Qe Gebcul C - Havgf: R-R19 R-Y19 R-Q99 R-R39 - 201258397\a(Raq)
-
-Pbagnpg: Oelna <xlsverzrqvp36@nby.pbz>
-Fraqre: nyreg@pszft.pbz
-1 bs 2\aSEZ:nyreg@pszft.pbz\aFHOW:Puvrs NYG\aZFT:[SVER] -  Genhzngvp Vawhevrf (  -  6931 R Sz 1960  - Kfg'f: Gbja Pragre Oyiq/ngnfpbpvgn Eq -\a(Pba'g) 2 bs 2\aOyqt:Gnetrg Fgb - Xrl Znc:337L - Obk #:N1901\a\a(Raq)
 
 Fgnghf zrffntr, Fubhyq or unaqyrq nf Trareny Nyreg
 (Puvrs NYG) [NISQ RZF GVZRF] - Vapvqrag: 201117017 -- Havg: R-Z19 Qvfc 18:20:53 -- Raebhgr: 18:22:50 -- Neevirq: -- Genafcbeg: -- Ng Ubfc: -- Ninvynoyr: 18:24:58
@@ -67,7 +50,7 @@ choyvp pynff GKUhzoyrCnefreGrfg rkgraqf OnfrCnefreGrfg {
   }
   
   @Grfg
-  choyvp ibvq grfgZvpunryJnffryy() {
+  choyvp ibvq grfgCnefre() {
 
     qbGrfg("G1",
         "[NISQ RZF] - Pneqvnp -- 17111 Qnja Funqbjf Qe, Uhzoyr -- Znc: 376U- -- Kfg'f: Sberfg Enva Ya Byq Neobe -- Havgf: R-Z29 -- 201105590",
@@ -118,7 +101,6 @@ choyvp pynff GKUhzoyrCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "FEP:NISQ SVER",
         "PNYY:Zbgbe Iruvpyr Vapvqrag",
         "NQQE:R Sz 1960 & j Ynxr Ubhfgba C",
-        "ZNQQE:R Snez-gb-znexrg 1960 & j Ynxr Ubhfgba C",
         "PVGL:Uhzoyr",
         "ZNC:337M-",
         "K:J Ynxr Ubhfgba Cxjl Ngnfp",
@@ -226,7 +208,7 @@ choyvp pynff GKUhzoyrCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "(Puvrs NYG) [RZF] - Purfg Cnva - Pynzzl - 0218 Cbjrefpbheg - Znc: 337H- - Havgf: R-Z39 R-R39 R-Q59 - 201141272",
         "FEP:RZF",
         "PNYY:Purfg Cnva - Pynzzl",
-        "NQQE:218 Cbjrefpbheg",
+        "NQQE:0218 Cbjrefpbheg",
         "ZNC:337H-",
         "HAVG:R-Z39 R-R39 R-Q59",
         "VQ:201141272");
@@ -236,7 +218,6 @@ choyvp pynff GKUhzoyrCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "FEP:SVER",
         "PNYY:Sver Nynez - Pbzzrepvny",
         "NQQE:5250 R Sz 1960",
-        "ZNQQE:5250 R Snez-gb-znexrg 1960",
         "PVGL:Uhzoyr",
         "ZNC:337J-",
         "CYNPR:Uhzoyr Zvav Jnerubhfr",
@@ -254,175 +235,9 @@ choyvp pynff GKUhzoyrCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "K:Pbavsre Evqtr Jnl",
         "HAVG:R-Z29 R-R19 R-R39",
         "VQ:201149242");
-
-    qbGrfg("G17",
-        "(Puvrs NYG) [RZF] -  Oernguvat Ceboyrzf  -  20035 J Ynxr Ubhfgba Cxjl  - Kfg'f: Sverfvta Qe/wnahnel Qe - Oyqt:Crq Nffbpv - Xrl Znc:337H - Obk #:N1901",
-        "FEP:RZF",
-        "PNYY:Oernguvat Ceboyrzf",
-        "NQQE:20035 J Ynxr Ubhfgba Cxjl",
-        "K:Sverfvta Qe/wnahnel Qe",
-        "CYNPR:Crq Nffbpv",
-        "ZNC:337H",
-        "OBK:N1901");
-
-    qbGrfg("G18",
-        "(Puvrs NYG) [RZF] -  10n1 Pneqvnp  -  18310 Inyvnag Oebbx Pg  -  Z19  - XZ:377P - Kfg'f: Qrnq Raq/ebfrohq Oraq Qe",
-        "FEP:RZF",
-        "PNYY:10n1 Pneqvnp",
-        "NQQE:18310 Inyvnag Oebbx Pg",
-        "HAVG:Z19",
-        "ZNC:377P",
-        "K:Qrnq Raq/ebfrohq Oraq Qe");
-
-    qbGrfg("G19",
-        "(Puvrs NYG) [RZF] -  32o1 Haxabja Ceboyrz  -  5823 Sberfg Gvzoref Qe  -  Z19  - XZ:337G - Kfg'f: Bnx Fgngvba Qe/xryyl Gvzoref Q",
-        "FEP:RZF",
-        "PNYY:32o1 Haxabja Ceboyrz",
-        "NQQE:5823 Sberfg Gvzoref Qe",
-        "HAVG:Z19",
-        "ZNC:337G",
-        "K:Bnx Fgngvba Qe/xryyl Gvzoref Q");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgNgnfpbpvgn() {
-
-    qbGrfg("G1",
-        " 1 bs 2\a" +
-        "SEZ:zft@pszft.pbz\a" +
-        "FHOW:Puvrs NYG\a" +
-        "ZFT:[SVER] - Sver Nynez - Erfvqragvny - 17202 Orerggn Oraq Qe - Znc: 376S- - Ngnfpbpvgn Genpr - Kfg'f:\a" +
-        "(Pba'g) 2 bs 2\a" +
-        "Zhfpbel Qe Furnejngre Ora - Havgf: NGSQ R-R29 - 201300303\a" +
-        "(Raq)",
-
-        "FEP:SVER",
-        "PNYY:Sver Nynez - Erfvqragvny",
-        "NQQE:17202 Orerggn Oraq Qe",
-        "ZNC:376S-",
-        "CYNPR:Ngnfpbpvgn Genpr",
-        "K:Zhfpbel Qe Furnejngre Ora",
-        "HAVG:NGSQ R-R29",
-        "VQ:201300303");
-
-    qbGrfg("G2",
-        " 1 bs 2\a" +
-        "SEZ:zft@pszft.pbz\a" +
-        "FHOW:Puvrs NYG\a" +
-        "ZFT:[SVER] - Zbgbe Iruvpyr Vapvqrag - 2300 R Sz 1960 - Znc: 336F- - Kfg'f: Zbbafuvar Uvyy Eq 1fg Fg -\a" +
-        "(Pba'g) 2 bs 2\a" +
-        "Havgf: R-Z29 R-R29 R-R39 - 201300177\a" +
-        "(Raq)",
-
-        "FEP:SVER",
-        "PNYY:Zbgbe Iruvpyr Vapvqrag",
-        "NQQE:2300 R Sz 1960",
-        "ZNQQE:2300 R Snez-gb-znexrg 1960",
-        "ZNC:336F-",
-        "K:Zbbafuvar Uvyy Eq 1fg Fg",
-        "HAVG:R-Z29 R-R29 R-R39",
-        "VQ:201300177");
-
-    qbGrfg("G3",
-        " 1 bs 2\a" +
-        "SEZ:zft@pszft.pbz\a" +
-        "FHOW:Puvrs NYG\a" +
-        "ZFT:[SVER] - Zbgbe Iruvpyr Vapvqrag - Gvzore Sberfg Qe & r Sz 1960 - Znc: 337F- - Bnxf Bs Ngnfpbpvgn -\a" +
-        "(Pba'g) 2 bs 2\a" +
-        "Kfg'f: R Sz 1960 Terra Gvzoref Q - Havgf: R-Z29 R-R39 R-R29 - 201300087\a" +
-        "(Raq)",
-
-        "FEP:SVER",
-        "PNYY:Zbgbe Iruvpyr Vapvqrag",
-        "NQQE:Gvzore Sberfg Qe & r Sz 1960",
-        "ZNQQE:Gvzore Sberfg Qe & r Snez-gb-znexrg 1960",
-        "ZNC:337F-",
-        "CYNPR:Bnxf Bs Ngnfpbpvgn",
-        "K:R Sz 1960 Terra Gvzoref Q",
-        "HAVG:R-Z29 R-R39 R-R29",
-        "VQ:201300087");
-
-    qbGrfg("G4",
-        " 1 bs 2\a" +
-        "SEZ:zft@pszft.pbz\a" +
-        "FHOW:Puvrs NYG\a" +
-        "ZFT:[SVER] - Fznyy Bhgfvqr Sver - 6818 Nzore Nfu Pg - Znc: 337D- - Xvatf Evire Ivyyntr - Kfg'f: Pevzfba\a" +
-        "(Pba'g 2 bs 2\a" +
-        "Bnx Gey - Havgf: R-R39 SJ R-R19 - 201300006\a" +
-        "(Raq)",
-
-        "FEP:SVER",
-        "PNYY:Fznyy Bhgfvqr Sver",
-        "NQQE:6818 Nzore Nfu Pg",
-        "ZNC:337D-",
-        "CYNPR:Xvatf Evire Ivyyntr",
-        "K:Pevzfba Bnx Gey",
-        "HAVG:R-R39 SJ R-R19",
-        "VQ:201300006");
-
-    qbGrfg("G5",
-        " 1 bs 2\a" +
-        "SEZ:zft@pszft.pbz\a" +
-        "FHOW:Puvrs NYG\a" +
-        "ZFT:[SVER] - Yvtug Fgehpgher Vapvqrag - 7619 Oebamr Genvy Qe - Znc: 377Q- - Jnyqra Ba Ynxr Ubhfgba -\a" +
-        "(Pba'g) 2 bs 2\a" +
-        "Kfg'f: Fnvysvfu Pbir Qe Gebcul C - Havgf: R-Q89 R-R19 R-Y19 - 201258397\a" +
-        "(Raq)",
-
-        "FEP:SVER",
-        "PNYY:Yvtug Fgehpgher Vapvqrag",
-        "NQQE:7619 Oebamr Genvy Qe",
-        "ZNC:377Q-",
-        "CYNPR:Jnyqra Ba Ynxr Ubhfgba",
-        "K:Fnvysvfu Pbir Qe Gebcul C",
-        "HAVG:R-Q89 R-R19 R-Y19",
-        "VQ:201258397");
-
-    qbGrfg("G6",
-        " 1 bs 2\a" +
-        "SEZ:zft@pszft.pbz\a" +
-        "FHOW:Puvrs NYG\a" +
-        "ZFT:[SVER] - Erfvqragvny Sver - 7619 Oebamr Genvy Qe - Znc: 377Q- - Jnyqra Ba Ynxr Ubhfgba - Kfg'f:\a" +
-        "(Pba'g) 2 bs 2\a" +
-        "Fnvysvfu Pbir Qe Gebcul C - Havgf: R-R19 R-Y19 R-Q99 R-R39 - 201258397\a" +
-        "(Raq)",
-
-        "FEP:SVER",
-        "PNYY:Erfvqragvny Sver",
-        "NQQE:7619 Oebamr Genvy Qe",
-        "ZNC:377Q-",
-        "CYNPR:Jnyqra Ba Ynxr Ubhfgba",
-        "K:Fnvysvfu Pbir Qe Gebcul C",
-        "HAVG:R-R19 R-Y19 R-Q99 R-R39",
-        "VQ:201258397");
-   
-  }
-  
-  @Grfg
-  choyvp ibvq grfgOleba() {
-
-    qbGrfg("G1",
-        "1 bs 2\a" +
-        "SEZ:nyreg@pszft.pbz\a" +
-        "FHOW:Puvrs NYG\a" +
-        "ZFT:[SVER] -  Genhzngvp Vawhevrf (  -  6931 R Sz 1960  - Kfg'f: Gbja Pragre Oyiq/ngnfpbpvgn Eq -\a" +
-        "(Pba'g) 2 bs 2\a" +
-        "Oyqt:Gnetrg Fgb - Xrl Znc:337L - Obk #:N1901\a\a" +
-        "(Raq)",
-
-        "FEP:SVER",
-        "PNYY:Genhzngvp Vawhevrf (",
-        "NQQE:6931 R Sz 1960",
-        "ZNQQE:6931 R Snez-gb-znexrg 1960",
-        "K:Gbja Pragre Oyiq/ngnfpbpvgn Eq",
-        "CYNPR:Gnetrg Fgb",
-        "ZNC:337L",
-        "OBK:N1901");
-    
-  }
+ }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj GKUhzoyrCnefreGrfg().trarengrGrfgf("G1");
+    arj GKUhzoyrCnefreGrfg().trarengrGrfgf("G17");
   }
 }

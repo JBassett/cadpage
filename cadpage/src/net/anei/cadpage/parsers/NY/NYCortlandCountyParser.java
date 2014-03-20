@@ -13,7 +13,6 @@ public class NYCortlandCountyParser extends MsgParser {
   
   public NYCortlandCountyParser() {
     super("CORTLAND COUNTY", "NY");
-    setFieldList("ADDR CALL INFO");
   }
   
   @Override

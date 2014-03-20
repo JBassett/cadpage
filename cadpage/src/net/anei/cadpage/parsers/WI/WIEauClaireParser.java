@@ -13,7 +13,7 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  */
 public class WIEauClaireParser extends FieldProgramParser {
   
-  private static final Pattern SUBJECT_PTN = Pattern.compile("Case# (\\d\\d-\\d+)");
+  private static final Pattern SUBJECT_PTN = Pattern.compile("Case# (\\d\\d-\\d{3})");
   
   public WIEauClaireParser() {
     super("EAU CLAIRE", "WI",
@@ -22,7 +22,7 @@ public class WIEauClaireParser extends FieldProgramParser {
   
   @Override
   public String getFilter() {
-    return "tfddispatch@att.net,messaging@iamresponding.com";
+    return "tfddispatch@att.net";
   }
   
   @Override
@@ -33,7 +33,7 @@ public class WIEauClaireParser extends FieldProgramParser {
     String sub = body.substring(0,pt).trim();
     body = body.substring(pt+1).trim();
     
-    if (!subject.startsWith("Case#")) subject = sub;
+    if (subject.length() == 0) subject = sub;
     if (sub.length() > 0 && !sub.equals(subject)) return false;
     
     if (subject.length() > 0) {
@@ -49,17 +49,9 @@ public class WIEauClaireParser extends FieldProgramParser {
   private static final DateFormat TIME_FMT = new SimpleDateFormat("hh:mm:ss aa");
   private class MyTimeField extends TimeField {
     
-    public MyTimeField() {
-      setPattern("\\d\\d?:\\d\\d:\\d\\d(?: [AP]M)?", true);
-    }
-    
     @Override
     public void parse(String field, Data data) {
-      if (field.length() == 8) {
-        data.strTime = field;
-      } else {
-        setTime(TIME_FMT, field, data);
-      }
+      setTime(TIME_FMT, field, data);
     }
   }
   

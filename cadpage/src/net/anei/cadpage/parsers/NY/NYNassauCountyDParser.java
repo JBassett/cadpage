@@ -9,128 +9,68 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class NYNassauCountyDParser extends FieldProgramParser {
   
-  private static final Pattern MARKER = Pattern.compile("^([^\\*]*?)\\*\\*\\*([^\\*]+?)\\*[\\* ]\\* ?");
-  private static final Pattern MISSING_DELIM = Pattern.compile("(?<=[^\\*])(?=TOA:|CS:)|(?<= \\d\\d-\\d\\d-\\d\\d)(?! ?\\*)");
-  private static final Pattern DELIM = Pattern.compile("(?<![\\*\n])\\*");
+  private static final Pattern ID_PTN = Pattern.compile("^(\\d{4}-\\d{6}) ");
+  private static final Pattern ID_PTN2 = Pattern.compile("\\b(\\d{4}-\\d{6})\\b");
   
   public NYNassauCountyDParser() {
     super("NASSAU COUNTY", "NY",
-           "PLACE? ADDR/ZSXa! CS:X? TOA:TIMEDATE? UNITID? INFO+");
+           "ADDR/SP! CS:X! TOA:SPEC");
   }
-  
-  @Override
-  public String getFilter() {
-    return "eastmeadowfd@eastmeadowfd.net,paging1@firerescuesystems.xohost.com,wantaghpaging@gmail.com";
-  }
-  
+
   @Override
   protected boolean parseMsg(String body, Data data) {
-    Matcher match = MARKER.matcher(body);
-    if (!match.find()) return false;
-    data.strCall = append(match.group(2).trim(), " - ", match.group(1).trim());
-    body = body.substring(match.end());
-    body = MISSING_DELIM.matcher(body).replaceAll(" *");
     
-    if (body.contains(" c/s:") || body.contains(" ADTNL:") || body.contains(" ADTML:")) return false;
-    return parseFields(DELIM.split(body), 2, data);
-  }
-  
-  @Override
-  public String getProgram() {
-    return "CALL " + super.getProgram();
-  }
-  
-  private class MyPlaceField extends PlaceField {
-    @Override
-    public boolean canFail() {
-      return true;
+    Matcher match = ID_PTN.matcher(body);
+    if (match.find()) {
+      data.strCallId = match.group(1);
+      body = body.substring(match.end()).trim();
     }
     
-    @Override
-    public boolean checkParse(String field, Data data) {
-      // If the next field has a colon, it cannot be an address
-      // so this field cannot be a place field
-      String nextFld = getRelativeField(+1);
-      if (nextFld.contains(":")) return false;
-      super.parse(field, data);
-      return true;
-    }
+    // Call description is in front of text bracketed by three asterisks
+    int pt1 = body.indexOf("***");
+    if (pt1 < 0) return false;
+    int pt2 = body.indexOf("*** ", pt1+3);
+    if (pt2 < 0) return false;
+    data.strCall = append(body.substring(0,pt1).trim(), " / ", body.substring(pt1+3, pt2).trim());
+    
+    body = body.substring(pt2+4).trim();
+    return super.parseMsg(body, data);
   }
   
-  private class MyDateTimeField extends DateTimeField {
-    @Override
-    public void parse(String field, Data data) {
-      field = field.replace('-', '/');
-      super.parse(field, data);
-    }
-  }
-  
-  private static final Pattern UNIT_ID_PTN = Pattern.compile("(.*)(\\d{4}-\\d{6})");
-  private static final Pattern MISSING_BLANK_PTN = Pattern.compile("(?<=[^ ])(?=RESCUE|ENGINE|LADDER)");
-  private class MyUnitIdField extends Field {
-    
-    @Override
-    public boolean canFail() {
-      return true;
-    }
-    
-    @Override
-    public boolean checkParse(String field, Data data) {
-      Matcher match = UNIT_ID_PTN.matcher(field);
-      if (!match.matches()) return false;
-      data.strUnit = MISSING_BLANK_PTN.matcher(match.group(1).trim()).replaceAll(",");
-      data.strCallId = match.group(2).trim();
-      return true;
-    }
+  private class SpecField extends InfoField {
     
     @Override
     public void parse(String field, Data data) {
-      if (!checkParse(field, data)) abort();
-    }
-
-    @Override
-    public String getFieldNames() {
-      return "UNIT ID";
-    }
-    
-  }
-  
-  private static final Pattern INFO_UNIT_PTN = Pattern.compile(" +UNITS +([0-9, /]+)$");
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = INFO_UNIT_PTN.matcher(field);
+      Parser p = new Parser(field);
+      data.strTime = p.get(' ');
+      data.strDate = p.get(' ').replace('-', '/');
+      field = p.get();
+      
+      Matcher match = ID_PTN2.matcher(field);
       if (match.find()) {
-        String unit = match.group(1).trim();
-        if (unit.endsWith(",")) unit = unit.substring(0,unit.length()-1).trim();
-        data.strUnit = append(data.strUnit, ", ", unit);
-        field = field.substring(0,match.start());
+        data.strCallId = match.group(1);
+        field = field.substring(0,match.start()) + field.substring(match.end());
+        field = field.trim().replaceAll("  +", " ");
       }
       super.parse(field, data);
     }
     
     @Override
     public String getFieldNames() {
-      return "INFO UNIT";
+      return "X DATE TIME INFO ID";
     }
   }
   
   @Override
   public Field getField(String name) {
-    if (name.equals("PLACE")) return new MyPlaceField();
-    if (name.equals("INFO")) return new MyInfoField();
-    if (name.equals("DATETIME")) return new MyDateTimeField();
-    if (name.equals("UNITID")) return new MyUnitIdField();
+    if (name.equals("SPEC")) return new SpecField();
     return super.getField(name);
   }
   
   @Override
-  public String adjustMapAddress(String addr) {
-    if (addr.startsWith("Pre-Plan ")) addr = addr.substring(9).trim();
-    addr = BLVE_PTN.matcher(addr).replaceAll(" BLVD");
-    return addr;
+  public String getProgram() {
+    return "ID CALL " + super.getProgram();
   }
-  private static final Pattern BLVE_PTN = Pattern.compile(" +BLVE\\b");
 }
 
 

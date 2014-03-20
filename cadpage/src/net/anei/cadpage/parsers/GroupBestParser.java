@@ -13,15 +13,18 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
  * that accepts each message 
  */
 
-public class GroupBestParser extends GroupBaseParser {
+public class GroupBestParser extends MsgParser {
   
   private MsgParser[] parsers;
+  
+  private String dispFilter;
   
   private String sponsor;
   
   private Date sponsorDate;
   
   public GroupBestParser(MsgParser ... parsers) {
+    super("", "");
     
     // Build the final array of parsers.  eliminating parsers that are aliased
     // to another parser in the list
@@ -30,11 +33,6 @@ public class GroupBestParser extends GroupBaseParser {
     
     // Loop through the parser list
     for (MsgParser parser : parsers) {
-      
-      // Merge the default city/state and filter information.  None of these
-      // are really used for any maping or filtering, but they do end up
-      // calculating the displayed location name and sender filter.
-      addParser(parser);
       
       // See if this parser has an alias code
       String aliasCode = parser.getAliasCode();
@@ -45,22 +43,17 @@ public class GroupBestParser extends GroupBaseParser {
         if (mainParser != null) {
           
           // Yes again.  The main parser is going to replace the aliased parser
-          // First step is to make sure the  main parser is an AliasedMsgParser
-          // that we can adjust to include things that may differ between aliased
-          // parsers
-          AliasedMsgParser aliasParser;
-          if (mainParser instanceof AliasedMsgParser) {
-            aliasParser = (AliasedMsgParser)mainParser;
-          } else {
-            aliasParser = new AliasedMsgParser(mainParser);
-            aliasMap.put(aliasCode, aliasParser);
-            int ndx = parserList.indexOf(mainParser);
-            parserList.set(ndx, aliasParser);
+          // but before we discard the new parser, see if it has a different
+          // default city or state then the main parser.  If it does, reset the
+          // main parser default city or state value to an empty string.
+          String defCity = mainParser.getDefaultCity();
+          if (defCity.length() > 0 && !defCity.equals(parser.getDefaultCity())) {
+            mainParser.setDefaultCity("");
           }
-          
-          // Now that that is taken care of, just add the new parser
-          // to the aliased one
-          aliasParser.addMsgParser(parser);
+          String defState = mainParser.getDefaultState();
+          if (defState.length() > 0 && !defState.equals(parser.getDefaultState())) {
+            mainParser.setDefaultState("");
+          }
           parser = null;
         } 
         
@@ -78,12 +71,28 @@ public class GroupBestParser extends GroupBaseParser {
     
     // Convert the adjusted parser list back to an array
     this.parsers = parserList.toArray(new MsgParser[parserList.size()]);
+    setDefaultCity(parsers[0].getDefaultCity());
+    setDefaultState(parsers[0].getDefaultState());
+    
+    // Build a display filter by concatenating all of the filters of
+    // our constituent parsers.  As the name implies, this will never be
+    // used to do any real filtering, but it will give us something to 
+    // display in the settings menu
+    StringBuilder sb = new StringBuilder();
+    for (MsgParser parser : this.parsers) {
+      String filter = parser.getFilter();
+      if (filter.length() > 0) {
+        if (sb.length() > 0) sb.append(',');
+        sb.append(filter);
+      }
+    }
+    dispFilter = sb.toString();
     
     // Group parser is sponsored if all of it subparsers are sponsored
     // If all subparsers are sponsored, sponsor date is the earliest subparser sponsor date
     sponsor = null;
     sponsorDate = null;
-    for (MsgParser parser : parsers) {
+    for (MsgParser parser : this.parsers) {
       String pSponsor = parser.getSponsor();
       if (pSponsor == null) {
         sponsor = null;
@@ -102,43 +111,52 @@ public class GroupBestParser extends GroupBaseParser {
       }
     }
   }
+  
+  @Override
+  public String getFilter() {
+    return dispFilter;
+  }
 
   @Override
   protected Data parseMsg(Message msg, int parserFlags) {
     
-    int bestScore = Integer.MIN_VALUE;
+    // OK, this gets complicated
+    // if PARSE_FLG_GEN_ALERT is set, we can't
+    // pass them directly to the subparsers.  If we do, they will all return
+    // a general alert status, possibly masking a real positive parser hit from
+    // one of the other parsers.  In this case, and this case only, we turn off
+    // the general alert flag passed to subparsers and handle it ourselves
+    int tFlags = parserFlags;
+    boolean genAlert = (parserFlags & PARSE_FLG_FORCE) == PARSE_FLG_FORCE;
+    if (genAlert) {
+      tFlags |= PARSE_FLG_RUN_REPORT;
+      tFlags &= ~PARSE_FLG_GEN_ALERT;
+    }
+    
+    int bestScore = -1;
     Data bestData = null;
     
     for (MsgParser parser : parsers) {
-      
-      // If we encounter a GroupBlockParser in the list, see if 
-      // we have found anything so far, excepting anything with
-      // a general alert or run report status.  If we have, return it
-      if (parser instanceof GroupBlockParser) {
-        if (bestData != null && 
-            !bestData.strCall.equals("GENERAL ALERT") && 
-            !bestData.strCall.equals("RUN REPORT")) return bestData;
-      }
-      
-      // Otherwise invoke this parser and see what kind of result it returns.
-      else {
-        Data tmp = parser.parseMsg(msg, parserFlags);
-        if (tmp != null) {
-          // Score the result.
-          // We want to seriously ding any result produced by any of the "General" parsers
-          // including General Alert.  GENERAL ALERT type messages produced by location
-          // parsers do not suffer this penalty
-          int newScore = tmp.score();
-          if (!parser.getParserCode().startsWith("General")) newScore += 100000;
-          if (newScore > bestScore) {
-            bestData = tmp;
-            bestScore = newScore;
-          }
+      Data tmp = parser.parseMsg(msg, tFlags);
+      if (tmp != null) {
+        int newScore = tmp.score();
+        if (!parser.getParserCode().startsWith("General")) newScore +=25;
+        if (newScore > bestScore) {
+          bestData = tmp;
+          bestScore = newScore;
         }
       }
     }
     
-    return bestData;
+    if (bestData != null) return bestData;
+    
+    // If non of our subparsers found this to be valid page, and the original
+    // flags forced a general alert, handle that now
+    if (genAlert) {
+      return ManageParsers.getInstance().getAlertParser().parseMsg(msg, parserFlags);
+    }
+    
+    return null;
   }
 
   // We have to override this to satisfy abstract requirements, but it will

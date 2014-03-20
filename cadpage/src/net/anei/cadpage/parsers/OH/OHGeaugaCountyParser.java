@@ -19,7 +19,6 @@ public class OHGeaugaCountyParser extends SmartAddressParser {
  
   public OHGeaugaCountyParser() {
     super("GEAUGA COUNTY", "OH");
-    setFieldList("CALL ADDR APT INFO PLACE");
   }
   
   @Override
@@ -78,7 +77,7 @@ public class OHGeaugaCountyParser extends SmartAddressParser {
         data.strPlace = body;
       } else {
         res.getData(data);
-        String sExtra = res.getLeft();
+        String sExtra = getLeft();
         if (data.strCall.length() == 0) {
           data.strCall = sExtra;
         } else {

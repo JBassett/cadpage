@@ -15,7 +15,6 @@ public class OHWayneCountyAParser extends SmartAddressParser {
   
   public OHWayneCountyAParser() {
     super("WAYNE COUNTY", "OH");
-    setFieldList("CALL ADDR APT INFO");
   }
   
   @Override
@@ -48,7 +47,7 @@ public class OHWayneCountyAParser extends SmartAddressParser {
     String sPlace = getLeft();
     data.strSupp = sPlace;
     if (data.strAddress.length() >= 4 ) return true;
-    return data.parseGeneralAlert(this, body);
+    return data.parseGeneralAlert(body);
   }
 
   

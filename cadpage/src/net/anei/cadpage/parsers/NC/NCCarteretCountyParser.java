@@ -1,32 +1,53 @@
 package net.anei.cadpage.parsers.NC;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import net.anei.cadpage.parsers.MsgInfo.Data;
-import net.anei.cadpage.parsers.dispatch.DispatchSouthernPlusParser;
+import net.anei.cadpage.parsers.dispatch.DispatchSouthernParser;
 
 /**
  * Carteret county, NC
  */
-public class NCCarteretCountyParser extends DispatchSouthernPlusParser {
+public class NCCarteretCountyParser extends DispatchSouthernParser {
+  
+  private final static Pattern SUB_MARKER = Pattern.compile("^CEC:\\d\\d:\\d\\d[ ,]");
+  private final static Pattern SUB_TRAILER = Pattern.compile(" \\d\\d$");
+  private final static Pattern CALL_ID_PTN = Pattern.compile(" +OCA: *(\\d\\d-\\d\\d-\\d{4})$");
   
   public NCCarteretCountyParser() {
-    super(CITY_LIST, "CARTERET COUNTY", "NC", 
-          DSFLAG_OPT_DISPATCH_ID | DSFLAG_NO_NAME_PHONE | DSFLAG_ID_OPTIONAL);
+    super(CITY_LIST, "CARTERET COUNTY", "NC");
   }
   
   @Override
   public String getFilter() {
-    return "cec@carteretcountygov.org,@sealevelfire-rescue.org,vtext.com@gmail.com";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_PREFER_GPS;
+    return "cec@carteretcountygov.org,@sealevelfire-rescue.org";
   }
   
   @Override
   public boolean parseMsg(String subject, String body, Data data) {
-
-    if (!super.parseMsg(subject, body, data)) return false;
+    subject = subject.trim();
+    boolean badTime = false;
+    if (subject.length() > 0 && SUB_MARKER.matcher(body).find()) {
+      if (!SUB_TRAILER.matcher(subject).find()) {
+        subject += " 00";
+        badTime = true;
+      }
+      body = "CEC:" + subject + ':' + body.substring(4);
+    }
+    body = body.replace(",", "");
+    
+    Matcher match = CALL_ID_PTN.matcher(body);
+    String callId = "";
+    if (match.find()) {
+      callId = match.group(1);
+      body = body.substring(0,match.start());
+    }
+    
+    if (!super.parseMsg(body, data)) return false;
+    if (badTime) data.strTime = "";
+    
+    if (data.strCallId.length() == 0) data.strCallId = callId;
     
     // Sometimes city name is duplicated in address
     // which ends up as the place name

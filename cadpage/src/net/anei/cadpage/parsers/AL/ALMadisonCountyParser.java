@@ -20,25 +20,16 @@ public class ALMadisonCountyParser extends FieldProgramParser {
   
   @Override
   public String getFilter() {
-    return "cad.page@madco911.com,rescue1-bounces@rescuesquad.net,cad.page@madco9-1-1.org";
+    return "cad.page@madco911.com,rescue1-bounces@rescuesquad.net";
   }
 
   @Override
   protected boolean parseMsg(String subject, String body, Data data) {
-
-    if (body.startsWith("/ ")) body = body.substring(2).trim();
-    do {
-      if (subject.contains(CAD_MARKER)) break;
-      
-      if (body.startsWith(CAD_MARKER + " / ")) {
-        body = body.substring(CAD_MARKER.length()+3);
-        break;
-      }
-      
-      if (body.startsWith("Loc:")) break;
-      
-      return false;
-    } while (false);
+    
+   if (! subject.contains(CAD_MARKER)) {
+     if (! body.startsWith(CAD_MARKER + " / ")) return false;
+      body = body.substring(CAD_MARKER.length()+3);
+    }
    
     return super.parseMsg(body, data);
   }
@@ -48,14 +39,13 @@ public class ALMadisonCountyParser extends FieldProgramParser {
     public void parse(String field, Data data) {
       field = field.replaceAll(" alias ", " @");
       Parser p = new Parser(field);
-      parseAddress(StartType.START_ADDR, FLAG_ANCHOR_END, p.get(":"), data);
+      parseAddress(StartType.START_ADDR, FLAG_ANCHOR_END, p.get(": @"), data);
       data.strPlace = p.get();
-      if (data.strPlace.startsWith("@")) data.strPlace = data.strPlace.substring(1).trim();
     }
     
     @Override
     public String getFieldNames() {
-      return "ADDR APT CITY PLACE";
+      return "ADDR APT PLACE";
     }
   }
   
@@ -74,11 +64,8 @@ public class ALMadisonCountyParser extends FieldProgramParser {
   }
   
   private static final Properties CITY_TABLE = buildCodeTable(new String[]{
-      "MAD",   "MADISON",
       "MDCO",  "MADISON COUNTY",
       "HSV",   "HUNTSVILLE",
-      "LIME",  "LIMESTONE COUNTY",
-      "LIME MAD", "MADISON",
       "NEWH",  "NEW HOPE",
       "OXRD",  "OWENS CROSS ROADS",
       "TRI",   "TRIANA"

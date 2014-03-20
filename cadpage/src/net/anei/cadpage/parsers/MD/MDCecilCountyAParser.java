@@ -21,7 +21,6 @@ public class MDCecilCountyAParser extends MsgParser {
 
   public MDCecilCountyAParser() {
     super("CECIL COUNTY", "MD");
-    setFieldList("BOX CALL ADDR APT X CITY ID");
   }
 
   @Override

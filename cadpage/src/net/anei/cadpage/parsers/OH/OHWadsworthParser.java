@@ -1,15 +1,14 @@
 package net.anei.cadpage.parsers.OH;
 
-import net.anei.cadpage.parsers.GroupBestParser;
 
-/*
- * Wayne County, OH
- */
-
-public class OHWadsworthParser extends GroupBestParser {
+public class OHWadsworthParser extends OHSummitCountyParser {
   
   public OHWadsworthParser() {
-    super(new OHWadsworthAParser(),
-           new OHWadsworthBParser());
+    super("WADSWORTH", "OH");
+  }
+  
+  @Override
+  public String getFilter() {
+    return "info@sundance-sys.com";
   }
 }

@@ -19,24 +19,6 @@ F: Z:68:PNAPRY;2932 EBQZNA NI; EVN\a
 F: Z:69:Hcqngr: ;SVER ZHGHNY NVQ;2932 EBQZNA NI\a
 @EVSQ: 17437:;ZRQVPNY PNYY;767 30GU FG;EV
 
-Ebpx Vfynaq Pbhagl, VY
-Pbagnpg: Qneva Xrvgu <qneva.xrvgu@ubgznvy.pbz>
-Fraqre: PNQ@evpbrgfo.bet
-
-F: Z:91:SLV: ;3130 9GU FG;FGEHPGHER SVER/TRARENY;EV 
-F: Z:90:Hcqngr: ;2626 EBQZNA NI;FGEHPGHER SVER/TRARENY;EVN 
-F: Z:93:SLV: ;2932 EBQZNA NI;FGEHPGHER SVER/TRARENY;EVN 
-
-Pbagnpg: Wvz Barl <wvzbarl95@lnubb.pbz>
-Fraqre: PNQ@evpbrgfo.bet
-417:SLV: ;28424 38GU NI A;PBHAGL RZF BAYL;UVY
-416:SLV: ;27521 94GU NI A;PBHAGL RZF BAYL;UVY
-F: Z:417:SLV: ;28424 38GU NI A;PBHAGL RZF BAYL;UVY 
-
-Pbagnpg: qneva.xrvgu@ubgznvy.pbz
-Fraqre: PNQ@evpbrgfo.bet
-F: Z:135:SLV: ;1201 7GU FG;FGEHPGHER SVER/TRARENY;RZ 
-
 */
 
 choyvp pynff VYEbpxVfynaqPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -49,64 +31,72 @@ choyvp pynff VYEbpxVfynaqPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   choyvp ibvq grfgCnefre() {
 
     qbGrfg("G1",
-        "F: Z:91:SLV: ;3130 9GU FG;FGEHPGHER SVER/TRARENY;EV ",
-        "VQ:91",
-        "NQQE:3130 9GU FG",
-        "PNYY:FGEHPGHER SVER/TRARENY",
-        "PVGL:EBPX VFYNAQ");
+        "@EVSQ: 15221:;PENFU CREFBANY VAWHEVRF;24GU FG/18GU NI",
+        "FEP:EVSQ",
+        "VQ:15221",
+        "PNYY:PENFU CREFBANY VAWHEVRF",
+        "NQQE:24GU FG & 18GU NI",
+        "ZNQQE:24GU FG & 18GU NIR");
 
     qbGrfg("G2",
-        "F: Z:90:Hcqngr: ;2626 EBQZNA NI;FGEHPGHER SVER/TRARENY;EVN ",
-        "VQ:90",
-        "NQQE:2626 EBQZNA NI",
-        "ZNQQE:2626 EBQZNA NIR",
-        "PNYY:FGEHPGHER SVER/TRARENY",
-        "PVGL:EBPX VFYNAQ NEFRANY");
+        "@EVSQ: 15226:;SVER BGURE;1323 14GU FG",
+        "FEP:EVSQ",
+        "VQ:15226",
+        "PNYY:SVER BGURE",
+        "NQQE:1323 14GU FG");
 
     qbGrfg("G3",
-        "F: Z:93:SLV: ;2932 EBQZNA NI;FGEHPGHER SVER/TRARENY;EVN ",
-        "VQ:93",
-        "NQQE:2932 EBQZNA NI",
-        "ZNQQE:2932 EBQZNA NIR",
-        "PNYY:FGEHPGHER SVER/TRARENY",
-        "PVGL:EBPX VFYNAQ NEFRANY");
-  
+        "@EVSQ: 15227:;SVER NYNEZ;3605 11GU NI",
+        "FEP:EVSQ",
+        "VQ:15227",
+        "PNYY:SVER NYNEZ",
+        "NQQE:3605 11GU NI",
+        "ZNQQE:3605 11GU NIR");
+
+    qbGrfg("G4",
+        "@EVSQ: 16193:;ZRQVPNY PNYY;2300-46 79GU NI J",
+        "FEP:EVSQ",
+        "VQ:16193",
+        "PNYY:ZRQVPNY PNYY",
+        "NQQE:2300-46 79GU NI J",
+        "ZNQQE:2300 79GU NIR J");
   }
   
   @Grfg
-  choyvp ibvq WvzBarl() {
+  choyvp ibvq grfgCnefre2() {
 
     qbGrfg("G1",
-        "417:SLV: ;28424 38GU NI A;PBHAGL RZF BAYL;UVY",
-        "VQ:417",
-        "NQQE:28424 38GU NI A",
-        "ZNQQE:28424 38GU NIR A",
-        "PNYY:PBHAGL RZF BAYL",
-        "PVGL:UVYYFQNYR");
+        "F: Z:67:SLV: ;FGEHPGHER SVER/TRARENY;2932 EBQZNA NI\a",
+        "VQ:67",
+        "PNYY:FGEHPGHER SVER/TRARENY",
+        "NQQE:2932 EBQZNA NI",
+        "ZNQQE:2932 EBQZNA NIR");
 
     qbGrfg("G2",
-        "416:SLV: ;27521 94GU NI A;PBHAGL RZF BAYL;UVY",
-        "VQ:416",
-        "NQQE:27521 94GU NI A",
-        "ZNQQE:27521 94GU NIR A",
-        "PNYY:PBHAGL RZF BAYL",
-        "PVGL:UVYYFQNYR");
-  
-  }
-  
-  @Grfg
-  choyvp ibvq grfgQnevaXrvgu() {
+        "F: Z:68:PNAPRY;2932 EBQZNA NI; EVN\a",
+        "VQ:68",
+        "PNYY:PNAPRY - EVN",
+        "NQQE:2932 EBQZNA NI",
+        "ZNQQE:2932 EBQZNA NIR");
 
-    qbGrfg("G1",
-        "F: Z:135:SLV: ;1201 7GU FG;FGEHPGHER SVER/TRARENY;RZ ",
-        "VQ:135",
-        "NQQE:1201 7GU FG",
-        "PNYY:FGEHPGHER SVER/TRARENY",
-        "PVGL:RNFG ZBYVAR");
+    qbGrfg("G3",
+        "F: Z:69:Hcqngr: ;SVER ZHGHNY NVQ;2932 EBQZNA NI\a",
+        "VQ:69",
+        "PNYY:SVER ZHGHNY NVQ",
+        "NQQE:2932 EBQZNA NI",
+        "ZNQQE:2932 EBQZNA NIR");
+
+    qbGrfg("G4",
+        "@EVSQ: 17437:;ZRQVPNY PNYY;767 30GU FG;EV",
+        "FEP:EVSQ",
+        "VQ:17437",
+        "PNYY:ZRQVPNY PNYY",
+        "NQQE:767 30GU FG",
+        "PVGL:EBPX VFYNAQ");
 
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj VYEbpxVfynaqPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj VYEbpxVfynaqPbhaglCnefreGrfg().trarengrGrfgf("G1", "FEP VQ PNYY NQQE PVGL");
   }
 }

@@ -10,9 +10,6 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 
 public class DispatchProphoenixParser extends FieldProgramParser {
   
-  private static final Pattern MARKER = Pattern.compile("^(?:(\\d+)|(?:[ A-Z0-9]+ +\\(#([A-Z0-9]+)\\) +)?([- A-Z0-9]+):) +");
-  private static final Pattern TRAILER_PTN = Pattern.compile(" *;[A-Z0-9]+ +STOP$"); 
-  
   private Properties cityCodes;
   
   public DispatchProphoenixParser(String defCity, String defState) {
@@ -21,44 +18,30 @@ public class DispatchProphoenixParser extends FieldProgramParser {
   
   public DispatchProphoenixParser(Properties cityCodes, String defCity, String defState) {
     super(defCity, defState,
-           "DATETIME CALL ADDR! Units:UNIT+ Comments:INFO+");
+           "IDDATETIME CALL ADDR! Units:UNIT+ Comments:INFO+");
     this.cityCodes = cityCodes;
   }
   
   @Override
   protected boolean parseMsg(String body, Data data) {
-    
-    // There are two kinds of headers.  Possibly one for text pages and another for SMTP pages
-    Matcher match = MARKER.matcher(body);
-    if (!match.find()) return false;
-    data.strCallId = match.group(1);
-    if (data.strCallId == null) {
-      data.strCallId = match.group(2);
-      if (data.strCallId == null) data.strCallId = "";
-      data.strSource = match.group(3).trim();
-    }
-    body = body.substring(match.end());
-    
-    match = TRAILER_PTN.matcher(body);
-    if (match.find()) body = body.substring(0,match.start());
-    
     return parseFields(body.split("\n"), data);
   }
   
-  @Override
-  public String getProgram() {
-    return "ID SRC " + super.getProgram();
-  }
-  
   private static final Pattern ID_DATE_TIME_PTN = 
-    Pattern.compile("\\{(\\d\\d/\\d\\d/\\d{4}) (\\d\\d:\\d\\d:\\d\\d)\\}");
-  private class MyDateTimeField extends DateTimeField {
+    Pattern.compile("(\\d{10}) \\{(\\d\\d/\\d\\d/\\d{4}) (\\d\\d:\\d\\d:\\d\\d)\\}");
+  private class IdDateTimeField extends Field {
     @Override
     public void parse(String field, Data data) {
       Matcher match = ID_DATE_TIME_PTN.matcher(field);
       if (!match.matches()) abort();
-      data.strDate = match.group(1);
-      data.strTime = match.group(2);
+      data.strCallId = match.group(1);
+      data.strDate = match.group(2);
+      data.strTime = match.group(3);
+    }
+    
+    @Override
+    public String getFieldNames() {
+      return "ID DATE TIME";
     }
   }
   
@@ -137,9 +120,11 @@ public class DispatchProphoenixParser extends FieldProgramParser {
     }
   }
   
+  
+  
   @Override
   public Field getField(String name) {
-    if (name.equals("DATETIME")) return new MyDateTimeField();
+    if (name.equals("IDDATETIME")) return new IdDateTimeField();
     if (name.equals("CALL")) return new MyCallField();
     if (name.equals("ADDR")) return new MyAddressField();
     if (name.equals("UNIT")) return new MyUnitField();

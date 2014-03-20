@@ -1,17 +1,12 @@
 package net.anei.cadpage.donation;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-
 //import net.anei.cadpage.ContentQuery;
-import net.anei.cadpage.BugReportGenerator;
-import net.anei.cadpage.C2DMService;
+import net.anei.cadpage.C2DMReceiver;
 import net.anei.cadpage.ContentQuery;
 import net.anei.cadpage.ManagePreferences;
 import net.anei.cadpage.R;
@@ -20,7 +15,6 @@ import net.anei.cadpage.SmsMsgLogBuffer;
 import net.anei.cadpage.SmsReceiver;
 import net.anei.cadpage.billing.BillingManager;
 import android.content.Context;
-import android.content.Intent;
 import android.preference.ListPreference;
 import android.preference.PreferenceGroup;
 
@@ -77,15 +71,12 @@ public class DeveloperToolsManager {
     "Content Query",
     "Recent Tasks",
     "Stat: Roll Last Date",
-    "Build Test Message",
-    "Status test",
-    "Generate Bug Report",
-    "Active911 Account Req"
+    "Build Test Message"
     
   };
   
   private static final String[] valueList = new String[]{
-    "31", "32", "33", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"
+    "31", "32", "33", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"
   };
   
   private class DeveloperListPreference extends ListPreference {
@@ -234,38 +225,16 @@ public class DeveloperToolsManager {
         SmsReceiver.processCadPage(context, message);
         break;
         
-      case 15:    // Situation specific status test
-        ManagePreferences.setPaidYear(2013);
-        ManagePreferences.setInstallDate(buildDate("09162013"));
-        ManagePreferences.setPurchaseDate(buildDate("09162013"));
-        ManagePreferences.setFreeRider(false);
-        ManagePreferences.setSponsor(null);
-        ManagePreferences.setFreeSub(false);
-        ManagePreferences.setAuthLocation(null);
-        ManagePreferences.setAuthExemptDate(null);
-        ManagePreferences.setAuthExemptDate(null);
-        ManagePreferences.setAuthRunDays(0);
-        ManagePreferences.setAuthLastCheckTime(1379942474422L);
-        break;
-        
-      case 16:    // generate bug report
-        BugReportGenerator.generate();
-        break;
-        
-      case 17:
-        context.sendBroadcast(new Intent("net.anei.cadpage.REQ_ACCOUNT_INFO.Active911"));
-        break;
-        
       case 31:    // C2DM Register
-        C2DMService.register(context);
+        C2DMReceiver.register(context);
         break;
         
       case 32:    // C2DM Unregister
-        C2DMService.unregister(context);
+        C2DMReceiver.unregister(context);
         break;
         
       case 33:    // C2DM: Report
-        C2DMService.emailRegistrationId(context);
+        C2DMReceiver.emailRegistrationId(context);
         break;
       }
       MainDonateEvent.instance().refreshStatus();
@@ -315,14 +284,6 @@ public class DeveloperToolsManager {
     
   }
   
-  private static final DateFormat DATE_FORMAT = new SimpleDateFormat("MMddyyyy");
-  private Date buildDate(String dateStr) {
-    try {
-      return DATE_FORMAT.parse(dateStr);
-    } catch (ParseException ex) {
-      throw new RuntimeException(ex);
-    }
-  }
   
   
   

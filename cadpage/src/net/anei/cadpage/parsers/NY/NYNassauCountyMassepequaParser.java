@@ -1,13 +1,17 @@
 package net.anei.cadpage.parsers.NY;
 
 import java.util.Properties;
-import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
 import net.anei.cadpage.parsers.MsgInfo.Data;
 
 
 public class NYNassauCountyMassepequaParser extends FieldProgramParser {
+  
+  private static final Properties CITY_CODES = buildCodeTable(new String[]{
+      "MASS", "MASSEPEQUA",
+      "MPK",  "MASSEPEQUA PARK"
+  });
   
   public NYNassauCountyMassepequaParser() {
     super(CITY_CODES, "NASSAU COUNTY", "NY", 
@@ -16,7 +20,7 @@ public class NYNassauCountyMassepequaParser extends FieldProgramParser {
   
   @Override
   public String getFilter() {
-    return "paging@rednmxcad.com,massapequafd@rednmxcad.com";
+    return "paging@rednmxcad.com";
   }
   
   @Override
@@ -46,16 +50,4 @@ public class NYNassauCountyMassepequaParser extends FieldProgramParser {
     if (name.equals("ADDR")) return new MyAddressField();
     return super.getField(name);
   }
-  
-  @Override
-  public String adjustMapAddress(String address) {
-    return WESTFIELD_MALL_PTN.matcher(address).replaceAll("1 WESTFIELD MALL");
-  }
-  private static final Pattern WESTFIELD_MALL_PTN = Pattern.compile("\\b\\d+ +WESTFIELD MALL\\b", Pattern.CASE_INSENSITIVE);
-  
-  private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "E/M",  "EAST MASSAPEQUA",
-      "MASS", "MASSAPEQUA",
-      "MPK",  "MASSAPEQUA PARK"
-  });
 }

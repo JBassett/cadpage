@@ -15,12 +15,11 @@ public class PAMonroeCountyParser extends SmartAddressParser {
   
   public PAMonroeCountyParser() {
     super(CITY_CODES, "MONROE COUNTY", "PA");
-    setFieldList("CODE CALL PLACE ADDR APT CITY X INFO");
   }
   
   @Override
   public String getFilter() {
-    return "emergin@monroeco911.com,12101";
+    return "emergin@monroeco911.com";
   }
 
   @Override

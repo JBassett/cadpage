@@ -13,33 +13,17 @@ public class TXBellCountyParser extends FieldProgramParser {
   
   public TXBellCountyParser() {
     super(CITY_CODES, "BELL COUNTY", "TX",
-        "PRI LOC:ADDR/S TYPE_CODE:CALL! SubType:CALL CALLER_NAME:NAME! CLRNUM:PHONE! TIME:TIME! Comments:INFO");
-    setupGpsLookupTable(GPS_TABLE);
+        "LOC:ADDR/S! TYPE_CODE:CALL! SubType:CALL CALLER_NAME:NAME! CLRNUM:PHONE! TIME:TIME! Comments:INFO");
   }
   
   public String getFilter() {
     return "930010";
   }
   
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("PRI")) return new PriorityField("P(\\d)");
-    if (name.equals("CALL")) return new MyCallField();
-    if (name.equals("ADDR")) return new MyAddressField();
-    if (name.equals("INFO")) return new MyInfoField();
-    return super.getField(name);
-  }
-
   private static final Pattern PLACE_MARKER = Pattern.compile(": ?[@:]");
   private class MyAddressField extends AddressField {
     @Override
     public void parse(String field, Data data) {
-      while (field.endsWith(": EST")) field = field.substring(0,field.length()-5).trim();
       field = field.replace("CHAPPARAL", "CHAPARRAL");
       if (field.startsWith("@")) {
         data.strAddress = field;
@@ -66,51 +50,26 @@ public class TXBellCountyParser extends FieldProgramParser {
     }
   }
   
-  private static final Pattern INFO_PHONE_GPS_PTN = Pattern.compile("(\\d{10}) ([-+]\\d{3}\\.\\d{6} [-+]\\d{3}\\.\\d{6})\\b *(.*)");
-  private class MyInfoField extends InfoField {
-    @Override
-    public void parse(String field, Data data) {
-      Matcher match = INFO_PHONE_GPS_PTN.matcher(field);
-      if (match.matches()) {
-        data.strPhone = match.group(1);
-        setGPSLoc(match.group(2), data);
-        field = match.group(3);
-      }
-      super.parse(field, data);
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "PHONE GPS INFO";
-    }
+  @Override
+  public Field getField(String name) {
+    if (name.equals("CALL")) return new MyCallField();
+    if (name.equals("ADDR")) return new MyAddressField();
+    return super.getField(name);
   }
   
   @Override
-  protected String adjustGpsLookupAddress(String address) {
-    if (!address.startsWith("@")) return null;
-    int pt = address.indexOf(':');
-    if (pt >= 0) address = address.substring(0,pt);
-    return address;
+  public String adjustMapAddress(String addr) {
+    if (addr.startsWith("@")) {
+      int pt = addr.indexOf(':');
+      if (pt < 0) pt = addr.length();
+      addr = "I 35 MM " + addr.substring(1,pt);
+    }
+    return addr;
   }
-
-  private static final Properties GPS_TABLE = buildCodeTable(new String[]{
-      "@305",   "31.153174,-97.324602",
-      "@306",   "31.166908,-97.319074",
-      "@307",   "31.180577,-97.313935",
-      "@308",   "31.192139,-97.309398",
-      "@309",   "31.208031,-97.302668",
-      "@310",   "31.221252,-97.295544",
-      "@311",   "31.233926,-97.288221",
-      "@312",   "31.243887,-97.282241",
-      "@313",   "31.256592,-97.275016",
-      "@314",   "31.272733,-97.265484",
-      "@315",   "31.284852,-97.256454"
-  });
+  
   
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
       "BELL", "",         // Bell County
-      "HKRH", "HARKER HEIGHTS",
-      "NOLN", "NOLANVILLE",
       "TROY", "TROY"
   });
   

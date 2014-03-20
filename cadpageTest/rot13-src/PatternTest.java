@@ -5,11 +5,10 @@ vzcbeg wnin.hgvy.ertrk.Cnggrea;
 
 choyvp pynff CnggreaGrfg {
 
-  cevingr fgngvp svany Cnggrea ZNFGRE  =
-      Cnggrea.pbzcvyr(".* {3,}([N-M0-9]+) +\\(GVZRF\\) +(?:Erp'q|Erprvirq).* Eha ?#[- ]+(\\q+)\\o.*");
-  
+  cevingr fgngvp svany Cnggrea ZNFGRE = 
+      Cnggrea.pbzcvyr("(?:(Fgngvba [^/:]+) / )?([N-M]+\\f+(?:Nqe:|nqe:|Obk:).*)", Cnggrea.QBGNYY);
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    qbGrfg("4320 Trbetrgbja Qe            C341      (GVZRF) Erprvirq - 08:37:30//Nffvtarq - 08:37:46//Raebhgr -08:38:10//BaFprar - 08:42:58//Qrcneg Ybpngvba - 08:54:47//Neevir Qrfgvangvba - 09:04:48//Nzoh Eha # -1403298             //Gbgny Zvyrf - 4");
+    qbGrfg("Fgngvba 45 & 55 / SVAI   Obk:45015 nqe: YBJRE QBYVATGBA EQ/LBEXFUVER QE ,52 12/06/12  19:01:49 SQ1219254   Eha: E45");
   }
   
   cevingr fgngvp ibvq qbGrfg(Fgevat grfg) {

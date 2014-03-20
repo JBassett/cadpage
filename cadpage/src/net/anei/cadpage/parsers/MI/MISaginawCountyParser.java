@@ -11,7 +11,7 @@ public class MISaginawCountyParser extends FieldProgramParser {
   
   public MISaginawCountyParser() {
     super("SAGINAW COUNTY", "MI",
-           "LOC:ADDR! DESC:INFO! APT:APT? TYP:CALL!");
+           "LOC:ADDR! DESC:INFO! APT:APT! TYP:CALL!");
   }
   
   @Override
@@ -24,7 +24,7 @@ public class MISaginawCountyParser extends FieldProgramParser {
     public void parse(String field, Data data) {
       Matcher match = GPS_PTN.matcher(field);
       if (match.find()) {
-        setGPSLoc(match.group(1) + "," + match.group(2), data);
+        data.strGPSLoc = match.group(1) + "," + match.group(2);
       } else {
         super.parse(field, data);
       }

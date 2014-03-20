@@ -15,7 +15,6 @@ public class NYOrleansCountyParser extends MsgParser {
   
   public NYOrleansCountyParser() {
     super("ORLEANS COUNTY", "NY");
-    setFieldList("CALL ADDR CITY INFO CODE");
   }
   
   @Override

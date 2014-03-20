@@ -115,7 +115,6 @@ choyvp pynff INXvatTrbetrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "FEP:QRF",
         "PNYY:NOQBZVANY CNVA",
         "NQQE:4755 WNZRF ZNQVFBA CXL",
-        "ZNQQE:4755 WNZRF ZNQVFBA CXJL",
         "VQ:000657",
         "K:PBZZREPR QE/QNAHOR QE");
 
@@ -180,7 +179,7 @@ choyvp pynff INXvatTrbetrPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
   }
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj INXvatTrbetrPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj INXvatTrbetrPbhaglCnefreGrfg().trarengrGrfgf("G1", "FEP PNYY PVGL NQQE VQ K VASB");
   }
 }
   

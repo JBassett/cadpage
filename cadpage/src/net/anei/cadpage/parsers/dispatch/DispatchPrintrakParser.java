@@ -73,7 +73,7 @@ public class DispatchPrintrakParser extends FieldProgramParser {
     String program = 
         (version == FLG_VERSION_1 ?
             "SRC PRI:PRI INC:ID TYP:CALL! BLD:APT APT:APT AD:ADDR! CTY:CITY MAP:MAP LOC:PLACE CN:NAME CMT1:" + cmt1Fld +  
-            " Original_Location:PLACE2? CMT2:INFO Original_Location:PLACE2? CE:INFO? CMT2:INFO CALLER_STATEMENT:INFO? STATEMENT:INFO? TIME:TIME UNTS:UNIT XST:X XST2:X UNTS:UNIT XST:X XST2:X"
+            " Original_Location:PLACE2? CMT2:INFO Original_Location:PLACE2? TIME:TIME UNTS:UNIT XST:X XST2:X UNTS:UNIT"
         : version == FLG_VERSION_2 ?
             "TYP:CALL! LOC:PLACE! AD:ADDR/S! XST:X! CMT1:INFO! UNTS:UNIT!"
         : null);    
@@ -82,8 +82,6 @@ public class DispatchPrintrakParser extends FieldProgramParser {
   
   protected boolean parseMsg(String body, Data data) {
     body = body.replace(" CMTS:", " CMT1:").replace("AD:", " AD:");
-    body = body.replace(" CALLER / STATEMENT:", " CALLER STATEMENT:");
-    body = body.replace(" CALLER CMT2:", " CMT2:");
     return super.parseMsg(body, data);
   }
   
@@ -117,7 +115,7 @@ public class DispatchPrintrakParser extends FieldProgramParser {
       if (field.startsWith("CALLBK=")) {
         data.strPhone = field.substring(7).trim();
       } else {
-        super.parse(field, data);
+        data.strPlace = field;
       }
     }
     
@@ -155,19 +153,8 @@ public class DispatchPrintrakParser extends FieldProgramParser {
   private class BasePlace2Field extends PlaceField {
     @Override
     public void parse(String field, Data data) {
-      if (data.strPlace.length() == 0) {
-        super.parse(field, data);
-      } else {
-        if (field.startsWith(data.strPlace)) {
-          field = field.substring(data.strPlace.length()).trim();
-          data.strSupp = append(data.strSupp, " / ", field);
-        }
-      }
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "PLACE INFO";
+      if (data.strPlace.length() > 0) return;
+      super.parse(field, data);
     }
   }
   
@@ -177,18 +164,6 @@ public class DispatchPrintrakParser extends FieldProgramParser {
       if (field.startsWith("INCIDENT CLONED FROM ")) return;
       if (field.startsWith("Original Date/Time for ")) return;
       super.parse(field,  data);
-    }
-  }
-  
-  private class BaseUnitField extends UnitField {
-    @Override
-    public void parse(String field, Data data) {
-      if (data.strUnit.contains("field")) return;
-      if (data.strUnit.length() > 0 && field.contains(data.strUnit)) {
-        data.strUnit = field;
-      } else {
-        data.strUnit = append(data.strUnit, " ", field);
-      }
     }
   }
   
@@ -209,7 +184,6 @@ public class DispatchPrintrakParser extends FieldProgramParser {
     if (name.equals("CALL2")) return new BaseCall2Field();
     if (name.equals("PLACE2")) return new BasePlace2Field();
     if (name.equals("INFO")) return new BaseInfoField();
-    if (name.equals("UNIT")) return new BaseUnitField();
     if (name.equals("X")) return new BaseCrossField();
     return super.getField(name);
   }

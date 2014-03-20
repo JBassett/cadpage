@@ -104,8 +104,7 @@ choyvp pynff GKZbagtbzrelPbhaglNCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:2010-63564",
         "PNYY:19Q04-URNEG CEBOYRZF - Pynzzl",
         "HAVG:ZE51",
-        "NQQE:UVTUJNL 105 J & F SZ 1486",
-        "ZNQQE:UVTUJNL 105 J & F SNEZ-GB-ZNEXRG 1486");
+        "NQQE:UVTUJNL 105 J & F SZ 1486");
 
     qbGrfg("G3",
         "[Sver PNQ Zrffntr]  Arj Sver Eha: 2010-63733,Angher: S15-VYYRTNY OHEA,R55;,Ybpngvba: 14321 SBERFG PVE R-ZB,Ohvyqvat: ,Pebff: 14658 SBERFG PVE-ZB,",
@@ -352,6 +351,7 @@ choyvp pynff GKZbagtbzrelPbhaglNCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:S18-YVIR JVERF QBJA",
         "HAVG:R111",
         "NQQE:ZZ 73",
+        "ZNQQE:FCEVAT PERRX OEVQTR Z,ZZ 73",
         "CYNPR:FCEVAT PERRX OEVQTR Z",
         "ZNC:292O");
 

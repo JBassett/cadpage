@@ -21,7 +21,6 @@ public class CAElDoradoCountyParser extends MsgParser {
   
   public CAElDoradoCountyParser() {
     super("EL DORADO COUNTY", "CA");
-    setFieldList("DATE TIME CALL ID ADDR CITY PLACE UNIT GPS");
   }
   
   @Override
@@ -62,13 +61,8 @@ public class CAElDoradoCountyParser extends MsgParser {
     body = body.substring(match.end()).trim();
     if (body.startsWith(";") || body.startsWith(";")) body = body.substring(1).trim();
     if (body.endsWith(";") || body.endsWith(";")) body = body.substring(0,body.length()-1).trim();
-    setGPSLoc(body, data);
+    data.strGPSLoc = body;
     
     return true;
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_PREFER_GPS | MAP_FLG_SUPPR_LA;
   }
 }

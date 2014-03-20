@@ -96,7 +96,6 @@ choyvp pynff GKCnexrePbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:46 FRVMHERF",
         "FEP:46",
         "NQQE:1170 SZ 1885",
-        "ZNQQE:1170 SNEZ-GB-ZNEXRG 1885",
         "PVGL:CRNFGRE",
         "ZNC:21W",
         "VASB:FGN 46 JVGU ZRQVP 13 FRVMHERF. NQQERFF BA ZNVYOBK. YNETR GBJRE VA / ONPXLNEQ. YBT PNOVA UBHFR");
@@ -775,7 +774,7 @@ choyvp pynff GKCnexrePbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
         "FEP:FVYIRE PERRX",
         "NQQE:SEVRAQFUVC EQ",
-        "ZNQQE:SEVRAQFUVC EQ & 1 ZVYR RNFG SNEZ-GB-ZNEXRG 51 A",
+        "ZNQQE:SEVRAQFUVC EQ & 1 ZVYR RNFG SZ 51 A",
         "K:1 ZVYR RNFG SZ 51 A",
         "PVGL:JRNGURESBEQ",
         "ZNC:472Q",
@@ -880,7 +879,7 @@ choyvp pynff GKCnexrePbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:RZF",
         "FEP:48",
         "NQQE:Crry Eq ab ahzrevpf ninyvoyr",
-        "ZNQQE:Crry Eq & ahzrevpf ninyvoyr",
+        "ZNQQE:Crry Eq ab ahzrevpf ninyvoyr & Byq Pbggbaqnyr Eq",
         "K:Byq Pbggbaqnyr Eq",  // Abg znccvat
         "ZNC:402 S",
         "VASB:Ercbegrq Uvg naq eha Gbarq ol YP - Oenql CPSN");
@@ -1053,6 +1052,7 @@ choyvp pynff GKCnexrePbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "FEP:48",
         "CYNPR:Cnex",
         "NQQE:Cnex oruvaq Oebbxfuverf",
+        "ZNQQE:Cnex,Cnex oruvaq Oebbxfuverf",
         "PVGL:Fcevatgbja",
         "ZNC:22P",
         "VASB:18 Zbagu byq vafvqr, abg ehaavat, Znebba Gnubr - Oenql CPSN");

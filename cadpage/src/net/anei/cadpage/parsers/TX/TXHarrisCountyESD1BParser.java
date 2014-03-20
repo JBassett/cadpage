@@ -1,6 +1,5 @@
 package net.anei.cadpage.parsers.TX;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import net.anei.cadpage.parsers.FieldProgramParser;
@@ -10,23 +9,17 @@ import net.anei.cadpage.parsers.MsgInfo.Data;
 public class TXHarrisCountyESD1BParser extends FieldProgramParser {
   
   private static final Pattern REPORT_PTN = Pattern.compile("^ID#:[^ ]+ *- *UNIT:[^ ]+ .*- *DISP:");
-  private static final Pattern DELIM = Pattern.compile("(?<=^|[^\\d])-|-(?=[^\\d])");
+  private static final Pattern DELIM = Pattern.compile("(?:^| )-");
 
   public TXHarrisCountyESD1BParser() {
     super("HARRIS COUNTY", "TX",
-           "( CODE_CALL ADDR UNIT! KM:MAP! Xst's:X " + 
-           "| ID/Z ADDRCH! Cross_Streets:X Key_Map:MAP " +
+           "( ID/Z ADDRCH! Cross_Streets:X Key_Map:MAP " +
            "| ( ID UNIT2? | UNIT ) CODE CALL! PREALERT? ADDR! Apt:APT! Bldg:PLACE Key_Map:MAP% Cross_Streets:X Box_#:BOX )");
   }
   
   @Override
   public String getFilter() {
-    return "cadnoreply@proxy.hcec.com,93001,agaleucia@avfd.com";
-  }
-  
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
+    return "cadnoreply@proxy.hcec.com,93001";
   }
   
   @Override
@@ -38,51 +31,10 @@ public class TXHarrisCountyESD1BParser extends FieldProgramParser {
     }
     return parseFields(DELIM.split(body), data);
   }
-
+  
   @Override
   public String getProgram() {
     return super.getProgram() + " PLACE";
-  }
-  
-  @Override
-  public Field getField(String name) {
-    if (name.equals("CODE_CALL")) return new CodeCallField();
-    if (name.equals("ID")) return new MyIdField();
-    if (name.equals("ADDRCH"))  return new AddressChangeField();
-    if (name.equals("UNIT")) return new MyUnitField();
-    if (name.equals("UNIT2")) return new MyUnit2Field();
-    if (name.equals("CODE")) return new MyCodeField();
-    if (name.equals("CALL")) return new MyCallField();
-    if (name.equals("PREALERT")) return new PreAlertField();
-    if (name.equals("APT")) return new MyAptField();
-    return super.getField(name);
-  }
-  
-  private static final Pattern CALL_CODE_PTN = Pattern.compile("(\\d{1,2}[a-z]\\d{1,2}[a-z]?) +([^ ].*)");
-  private class CodeCallField extends Field {
-    @Override
-    public boolean canFail() {
-      return true;
-    }
-    
-    @Override
-    public boolean checkParse(String field, Data data) {
-      Matcher match = CALL_CODE_PTN.matcher(field);
-      if (!match.matches()) return false;
-      data.strCode = match.group(1);
-      data.strCall = match.group(2);
-      return true;
-    }
-    
-    @Override
-    public void parse(String field, Data data) {
-      if (!checkParse(field, data)) abort();
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CODE CALL";
-    }
   }
   
   private class MyIdField extends IdField {
@@ -113,11 +65,6 @@ public class TXHarrisCountyESD1BParser extends FieldProgramParser {
       field = field.substring(19).trim();
       super.parse(field, data);
       return true;
-    }
-    
-    @Override
-    public String getFieldNames() {
-      return "CALL " + super.getFieldNames();
     }
   }
   
@@ -190,4 +137,18 @@ public class TXHarrisCountyESD1BParser extends FieldProgramParser {
       data.strApt = append(field, "-", data.strApt);
     }
   }
+  
+  @Override
+  public Field getField(String name) {
+    if (name.equals("ID")) return new MyIdField();
+    if (name.equals("ADDRCH"))  return new AddressChangeField();
+    if (name.equals("UNIT")) return new MyUnitField();
+    if (name.equals("UNIT2")) return new MyUnit2Field();
+    if (name.equals("CODE")) return new MyCodeField();
+    if (name.equals("CALL")) return new MyCallField();
+    if (name.equals("PREALERT")) return new PreAlertField();
+    if (name.equals("APT")) return new MyAptField();
+    return super.getField(name);
+  }
+  
 }

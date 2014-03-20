@@ -14,7 +14,7 @@ public class PAMercerCountyParser extends FieldProgramParser {
   
   public PAMercerCountyParser() {
     super(CITY_CODES, "MERCER COUNTY", "PA",
-           "Location:ADDR/S? EID:ID! TYPE_CODE:CALL! CALLER_NAME:NAME CALLER_ADDR:ADDR/S TIME:TIME");
+           "Location:ADDR/S! EID:ID! TYPE_CODE:CALL! CALLER_NAME:NAME CALLER_ADDR:SKIP TIME:TIME");
   }
   
   @Override
@@ -32,8 +32,6 @@ public class PAMercerCountyParser extends FieldProgramParser {
   private class MyAddressField extends AddressField {
     @Override
     public void parse(String field, Data data) {
-      if (data.strAddress.length() > 0) return;
-      
       String sPlace = "";
       Matcher match = PLACE_MARKER.matcher(field);
       if (match.find()) {
@@ -83,92 +81,35 @@ public class PAMercerCountyParser extends FieldProgramParser {
   }
   
   private static final Properties CITY_CODES = buildCodeTable(new String[]{
-      "CLRK",  "CLARK",
-      "COOL",  "COOLSPRING TWP",
-      "DEER",  "DEER CREEK",
-      "DELA",  "DELAWARE",
-      "ELAC",  "EAST LACKAWANNOCK",
-      "FAIR",  "FAIRVIEW",
-      "FARL",  "FARRELL",
-      "FIND",  "FINDLEY",
-      "FRED",  "FREDONIA",
-      "FREN",  "FRENCH CREEK",
-      "GRNE",  "GREENE",
-      "GRVL",  "GREENVILLE",
-      "GROV",  "GROVE CITY",
-      "HEMP",  "HEMPFIELD",
-      "HERM",  "HERMITAGE",
-      "JACK",  "JACKSON TWP",
-      "JCEN",  "JACKSON CENTER",
-      "JAME",  "JAMESTOWN",
-      "JEFF",  "JEFFERSON",
-      "LACK",  "LACKAWANNOCK",
-      "LAKE",  "LAKE",
-      "LIBR",  "LIBERTY TWP",
-      "MERC",  "MERCER",
-      "MILL",  "MILL CREEK",
-      "NLEB",  "NEW LEBANON",
-      "NVER",  "NEW VERNON",
-      "OTTR",  "OTTER CREEK",
-      "PERR",  "PERRY",
-      "PINE",  "PINE",
-      "PYMA",  "PYMATUNING",
-      "SALM",  "SALEM",
-      "SCRK",  "SANDY CREEK",
-      "SLAK",  "SANDY LAKE",
-      "SLTP", "SANDY LAKE TWP",
-      "SHAR",  "SHARON",
-      "SHRP",  "SHARPSVILLE",
-      "SKVL",  "SHEAKLEYVILLE",
-      "SHEN",  "SHENANGO",
-      "SPYM",  "SOUTH PYMATUNING",
-      "SPRG",  "SPRINGFIELD",
-      "STON",  "STONEBORO",
-      "SUGR",  "SUGAR GROVE",
-      "WMID",  "WEST MIDDLESEX",
-      "WSAL",  "WEST SALEM",
-      "WHEA",  "WHEATLAND",
-      "WILM",  "WILMINGTON",
-      "WOLF",  "WOLF CREEK",
-      "WRTH",  "WORTH",
-      "SLTP",  "SANDY LAKE TWP"
+      "COOL", "COOLSPRING TWP",
+      "GROV", "GROVE CITY",
+      "JACK", "JACKSON TWP",
+      "PINE", "PINE",
+      "SLAK", "Sandy Lake",
+      "STON", "STONEBORO"
   });
   
   private static final Properties CALL_CODES = buildCodeTable(new String[]{
       "AF",   "Fire-Admin Activity",
-      "ANML", "Animal Rescue",
-      "BACK", "Back Pains",
       "BARN", "Barn Fire",
       "BRU",  "Brush Fire",
       "CHIM", "Chimney Fire",
       "CMD",  "Carbon Monoxide Detector",
-      "CMDS", "Carbon Monoxide detector w/ symptoms",
       "COM",  "Commercial Fire",
       "ELI",  "Electric Fire",
       "ELO",  "Electric Lines down",
-      "EXP",  "Explosion",
       "FALM", "Fire alarm",
-      "GARC", "Comercial Garage Fire",
       "GARF", "Garbage Fire",
-      "GAS",  "Inside Gas Leak",
       "HAZ",  "Hazmat",
       "HF",   "House fire",
-      "KITF", "Kitchen Fire",
-      "MHF",  "Mobile Home Fire",
       "MUT",  "Mutual Aid",
       "MVA",  "Motor Vehicle Crash w. no injuries",
       "MVE",  "Motor Vehicle Crash w. trap",
       "MVI",  "Motor Vehicle Crash w/ injuries",
       "MVU",  "Motor Vehicle Crash w/ unknown injuries",
-      "RES",  "Rescue Call",
-      "ROAD", "Notification of Road Conditions",
-      "QRS",  "EMS Call",
-      "SDET", "Smoke Detector Activation",
       "SERV", "Service Call",
-      "SMOI", "Smoke in Structure",
       "STR",  "Structure Fire",
       "TREE", "Tree down",
-      "UNKF", "Unknown Type Fire",
       "UTL",  "Utility Lines Down",
   });
 }

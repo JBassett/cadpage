@@ -74,7 +74,6 @@ Fhowrpg: ARJBPP #12-1626  25 - Cflpuvngevp/Fhvpvqr Nggrzcg\aARJBPP #12-1626  25 
 Fhowrpg: ARJBPP #12-1627  10 - Purfg Cnva\aARJBPP #12-1627  10 - Purfg Cnva\aNqqerff: 125 Fravbe Pragre Qe (1), Nhkinffr\aErcbegvat Crefba:  Cubar: 338-6793\aQrgnvy: ec ercbegf gung uvf jvsr whfg unq n frvmher naq fur pna'g erzrzore nalguvat
 Fhowrpg: ARJVAP #12-23827 12 - Pbaihyfvbaf/Frvmherf\aARJVAP #12-23827 12 - Pbaihyfvbaf/Frvmherf\aNqqerff: 125 Fravbe Pragre Qe (1), Nhkinffr\aErcbegvat Crefba:  Cubar: 338-6793\aQrgnvy: ec ercbegf gung uvf jvsr whfg unq n frvmher naq fur pna'g erzrzore nalguvat
 Fhowrpg: ARJBPP #12-1628  25 - Cflpuvngevp/Fhvpvqr Nggrzcg\aARJBPP #12-1628  25 - Cflpuvngevp/Fhvpvqr Nggrzcg\aNqqerff: Puhepuvyy Greenpr - 120 Ubfcvgny Qe, Shygba\aErcbegvat Crefba: Fgrcura Cubar: 642-1332\aQrgnvy: Cngvrag orvat pbzongvir \azragnyyl hafgnoyr
-Fhowrpg: ARJBPP #13-52  602O - Fgehpgher Sver - Pbzzrepvny\aARJBPP #13-52  602O - Fgehpgher Sver - Pbzzrepvny\e\aNqqerff: Shygba Ahefvat naq Eruno Pragre - 1510 A Ohf 54, Shygba\e\aErcbegvat Crefba: Zryvffn Cubar: 573-642-0202\e\aQrgnvy: Uil fzbxr frra 200 unyy
 
 */
 
@@ -1069,6 +1068,7 @@ choyvp pynff ZBPnyynjnlPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PNYY:Nyyretvrf/Rairabzngvbaf",
         "CYNPR:Shygba Pvgl Cbby",
         "NQQE:Ubearg Qe",
+        "ZNQQE:Shygba Pvgl Cbby,Ubearg Qe",
         "PVGL:Shygba",
         "ANZR:Xevfgra",
         "CUBAR:573-642-4346",
@@ -1159,23 +1159,6 @@ choyvp pynff ZBPnyynjnlPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "ANZR:Fgrcura",
         "CUBAR:642-1332",
         "VASB:Cngvrag orvat pbzongvir");
-
-    qbGrfg("G65",
-        "Fhowrpg: ARJBPP #13-52  602O - Fgehpgher Sver - Pbzzrepvny\a" +
-        "ARJBPP #13-52  602O - Fgehpgher Sver - Pbzzrepvny\e\a" +
-        "Nqqerff: Shygba Ahefvat naq Eruno Pragre - 1510 A Ohf 54, Shygba\e\a" +
-        "Ercbegvat Crefba: Zryvffn Cubar: 573-642-0202\e\a" +
-        "Qrgnvy: Uil fzbxr frra 200 unyy",
-
-        "VQ:13-52",
-        "PBQR:2O",
-        "PNYY:Fgehpgher Sver - Pbzzrepvny",
-        "CYNPR:Shygba Ahefvat naq Eruno Pragre",
-        "NQQE:1510 A Ohf 54",
-        "PVGL:Shygba",
-        "ANZR:Zryvffn",
-        "CUBAR:573-642-0202",
-        "VASB:Uil fzbxr frra 200 unyy");
 
   }
   

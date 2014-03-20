@@ -8,7 +8,6 @@ public class NJNeptuneParser extends SmartAddressParser {
   
   public NJNeptuneParser() {
     super("NEPTUNE", "NJ");
-    setFieldList("CALL ADDR INFO");
   }
   
   @Override

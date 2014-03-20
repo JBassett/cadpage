@@ -103,15 +103,6 @@ Nzohynapr Pnyy, Ivpgvz bs n Snyy: R/Z ng 6 Ebjynaq Pbheg, Unzcgba Onlf  p/f: Yla
 Nzohynapr Pnyy, Fvrmherf: *** 2aq nynez\e\an/z fvrmherf @ EHZON ng 43 Pnabr Cynpr Ebnq Fbhgu, Unzcgba Onlf  p/f: Pnegre Nirahr . . 19:57:19
 Nzohynapr Pnyy, Purfg Cnvaf: N/S ng 25 Cbadhbthr Nirahr, Unzcgba Onlf  p/f: Rnfg Zbagnhx Uvtujnl   B: Fravbe - Pbzzhavgl Pragre . . 11:14:08
 
-Pbagnpg: Cnhy Fzvgu <fzvgglc330@tznvy.pbz>
-Fraqre: zrqsbeq@erqazkpnq.pbz
-Nhgbzngvp Nynez, Trareny Sver ng 2 EHFFRYY PG, ZRQSBEQ  p/f: ZNCYR NIR   B: FZNYQBAR, FHMNAA . . 11:47:20
-Nzohynapr Pnyy: r/s nzf ng 5 Ybrgfpure Ynar, Unzcgba Onlf  p/f: Jnxrzna Ebnq   B: Wbua Ybrgfpure . . 12:32:42
-
-Pbagnpg: evpu zvpuryf <fveoyxavtug@tznvy.pbz>
-Fraqre: ynxrynaqsq@erqazkpnq.pbz
-Nzohynapr Pnyy, Oyrrqvat ng 11 YNXRFUBER . . 19:28:35
-
 */
 
 choyvp pynff ALFhssbyxPbhaglPCnefreGrfg rkgraqf OnfrCnefreGrfg {
@@ -124,7 +115,6 @@ choyvp pynff ALFhssbyxPbhaglPCnefreGrfg rkgraqf OnfrCnefreGrfg {
   choyvp ibvq grfgAbgCntr() {
     qbOnqGrfg("V'z ng gur fgber");
     qbOnqGrfg("V'z ng n zrrgvat evtug abj. . .");
-    qbOnqGrfg("*** 16 ***202 QRCBG EQPF: YLAPU FGNQGZY: 21-O-1GBN: 07:38 01-22-132013-000321GLCR: OYRRQVAT / YNPRENGVBAF YBP: 202 QRCBG EQ UHAGVF  NCG 4 PEBFF: YLAPU FG / R 14 FG PBQR: 21-O-1GVZR: 07:38:32");
   }
   
   @Grfg
@@ -587,46 +577,11 @@ choyvp pynff ALFhssbyxPbhaglPCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "CYNPR:Fravbe - Pbzzhavgl Pragre",
         "GVZR:11:14:08");
 
-    qbGrfg("G5",
-        "Nzohynapr Pnyy: r/s nzf ng 5 Ybrgfpure Ynar, Unzcgba Onlf  p/f: Jnxrzna Ebnq   B: Wbua Ybrgfpure . . 12:32:42",
-        "PNYY:Nzohynapr Pnyy",
-        "VASB:r/s nzf",
-        "NQQE:5 Ybrgfpure Ynar",
-        "PVGL:Unzcgba Onlf",
-        "K:Jnxrzna Ebnq",
-        "CYNPR:Wbua Ybrgfpure",
-        "GVZR:12:32:42");
-
-  }
-  
-  @Grfg
-  choyvp ibvq grfgCnhyFzvgu() {
-
-    qbGrfg("G1",
-        "Nhgbzngvp Nynez, Trareny Sver ng 2 EHFFRYY PG, ZRQSBEQ  p/f: ZNCYR NIR   B: FZNYQBAR, FHMNAA . . 11:47:20",
-        "PNYY:Nhgbzngvp Nynez, Trareny Sver",
-        "NQQE:2 EHFFRYY PG",
-        "PVGL:ZRQSBEQ",
-        "K:ZNCYR NIR",
-        "CYNPR:FZNYQBAR, FHMNAA",
-        "GVZR:11:47:20");
-   
-  }
-  
-  @Grfg
-  choyvp ibvq grfgEvpuZvpunryf() {
-
-    qbGrfg("G1",
-        "Nzohynapr Pnyy, Oyrrqvat ng 11 YNXRFUBER . . 19:28:35",
-        "PNYY:Nzohynapr Pnyy, Oyrrqvat",
-        "NQQE:11 YNXRFUBER",
-        "GVZR:19:28:35");
-   
   }
   
   
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj ALFhssbyxPbhaglPCnefreGrfg().trarengrGrfgf("G1");
+    arj ALFhssbyxPbhaglPCnefreGrfg().trarengrGrfgf("G1", "PNYY PBQR VASB NQQE NCG PVGL K CYNPR GVZR");
   }
 
 }

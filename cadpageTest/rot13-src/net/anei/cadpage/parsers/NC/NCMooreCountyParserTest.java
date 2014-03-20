@@ -69,7 +69,7 @@ choyvp pynff APZbberPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
 
     qbGrfg("G2",
         "[[911 ABGVSVPNGVBA] ]  1 F. IVARYNAQ FBHGU PRYY GBJRE 2011025029 09:31:20 Z25 CFLPUVNGEVP/FHVPVQR NGGRZCG",
-        "NQQE:F IVARYNAQ FBHGU PRYY GBJRE",
+        "NQQE:1 F IVARYNAQ FBHGU PRYY GBJRE",
         "VQ:2011025029",
         "GVZR:09:31:20",
         "HAVG:Z25",
@@ -142,7 +142,8 @@ choyvp pynff APZbberPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "VQ:2012031517",
         "GVZR:15:45:55",
         "HAVG:Z31",
-        "PNYY:HAPBAFPVBHFARFF/SNVAGVAT (ARNE)");
+        "PNYY:HAPBAFPVBHFARFF/SNVAGVAT",
+        "VASB:(ARNE)");
 
     qbGrfg("G2",
         "232 NYYRA YA NOREQRRA ZQY 30N01 2012028950 15:18:54 Z30 GENHZNGVP VAWHEVRF\e",
@@ -188,7 +189,8 @@ choyvp pynff APZbberPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PBQR:31Q03",
         "GVZR:11:05:29",
         "HAVG:Z31",
-        "PNYY:HAPBAFPVBHFARFF/SNVAGVAT (ARNE)");
+        "PNYY:HAPBAFPVBHFARFF/SNVAGVAT",
+        "VASB:(ARNE)");
 
     qbGrfg("G7",
         "144 FUNQL JBBQ PG JRFG RAQ, SQY 69Q06, 08:46:34, S69 FGEHPGHER SVER, JBXR HC NAQ URE FGBIR JBHYQAG BCRA.\e",
@@ -289,12 +291,13 @@ choyvp pynff APZbberPbhaglCnefreGrfg rkgraqf OnfrCnefreGrfg {
         "PVGL:JUVFCREVAT CVARF",
         "GVZR:22:16:31",
         "HAVG:Z31",
-        "PNYY:HAPBAFPVBHFARFF/SNVAGVAT (ARNE)");
+        "PNYY:HAPBAFPVBHFARFF/SNVAGVAT",
+        "VASB:(ARNE)");
 
   }   
   
 
   choyvp fgngvp ibvq znva(Fgevat[] netf) {
-    arj APZbberPbhaglCnefreGrfg().trarengrGrfgf("G1");
+    arj APZbberPbhaglCnefreGrfg().trarengrGrfgf("G1", "NQQE PVGL CYNPR PBQR VQ GVZR HAVG PNYY VASB");
   }
 }

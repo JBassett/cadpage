@@ -21,16 +21,12 @@ public class TXParkerCountyParser extends FieldProgramParser {
     return "Fire.Dispatch@parkercountytx.com";
   }
   
-  @Override
-  public int getMapFlags() {
-    return MAP_FLG_SUPPR_LA;
-  }
-  
   protected boolean parseMsg(String body, Data data) {
     if (!parseFields(DELIM.split(body), 14, data)) return false;
     data.strCross = clean(data.strCross);
     data.strCity = clean(data.strCity);
     data.strMap = clean(data.strMap);
+    data.strGPSLoc = clean(data.strGPSLoc);
     
     String city = PLACE_CITY_XREF.getProperty(data.strCity.toUpperCase());
     if (city != null) {
