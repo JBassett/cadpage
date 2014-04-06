@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">04062014</string>
+  <string name="release_version">v1.7.15</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+New Locations:\n
+Napa, CA\n
+Palm Beach County, FL\n
+White County, GA\n
+Centre County, PA\n
+Dickenson County, VA\n
+Chelan County, WA\n
+Racine County, WI\n
+\n
+Location Parsing Fixes:\n
+Chilton County, AL\n
+Jefferson County, AL\n
+East Feliciana Parish, LA\n
+Lafourche Parish, LA\n
+Emmet County, MI\n
+St Louis County, MO\n
+Atlanticare EMS, NJ\n
+Orange County, NY\n
+New Bruswick County, NC\n
+Lorain County, OH\n
+Pennington County, SD\n
+  </string>
+</resources>
+  
