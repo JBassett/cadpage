@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">05172014</string>
+  <string name="release_version">v1.7.23</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+The new Cadpage direct paging has been added to the beta release version of Cadpage.  
+Support is not incuded in this release but should be added next week.  For
+more details on installing the beta version, see our facebook page at 
+http://facebook.com/CADPage\n
+\n
+New Locations:\n
+Lake County, IN\n
+Salem County, NJ (alt)\n
+\n
+Location Parsing Fixes:\n
+Talladega County, AL\n
+Ascension Parish, LA\n
+Deschutes County, OR\n
+Lincoln County, SD\n
+  </string>
+</resources>
+  
