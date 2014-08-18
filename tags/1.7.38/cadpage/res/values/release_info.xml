@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="release_date">08182014</string>
+  <string name="release_version">v1.7.37</string>
+  <!-- Magic word - change quarterly and email to Richard Lieder <Richard.Lieder@ccvfd.com> -->
+  <string name="release_magic_word2">quantum</string>
+  <string name="release_text">
+Cadpage Paging Service is now supported!!!\n
+See http://www.cadpage.org/paging-service\n
+\n
+New Locations:\n
+Kentucky State Police, KY\n
+\n
+Location Parsing Fixes:\n
+Shasta County, CA\n
+New London County, CT\n
+New Milford, CT\n
+Brantley County, GA\n
+Cumberland County, ME\n
+Hennepin County, MN\n
+Hanover, NH\n
+Mercer County, NJ\n
+Nassau County, NY\n
+Yamhill County, OR\n
+Delaware County, PA\n
+Erie County, PA\n
+Washington County, PA\n
+Roanoke County, VA\n
+\n
+General Fixes:\n
+Attempt fix for sporadic BadTokeException crash\n
+Fix abort during payment status recalculation\n
+
+  </string>
+</resources>
+  
