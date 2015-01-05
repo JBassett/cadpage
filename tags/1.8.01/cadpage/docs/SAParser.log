@@ -1,0 +1,46 @@
+Version 8.0 01/04/2015
+
+Improved logic that determines if a trailing direction should be included in the address
+or if it is instead part of a trailing city name or cross street.
+
+Fixed bug in the FLAG_NO_STREET_SFX logic.
+
+Version 7.0 12/29/2014
+
+Added option to specify a regular expression pattern that will be used to 
+identify leading place names instead of the regular address start logic.
+
+Version 6.0 12/18/2014
+
+Added new setupSpecialStreets() method allowing parser to define street names
+should be considered valid street names without a trailing street suffix.
+
+Fixed problem not finding legitimate numbered address following a "COUNTY 911"
+construct that could be mistaken for a naked road.
+
+Fixed problem misidentifying saint or doctor names starting one or two words
+after a city name.
+
+Fixed problem where logic not permitting city names following connectors or
+cross street indicators remained effective when only searching for city name.
+ 
+Version 5.0 12/08/2014
+
+Fixed case insensitive keyword processing to properly handle truncated keywords
+at the end of the message
+
+Version 4.0 11/14/2014
+
+Added "GR" to list of valid road suffixes
+
+Version 3.0 11/7/2014
+
+Fixed bug which allowing parser to return a STATUS_STREET_NAME result for a
+street name in the Multi Word Street name table that lacks a proper street suffix.
+
+Added BV and TE as recognized street suffixes.
+Added MC as an option street prefix
+
+Added logic to support utility to identify multiple word street names that
+need to be added to the multiple word street name table. 
+ 
